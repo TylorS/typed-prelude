@@ -1,6 +1,6 @@
-import { indexOf } from '../../common/indexOf'
 import { curry } from '../../lambda'
 import { isJust } from '../../maybe'
+import { indexOf } from '../indexOf'
 
 export const contains: {
   <A>(value: A, list: A): boolean

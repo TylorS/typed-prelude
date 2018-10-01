@@ -43,6 +43,22 @@ lib
 lib.es2015
 .tmp
 .cache-loader
+/common/
+/effect/
+/either/
+/future/
+/lambda/
+/list/
+/logic/
+/math/
+/maybe/
+/objects/
+/strings/
+/tuple/
+/uuid/
+/index.js
+/index.d.ts
+/index.js.map
 
 # other stuff
 src/test.ts

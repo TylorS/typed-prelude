@@ -1,4 +1,4 @@
-import { curry } from 'source/lambda'
+import { curry } from '../lambda'
 
 export const hasOwnProperty: {
   <A extends PropertyKey, B extends Partial<Record<A, any>>>(key: A, obj: B): boolean

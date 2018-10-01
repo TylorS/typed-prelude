@@ -1,5 +1,15 @@
-import { id } from '../../lambda'
-import { equals } from '../../logic'
+import { curry, id } from '../../lambda'
+import { equals, greaterThan, ifElse, lessThan, or } from '../../logic'
+import { decrement, increment } from '../../math'
+
+export const move = curry(__move) as {
+  <A>(fromIndex: number, toIndex: number, list: A[]): A[]
+  (fromIndex: number, toIndex: number): <A>(list: A[]) => A[]
+  (fromIndex: number): {
+    <A>(toIndex: number, list: A[]): A[]
+    (toIndex: number): <A>(list: A[]) => A[]
+  }
+}
 
 function __move<A>(fromIndex: number, toIndex: number, list: A[]): A[] {
   const length = list.length
@@ -12,9 +22,11 @@ function __move<A>(fromIndex: number, toIndex: number, list: A[]): A[] {
   for (let i = 0; i < length; ++i) {
     newArray[i] = list[findMovedIndex(i, fromIndex, toIndex)]
   }
+
+  return newArray
 }
 
-function __findMovedIndex(i: number, fromIndex: number, toIndex: number): number {
+function findMovedIndex(i: number, fromIndex: number, toIndex: number): number {
   if (equals(i, toIndex)) {
     return fromIndex
   }

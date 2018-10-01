@@ -1,4 +1,4 @@
-import { curry } from 'source/lambda'
+import { curry } from '../lambda'
 import { chain, Maybe } from '../maybe'
 import { prop } from './prop'
 import { Path } from './types'

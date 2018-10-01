@@ -1,6 +1,5 @@
-import { Nothing } from 'source'
 import { curry } from '../lambda'
-import { Maybe } from '../maybe'
+import { Maybe, Nothing } from '../maybe'
 import { hasOwnProperty } from './hasOwnProperty'
 
 export const prop = curry(

@@ -1,4 +1,4 @@
-import { curry } from 'source/lambda'
+import { curry } from '../lambda'
 
 export const substring: {
   (from: number, to: number | undefined, str: string): string
