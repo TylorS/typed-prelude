@@ -1,0 +1,6 @@
+export * from './split'
+export * from './substr'
+export * from './substring'
+export * from './toLowerCase'
+export * from './toUpperCase'
+export * from './trim'
