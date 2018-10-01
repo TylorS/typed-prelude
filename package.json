@@ -13,6 +13,7 @@
   "scripts": {
     "clean:commonjs": "rm -rf lib",
     "clean:es2015": "rm -rf common effect either future lambda list logic math maybe objects strings tuple uuid index.* ",
+    "clean:all": "npm run clean:commonjs && npm run clean:es2015",
     "build:commonjs": "npm run clean:commonjs && tsc --module commonjs --outDir lib",
     "build:es2015": "npm run clean:es2015 && tsc --module es2015 --outDir ./",
     "build": "npm run build:commonjs && npm run build:es2015",
