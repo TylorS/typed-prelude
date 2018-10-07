@@ -1,6 +1,6 @@
 import { asap, currentTime } from '@most/scheduler'
-import { callbackTask } from 'source/effect/callbackTask'
 import { Effect } from '../effect'
+import { callbackTask } from '../effect/callbackTask'
 import { curry } from '../lambda'
 import { HistoryResources } from './types'
 

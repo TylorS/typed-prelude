@@ -1,3 +1,5 @@
+export type Primitive = undefined | null | boolean | string | number | Function
+
 export type IO<A = void> = () => A
 export type Arity1<A = any, B = any> = (value: A) => B
 export type Arity2<A = any, B = any, C = any> = (a: A, b: B) => C

@@ -1,14 +1,16 @@
 import { asap } from '@most/scheduler'
 import { Disposable } from '@most/types'
-import { Effect } from '../effect'
+import { Effect, EffectResources } from '../effect'
 import { callbackTask } from '../effect/callbackTask'
 import { Either } from '../either'
-import { apply, Arity1, Arity2, pipe } from '../lambda'
+import { apply, Arity1, Arity3, pipe } from '../lambda'
 
 export interface Future<A, B, C extends {} = {}> extends Effect<Either<A, B>, C> {}
 
 export namespace Future {
-  export const create = <A, B, C extends {} = {}>(fn: Arity2<Arity1<A>, Arity1<B>, Disposable>) =>
+  export const create = <A, B, C extends {} = {}>(
+    fn: Arity3<Arity1<A>, Arity1<B>, EffectResources<C>, Disposable>,
+  ): Future<A, B, C> =>
     Effect.create<Either<A, B>, C>((cb, resources) => {
       const { scheduler } = resources
       let resolved = false
@@ -24,10 +26,15 @@ export namespace Future {
         resolve,
       )
 
-      return asap(callbackTask<any>(apply([left, right]), fn), scheduler)
+      return asap(callbackTask<any>(apply([left, right, resources]), fn), scheduler)
     })
 
   export const of = <A, B = unknown>(value: A): Future<B, A> => Effect.of(Either.of(value))
   export const reject = <A, B = unknown>(value: A): Future<A, B> =>
     Effect.of(Either.left<A, B>(value))
+
+  export const fromPromise = <A, B = unknown>(f: () => Promise<A>): Future<B, A> =>
+    Future.create((reject, resolve, { scheduler }) =>
+      asap(callbackTask(f => f().then(resolve, reject), f), scheduler),
+    )
 }

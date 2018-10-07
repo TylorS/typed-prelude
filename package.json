@@ -3,7 +3,7 @@
   "version": "5.0.0",
   "description": "The TypeScript Standard Library",
   "main": "lib/index.js",
-  "module": "index.js",
+  "module": "./index.js",
   "typings": "index.d.ts",
   "types": "index.d.ts",
   "repository": "https://github.com/TylorS/typed-test",
@@ -12,14 +12,15 @@
   "private": false,
   "scripts": {
     "clean:commonjs": "rm -rf lib",
-    "clean:es2015": "rm -rf common effect either future lambda list logic math maybe objects strings tuple uuid index.* ",
+    "clean:es2015": "rm -rf common dom effect either future history http lambda list logic math maybe objects storage strings tuple uuid index.* ",
     "clean:all": "npm run clean:commonjs && npm run clean:es2015",
     "build:commonjs": "npm run clean:commonjs && tsc --module commonjs --outDir lib",
     "build:es2015": "npm run clean:es2015 && tsc --module es2015 --outDir ./",
     "build": "npm run build:commonjs && npm run build:es2015",
-    "test": "typed-test",
+    "test": "typed-test && typed-test --mode=browser",
     "preversion": "npm test && npm run build",
-    "postversion": "npm publish"
+    "postversion": "npm publish",
+    "postpublish": "npm run clean:all"
   },
   "devDependencies": {
     "@typed/test": "8.0.0",

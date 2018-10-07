@@ -59,6 +59,10 @@ lib.es2015
 /index.js
 /index.d.ts
 /index.js.map
+/dom/
+/history/
+/http/
+/storage/
 
 # other stuff
 src/test.ts

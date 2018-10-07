@@ -1,7 +1,7 @@
 import { ServerHistory, ServerLocation } from './server'
 import { HistoryResources, Href } from './types'
 
-export function createEnv(href: Href = '/'): HistoryResources {
+export function historyResources(href: Href = '/'): HistoryResources {
   if (typeof location !== 'undefined' && typeof history !== 'undefined') {
     return { location, history }
   }

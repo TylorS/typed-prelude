@@ -10,4 +10,4 @@ export type Href = string
  * @name Env
  * @type
  */
-export type HistoryResources = Readonly<{ location: Location; history: History }>
+export type HistoryResources = { location: Location; history: History }

@@ -1,4 +1,4 @@
-import { asap } from '@most/scheduler'
+import { asap, newDefaultScheduler } from '@most/scheduler'
 import { Disposable, Scheduler } from '@most/types'
 import { Arity2, IO } from '../lambda'
 import { callbackTask } from './callbackTask'
@@ -28,4 +28,10 @@ export function runEffect<A, B extends {} = {}>(
   effect: Effect<A>,
 ): Disposable {
   return effect.runEffect(cb, resources)
+}
+
+export function defaultResources(): EffectResources {
+  return {
+    scheduler: newDefaultScheduler(),
+  }
 }

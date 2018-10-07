@@ -52,6 +52,10 @@ export function isNumber(x: any): x is number {
   return typeof x === 'number'
 }
 
+export function isString(x: any): x is string {
+  return typeof x === 'string'
+}
+
 export function isObject<A extends object = Object>(x: any): x is A {
   return x && typeof x === 'object'
 }

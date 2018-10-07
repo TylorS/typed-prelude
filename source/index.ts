@@ -1,8 +1,11 @@
+export * from './history'
+export * from './http'
 export * from './lambda'
 export * from './list'
 export * from './logic'
 export * from './math'
 export * from './objects'
+export * from './storage'
 export * from './strings'
 export * from './uuid'
 
@@ -59,13 +62,14 @@ export namespace Tuple {
 }
 
 import * as EffectModule from './effect'
-export { runEffect } from './effect'
+export { runEffect, defaultResources } from './effect'
 
 export type Effect<A> = EffectModule.Effect<A>
 
 export namespace Effect {
   export const create = EffectModule.Effect.create
   export const of = EffectModule.Effect.of
+  export const fromIO = EffectModule.Effect.fromIO
   export const chain = EffectModule.chain
   export const map = EffectModule.chain
   export const ap = EffectModule.ap
