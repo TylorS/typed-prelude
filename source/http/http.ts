@@ -6,6 +6,9 @@ import { HttpOptions, HttpResponse, Request } from './types'
 
 const IS_HTTPS = /https/
 
+// TODO: Write some tests
+// I ripped this out of a side-project
+
 export const http: {
   (url: string, options?: HttpOptions): Future<Error, HttpResponse>
   <A>(url: string, options?: HttpOptions): Request<A>
