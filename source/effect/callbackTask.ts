@@ -10,11 +10,17 @@ class CallbackTask<A, B = void> implements Task {
   constructor(private f: Arity2<A, number, B>, private value: A) {}
 
   public run(time: number) {
-    const { f, value } = this
-    const x = f(value, time)
+    try {
+      const { f, value } = this
+      const x = f(value, time)
 
-    if (isDisposable(x)) {
-      this.disposable = x
+      if (isDisposable(x)) {
+        this.disposable = x
+      }
+    } catch (e) {
+      console.error(e)
+
+      throw e
     }
   }
 

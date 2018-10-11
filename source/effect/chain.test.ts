@@ -1,7 +1,6 @@
-import { newDefaultScheduler } from '@most/scheduler'
 import { describe, given, it, Test } from '@typed/test'
 import { chain } from './chain'
-import { Effect } from './Effect'
+import { defaultResources, Effect } from './Effect'
 
 export const test: Test = describe(`Effect.chain`, [
   given(`(a -> Effect b) -> Effect a`, [
@@ -18,7 +17,7 @@ export const test: Test = describe(`Effect.chain`, [
 
       const { runEffect } = chain(f, effA)
 
-      runEffect(assert, { scheduler: newDefaultScheduler() })
+      runEffect(assert, defaultResources())
     }),
   ]),
 ])

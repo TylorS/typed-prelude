@@ -1,14 +1,13 @@
-import { asap } from '@most/scheduler'
-import { Disposable, Scheduler } from '@most/types'
-import { callbackTask } from 'source/effect/callbackTask'
-import { Arity1 } from '../lambda'
+import { Disposable } from '@most/types'
+import { Effect, map } from '../effect'
+import { apply, Arity1 } from '../lambda'
 
 export class Subscriptions<A> {
   private subscriptions: Array<Arity1<A>> = []
-  constructor(private scheduler: Scheduler) {}
+  private getSubscriptions: Effect<Array<Arity1<A>>> = Effect.fromIO(() => this.subscriptions)
 
-  public pushToSubscribers = (value: A): Disposable =>
-    asap(callbackTask(pushToSubscribers(this.subscriptions), value), this.scheduler)
+  public pushToSubscribers = (value: A): Effect<void> =>
+    map(subscriptions => pushToSubscribers(subscriptions, value), this.getSubscriptions)
 
   public addSubsciber = (subscriber: Arity1<A>): Disposable => {
     this.subscriptions = this.subscriptions.concat(subscriber)
@@ -23,6 +22,6 @@ export class Subscriptions<A> {
   }
 }
 
-function pushToSubscribers<A>(subscriptions: Array<Arity1<A>>) {
-  return (value: A) => subscriptions.forEach(f => f(value))
+function pushToSubscribers<A>(subscriptions: Array<Arity1<A>>, value: A) {
+  subscriptions.forEach(apply([value]))
 }

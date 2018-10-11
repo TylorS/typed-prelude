@@ -21,4 +21,24 @@ export const test: Test = describe(`pathJoin`, [
       equal(expected, actual)
     }),
   ]),
+
+  given(`an array with && expressions`, [
+    it(`filters out non-string values`, ({ equal }) => {
+      const parts = ['a', false && 'b', 'c']
+      const expected = '/a/c'
+      const actual = pathJoin(parts)
+
+      equal(expected, actual)
+    }),
+  ]),
+
+  given('an array of paths and trailingSlash=true', [
+    it(`returns a path with a trailing slash`, ({ equal }) => {
+      const parts = ['a', 'b', 'c']
+      const expected = '/a/b/c/'
+      const actual = pathJoin(parts, true)
+
+      equal(expected, actual)
+    }),
+  ]),
 ])

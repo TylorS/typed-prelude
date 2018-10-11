@@ -7,5 +7,5 @@ export const map = curry(__map) as {
 }
 
 function __map<A, B, C extends {} = {}>(f: Arity1<A, B>, effect: Effect<A, C>): Effect<B, C> {
-  return Effect.create((cb, scheduler) => effect.runEffect((a, t) => cb(f(a), t), scheduler))
+  return Effect.create((cb, resources) => effect.runEffect((a, t) => cb(f(a), t), resources))
 }

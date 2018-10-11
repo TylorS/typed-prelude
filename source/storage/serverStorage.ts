@@ -1,10 +1,10 @@
-export function mockStorage(map?: Map<string, string>): Storage {
-  return new Proxy(new MockStorage(map), { get, set }) as MockedStorage
+export function serverStorage(map?: Map<string, string>): Storage {
+  return new Proxy(new ServerStorage(map), { get, set }) as MockedStorage
 }
 
-type MockedStorage = MockStorage & { [index: number]: string } & { [key: string]: string }
+type MockedStorage = ServerStorage & { [index: number]: string } & { [key: string]: string }
 
-class MockStorage {
+class ServerStorage {
   public map: Map<string, string>
 
   constructor(map?: Map<string, string>) {
@@ -38,7 +38,7 @@ class MockStorage {
   }
 }
 
-function get(target: MockStorage, property: keyof MockStorage) {
+function get(target: ServerStorage, property: keyof ServerStorage) {
   if (target[property]) {
     return target[property]
   }
@@ -52,7 +52,7 @@ function get(target: MockStorage, property: keyof MockStorage) {
   return target.getItem(property)
 }
 
-function set(target: MockStorage, property: PropertyKey, value: string) {
+function set(target: ServerStorage, property: PropertyKey, value: string) {
   let key = property.toString()
   const int = parseInt(key, 10)
 

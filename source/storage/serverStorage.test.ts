@@ -1,9 +1,9 @@
 import { describe, it } from '@typed/test'
-import { mockStorage } from './mockStorage'
+import { serverStorage } from './serverStorage'
 
-describe(`mockStorage`, [
+describe(`serverStorage`, [
   it(`implements Storage interface`, ({ equal }) => {
-    const storage: Storage = mockStorage()
+    const storage: Storage = serverStorage()
 
     storage.setItem('foo', 'bar')
     equal('bar', storage.getItem('foo'))

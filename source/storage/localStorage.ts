@@ -1,8 +1,5 @@
-import { mockStorage } from './mockStorage'
+import { isBrowser } from '../common/executionEnvironment'
+import { serverStorage } from './serverStorage'
 import { wrapStorage } from './wrapStorage'
 
-export const localStorage = wrapStorage(
-  typeof window === 'undefined' || typeof window.localStorage === 'undefined'
-    ? mockStorage()
-    : window.localStorage,
-)
+export const localStorage = wrapStorage(!isBrowser ? serverStorage() : window.localStorage)

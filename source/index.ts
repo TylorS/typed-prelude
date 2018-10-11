@@ -62,9 +62,9 @@ export namespace Tuple {
 }
 
 import * as EffectModule from './effect'
-export { runEffect, defaultResources } from './effect'
+export { runEffect, defaultResources, runPure, handle, Pure } from './effect'
 
-export type Effect<A> = EffectModule.Effect<A>
+export type Effect<A, B extends {} = {}> = EffectModule.Effect<A, B>
 
 export namespace Effect {
   export const create = EffectModule.Effect.create

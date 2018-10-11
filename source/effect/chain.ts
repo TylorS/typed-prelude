@@ -24,9 +24,7 @@ function __chain<A, B, C extends {} = {}, D extends {} = {}>(
       Object.assign({}, resources, {
         scheduler: schedulerRelativeTo(t, resources.scheduler),
       })
-
     const disposables: Disposable[] = []
-
     const rootDisposable = effect.runEffect(
       (a, t) => disposables.push(f(a).runEffect(cb, relativeResources(t))),
       resources,

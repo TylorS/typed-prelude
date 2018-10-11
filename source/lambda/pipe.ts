@@ -40,4 +40,35 @@ export interface Pipe {
     e: Arity1<E, F>,
     f: Arity1<F, G>,
   ): Arity1<A, G>
+
+  <A, B, C, D, E, F, G, H>(
+    a: Arity1<A, B>,
+    b: Arity1<B, C>,
+    c: Arity1<C, D>,
+    d: Arity1<D, E>,
+    e: Arity1<E, F>,
+    f: Arity1<F, G>,
+    g: Arity1<G, H>,
+  ): Arity1<A, H>
+  <A, B, C, D, E, F, G, H, I>(
+    a: Arity1<A, B>,
+    b: Arity1<B, C>,
+    c: Arity1<C, D>,
+    d: Arity1<D, E>,
+    e: Arity1<E, F>,
+    f: Arity1<F, G>,
+    g: Arity1<G, H>,
+    h: Arity1<H, I>,
+  ): Arity1<A, I>
+  <A, B, C, D, E, F, G, H, I, J>(
+    a: Arity1<A, B>,
+    b: Arity1<B, C>,
+    c: Arity1<C, D>,
+    d: Arity1<D, E>,
+    e: Arity1<E, F>,
+    f: Arity1<F, G>,
+    g: Arity1<G, H>,
+    h: Arity1<H, I>,
+    j: Arity1<H, J>,
+  ): Arity1<A, J>
 }
