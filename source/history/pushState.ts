@@ -5,17 +5,13 @@ import { curry } from '../lambda'
 import { HistoryResources } from './types'
 
 export const pushState: {
-  (data: any, title: string, url: string): Effect<Location, HistoryResources>
-  (data: any, title: string): (url: string) => Effect<Location, HistoryResources>
-  (data: any): {
-    (title: string, url: string): Effect<Location, HistoryResources>
-    (title: string): (url: string) => Effect<Location, HistoryResources>
-  }
+  (data: any, url: string): Effect<Location, HistoryResources>
+  (data: any): (url: string) => Effect<Location, HistoryResources>
 } = curry(
-  (data: any, title: string, url: string): Effect<Location, HistoryResources> =>
+  (data: any, url: string): Effect<Location, HistoryResources> =>
     Effect.create((cb, { history, location, scheduler }) => {
       function pushState() {
-        history.pushState(data, title, url)
+        history.pushState(data, '', url)
 
         cb(location, currentTime(scheduler))
       }

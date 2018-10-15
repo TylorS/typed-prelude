@@ -6,13 +6,12 @@ const OPTIONAL_REGEX = /^(\/)?\?/
 
 export type Param = {
   name: string
-  pattern: string
+  pattern: RegExp
   required: boolean
   part: number
 }
 
-export function pathToRegex(path: string | RegExp): { regex: RegExp; params: Param[] } {
-  path = path + ''
+export function pathToRegex(path: string): { regex: RegExp; params: Param[] } {
   const parts = pathParts(path)
   const length = parts.length - 1
   let subRegexp
@@ -40,7 +39,7 @@ export function pathToRegex(path: string | RegExp): { regex: RegExp; params: Par
           pattern += '(' + subRegexp + '?)'
           params[params.length] = {
             name: part.slice(1),
-            pattern: subRegexp,
+            pattern: new RegExp(subRegexp),
             required: false,
             part: i,
           }
@@ -63,7 +62,7 @@ export function pathToRegex(path: string | RegExp): { regex: RegExp; params: Par
           pattern += '(' + subRegexp + ')'
           params[params.length] = {
             name: part.slice(1),
-            pattern: subRegexp,
+            pattern: new RegExp(subRegexp),
             required: !OPTIONAL_REGEX.test(path.slice(optionalIndex, optionalIndex + 1)),
             part: i,
           }
@@ -81,6 +80,6 @@ export function pathToRegex(path: string | RegExp): { regex: RegExp; params: Par
   return { regex, params }
 }
 
-export function pathParts(path: string | RegExp) {
-  return (path + '').match(rePartsMatcher) || []
+export function pathParts(path: string) {
+  return path.match(rePartsMatcher) || []
 }

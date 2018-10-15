@@ -50,42 +50,20 @@ export type Curry<T extends Fn> = ArgsOf<T> extends [infer A]
           ? Curry5<A, B, C, D, E, ReturnType<T>>
           : ArgsOf<T> extends never[] ? IO<ReturnType<T>> : never
 
-export type ArgsOf<T extends Fn> = T extends IO
-  ? []
-  : T extends Arity1<infer A>
-    ? [A]
-    : T extends Arity2<infer A, infer B>
-      ? [A, B]
-      : T extends Arity3<infer A, infer B, infer C>
-        ? [A, B, C]
-        : T extends Arity4<infer A, infer B, infer C, infer D>
-          ? [A, B, C, D]
-          : T extends Arity5<infer A, infer B, infer C, infer D, infer E> ? [A, B, C, D, E] : any[]
+export type ArgsOf<T extends Fn> = T extends Fn<infer Args, any> ? Args : []
 
-export type ArgsToFn<Args extends any[], R> = Args extends [infer A]
-  ? Arity1<A, R>
-  : Args extends [infer A, infer B]
-    ? Arity2<A, B, R>
-    : Args extends [infer A, infer B, infer C]
-      ? Arity3<A, B, C, R>
-      : Args extends [infer A, infer B, infer C, infer D]
-        ? Arity4<A, B, C, D, R>
-        : Args extends [infer A, infer B, infer C, infer D, infer E]
-          ? Arity5<A, B, C, D, E, R>
-          : never
-
-export type Flip<T extends Fn> = ArgsOf<T> extends never[]
-  ? ArgsToFn<never[], ReturnType<T>>
+export type Flip<T extends Fn> = ArgsOf<T> extends []
+  ? Fn<[], ReturnType<T>>
   : ArgsOf<T> extends [infer A]
-    ? ArgsToFn<[A], ReturnType<T>>
+    ? Fn<[A], ReturnType<T>>
     : ArgsOf<T> extends [infer A, infer B]
-      ? ArgsToFn<[B, A], ReturnType<T>>
+      ? Fn<[B, A], ReturnType<T>>
       : ArgsOf<T> extends [infer A, infer B, infer C]
-        ? ArgsToFn<[B, A, C], ReturnType<T>>
+        ? Fn<[B, A, C], ReturnType<T>>
         : ArgsOf<T> extends [infer A, infer B, infer C, infer D]
-          ? ArgsToFn<[B, A, C, D], ReturnType<T>>
+          ? Fn<[B, A, C, D], ReturnType<T>>
           : ArgsOf<T> extends [infer A, infer B, infer C, infer D, infer E]
-            ? ArgsToFn<[B, A, C, D, E], ReturnType<T>>
+            ? Fn<[B, A, C, D, E], ReturnType<T>>
             : never
 
 export type ToUnion<Args extends any[]> = Args extends never[]

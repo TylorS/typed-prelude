@@ -15,6 +15,8 @@ export type Path<T, Keys extends PropertyKey[]> = Keys extends []
             ? Prop<Prop<Prop<Prop<Prop<T, Keys[0]>, Keys[1]>, Keys[2]>, Keys[3]>, Keys[4]>
             : undefined
 
+export type ValuesOf<A> = { [K in keyof A]: A[K] }[keyof A]
+
 export type Union<A, B> = A | B
 export type MergeObjects<A, B> = {
   [K in Union<keyof A, keyof B>]: K extends keyof B

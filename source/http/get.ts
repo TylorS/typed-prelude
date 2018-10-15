@@ -1,6 +1,6 @@
 import { Future } from 'source'
+import { addQueryParameters } from '../common/addQueryParameters'
 import { DropKeys, MergeObjects } from '../objects'
-import { addQueryParameters } from './addQueryParameters'
 import { http } from './http'
 import { HttpOptions, HttpResponse, Request } from './types'
 

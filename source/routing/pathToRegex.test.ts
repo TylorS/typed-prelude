@@ -13,7 +13,10 @@ export const test: Test = describe(`pathToRegex`, [
       const match = regex.exec(url) as RegExpExecArray
 
       equal(url, match.input)
-      equal([{ name: 'id', pattern: '[a-zA-Z0-9-_]+', required: true }], params)
+      equal(
+        [{ name: 'id', pattern: new RegExp('[a-zA-Z0-9-_]+'), required: true, part: 0 }],
+        params,
+      )
     }),
   ]),
 ])
