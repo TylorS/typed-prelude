@@ -4,6 +4,7 @@ export * from './pushState'
 export * from './types'
 
 export * from '../common/addQueryParameters'
+export * from '../common/pathJoin'
 
 import { isBrowser } from '../common/executionEnvironment'
 import { historyResources } from './historyResources'
