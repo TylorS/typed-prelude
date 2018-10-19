@@ -1,3 +1,5 @@
+export * from './capitalize'
+export * from './plural'
 export * from './split'
 export * from './substr'
 export * from './substring'
