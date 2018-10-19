@@ -56,6 +56,10 @@ export function isString(x: any): x is string {
   return typeof x === 'string'
 }
 
+export function isObject<A extends object = Object>(x: A | undefined | null | void): x is A
+// tslint:disable-next-line:unified-signatures
+export function isObject<A extends object = Object>(x: any): x is A
+
 export function isObject<A extends object = Object>(x: any): x is A {
   return x && typeof x === 'object'
 }

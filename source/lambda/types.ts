@@ -14,6 +14,7 @@ export type Arity5<A = any, B = any, C = any, D = any, E = any, F = any> = (
 ) => F
 
 export type Predicate<A> = Arity1<A, boolean>
+export type Is<A> = (value: any) => value is A
 export type Predicate2<A, B> = Arity2<A, B, boolean>
 export type ComparisonNumbers = -1 | 0 | 1
 export type ComparableValues = PropertyKey | boolean
