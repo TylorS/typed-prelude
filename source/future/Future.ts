@@ -20,7 +20,7 @@ export namespace Future {
         x => !resolved && cb(x as Either<A, B>, scheduler.currentTime()),
         resolve,
       )
-      const right: <A>(value: A) => void = pipe(
+      const right: <B>(value: B) => void = pipe(
         Either.of,
         x => !resolved && cb(x as Either<A, B>, scheduler.currentTime()),
         resolve,
