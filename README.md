@@ -1,9 +1,3 @@
-# @typed/dom
+# Typed
 
-Effecient and well-typed DOM rendering.
-
-## Features
-
-- Tiny
-- Memoization
-- 
+The TypeScript Standard Library
