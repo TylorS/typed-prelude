@@ -1,5 +1,6 @@
 export * from './ap'
 export * from './append'
+export * from './appendOrRemove'
 export * from './ascend'
 export * from './chain'
 export * from './concat'
