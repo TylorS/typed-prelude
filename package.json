@@ -12,7 +12,7 @@
   "private": false,
   "scripts": {
     "clean:commonjs": "rm -rf lib",
-    "clean:es2015": "rm -rf common dom effect either future history http lambda list logic math maybe objects storage strings tuple uuid index.* ",
+    "clean:es2015": "ts-node tools/cleanup.ts",
     "clean:all": "npm run clean:commonjs && npm run clean:es2015",
     "build:commonjs": "npm run clean:commonjs && tsc --module commonjs --outDir lib",
     "build:es2015": "npm run clean:es2015 && tsc --module es2015 --outDir ./",
@@ -25,9 +25,9 @@
   "devDependencies": {
     "@typed/test": "8.0.0",
     "@types/node": "10.11.3",
-    "@types/react": "^16.4.14",
     "lint-staged": "7.3.0",
     "prettier": "1.14.3",
+    "ts-node": "7.0.1",
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.15.0",
     "tslint-plugin-prettier": "2.0.0",
@@ -36,7 +36,6 @@
   "dependencies": {
     "@most/disposable": "1.2.1",
     "@most/scheduler": "1.2.1",
-    "@most/types": "1.0.1",
-    "react": "^16.5.2"
+    "@most/types": "1.0.1"
   }
 }

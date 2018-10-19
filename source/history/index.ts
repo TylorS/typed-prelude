@@ -3,6 +3,8 @@ export * from './parseQueries'
 export * from './pushState'
 export * from './types'
 
+export * from '../common/addQueryParameters'
+
 import { isBrowser } from '../common/executionEnvironment'
 import { historyResources } from './historyResources'
 
