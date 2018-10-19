@@ -1,6 +1,7 @@
 export * from './clone'
 export * from './hasOwnProperty'
 export * from './keysOf'
+export * from './mapObj'
 export * from './isEmpty'
 export * from './path'
 export * from './prop'
