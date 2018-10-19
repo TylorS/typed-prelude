@@ -9,24 +9,24 @@ export const fork: {
     left: Arity1<A>,
     right: Arity1<B>,
     resources: EffectResources<C>,
-    future: Future<A, B>,
+    future: Future<A, B, C>,
   ): Disposable
 
   <A, B, C extends {} = {}>(left: Arity1<A>, right: Arity1<B>, resources: EffectResources<C>): (
-    future: Future<A, B>,
+    future: Future<A, B, C>,
   ) => Disposable
 
   <A, B>(left: Arity1<A>, right: Arity1<B>): {
-    <C extends {} = {}>(resources: EffectResources<C>, future: Future<A, B>): Disposable
-    <C extends {} = {}>(resources: EffectResources<C>): (future: Future<A, B>) => Disposable
+    <C extends {} = {}>(resources: EffectResources<C>, future: Future<A, B, C>): Disposable
+    <C extends {} = {}>(resources: EffectResources<C>): (future: Future<A, B, C>) => Disposable
   }
 
   <A, B, C extends {} = {}>(left: Arity1<A>): {
-    (right: Arity1<B>, resources: EffectResources<C>, future: Future<A, B>): Disposable
-    (right: Arity1<B>, resources: EffectResources<C>): (future: Future<A, B>) => Disposable
+    (right: Arity1<B>, resources: EffectResources<C>, future: Future<A, B, C>): Disposable
+    (right: Arity1<B>, resources: EffectResources<C>): (future: Future<A, B, C>) => Disposable
     (right: Arity1<B>): {
-      (resources: EffectResources<C>, future: Future<A, B>): Disposable
-      (resources: EffectResources<C>): (future: Future<A, B>) => Disposable
+      (resources: EffectResources<C>, future: Future<A, B, C>): Disposable
+      (resources: EffectResources<C>): (future: Future<A, B, C>) => Disposable
     }
   }
 } = curry(__fork)
@@ -35,7 +35,7 @@ function __fork<A, B, C extends {} = {}>(
   left: Arity1<A>,
   right: Arity1<B>,
   resources: EffectResources<C>,
-  future: Future<A, B>,
+  future: Future<A, B, C>,
 ): Disposable {
   return future.runEffect(
     either => (isLeft(either) ? left(fromLeft(either)) : right(fromRight(either))),
