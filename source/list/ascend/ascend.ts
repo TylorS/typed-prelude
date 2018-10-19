@@ -1,13 +1,17 @@
-import { ComparisonNumbers, curry } from '../../lambda'
+import { ComparableValues, ComparisonNumbers, curry } from '../../lambda'
 
 export const ascend: {
-  <A, B>(f: (a: A) => B, a: A, b: A): ComparisonNumbers
-  <A, B>(f: (a: A) => B, a: A): (b: A) => ComparisonNumbers
-  <A, B>(f: (a: A) => B): {
+  <A, B extends ComparableValues>(f: (a: A) => B, a: A, b: A): ComparisonNumbers
+  <A, B extends ComparableValues>(f: (a: A) => B, a: A): (b: A) => ComparisonNumbers
+  <A, B extends ComparableValues>(f: (a: A) => B): {
     (a: A, b: A): ComparisonNumbers
     (a: A): (b: A) => ComparisonNumbers
   }
-} = curry(function ascend<A, B>(f: (a: A) => B, a: A, b: A): ComparisonNumbers {
+} = curry(function ascend<A, B extends ComparableValues>(
+  f: (a: A) => B,
+  a: A,
+  b: A,
+): ComparisonNumbers {
   const aa = f(a)
   const bb = f(b)
 
