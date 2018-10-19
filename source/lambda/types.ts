@@ -51,6 +51,17 @@ export type Curry<T extends Fn> = ArgsOf<T> extends [infer A]
           : ArgsOf<T> extends never[] ? IO<ReturnType<T>> : never
 
 export type ArgsOf<T extends Fn> = T extends Fn<infer Args, any> ? Args : []
+export type PotentialArgsOf<T extends Fn> = T extends Fn<infer Args, any> ? PotentialOf<Args> : []
+export type PartialArgsOf<T extends Fn> = T extends (...args: infer TArgs) => any
+  ? Partial<TArgs>
+  : never
+export type TailArgsOf<F extends Function> = F extends (head: any, ...tail: infer TTail) => any
+  ? TTail
+  : never
+export type HeadArg<F extends Function> = F extends (head: infer A, ...tail: any[]) => any
+  ? A
+  : never
+export type InitArgsOf<F extends Fn> = Init<ArgsOf<F>>
 
 export type Flip<T extends Fn> = ArgsOf<T> extends []
   ? Fn<[], ReturnType<T>>
@@ -65,18 +76,6 @@ export type Flip<T extends Fn> = ArgsOf<T> extends []
           : ArgsOf<T> extends [infer A, infer B, infer C, infer D, infer E]
             ? Fn<[B, A, C, D, E], ReturnType<T>>
             : never
-
-export type ToUnion<Args extends any[]> = Args extends never[]
-  ? never
-  : Args extends [infer A]
-    ? A
-    : Args extends [infer A, infer B]
-      ? A | B
-      : Args extends [infer A, infer B, infer C]
-        ? A | B | C
-        : Args extends [infer A, infer B, infer C, infer D]
-          ? A | B | C | D
-          : Args extends [infer A, infer B, infer C, infer D, infer E] ? A | B | C | D | E : never
 
 export type Apply<Args extends any[] = any[], T extends Fn<Args> = Fn<Args>> = T extends (
   ...args: Args
@@ -93,3 +92,25 @@ export type Uncurry<Fun extends Fn> = Fun extends (
     : Fun extends (a: infer A) => (b: infer B) => (c: infer C) => infer D
       ? (a: A, b: B, c: C) => D
       : Fun extends (a: infer A) => (b: infer B) => infer C ? (a: A, b: B) => C : Fun
+
+export type And<A extends any[], B extends any = A> = {
+  continue: B extends A ? And<Tail<A>, HeadArg<Fn<A>>> : B & And<Tail<A>, Head<A>>
+  end: B
+}[A extends [] ? 'end' : 'continue']
+
+export type Or<A extends any[], B extends any = A> = {
+  continue: B extends A ? Or<Tail<A>, HeadArg<Fn<A>>> : B | Or<Tail<A>, HeadArg<Fn<A>>>
+  end: B
+}[A extends [] ? 'end' : 'continue']
+
+export type Init<A extends any[], B extends any[] = Tail<A>> = CastArray<
+  { [K in keyof B]: A[keyof A & K] }
+>
+export type Tail<A extends any[]> = TailArgsOf<(...args: A) => any>
+export type Head<A extends any[]> = HeadArg<Fn<A>>
+export type PotentialOf<T extends any[], TResult extends any[] = T> = {
+  continue: PotentialOf<Init<T>, TResult | Init<T>>
+  end: TResult
+}[T extends [] ? 'end' : 'continue']
+
+type CastArray<T> = T extends any[] ? T : []

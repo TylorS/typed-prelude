@@ -4,7 +4,7 @@ import { Maybe, Nothing } from '../maybe'
 import { Param, pathParts, pathToRegex } from './pathToRegex'
 import { Route } from './types'
 
-export function createRoute<A extends Record<string, any>>(path: string): Route<A> {
+export function createRoute<A extends Record<string, string | number>>(path: string): Route<A> {
   const { regex, params } = pathToRegex(path)
   const parts = pathParts(path)
 
@@ -13,36 +13,38 @@ export function createRoute<A extends Record<string, any>>(path: string): Route<
     match: (href: Href): Maybe<A> => {
       const matches = regex.exec(href)
 
-      if (!matches) {
-        return Nothing
-      }
-
-      return Maybe.of(findParams(params, {}, matches) as A)
+      return matches ? Maybe.of(findParams<A>(params, {}, matches)) : Nothing
     },
-    createPath: (parameters: A, trailingSlash: boolean = false): Href => {
+    createPath: (parameters: A, trailingSlash: boolean = false): Maybe<Href> => {
       if (params.length === 0) {
-        return pathJoin(parts, trailingSlash)
+        return Maybe.of(pathJoin(parts, trailingSlash))
       }
 
       const usableParts = parts.slice()
 
-      for (const { pattern, part, name } of params) {
+      for (const { pattern, part, required, name } of params) {
         const value = parameters[name]
-        const stringValue = String(value)
+        const stringValue = value + ''
 
         if (value && pattern.test(stringValue)) {
           usableParts[part] = stringValue
+        } else if (required) {
+          return Nothing
         } else {
           usableParts[part] = ''
         }
       }
 
-      return pathJoin(usableParts, trailingSlash)
+      return Maybe.of(pathJoin(usableParts, trailingSlash))
     },
   }
 }
 
-function findParams(params: Param[], parameters: Record<string, any>, matches: RegExpExecArray) {
+function findParams<A>(
+  params: Param[],
+  parameters: Record<string, any>,
+  matches: RegExpExecArray,
+): A {
   for (let i = 0; i < params.length; ++i) {
     const { name, pattern } = params[i]
 
@@ -53,7 +55,7 @@ function findParams(params: Param[], parameters: Record<string, any>, matches: R
     }
   }
 
-  return parameters
+  return parameters as A
 }
 
 function parseParam(param: any): any {

@@ -12,4 +12,4 @@ export const get: {
   (url: string, options?: GetOptions): Future<Error, HttpResponse>
   <A extends {}>(url: string, options?: GetOptions): Request<A>
 } = <A extends {}>(url: string, options: GetOptions = {}): Request<A> =>
-  http(addQueryParameters(url, options.queryParameters), options)
+  http(addQueryParameters(url, options.queryParameters || {}), options)

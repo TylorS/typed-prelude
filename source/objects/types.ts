@@ -18,11 +18,13 @@ export type Path<T, Keys extends PropertyKey[]> = Keys extends []
 export type ValuesOf<A> = { [K in keyof A]: A[K] }[keyof A]
 
 export type Union<A, B> = A | B
-export type MergeObjects<A, B> = {
-  [K in Union<keyof A, keyof B>]: K extends keyof B
-    ? K extends keyof A ? Defined<A[K] | B[K]> : B[K]
-    : K extends keyof A ? A[K] : never
-}
+export type MergeObjects<A, B> = B extends A
+  ? B
+  : {
+      [K in Union<keyof A, keyof B>]: K extends keyof B
+        ? K extends keyof A ? Defined<A[K] | B[K]> : B[K]
+        : K extends keyof A ? A[K] : never
+    }
 
 export type DropKeys<A, Keys extends PropertyKey> = { [K in Exclude<keyof A, Keys>]: A[K] }
 

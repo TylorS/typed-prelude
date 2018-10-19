@@ -4,6 +4,8 @@ import { toMaybe } from './toMaybe'
 
 export type Maybe<A> = Just<A> | Nothing
 
+export type MaybeValue<A extends Maybe<any>> = A extends Maybe<infer R> ? R : never
+
 export namespace Maybe {
   /**
    * Creates a Maybe containing a value. If the value is `undefined` or `null`
