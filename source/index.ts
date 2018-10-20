@@ -29,6 +29,7 @@ export namespace Maybe {
   export const combineArray = MaybeModule.combineArray
   export const just = MaybeModule.Just.of
   export const map = MaybeModule.map
+  export const race = MaybeModule.race
 }
 
 import * as EitherModule from './either'
@@ -36,6 +37,7 @@ import * as EitherModule from './either'
 export type Either<A, B> = EitherModule.Either<A, B>
 export type Left<A> = EitherModule.Left<A>
 export type Right<A> = EitherModule.Right<A>
+export const tryCatch = EitherModule.tryCatch
 
 export namespace Either {
   export const of = EitherModule.Either.of
@@ -77,7 +79,7 @@ export namespace Effect {
 }
 
 import * as FutureModule from './future'
-export { fork } from './future'
+export { fork, toPromise } from './future'
 
 export type Future<A, B> = FutureModule.Future<A, B>
 
