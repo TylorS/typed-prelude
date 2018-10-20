@@ -12,6 +12,11 @@ export interface Store<A> {
   readonly listen: (listener: Arity1<A>) => Disposable
 }
 
+export type StoreUpdate<A> = <Resources>(
+  stateEffect: UpdateStateEffect<A, Resources>,
+) => Effect<A, Resources>
+export type UpdateStateEffect<A = any, Resources = {}> = Effect<Arity1<A, A>, Resources>
+
 export const createStore = <A>(defaultState: A, options: TypedStoreOptions = {}): Store<A> =>
   new TypedStore(defaultState, options)
 

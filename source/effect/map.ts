@@ -1,8 +1,9 @@
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry, IO } from '../lambda'
 import { Effect } from './Effect'
 
 export const map = curry(__map) as {
   <A, B, C extends {} = {}>(f: Arity1<A, B>, effect: Effect<A, C>): Effect<B, C>
+  <B>(f: IO<B>): <A, C extends {} = {}>(effect: Effect<A, C>) => Effect<B, C>
   <A, B>(f: Arity1<A, B>): <C extends {} = {}>(effect: Effect<A, C>) => Effect<B, C>
 }
 

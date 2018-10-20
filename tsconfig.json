@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "declaration": true,
     "esModuleInterop": false,
+    "jsx": "react",
     "lib": ["es2016", "dom"],
     "moduleResolution": "node",
     "module": "commonjs",

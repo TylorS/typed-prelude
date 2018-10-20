@@ -13,7 +13,8 @@ export const ap = curry(
     fn: Effect<Arity1<A, B>, C>,
     value: Effect<A, D>,
   ): Effect<B, C & D>
-  <A, B, C extends {} = {}>(fn: Effect<Arity1<A, B>, C>): <D extends {} = {}>(
+
+  <A, B, C extends {} = {}>(fn: Effect<Arity1<A, B>, C>): <D extends {} = C>(
     value: Effect<A, D>,
   ) => Effect<B, C & D>
 }

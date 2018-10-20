@@ -1,16 +1,20 @@
 import { disposeAll, disposeBoth } from '@most/disposable'
 import { schedulerRelativeTo } from '@most/scheduler'
 import { Disposable } from '@most/types'
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry, IO } from '../lambda'
 import { Effect, EffectResources } from './Effect'
 
 export const chain = curry(__chain) as {
-  <A, B, C extends {} = {}, D extends {} = {}>(
+  <A, B, C extends {} = {}, D extends {} = C>(
     f: Arity1<A, Effect<B, C>>,
     effect: Effect<A, D>,
   ): Effect<B, C & D>
 
-  <A, B, C extends {} = {}>(f: Arity1<A, Effect<B, C>>): <D extends {} = {}>(
+  <A, B extends {} = {}>(f: IO<Effect<A, B>>): <C extends {} = B>(
+    effect: Effect<any, B>,
+  ) => Effect<A, B & C>
+
+  <A, B, C extends {} = {}>(f: Arity1<A, Effect<B, C>>): <D extends {} = C>(
     effect: Effect<A, D>,
   ) => Effect<B, C & D>
 }
