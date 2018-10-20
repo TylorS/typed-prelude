@@ -5,5 +5,5 @@ export const toggleOrSet: {
   (bool: boolean | undefined): (toggleableBoolean: boolean) => boolean
 } = curry(
   (bool: boolean | undefined, toggleableBoolean: boolean): boolean =>
-    typeof bool === 'boolean' ? bool : !toggleableBoolean,
+    bool === void 0 ? !toggleableBoolean : bool,
 )
