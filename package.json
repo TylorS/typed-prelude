@@ -23,7 +23,7 @@
     "postpublish": "npm run clean:all"
   },
   "devDependencies": {
-    "@typed/test": "8.0.0",
+    "@typed/test": "9.0.0",
     "@types/node": "10.11.3",
     "lint-staged": "7.3.0",
     "prettier": "1.14.3",
