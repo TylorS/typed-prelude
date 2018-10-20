@@ -6,3 +6,5 @@ export * from './substring'
 export * from './toLowerCase'
 export * from './toUpperCase'
 export * from './trim'
+
+export * from '../common/toString'
