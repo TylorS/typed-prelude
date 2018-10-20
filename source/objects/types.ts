@@ -1,4 +1,4 @@
-import { Primitive } from '../lambda'
+import { Defined, Primitive } from '../lambda'
 
 export type Prop<T, K extends PropertyKey> = K extends keyof T ? T[K] : undefined
 export type Path<T, Keys extends PropertyKey[]> = Keys extends []
@@ -17,18 +17,19 @@ export type Path<T, Keys extends PropertyKey[]> = Keys extends []
 
 export type ValuesOf<A> = { [K in keyof A]: A[K] }[keyof A]
 
-export type Union<A, B> = A | B
 export type MergeObjects<A, B> = B extends A
   ? B
   : {
-      [K in Union<keyof A, keyof B>]: K extends keyof B
+      [K in keyof A | keyof B]: K extends keyof B
         ? K extends keyof A ? Defined<A[K] | B[K]> : B[K]
         : K extends keyof A ? A[K] : never
     }
-
 export type DropKeys<A, Keys extends PropertyKey> = { [K in Exclude<keyof A, Keys>]: A[K] }
+export type Overwrite<A, B> = B extends A
+  ? B
+  : { [K in keyof A | keyof B]: K extends keyof B ? B[K] : K extends keyof A ? A[K] : never }
 
-export type Defined<T> = T extends undefined ? never : T
+export type OptionalKeys<A extends object, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A, K>>
 
 export type Immutable<A> = A extends Primitive
   ? A
@@ -39,3 +40,9 @@ export type Immutable<A> = A extends Primitive
 export interface ImmutableArray<A> extends ReadonlyArray<Immutable<A>> {}
 export interface ImmutableMap<K, V> extends ReadonlyMap<Immutable<K>, Immutable<V>> {}
 export type ImmutableObject<A> = { readonly [K in keyof A]: Immutable<A[K]> }
+
+export type ExtractUnionMember<
+  A extends object,
+  Tag extends keyof A,
+  Value extends A[Tag]
+> = Extract<A, Record<Tag, Value>>

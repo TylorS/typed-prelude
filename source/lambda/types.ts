@@ -94,6 +94,20 @@ export type Uncurry<Fun extends Fn> = Fun extends (
       ? (a: A, b: B, c: C) => D
       : Fun extends (a: infer A) => (b: infer B) => infer C ? (a: A, b: B) => C : Fun
 
+export type Init<A extends any[], B extends any[] = Tail<A>> = CastArray<
+  { [K in keyof B]: A[keyof A & K] }
+>
+export type Tail<A extends any[]> = TailArgsOf<(...args: A) => any>
+export type Head<A extends any[]> = HeadArg<Fn<A>>
+
+export type Defined<T> = T extends undefined ? never : T
+
+// Frowned-upon recursion - may not work in future versions of TS
+export type PotentialOf<T extends any[], TResult extends any[] = T> = {
+  continue: PotentialOf<Init<T>, TResult | Init<T>>
+  end: TResult
+}[T extends [] ? 'end' : 'continue']
+
 export type And<A extends any[], B extends any = A> = {
   continue: B extends A ? And<Tail<A>, HeadArg<Fn<A>>> : B & And<Tail<A>, Head<A>>
   end: B
@@ -104,14 +118,5 @@ export type Or<A extends any[], B extends any = A> = {
   end: B
 }[A extends [] ? 'end' : 'continue']
 
-export type Init<A extends any[], B extends any[] = Tail<A>> = CastArray<
-  { [K in keyof B]: A[keyof A & K] }
->
-export type Tail<A extends any[]> = TailArgsOf<(...args: A) => any>
-export type Head<A extends any[]> = HeadArg<Fn<A>>
-export type PotentialOf<T extends any[], TResult extends any[] = T> = {
-  continue: PotentialOf<Init<T>, TResult | Init<T>>
-  end: TResult
-}[T extends [] ? 'end' : 'continue']
-
+// Internal
 type CastArray<T> = T extends any[] ? T : []
