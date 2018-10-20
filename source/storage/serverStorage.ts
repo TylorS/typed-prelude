@@ -1,8 +1,6 @@
 export function serverStorage(map?: Map<string, string>): Storage {
-  return new Proxy(new ServerStorage(map), { get, set }) as MockedStorage
+  return new Proxy(new ServerStorage(map), { get, set }) as Storage
 }
-
-type MockedStorage = ServerStorage & { [index: number]: string } & { [key: string]: string }
 
 class ServerStorage {
   public map: Map<string, string>
@@ -28,7 +26,7 @@ class ServerStorage {
   }
 
   public key(index: number): string | null {
-    const values = Array.from(this.map.values())
+    const values = Array.from(this.map.keys())
 
     return values[index] || null
   }
@@ -58,9 +56,10 @@ function set(target: ServerStorage, property: PropertyKey, value: string) {
 
   if (!Number.isNaN(int)) {
     const keys = Array.from(target.map.keys())
+    const actualKey = (key = keys[int])
 
-    if (keys[int]) {
-      key = keys[int]
+    if (!actualKey) {
+      return false
     }
   }
 
