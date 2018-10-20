@@ -2,7 +2,7 @@ import { disposeBoth } from '@most/disposable'
 import { currentTime } from '@most/scheduler'
 import { Arity2, curry } from '../lambda'
 import { combine as combineMaybe, fromJust, isJust, Just, Maybe, Nothing } from '../maybe'
-import { Effect, Pure } from './Effect'
+import { Effect } from './Effect'
 
 export const combine = curry(
   <A, B, C, Resources extends {}>(
@@ -31,13 +31,6 @@ export const combine = curry(
       )
     }),
 ) as {
-  <A, B, C>(fn: Arity2<A, B, C>, a: Pure<A>, b: Pure<B>): Pure<C>
-  <A, B, C>(fn: Arity2<A, B, C>, a: Pure<A>): (b: Pure<B>) => Pure<C>
-  <A, B, C>(fn: Arity2<A, B, C>): {
-    (a: Pure<A>, b: Pure<B>): Pure<C>
-    (a: Pure<A>): (b: Pure<B>) => Pure<C>
-  }
-
   <A, B, C, Resources extends {}>(
     fn: Arity2<A, B, C>,
     a: Effect<A, Resources>,
