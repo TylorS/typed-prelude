@@ -49,10 +49,22 @@ export function createStore<A>(defaultState: A, options: TypedStoreOptions = {})
             reset,
             update,
           }}
-        />
+        >
+          {this.props.children}
+        </Provider>
       )
     }
   }
 
-  return { Provider: TypedProvider, Consumer, undo, redo, reset, update, state, listen }
+  return {
+    Provider: TypedProvider,
+    Consumer,
+    undo,
+    redo,
+    reset,
+    update,
+    state,
+    listen,
+    defaultState,
+  }
 }

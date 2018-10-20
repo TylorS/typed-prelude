@@ -4,6 +4,7 @@ import { ap, chain, Effect, map } from '../effect'
 import { Arity1 } from '../lambda'
 
 export interface Store<A> {
+  readonly defaultState: A
   readonly state: Effect<A>
   readonly undo: Effect<A>
   readonly redo: Effect<A>
@@ -26,11 +27,12 @@ export type TypedStoreOptions = {
 }
 
 class TypedStore<A> implements Store<A> {
-  public state: Effect<A>
-  public undo: Effect<A>
-  public redo: Effect<A>
-  public reset: Effect<A>
-  public options: TypedStoreOptions
+  public readonly state: Effect<A>
+  public readonly undo: Effect<A>
+  public readonly redo: Effect<A>
+  public readonly reset: Effect<A>
+  public readonly options: TypedStoreOptions
+  public readonly defaultState: A
 
   private currentState: A
   private subcriptions: Subscriptions<A>
@@ -38,6 +40,7 @@ class TypedStore<A> implements Store<A> {
   private redos: A[] = []
 
   constructor(defaultState: A, options: TypedStoreOptions) {
+    this.defaultState = defaultState
     this.currentState = defaultState
     this.subcriptions = new Subscriptions()
     this.options = options
