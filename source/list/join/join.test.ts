@@ -5,8 +5,8 @@ export const test: Test = describe(`join`, [
   given(`a separator and a list of values`, [
     it(`returns a string of the values joined by the separator`, ({ equal }) => {
       const separator = '-!-'
-      const values = [{ a: '1' }, { b: '2' }, { c: '3' }]
-      const expected = `{"a": "1"}-!-{"b": "2"}-!-{"c": "3"}`
+      const values = [0, 1, 2]
+      const expected = `0-!-1-!-2`
 
       equal(expected, join(separator, values))
     }),
