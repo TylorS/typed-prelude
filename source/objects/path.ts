@@ -1,10 +1,10 @@
 import { curry } from '../lambda'
 import { chain, Maybe } from '../maybe'
 import { prop } from './prop'
-import { Path } from './types'
+import { ObjectPath } from './types'
 
 export const path = curry(
-  <Keys extends PropertyKey[], A extends object>(keys: Keys, obj: A): Maybe<Path<A, Keys>> =>
+  <Keys extends PropertyKey[], A extends object>(keys: Keys, obj: A): Maybe<ObjectPath<A, Keys>> =>
     keys.length === 0
       ? Maybe.of(obj)
       : keys.length === 1

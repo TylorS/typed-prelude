@@ -1,6 +1,7 @@
 export * from './historyResources'
 export * from './parseQueries'
 export * from './pushState'
+export * from './replaceState'
 export * from './types'
 
 export * from '../common/addQueryParameters'

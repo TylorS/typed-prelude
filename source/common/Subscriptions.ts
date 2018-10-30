@@ -3,14 +3,17 @@ import { Effect, map } from '../effect'
 import { apply, Arity1 } from '../lambda'
 
 export class Subscriptions<A> {
-  private subscriptions: Array<Arity1<A>> = []
-  private getSubscriptions: Effect<Array<Arity1<A>>> = Effect.fromIO(() => this.subscriptions)
+  public readonly subscriptions: ReadonlyArray<Arity1<A>> = []
+  private getSubscriptions: Effect<ReadonlyArray<Arity1<A>>> = Effect.fromIO(
+    () => this.subscriptions,
+  )
 
   public pushToSubscribers = (value: A): Effect<void> =>
     map(subscriptions => pushToSubscribers(subscriptions, value), this.getSubscriptions)
 
   public addSubsciber = (subscriber: Arity1<A>): Disposable => {
-    this.subscriptions = this.subscriptions.concat(subscriber)
+    // To enable readonly subscriptions
+    ;(this as any).subscriptions = this.subscriptions.concat(subscriber)
 
     return {
       dispose: () => this.removeSubscriber(subscriber),
@@ -18,10 +21,10 @@ export class Subscriptions<A> {
   }
 
   public removeSubscriber = (subscriber: Arity1<A>) => {
-    this.subscriptions = this.subscriptions.filter(x => x !== subscriber)
+    ;(this as any).subscriptions = this.subscriptions.filter(x => x !== subscriber)
   }
 }
 
-function pushToSubscribers<A>(subscriptions: Array<Arity1<A>>, value: A) {
+export function pushToSubscribers<A>(subscriptions: ReadonlyArray<Arity1<A>>, value: A) {
   subscriptions.forEach(apply([value]))
 }

@@ -3,7 +3,9 @@ import { DropKeys } from '../objects'
 import { Effect, EffectResources, Pure } from './Effect'
 
 export type Handle<A extends Effect<any, any>, B extends {}> = A extends Effect<infer C, infer D>
-  ? Exclude<keyof D, keyof B> extends never ? Pure<C> : Effect<C, DropKeys<D, keyof B>>
+  ? Exclude<keyof D | 'scheduler', keyof B> extends never
+    ? Pure<C>
+    : Effect<C, DropKeys<D, keyof B>>
   : never
 
 export const handle = curry(

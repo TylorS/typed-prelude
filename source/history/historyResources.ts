@@ -1,7 +1,7 @@
 import { ServerHistory, ServerLocation } from './server'
-import { HistoryResources, Href } from './types'
+import { HistoryResources, Path } from './types'
 
-export function historyResources(href: Href = '/'): HistoryResources {
+export function historyResources(href: Path = '/'): HistoryResources {
   if (typeof location !== 'undefined' && typeof history !== 'undefined') {
     return { location, history }
   }

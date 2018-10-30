@@ -1,11 +1,11 @@
-import { Href } from '../history'
+import { Path } from '../history'
 import { Match } from '../logic'
 import { Maybe } from '../maybe'
 
 export interface Route<A = unknown> {
   readonly path: string
-  readonly match: Match<Href, A>
-  readonly createPath: (params: A, trailingSlash?: boolean) => Maybe<Href>
+  readonly match: Match<Path, A>
+  readonly createPath: (params: A, trailingSlash?: boolean) => Maybe<Path>
 }
 
 export type Routes = Array<Route<any>>

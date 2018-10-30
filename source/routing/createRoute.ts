@@ -1,21 +1,23 @@
 import { pathJoin } from '../common/pathJoin'
-import { Href } from '../history'
+import { Path } from '../history'
 import { Maybe, Nothing } from '../maybe'
 import { Param, pathParts, pathToRegex } from './pathToRegex'
 import { Route } from './types'
 
-export function createRoute<A extends Record<string, string | number>>(path: string): Route<A> {
+export function createRoute<A extends Record<string, string | number> = {}>(
+  path: string,
+): Route<A> {
   const { regex, params } = pathToRegex(path)
   const parts = pathParts(path)
 
   return {
     path,
-    match: (href: Href): Maybe<A> => {
+    match: (href: Path): Maybe<A> => {
       const matches = regex.exec(href)
 
       return matches ? Maybe.of(findParams<A>(params, {}, matches)) : Nothing
     },
-    createPath: (parameters: A, trailingSlash: boolean = false): Maybe<Href> => {
+    createPath: (parameters: A, trailingSlash: boolean = false): Maybe<Path> => {
       if (params.length === 0) {
         return Maybe.of(pathJoin(parts, trailingSlash))
       }
