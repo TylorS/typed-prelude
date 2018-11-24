@@ -16,15 +16,16 @@ export interface Pure<A> extends Effect<A> {
 
 export namespace Effect {
   export const create = <A, B extends {} = {}>(
-    // tslint:disable-next-line:no-shadowed-variable
     runEffect: (cb: Arity2<A, number, void>, resources: EffectResources<B>) => Disposable,
-  ): Effect<A, B> => ({ runEffect: (cb, resources) => runEffect(cb, resources || ({} as any)) })
+  ): Effect<A, B> => ({ runEffect: (cb, resources) => runEffect(cb, resources) })
 
   export const of = <A>(value: A): Effect<A> =>
     create<A>((cb, { scheduler }) => asap(callbackTask<A>(cb, value), scheduler))
 
   export const fromIO = <A>(io: IO<A>): Effect<A> =>
-    create<A>((cb, { scheduler }) => asap(callbackTask((_, t) => cb(io(), t), void 0), scheduler))
+    create<A>((cb, { scheduler }) =>
+      asap(callbackTask((_, t) => cb(io(), t), undefined), scheduler),
+    )
 }
 
 export const runEffect: {
