@@ -1,4 +1,4 @@
-import { equals } from '../../logic'
+import { equals } from '../../logic/equals'
 import { diffArrays } from './diffArrays'
 import { diffMaps } from './diffMaps'
 import { diffObjects } from './diffObjects'

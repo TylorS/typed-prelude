@@ -1,14 +1,15 @@
 import { describe, given, it, Test } from '@typed/test'
 
-import { isNotEqual } from './isNotEqual'
+import { notEqual } from './notEqual'
 
-export const test: Test = describe(`isNotEqual`, [
+export const test: Test = describe(`notEqual`, [
   given(`an expected and actual value`, [
     it(`returns the actual value if assertion is true`, ({ equal }) => {
       const expected = { a: 1 }
+
       const actual = { a: 2 }
 
-      equal(isNotEqual(expected, actual), actual)
+      equal(notEqual(expected, actual), actual)
     }),
 
     it(`throws an AssertionError if assertion is false`, ({ same }) => {
@@ -16,7 +17,7 @@ export const test: Test = describe(`isNotEqual`, [
       const actual = { a: 1 }
 
       try {
-        isNotEqual(expected, actual)
+        notEqual(expected, actual)
         throw new Error(`Should throw error`)
       } catch (e) {
         same(e.message, `Values not expected to be equal`)

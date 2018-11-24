@@ -1,5 +1,9 @@
 import { green, red } from '../../common/colors'
-import { ascend, join, map, sort, uniq } from '../../list'
+import { ascend } from '../../list/ascend'
+import { join } from '../../list/join'
+import { map } from '../../list/map'
+import { sort } from '../../list/sort'
+import { uniq } from '../../list/uniq'
 import { equals } from '../../logic'
 import { isEmpty, stringify } from './helpers'
 

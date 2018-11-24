@@ -1,7 +1,7 @@
 import { curry } from '../lambda'
 import { AssertionError } from './AssertionError'
 
-export const isSame: {
+export const notSame: {
   <A>(expected: A, actual: A): A
   <A>(expected: A): (actual: A) => A
 } = curry(

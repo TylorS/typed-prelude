@@ -1,5 +1,7 @@
 import { equals } from '../../common/equals'
-import { join, length, map } from '../../list'
+import { join } from '../../list/join'
+import { length } from '../../list/length'
+import { map } from '../../list/map'
 import { addedValue, isEmpty, isObject, removedValue, stringify } from './helpers'
 
 export function diffArrays<A extends any[]>(expected: A, actual: A): string {

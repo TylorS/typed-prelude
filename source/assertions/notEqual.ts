@@ -2,7 +2,7 @@ import { curry } from '../lambda'
 import { equals } from '../logic'
 import { AssertionError } from './AssertionError'
 
-export const isNotEqual: {
+export const notEqual: {
   <A>(expected: A, actual: A): A
   <A>(expected: A): (actual: A) => A
 } = curry(
