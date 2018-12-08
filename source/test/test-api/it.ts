@@ -19,7 +19,7 @@ export function it(
     const { timeout, skip } = options
 
     if (skip) {
-      return Promise.resolve<RunnerTestResult>({ ...config, type: 'skip' })
+      return Promise.resolve<RunnerTestResult>({ ...config, type: 'skipped' })
     }
 
     const { context, assertions } = createAssertionEnvironment()
@@ -37,7 +37,7 @@ export function it(
         if (error === undefined && context.count > 0) {
           return resolve({
             ...config,
-            type: 'pass',
+            type: 'passed',
           })
         }
 
@@ -49,7 +49,7 @@ export function it(
 
         return resolve({
           ...config,
-          type: 'fail',
+          type: 'failed',
           error: testError,
         })
       }

@@ -44,15 +44,15 @@ export function resultToString(
   logLevel: LogLevel,
   nested = false,
 ): string {
-  if (result.type === 'pass') {
+  if (result.type === 'passed') {
     return passingTestResultToString(result, nested)
   }
 
-  if (result.type === 'fail') {
+  if (result.type === 'failed') {
     return failingTestResultToString(result, nested)
   }
 
-  if (result.type === 'skip') {
+  if (result.type === 'skipped') {
     return skippedTestResultToString(result, nested, logLevel)
   }
 
@@ -106,7 +106,7 @@ export function collectionTestResultToString(
             return `\n${r}`
           }
 
-          return x.type === 'fail' ? `${r}\n` : r
+          return x.type === 'failed' ? `${r}\n` : r
         })
         .join(`\n`),
     )

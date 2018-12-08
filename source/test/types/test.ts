@@ -41,15 +41,15 @@ export interface CollectionTestResult extends TestConfig {
 }
 
 export interface PassedTestResult extends TestConfig {
-  readonly type: 'pass'
+  readonly type: 'passed'
 }
 
 export interface SkippedTestResult extends TestConfig {
-  readonly type: 'skip'
+  readonly type: 'skipped'
 }
 
 export interface FailedTestResult extends TestConfig {
-  readonly type: 'fail'
+  readonly type: 'failed'
   readonly error: Error
 }
 
@@ -89,4 +89,10 @@ export type TestResultWithMetadata =
 export interface CollectionTestResultWithMetadata extends CollectionTestResult {
   readonly results: TestResultWithMetadata[]
   readonly metadata: NodeMetadata | TestMetadata
+}
+
+export interface TestStats {
+  readonly passed: number
+  readonly failed: number
+  readonly skipped: number
 }
