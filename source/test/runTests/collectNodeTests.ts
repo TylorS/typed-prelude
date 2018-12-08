@@ -1,3 +1,4 @@
+import { all as clearAllNodeModules } from 'clear-require'
 import { chain, groupBy, uniq } from '../../list'
 import { isTestCollection } from '../test-api/isTestCollection'
 import { isTestRunner } from '../test-api/isTestRunner'
@@ -13,8 +14,14 @@ import {
 export function collectNodeTests(testMetadata: TestMetadata[]): TestWithMetadataId[] {
   const metadataByFile = groupBy(x => x.filePath, testMetadata)
   const filePaths = uniq(Object.keys(metadataByFile))
+  const tests = chain(
+    filePath => testsWithMetadataId(filePath, metadataByFile[filePath]),
+    filePaths,
+  )
 
-  return chain(filePath => testsWithMetadataId(filePath, metadataByFile[filePath]), filePaths)
+  clearAllNodeModules()
+
+  return tests
 }
 
 function testsWithMetadataId<A extends string>(
