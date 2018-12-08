@@ -48,3 +48,6 @@ export type ExtractUnionMember<
   Tag extends keyof A,
   Value extends A[Tag]
 > = Extract<A, Record<Tag, Value>>
+
+export type Mutable<A> = A extends Primitive ? A : MutableObject<A>
+export type MutableObject<A> = { -readonly [K in keyof A]: Mutable<A[K]> }
