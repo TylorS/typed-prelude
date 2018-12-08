@@ -8,13 +8,11 @@ import { fromLeft } from './Left'
  * value of another `Either`.
  * @name chainLeft<A, B, C>(f: (value: B) => Either<C, B>, either: Either<A, B>): Either<A C>
  */
-export const chainLeft: EitherChainLeft = curry(__chainLeft)
+export const chainLeft = curry(__chainLeft) as {
+  <A, B, C>(f: (value: A) => Either<C, B>, either: Either<A, B>): Either<C, B>
+  <A, B, C>(f: (value: A) => Either<C, B>): (either: Either<A, B>) => Either<C, B>
+}
 
 function __chainLeft<A, B, C>(f: (value: A) => Either<C, B>, either: Either<A, B>): Either<C, B> {
   return isLeft(either) ? f(fromLeft(either)) : either
-}
-
-export type EitherChainLeft = {
-  <A, B, C>(f: (value: A) => Either<C, B>, either: Either<A, B>): Either<C, B>
-  <A, B, C>(f: (value: A) => Either<C, B>): (either: Either<A, B>) => Either<C, B>
 }

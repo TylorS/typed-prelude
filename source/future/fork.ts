@@ -4,7 +4,7 @@ import { fromLeft, fromRight, isLeft } from '../either'
 import { Arity1, curry } from '../lambda'
 import { Future } from './Future'
 
-export const fork: {
+export const fork = curry(__fork) as {
   <A, B, C extends {} = {}>(
     left: Arity1<A>,
     right: Arity1<B>,
@@ -29,7 +29,7 @@ export const fork: {
       (resources: EffectResources<C>): (future: Future<A, B, C>) => Disposable
     }
   }
-} = curry(__fork)
+}
 
 function __fork<A, B, C extends {} = {}>(
   left: Arity1<A>,

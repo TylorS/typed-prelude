@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../test'
 import { chain, isNothing, Maybe, Nothing } from './'
 
 export const test: Test = describe(`chain`, [

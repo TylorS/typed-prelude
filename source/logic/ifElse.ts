@@ -1,6 +1,6 @@
 import { Arity1, curry, Predicate } from '../lambda'
 
-export const ifElse: {
+export const ifElse = curry(__ifElse) as {
   <A, B>(predicate: Predicate<A>, thenFn: Arity1<A, B>, elseFn: Arity1<A, B>, value: A): B
   <A, B>(predicate: Predicate<A>, thenFn: Arity1<A, B>, elseFn: Arity1<A, B>): (value: A) => B
   <A, B>(predicate: Predicate<A>, thenFn: Arity1<A, B>): {
@@ -15,7 +15,7 @@ export const ifElse: {
       (elseFn: Arity1<A, B>): (value: A) => B
     }
   }
-} = curry(__ifElse)
+}
 
 function __ifElse<A, B>(
   predicate: Predicate<A>,

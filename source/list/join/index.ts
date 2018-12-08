@@ -1,9 +1,9 @@
 import { curry } from '../../lambda'
 
-export const join: {
+export const join = curry(__join) as {
   <A>(separator: string, list: A[]): string
   <A>(separator: string): (list: A[]) => string
-} = curry(__join)
+}
 
 function __join<A>(separator: string, list: A[]): string {
   let str = ''

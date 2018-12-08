@@ -1,13 +1,13 @@
 import { curry } from '../../lambda'
 
-export const insert: {
+export const insert = curry(__insert) as {
   <A>(index: number, value: A, list: A[]): A[]
   <A>(index: number, value: A): (list: A[]) => A[]
   <A>(index: number): {
     (value: A, list: A[]): A[]
     (value: A): (list: A[]) => A[]
   }
-} = curry(__insert)
+}
 
 function __insert<A>(index: number, value: A, list: A[]): A[] {
   const length = list.length

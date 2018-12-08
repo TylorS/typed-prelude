@@ -12,7 +12,11 @@ for (const lib of libs) {
 const indexPaths = ['index.js', 'index.js.map', 'index.d.ts']
 
 for (const path of indexPaths) {
-  unlinkSync(join(rootPath, path))
+  const filePath = join(rootPath, path)
+
+  if (existsSync(filePath)) {
+    unlinkSync(filePath)
+  }
 }
 
 function rimraf(directory: string) {

@@ -2,7 +2,7 @@ import { asap } from '@most/scheduler'
 import { Disposable } from '@most/types'
 import { Effect, EffectResources } from '../effect'
 import { callbackTask } from '../effect/callbackTask'
-import { Either } from '../either'
+import { Either, unpack } from '../either'
 import { apply, Arity1, Arity3, pipe } from '../lambda'
 
 export interface Future<A, B, C extends {} = {}> extends Effect<Either<A, B>, C> {}
@@ -37,4 +37,7 @@ export namespace Future {
     Future.create((reject, resolve, { scheduler }) =>
       asap(callbackTask(f => f().then(resolve, reject), f), scheduler),
     )
+
+  export const fromEither = <A, B>(either: Either<A, B>): Future<A, B> =>
+    unpack<A, B, Future<A, B>>(Future.reject, Future.of, either)
 }

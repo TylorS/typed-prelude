@@ -1,4 +1,5 @@
 export * from './clone'
+export * from './dissoc'
 export * from './hasOwnProperty'
 export * from './keysOf'
 export * from './mapObj'

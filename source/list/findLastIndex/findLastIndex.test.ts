@@ -1,7 +1,7 @@
-import { describe, given, it, Test } from '@typed/test'
-import { findLastIndex } from '.'
 import { always } from '../../lambda'
 import { Nothing, withDefault } from '../../maybe'
+import { describe, given, it, Test } from '../../test'
+import { findLastIndex } from './index'
 
 export const test: Test = describe(`findLast`, [
   given(`a Predicate and a List`, [

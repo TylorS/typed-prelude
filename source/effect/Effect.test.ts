@@ -1,5 +1,5 @@
 import { newDefaultScheduler } from '@most/scheduler'
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../test'
 import { Effect } from './Effect'
 
 export const test: Test = describe(`Effect`, [
@@ -15,13 +15,15 @@ export const test: Test = describe(`Effect`, [
           return { dispose }
         })
 
+        const disposable = runEffect(assert, { scheduler: newDefaultScheduler() })
+
         function assert(actual: typeof expected) {
           equal(expected, actual)
 
+          disposable.dispose()
+
           done()
         }
-
-        runEffect(assert, { scheduler: newDefaultScheduler() })
       }),
     ]),
   ]),

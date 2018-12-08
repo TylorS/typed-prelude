@@ -1,8 +1,6 @@
 import { curry } from '../../lambda'
 
-export const startsWith: StartsWith = curry(__startsWith)
-
-export type StartsWith = {
+export const startsWith = curry(__startsWith) as {
   <A>(search: ArrayLike<A>, list: ArrayLike<A>): boolean
   <A>(search: ArrayLike<A>): (list: ArrayLike<A>) => boolean
 }

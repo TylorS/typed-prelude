@@ -4,10 +4,7 @@ import { callbackTask } from '../effect/callbackTask'
 import { curry } from '../lambda'
 import { HistoryResources } from './types'
 
-export const replaceState: {
-  (data: any, url: string): Effect<Location, HistoryResources>
-  (data: any): (url: string) => Effect<Location, HistoryResources>
-} = curry(
+export const replaceState = curry(
   (data: any, url: string): Effect<Location, HistoryResources> =>
     Effect.create((cb, { history, location, scheduler }) => {
       function replaceState() {

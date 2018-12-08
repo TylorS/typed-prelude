@@ -1,4 +1,4 @@
-import { describe, it } from '@typed/test'
+import { describe, it } from '../test'
 import { serverStorage } from './serverStorage'
 
 describe(`serverStorage`, [

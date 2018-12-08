@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../test'
 
 import { Maybe } from '../maybe'
 import { prop } from './prop'
@@ -8,7 +8,6 @@ export const test: Test = describe(`prop`, [
     it(`returns V`, ({ equal }) => {
       equal(Maybe.of(1), prop('a', { a: 1 }))
       equal(Maybe.of(1), prop('a')({ a: 1 }))
-      equal(Maybe.of(1), prop(1, [0, 1]))
     }),
   ]),
 ])

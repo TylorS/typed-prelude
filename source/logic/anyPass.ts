@@ -1,8 +1,6 @@
 import { curry, Predicate } from '../lambda'
 
-export const anyPass: AnyPass = curry(__anyPass)
-
-export type AnyPass = {
+export const anyPass = curry(__anyPass) as {
   <A>(predicates: Array<Predicate<A>>, value: A): boolean
   <A>(predicates: Array<Predicate<A>>): (value: A) => boolean
 }

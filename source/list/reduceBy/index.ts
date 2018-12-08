@@ -1,6 +1,6 @@
 import { curry } from '../../lambda'
 
-export const reduceBy: ReduceByArity4 = curry(
+export const reduceBy = curry(
   <A, B>(
     f: (acc: B, x: A) => B,
     seed: B,
@@ -20,7 +20,8 @@ export const reduceBy: ReduceByArity4 = curry(
 
     return newObj
   },
-)
+) as ReduceByArity4
+
 export interface ReduceByArity4 {
   <A, B>(f: (acc: B, value: A) => B, seed: B, by: (a: A) => PropertyKey | number, list: A[]): {
     readonly [key: string]: B

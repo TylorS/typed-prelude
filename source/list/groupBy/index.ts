@@ -1,9 +1,9 @@
 import { Arity1, curry } from '../../lambda'
 
-export const groupBy: {
+export const groupBy = curry(__groupBy) as {
   <A, B extends PropertyKey>(f: Arity1<A, B>, list: A[]): Record<B, A[]>
   <A, B extends PropertyKey>(f: Arity1<A, B>): (list: A[]) => Record<B, A[]>
-} = curry(__groupBy)
+}
 
 function __groupBy<A, B extends PropertyKey>(f: Arity1<A, B>, list: A[]): Record<B, A[]> {
   return list.reduce(groupByReducer(f), {} as Record<B, A[]>)

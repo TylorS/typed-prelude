@@ -1,5 +1,5 @@
-import { curry } from 'source/lambda'
 import { Effect } from '../effect'
+import { curry } from '../lambda'
 import { Maybe } from '../maybe'
 
 export interface StorageEffects {

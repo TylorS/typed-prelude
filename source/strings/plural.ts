@@ -1,9 +1,9 @@
 import { curry } from '../lambda'
 
-export const plural: {
+export const plural = curry(__plural) as {
   (str: string, numOfItems: number): string
   (str: string): (numOfItems: number) => string
-} = curry(__plural)
+}
 
 function __plural(str: string, num: number): string {
   if (num === 1) {

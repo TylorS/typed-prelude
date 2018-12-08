@@ -1,6 +1,6 @@
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../test'
 
-import { Either } from '../Either'
+import { Either } from './Either'
 import { unpack } from './unpack'
 
 export const test: Test = describe(`unpack`, [

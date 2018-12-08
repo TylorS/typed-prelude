@@ -1,10 +1,10 @@
 import { curry, Predicate } from '../lambda'
 import { not } from './not'
 
-export const allPass: {
+export const allPass = curry(__allPass) as {
   <A>(predicates: Array<Predicate<A>>, value: A): boolean
   <A>(predicates: Array<Predicate<A>>): Predicate<A>
-} = curry(__allPass)
+}
 
 function __allPass<A>(predicates: Array<Predicate<A>>, value: A): boolean {
   const predicateCount = predicates.length

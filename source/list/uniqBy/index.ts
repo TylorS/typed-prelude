@@ -1,10 +1,7 @@
 import { curry } from '../../lambda'
 import { includes } from '../includes'
 
-export const uniqBy: {
-  <A, B>(toComparisonValue: (value: A, index: number) => B, list: A[]): A[]
-  <A, B>(toComparisonValue: (value: A, index: number) => B): (list: A[]) => A[]
-} = curry(
+export const uniqBy = curry(
   <A, B>(toComparisonValue: (value: A, index: number) => B, list: A[]): A[] => {
     const valuesSeen: B[] = []
     const result: A[] = []
@@ -23,4 +20,7 @@ export const uniqBy: {
 
     return result
   },
-)
+) as {
+  <A, B>(toComparisonValue: (value: A, index: number) => B, list: A[]): A[]
+  <A, B>(toComparisonValue: (value: A, index: number) => B): (list: A[]) => A[]
+}

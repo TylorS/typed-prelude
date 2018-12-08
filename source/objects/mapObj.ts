@@ -1,6 +1,6 @@
 import { curry } from '../lambda'
 
-export const mapObj: {
+export const mapObj = curry(__mapObj) as {
   <A, B, C extends Record<PropertyKey, A>>(
     fn: <K extends keyof C>(key: K, value: C[K]) => B,
     obj: C,
@@ -9,7 +9,7 @@ export const mapObj: {
   <A, B, C extends Record<PropertyKey, A>>(fn: <K extends keyof C>(key: K, value: C[K]) => B): (
     obj: C,
   ) => { [K in keyof C]: B }
-} = curry(__mapObj)
+}
 
 function __mapObj<A, B, C extends Record<PropertyKey, A>>(
   fn: <K extends keyof C>(key: K, value: C[K]) => B,

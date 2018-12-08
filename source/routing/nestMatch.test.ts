@@ -1,6 +1,6 @@
-import { describe, given, it, Test } from '@typed/test'
 import { Match } from '../logic'
 import { fromJust, isJust, isNothing, Maybe, Nothing } from '../maybe'
+import { describe, given, it, Test } from '../test'
 import { createRoute } from './createRoute'
 import { nestMatch } from './nestMatch'
 

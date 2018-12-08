@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@typed/test": "9.0.0",
+    "@types/cote": "^0.17.0",
     "@types/node": "10.12.1",
     "lint-staged": "8.0.2",
     "prettier": "1.14.3",
@@ -31,14 +32,15 @@
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.15.0",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "3.1.4"
+    "typescript": "3.2.1"
   },
   "peerDependencies": {
-    "typescript": "^3.1.4"
+    "typescript": "^3.2.1"
   },
   "dependencies": {
     "@most/disposable": "1.2.1",
     "@most/scheduler": "1.2.1",
-    "@most/types": "1.0.1"
+    "@most/types": "1.0.1",
+    "creed": "^1.4.0"
   }
 }

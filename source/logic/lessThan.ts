@@ -1,6 +1,6 @@
 import { curry } from '../lambda'
 
-export const lessThan: {
+export const lessThan = curry(<A>(right: A, left: A) => left < right) as {
   <A>(right: A, left: A): boolean
   <A>(right: A): (left: A) => boolean
-} = curry(<A>(right: A, left: A) => left < right)
+}

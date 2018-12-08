@@ -9,10 +9,7 @@ const IS_HTTPS = /https/
 // TODO: Write some tests
 // I ripped this out of a side-project
 
-export const http: {
-  (url: string, options?: HttpOptions): Future<Error, HttpResponse>
-  <A>(url: string, options?: HttpOptions): Request<A>
-} = <A>(url: string, options: HttpOptions = {}): Request<A> =>
+export const http = (<A>(url: string, options: HttpOptions = {}): Request<A> =>
   Future.create<Error, HttpResponse>((reject, resolve) => {
     const { method = 'GET', headers, body } = options
 
@@ -97,4 +94,7 @@ export const http: {
     request.send(body)
 
     return { dispose: () => request.abort() }
-  })
+  })) as {
+  (url: string, options?: HttpOptions): Future<Error, HttpResponse>
+  <A>(url: string, options?: HttpOptions): Request<A>
+}

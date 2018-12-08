@@ -7,9 +7,7 @@ import { Maybe } from './Maybe'
  * `Just`s. If either `Maybe`s are `Nothing` then `Nothing` is returned.
  * @name combine<A, B, C>(f: (a: A, b: B) => C, a: Maybe<A>, b: Maybe<B>): Maybe<C>
  */
-export const combine: Combine = curry(__combine)
-
-export type Combine = {
+export const combine = curry(__combine) as {
   <A, B, C>(f: (valueA: A, valueB: B) => C, maybeA: Maybe<A>, maybeB: Maybe<B>): Maybe<C>
   <A, B, C>(f: (valueA: A, valueB: B) => C, maybeA: Maybe<A>): (maybeB: Maybe<B>) => Maybe<C>
 

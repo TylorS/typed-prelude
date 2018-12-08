@@ -1,10 +1,10 @@
 import { curry, Predicate } from '../lambda'
 import { Maybe, Nothing } from '../maybe'
 
-export const cond: {
+export const cond = curry(__cond) as {
   <A, B>(conditions: Array<Conditional<A, B>>, value: A): Maybe<B>
   <A, B>(conditions: Array<Conditional<A, B>>): (value: A) => Maybe<B>
-} = curry(__cond)
+}
 
 function __cond<A, B>(conditionals: Array<Conditional<A, B>>, value: A): Maybe<B> {
   const itemCount = conditionals.length

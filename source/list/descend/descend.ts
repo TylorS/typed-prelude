@@ -1,13 +1,6 @@
 import { ComparableValues, ComparisonNumbers, curry } from '../../lambda'
 
-export const descend: {
-  <A, B extends ComparableValues>(f: (a: A) => B, a: A, b: A): ComparisonNumbers
-  <A, B extends ComparableValues>(f: (a: A) => B, a: A): (b: A) => ComparisonNumbers
-  <A, B extends ComparableValues>(f: (a: A) => B): {
-    (a: A, b: A): ComparisonNumbers
-    (a: A): (b: A) => ComparisonNumbers
-  }
-} = curry(function descend<A, B extends ComparableValues>(
+export const descend = curry(function descend<A, B extends ComparableValues>(
   f: (a: A) => B,
   a: A,
   b: A,
@@ -24,4 +17,11 @@ export const descend: {
   }
 
   return 0
-})
+}) as {
+  <A, B extends ComparableValues>(f: (a: A) => B, a: A, b: A): ComparisonNumbers
+  <A, B extends ComparableValues>(f: (a: A) => B, a: A): (b: A) => ComparisonNumbers
+  <A, B extends ComparableValues>(f: (a: A) => B): {
+    (a: A, b: A): ComparisonNumbers
+    (a: A): (b: A) => ComparisonNumbers
+  }
+}

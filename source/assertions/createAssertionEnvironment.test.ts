@@ -1,4 +1,4 @@
-import { describe, it, Test } from '@typed/test'
+import { describe, it, Test } from '../test'
 import { createAssertionEnvironment } from './createAssertionEnvironment'
 
 export const test: Test = describe(`createAssertionsEnvironment`, [

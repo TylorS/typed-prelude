@@ -1,5 +1,5 @@
-import { describe, given, it, Test } from '@typed/test'
 import { join } from '.'
+import { describe, given, it, Test } from '../../test'
 
 export const test: Test = describe(`join`, [
   given(`a separator and a list of values`, [

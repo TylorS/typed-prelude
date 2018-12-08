@@ -1,5 +1,5 @@
-import { describe, given, it, Test } from '@typed/test'
-import { endsWith } from '.'
+import { describe, given, it, Test } from '../../test'
+import { endsWith } from './index'
 
 export const test: Test = describe(`endswith`, [
   given(`an array containing the end of another`, [

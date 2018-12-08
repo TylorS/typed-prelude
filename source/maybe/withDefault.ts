@@ -8,13 +8,11 @@ import { Maybe } from './Maybe'
  * Nothing or the value contained in a Just.
  * @name withDefault<A>(defaultValue: A, maybe: Maybe<A>): A
  */
-export const withDefault: WithDefault = curry(__withDefault)
+export const withDefault = curry(__withDefault) as {
+  <A>(defaultValue: A, maybe: Maybe<A>): A
+  <A>(defaultValue: A): (maybe: Maybe<A>) => A
+}
 
 function __withDefault<A>(defaultValue: A, maybe: Maybe<A>): A {
   return isJust(maybe) ? fromJust(maybe) : defaultValue
-}
-
-export interface WithDefault {
-  <A>(defaultValue: A, maybe: Maybe<A>): A
-  <A>(defaultValue: A): (maybe: Maybe<A>) => A
 }

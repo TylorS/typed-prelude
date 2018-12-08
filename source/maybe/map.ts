@@ -7,13 +7,11 @@ import { Maybe } from './Maybe'
  * maybe is a `Nothing` just the `Nothing` is returned.
  * @name map<A, B>(f: (value: A) => B, maybe: Maybe<A>): Maybe<B>
  */
-export const map: MaybeMap = curry(__map)
+export const map = curry(__map) as {
+  <A, B>(f: (value: A) => B, maybe: Maybe<A>): Maybe<B>
+  <A, B>(f: (value: A) => B): (maybe: Maybe<A>) => Maybe<B>
+}
 
 function __map<A, B>(f: (value: A) => B, maybe: Maybe<A>): Maybe<B> {
   return chain(a => Maybe.of(f(a)), maybe)
-}
-
-export interface MaybeMap {
-  <A, B>(f: (value: A) => B, maybe: Maybe<A>): Maybe<B>
-  <A, B>(f: (value: A) => B): (maybe: Maybe<A>) => Maybe<B>
 }

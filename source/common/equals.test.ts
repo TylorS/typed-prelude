@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../test'
 
 import { equals } from './equals'
 

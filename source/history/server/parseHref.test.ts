@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '@typed/test'
+import { describe, given, it, Test } from '../../test'
 import { ParsedHref, parseHref } from './parseHref'
 
 export const test: Test = describe(`parseHref`, [

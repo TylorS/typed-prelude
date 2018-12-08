@@ -28,7 +28,13 @@ export namespace Effect {
     )
 }
 
-export const runEffect: {
+export const runEffect = curry(function runEffect<A, B extends {} = {}>(
+  resources: EffectResources<B>,
+  cb: Arity2<A, number, void>,
+  effect: Effect<A>,
+): Disposable {
+  return effect.runEffect(cb, resources)
+}) as {
   <A, B extends {} = {}>(
     resources: EffectResources<B>,
     cb: Arity2<A, number, void>,
@@ -43,13 +49,7 @@ export const runEffect: {
     <A>(cb: Arity2<A, number, void>, effect: Effect<A>): Disposable
     <A>(cb: Arity2<A, number, void>): (effect: Effect<A>) => Disposable
   }
-} = curry(function runEffect<A, B extends {} = {}>(
-  resources: EffectResources<B>,
-  cb: Arity2<A, number, void>,
-  effect: Effect<A>,
-): Disposable {
-  return effect.runEffect(cb, resources)
-})
+}
 
 export function defaultResources(): EffectResources {
   return {
@@ -57,19 +57,19 @@ export function defaultResources(): EffectResources {
   }
 }
 
-export const runPure: {
+export const runPure = curry(
+  <A>(cb: (value: A, time: number) => void, pure: Pure<A>): Disposable => pure.runEffect(cb),
+) as {
   <A>(cb: (value: A, time: number) => void, pure: Pure<A>): Disposable
   <A>(cb: (value: A, time: number) => void): (pure: Pure<A>) => Disposable
-} = curry(
-  <A>(cb: (value: A, time: number) => void, pure: Pure<A>): Disposable => pure.runEffect(cb),
-)
+}
 
-export const execEffect: {
-  <A extends {} = {}>(resources: EffectResources<A>, eff: Effect<any, A>): Disposable
-  <A extends {} = {}>(resources: EffectResources<A>): (eff: Effect<any, A>) => Disposable
-} = curry(
+export const execEffect = curry(
   <A extends {} = {}>(resources: EffectResources<A>, eff: Effect<any, A>): Disposable =>
     eff.runEffect(noOp, resources),
-)
+) as {
+  <A extends {} = {}>(resources: EffectResources<A>, eff: Effect<any, A>): Disposable
+  <A extends {} = {}>(resources: EffectResources<A>): (eff: Effect<any, A>) => Disposable
+}
 
 export const execPure = (pure: Pure<any>): Disposable => pure.runEffect(noOp)
