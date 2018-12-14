@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '../test'
+import { describe, given, it, Test } from '@typed/test'
 
 import { Maybe } from '../maybe'
 import { prop } from './prop'

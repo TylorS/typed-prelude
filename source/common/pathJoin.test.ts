@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '../test'
+import { describe, given, it, Test } from '@typed/test'
 import { pathJoin } from './pathJoin'
 
 export const test: Test = describe(`pathJoin`, [

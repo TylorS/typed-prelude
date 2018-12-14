@@ -1,4 +1,4 @@
-import { describe, given, it } from '../../test'
+import { describe, given, it } from '@typed/test'
 import { zip } from './zip'
 
 describe('zip', [

@@ -1,9 +1,9 @@
+import { describe, given, it, Test } from '@typed/test'
 import { chain, defaultResources, Effect } from '../effect'
 import { increment } from '../math'
-import { describe, given, it, Test } from '../test'
 import { createStore } from './Store'
 
-export const test: Test = describe.only(`createStore `, [
+export const test: Test = describe(`createStore `, [
   given(`Default State and Resources`, [
     it(`returns a Store`, ({ equal }, done) => {
       const resources = defaultResources()

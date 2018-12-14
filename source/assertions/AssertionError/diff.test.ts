@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '../../test'
+import { describe, given, it, Test } from '@typed/test'
 
 import { strip } from '../../common/colors'
 import { diff } from './diff'

@@ -1,5 +1,5 @@
 import { newDefaultScheduler } from '@most/scheduler'
-import { describe, given, it, Test } from '../test'
+import { describe, given, it, Test } from '@typed/test'
 import { Effect } from './Effect'
 
 export const test: Test = describe(`Effect`, [

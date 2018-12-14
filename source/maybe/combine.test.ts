@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '../test'
+import { describe, given, it, Test } from '@typed/test'
 import { fromJust, isJust, Just } from './'
 
 import { combine } from './combine'

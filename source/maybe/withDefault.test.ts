@@ -1,5 +1,5 @@
+import { describe, given, it, Test } from '@typed/test'
 import { Maybe, Nothing, withDefault } from '.'
-import { describe, given, it, Test } from '../test'
 
 export const test: Test = describe(`withDefault`, [
   given(`a default value and Nothing`, [

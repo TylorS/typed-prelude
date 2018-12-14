@@ -1,5 +1,5 @@
+import { describe, given, it, Test } from '@typed/test'
 import { Maybe } from '../maybe'
-import { describe, given, it, Test } from '../test'
 import { combineRoutes } from './combineRoutes'
 import { createRoute } from './createRoute'
 

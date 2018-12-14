@@ -1,4 +1,4 @@
-import { describe, given, it, Test } from '../test'
+import { describe, given, it, Test } from '@typed/test'
 import { toString } from './toString'
 
 export const test: Test = describe(`toString`, [
