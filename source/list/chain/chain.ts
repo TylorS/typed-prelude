@@ -1,7 +1,16 @@
 import { Arity1, curry } from '../../lambda'
-import { flatten } from '../flatten'
 
-export const chain = curry((f, list) => flatten(list.map(f))) as {
+export const chain = curry((f, list) => unnest(list.map(f))) as {
   <A, B>(fn: Arity1<A, B[]>, list: A[]): B[]
   <A, B>(fn: Arity1<A, B[]>): (list: A[]) => B[]
+}
+
+function unnest<A>(nestedList: A[][]): A[] {
+  const unnestedList: A[] = []
+
+  for (const list of nestedList) {
+    unnestedList.push(...list)
+  }
+
+  return unnestedList
 }

@@ -1,7 +1,7 @@
 import { Options } from '@typed/test'
 
 const nodeOptions: Options = {
-  typeCheck: true,
+  typeCheck: false,
 }
 
 // const browserOptions: Options = {
