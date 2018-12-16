@@ -10,7 +10,6 @@ export function findDynamicImportDependency(
   dependencies: Dependency[],
   sourceFilesToProcess: SourceFile[],
   project: Project,
-  recursive: boolean,
 ) {
   const [moduleSpecifier] = importCallExpression
     .getDescendantsOfKind(SyntaxKind.StringLiteral)
@@ -24,9 +23,6 @@ export function findDynamicImportDependency(
     resolvedFilePath,
   }
 
-  if (recursive) {
-    sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))
-  }
-
+  sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))
   dependencies.push(dependency)
 }

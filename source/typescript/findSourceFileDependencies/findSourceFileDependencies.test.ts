@@ -22,7 +22,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'named',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 
@@ -41,7 +41,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'dynamic-import',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 
@@ -60,7 +60,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'dynamic-import',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 
@@ -79,7 +79,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'namespace',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 
@@ -98,7 +98,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'import-require',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 
@@ -117,7 +117,7 @@ export const test = describe(`findSourceFileDependencies`, [
         type: 'commonjs-require',
       }
 
-      equal([expected], dependencyMap.get(filePath)!)
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
 ])

@@ -9,13 +9,11 @@ import { findImportEqualsDependency } from './findImportEqualsDependency'
 export type FindSourceFileDependenciesOptions = {
   sourceFile: SourceFile
   project: Project
-  recursive?: boolean
 }
 
 export function findSourceFileDependencies({
   sourceFile,
   project,
-  recursive = true,
 }: FindSourceFileDependenciesOptions): [DependencyMap, DependentMap] {
   const dependencyMap: DependencyMap = new Map()
   const dependentMap: DependentMap = new Map()
@@ -41,14 +39,13 @@ export function findSourceFileDependencies({
 
     const dependencies: Dependency[] = []
 
-    dependencyMap.set(filePath, dependencies)
+    dependencyMap.set(filePath, { sourceFile: sourceFileToProcess, dependencies })
 
     findDependenciesOfSourceFile({
       project,
       dependencies,
       sourceFileToProcess,
       sourceFilesToProcess,
-      recursive,
     })
 
     dependencies.forEach(dependency => addDependent(filePath, dependency.resolvedFilePath))
@@ -62,7 +59,6 @@ type FindDependenciesOfSourceFileOptions = {
   sourceFileToProcess: SourceFile
   sourceFilesToProcess: SourceFile[]
   dependencies: Dependency[]
-  recursive: boolean
 }
 
 function findDependenciesOfSourceFile({
@@ -70,7 +66,6 @@ function findDependenciesOfSourceFile({
   project,
   dependencies,
   sourceFilesToProcess,
-  recursive,
 }: FindDependenciesOfSourceFileOptions): void {
   const sourceFileDecescendants = sourceFile.getDescendants()
   const directory = sourceFile.getDirectoryPath()
@@ -84,19 +79,14 @@ function findDependenciesOfSourceFile({
     if (TypeGuards.isImportDeclaration(descendant)) {
       const dependencySourceFile = descendant.getModuleSpecifierSourceFileOrThrow()
 
-      if (recursive) {
-        sourceFilesToProcess.push(dependencySourceFile)
-      }
-
+      sourceFilesToProcess.push(dependencySourceFile)
       findImportDeclarationDependency(descendant, dependencySourceFile, dependencies)
     }
 
     if (TypeGuards.isImportEqualsDeclaration(descendant)) {
       const dependencySourceFile = descendant.getExternalModuleReferenceSourceFileOrThrow()
 
-      if (recursive) {
-        sourceFilesToProcess.push(dependencySourceFile)
-      }
+      sourceFilesToProcess.push(dependencySourceFile)
 
       findImportEqualsDependency(
         descendant as ImportEqualsDeclaration,
@@ -115,7 +105,6 @@ function findDependenciesOfSourceFile({
           dependencies,
           sourceFilesToProcess,
           project,
-          recursive,
         )
       }
     }
@@ -127,7 +116,6 @@ function findDependenciesOfSourceFile({
         dependencies,
         sourceFilesToProcess,
         project,
-        recursive,
       )
     }
   }

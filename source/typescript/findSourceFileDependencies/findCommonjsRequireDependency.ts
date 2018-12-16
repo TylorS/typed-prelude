@@ -10,7 +10,6 @@ export function findCommonjsRequireDependency(
   dependencies: Dependency[],
   sourceFilesToProcess: SourceFile[],
   project: Project,
-  recursive: boolean,
 ) {
   const callExpression = requireIdentifier.getParentIfKind(SyntaxKind.CallExpression)
 
@@ -27,10 +26,7 @@ export function findCommonjsRequireDependency(
       resolvedFilePath,
     }
 
-    if (recursive) {
-      sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))
-    }
-
+    sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))
     dependencies.push(dependency)
   }
 }

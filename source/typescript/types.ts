@@ -11,7 +11,8 @@ export interface TsConfig {
   exclude?: string[]
 }
 
-export interface DependencyMap extends Map<string, Dependency[]> {}
+export interface DependencyMap
+  extends Map<string, { sourceFile: SourceFile; dependencies: Dependency[] }> {}
 export interface DependentMap extends Map<string, string[]> {}
 
 export interface Dependency {
