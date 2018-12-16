@@ -164,4 +164,20 @@ export const test = describe(`findSourceFileExports`, [
       ok(exportMetadata.every(x => TypeGuards.isArrowFunction(x.node)))
     }),
   ]),
+
+  given(`a SourceFile with re-exports`, [
+    it(`returns ExportMetadata[]`, ({ equal, ok }) => {
+      const filePath = join(testFixtures, 're-exports.ts')
+      const project = new Project()
+      const sourceFile = project.addExistingSourceFile(filePath)
+      const exportMetadata = findSourceFileExports({ sourceFile })
+
+      equal(
+        [['add', 'add'], ['subtract', 'subtract'], ['multiply', 'multiply'], ['divide', 'divide']],
+        chain(x => x.exportNames, exportMetadata),
+      )
+
+      ok(exportMetadata.every(x => TypeGuards.isVariableDeclaration(x.node)))
+    }),
+  ]),
 ])

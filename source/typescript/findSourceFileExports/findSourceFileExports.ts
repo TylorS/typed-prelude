@@ -13,7 +13,6 @@ import {
   VariableDeclaration,
 } from 'ts-simple-ast'
 import { ascend, uniq } from '../../list'
-import { Mutable } from '../../objects'
 import { Tuple } from '../../tuple'
 import { ExportMetadata } from '../types'
 
@@ -25,8 +24,8 @@ export type FindSourceFileExportsOptions = {
 const MODULE_EXPORTS = /^module\.exports/
 const EXPORTS = /^(exports.)([a-zA-Z0-9]+)/
 
-const moduleExport = ['module', 'export']
-const defaultExport = ['default', 'default']
+const moduleExport: Tuple<string> = ['module', 'export']
+const defaultExport: Tuple<string> = ['default', 'default']
 
 export function findSourceFileExports({
   sourceFile,
@@ -46,8 +45,8 @@ export function findSourceFileExports({
     : nodesToCheck
 
   for (const node of uniq(allNodes)) {
-    const exportMetadata: Mutable<ExportMetadata> = {
-      exportNames: [],
+    const exportMetadata = {
+      exportNames: [] as Array<Tuple<string>>,
       sourceFile,
       node,
     }
@@ -61,7 +60,7 @@ export function findSourceFileExports({
       TypeGuards.isEnumDeclaration(node) ||
       TypeGuards.isNamespaceDeclaration(node)
     ) {
-      exportMetadata.exportNames.push(findExportNamesFromVariableDeclaration(node))
+      exportMetadata.exportNames.push(findExportNamesFromDeclaration(node))
     }
 
     if (TypeGuards.isExportAssignment(node)) {
@@ -70,7 +69,9 @@ export function findSourceFileExports({
 
       exportMetadata.node = expression
 
-      const exportNames = isExportEquals ? moduleExport.slice() : defaultExport.slice()
+      const exportNames = isExportEquals
+        ? (moduleExport.slice() as Tuple<string>)
+        : (defaultExport.slice() as Tuple<string>)
 
       if (TypeGuards.isIdentifier(expression)) {
         exportNames[0] = expression.getText()
@@ -91,7 +92,7 @@ export function findSourceFileExports({
       }
     }
 
-    exportMetadataList.push(exportMetadata as ExportMetadata)
+    exportMetadataList.push(exportMetadata)
   }
 
   return exportMetadataList.sort(ascend(x => x.node.getStartLinePos()))
@@ -121,12 +122,12 @@ function findExportNamesFromCommonjsExportExpression(
     return ['module', 'exports']
   }
 
-  const matches = EXPORTS.exec(text)!
+  const [, , exportName] = EXPORTS.exec(text)!
 
-  return ['exports', matches[2]]
+  return ['exports', exportName]
 }
 
-function findExportNamesFromVariableDeclaration(
+function findExportNamesFromDeclaration(
   declaration:
     | VariableDeclaration
     | FunctionDeclaration
