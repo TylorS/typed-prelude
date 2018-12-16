@@ -120,4 +120,23 @@ export const test = describe(`findSourceFileDependencies`, [
       equal([expected], dependencyMap.get(filePath)!.dependencies)
     }),
   ]),
+
+  given(`a SourceFile with export * from`, [
+    it(`returns it's dependencies`, ({ equal }) => {
+      const project = new Project()
+      const filePath = join(testFixtures, 're-exports.ts')
+      const sourceFile = project.addExistingSourceFile(filePath)
+      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+
+      const expected: Dependency = {
+        moduleSpecifier: "'./math'",
+        importNames: [['*', '*']],
+        resolvedFilePath:
+          '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
+        type: 're-export',
+      }
+
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
+    }),
+  ]),
 ])

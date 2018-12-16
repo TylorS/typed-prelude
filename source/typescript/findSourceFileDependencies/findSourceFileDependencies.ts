@@ -5,6 +5,7 @@ import { findCommonjsRequireDependency } from './findCommonjsRequireDependency'
 import { findDynamicImportDependency } from './findDynamicImportDependency'
 import { findImportDeclarationDependency } from './findImportDeclarationDependency'
 import { findImportEqualsDependency } from './findImportEqualsDependency'
+import { findImportNames } from './helpers'
 
 export type FindSourceFileDependenciesOptions = {
   sourceFile: SourceFile
@@ -117,6 +118,26 @@ function findDependenciesOfSourceFile({
         sourceFilesToProcess,
         project,
       )
+    }
+
+    if (TypeGuards.isExportDeclaration(descendant)) {
+      const moduleSpecifier = descendant.getModuleSpecifier()
+
+      if (moduleSpecifier) {
+        const importNames = findImportNames(descendant.getNamedExports())
+        const dependencySourceFile = descendant.getModuleSpecifierSourceFileOrThrow()
+        const resolvedFilePath = dependencySourceFile.getFilePath()
+
+        const dependency: Dependency = {
+          importNames: importNames.length > 0 ? importNames : [['*', '*']],
+          moduleSpecifier: moduleSpecifier.getText(),
+          resolvedFilePath,
+          type: 're-export',
+        }
+
+        sourceFilesToProcess.push(dependencySourceFile)
+        dependencies.push(dependency)
+      }
     }
   }
 }

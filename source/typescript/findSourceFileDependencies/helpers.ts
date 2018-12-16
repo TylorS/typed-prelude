@@ -1,4 +1,10 @@
-import { CallExpression, ImportSpecifier, SyntaxKind, TypeGuards } from 'ts-simple-ast'
+import {
+  CallExpression,
+  ExportSpecifier,
+  ImportSpecifier,
+  SyntaxKind,
+  TypeGuards,
+} from 'ts-simple-ast'
 import { Tuple } from '../../tuple'
 
 const REQUIRE_OPEN_REGEX = /^require\(/
@@ -15,7 +21,9 @@ export function stripModuleSpecifier(specifier: string): string {
   return specifier.replace(MODULE_SPECIFIER_OPEN, '').replace(MODULE_SPECIFIER_CLOSE, '')
 }
 
-export function findImportNames(specifiers: ImportSpecifier[]): Array<Tuple<string, string>> {
+export function findImportNames(
+  specifiers: Array<ImportSpecifier | ExportSpecifier>,
+): Array<Tuple<string, string>> {
   return specifiers.map(specifier => {
     const name = specifier.getNameNode().getText()
     const alias = specifier.getAliasNode()

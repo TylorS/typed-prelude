@@ -28,6 +28,7 @@ export type DependencyType =
   | 'import-require'
   | 'commonjs-require'
   | 'dynamic-import'
+  | 're-export'
 
 export interface ExportMetadata {
   readonly exportNames: Array<Tuple<string, string>>
