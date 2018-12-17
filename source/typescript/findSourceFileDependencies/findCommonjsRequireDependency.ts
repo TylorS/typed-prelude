@@ -10,6 +10,7 @@ export function findCommonjsRequireDependency(
   dependencies: Dependency[],
   sourceFilesToProcess: SourceFile[],
   project: Project,
+  getModuleId: (filePath: string) => number,
 ) {
   const callExpression = requireIdentifier.getParentIfKind(SyntaxKind.CallExpression)
 
@@ -18,12 +19,14 @@ export function findCommonjsRequireDependency(
       .getDescendantsOfKind(SyntaxKind.StringLiteral)
       .map(x => x.getText())
     const resolvedFilePath = sync(stripModuleSpecifier(moduleSpecifier), resolveOptions)
+    const moduleId = getModuleId(resolvedFilePath)
 
     const dependency: Dependency = {
-      type: 'commonjs-require',
-      importNames: findVariableNameOfCallExpression(callExpression),
       moduleSpecifier,
+      moduleId,
+      importNames: findVariableNameOfCallExpression(callExpression),
       resolvedFilePath,
+      type: 'commonjs-require',
     }
 
     sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))

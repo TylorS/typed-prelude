@@ -12,10 +12,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'named-imports.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['default', 'add'], ['multiply', 'multiply']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -31,10 +32,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'dynamic-import.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['add', 'add']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -50,10 +52,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'dynamic-import-destructured.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['add', 'add2'], ['multiply', 'multiply']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -69,10 +72,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'namespace-import.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['*', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -88,10 +92,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'import-require.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['require', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -107,10 +112,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 'commonjs.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['math', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
@@ -126,10 +132,11 @@ export const test = describe(`findSourceFileDependencies`, [
       const project = new Project()
       const filePath = join(testFixtures, 're-exports.ts')
       const sourceFile = project.addExistingSourceFile(filePath)
-      const [dependencyMap] = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
         moduleSpecifier: "'./math'",
+        moduleId: 2,
         importNames: [['*', '*']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',

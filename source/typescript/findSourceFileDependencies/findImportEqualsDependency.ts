@@ -6,16 +6,19 @@ export function findImportEqualsDependency(
   importEqualsDeclaration: ImportEqualsDeclaration,
   dependencySourceFile: SourceFile,
   dependencies: Dependency[],
+  getModuleId: (filePath: string) => number,
 ) {
   const moduleSpecifier = stripRequireSpecifier(
     importEqualsDeclaration.getModuleReference().getText(),
   )
   const resolvedFilePath = dependencySourceFile.getFilePath()
+  const moduleId = getModuleId(resolvedFilePath)
   const dependency: Dependency = {
-    type: 'import-require',
+    moduleSpecifier,
+    moduleId,
     importNames: [['require', 'math']],
     resolvedFilePath,
-    moduleSpecifier,
+    type: 'import-require',
   }
 
   dependencies.push(dependency)

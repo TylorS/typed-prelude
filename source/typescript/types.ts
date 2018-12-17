@@ -12,13 +12,22 @@ export interface TsConfig {
 }
 
 export interface DependencyMap
-  extends Map<string, { sourceFile: SourceFile; dependencies: Dependency[] }> {}
+  extends Map<
+      string,
+      {
+        sourceFile: SourceFile
+        moduleId: number
+        exportMetadata: ExportMetadata[]
+        dependencies: Dependency[]
+      }
+    > {}
 export interface DependentMap extends Map<string, string[]> {}
 
 export interface Dependency {
   readonly importNames: Array<Tuple<string, string>>
   readonly type: DependencyType
   readonly moduleSpecifier: string
+  readonly moduleId: number
   readonly resolvedFilePath: string
 }
 

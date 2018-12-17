@@ -10,17 +10,20 @@ export function findDynamicImportDependency(
   dependencies: Dependency[],
   sourceFilesToProcess: SourceFile[],
   project: Project,
+  getModuleId: (filePath: string) => number,
 ) {
   const [moduleSpecifier] = importCallExpression
     .getDescendantsOfKind(SyntaxKind.StringLiteral)
     .map(x => x.getText())
   const resolvedFilePath = sync(stripModuleSpecifier(moduleSpecifier), resolveOptions)
+  const moduleId = getModuleId(resolvedFilePath)
 
   const dependency: Dependency = {
-    type: 'dynamic-import',
-    importNames: findVariableNameOfCallExpression(importCallExpression),
     moduleSpecifier,
+    moduleId,
+    importNames: findVariableNameOfCallExpression(importCallExpression),
     resolvedFilePath,
+    type: 'dynamic-import',
   }
 
   sourceFilesToProcess.push(project.addExistingSourceFile(resolvedFilePath))

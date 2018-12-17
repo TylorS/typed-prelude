@@ -6,14 +6,17 @@ export function findImportDeclarationDependency(
   importDeclaration: ImportDeclaration,
   dependencySourceFile: SourceFile,
   dependencies: Dependency[],
+  getModuleId: (filePath: string) => number,
 ) {
   const resolvedFilePath = dependencySourceFile.getFilePath()
   const moduleSpecifier = importDeclaration.getModuleSpecifier().getText()
   const namespaceImport = importDeclaration.getNamespaceImport()
+  const moduleId = getModuleId(resolvedFilePath)
 
   if (namespaceImport) {
     const dependency: Dependency = {
       moduleSpecifier,
+      moduleId,
       importNames: [['*', 'math']],
       resolvedFilePath,
       type: 'namespace',
@@ -28,6 +31,7 @@ export function findImportDeclarationDependency(
 
   const dependency: Dependency = {
     moduleSpecifier,
+    moduleId,
     importNames: defaultImport
       ? [['default', defaultImport.getText()], ...importNames]
       : importNames,

@@ -1,11 +1,13 @@
+import { sync } from 'resolve'
 import { ImportEqualsDeclaration, Project, SourceFile, SyntaxKind, TypeGuards } from 'ts-simple-ast'
 import { getFileExtensions } from '../common/getFileExtensions'
+import { findSourceFileExports } from '../findSourceFileExports'
 import { Dependency, DependencyMap, DependentMap } from '../types'
 import { findCommonjsRequireDependency } from './findCommonjsRequireDependency'
 import { findDynamicImportDependency } from './findDynamicImportDependency'
 import { findImportDeclarationDependency } from './findImportDeclarationDependency'
 import { findImportEqualsDependency } from './findImportEqualsDependency'
-import { findImportNames } from './helpers'
+import { findImportNames, preferEsModule, stripModuleSpecifier } from './helpers'
 
 export type FindSourceFileDependenciesOptions = {
   sourceFile: SourceFile
@@ -15,9 +17,15 @@ export type FindSourceFileDependenciesOptions = {
 export function findSourceFileDependencies({
   sourceFile,
   project,
-}: FindSourceFileDependenciesOptions): [DependencyMap, DependentMap] {
+}: FindSourceFileDependenciesOptions): {
+  dependencyMap: DependencyMap
+  dependentMap: DependentMap
+  moduleIds: Map<string, number>
+} {
   const dependencyMap: DependencyMap = new Map()
   const dependentMap: DependentMap = new Map()
+  let moduleId = 0
+  const moduleIds = new Map<string, number>()
   const sourceFilesToProcess = [sourceFile]
   const resolvedFilePathsProcessed: string[] = []
 
@@ -28,6 +36,20 @@ export function findSourceFileDependencies({
     dependentMap.set(dependent, dependents)
   }
 
+  function getModuleId(filePath: string): number {
+    const id = moduleIds.get(filePath)
+
+    if (id) {
+      return id
+    }
+
+    const newId = ++moduleId
+
+    moduleIds.set(filePath, newId)
+
+    return newId
+  }
+
   while (sourceFilesToProcess.length > 0) {
     const sourceFileToProcess = sourceFilesToProcess.shift() as SourceFile
     const filePath = sourceFileToProcess.getFilePath()
@@ -36,23 +58,35 @@ export function findSourceFileDependencies({
       continue
     }
 
+    const moduleId = getModuleId(filePath)
     resolvedFilePathsProcessed.push(filePath)
 
     const dependencies: Dependency[] = []
+    const exportMetadata = findSourceFileExports({ sourceFile: sourceFileToProcess })
 
-    dependencyMap.set(filePath, { sourceFile: sourceFileToProcess, dependencies })
+    dependencyMap.set(filePath, {
+      sourceFile: sourceFileToProcess,
+      moduleId,
+      exportMetadata,
+      dependencies,
+    })
 
     findDependenciesOfSourceFile({
       project,
       dependencies,
       sourceFileToProcess,
       sourceFilesToProcess,
+      getModuleId,
     })
 
     dependencies.forEach(dependency => addDependent(filePath, dependency.resolvedFilePath))
   }
 
-  return [dependencyMap, dependentMap]
+  return {
+    dependencyMap,
+    dependentMap,
+    moduleIds,
+  }
 }
 
 type FindDependenciesOfSourceFileOptions = {
@@ -60,6 +94,7 @@ type FindDependenciesOfSourceFileOptions = {
   sourceFileToProcess: SourceFile
   sourceFilesToProcess: SourceFile[]
   dependencies: Dependency[]
+  getModuleId: (path: string) => number
 }
 
 function findDependenciesOfSourceFile({
@@ -67,6 +102,7 @@ function findDependenciesOfSourceFile({
   project,
   dependencies,
   sourceFilesToProcess,
+  getModuleId,
 }: FindDependenciesOfSourceFileOptions): void {
   const sourceFileDecescendants = sourceFile.getDescendants()
   const directory = sourceFile.getDirectoryPath()
@@ -74,18 +110,25 @@ function findDependenciesOfSourceFile({
   const resolveOptions = {
     basedir: directory,
     extensions,
+    packageFilter: preferEsModule,
   }
 
   for (const descendant of sourceFileDecescendants) {
     if (TypeGuards.isImportDeclaration(descendant)) {
-      const dependencySourceFile = descendant.getModuleSpecifierSourceFileOrThrow()
+      const dependencySourceFileSpecifier = stripModuleSpecifier(
+        descendant.getModuleSpecifier().getText(),
+      )
+      const dependencyPath = sync(dependencySourceFileSpecifier, resolveOptions)
+      const dependencySourceFile = project.addExistingSourceFile(dependencyPath)
 
       sourceFilesToProcess.push(dependencySourceFile)
-      findImportDeclarationDependency(descendant, dependencySourceFile, dependencies)
+      findImportDeclarationDependency(descendant, dependencySourceFile, dependencies, getModuleId)
     }
 
     if (TypeGuards.isImportEqualsDeclaration(descendant)) {
-      const dependencySourceFile = descendant.getExternalModuleReferenceSourceFileOrThrow()
+      const dependencySourceFileSpecifier = stripModuleSpecifier(descendant.getName())
+      const dependencyPath = sync(dependencySourceFileSpecifier, resolveOptions)
+      const dependencySourceFile = project.addExistingSourceFile(dependencyPath)
 
       sourceFilesToProcess.push(dependencySourceFile)
 
@@ -93,6 +136,7 @@ function findDependenciesOfSourceFile({
         descendant as ImportEqualsDeclaration,
         dependencySourceFile,
         dependencies,
+        getModuleId,
       )
     }
 
@@ -106,6 +150,7 @@ function findDependenciesOfSourceFile({
           dependencies,
           sourceFilesToProcess,
           project,
+          getModuleId,
         )
       }
     }
@@ -117,6 +162,7 @@ function findDependenciesOfSourceFile({
         dependencies,
         sourceFilesToProcess,
         project,
+        getModuleId,
       )
     }
 
@@ -131,6 +177,7 @@ function findDependenciesOfSourceFile({
         const dependency: Dependency = {
           importNames: importNames.length > 0 ? importNames : [['*', '*']],
           moduleSpecifier: moduleSpecifier.getText(),
+          moduleId: getModuleId(resolvedFilePath),
           resolvedFilePath,
           type: 're-export',
         }
