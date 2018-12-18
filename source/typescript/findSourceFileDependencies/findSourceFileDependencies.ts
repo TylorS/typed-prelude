@@ -7,16 +7,20 @@ import { findCommonjsRequireDependency } from './findCommonjsRequireDependency'
 import { findDynamicImportDependency } from './findDynamicImportDependency'
 import { findImportDeclarationDependency } from './findImportDeclarationDependency'
 import { findImportEqualsDependency } from './findImportEqualsDependency'
-import { findImportNames, preferEsModule, stripModuleSpecifier } from './helpers'
+import { findImportNames, IMAGE_EXTENSIONS, preferEsModule, stripModuleSpecifier } from './helpers'
 
 export type FindSourceFileDependenciesOptions = {
   sourceFile: SourceFile
   project: Project
+  // File extensions to treat as links
+  // Defaults to common web image formats
+  linkExtensions?: string[]
 }
 
 export function findSourceFileDependencies({
   sourceFile,
   project,
+  linkExtensions = IMAGE_EXTENSIONS,
 }: FindSourceFileDependenciesOptions): {
   dependencyMap: DependencyMap
   dependentMap: DependentMap

@@ -71,3 +71,5 @@ export function preferEsModule(pkg: any): any {
 
   return pkg
 }
+
+export const IMAGE_EXTENSIONS = ['gif', 'ico', 'jpeg', 'jpg', 'svg', 'png', 'tif', 'tiff', 'webp']

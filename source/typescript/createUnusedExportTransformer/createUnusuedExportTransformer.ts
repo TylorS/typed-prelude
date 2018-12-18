@@ -11,6 +11,7 @@ export function createUnusedExportTransformer({
   return (context: ts.TransformationContext) => (sourceFile: ts.SourceFile) => {
     const { exportMetadata, moduleId } = dependencyMap.get(sourceFile.fileName)!
 
+    // If it's the entry point keep all exports
     if (moduleId === 1) {
       return sourceFile
     }
@@ -23,6 +24,10 @@ export function createUnusedExportTransformer({
           .filter(y => x.sourceFile !== y.getSourceFile()).length === 0,
     )
     const unusedExportNodes = unusedExports.map(x => x.node.compilerNode)
+
+    if (unusedExportNodes.length === 0) {
+      return sourceFile
+    }
 
     return ts.visitEachChild(
       sourceFile,
