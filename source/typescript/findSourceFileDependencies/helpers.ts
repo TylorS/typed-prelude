@@ -14,7 +14,7 @@ const MODULE_SPECIFIER_OPEN = /^(\'|\")/
 const MODULE_SPECIFIER_CLOSE = /(\'|\")$/
 
 export function stripRequireSpecifier(specifier: string): string {
-  return specifier.replace(REQUIRE_OPEN_REGEX, '').replace(CLOSING_BRACE, '')
+  return stripModuleSpecifier(specifier.replace(REQUIRE_OPEN_REGEX, '').replace(CLOSING_BRACE, ''))
 }
 
 export function stripModuleSpecifier(specifier: string): string {

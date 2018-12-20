@@ -1,3 +1,4 @@
+import { extname } from 'path'
 import { sync } from 'resolve'
 import { ImportEqualsDeclaration, Project, SourceFile, SyntaxKind, TypeGuards } from 'ts-simple-ast'
 import { getFileExtensions } from '../common/getFileExtensions'
@@ -5,9 +6,18 @@ import { findSourceFileExports } from '../findSourceFileExports'
 import { Dependency, DependencyMap, DependentMap } from '../types'
 import { findCommonjsRequireDependency } from './findCommonjsRequireDependency'
 import { findDynamicImportDependency } from './findDynamicImportDependency'
-import { findImportDeclarationDependency } from './findImportDeclarationDependency'
+import {
+  findImportDeclarationDependency,
+  findImportDeclarationImportNames,
+} from './findImportDeclarationDependency'
 import { findImportEqualsDependency } from './findImportEqualsDependency'
-import { findImportNames, IMAGE_EXTENSIONS, preferEsModule, stripModuleSpecifier } from './helpers'
+import {
+  findImportNames,
+  IMAGE_EXTENSIONS,
+  preferEsModule,
+  stripModuleSpecifier,
+  stripRequireSpecifier,
+} from './helpers'
 
 export type FindSourceFileDependenciesOptions = {
   sourceFile: SourceFile
@@ -62,9 +72,9 @@ export function findSourceFileDependencies({
       continue
     }
 
-    const moduleId = getModuleId(filePath)
     resolvedFilePathsProcessed.push(filePath)
 
+    const moduleId = getModuleId(filePath)
     const dependencies: Dependency[] = []
     const exportMetadata = findSourceFileExports({ sourceFile: sourceFileToProcess })
 
@@ -81,6 +91,7 @@ export function findSourceFileDependencies({
       sourceFileToProcess,
       sourceFilesToProcess,
       getModuleId,
+      linkExtensions,
     })
 
     dependencies.forEach(dependency => addDependent(filePath, dependency.resolvedFilePath))
@@ -99,6 +110,7 @@ type FindDependenciesOfSourceFileOptions = {
   sourceFilesToProcess: SourceFile[]
   dependencies: Dependency[]
   getModuleId: (path: string) => number
+  linkExtensions: string[]
 }
 
 function findDependenciesOfSourceFile({
@@ -107,10 +119,12 @@ function findDependenciesOfSourceFile({
   dependencies,
   sourceFilesToProcess,
   getModuleId,
+  linkExtensions,
 }: FindDependenciesOfSourceFileOptions): void {
   const sourceFileDecescendants = sourceFile.getDescendants()
   const directory = sourceFile.getDirectoryPath()
   const extensions = getFileExtensions({ ...project.getCompilerOptions(), allowJs: true })
+  const fileIsLink = filePathIsLink(linkExtensions)
   const resolveOptions = {
     basedir: directory,
     extensions,
@@ -123,6 +137,22 @@ function findDependenciesOfSourceFile({
         descendant.getModuleSpecifier().getText(),
       )
       const dependencyPath = sync(dependencySourceFileSpecifier, resolveOptions)
+
+      if (fileIsLink(dependencyPath)) {
+        const moduleId = getModuleId(dependencyPath)
+        const { importNames } = findImportDeclarationImportNames(descendant)
+
+        dependencies.push({
+          moduleSpecifier: dependencySourceFileSpecifier,
+          moduleId,
+          importNames,
+          resolvedFilePath: dependencyPath,
+          type: 'link',
+        })
+
+        continue
+      }
+
       const dependencySourceFile = project.addExistingSourceFile(dependencyPath)
 
       sourceFilesToProcess.push(dependencySourceFile)
@@ -130,8 +160,25 @@ function findDependenciesOfSourceFile({
     }
 
     if (TypeGuards.isImportEqualsDeclaration(descendant)) {
-      const dependencySourceFileSpecifier = stripModuleSpecifier(descendant.getName())
+      const dependencySourceFileSpecifier = stripRequireSpecifier(
+        descendant.getModuleReference().getText(),
+      )
       const dependencyPath = sync(dependencySourceFileSpecifier, resolveOptions)
+
+      if (fileIsLink(dependencyPath)) {
+        const moduleId = getModuleId(dependencyPath)
+
+        dependencies.push({
+          moduleSpecifier: dependencySourceFileSpecifier,
+          moduleId,
+          importNames: [['require', descendant.getName()]],
+          resolvedFilePath: dependencyPath,
+          type: 'link',
+        })
+
+        continue
+      }
+
       const dependencySourceFile = project.addExistingSourceFile(dependencyPath)
 
       sourceFilesToProcess.push(dependencySourceFile)
@@ -145,29 +192,30 @@ function findDependenciesOfSourceFile({
     }
 
     if (descendant.getKind() === SyntaxKind.ImportKeyword) {
-      const callExpression = descendant.getParentIfKind(SyntaxKind.CallExpression)
+      const importCallExpression = descendant.getParentIfKind(SyntaxKind.CallExpression)
 
-      if (callExpression) {
-        findDynamicImportDependency(
-          callExpression,
+      if (importCallExpression) {
+        findDynamicImportDependency({
+          importCallExpression,
           resolveOptions,
           dependencies,
           sourceFilesToProcess,
           project,
           getModuleId,
-        )
+        })
       }
     }
 
     if (TypeGuards.isIdentifier(descendant) && descendant.getText() === 'require') {
-      findCommonjsRequireDependency(
-        descendant,
+      findCommonjsRequireDependency({
+        requireIdentifier: descendant,
         resolveOptions,
         dependencies,
         sourceFilesToProcess,
         project,
         getModuleId,
-      )
+        isLink: fileIsLink,
+      })
     }
 
     if (TypeGuards.isExportDeclaration(descendant)) {
@@ -180,7 +228,7 @@ function findDependenciesOfSourceFile({
 
         const dependency: Dependency = {
           importNames: importNames.length > 0 ? importNames : [['*', '*']],
-          moduleSpecifier: moduleSpecifier.getText(),
+          moduleSpecifier: stripModuleSpecifier(moduleSpecifier.getText()),
           moduleId: getModuleId(resolvedFilePath),
           resolvedFilePath,
           type: 're-export',
@@ -191,4 +239,16 @@ function findDependenciesOfSourceFile({
       }
     }
   }
+}
+
+function filePathIsLink(linkExtensions: string[]) {
+  return (filePath: string) => {
+    const extension = withDot(extname(filePath))
+
+    return linkExtensions.map(withDot).some(x => x === extension)
+  }
+}
+
+function withDot(extension: string) {
+  return extension.startsWith('.') ? extension : `.${extension}`
 }

@@ -11,16 +11,15 @@ export interface TsConfig {
   exclude?: string[]
 }
 
-export interface DependencyMap
-  extends Map<
-      string,
-      {
-        sourceFile: SourceFile
-        moduleId: number
-        exportMetadata: ExportMetadata[]
-        dependencies: Dependency[]
-      }
-    > {}
+export interface DependencyMap extends Map<string, DependencyMapValue> {}
+
+export interface DependencyMapValue {
+  sourceFile: SourceFile
+  moduleId: number
+  exportMetadata: ExportMetadata[]
+  dependencies: Dependency[]
+}
+
 export interface DependentMap extends Map<string, string[]> {}
 
 export interface Dependency {
@@ -38,6 +37,7 @@ export type DependencyType =
   | 'commonjs-require'
   | 'dynamic-import'
   | 're-export'
+  | 'link'
 
 export interface ExportMetadata {
   readonly exportNames: Array<Tuple<string, string>>

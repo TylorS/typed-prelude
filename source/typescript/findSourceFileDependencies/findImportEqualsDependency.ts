@@ -11,12 +11,13 @@ export function findImportEqualsDependency(
   const moduleSpecifier = stripRequireSpecifier(
     importEqualsDeclaration.getModuleReference().getText(),
   )
+  const name = importEqualsDeclaration.getName()
   const resolvedFilePath = dependencySourceFile.getFilePath()
   const moduleId = getModuleId(resolvedFilePath)
   const dependency: Dependency = {
     moduleSpecifier,
     moduleId,
-    importNames: [['require', 'math']],
+    importNames: [['require', name]],
     resolvedFilePath,
     type: 'import-require',
   }

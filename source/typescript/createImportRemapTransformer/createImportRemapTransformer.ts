@@ -15,12 +15,12 @@ export type CreateImportRemapTransformerOptions = {
 export function createImportRemapTransformer({
   tsConfig,
   moduleIds,
-}: CreateImportRemapTransformerOptions): ts.Transformer<ts.SourceFile> {
+}: CreateImportRemapTransformerOptions): ts.TransformerFactory<ts.SourceFile> {
   const extensions = getFileExtensions(tsConfig.compilerOptions)
   const baseUrl = tsConfig.compilerOptions.baseUrl
     ? join(dirname(tsConfig.configPath), tsConfig.compilerOptions.baseUrl)
     : null
-  const match = baseUrl ? createMatchPath(baseUrl, compilerOptions.paths || {}) : null
+  const match = baseUrl ? createMatchPath(baseUrl, tsConfig.compilerOptions.paths || {}) : null
   function getResolvedPath(target: string, containingFile: string): string {
     return (
       (match && match(target)) ||

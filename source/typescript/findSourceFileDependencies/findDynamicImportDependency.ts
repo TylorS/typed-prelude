@@ -4,18 +4,28 @@ import { Dependency } from '../types'
 import { findVariableNameOfCallExpression, stripModuleSpecifier } from './helpers'
 import { ResolveOptions } from './types'
 
-export function findDynamicImportDependency(
-  importCallExpression: CallExpression,
-  resolveOptions: ResolveOptions,
-  dependencies: Dependency[],
-  sourceFilesToProcess: SourceFile[],
-  project: Project,
-  getModuleId: (filePath: string) => number,
-) {
-  const [moduleSpecifier] = importCallExpression
+export type FindDynamicImportDependencyOptions = {
+  importCallExpression: CallExpression
+  resolveOptions: ResolveOptions
+  dependencies: Dependency[]
+  sourceFilesToProcess: SourceFile[]
+  project: Project
+  getModuleId: (filePath: string) => number
+}
+
+export function findDynamicImportDependency({
+  importCallExpression,
+  resolveOptions,
+  dependencies,
+  sourceFilesToProcess,
+  project,
+  getModuleId,
+}: FindDynamicImportDependencyOptions) {
+  const descendants = importCallExpression
     .getDescendantsOfKind(SyntaxKind.StringLiteral)
     .map(x => x.getText())
-  const resolvedFilePath = sync(stripModuleSpecifier(moduleSpecifier), resolveOptions)
+  const moduleSpecifier = stripModuleSpecifier(descendants[0])
+  const resolvedFilePath = sync(moduleSpecifier, resolveOptions)
   const moduleId = getModuleId(resolvedFilePath)
 
   const dependency: Dependency = {

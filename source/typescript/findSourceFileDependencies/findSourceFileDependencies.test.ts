@@ -15,7 +15,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['default', 'add'], ['multiply', 'multiply']],
         resolvedFilePath:
@@ -35,7 +35,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['add', 'add']],
         resolvedFilePath:
@@ -55,7 +55,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['add', 'add2'], ['multiply', 'multiply']],
         resolvedFilePath:
@@ -75,7 +75,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['*', 'math']],
         resolvedFilePath:
@@ -95,7 +95,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['require', 'math']],
         resolvedFilePath:
@@ -115,7 +115,7 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['math', 'math']],
         resolvedFilePath:
@@ -135,12 +135,32 @@ export const test = describe(`findSourceFileDependencies`, [
       const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
 
       const expected: Dependency = {
-        moduleSpecifier: "'./math'",
+        moduleSpecifier: './math',
         moduleId: 2,
         importNames: [['*', '*']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
         type: 're-export',
+      }
+
+      equal([expected], dependencyMap.get(filePath)!.dependencies)
+    }),
+  ]),
+
+  given(`a SourceFile with link import`, [
+    it(`returns it's dependencies`, ({ equal }) => {
+      const project = new Project()
+      const filePath = join(testFixtures, 'image-import.ts')
+      const sourceFile = project.addExistingSourceFile(filePath)
+      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
+
+      const expected: Dependency = {
+        moduleSpecifier: './example-image.png',
+        moduleId: 2,
+        importNames: [['default', 'ExampleImage']],
+        resolvedFilePath:
+          '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/example-image.png',
+        type: 'link',
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
