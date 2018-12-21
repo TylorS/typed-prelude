@@ -6,23 +6,22 @@ import { findImportNames, stripModuleSpecifier } from './helpers'
 export function findImportDeclarationDependency(
   importDeclaration: ImportDeclaration,
   dependencySourceFile: SourceFile,
-  dependencies: Dependency[],
   getModuleId: (filePath: string) => number,
-) {
+  isLink: boolean,
+): Dependency {
   const resolvedFilePath = dependencySourceFile.getFilePath()
   const moduleSpecifier = stripModuleSpecifier(importDeclaration.getModuleSpecifier().getText())
   const moduleId = getModuleId(resolvedFilePath)
   const { importNames, type } = findImportDeclarationImportNames(importDeclaration)
-
   const dependency: Dependency = {
     moduleSpecifier,
     moduleId,
     resolvedFilePath,
     importNames,
-    type,
+    type: isLink ? DependencyType.Link : type,
   }
 
-  dependencies.push(dependency)
+  return dependency
 }
 
 export function findImportDeclarationImportNames(
@@ -36,7 +35,7 @@ export function findImportDeclarationImportNames(
   if (namespaceImport) {
     const importNames: Array<Tuple<string>> = [['*', namespaceImport.getText()]]
 
-    return { importNames, type: 'namespace' }
+    return { importNames, type: DependencyType.Namespace }
   }
 
   const defaultImport = importDeclaration.getDefaultImport()
@@ -46,5 +45,5 @@ export function findImportDeclarationImportNames(
     ? [['default', defaultImport.getText()], ...namedImportNames]
     : namedImportNames
 
-  return { importNames, type: 'named' }
+  return { importNames, type: DependencyType.Named }
 }

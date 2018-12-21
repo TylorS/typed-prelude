@@ -1,7 +1,7 @@
 import { describe, given, it } from '@typed/test'
 import { join } from 'path'
 import { Project } from 'ts-simple-ast'
-import { Dependency } from '../types'
+import { Dependency, DependencyType } from '../types'
 import { findSourceFileDependencies } from './findSourceFileDependencies'
 
 const testFixtures = join(__dirname, 'test-fixtures')
@@ -16,11 +16,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['default', 'add'], ['multiply', 'multiply']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'named',
+        type: DependencyType.Named,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -36,11 +36,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['add', 'add']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'dynamic-import',
+        type: DependencyType.DynamicImport,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -56,11 +56,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['add', 'add2'], ['multiply', 'multiply']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'dynamic-import',
+        type: DependencyType.DynamicImport,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -76,11 +76,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['*', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'namespace',
+        type: DependencyType.Namespace,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -96,11 +96,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['require', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'import-require',
+        type: DependencyType.ImportRequire,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -116,11 +116,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['math', 'math']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 'commonjs-require',
+        type: DependencyType.CommonjsRequire,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -136,11 +136,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './math',
-        moduleId: 2,
+        moduleId: 1,
         importNames: [['*', '*']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/math.ts',
-        type: 're-export',
+        type: DependencyType.ReExport,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)
@@ -156,11 +156,11 @@ export const test = describe(`findSourceFileDependencies`, [
 
       const expected: Dependency = {
         moduleSpecifier: './example-image.png',
-        moduleId: 2,
-        importNames: [['default', 'ExampleImage']],
+        moduleId: 1,
+        importNames: [['*', 'ExampleImage']],
         resolvedFilePath:
           '/Users/tylors/code/tylors/typed-prelude-next/source/typescript/findSourceFileDependencies/test-fixtures/example-image.png',
-        type: 'link',
+        type: DependencyType.Link,
       }
 
       equal([expected], dependencyMap.get(filePath)!.dependencies)

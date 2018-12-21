@@ -1,4 +1,4 @@
-import ExampleImage from './example-image.png'
+import * as ExampleImage from './example-image.png'
 
 export function createImage() {
   const img = document.createElement('img')

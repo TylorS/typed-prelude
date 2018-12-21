@@ -1,12 +1,12 @@
 import { ImportEqualsDeclaration, SourceFile } from 'ts-simple-ast'
-import { Dependency } from '../types'
+import { Dependency, DependencyType } from '../types'
 import { stripRequireSpecifier } from './helpers'
 
 export function findImportEqualsDependency(
   importEqualsDeclaration: ImportEqualsDeclaration,
   dependencySourceFile: SourceFile,
-  dependencies: Dependency[],
   getModuleId: (filePath: string) => number,
+  isLink: boolean,
 ) {
   const moduleSpecifier = stripRequireSpecifier(
     importEqualsDeclaration.getModuleReference().getText(),
@@ -19,8 +19,8 @@ export function findImportEqualsDependency(
     moduleId,
     importNames: [['require', name]],
     resolvedFilePath,
-    type: 'import-require',
+    type: isLink ? DependencyType.Link : DependencyType.ImportRequire,
   }
 
-  dependencies.push(dependency)
+  return dependency
 }
