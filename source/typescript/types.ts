@@ -30,14 +30,16 @@ export interface Dependency {
   readonly resolvedFilePath: string
 }
 
-export type DependencyType =
-  | 'named'
-  | 'namespace'
-  | 'import-require'
-  | 'commonjs-require'
-  | 'dynamic-import'
-  | 're-export'
-  | 'link'
+export const enum DependencyType {
+  Named,
+  Namespace,
+  ImportRequire,
+  CommonjsRequire,
+  DynamicImport,
+  ReExport,
+  Link,
+  Entry,
+}
 
 export interface ExportMetadata {
   readonly exportNames: Array<Tuple<string, string>>

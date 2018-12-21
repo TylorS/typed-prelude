@@ -12,7 +12,7 @@ export function createUnusedExportTransformer({
     const { exportMetadata, moduleId } = dependencyMap.get(sourceFile.fileName)!
 
     // If it's the entry point keep all exports
-    if (moduleId === 1) {
+    if (moduleId === 0) {
       return sourceFile
     }
 

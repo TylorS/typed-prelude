@@ -35,8 +35,8 @@ export function createImportRemapTransformer({
   return createRemapImportsTransformer({
     remapTarget(target, containingFile) {
       const path = getResolvedPath(target, containingFile)
-      const id = moduleIds.get(path)!
-      const value = id ? `${id}` : path
+      const id = moduleIds.get(path)
+      const value = id !== undefined ? `${id}` : path
 
       return value
     },
