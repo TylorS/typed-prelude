@@ -30,7 +30,6 @@
     "@types/resolve": "0.0.8",
     "@types/source-map-support": "^0.4.1",
     "@types/tempy": "^0.2.0",
-    "@types/uglify-es": "^3.0.0",
     "lint-staged": "8.0.2",
     "prettier": "1.14.3",
     "ts-node": "7.0.1",
@@ -51,9 +50,9 @@
     "resolve": "^1.8.1",
     "source-map-support": "^0.5.9",
     "tempy": "^0.2.1",
+    "terser": "^3.13.1",
     "ts-simple-ast": "^20.0.0",
     "tsconfig-paths": "^3.7.0",
-    "tslib": "^1.9.3",
-    "uglify-es": "^3.3.9"
+    "tslib": "^1.9.3"
   }
 }
