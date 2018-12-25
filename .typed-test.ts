@@ -5,10 +5,10 @@ const nodeOptions: Options = {
   files: ['source/typescript/**/*.test.ts'],
 }
 
-const browserOptions: Options = {
-  ...nodeOptions,
-  mode: 'browser',
-  files: ['source/typescript/**/*.browser-test.ts'],
-}
+// const browserOptions: Options = {
+//   ...nodeOptions,
+//   mode: 'browser',
+//   files: ['source/typescript/**/*.browser-test.ts'],
+// }
 
-export default [nodeOptions, browserOptions]
+export default [nodeOptions]
