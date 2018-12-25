@@ -1,14 +1,4 @@
-export * from './history'
-export * from './http'
 export * from './lambda'
-export * from './list'
-export * from './logic'
-export * from './math'
-export * from './objects'
-export * from './routing'
-export * from './storage'
-export * from './strings'
-export * from './uuid'
 
 import * as MaybeModule from './maybe'
 
@@ -93,3 +83,14 @@ export namespace Future {
   export const mapLeft = FutureModule.mapLeft
   export const ap = FutureModule.ap
 }
+
+export * from './math'
+export * from './logic'
+export * from './list'
+export * from './strings'
+export * from './objects'
+export * from './history'
+export * from './http'
+export * from './routing'
+export * from './storage'
+export * from './uuid'

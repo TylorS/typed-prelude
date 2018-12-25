@@ -1,3 +1,4 @@
+import { DropKeys } from '../common/types'
 import { Defined, Primitive } from '../lambda'
 
 export type Prop<T, K extends PropertyKey> = K extends keyof T ? T[K] : undefined
@@ -24,9 +25,7 @@ export type MergeObjects<A, B> = B extends A
         ? K extends keyof A ? Defined<A[K] | B[K]> : B[K]
         : K extends keyof A ? A[K] : never
     }
-export type DropKeys<A, Keys extends PropertyKey> = Exclude<keyof A, Keys> extends never
-  ? {}
-  : { [K in Exclude<keyof A, Keys>]: A[K] }
+
 export type Overwrite<A, B> = B extends A
   ? B
   : { [K in keyof A | keyof B]: K extends keyof B ? B[K] : K extends keyof A ? A[K] : never }

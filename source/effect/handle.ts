@@ -1,5 +1,5 @@
+import { DropKeys } from '../common/types'
 import { curry } from '../lambda'
-import { DropKeys } from '../objects'
 import { Effect, EffectResources, Pure } from './Effect'
 
 export type Handle<A extends Effect<any, any>, B extends {}> = A extends Effect<infer C, infer D>

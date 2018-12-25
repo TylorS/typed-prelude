@@ -2,11 +2,15 @@ import { sync } from 'resolve'
 import { ImportEqualsDeclaration, Project, SourceFile, SyntaxKind, TypeGuards } from 'ts-simple-ast'
 import { filePathIsLink } from '../common/filePathIsLink'
 import { getFileExtensions } from '../common/getFileExtensions'
+import { withDot } from '../common/withDot'
 import { findSourceFileExports } from '../findSourceFileExports'
 import { Dependency, DependencyMap, DependencyType, DependentMap } from '../types'
 import { findCommonjsRequireDependency } from './findCommonjsRequireDependency'
 import { findDynamicImportDependency } from './findDynamicImportDependency'
-import { findImportDeclarationDependency } from './findImportDeclarationDependency'
+import {
+  findImportDeclarationDependency,
+  findImportDeclarationImportNames,
+} from './findImportDeclarationDependency'
 import { findImportEqualsDependency } from './findImportEqualsDependency'
 import {
   findImportNames,
@@ -32,12 +36,18 @@ export function findSourceFileDependencies({
   dependencyMap: DependencyMap
   dependentMap: DependentMap
   moduleIds: Map<string, number>
+  moduleIdToFilePaths: Map<number, string>
 } {
+  linkExtensions = linkExtensions.map(withDot)
+
   const dependencyMap: DependencyMap = new Map()
   const dependentMap: DependentMap = new Map()
   const moduleIds = new Map<string, number>()
+  const moduleIdToFilePaths = new Map<number, string>()
   const fileIsLink = filePathIsLink(linkExtensions)
-  const extensions = getFileExtensions({ ...project.getCompilerOptions(), allowJs: true })
+  const extensions = getFileExtensions({ ...project.getCompilerOptions(), allowJs: true }).concat(
+    linkExtensions,
+  )
   const sourceFilesToProcess: SourceFile[] = [sourceFile]
   const resolvedFilePathsProcessed: string[] = []
 
@@ -60,6 +70,7 @@ export function findSourceFileDependencies({
     const newId = moduleId++
 
     moduleIds.set(filePath, newId)
+    moduleIdToFilePaths.set(newId, filePath)
 
     return newId
   }
@@ -102,6 +113,7 @@ export function findSourceFileDependencies({
     dependencyMap,
     dependentMap,
     moduleIds,
+    moduleIdToFilePaths,
   }
 }
 
@@ -124,7 +136,6 @@ function findDependenciesOfSourceFile({
   fileIsLink,
   extensions,
 }: FindDependenciesOfSourceFileOptions): void {
-  const sourceFileDecescendants = sourceFile.getDescendants()
   const directory = sourceFile.getDirectoryPath()
   const resolveOptions = {
     basedir: directory,
@@ -132,13 +143,28 @@ function findDependenciesOfSourceFile({
     packageFilter: preferEsModule,
   }
 
-  for (const descendant of sourceFileDecescendants) {
+  sourceFile.forEachDescendant(descendant => {
     if (TypeGuards.isImportDeclaration(descendant)) {
       const dependencySourceFileSpecifier = stripModuleSpecifier(
         descendant.getModuleSpecifier().getText(),
       )
       const dependencyPath = sync(dependencySourceFileSpecifier, resolveOptions)
       const isLink = fileIsLink(dependencyPath)
+
+      if (isLink) {
+        const dependency: Dependency = {
+          moduleSpecifier: dependencySourceFileSpecifier,
+          moduleId: getModuleId(dependencyPath),
+          resolvedFilePath: dependencyPath,
+          importNames: findImportDeclarationImportNames(descendant).importNames,
+          type: DependencyType.Link,
+        }
+
+        dependencies.push(dependency)
+
+        return
+      }
+
       const dependencySourceFile = project.addExistingSourceFile(dependencyPath)
       const dependency = findImportDeclarationDependency(
         descendant,
@@ -168,7 +194,10 @@ function findDependenciesOfSourceFile({
       )
 
       dependencies.push(dependency)
-      sourceFilesToProcess.push(dependencySourceFile)
+
+      if (dependency.type !== DependencyType.Link) {
+        sourceFilesToProcess.push(dependencySourceFile)
+      }
 
       return
     }
@@ -200,10 +229,11 @@ function findDependenciesOfSourceFile({
       })
 
       if (dependency) {
-        const dependencySourceFile = project.addExistingSourceFile(dependency.resolvedFilePath)
-
         dependencies.push(dependency)
-        sourceFilesToProcess.push(dependencySourceFile)
+
+        if (dependency.type !== DependencyType.Link) {
+          sourceFilesToProcess.push(project.addExistingSourceFile(dependency.resolvedFilePath))
+        }
 
         return
       }
@@ -225,8 +255,8 @@ function findDependenciesOfSourceFile({
         }
 
         dependencies.push(dependency)
-        sourceFilesToProcess.push(dependencySourceFile)
+        project.addExistingSourceFile(dependency.resolvedFilePath)
       }
     }
-  }
+  })
 }

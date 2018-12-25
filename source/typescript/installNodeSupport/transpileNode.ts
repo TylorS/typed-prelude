@@ -33,7 +33,6 @@ export function transpileNode(cwd: string, compilerOptions: CompilerOptions): ()
   const cacheDirectory = directory()
   const originalJsHandler = require.extensions['.js']
   const memoryCache = {
-    contents: Object.create(null),
     outputs: Object.create(null),
   }
   const extensions = getFileExtensions(compilerOptions)
@@ -83,7 +82,7 @@ export function transpileNode(cwd: string, compilerOptions: CompilerOptions): ()
 
 function readThrough(
   cachedir: string,
-  memoryCache: { contents: Record<string, string>; outputs: Record<string, string> },
+  memoryCache: { outputs: Record<string, string> },
   compile: (code: string, fileName: string, lineOffset?: number) => [string, string],
   getExtension: (fileName: string) => string,
 ) {

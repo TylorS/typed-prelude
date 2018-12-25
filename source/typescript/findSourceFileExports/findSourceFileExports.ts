@@ -22,7 +22,7 @@ export type FindSourceFileExportsOptions = {
 }
 
 const MODULE_EXPORTS = /^module\.exports/
-const EXPORTS = /^(exports.)([a-zA-Z0-9]+)/
+const EXPORTS = /(exports\.)(.+)/
 
 const moduleExport: Tuple<string> = ['module', 'export']
 const defaultExport: Tuple<string> = ['default', 'default']

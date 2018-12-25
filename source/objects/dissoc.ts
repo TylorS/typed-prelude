@@ -1,6 +1,6 @@
+import { DropKeys } from '../common/types'
 import { curry } from '../lambda'
 import { clone } from './clone'
-import { DropKeys } from './types'
 
 export const dissoc = curry(_dissoc) as {
   <K extends PropertyKey, A extends Record<K, any>>(key: K, obj: A): DropKeys<A, K>
