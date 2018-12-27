@@ -4,6 +4,7 @@ import { Maybe, Nothing } from '../../maybe'
 import { diagnosticsToString } from '../common/diagnosticsToString'
 
 export type MemoryResult = {
+  fileName: string
   js: string
   map: Maybe<string>
   dts: Maybe<string>
@@ -26,6 +27,7 @@ export function emitToMemory({
   project,
   transformers,
 }: EmitToMemoryOptions): MemoryResult {
+  const filePath = sourceFile.getFilePath()
   const result = project.emitToMemory({
     targetSourceFile: sourceFile,
     customTransformers: transformers,
@@ -33,7 +35,7 @@ export function emitToMemory({
 
   if (result.getEmitSkipped()) {
     const error = new Error(
-      `Unable to compile ${sourceFile.getFilePath()}\n ${diagnosticsToString(
+      `Unable to compile ${filePath}\n ${diagnosticsToString(
         result.getDiagnostics().map(x => x.compilerObject),
         directory,
       )}`,
@@ -48,6 +50,7 @@ export function emitToMemory({
   const dts = files.find(x => extname(x.filePath) === '.ts')
 
   return {
+    fileName: filePath,
     js,
     map: map ? Maybe.of(map.text) : Nothing,
     dts: dts ? Maybe.of(dts.text) : Nothing,
