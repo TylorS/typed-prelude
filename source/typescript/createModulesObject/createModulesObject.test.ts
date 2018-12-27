@@ -31,8 +31,6 @@ export const test = describe(`wrapModuleInFactory`, [
       const sourceListMap = createModulesObject({ results, moduleIds })
       const { source: js } = sourceListMap.toStringWithSourceMap({ file: 'whatever.js' })
 
-      console.log(js)
-
       ok(js.startsWith(`var modules = {\n`))
       ok(js.endsWith(`\n}`))
     }),
