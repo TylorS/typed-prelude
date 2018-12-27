@@ -8,7 +8,3 @@ export * from './map'
 export * from './periodic'
 export * from './ap'
 export * from './switchLatest'
-
-if (process.env.NODE_ENV === 'development') {
-  console.log('hi')
-}
