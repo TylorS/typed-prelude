@@ -3,6 +3,7 @@ import { join, relative } from 'path'
 import Project from 'ts-simple-ast'
 import { isNothing, map, withDefault } from '../../maybe'
 import { adjustTsConfig } from '../common/adjustTsConfig'
+import { emitResults } from '../emitResults'
 import { findSourceFileDependencies } from '../findSourceFileDependencies'
 import { findTsConfig } from '../findTsConfig'
 import { BundleGraph } from '../types'
@@ -48,6 +49,12 @@ function setupTestEnvinronment(fileName: string, { equal, ok }: Assertions) {
     sourceFile,
     project,
   })
+  const results = emitResults({
+    sourceFiles: Array.from(dependencyMap.values()).map(x => x.sourceFile),
+    project,
+    directory: testFixtures,
+    moduleIds,
+  })
 
   const getPath = (x: string) => join(testFixtures, x)
 
@@ -75,8 +82,7 @@ function setupTestEnvinronment(fileName: string, { equal, ok }: Assertions) {
   }
 
   return {
-    directory: testFixtures,
-    project,
+    results,
     publicPath: '/',
     dependencyMap,
     moduleIds,
