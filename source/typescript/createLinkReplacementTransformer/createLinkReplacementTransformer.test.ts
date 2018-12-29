@@ -18,13 +18,17 @@ export const test = describe(`createImportRemapTransformer`, [
       const tsConfig = adjustTsConfig(findTsConfig({ directory: testFixtures }))
       const project = new Project({ compilerOptions: tsConfig.compilerOptions })
       const sourceFile = project.addExistingSourceFile(exampleFile)
-      const { dependencyMap } = findSourceFileDependencies({ sourceFile, project })
+      const { dependencyMap, moduleIds } = findSourceFileDependencies({
+        sourceFile,
+        project,
+      })
       const linkDependencies = findDependenciesOfType(dependencyMap, DependencyType.Link)
       const transformer = createLinkReplacementTransformer({ linkDependencies, publicPath: '/' })
       const { js } = emitToMemory({
         directory: testFixtures,
         sourceFile,
         project,
+        moduleIds,
         transformers: { before: [transformer] },
       })
 

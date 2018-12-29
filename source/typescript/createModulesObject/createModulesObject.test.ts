@@ -24,11 +24,12 @@ export const test = describe(`wrapModuleInFactory`, [
         directory: testFixtures,
         sourceFiles: Array.from(dependencyMap.values()).map(x => x.sourceFile),
         project,
+        moduleIds,
         transformers: {
           before: [createImportRemapTransformer({ tsConfig, moduleIds })],
         },
       })
-      const sourceListMap = createModulesObject({ results, moduleIds })
+      const sourceListMap = createModulesObject({ results })
       const { source: js } = sourceListMap.toStringWithSourceMap({ file: 'whatever.js' })
 
       ok(js.startsWith(`var modules = {\n`))

@@ -1,6 +1,6 @@
 import { CodeNode, fromStringWithSourceMap, SourceListMap } from 'source-list-map'
 import { fromJust, isJust } from '../../maybe'
-import { MemoryResult } from '../emitToMemory'
+import { MemoryResult } from '../types'
 
 const FACTORY_OPEN = new CodeNode(`function (require, module, exports, __typedRequire) {\n`)
 const FACTORY_CLOSE = new CodeNode(`\n}`)

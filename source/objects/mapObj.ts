@@ -1,3 +1,4 @@
+import { mapObj as __mapObj } from '../common/mapObj'
 import { curry } from '../lambda'
 
 export const mapObj = curry(__mapObj) as {
@@ -9,18 +10,4 @@ export const mapObj = curry(__mapObj) as {
   <A, B, C extends Record<PropertyKey, A>>(fn: <K extends keyof C>(key: K, value: C[K]) => B): (
     obj: C,
   ) => { [K in keyof C]: B }
-}
-
-function __mapObj<A, B, C extends Record<PropertyKey, A>>(
-  fn: <K extends keyof C>(key: K, value: C[K]) => B,
-  obj: C,
-): { [K in keyof C]: B } {
-  const newObj = {} as { [K in keyof C]: B }
-
-  // tslint:disable-next-line:forin
-  for (const key in obj) {
-    newObj[key] = fn(key, obj[key])
-  }
-
-  return newObj
 }

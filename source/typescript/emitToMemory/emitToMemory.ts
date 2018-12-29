@@ -2,18 +2,13 @@ import { extname } from 'path'
 import Project, { SourceFile, ts } from 'ts-simple-ast'
 import { Maybe, Nothing } from '../../maybe'
 import { diagnosticsToString } from '../common/diagnosticsToString'
-
-export type MemoryResult = {
-  fileName: string
-  js: string
-  map: Maybe<string>
-  dts: Maybe<string>
-}
+import { MemoryResult } from '../types'
 
 export type EmitToMemoryOptions = {
   directory: string
   sourceFile: SourceFile
   project: Project
+  moduleIds: Map<string, number>
   transformers?: {
     before?: Array<ts.TransformerFactory<ts.SourceFile>>
     after?: Array<ts.TransformerFactory<ts.SourceFile>>
@@ -25,6 +20,7 @@ export function emitToMemory({
   directory,
   sourceFile,
   project,
+  moduleIds,
   transformers,
 }: EmitToMemoryOptions): MemoryResult {
   const filePath = sourceFile.getFilePath()
@@ -51,6 +47,7 @@ export function emitToMemory({
 
   return {
     fileName: filePath,
+    moduleId: moduleIds.get(filePath)!,
     js,
     map: map ? Maybe.of(map.text) : Nothing,
     dts: dts ? Maybe.of(dts.text) : Nothing,

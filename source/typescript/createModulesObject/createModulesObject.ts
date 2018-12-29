@@ -1,5 +1,5 @@
 import { CodeNode, SourceListMap } from 'source-list-map'
-import { EmitResults } from '../emitResults'
+import { EmitResults } from '../types'
 import { wrapModuleInFactory } from '../wrapModuleInFactory/wrapModuleInFactory'
 
 const OPEN = new CodeNode(`var modules = {\n`)
@@ -8,12 +8,12 @@ const COMMA = new CodeNode(`,`)
 
 export type CreateModulesObjectOptions = {
   results: EmitResults
-  moduleIds: Map<string, number>
+  dynamicImportPaths?: string[]
 }
 
 export function createModulesObject({
   results,
-  moduleIds,
+  dynamicImportPaths = [],
 }: CreateModulesObjectOptions): SourceListMap {
   const sourceList = new SourceListMap([OPEN])
   const entries = Array.from(results.entries())
@@ -22,9 +22,11 @@ export function createModulesObject({
   for (let i = 0; i < entries.length; ++i) {
     const [fileName, result] = entries[i]
 
-    const moduleId = moduleIds.get(fileName)!
+    if (dynamicImportPaths.includes(fileName)) {
+      continue
+    }
 
-    sourceList.add(new CodeNode(`${moduleId}: `))
+    sourceList.add(new CodeNode(`${result.moduleId}: `))
     sourceList.add(wrapModuleInFactory(result))
 
     if (i !== last) {

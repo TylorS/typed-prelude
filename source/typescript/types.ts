@@ -1,5 +1,6 @@
 import { Node, SourceFile } from 'ts-simple-ast'
 import { CompilerOptions } from 'typescript'
+import { Maybe } from '../maybe'
 import { Tuple } from '../tuple'
 
 export interface TsConfig {
@@ -56,4 +57,32 @@ export interface NodePosition {
 
 export interface NodeMetadata extends NodePosition {
   readonly text: string
+}
+
+export type SourceMap = {
+  version: number
+  file: any
+  sources: string[]
+  sourcesContent: string[]
+  mappings: string
+}
+
+export type SourceAndSourceMap = { source: string; map: SourceMap }
+
+export type MemoryResult = {
+  fileName: string
+  moduleId: number
+  js: string
+  map: Maybe<string>
+  dts: Maybe<string>
+}
+
+export type EmitResults = Map<string, MemoryResult>
+export type DynamicBundleResults = { fileName: string; results: MemoryResult[] }
+
+export interface BundleGraph {
+  readonly hash: string
+  readonly main: MemoryResult[]
+  readonly common: Maybe<MemoryResult[]>
+  readonly dynamicBundles: DynamicBundleResults[]
 }

@@ -1,8 +1,8 @@
-import { basename, dirname, extname, join } from 'path'
 import { pathJoin } from '../../common/pathJoin'
 import { DependencyMap, DependencyType } from '../types'
 import { findDependenciesOfType } from './findDependenciesOfType'
 import { getHash } from './getHash'
+import { insertHash } from './insertHash'
 
 export type GenerateDynamicImportPathsOptions = {
   dependencyMap: DependencyMap
@@ -34,12 +34,4 @@ export function generateDynamicImportPaths({
     },
     {} as Record<string, string>,
   )
-}
-
-function insertHash(hash: string, filePath: string) {
-  const dir = dirname(filePath)
-  const ext = extname(filePath)
-  const base = basename(filePath).replace(ext, '')
-
-  return join(dir, base + `.${hash}` + ext)
 }

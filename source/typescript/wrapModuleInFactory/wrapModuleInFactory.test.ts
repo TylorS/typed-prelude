@@ -17,7 +17,12 @@ export const test = describe(`wrapModuleInFactory`, [
         compilerOptions: { ...tsConfig.compilerOptions, sourceMap: true },
       })
       const sourceFile = project.addExistingSourceFile(math)
-      const memoryResult = emitToMemory({ directory: testFixtures, sourceFile, project })
+      const memoryResult = emitToMemory({
+        directory: testFixtures,
+        sourceFile,
+        project,
+        moduleIds: new Map([[math, 0]]),
+      })
       const { source: js, map } = wrapModuleInFactory(memoryResult).toStringWithSourceMap({
         file: 'whatever.js',
       })

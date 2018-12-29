@@ -43,6 +43,7 @@ export const test = describe(`createImportRemapTransformer`, [
         directory: testFixtures,
         sourceFile,
         project,
+        moduleIds,
         transformers: {
           before: [createImportRemapTransformer({ tsConfig, moduleIds }), transformer],
         },

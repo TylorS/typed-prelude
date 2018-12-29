@@ -5,7 +5,7 @@ export const chain = curry((f, list) => unnest(list.map(f))) as {
   <A, B>(fn: Arity1<A, B[]>): (list: A[]) => B[]
 }
 
-function unnest<A>(nestedList: A[][]): A[] {
+export function unnest<A>(nestedList: A[][]): A[] {
   const unnestedList: A[] = []
 
   for (const list of nestedList) {
