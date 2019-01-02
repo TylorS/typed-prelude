@@ -255,7 +255,7 @@ function findDependenciesOfSourceFile({
         }
 
         dependencies.push(dependency)
-        project.addExistingSourceFile(dependency.resolvedFilePath)
+        sourceFilesToProcess.push(dependencySourceFile)
       }
     }
   })

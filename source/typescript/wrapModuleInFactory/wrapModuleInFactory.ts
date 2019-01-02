@@ -1,5 +1,5 @@
-import { CodeNode, fromStringWithSourceMap, SourceListMap } from 'source-list-map'
-import { fromJust, isJust } from '../../maybe'
+import { CodeNode, SourceListMap } from 'source-list-map'
+import { getSourceList } from '../common/getSourceList'
 import { MemoryResult } from '../types'
 
 const FACTORY_OPEN = new CodeNode(`function (require, module, exports, __typedRequire) {\n`)
@@ -12,14 +12,4 @@ export function wrapModuleInFactory(result: MemoryResult): SourceListMap {
   sourceList.add(FACTORY_CLOSE)
 
   return sourceList
-}
-
-function getSourceList({ js, map }: MemoryResult): SourceListMap {
-  if (isJust(map)) {
-    const mapContents = JSON.parse(fromJust(map))
-
-    return fromStringWithSourceMap(js, mapContents)
-  }
-
-  return new SourceListMap([new CodeNode(js)])
 }

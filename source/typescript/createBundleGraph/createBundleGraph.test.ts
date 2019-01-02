@@ -35,7 +35,7 @@ export const test = describe(`createBundleGraphs`, [
       const { assertGraph, ...env } = setupTestEnvinronment('common-bundle.ts', assertions)
       const graph = createBundleGraph(env)
 
-      assertGraph(['common-bundle.ts', 'commonjs.ts', 'dynamic-import.ts'], ['math.ts'], [], graph)
+      assertGraph(['dynamic-import.ts', 'commonjs.ts', 'common-bundle.ts'], ['math.ts'], [], graph)
     }),
   ]),
 ])

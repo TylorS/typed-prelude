@@ -1,7 +1,8 @@
+import { join } from 'path'
 import { CodeNode, SourceListMap } from 'source-list-map'
 import { ArgsOf } from '../../lambda'
 import { createModulesObject } from '../createModulesObject'
-import { EmitResults, SourceAndSourceMap } from '../types'
+import { MemoryResult, SourceAndSourceMap } from '../types'
 
 const IIFE_OPEN = new CodeNode(`(function() {`)
 const IIFE_CLOSE = new CodeNode(`}())`)
@@ -111,58 +112,57 @@ const START_APP = new CodeNode(`typedRequire("0");`)
 
 export type CreateEntryBundleOptions = {
   fileName: string
-  results: EmitResults
+  results: MemoryResult[]
   moduleIds: Map<string, number>
   dynamicImportPaths: Record<string, string>
+  publicPath: string
 }
 
-// TODO: urlsToModuleId map for dynamic imported bundles
 export function createEntryBundle({
   fileName,
   results,
   moduleIds,
   dynamicImportPaths,
+  publicPath,
 }: CreateEntryBundleOptions): SourceAndSourceMap {
   const sourceList = new SourceListMap([IIFE_OPEN, NEW_LINE])
-  const urlToModuleId = createUrlToModuleId(dynamicImportPaths, moduleIds)
-  const modules = createModulesObject({
-    results,
-    dynamicImportPaths: Object.keys(dynamicImportPaths),
-  })
+  const urlToModuleId = createUrlToModuleId(dynamicImportPaths, moduleIds, publicPath)
+  const modules = createModulesObject({ results })
 
-  function addNewLine(x: ArgsOf<SourceListMap['add']>[0]) {
-    sourceList.add(x)
-    sourceList.add(NEW_LINE)
-  }
-
-  addNewLine(urlToModuleId)
-  addNewLine(INSTALLED_MODULES)
-  addNewLine(SUBSCRIPTIONS)
-  addNewLine(ADD_SUBSCRIPTION)
-  addNewLine(JSONP_CALLBACK)
-  addNewLine(JSONP_SETUP)
-  addNewLine(modules)
-  addNewLine(TYPED_REQUIRE)
-  addNewLine(IMPORT_MODULE)
-  addNewLine(INSTALL_MODULE)
-  addNewLine(NEW_LINE)
-  addNewLine(START_APP)
-  addNewLine(NEW_LINE)
-  addNewLine(IIFE_CLOSE)
+  addNewLine(urlToModuleId, sourceList)
+  addNewLine(INSTALLED_MODULES, sourceList)
+  addNewLine(SUBSCRIPTIONS, sourceList)
+  addNewLine(ADD_SUBSCRIPTION, sourceList)
+  addNewLine(JSONP_CALLBACK, sourceList)
+  addNewLine(JSONP_SETUP, sourceList)
+  addNewLine(modules, sourceList)
+  addNewLine(TYPED_REQUIRE, sourceList)
+  addNewLine(IMPORT_MODULE, sourceList)
+  addNewLine(INSTALL_MODULE, sourceList)
+  addNewLine(NEW_LINE, sourceList)
+  addNewLine(START_APP, sourceList)
+  addNewLine(NEW_LINE, sourceList)
+  addNewLine(IIFE_CLOSE, sourceList)
 
   return sourceList.toStringWithSourceMap({ file: fileName })
+}
+
+function addNewLine(code: ArgsOf<SourceListMap['add']>[0], sourceList: SourceListMap) {
+  sourceList.add(code)
+  sourceList.add(NEW_LINE)
 }
 
 function createUrlToModuleId(
   dynamicImportPaths: Record<string, string>,
   moduleIds: Map<string, number>,
+  publicPath: string,
 ) {
   const code = Object.keys(dynamicImportPaths)
     .reduce(
       (acc, key) => {
         const moduleId = moduleIds.get(key)!
 
-        acc.push(`\n ${dynamicImportPaths[key]}: ${moduleId}`)
+        acc.push(`\n "${join(`/`, publicPath, dynamicImportPaths[key])}": ${moduleId}`)
 
         return acc
       },
@@ -172,7 +172,6 @@ function createUrlToModuleId(
 
   return new SourceListMap([
     new CodeNode(`var urlToModuleId = {`),
-    NEW_LINE,
     new CodeNode(code),
     NEW_LINE,
     new CodeNode(`};`),

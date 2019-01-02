@@ -1,8 +1,6 @@
 import { mapObj } from '../../common/mapObj'
 import { unnest } from '../../list'
 import { Maybe, Nothing } from '../../maybe'
-import { generateDynamicImportPaths } from '../common/generateDynamicImportPaths'
-import { getHash } from '../common/getHash'
 import {
   BundleGraph,
   DependencyMap,
@@ -18,22 +16,18 @@ export type CreateBundleGraphOptions = {
   dependencyMap: DependencyMap
   moduleIds: Map<string, number>
   moduleIdToFilePaths: Map<number, string>
+  dynamicImportPaths: Record<string, string>
   publicPath: string
+  bundleHash?: string
 }
 
 export function createBundleGraph({
   dependencyMap,
   results,
   moduleIdToFilePaths,
-  publicPath,
+  dynamicImportPaths,
 }: CreateBundleGraphOptions): BundleGraph {
-  const hash = getHash()
   const mainResults = dependenciesOfFile(moduleIdToFilePaths.get(0)!, dependencyMap, results)
-  const dynamicImportPaths = generateDynamicImportPaths({
-    dependencyMap,
-    publicPath,
-    bundleHash: hash,
-  })
   const dynamicImportResults = mapObj(
     filePath => dependenciesOfFile(filePath, dependencyMap, results),
     dynamicImportPaths,
@@ -51,7 +45,7 @@ export function createBundleGraph({
     commonFileNames,
   )
 
-  return { hash, main, common, dynamicBundles }
+  return { main, common, dynamicBundles }
 }
 
 function createDynamicBundles(

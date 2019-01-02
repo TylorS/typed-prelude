@@ -1,4 +1,4 @@
-import { ascend } from '../../list'
+import { descend } from '../../list'
 import { DependencyMap, DependencyType, EmitResults, MemoryResult } from '../types'
 
 // TODO: warn of circular dependencies?
@@ -33,5 +33,5 @@ export function dependenciesOfFile(
     })
   }
 
-  return memoryResults.sort(ascend(x => x.moduleId))
+  return memoryResults.sort(descend(x => x.moduleId))
 }

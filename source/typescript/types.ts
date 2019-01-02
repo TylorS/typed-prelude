@@ -78,11 +78,17 @@ export type MemoryResult = {
 }
 
 export type EmitResults = Map<string, MemoryResult>
-export type DynamicBundleResults = { fileName: string; results: MemoryResult[] }
 
 export interface BundleGraph {
-  readonly hash: string
   readonly main: MemoryResult[]
   readonly common: Maybe<MemoryResult[]>
   readonly dynamicBundles: DynamicBundleResults[]
+}
+
+export type DynamicBundleResults = { fileName: string; results: MemoryResult[] }
+
+export type Bundle = {
+  main: SourceAndSourceMap
+  common: Maybe<SourceAndSourceMap>
+  dynamicBundles: Array<{ fileName: string; source: string; map: SourceMap }>
 }

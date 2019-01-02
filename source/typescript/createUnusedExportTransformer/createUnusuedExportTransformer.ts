@@ -1,4 +1,4 @@
-import { ReferenceFindableNode, ts, TypeGuards } from 'ts-simple-ast'
+import { ReferenceFindableNode, SyntaxKind, ts, TypeGuards } from 'ts-simple-ast'
 import { DependencyMap } from '../types'
 
 export type CreateUnusedExportTransformerOptions = {
@@ -23,7 +23,20 @@ export function createUnusedExportTransformer({
           .findReferencesAsNodes()
           .filter(y => x.sourceFile !== y.getSourceFile()).length === 0,
     )
-    const unusedExportNodes = unusedExports.map(x => x.node.compilerNode)
+    const unusedExportNodes = unusedExports.map(({ node }) => {
+      const nodes = [
+        node.getFirstAncestorByKind(SyntaxKind.VariableStatement),
+        node.getFirstAncestorByKind(SyntaxKind.ExportAssignment),
+      ]
+
+      for (const node of nodes) {
+        if (node) {
+          return node.compilerNode
+        }
+      }
+
+      return node.compilerNode
+    })
 
     if (unusedExportNodes.length === 0) {
       return sourceFile

@@ -26,7 +26,6 @@ export const test = describe(`createImportRemapTransformer`, [
       })
       const dynamicImportDependencies = generateDynamicImportPaths({
         dependencyMap,
-        publicPath: '/',
         bundleHash,
       })
 
@@ -35,7 +34,7 @@ export const test = describe(`createImportRemapTransformer`, [
       dynamicImportDependencies[moduleIdToFilePaths.get(1)!] = fileName
 
       const transformer = createDynamicImportTransformer({
-        dynamicImportDependencies,
+        dynamicImportPaths: dynamicImportDependencies,
         moduleIdToFilePaths,
         publicPath: '/',
       })

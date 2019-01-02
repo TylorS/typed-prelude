@@ -3,12 +3,12 @@ import { pathJoin } from '../../common/pathJoin'
 
 export type CreateDynamicImportTransformerOptions = {
   moduleIdToFilePaths: Map<number, string>
-  dynamicImportDependencies: Record<string, string>
+  dynamicImportPaths: Record<string, string>
   publicPath: string
 }
 
 export function createDynamicImportTransformer({
-  dynamicImportDependencies,
+  dynamicImportPaths: dynamicImportDependencies,
   moduleIdToFilePaths,
   publicPath,
 }: CreateDynamicImportTransformerOptions) {
