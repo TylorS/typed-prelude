@@ -8,7 +8,7 @@ import { createBundle } from './createBundle'
 import { findTsConfig } from './findTsConfig'
 import { SourceAndSourceMap, SourceMap } from './types'
 
-type MainOptions = {
+export type GenerateBundleOptions = {
   directory: string
   filePath: string
   outputDirectory: string
@@ -18,7 +18,7 @@ type MainOptions = {
   commonFileName?: string
 }
 
-async function main({
+export async function generateBundle({
   directory,
   useHash,
   filePath,
@@ -26,7 +26,7 @@ async function main({
   publicPath,
   mainFileName = MAIN_JS,
   commonFileName = COMMON_JS,
-}: MainOptions) {
+}: GenerateBundleOptions) {
   const tsConfig = findTsConfig({ directory })
   const { hash, main, common, dynamicBundles } = createBundle({
     tsConfig,
@@ -96,17 +96,3 @@ function sourceMapUrl(fileName: string) {
 
   return `//# sourceMappingURL=${base}.map`
 }
-
-const directory = process.cwd()
-const outputDirectory = join(directory, 'dist')
-const filePath = join(__dirname, 'bundle-test.ts')
-
-const options: MainOptions = {
-  directory,
-  outputDirectory,
-  filePath,
-  publicPath: 'dist',
-  useHash: false,
-}
-
-main(options)

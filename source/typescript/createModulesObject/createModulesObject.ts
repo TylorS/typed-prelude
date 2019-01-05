@@ -1,6 +1,6 @@
 import { CodeNode, SourceListMap } from 'source-list-map'
 import { MemoryResult } from '../types'
-import { wrapModuleInFactory } from '../wrapModuleInFactory/wrapModuleInFactory'
+import { wrapModuleInFactory } from '../wrapModuleInFactory'
 
 const OPEN = new CodeNode(`var modules = {\n`)
 const CLOSE = new CodeNode(`\n}`)
