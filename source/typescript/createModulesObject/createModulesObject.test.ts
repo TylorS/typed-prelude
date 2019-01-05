@@ -29,7 +29,10 @@ export const test = describe(`wrapModuleInFactory`, [
           before: [createImportRemapTransformer({ tsConfig, moduleIds })],
         },
       })
-      const sourceListMap = createModulesObject({ results })
+      const sourceListMap = createModulesObject({
+        directory: __dirname,
+        results: Array.from(results.values()),
+      })
       const { source: js } = sourceListMap.toStringWithSourceMap({ file: 'whatever.js' })
 
       ok(js.startsWith(`var modules = {\n`))

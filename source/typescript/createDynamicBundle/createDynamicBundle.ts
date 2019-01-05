@@ -3,6 +3,7 @@ import { MemoryResult, SourceAndSourceMap } from '../types'
 import { wrapModuleInFactory } from '../wrapModuleInFactory/wrapModuleInFactory'
 
 export type CreateDynamicBundleOptions = {
+  directory: string
   fileName: string
   results: MemoryResult[]
 }
@@ -14,16 +15,15 @@ const ARRAY_OPEN = new CodeNode(`[`)
 const ARRAY_CLOSE = new CodeNode(`]`)
 
 export function createDynamicBundle({
+  directory,
   fileName,
   results,
 }: CreateDynamicBundleOptions): SourceAndSourceMap {
   const lastIndex = results.length - 1
-  const sourceList = new SourceListMap()
-
-  sourceList.add(JSONP_SETUP_OPEN)
+  const sourceList = new SourceListMap([JSONP_SETUP_OPEN])
 
   results.forEach((result, index) => {
-    sourceList.add(createDyanmicResult(result))
+    sourceList.add(createDyanmicResult(directory, result))
 
     if (index !== lastIndex) {
       sourceList.add(COMMA)
@@ -35,9 +35,9 @@ export function createDynamicBundle({
   return sourceList.toStringWithSourceMap({ file: fileName })
 }
 
-function createDyanmicResult(result: MemoryResult) {
+function createDyanmicResult(directory: string, result: MemoryResult) {
   const { moduleId } = result
-  const factory = wrapModuleInFactory(result)
+  const factory = wrapModuleInFactory(directory, result)
   const sourceList = new SourceListMap([ARRAY_OPEN])
 
   sourceList.add(factory)

@@ -49,7 +49,7 @@ export function emitToMemory({
     fileName: filePath,
     moduleId: moduleIds.get(filePath)!,
     js,
-    map: map ? Maybe.of(map.text) : Nothing,
+    map: map ? Maybe.of(JSON.parse(map.text)) : Nothing,
     dts: dts ? Maybe.of(dts.text) : Nothing,
   }
 }

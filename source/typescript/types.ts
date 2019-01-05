@@ -73,7 +73,7 @@ export type MemoryResult = {
   fileName: string
   moduleId: number
   js: string
-  map: Maybe<string>
+  map: Maybe<SourceMap>
   dts: Maybe<string>
 }
 
@@ -88,6 +88,7 @@ export interface BundleGraph {
 export type DynamicBundleResults = { fileName: string; results: MemoryResult[] }
 
 export type Bundle = {
+  hash: string
   main: SourceAndSourceMap
   common: Maybe<SourceAndSourceMap>
   dynamicBundles: Array<{ fileName: string; source: string; map: SourceMap }>

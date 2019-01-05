@@ -104,6 +104,7 @@ export type Head<A extends any[]> = HeadArg<Fn<A>>
 export type Defined<T> = T extends undefined ? never : T
 
 // Frowned-upon recursion - may not work in future versions of TS
+
 // Works beautifully with 3.2, even keeps the original variable names without addition work.
 // export type Curry<T extends (...args: any) => any> = <
 //   InitArgs extends PotentialOf<ArgsOf<T>>,
@@ -123,12 +124,12 @@ export type Last<A extends any[], B extends any = A[0]> = {
 }[A extends [] ? 'end' : 'continue']
 
 export type And<A extends any[], B extends any = A> = {
-  continue: B extends A ? And<Tail<A>, HeadArg<Fn<A>>> : B & And<Tail<A>, Head<A>>
+  continue: B extends A ? And<Tail<A>, Head<A>> : B & And<Tail<A>, Head<A>>
   end: B
 }[A extends [] ? 'end' : 'continue']
 
 export type Or<A extends any[], B extends any = A> = {
-  continue: B extends A ? Or<Tail<A>, HeadArg<Fn<A>>> : B | Or<Tail<A>, HeadArg<Fn<A>>>
+  continue: B extends A ? Or<Tail<A>, Head<A>> : B | Or<Tail<A>, Head<A>>
   end: B
 }[A extends [] ? 'end' : 'continue']
 

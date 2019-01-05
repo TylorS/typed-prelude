@@ -111,6 +111,7 @@ for(var i = 0; i < jsonpArray.length; i++) { jsonpCallback(jsonpArray[i]); }
 const START_APP = new CodeNode(`typedRequire("0");`)
 
 export type CreateEntryBundleOptions = {
+  directory: string
   fileName: string
   results: MemoryResult[]
   moduleIds: Map<string, number>
@@ -119,6 +120,7 @@ export type CreateEntryBundleOptions = {
 }
 
 export function createEntryBundle({
+  directory,
   fileName,
   results,
   moduleIds,
@@ -127,7 +129,7 @@ export function createEntryBundle({
 }: CreateEntryBundleOptions): SourceAndSourceMap {
   const sourceList = new SourceListMap([IIFE_OPEN, NEW_LINE])
   const urlToModuleId = createUrlToModuleId(dynamicImportPaths, moduleIds, publicPath)
-  const modules = createModulesObject({ results })
+  const modules = createModulesObject({ directory, results })
 
   addNewLine(urlToModuleId, sourceList)
   addNewLine(INSTALLED_MODULES, sourceList)
@@ -144,7 +146,9 @@ export function createEntryBundle({
   addNewLine(NEW_LINE, sourceList)
   addNewLine(IIFE_CLOSE, sourceList)
 
-  return sourceList.toStringWithSourceMap({ file: fileName })
+  const { source, map } = sourceList.toStringWithSourceMap({ file: fileName })
+
+  return { source, map }
 }
 
 function addNewLine(code: ArgsOf<SourceListMap['add']>[0], sourceList: SourceListMap) {

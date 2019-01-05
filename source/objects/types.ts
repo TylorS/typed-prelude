@@ -36,11 +36,14 @@ export type Immutable<A> = A extends Primitive
   ? A
   : A extends Array<infer B>
     ? ImmutableArray<B>
-    : A extends Map<infer K, infer V> ? ImmutableMap<K, V> : ImmutableObject<A>
+    : A extends Map<infer K, infer V>
+      ? ImmutableMap<K, V>
+      : A extends Set<infer V> ? ImmutableSet<V> : ImmutableObject<A>
 
 export interface ImmutableArray<A> extends ReadonlyArray<Immutable<A>> {}
 export interface ImmutableMap<K, V> extends ReadonlyMap<Immutable<K>, Immutable<V>> {}
-export type ImmutableObject<A> = { readonly [K in keyof A]: Immutable<A[K]> }
+export interface ImmutableSet<V> extends ReadonlySet<Immutable<V>> {}
+export type ImmutableObject<A> = { +readonly [K in keyof A]: Immutable<A[K]> }
 
 export type ExtractUnionMember<
   A extends object,
@@ -48,5 +51,21 @@ export type ExtractUnionMember<
   Value extends A[Tag]
 > = Extract<A, Record<Tag, Value>>
 
-export type Mutable<A> = A extends Primitive ? A : MutableObject<A>
+export type Mutable<A> = A extends Primitive
+  ? A
+  : A extends ImmutableArray<infer V>
+    ? MutableArray<V>
+    : A extends ReadonlyArray<infer V>
+      ? MutableArray<V>
+      : A extends ImmutableMap<infer K, infer V>
+        ? MutableMap<K, V>
+        : A extends ReadonlyMap<infer K, infer V>
+          ? MutableMap<K, V>
+          : A extends ImmutableSet<infer V>
+            ? MutableSet<V>
+            : A extends ReadonlySet<infer V> ? MutableSet<V> : MutableObject<A>
+
+export interface MutableMap<K, V> extends Map<Mutable<K>, Mutable<V>> {}
+export interface MutableSet<V> extends Set<Mutable<V>> {}
+export interface MutableArray<A> extends Array<Mutable<A>> {}
 export type MutableObject<A> = { -readonly [K in keyof A]: Mutable<A[K]> }

@@ -2,6 +2,7 @@ import { createNodeEnvTransformer, deadIfsTransformer } from '@ts-tools/robotrix
 import { Project } from 'ts-simple-ast'
 import { map } from '../../maybe'
 import { adjustTsConfig } from '../common/adjustTsConfig'
+import { COMMON_JS, MAIN_JS } from '../common/constants'
 import { findDependenciesOfType } from '../common/findDependenciesOfType'
 import { generateDynamicImportPaths } from '../common/generateDynamicImportPaths'
 import { getHash } from '../common/getHash'
@@ -23,6 +24,8 @@ export type CreateBundleOptions = {
   filePath: string
   publicPath?: string
   linkExtensions?: string[]
+  mainFileName?: string
+  commonFileName?: string
 }
 
 export function createBundle({
@@ -31,6 +34,8 @@ export function createBundle({
   filePath,
   linkExtensions,
   publicPath = '/',
+  mainFileName = MAIN_JS,
+  commonFileName = COMMON_JS,
 }: CreateBundleOptions): Bundle {
   const bundleHash = getHash()
   const { compilerOptions } = adjustTsConfig(tsConfig)
@@ -56,8 +61,8 @@ export function createBundle({
         createDynamicImportTransformer({ dynamicImportPaths, moduleIdToFilePaths, publicPath }),
         createUnusedExportTransformer({ dependencyMap }),
         createNodeEnvTransformer(process.env),
-        deadIfsTransformer,
       ],
+      after: [deadIfsTransformer],
     },
   })
   const { main, common, dynamicBundles } = createBundleGraph({
@@ -71,17 +76,27 @@ export function createBundle({
   })
 
   return {
+    hash: bundleHash,
     main: createEntryBundle({
-      fileName: insertHash(bundleHash, 'bundle.js'),
+      directory,
+      fileName: insertHash(bundleHash, mainFileName),
       publicPath,
       results: main,
       dynamicImportPaths,
       moduleIds,
     }),
     common: map(
-      results => createDynamicBundle({ fileName: insertHash(bundleHash, 'common.js'), results }),
+      results =>
+        createDynamicBundle({
+          directory,
+          fileName: insertHash(bundleHash, commonFileName),
+          results,
+        }),
       common,
     ),
-    dynamicBundles: dynamicBundles.map(x => ({ fileName: x.fileName, ...createDynamicBundle(x) })),
+    dynamicBundles: dynamicBundles.map(x => ({
+      fileName: x.fileName,
+      ...createDynamicBundle({ ...x, directory }),
+    })),
   }
 }

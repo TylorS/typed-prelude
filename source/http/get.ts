@@ -1,6 +1,7 @@
 import { addQueryParameters } from '../common/addQueryParameters'
+import { DropKeys } from '../common/types'
 import { Future } from '../future'
-import { DropKeys, MergeObjects } from '../objects'
+import { MergeObjects } from '../objects'
 import { http } from './http'
 import { HttpOptions, HttpResponse, Request } from './types'
 
