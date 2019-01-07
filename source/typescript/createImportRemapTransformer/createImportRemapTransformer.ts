@@ -3,6 +3,7 @@ import { dirname, join } from 'path'
 import { sync } from 'resolve'
 import { ts } from 'ts-simple-ast'
 import { createMatchPath } from 'tsconfig-paths'
+import { sys } from 'typescript'
 import { getFileExtensions } from '../common/getFileExtensions'
 import { preferEsModule } from '../findSourceFileDependencies/helpers'
 import { TsConfig } from '../types'
@@ -20,16 +21,30 @@ export function createImportRemapTransformer({
   const baseUrl = tsConfig.compilerOptions.baseUrl
     ? join(dirname(tsConfig.configPath), tsConfig.compilerOptions.baseUrl)
     : null
-  const match = baseUrl ? createMatchPath(baseUrl, tsConfig.compilerOptions.paths || {}) : null
+  const match = baseUrl
+    ? createMatchPath(baseUrl, tsConfig.compilerOptions.paths || {}, [
+        'module',
+        'jsnext:main',
+        'browser',
+        'main',
+      ])
+    : null
   function getResolvedPath(target: string, containingFile: string): string {
-    return (
-      (match && match(target)) ||
-      sync(target, {
+    const hasMatch = match && match(target, sys.readFile, sys.fileExists, extensions)
+
+    if (hasMatch) {
+      return hasMatch
+    }
+
+    try {
+      return sync(target, {
         basedir: dirname(containingFile),
         extensions,
         packageFilter: preferEsModule,
       })
-    )
+    } catch {
+      return target
+    }
   }
 
   return createRemapImportsTransformer({

@@ -28,7 +28,7 @@ export type CreateBundleOptions = {
   commonFileName?: string
 }
 
-export function createBundle({
+export async function createBundle({
   tsConfig,
   directory,
   filePath,
@@ -36,12 +36,12 @@ export function createBundle({
   publicPath = '/',
   mainFileName = MAIN_JS,
   commonFileName = COMMON_JS,
-}: CreateBundleOptions): Bundle {
+}: CreateBundleOptions): Promise<Bundle> {
   const bundleHash = getHash()
   const { compilerOptions } = adjustTsConfig(tsConfig)
   const project = new Project({ compilerOptions })
   const sourceFile = project.addExistingSourceFile(filePath)
-  const { dependencyMap, moduleIds, moduleIdToFilePaths } = findSourceFileDependencies({
+  const { dependencyMap, moduleIds, moduleIdToFilePaths } = await findSourceFileDependencies({
     sourceFile,
     project,
     linkExtensions,

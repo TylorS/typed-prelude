@@ -42,16 +42,21 @@ export function createUnusedExportTransformer({
       return sourceFile
     }
 
-    return ts.visitEachChild(
-      sourceFile,
-      function visitNode(node: ts.Node): ts.Node | undefined {
-        if (unusedExportNodes.includes(node)) {
-          return undefined
-        }
+    try {
+      return ts.visitEachChild(
+        sourceFile,
+        function visitNode(node: ts.Node): ts.Node | undefined {
+          if (unusedExportNodes.includes(node)) {
+            return undefined
+          }
 
-        return ts.visitEachChild(node, visitNode, context)
-      },
-      context,
-    )
+          return ts.visitEachChild(node, visitNode, context)
+        },
+        context,
+      )
+    } catch (error) {
+      console.error(error)
+      return sourceFile
+    }
   }
 }

@@ -27,13 +27,16 @@ export async function generateBundle({
   mainFileName = MAIN_JS,
   commonFileName = COMMON_JS,
 }: GenerateBundleOptions) {
+  console.time('Finished')
   const tsConfig = findTsConfig({ directory })
+  console.time('Create Bundle')
   const { hash, main, common, dynamicBundles } = createBundle({
     tsConfig,
     directory,
     filePath,
     publicPath,
   })
+  console.timeEnd('Create Bundle')
 
   rimraf.sync(outputDirectory)
   mkdirSync(outputDirectory)
@@ -54,6 +57,8 @@ export async function generateBundle({
     common,
   )
   dynamicBundles.forEach(x => writeBundle(directory, outputDirectory, x.fileName, x))
+
+  console.timeEnd('Finished')
 }
 
 function removeHash(hash: string, sourceAndSourceMap: SourceAndSourceMap): SourceAndSourceMap {

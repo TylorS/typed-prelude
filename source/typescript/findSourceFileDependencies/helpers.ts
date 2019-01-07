@@ -1,3 +1,5 @@
+import builtinModules = require('builtin-modules')
+import { extname } from 'path'
 import {
   CallExpression,
   ExportSpecifier,
@@ -59,17 +61,19 @@ export function findVariableNameOfCallExpression(
   return []
 }
 
-export function preferEsModule(pkg: any): any {
-  const m = pkg.module
-  const jsnext = pkg['jsnext:main']
+export function preferEsModule(extensions: string[]) {
+  return function usEsModule(pkg: any): any {
+    const m = pkg.module
+    const jsnext = pkg['jsnext:main']
 
-  if (m) {
-    pkg.main = m
-  } else if (jsnext) {
-    pkg.main = jsnext
+    if (m && extensions.includes(extname(m))) {
+      pkg.main = m
+    } else if (jsnext && extensions.includes(extname(jsnext))) {
+      pkg.main = jsnext
+    }
+
+    return pkg
   }
-
-  return pkg
 }
 
 export const IMAGE_EXTENSIONS = [
@@ -83,3 +87,7 @@ export const IMAGE_EXTENSIONS = [
   '.tiff',
   '.webp',
 ]
+
+export function isBuiltin(specifier: string): boolean {
+  return builtinModules.includes(specifier)
+}

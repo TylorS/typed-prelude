@@ -1,8 +1,7 @@
-import { sync } from 'resolve'
 import { CallExpression, SyntaxKind } from 'ts-simple-ast'
+import { ResolveOptions, resolvePkg } from '../common/resolvePkg'
 import { Dependency, DependencyType } from '../types'
 import { findVariableNameOfCallExpression, stripModuleSpecifier } from './helpers'
-import { ResolveOptions } from './types'
 
 export type FindDynamicImportDependencyOptions = {
   importCallExpression: CallExpression
@@ -10,7 +9,7 @@ export type FindDynamicImportDependencyOptions = {
   getModuleId: (filePath: string) => number
 }
 
-export function findDynamicImportDependency({
+export async function findDynamicImportDependency({
   importCallExpression,
   resolveOptions,
   getModuleId,
@@ -19,7 +18,7 @@ export function findDynamicImportDependency({
     .getDescendantsOfKind(SyntaxKind.StringLiteral)
     .map(x => x.getText())
   const moduleSpecifier = stripModuleSpecifier(descendants[0])
-  const resolvedFilePath = sync(moduleSpecifier, resolveOptions)
+  const resolvedFilePath = await resolvePkg(moduleSpecifier, resolveOptions)
   const moduleId = getModuleId(resolvedFilePath)
 
   const dependency: Dependency = {

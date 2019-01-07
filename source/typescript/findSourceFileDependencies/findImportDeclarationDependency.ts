@@ -1,5 +1,5 @@
-import { Tuple } from 'source/tuple'
 import { ImportDeclaration, SourceFile } from 'ts-simple-ast'
+import { Tuple } from '../../tuple'
 import { Dependency, DependencyType } from '../types'
 import { findImportNames, stripModuleSpecifier } from './helpers'
 
