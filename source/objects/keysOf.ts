@@ -1,1 +1,2 @@
-export const keysOf = <A extends PropertyKey>(obj: Record<A, any>): A[] => Object.keys(obj) as A[]
+export const keysOf = <A extends PropertyKey>(obj: Partial<Record<A, any>>): A[] =>
+  Object.keys(obj) as A[]

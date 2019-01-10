@@ -11,7 +11,10 @@ export const test = describe(`installNodeSupport`, [
 
       throws(() => require(file))
 
-      const cleanup = installNodeSupport(findTsConfig({ directory }))
+      const cleanup = installNodeSupport({
+        directory,
+        compilerOptions: findTsConfig({ directory }).compilerOptions,
+      })
 
       const { foobar } = require(file)
 
