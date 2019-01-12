@@ -1,7 +1,7 @@
+import { ok } from 'power-assert'
+
 export const notOk = (bool: boolean) => {
-  if (bool) {
-    throw new Error('Value was expected to be false')
-  }
+  ok(!bool)
 
   return bool
 }

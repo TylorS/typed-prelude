@@ -11,7 +11,7 @@ export const test: Test = describe(`same`, [
       equal(actual, same(expected, actual))
     }),
 
-    it(`throws an error if assertion is false`, ({ equal }) => {
+    it(`throws an error if assertion is false`, ({ notOk }) => {
       const expected = 1
       const actual = 2
 
@@ -19,7 +19,7 @@ export const test: Test = describe(`same`, [
         same(expected, actual)
         throw new Error(`Should throw error`)
       } catch (e) {
-        equal(e.message, `Values are not same`)
+        notOk(e.message === `Should throw error`)
       }
     }),
   ]),

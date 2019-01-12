@@ -1,4 +1,5 @@
 import { createHash } from 'crypto'
+import espowerSource from 'espower-source'
 import { readFileSync, writeFileSync } from 'fs'
 import { basename, extname, join } from 'path'
 import * as sourceMapSupport from 'source-map-support'
@@ -14,7 +15,6 @@ import { getFileExtensions } from '../common/getFileExtensions'
 
 const DEFAULT_COMPILER_OPTIONS = {
   sourceMap: true,
-  inlineSourceMap: false,
   declaration: false,
   noEmit: false,
   outDir: '$$ts-transpilation$$',
@@ -27,7 +27,11 @@ export interface Register {
   compile(code: string, fileName: string): string
 }
 
-export function transpileNode(cwd: string, compilerOptions: CompilerOptions): () => void {
+export function transpileNode(
+  cwd: string,
+  compilerOptions: CompilerOptions,
+  assertionSupport: boolean = false,
+): () => void {
   compilerOptions = { ...cleanCompilerOptions(compilerOptions), ...DEFAULT_COMPILER_OPTIONS }
 
   const cacheDirectory = directory()
@@ -38,6 +42,12 @@ export function transpileNode(cwd: string, compilerOptions: CompilerOptions): ()
   const extensions = getFileExtensions(compilerOptions)
 
   const compile = (code: string, fileName: string): [string, string] => {
+    if (assertionSupport) {
+      const newSource = espowerSource(code, fileName, {})
+
+      return [newSource, '']
+    }
+
     const result = transpileModule(code, {
       fileName,
       compilerOptions,
@@ -141,6 +151,10 @@ function updateOutput(
   sourceMap: string,
   getExtension: (fileName: string) => string,
 ) {
+  if (sourceMap === '') {
+    return outputText
+  }
+
   const base64Map = Buffer.from(updateSourceMap(sourceMap, fileName), 'utf8').toString('base64')
   const sourceMapContent = `data:application/json;charset=utf-8;base64,${base64Map}`
   const sourceMapLength =

@@ -5,6 +5,7 @@ import { transpileNode } from './transpileNode'
 export type TypeScriptSupportOptions = {
   directory: string
   compilerOptions: CompilerOptions
+  assertionSupport?: boolean
 }
 
 /**
@@ -13,6 +14,7 @@ export type TypeScriptSupportOptions = {
 export function installNodeSupport({
   directory,
   compilerOptions,
+  assertionSupport = false,
 }: TypeScriptSupportOptions): () => void {
   const { baseUrl, paths } = compilerOptions
 
@@ -24,7 +26,7 @@ export function installNodeSupport({
         })
       : () => void 0
 
-  const tranpilationDispose = transpileNode(directory, compilerOptions)
+  const tranpilationDispose = transpileNode(directory, compilerOptions, assertionSupport)
 
   return () => {
     tsPathDispose()

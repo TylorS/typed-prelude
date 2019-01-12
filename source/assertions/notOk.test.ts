@@ -10,13 +10,8 @@ export const test: Test = describe(`notOk`, [
       same(value, false)
     }),
 
-    it(`throws an Error`, ({ same }) => {
-      try {
-        notOk(true)
-        throw new Error(`Should throw error`)
-      } catch (e) {
-        same(e.message, `Value was expected to be false`)
-      }
+    it(`throws an Error`, ({ throws }) => {
+      throws(() => notOk(true))
     }),
   ]),
 ])

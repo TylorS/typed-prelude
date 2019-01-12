@@ -1,15 +1,12 @@
+import * as assert from 'power-assert'
 import { curry } from '../lambda'
-import { equals } from '../logic'
-import { AssertionError } from './AssertionError'
 
 export const notEqual: {
   <A>(expected: A, actual: A): A
   <A>(expected: A): (actual: A) => A
 } = curry(
   <A>(expected: A, actual: A): A => {
-    if (equals(expected, actual)) {
-      throw new AssertionError('Values not expected to be equal', expected, actual)
-    }
+    assert.notDeepStrictEqual(expected, actual)
 
     return actual
   },

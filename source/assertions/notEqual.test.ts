@@ -12,7 +12,7 @@ export const test: Test = describe(`notEqual`, [
       equal(notEqual(expected, actual), actual)
     }),
 
-    it(`throws an AssertionError if assertion is false`, ({ same }) => {
+    it(`throws an AssertionError if assertion is false`, ({ notOk }) => {
       const expected = { a: 1 }
       const actual = { a: 1 }
 
@@ -20,7 +20,7 @@ export const test: Test = describe(`notEqual`, [
         notEqual(expected, actual)
         throw new Error(`Should throw error`)
       } catch (e) {
-        same(e.message, `Values not expected to be equal`)
+        notOk(e.message === `Should throw error`)
       }
     }),
   ]),

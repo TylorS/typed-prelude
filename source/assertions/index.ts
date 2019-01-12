@@ -1,10 +1,10 @@
-export * from './AssertionError'
 export * from './createAssertionEnvironment'
 export * from './equal'
 export * from './notEqual'
 export * from './notOk'
 export * from './notSame'
-export * from './ok'
 export * from './rejects'
 export * from './same'
 export * from './throws'
+
+export { ok } from 'power-assert'
