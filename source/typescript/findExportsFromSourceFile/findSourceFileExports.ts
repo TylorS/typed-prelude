@@ -6,6 +6,7 @@ import {
   isFunctionLike,
   isIdentifier,
   isVariableDeclaration,
+  isVariableDeclarationList,
   Node,
   SourceFile,
   SyntaxKind,
@@ -143,18 +144,17 @@ function findExportMetadata(sourceFile: SourceFile, typeChecker: TypeChecker): E
 
   // SourceFile always has SyntaxList at 0
   const syntaxList = sourceFile.getChildAt(0)
-  // Imports and Exports must be top-level
+  // Exports must be top-level
   syntaxList.getChildren(sourceFile).forEach(checkNode)
 
   return exportMetadata
 }
 
 function findNodeToUse(node: Node): Node {
-  if (isVariableDeclaration(node)) {
-    return node.parent.parent
-  }
-
-  if (isFunctionLike(node) && node.parent) {
+  if (
+    (isVariableDeclaration(node) || isVariableDeclarationList(node) || isFunctionLike(node)) &&
+    node.parent
+  ) {
     return findNodeToUse(node.parent)
   }
 
@@ -162,13 +162,11 @@ function findNodeToUse(node: Node): Node {
 }
 
 function hasExportModifer(node: Node): boolean {
-  if (!node.modifiers) {
-    return false
-  }
-
-  for (const modifier of node.modifiers) {
-    if (modifier.kind === SyntaxKind.ExportKeyword) {
-      return true
+  if (node.modifiers) {
+    for (const modifier of node.modifiers) {
+      if (modifier.kind === SyntaxKind.ExportKeyword) {
+        return true
+      }
     }
   }
 
