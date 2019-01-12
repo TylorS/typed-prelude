@@ -18,8 +18,6 @@ export function createResolveFilePath({ extensions, browser }: CreateResolveFile
   }
 
   return function resolveFilePath(basedir: string, moduleSpecifier: string) {
-    options.basedir = basedir
-
     try {
       const matchPath = tryCreateMatchPath(basedir, fields)
 
@@ -31,7 +29,7 @@ export function createResolveFilePath({ extensions, browser }: CreateResolveFile
         }
       }
 
-      return resolve.sync(moduleSpecifier, options)
+      return resolve.sync(moduleSpecifier, { ...options, basedir })
     } catch (error) {
       // Didn't use matchPath - tried and failed to resolve
       if (error.code === 'MODULE_NOT_FOUND') {

@@ -2,7 +2,7 @@ import { Options } from '@typed/test'
 
 const nodeOptions: Options = {
   typeCheck: false,
-  files: ['source/assertions/**/*.test.ts'],
+  files: ['source/**/*.test.ts'],
 }
 
 // const browserOptions: Options = {
