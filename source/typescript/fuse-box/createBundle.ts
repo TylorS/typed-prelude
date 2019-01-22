@@ -1,4 +1,5 @@
 import { join, relative } from 'path'
+import { isUndefined } from '../../logic'
 import { MergeObjects } from '../../objects'
 import { createFuseBox, CreateFuseBoxOptions } from './fuse-box'
 
@@ -13,7 +14,8 @@ export async function createBundle(options: CreateBundleOptions) {
     fileName,
     bundleName = 'app',
     devServer,
-    watch = !!devServer,
+    ssl,
+    watch = !isUndefined(devServer) || !isUndefined(ssl),
     tsConfig,
   } = options
   const outDir = tsConfig.compilerOptions.outDir || join(directory, './dist')
