@@ -1,5 +1,4 @@
 import { join, relative } from 'path'
-import rimraf = require('rimraf')
 import { MergeObjects } from '../../objects'
 import { createFuseBox, CreateFuseBoxOptions } from './fuse-box'
 
@@ -18,9 +17,6 @@ export async function createBundle(options: CreateBundleOptions) {
     tsConfig,
   } = options
   const outDir = tsConfig.compilerOptions.outDir || join(directory, './dist')
-
-  rimraf.sync(outDir)
-
   const fuseBoxDir = join(directory, '.fusebox')
   const relativePath = relative(directory, fileName)
   const fuseBox = await createFuseBox(options)
