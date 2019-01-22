@@ -1,9 +1,11 @@
 import { asap, newDefaultScheduler } from '@most/scheduler'
 import { Disposable, Scheduler } from '@most/types'
-import { Arity1, Arity2, curry, IO, noOp } from '../lambda'
+import { Arity1, Arity2, curry, Fn, IO, noOp, Predicate } from '../lambda'
 import { callbackTask } from './callbackTask'
 
-export type EffectResources<A extends {} = {}> = A & { scheduler: Scheduler }
+export type EffectResources<A extends {} = {}> = {
+  [K in keyof A | 'scheduler']: K extends 'scheduler' ? Scheduler : A[K]
+}
 
 // Generic Effect type
 export interface Effect<A, B extends {} = {}> {
@@ -17,7 +19,7 @@ export interface Pure<A> extends Effect<A> {
 export namespace Effect {
   export const create = <A, B extends {} = {}>(
     runEffect: (cb: Arity2<A, number, void>, resources: EffectResources<B>) => Disposable,
-  ): Effect<A, B> => ({ runEffect: (cb, resources) => runEffect(cb, resources) })
+  ): Effect<A, B> => ({ runEffect })
 
   export const of = <A>(value: A): Effect<A> =>
     create<A>((cb, { scheduler }) => asap(callbackTask<A>(cb, value), scheduler))

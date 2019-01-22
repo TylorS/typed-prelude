@@ -6,22 +6,12 @@ export function callbackTask<A, B = void>(f: Arity2<A, number, B>, value: A): Ta
 }
 
 class CallbackTask<A, B = void> implements Task {
-  private disposable: Disposable | undefined
+  private disposable: any
   constructor(private f: Arity2<A, number, B>, private value: A) {}
 
   public run(time: number) {
-    try {
-      const { f, value } = this
-      const x = f(value, time)
-
-      if (isDisposable(x)) {
-        this.disposable = x
-      }
-    } catch (e) {
-      console.error(e)
-
-      throw e
-    }
+    const { f, value } = this
+    this.disposable = f(value, time)
   }
 
   public error(time: number) {
@@ -31,7 +21,7 @@ class CallbackTask<A, B = void> implements Task {
   }
 
   public dispose() {
-    if (this.disposable) {
+    if (isDisposable(this.disposable)) {
       this.disposable.dispose()
       this.disposable = undefined
     }

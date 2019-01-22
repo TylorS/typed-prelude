@@ -46,14 +46,18 @@
     "@most/disposable": "1.2.1",
     "@most/scheduler": "1.2.1",
     "@most/types": "1.0.1",
+    "devcert": "^1.0.0",
     "espower-source": "^2.3.0",
     "fuse-box": "^3.6.0",
     "minimatch": "^3.0.4",
+    "opn": "^5.4.0",
     "power-assert": "^1.6.1",
     "resolve": "^1.9.0",
     "rimraf": "^2.6.3",
     "source-map-support": "^0.5.9",
     "tempy": "^0.2.1",
-    "tsconfig-paths": "^3.7.0"
+    "tsconfig-paths": "^3.7.0",
+    "uglify-es": "^3.3.9",
+    "uglify-js": "^3.4.9"
   }
 }

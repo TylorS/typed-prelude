@@ -53,3 +53,10 @@ export interface NodePosition {
   endLine: number
   numberOfLines: number
 }
+
+export const enum CompilationTarget {
+  BROWSER = 'browser',
+  SERVER = 'server',
+  UNIVERSAL = 'universal',
+  ELECTRON = 'electron',
+}

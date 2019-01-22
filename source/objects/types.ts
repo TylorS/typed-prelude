@@ -18,25 +18,52 @@ export type ObjectPath<T, Keys extends PropertyKey[]> = Keys extends []
 
 export type ValuesOf<A> = { [K in keyof A]: A[K] }[keyof A]
 
-export type Merge<A, B, ShouldOverwrite extends boolean = false> = ShouldOverwrite extends true
-  ? Overwrite<A, B>
-  : MergeObjects<A, B>
+export type OptionalPropertyNames<A> = {
+  [K in keyof A]-?: undefined extends A[K] ? K : never
+}[keyof A]
+export type RequiredPropertyNames<A> = {
+  [K in keyof A]-?: undefined extends A[K] ? never : K
+}[keyof A]
+export type OptionalProperties<A> = Pick<A, OptionalPropertyNames<A>>
+export type RequiredProperties<A> = Pick<A, RequiredPropertyNames<A>>
 
 export type MergeObjects<A, B> = {
-  [K in keyof A | keyof B]: K extends keyof B
+  [K in RequiredPropertyNames<A & B>]: K extends keyof B
     ? K extends keyof A
       ? Defined<A[K] | B[K]>
       : B[K]
     : K extends keyof A
     ? A[K]
     : never
-}
+} &
+  {
+    [K in Exclude<OptionalPropertyNames<A & B>, RequiredPropertyNames<A & B>>]?: K extends keyof B
+      ? K extends keyof A
+        ? Defined<A[K] | B[K]>
+        : B[K]
+      : K extends keyof A
+      ? A[K]
+      : never
+  }
 
 export type Overwrite<A, B> = B extends A
   ? B
-  : { [K in keyof A | keyof B]: K extends keyof B ? B[K] : K extends keyof A ? A[K] : never }
+  : {
+      [K in Exclude<RequiredPropertyNames<A & B>, OptionalPropertyNames<B>>]: K extends keyof B
+        ? B[K]
+        : K extends keyof A
+        ? A[K]
+        : never
+    } &
+      {
+        [K in OptionalPropertyNames<A> | OptionalPropertyNames<B>]?: K extends keyof B
+          ? B[K]
+          : K extends keyof A
+          ? A[K]
+          : never
+      }
 
-export type OptionalKeys<A extends object, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A, K>>
+export type OptionalKeys<A, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A, K>>
 
 export type Immutable<A> = A extends Primitive
   ? A

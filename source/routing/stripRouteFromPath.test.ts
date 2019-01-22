@@ -6,11 +6,10 @@ export const test: Test = describe(`stripRouteFromPath`, [
   given(`a path and a route`, [
     it(`returns a pathname with route match removed`, ({ equal }) => {
       const path = `/user/42/profile/settings`
-      const strip = stripRouteFromPath(path)
 
-      equal('/profile/settings', strip(createRoute('/user/:userId')))
-      equal('/settings', strip(createRoute('/user/:userId/profile/')))
-      equal(path, strip(createRoute('/foo')))
+      equal('/profile/settings', stripRouteFromPath(createRoute('/user/:userId'), path))
+      equal('/settings', stripRouteFromPath(createRoute('/user/:userId/profile/'), path))
+      equal(path, stripRouteFromPath(createRoute('/foo'), path))
     }),
   ]),
 ])

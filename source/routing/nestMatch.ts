@@ -6,17 +6,17 @@ import { Overwrite } from '../objects'
 import { stripRouteFromPath } from './stripRouteFromPath'
 import { Route } from './types'
 
-export const nestMatch = curry(__nestMatch) as {
-  <A, B>(match: Match<Path, A>, route: Route<B>): Match<Path, Overwrite<B, A>>
-  <A>(match: Match<Path, A>): <B>(route: Route<B>) => Match<Path, Overwrite<B, A>>
-}
+export const nestMatch: {
+  <A, B>(route: Route<A>, match: Match<Path, B>): Match<Path, Overwrite<A, B>>
+  <A>(route: Route<A>): <B>(match: Match<Path, B>) => Match<Path, Overwrite<A, B>>
+} = curry(__nestMatch)
 
 export function __nestMatch<A, B>(
-  match: Match<Path, A>,
   route: Route<B>,
+  match: Match<Path, A>,
 ): Match<Path, Overwrite<B, A>> {
   return (href: Path): Maybe<Overwrite<B, A>> => {
-    const maybeA = match(stripRouteFromPath(href, route))
+    const maybeA = match(stripRouteFromPath(route, href))
     const maybeB = route.match(href)
 
     return combine((a, b) => (Object.assign({}, b, a) as any) as Overwrite<B, A>, maybeA, maybeB)

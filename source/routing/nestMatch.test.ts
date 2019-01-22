@@ -10,7 +10,7 @@ export const test: Test = describe(`nestMatch`, [
       const match: Match<string, { foo: number }> = (a: string) =>
         a === '/foo' ? Maybe.of({ foo: 1 }) : Nothing
       const route = createRoute<{ id: number }>('/user/:id/')
-      const sut = nestMatch(match, route)
+      const sut = nestMatch(route, match)
 
       const validPath = '/user/42/foo'
       const expectedValidParams = { id: 42, foo: 1 }
