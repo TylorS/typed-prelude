@@ -1,6 +1,8 @@
+import { Bundle } from 'fuse-box'
 import { join, relative } from 'path'
 import { isUndefined } from '../../logic'
 import { MergeObjects } from '../../objects'
+import { TsConfig } from '../types'
 import { createFuseBox, CreateFuseBoxOptions } from './fuse-box'
 
 export type CreateBundleOptions = MergeObjects<
@@ -18,15 +20,27 @@ export async function createBundle(options: CreateBundleOptions) {
     watch = !isUndefined(devServer) || !isUndefined(ssl),
     tsConfig,
   } = options
-  const outDir = tsConfig.compilerOptions.outDir || join(directory, './dist')
-  const fuseBoxDir = join(directory, '.fusebox')
-  const relativePath = relative(directory, fileName)
+  const entryPath = relative(directory, fileName)
   const fuseBox = await createFuseBox(options)
-  let bundle = fuseBox.bundle(bundleName).instructions(`> ${relativePath}`)
-
-  if (watch) {
-    bundle = bundle.hmr().watch(void 0, x => !x.startsWith(outDir) && !x.startsWith(fuseBoxDir))
-  }
+  const bundleActions = watch
+    ? [withEntry(entryPath), watchMode(directory, tsConfig)]
+    : [withEntry(entryPath)]
+  const bundle = bundleActions.reduce((bundle, fn) => fn(bundle), fuseBox.bundle(bundleName))
 
   return { bundle, fuseBox }
+}
+
+function withEntry(relativePath: string) {
+  return (bundle: Bundle) => bundle.instructions(`> ${relativePath}`)
+}
+
+function watchMode(directory: string, tsConfig: TsConfig) {
+  return (bundle: Bundle) => {
+    const outDir = tsConfig.compilerOptions.outDir || join(directory, './dist')
+    const fuseBoxDir = join(directory, '.fusebox')
+
+    return bundle
+      .hmr()
+      .watch(undefined, path => !path.startsWith(outDir) && !path.startsWith(fuseBoxDir))
+  }
 }
