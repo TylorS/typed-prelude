@@ -1,6 +1,4 @@
-import { first, second, Tuple } from '../tuple/tuple'
-
-type Step = Tuple<RegExp, string>
+type Step = [RegExp, string]
 const STEPS: Step[] = [
   [/\\/g, '\\\\'],
   [/[\b]/g, '\\b'],
@@ -21,5 +19,5 @@ export function quote(s: string): string {
 }
 
 function applyStep(str: string, step: Step): string {
-  return str.replace(first(step), second(step))
+  return str.replace(step[0], step[1])
 }

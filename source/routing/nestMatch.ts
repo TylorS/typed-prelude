@@ -6,10 +6,10 @@ import { Overwrite } from '../objects'
 import { stripRouteFromPath } from './stripRouteFromPath'
 import { Route } from './types'
 
-export const nestMatch: {
+export const nestMatch = curry(__nestMatch) as {
   <A, B>(route: Route<A>, match: Match<Path, B>): Match<Path, Overwrite<A, B>>
   <A>(route: Route<A>): <B>(match: Match<Path, B>) => Match<Path, Overwrite<A, B>>
-} = curry(__nestMatch)
+}
 
 export function __nestMatch<A, B>(
   route: Route<B>,

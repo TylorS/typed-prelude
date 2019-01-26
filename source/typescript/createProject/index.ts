@@ -51,6 +51,8 @@ export function createProject(options: CreateProjectOptions): Project {
 
   findFilePaths(directory, fileGlobs).forEach(fileVersionManager.addFileVersion)
 
+  console.log(fileVersions)
+
   if (!options.skipDependencies) {
     const program = languageService.getProgram() as Program
     const sourceFiles = program.getSourceFiles()

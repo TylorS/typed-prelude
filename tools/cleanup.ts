@@ -1,10 +1,10 @@
-import { existsSync, readdirSync, unlinkSync } from 'fs'
+import { existsSync, readdirSync, statSync, unlinkSync } from 'fs'
 import { join } from 'path'
 import rimraf = require('rimraf')
 
 const rootPath = join(__dirname, '..')
 const sourcePath = join(rootPath, 'source')
-const libs = readdirSync(sourcePath)
+const libs = readdirSync(sourcePath).filter(x => statSync(x).isDirectory())
 
 for (const lib of libs) {
   rimraf.sync(join(rootPath, lib))

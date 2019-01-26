@@ -11,8 +11,12 @@
     "sourceMap": true,
     "target": "es5",
     "paths": {
-      "foo/*": ["./foo/*"],
-      "bar/*": ["./bar/*"],
+      "foo/*": [
+        "./foo/*"
+      ],
+      "bar/*": [
+        "./bar/*"
+      ],
     },
     "lib": [
       "es2016"

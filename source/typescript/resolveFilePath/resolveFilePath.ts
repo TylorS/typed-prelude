@@ -1,4 +1,4 @@
-import resolve = require('resolve')
+import resolve from 'resolve'
 import { createMatchPath } from 'tsconfig-paths'
 import { memoize } from '../../lambda'
 import { preferEsModule as packageFilter } from '../common/preferEsModule'

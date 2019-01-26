@@ -15,6 +15,7 @@ export type CreateFuseBoxOptions = {
   ssl?: boolean
   hash?: boolean
   indexHtmlPath?: string
+  log?: boolean
 }
 
 export async function createFuseBox({
@@ -26,6 +27,7 @@ export async function createFuseBox({
   ssl = false,
   hash = true,
   indexHtmlPath,
+  log = false,
 }: CreateFuseBoxOptions): Promise<FuseBox> {
   const useDevServer = !!devServer || !!ssl
   const { compilerOptions, configPath } = tsConfig
@@ -45,10 +47,7 @@ export async function createFuseBox({
     hash,
     output,
     plugins: [],
-    log: {
-      enabled: true,
-      showBundledFiles: false,
-    },
+    log,
     sourceMaps: useDevServer
       ? {
           inline: true,

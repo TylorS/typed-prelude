@@ -1,7 +1,7 @@
-import { isString } from '../logic'
-
 const DUPLICATE_PATH_SEPARATOR_REGEX = /\/{2,}/g
 const PATH_SEPARATOR = `/`
+
+const isString = (x: any) => typeof x === 'string'
 
 export function pathJoin(
   paths: Array<string | undefined | null | void | boolean>,

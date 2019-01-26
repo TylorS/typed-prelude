@@ -1,5 +1,6 @@
 import { Bundle } from 'fuse-box'
 import { join, relative } from 'path'
+import { reduce } from '../../list'
 import { isUndefined } from '../../logic'
 import { MergeObjects } from '../../objects'
 import { TsConfig } from '../types'
@@ -25,7 +26,7 @@ export async function createBundle(options: CreateBundleOptions) {
   const bundleActions = watch
     ? [withEntry(entryPath), watchMode(directory, tsConfig)]
     : [withEntry(entryPath)]
-  const bundle = bundleActions.reduce((bundle, fn) => fn(bundle), fuseBox.bundle(bundleName))
+  const bundle = reduce((bundle, fn) => fn(bundle), fuseBox.bundle(bundleName), bundleActions)
 
   return { bundle, fuseBox }
 }

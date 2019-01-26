@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "./**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../lambda"
+    },
+    {
+      "path": "../either"
+    },
+    {
+      "path": "../effect"
+    },
+    {
+      "path": "../future"
+    },
+    {
+      "path": "../objects"
+    }
+  ]
+}

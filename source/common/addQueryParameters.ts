@@ -1,6 +1,18 @@
-import { curry } from '../lambda'
+export function addQueryParameters(
+  url: string,
+  queryParams: Record<string, string | undefined>,
+): string
+export function addQueryParameters(
+  url: string,
+): (queryParams: Record<string, string | undefined>) => string
+export function addQueryParameters(url: string, queryParams?: Record<string, string | undefined>) {
+  if (queryParams === undefined) {
+    return (queryParams: Record<string, string | undefined>) =>
+      __addQueryParameters(url, queryParams)
+  }
 
-export const addQueryParameters = curry(__addQueryParameters)
+  return __addQueryParameters(url, queryParams)
+}
 
 function __addQueryParameters(
   url: string,

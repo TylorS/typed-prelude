@@ -1,0 +1,26 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "./**/*.ts"
+  ],
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../lambda"
+    },
+    {
+      "path": "../maybe"
+    },
+    {
+      "path": "../history"
+    },
+    {
+      "path": "../logic"
+    }
+  ]
+}

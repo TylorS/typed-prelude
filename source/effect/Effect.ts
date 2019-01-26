@@ -1,11 +1,9 @@
 import { asap, newDefaultScheduler } from '@most/scheduler'
 import { Disposable, Scheduler } from '@most/types'
-import { Arity1, Arity2, curry, Fn, IO, noOp, Predicate } from '../lambda'
+import { Arity1, Arity2, curry, IO, noOp } from '../lambda'
 import { callbackTask } from './callbackTask'
 
-export type EffectResources<A extends {} = {}> = {
-  [K in keyof A | 'scheduler']: K extends 'scheduler' ? Scheduler : A[K]
-}
+export type EffectResources<A extends {} = {}> = A & { scheduler: Scheduler }
 
 // Generic Effect type
 export interface Effect<A, B extends {} = {}> {

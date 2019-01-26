@@ -40,8 +40,8 @@ function _toString(x: any, seen: any[]): string {
       return typeof x === 'object'
         ? 'new Number(' + recur(x.valueOf()) + ')'
         : 1 / x === -Infinity
-          ? '-0'
-          : x.toString(10)
+        ? '-0'
+        : x.toString(10)
     case '[object String]':
       return typeof x === 'object' ? 'new String(' + recur(x.valueOf()) + ')' : quote(x)
     case '[object Undefined]':

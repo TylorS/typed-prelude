@@ -1,0 +1,21 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": [
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "./**/test-fixtures/*",
+    "./**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../lambda"
+    }
+  ]
+}

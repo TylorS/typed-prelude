@@ -1,6 +1,4 @@
-import { Arity1 } from '../lambda'
-
-export function mapArrayLike<A, B>(fn: Arity1<A, B>, functor: ArrayLike<A>): B[] {
+export function mapArrayLike<A, B>(fn: (value: A) => B, functor: ArrayLike<A>): B[] {
   let idx = 0
   const len = functor.length
   const result = Array(len)

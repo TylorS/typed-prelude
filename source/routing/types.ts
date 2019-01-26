@@ -8,7 +8,6 @@ export interface Route<A = unknown> {
   readonly createPath: (params: A, trailingSlash?: boolean) => Maybe<Path>
 }
 
-export type Routes = Array<Route<any>>
-
+export type Routes<A = any> = Array<Route<A>>
 export type RouteParams<A> = A extends Route<infer R> ? R : never
 export type RoutesOf<A extends any[]> = { [K in keyof A]: Route<A[K]> }
