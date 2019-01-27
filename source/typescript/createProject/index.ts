@@ -1,7 +1,9 @@
 import minimatch from 'minimatch'
 import { dirname } from 'path'
-import { Program } from 'typescript'
-import { memoize } from '../../lambda'
+import { Program, SourceFile } from 'typescript'
+import { memoize, pipe } from '../../lambda'
+import { chain, filter, map, uniq } from '../../list'
+import { first, Tuple } from '../../tuple'
 import { findFilePaths } from '../common/findFilePaths'
 import { getFileExtensions } from '../common/getFileExtensions'
 import { makeAbsolute } from '../common/makeAbsolute'
@@ -48,10 +50,18 @@ export function createProject(options: CreateProjectOptions): Project {
       return false
     },
   )
+  const getChangedFiles = pipe(
+    chain((fileChange: Tuple<string, number>) => [
+      ...dependencyManager.getDependentsOfFile(first(fileChange)),
+      first(fileChange),
+    ]),
+    filter(matchesGlob),
+    uniq,
+  )
 
-  findFilePaths(directory, fileGlobs).forEach(fileVersionManager.addFileVersion)
+  const initialFiles = findFilePaths(directory, fileGlobs)
 
-  console.log(fileVersions)
+  initialFiles.forEach(fileVersionManager.addFileVersion)
 
   if (!options.skipDependencies) {
     const program = languageService.getProgram() as Program
@@ -63,22 +73,23 @@ export function createProject(options: CreateProjectOptions): Project {
       const basedir = dirname(fileName)
       // This is internal to TS but significantly improves the speed at we find our dependencies
       const imports: Array<{ text: string }> = (sourceFile as any).imports || []
+      const dependencies = imports.map(x => resolvePath(basedir, x.text))
 
       fileVersionManager.addFileVersion(fileName)
-      dependencyManager.setDependenciesOfFile(
-        fileName,
-        imports.map(x => resolvePath(basedir, x.text)),
-      )
+      dependencyManager.setDependenciesOfFile(fileName, dependencies)
     })
   }
 
   function getSourceFiles() {
-    const program = languageService.getProgram() as Program
-    const sourceFiles = program
-      .getSourceFiles()
-      .filter(sourceFile => matchesGlob(makeAbsolute(directory, sourceFile.fileName)))
+    const changedFiles = getChangedFiles(fileVersionManager.applyChanges())
+    const program = languageService.getProgram()!
+    const typeChecker = program.getTypeChecker()
+    const sourceFiles = filter(
+      Boolean,
+      map(path => program.getSourceFile(path), changedFiles),
+    ) as SourceFile[]
 
-    return { sourceFiles, program }
+    return { sourceFiles, program, typeChecker }
   }
 
   return {

@@ -48,6 +48,7 @@ export async function createFuseBox({
     output,
     plugins: [],
     log,
+    emitHMRDependencies: true,
     sourceMaps: useDevServer
       ? {
           inline: true,

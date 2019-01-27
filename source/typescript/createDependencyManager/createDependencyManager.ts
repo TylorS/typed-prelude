@@ -1,4 +1,3 @@
-import { uniq } from '../../list'
 import { DependencyManager, DependencyMap } from '../types'
 
 export type CreateDependencyManagerOptions = {
@@ -10,18 +9,28 @@ export function createDependencyManager({
   dependencyMap,
   dependentMap,
 }: CreateDependencyManagerOptions): DependencyManager {
-  function addDependent(parent: string, child: string) {
-    if (!dependentMap[parent]) {
-      dependentMap[parent] = []
+  function addToTree(parent: string, child: string, map: DependencyMap) {
+    if (!map[parent]) {
+      map[parent] = []
     }
 
-    dependentMap[parent].push(child)
+    const values = map[parent]
+
+    if (!values.includes(child)) {
+      values.push(child)
+    }
   }
 
   function setDependenciesOfFile(file: string, dependencies: string[]) {
     dependencyMap[file] = dependencies
 
-    dependencies.forEach(dependent => addDependent(dependent, file))
+    dependencies.forEach(dependency => addToTree(dependency, file, dependentMap))
+  }
+
+  function setDependentsOfFile(file: string, dependents: string[]) {
+    dependentMap[file] = dependents
+
+    dependents.forEach(dependent => addToTree(dependent, file, dependencyMap))
   }
 
   function getDependenciesOfFile(file: string): string[] {
@@ -34,7 +43,7 @@ export function createDependencyManager({
 
     while (filesToProcess.length > 0) {
       const fileToProcess = filesToProcess.shift() as string
-      const subDependents = dependentMap[fileToProcess] || [].filter(x => !dependents.includes(x))
+      const subDependents = (dependentMap[fileToProcess] || []).filter(x => !dependents.includes(x))
 
       if (subDependents.length > 0) {
         dependents.push(...subDependents)
@@ -42,7 +51,7 @@ export function createDependencyManager({
       }
     }
 
-    return uniq(dependents)
+    return dependents
   }
 
   function removeFile(file: string) {
@@ -52,6 +61,7 @@ export function createDependencyManager({
 
   return {
     setDependenciesOfFile,
+    setDependentsOfFile,
     getDependenciesOfFile,
     getDependentsOfFile,
     removeFile,

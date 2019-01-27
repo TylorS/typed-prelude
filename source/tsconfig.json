@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
-    "rootDir": "../source",
+    "rootDir": ".",
     "composite": true,
     "declaration": true,
     "declarationMap": true,
+    "downlevelIteration": true,
     "esModuleInterop": true,
     "importHelpers": true,
     "jsx": "react",

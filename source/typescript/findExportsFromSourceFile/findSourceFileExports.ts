@@ -52,6 +52,7 @@ function findExportMetadata(sourceFile: SourceFile, typeChecker: TypeChecker): E
       exportMetadata.push({
         node,
         exportNames: [identifier],
+        sourceFile,
       })
 
       return
@@ -65,6 +66,7 @@ function findExportMetadata(sourceFile: SourceFile, typeChecker: TypeChecker): E
       exportMetadata.push({
         node,
         exportNames,
+        sourceFile,
       })
 
       return
@@ -81,6 +83,7 @@ function findExportMetadata(sourceFile: SourceFile, typeChecker: TypeChecker): E
       return exportMetadata.push({
         node,
         exportNames: [exportName],
+        sourceFile,
       })
     }
   }

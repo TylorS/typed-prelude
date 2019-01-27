@@ -16,9 +16,7 @@ export async function createBundle(options: CreateBundleOptions) {
     directory,
     fileName,
     bundleName = 'app',
-    devServer,
-    ssl,
-    watch = !isUndefined(devServer) || !isUndefined(ssl),
+    watch = defaultWatchValue(options),
     tsConfig,
   } = options
   const entryPath = relative(directory, fileName)
@@ -29,6 +27,10 @@ export async function createBundle(options: CreateBundleOptions) {
   const bundle = reduce((bundle, fn) => fn(bundle), fuseBox.bundle(bundleName), bundleActions)
 
   return { bundle, fuseBox }
+}
+
+export function defaultWatchValue({ devServer, ssl }: CreateBundleOptions) {
+  return !isUndefined(devServer) || !isUndefined(ssl)
 }
 
 function withEntry(relativePath: string) {

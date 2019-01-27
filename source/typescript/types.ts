@@ -1,4 +1,11 @@
-import { CompilerOptions, LanguageService, Node, Program, SourceFile } from 'typescript'
+import {
+  CompilerOptions,
+  LanguageService,
+  Node,
+  Program,
+  SourceFile,
+  TypeChecker,
+} from 'typescript'
 import { Immutable } from '../objects'
 
 export interface TsConfig {
@@ -17,13 +24,18 @@ export type Project = {
   readonly fileGlobs: string[]
   readonly dependencyMap: Immutable<DependencyMap>
   readonly dependentMap: Immutable<DependencyMap>
-  readonly getSourceFiles: () => { sourceFiles: SourceFile[]; program: Program }
+  readonly getSourceFiles: () => {
+    sourceFiles: SourceFile[]
+    program: Program
+    typeChecker: TypeChecker
+  }
 }
 
 export type DependencyMap = Record<string, string[]>
 
 export type DependencyManager = {
   readonly setDependenciesOfFile: (file: string, dependencies: string[]) => void
+  readonly setDependentsOfFile: (file: string, dependents: string[]) => void
   readonly removeFile: (file: string) => void
   readonly getDependenciesOfFile: (file: string) => string[]
   readonly getDependentsOfFile: (file: string) => string[]
@@ -33,6 +45,7 @@ export type FileVersionManager = {
   readonly addFileVersion: (file: string) => void
   readonly updateFileVersion: (file: string) => void
   readonly removeFileVersion: (file: string) => void
+  readonly applyChanges: () => Array<[string, number]>
   readonly hasFileVersion: (file: string) => boolean
   readonly fileVersionOf: (file: string) => number
 }
@@ -43,6 +56,7 @@ export interface NodeTree {
 }
 
 export interface ExportMetadata {
+  sourceFile: SourceFile
   exportNames: string[]
   node: Node
 }

@@ -43,6 +43,7 @@
     "typescript": "^3.2.4"
   },
   "dependencies": {
+    "@james-proxy/james-browser-launcher": "^1.3.3",
     "@most/disposable": "1.2.1",
     "@most/scheduler": "1.2.1",
     "@most/types": "1.0.1",
@@ -51,6 +52,7 @@
     "fuse-box": "^3.6.0",
     "minimatch": "^3.0.4",
     "power-assert": "^1.6.1",
+    "puppeteer": "^1.11.0",
     "resolve": "^1.10.0",
     "rimraf": "^2.6.3",
     "source-map-support": "^0.5.10",
