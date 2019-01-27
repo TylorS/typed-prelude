@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { Node } from 'typescript'
-import { curry } from '../../lambda'
 import { NodeTree } from '../types'
 
 export const findChildNodes: {

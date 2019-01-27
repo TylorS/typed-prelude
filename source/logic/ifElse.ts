@@ -1,4 +1,4 @@
-import { Arity1, curry, Predicate } from '../lambda'
+import { Arity1, curry, Predicate } from '@typed/lambda'
 
 export const ifElse = curry(__ifElse) as {
   <A, B>(predicate: Predicate<A>, thenFn: Arity1<A, B>, elseFn: Arity1<A, B>, value: A): B

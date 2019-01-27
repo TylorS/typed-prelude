@@ -1,6 +1,6 @@
+import { always } from '@typed/lambda'
+import { Maybe, Nothing } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
-import { always } from '../../lambda'
-import { Maybe, Nothing } from '../../maybe'
 import { findLast } from './index'
 
 export const test: Test = describe(`findLast`, [

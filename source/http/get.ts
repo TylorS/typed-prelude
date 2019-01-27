@@ -1,7 +1,7 @@
+import { Future } from '@typed/future'
+import { MergeObjects } from '@typed/objects'
 import { addQueryParameters } from '../common/addQueryParameters'
 import { DropKeys } from '../common/types'
-import { Future } from '../future'
-import { MergeObjects } from '../objects'
 import { http } from './http'
 import { HttpOptions, HttpResponse, Request } from './types'
 

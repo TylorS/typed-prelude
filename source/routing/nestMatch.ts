@@ -1,8 +1,8 @@
-import { Path } from '../history'
-import { curry } from '../lambda'
-import { Match } from '../logic'
-import { combine, Maybe } from '../maybe'
-import { Overwrite } from '../objects'
+import { Path } from '@typed/history'
+import { curry } from '@typed/lambda'
+import { Match } from '@typed/logic'
+import { combine, Maybe } from '@typed/maybe'
+import { Overwrite } from '@typed/objects'
 import { stripRouteFromPath } from './stripRouteFromPath'
 import { Route } from './types'
 

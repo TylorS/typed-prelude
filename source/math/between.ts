@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const between = curry(
   (from: number, to: number, num: number): number => Math.min(to, Math.max(from, num)),

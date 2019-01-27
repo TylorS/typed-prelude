@@ -1,4 +1,4 @@
-import { curry, Predicate } from '../lambda'
+import { curry, Predicate } from '@typed/lambda'
 
 export const anyPass = curry(__anyPass) as {
   <A>(predicates: Array<Predicate<A>>, value: A): boolean

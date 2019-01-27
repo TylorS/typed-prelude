@@ -1,5 +1,5 @@
-import { curry, Predicate } from '../lambda'
-import { Maybe, Nothing } from '../maybe'
+import { curry, Predicate } from '@typed/lambda'
+import { Maybe, Nothing } from '@typed/maybe'
 
 export const cond = curry(__cond) as {
   <A, B>(conditions: Array<Conditional<A, B>>, value: A): Maybe<B>

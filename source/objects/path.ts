@@ -1,5 +1,5 @@
-import { curry } from '../lambda'
-import { chain, Maybe } from '../maybe'
+import { curry } from '@typed/lambda'
+import { chain, Maybe } from '@typed/maybe'
 import { prop } from './prop'
 import { ObjectPath } from './types'
 
@@ -8,10 +8,10 @@ export const path = curry(
     (keys.length === 0
       ? Maybe.of(obj)
       : keys.length === 1
-        ? prop(keys[0], obj)
-        : keys
-            .slice(1)
-            .reduce((maybe, key) => chain(prop(key), maybe) as any, prop(keys[0], obj))) as Maybe<
+      ? prop(keys[0], obj)
+      : keys
+          .slice(1)
+          .reduce((maybe, key) => chain(prop(key), maybe) as any, prop(keys[0], obj))) as Maybe<
       ObjectPath<A, Keys>
     >,
 ) as {

@@ -1,6 +1,6 @@
 import { describe, given, it, Test } from '@typed/test'
 
-import { Maybe } from '../maybe'
+import { Maybe } from '@typed/maybe'
 import { prop } from './prop'
 
 export const test: Test = describe(`prop`, [

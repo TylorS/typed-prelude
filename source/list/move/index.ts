@@ -1,6 +1,6 @@
-import { curry, id } from '../../lambda'
-import { equals, greaterThan, ifElse, lessThan, or } from '../../logic'
-import { decrement, increment } from '../../math'
+import { curry, id } from '@typed/lambda'
+import { equals, greaterThan, ifElse, lessThan, or } from '@typed/logic'
+import { decrement, increment } from '@typed/math'
 
 export const move = curry(__move) as {
   <A>(fromIndex: number, toIndex: number, list: A[]): A[]

@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { Node } from 'typescript'
-import { curry } from '../../lambda'
 
 export const findFirstChildNode: {
   (predicate: (node: Node) => boolean, root: Node): Node | null

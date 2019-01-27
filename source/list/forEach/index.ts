@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../../lambda'
+import { Arity1, curry } from '@typed/lambda'
 
 export const forEach = curry(__forEach) as {
   <A>(f: Arity1<A, void>, list: A[]): A[]

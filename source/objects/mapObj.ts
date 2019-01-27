@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { mapObj as __mapObj } from '../common/mapObj'
-import { curry } from '../lambda'
 
 export const mapObj = curry(__mapObj) as {
   <A, B, C extends Record<PropertyKey, A>>(

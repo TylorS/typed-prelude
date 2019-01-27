@@ -1,5 +1,5 @@
-import { curry, Predicate } from '../../lambda'
-import { Maybe, Nothing } from '../../maybe'
+import { curry, Predicate } from '@typed/lambda'
+import { Maybe, Nothing } from '@typed/maybe'
 
 export const findLast = curry(__findLast) as {
   <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A>

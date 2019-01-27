@@ -1,8 +1,8 @@
+import { Future } from '@typed/future'
+import { curry } from '@typed/lambda'
+import { hasOwnProperty } from '@typed/objects'
 import { IncomingMessage } from 'http'
 import { isBrowser } from '../common/executionEnvironment'
-import { Future } from '../future'
-import { curry } from '../lambda'
-import { hasOwnProperty } from '../objects'
 import { HttpOptions, HttpResponse, Request } from './types'
 
 const IS_HTTPS = /https/

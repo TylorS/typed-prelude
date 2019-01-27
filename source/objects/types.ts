@@ -1,5 +1,5 @@
+import { Defined, Primitive } from '@typed/lambda'
 import { DropKeys } from '../common/types'
-import { Defined, Primitive } from '../lambda'
 
 export type Prop<T, K extends PropertyKey> = K extends keyof T ? T[K] : undefined
 export type ObjectPath<T, Keys extends PropertyKey[]> = Keys extends []

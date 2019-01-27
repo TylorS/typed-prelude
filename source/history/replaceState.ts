@@ -1,7 +1,7 @@
 import { asap, currentTime } from '@most/scheduler'
-import { Effect } from '../effect'
-import { callbackTask } from '../effect/callbackTask'
-import { curry } from '../lambda'
+import { Effect } from '@typed/effect'
+import { callbackTask } from '@typed/effect/callbackTask'
+import { curry } from '@typed/lambda'
 import { HistoryResources } from './types'
 
 export const replaceState = curry(

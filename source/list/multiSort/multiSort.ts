@@ -1,4 +1,4 @@
-import { Arity1, id } from '../../lambda'
+import { Arity1, id } from '@typed/lambda'
 import { ascend } from '../ascend'
 import { chain } from '../chain'
 import { groupBy } from '../groupBy'

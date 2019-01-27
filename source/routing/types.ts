@@ -1,6 +1,6 @@
-import { Path } from '../history'
-import { Match } from '../logic'
-import { Maybe } from '../maybe'
+import { Path } from '@typed/history'
+import { Match } from '@typed/logic'
+import { Maybe } from '@typed/maybe'
 
 export interface Route<A = unknown> {
   readonly path: string

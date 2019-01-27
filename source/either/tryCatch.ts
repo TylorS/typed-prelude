@@ -1,4 +1,4 @@
-import { IO } from '../lambda'
+import { IO } from '@typed/lambda'
 import { Either } from './Either'
 
 export function tryCatch<A, B = Error>(fn: IO<A>): Either<B, A> {

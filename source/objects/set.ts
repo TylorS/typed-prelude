@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { clone } from '../common/clone'
-import { curry } from '../lambda'
 
 export const set = curry(__set) as {
   <K extends PropertyKey, V, O extends { [Key in K]: V }>(key: K, value: V, obj: O): O

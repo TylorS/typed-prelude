@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 import { drop } from '../drop'
 
 export const takeLast = curry(<A>(n: number, list: A[]) =>

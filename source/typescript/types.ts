@@ -1,3 +1,4 @@
+import { Immutable } from '@typed/objects'
 import {
   CompilerOptions,
   LanguageService,
@@ -6,7 +7,6 @@ import {
   SourceFile,
   TypeChecker,
 } from 'typescript'
-import { Immutable } from '../objects'
 
 export interface TsConfig {
   readonly compilerOptions: CompilerOptions

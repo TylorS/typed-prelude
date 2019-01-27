@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const insert = curry(__insert) as {
   <A>(index: number, value: A, list: A[]): A[]

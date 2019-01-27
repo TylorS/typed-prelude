@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const plural = curry(__plural) as {
   (str: string, numOfItems: number): string

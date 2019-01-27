@@ -1,4 +1,4 @@
-import { curry, flip } from '../lambda'
+import { curry, flip } from '@typed/lambda'
 
 export const subtract = curry(__subtract)
 export const subtractBy = curry(flip(__subtract))

@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-reference
-/// <reference path="../external-types/espower-source.d.ts" />
+/// <reference path="../../external-types/espower-source.d.ts" />
 
 import { createHash } from 'crypto'
 import espowerSource from 'espower-source'

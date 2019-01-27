@@ -1,6 +1,6 @@
-import { map as mapEff } from '../effect'
-import { isLeft, map as mapEither } from '../either'
-import { Arity1, curry } from '../lambda'
+import { map as mapEff } from '@typed/effect'
+import { isLeft, map as mapEither } from '@typed/either'
+import { Arity1, curry } from '@typed/lambda'
 import { Future } from './Future'
 
 export const map = curry(__map) as {

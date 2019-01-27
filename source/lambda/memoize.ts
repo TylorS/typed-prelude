@@ -1,4 +1,4 @@
-import { toString } from '../common/toString'
+import { toString } from '@typed/common/toString'
 import { ArgsOf, Fn } from './types'
 
 export const memoize = <F extends Fn>(f: F) => {

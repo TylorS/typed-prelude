@@ -1,6 +1,6 @@
 import { asap, newDefaultScheduler } from '@most/scheduler'
 import { Disposable, Scheduler } from '@most/types'
-import { Arity1, Arity2, curry, IO, noOp } from '../lambda'
+import { Arity1, Arity2, curry, IO, noOp } from '@typed/lambda'
 import { callbackTask } from './callbackTask'
 
 export type EffectResources<A extends {} = {}> = A & { scheduler: Scheduler }

@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 import { chainLeft } from './chainLeft'
 import { Either } from './Either'
 

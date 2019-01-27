@@ -1,5 +1,5 @@
 import { Disposable, Task } from '@most/types'
-import { Arity2 } from '../lambda'
+import { Arity2 } from '@typed/lambda'
 
 export function callbackTask<A, B = void>(f: Arity2<A, number, B>, value: A): Task {
   return new CallbackTask(f, value)

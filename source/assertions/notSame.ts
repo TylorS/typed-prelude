@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { notStrictEqual } from 'power-assert'
-import { curry } from '../lambda'
 
 export const notSame: {
   <A>(expected: A, actual: A): A

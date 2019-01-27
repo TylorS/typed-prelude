@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const startsWith = curry(__startsWith) as {
   <A>(search: ArrayLike<A>, list: ArrayLike<A>): boolean

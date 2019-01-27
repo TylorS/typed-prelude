@@ -1,7 +1,7 @@
 import { disposeBoth } from '@most/disposable'
 import { currentTime } from '@most/scheduler'
-import { Arity2, curry } from '../lambda'
-import { combine as combineMaybe, fromJust, isJust, Just, Maybe, Nothing } from '../maybe'
+import { Arity2, curry } from '@typed/lambda'
+import { combine as combineMaybe, fromJust, isJust, Just, Maybe, Nothing } from '@typed/maybe'
 import { Effect } from './Effect'
 
 export const combine = curry(

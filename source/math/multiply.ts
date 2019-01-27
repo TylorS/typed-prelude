@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const multiply = curry(__multiply) as {
   (left: number, right: number): number

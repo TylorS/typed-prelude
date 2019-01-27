@@ -1,4 +1,4 @@
-import { curry, Is, Predicate } from '../../lambda'
+import { curry, Is, Predicate } from '@typed/lambda'
 
 export const filter = curry(
   <A>(predicate: Predicate<A>, list: A[]): A[] => list.filter(predicate),

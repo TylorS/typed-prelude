@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry } from '@typed/lambda'
 import { first, second, Tuple } from './tuple'
 
 export const map: {

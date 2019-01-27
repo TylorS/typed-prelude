@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry } from '@typed/lambda'
 import { second, Tuple } from './tuple'
 
 export const chain: {

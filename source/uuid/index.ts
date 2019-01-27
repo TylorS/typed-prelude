@@ -1,5 +1,5 @@
-import { Effect } from '../effect'
-import { IO, pipe } from '../lambda'
+import { Effect } from '@typed/effect'
+import { IO, pipe } from '@typed/lambda'
 import { randomUuidSeed } from './randomUuidSeed'
 import { Uuid } from './Uuid'
 import { uuid4 } from './uuid4'

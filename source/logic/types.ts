@@ -1,5 +1,5 @@
-import { Arity1 } from '../lambda'
-import { map as maybeMap, Maybe } from '../maybe'
+import { Arity1 } from '@typed/lambda'
+import { map as maybeMap, Maybe } from '@typed/maybe'
 
 export interface Match<A, B> extends Arity1<A, Maybe<B>> {}
 

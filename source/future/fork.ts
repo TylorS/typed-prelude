@@ -1,7 +1,7 @@
 import { Disposable } from '@most/types'
-import { EffectResources } from '../effect'
-import { fromLeft, fromRight, isLeft } from '../either'
-import { Arity1, curry } from '../lambda'
+import { EffectResources } from '@typed/effect'
+import { fromLeft, fromRight, isLeft } from '@typed/either'
+import { Arity1, curry } from '@typed/lambda'
 import { Future } from './Future'
 
 export const fork = curry(__fork) as {

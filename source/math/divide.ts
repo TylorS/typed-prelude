@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const divide = curry((left: number, right: number) => left / right)
 export const divideBy = curry((right: number, left: number): number => left / right)

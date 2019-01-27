@@ -1,4 +1,4 @@
-import { curry, Predicate } from '../lambda'
+import { curry, Predicate } from '@typed/lambda'
 
 // tslint:disable-next-line:variable-name
 export const any = curry(__any) as {

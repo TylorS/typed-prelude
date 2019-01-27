@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 import { chain } from './chain'
 import { map } from './map'
 import { Maybe } from './Maybe'

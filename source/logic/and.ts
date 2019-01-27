@@ -1,4 +1,4 @@
-import { curry, Is, Predicate } from '../lambda'
+import { curry, Is, Predicate } from '@typed/lambda'
 
 export const and = curry(__and) as {
   <C, A extends C, B extends C>(predicate1: Is<A>, predicate2: Is<B>, value: C): value is A & B

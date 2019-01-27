@@ -1,5 +1,5 @@
-import { curry } from '../../lambda'
-import { isJust } from '../../maybe'
+import { curry } from '@typed/lambda'
+import { isJust } from '@typed/maybe'
 import { indexOf } from '../indexOf'
 
 export const contains = curry((value, list) => isJust(indexOf(value, list))) as {

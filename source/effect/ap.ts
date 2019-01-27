@@ -1,5 +1,5 @@
-import { Arity1, curry } from '../lambda'
-import { MergeObjects } from '../objects'
+import { Arity1, curry } from '@typed/lambda'
+import { MergeObjects } from '@typed/objects'
 import { chain } from './chain'
 import { Effect } from './Effect'
 import { map } from './map'

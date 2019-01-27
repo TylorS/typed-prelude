@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { Node, Symbol, Type, TypeChecker } from 'typescript'
-import { curry } from '../../lambda'
 
 export const getSymbolFromNode: {
   (typeChecker: TypeChecker, node: Node): Symbol | null

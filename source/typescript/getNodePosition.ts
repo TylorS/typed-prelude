@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { Node, SourceFile } from 'typescript'
-import { curry } from '../lambda'
 import { getPosition } from './common/getPosition'
 import { NodePosition } from './types'
 

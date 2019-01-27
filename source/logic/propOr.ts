@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const propOr = curry(__propOr) as {
   <A, K extends PropertyKey>(defaultValue: A, key: K, obj: { [Key in K]: A }): A

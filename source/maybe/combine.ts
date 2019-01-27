@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 import { combineArray } from './combineArray'
 import { Maybe } from './Maybe'
 

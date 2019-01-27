@@ -1,6 +1,6 @@
-import { curry } from '../../lambda'
-import { equals } from '../../logic/equals'
-import { Maybe } from '../../maybe'
+import { curry } from '@typed/lambda'
+import { equals } from '@typed/logic/equals'
+import { Maybe } from '@typed/maybe'
 import { findLastIndex } from '../findLastIndex'
 
 export const lastIndexOf = curry(__lastIndexOf) as {

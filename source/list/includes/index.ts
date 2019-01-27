@@ -1,5 +1,5 @@
-import { indexOf } from '../../common/indexOf'
-import { curry } from '../../lambda'
+import { indexOf } from '@typed/common/indexOf'
+import { curry } from '@typed/lambda'
 
 export const includes = curry(
   <A>(value: A, list: ArrayLike<A>): boolean => indexOf(list, value) > -1,

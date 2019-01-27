@@ -1,5 +1,5 @@
+import { isJust, isNothing, withDefault } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
-import { isJust, isNothing, withDefault } from '../maybe'
 import { createRoute } from './createRoute'
 
 export const test: Test = describe(`createRoute`, [

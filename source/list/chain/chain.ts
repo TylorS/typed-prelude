@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../../lambda'
+import { Arity1, curry } from '@typed/lambda'
 
 export const chain = curry((f, list) => unnest(list.map(f))) as {
   <A, B>(fn: Arity1<A, B[]>, list: A[]): B[]

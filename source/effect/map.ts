@@ -1,4 +1,4 @@
-import { Arity1, curry, IO } from '../lambda'
+import { Arity1, curry, IO } from '@typed/lambda'
 import { Effect } from './Effect'
 
 export const map = curry(__map) as {

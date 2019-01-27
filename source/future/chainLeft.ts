@@ -1,6 +1,6 @@
-import { chain as chainEff, Effect } from '../effect'
-import { fromLeft, isRight } from '../either'
-import { Arity1, curry } from '../lambda'
+import { chain as chainEff, Effect } from '@typed/effect'
+import { fromLeft, isRight } from '@typed/either'
+import { Arity1, curry } from '@typed/lambda'
 import { Future } from './Future'
 
 export const chainLeft = curry(__chainLeft) as {

@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const join = curry(__join) as {
   <A>(separator: string, list: A[]): string

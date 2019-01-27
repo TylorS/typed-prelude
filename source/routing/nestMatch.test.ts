@@ -1,6 +1,6 @@
+import { Match } from '@typed/logic'
+import { fromJust, isJust, isNothing, Maybe, Nothing } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
-import { Match } from '../logic'
-import { fromJust, isJust, isNothing, Maybe, Nothing } from '../maybe'
 import { createRoute } from './createRoute'
 import { nestMatch } from './nestMatch'
 

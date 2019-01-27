@@ -1,4 +1,4 @@
-import { isJust, Nothing } from '../maybe'
+import { isJust, Nothing } from '@typed/maybe'
 import { Match } from './types'
 
 export function oneOf<A, B>(matches: Array<Match<A, B>>): Match<A, B> {

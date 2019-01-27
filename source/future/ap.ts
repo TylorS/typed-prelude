@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry } from '@typed/lambda'
 import { chain } from './chain'
 import { Future } from './Future'
 import { map } from './map'

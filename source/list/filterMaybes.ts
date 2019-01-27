@@ -1,5 +1,5 @@
-import { curry, Predicate2 } from '../lambda'
-import { fromJust, isJust, isNothing, Maybe } from '../maybe'
+import { curry, Predicate2 } from '@typed/lambda'
+import { fromJust, isJust, isNothing, Maybe } from '@typed/maybe'
 
 export const filterMaybes = <A>(list: Array<Maybe<A>>): A[] => list.filter(isJust).map(fromJust)
 

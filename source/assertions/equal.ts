@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import * as assert from 'power-assert'
-import { curry } from '../lambda'
 
 export const equal: {
   <A>(expected: A, actual: A): A

@@ -1,4 +1,4 @@
-import { curry, Predicate } from '../lambda'
+import { curry, Predicate } from '@typed/lambda'
 import { not } from './not'
 
 export const allPass = curry(__allPass) as {

@@ -1,6 +1,6 @@
-import { Effect } from '../effect'
-import { curry } from '../lambda'
-import { Maybe } from '../maybe'
+import { Effect } from '@typed/effect'
+import { curry } from '@typed/lambda'
+import { Maybe } from '@typed/maybe'
 
 export interface StorageEffects {
   clear: Effect<void>

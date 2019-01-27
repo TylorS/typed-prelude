@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const update = curry(function update<A>(index: number, value: A, list: A[]): A[] {
   const length = list.length

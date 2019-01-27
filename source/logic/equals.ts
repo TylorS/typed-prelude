@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { equals as _equals } from '../common/equals'
-import { curry } from '../lambda'
 
 export const equals = curry(<A>(a: A, b: A) => _equals(a, b, [], [])) as Equals
 

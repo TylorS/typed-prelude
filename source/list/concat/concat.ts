@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const concat = curry((a, b) => a.concat(b)) as {
   <A>(head: A[], tail: A[]): A[]

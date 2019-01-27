@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { equals } from '../common/equals'
-import { curry } from '../lambda'
 
 export const propEq = curry(
   <O, K extends keyof O>(key: K, value: O[K], obj: O): boolean => equals(obj[key], value),

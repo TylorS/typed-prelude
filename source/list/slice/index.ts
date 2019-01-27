@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const slice = curry(
   <A>(from: number, to: number, list: ArrayLike<A>): A[] => Array.from(list).slice(from, to),

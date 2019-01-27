@@ -1,5 +1,5 @@
+import { ascend } from '@typed/list'
 import { sync } from 'glob'
-import { ascend } from '../../list'
 import { makeAbsolute } from './makeAbsolute'
 
 export function findFilePaths(directory: string, fileGlobs: string[]): string[] {

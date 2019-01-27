@@ -1,5 +1,5 @@
-import { curry } from '../../lambda'
-import { equals } from '../../logic'
+import { curry } from '@typed/lambda'
+import { equals } from '@typed/logic'
 
 const isZero = equals(0)
 

@@ -1,6 +1,6 @@
-import { always, pipe } from '../lambda'
+import { always, pipe } from '@typed/lambda'
+import { equals, ifElse, isNull, isUndefined, or } from '@typed/logic'
 import { length } from '../list'
-import { equals, ifElse, isNull, isUndefined, or } from '../logic'
 
 const isZero = equals(0)
 const toTrue = always(true)

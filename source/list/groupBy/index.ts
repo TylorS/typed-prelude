@@ -1,4 +1,4 @@
-import { Arity1, curry } from '../../lambda'
+import { Arity1, curry } from '@typed/lambda'
 
 export const groupBy = curry(__groupBy) as {
   <A, B extends PropertyKey>(f: Arity1<A, B>, list: A[]): Record<B, A[]>

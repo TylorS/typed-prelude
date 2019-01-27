@@ -1,6 +1,6 @@
+import { memoize } from '@typed/lambda'
 import resolve from 'resolve'
 import { createMatchPath } from 'tsconfig-paths'
-import { memoize } from '../../lambda'
 import { preferEsModule as packageFilter } from '../common/preferEsModule'
 import { findTsConfig } from '../findTsConfig'
 

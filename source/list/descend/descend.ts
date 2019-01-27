@@ -1,4 +1,4 @@
-import { ComparableValues, ComparisonNumbers, curry } from '../../lambda'
+import { ComparableValues, ComparisonNumbers, curry } from '@typed/lambda'
 
 export const descend = curry(function descend<A, B extends ComparableValues>(
   f: (a: A) => B,

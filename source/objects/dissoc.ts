@@ -1,5 +1,5 @@
+import { curry } from '@typed/lambda'
 import { DropKeys } from '../common/types'
-import { curry } from '../lambda'
 import { clone } from './clone'
 
 export const dissoc = curry(_dissoc) as {

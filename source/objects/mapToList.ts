@@ -1,4 +1,4 @@
-import { curry } from '../lambda'
+import { curry } from '@typed/lambda'
 
 export const mapToList: {
   <A extends keyof any, B, C>(fn: (key: A, value: B) => C, obj: Record<A, B>): C[]

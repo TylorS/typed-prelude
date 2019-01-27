@@ -1,9 +1,9 @@
 import { asap } from '@most/scheduler'
 import { Disposable } from '@most/types'
-import { Effect, EffectResources } from '../effect'
-import { callbackTask } from '../effect/callbackTask'
-import { Either, unpack } from '../either'
-import { apply, Arity1, Arity3, pipe } from '../lambda'
+import { Effect, EffectResources } from '@typed/effect'
+import { callbackTask } from '@typed/effect/callbackTask'
+import { Either, unpack } from '@typed/either'
+import { apply, Arity1, Arity3, pipe } from '@typed/lambda'
 
 export interface Future<A, B, C extends {} = {}> extends Effect<Either<A, B>, C> {}
 

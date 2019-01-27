@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 import { includes } from '../includes'
 
 export const uniqBy = curry(

@@ -1,4 +1,4 @@
-import { mapToList } from '../../objects/mapToList'
+import { mapToList } from '@typed/objects/mapToList'
 import { FileVersionManager } from '../types'
 
 const EMPTY_VERSION: VersionModification = { version: -1 }

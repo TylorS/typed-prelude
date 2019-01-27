@@ -1,4 +1,4 @@
-import { Future } from '../future'
+import { Future } from '@typed/future'
 
 export type HttpOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'

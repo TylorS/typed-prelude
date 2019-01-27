@@ -1,5 +1,5 @@
-import { EffectResources } from '../effect'
-import { curry } from '../lambda'
+import { EffectResources } from '@typed/effect'
+import { curry } from '@typed/lambda'
 import { fork } from './fork'
 import { Future } from './Future'
 

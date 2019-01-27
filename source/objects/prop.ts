@@ -1,5 +1,5 @@
-import { curry } from '../lambda'
-import { Maybe, Nothing } from '../maybe'
+import { curry } from '@typed/lambda'
+import { Maybe, Nothing } from '@typed/maybe'
 import { hasOwnProperty } from './hasOwnProperty'
 
 export const prop = curry(

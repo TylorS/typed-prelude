@@ -1,6 +1,6 @@
 import { Either, isLeft } from './Either'
 
-import { Arity1, curry } from '../lambda'
+import { Arity1, curry } from '@typed/lambda'
 import { fromLeft } from './Left'
 import { fromRight } from './Right'
 

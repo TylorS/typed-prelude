@@ -1,5 +1,5 @@
-import { curry, Predicate } from '../../lambda'
-import { map, Maybe } from '../../maybe'
+import { curry, Predicate } from '@typed/lambda'
+import { map, Maybe } from '@typed/maybe'
 import { findIndex } from '../findIndex'
 
 export const find = curry(

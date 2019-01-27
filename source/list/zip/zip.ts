@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const zip = curry(function zip<A, B>(xs: A[], ys: B[]): Array<[A, B]> {
   const length = Math.min(xs.length, ys.length)

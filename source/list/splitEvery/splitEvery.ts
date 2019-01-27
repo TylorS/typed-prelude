@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const splitEvery = curry(function splitEvery<A>(amount: number, list: A[]): A[][] {
   if (amount <= 0) {

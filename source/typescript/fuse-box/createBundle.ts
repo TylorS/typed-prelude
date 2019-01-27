@@ -1,8 +1,8 @@
+import { reduce } from '@typed/list'
+import { isUndefined } from '@typed/logic'
+import { MergeObjects } from '@typed/objects'
 import { Bundle } from 'fuse-box'
 import { join, relative } from 'path'
-import { reduce } from '../../list'
-import { isUndefined } from '../../logic'
-import { MergeObjects } from '../../objects'
 import { TsConfig } from '../types'
 import { createFuseBox, CreateFuseBoxOptions } from './fuse-box'
 

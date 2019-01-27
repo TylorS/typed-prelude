@@ -1,5 +1,5 @@
-import { curry, id } from '../../lambda'
-import { fromJust, isNothing } from '../../maybe'
+import { curry, id } from '@typed/lambda'
+import { fromJust, isNothing } from '@typed/maybe'
 import { append } from '../append/append'
 import { findIndex } from '../findIndex'
 import { remove } from '../remove'

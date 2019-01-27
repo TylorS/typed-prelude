@@ -1,16 +1,14 @@
 declare module '@james-proxy/james-browser-launcher' {
-  import { ChildProcess } from "child_process";
-  import { Readable } from "stream";
+  import { ChildProcess } from 'child_process'
+  import { Readable } from 'stream'
 
   namespace factory {
     export type LauncherFactory = {
-      (error: Error, launcher: undefined): void,
-      (error: null, launcher: Launcher): void,
+      (error: Error, launcher: undefined): void
+      (error: null, launcher: Launcher): void
     }
 
-    export type Launcher = {
-      (url: string, options: BrowserOptions, cb: InstanceCallback): void
-    }
+    export type Launcher = (url: string, options: BrowserOptions, cb: InstanceCallback) => void
 
     export type BrowserOptions = {
       browser: Browsers
@@ -27,22 +25,18 @@ declare module '@james-proxy/james-browser-launcher' {
     }
 
     export type Instance = {
-      command: string,
-      args: string[],
-      image: string,
-      processName: string,
+      command: string
+      args: string[]
+      image: string
+      processName: string
       process: ChildProcess
       pid: number
       stdout: Readable
       stderr: Readable
     }
-
   }
-
 
   const factory: factory.LauncherFactory
 
   export = factory
 }
-
-

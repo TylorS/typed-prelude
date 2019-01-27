@@ -1,4 +1,4 @@
-import { Maybe, Nothing } from '../maybe'
+import { Maybe, Nothing } from '@typed/maybe'
 import { mean } from './mean'
 
 export function median(numbers: number[]): Maybe<number> {

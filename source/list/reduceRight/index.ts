@@ -1,4 +1,4 @@
-import { curry } from '../../lambda'
+import { curry } from '@typed/lambda'
 
 export const reduceRight = curry(
   <A, B>(fn: (accumulator: B, value: A, index: number, list: A[]) => B, seed: B, list: A[]): B =>

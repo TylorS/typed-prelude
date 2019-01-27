@@ -1,8 +1,8 @@
 import { disposeAll, disposeBoth } from '@most/disposable'
 import { schedulerRelativeTo } from '@most/scheduler'
 import { Disposable } from '@most/types'
-import { Arity1, curry, IO } from '../lambda'
-import { MergeObjects } from '../objects'
+import { Arity1, curry, IO } from '@typed/lambda'
+import { MergeObjects } from '@typed/objects'
 import { Effect, EffectResources } from './Effect'
 
 export const chain = curry(__chain) as {
