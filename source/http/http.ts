@@ -20,8 +20,7 @@ export const http: {
 
       if (!isBrowser) {
         const protocol = IS_HTTPS.test(url) ? 'https:' : 'http:'
-        const http: typeof import('https') =
-          protocol === 'https:' ? require('https') : require('http')
+        const http = protocol === 'https:' ? require('https') : require('http')
 
         const request = http.request(
           url,

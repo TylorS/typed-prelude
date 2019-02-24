@@ -1,3 +1,6 @@
 export * from './isRunnableTest'
 export * from './isTestCollection'
 export * from './updateModifer'
+export * from './describe'
+export * from './given'
+export * from './it'

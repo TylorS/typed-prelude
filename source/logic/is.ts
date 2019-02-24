@@ -1,5 +1,9 @@
 export function isUndefined(x: any): x is undefined {
-  return x === void 0
+  return x === undefined
+}
+
+export function isNotUndefined<A>(x: A | undefined): x is A {
+  return x !== undefined
 }
 
 export function isNull(x: any): x is null {

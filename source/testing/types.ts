@@ -1,7 +1,7 @@
 import { Uuid } from '../uuid'
 
-export const TYPED_TEST = Symbol.for('@typed/Test')
-export const TYPED_TEST_COLLECTION = Symbol.for('@typed/TestCollection')
+export const TYPED_TEST = Symbol('Test')
+export const TYPED_TEST_COLLECTION = Symbol('TestCollection')
 
 export type Test = TestCollection | RunningTest
 
@@ -36,6 +36,7 @@ export interface TestConfig {
 }
 
 export interface TestSpec {
+  readonly testId: Uuid
   readonly timeout: number
   readonly skip: boolean
 }
