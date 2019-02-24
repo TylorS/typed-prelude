@@ -7,7 +7,7 @@ export function it(does: string, what: TestFn): Test {
   return {
     [TYPED_TEST]: {
       id: uuid(),
-      name: `it ${does}`,
+      name: `It ${does}`,
       modifier: TestModifier.DEFAULT,
     },
     runTest: spec => runItTest(spec, what),

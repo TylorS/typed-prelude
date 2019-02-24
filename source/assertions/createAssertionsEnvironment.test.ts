@@ -1,9 +1,9 @@
 import { describe, it, Test } from '@typed/test'
-import { createAssertionEnvironment } from './createAssertionEnvironment'
+import { createAssertionsEnvironment } from './createAssertionsEnvironment'
 
 export const test: Test = describe(`createAssertionsEnvironment`, [
   it(`returns an object containing all assertions`, assert => {
-    const { assertions } = createAssertionEnvironment()
+    const { assertions } = createAssertionsEnvironment()
 
     assert.ok(assertions.hasOwnProperty('equal'))
     assert.ok(assertions.hasOwnProperty('notEqual'))
@@ -15,7 +15,7 @@ export const test: Test = describe(`createAssertionsEnvironment`, [
   }),
 
   it(`returns an object containing the number of assertions called`, assert => {
-    const { context, assertions } = createAssertionEnvironment()
+    const { context, assertions } = createAssertionsEnvironment()
 
     assert.same(context.count, 0)
 

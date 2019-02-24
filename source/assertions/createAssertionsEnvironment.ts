@@ -8,6 +8,7 @@ import { same } from './same'
 import { throws } from './throws'
 
 export interface AssertionEnvironment {
+  readonly stats: AssertionContext
   readonly context: AssertionContext
   readonly assertions: Assertions
 }
@@ -27,10 +28,11 @@ export interface AssertionContext {
   count: number
 }
 
-export function createAssertionEnvironment(): AssertionEnvironment {
+export function createAssertionsEnvironment(): AssertionEnvironment {
   const context: AssertionContext = { count: 0 }
 
   return {
+    stats: context,
     context,
     assertions: {
       equal: wrapAssertionInProxy(equal, context),

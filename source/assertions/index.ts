@@ -1,4 +1,4 @@
-export * from './createAssertionEnvironment'
+export * from './createAssertionsEnvironment'
 export * from './equal'
 export * from './notEqual'
 export * from './notOk'

@@ -1,4 +1,4 @@
-import { Assertions, createAssertionEnvironment } from '@typed/assertions'
+import { Assertions, createAssertionsEnvironment } from '@typed/assertions'
 import { isPromiseLike } from '@typed/logic'
 import { TestResult, TestSpec } from '../types'
 
@@ -18,7 +18,7 @@ export async function runItTest(
   }
 
   return new Promise<TestResult>(resolve => {
-    const { assertions, context } = createAssertionEnvironment()
+    const { assertions, context } = createAssertionsEnvironment()
     const done: Done = (error?: Error) =>
       error || context.count === 0
         ? resolve({ type: 'fail', error: error || NoAssertionError, testId })

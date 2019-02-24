@@ -1,3 +1,4 @@
+import { NodePosition } from '@typed/typescript'
 import { Uuid } from '../uuid'
 
 export const TYPED_TEST = Symbol('Test')
@@ -62,10 +63,7 @@ export interface TestMetadata extends NodeMetadata {
   readonly additionalTests: NodeMetadata[]
 }
 
-export interface NodeMetadata {
-  readonly line: number
-  readonly lines: number
-  readonly position: [number, number]
+export interface NodeMetadata extends NodePosition {
   readonly text: string
   readonly additionalTests: NodeMetadata[]
 }

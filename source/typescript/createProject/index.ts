@@ -3,7 +3,7 @@ import { chain, filter, map, uniq } from '@typed/list'
 import { first, Tuple } from '@typed/tuple'
 import minimatch from 'minimatch'
 import { dirname } from 'path'
-import { Program, SourceFile } from 'typescript'
+import { SourceFile } from 'typescript'
 import { findFilePaths } from '../common/findFilePaths'
 import { getFileExtensions } from '../common/getFileExtensions'
 import { makeAbsolute } from '../common/makeAbsolute'
@@ -60,11 +60,10 @@ export function createProject(options: CreateProjectOptions): Project {
   )
 
   const initialFiles = findFilePaths(directory, fileGlobs)
-
   initialFiles.forEach(fileVersionManager.addFileVersion)
 
   if (!options.skipDependencies) {
-    const program = languageService.getProgram() as Program
+    const program = languageService.getProgram()!
     const sourceFiles = program.getSourceFiles()
 
     // Get Initial Dependencies

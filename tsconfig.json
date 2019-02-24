@@ -2,9 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": ".",
-    "composite": true,
     "declaration": true,
-    "declarationMap": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
     "importHelpers": true,
