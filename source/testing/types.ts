@@ -69,9 +69,11 @@ export interface NodeMetadata extends NodePosition {
 }
 
 export const enum LogLevel {
+  OFF,
   DEFAULT,
   INFO,
   DEBUG,
+  ALL,
 }
 
 export interface Logger {
@@ -83,4 +85,15 @@ export interface Logger {
   readonly info: (msg: string) => Promise<void>
   // Debug
   readonly debug: (msg: string) => Promise<void>
+  readonly time: (label: string) => () => Promise<void>
 }
+
+export type Logs = ReadonlyArray<Log>
+
+export type Log =
+  | { readonly type: 'log'; readonly message: string }
+  | { readonly type: 'error'; readonly message: string }
+  | { readonly type: 'clear' }
+  | { readonly type: 'info'; readonly message: string }
+  | { readonly type: 'debug'; readonly message: string }
+  | { readonly type: 'time'; readonly label: string; readonly elapsed: number }

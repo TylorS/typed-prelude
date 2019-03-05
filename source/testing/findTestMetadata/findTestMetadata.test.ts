@@ -1,13 +1,19 @@
+import { newDefaultScheduler } from '@most/scheduler'
 import { describe, given, it } from '@typed/test'
 import { createProject, findTsConfig } from '@typed/typescript'
 import { join } from 'path'
+import { createTestLogger } from '../logging'
+import { LogLevel } from '../types'
 import { findTestMetadata } from './findTestMetadata'
 
 const testFixtures = join(__dirname, 'test-fixtures')
 
+const scheduler = newDefaultScheduler()
+const { logger } = createTestLogger({ logLevel: LogLevel.OFF, scheduler })
+
 export const test = describe(`findTests`, [
   given(`a SourceFile with it() Test and TypeChecker`, [
-    it(`returns TestMetadata[]`, ({ equal }) => {
+    it(`returns TestMetadata[]`, async ({ equal }) => {
       const tsConfig = findTsConfig({ directory: testFixtures })
       const fileName = join(testFixtures, 'basic-test.fixture-test.ts')
       const project = createProject({ directory: process.cwd(), fileGlobs: [fileName], tsConfig })
@@ -15,7 +21,7 @@ export const test = describe(`findTests`, [
         sourceFiles: [sourceFile],
         typeChecker,
       } = project.getSourceFiles()
-      const [passing, failing] = findTestMetadata({ sourceFile, typeChecker })
+      const [passing, failing] = await findTestMetadata({ sourceFile, typeChecker, logger })
 
       equal(
         "export const basicPassingTest = it('Is Basic (Passing)', ({ ok }) => ok(true))",
@@ -30,7 +36,7 @@ export const test = describe(`findTests`, [
   ]),
 
   given(`a SourceFile with TestCollection and TypeChecker`, [
-    it(`returns TestMetadata[]`, ({ equal }) => {
+    it(`returns TestMetadata[]`, async ({ equal }) => {
       const tsConfig = findTsConfig({ directory: testFixtures })
       const fileName = join(testFixtures, 'test-collection.fixture-test.ts')
       const project = createProject({ directory: process.cwd(), fileGlobs: [fileName], tsConfig })
@@ -38,7 +44,7 @@ export const test = describe(`findTests`, [
         sourceFiles: [sourceFile],
         typeChecker,
       } = project.getSourceFiles()
-      const [describeMetadata] = findTestMetadata({ sourceFile, typeChecker })
+      const [describeMetadata] = await findTestMetadata({ sourceFile, typeChecker, logger })
       const {
         additionalTests: [givenMetadata],
       } = describeMetadata

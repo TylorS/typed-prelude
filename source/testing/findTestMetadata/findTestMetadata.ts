@@ -7,7 +7,7 @@ import {
 } from '@typed/typescript'
 import { findFirstChildNode } from '@typed/typescript/common/findFirstChildNode'
 import { SourceFile, TypeChecker } from 'typescript'
-import { NodeMetadata, TestMetadata } from '../types'
+import { Logger, NodeMetadata, TestMetadata } from '../types'
 import { nodeIsTest } from './nodeIsTest'
 
 const EXPORT_REGEX = /export\s(var|let|const)\s/
@@ -17,12 +17,15 @@ const EMPTY_STRING = ''
 export type FindTestMetadataOptions = {
   sourceFile: SourceFile
   typeChecker: TypeChecker
+  logger: Logger
 }
 
-export function findTestMetadata({
+export async function findTestMetadata({
   sourceFile,
   typeChecker,
-}: FindTestMetadataOptions): TestMetadata[] {
+  logger,
+}: FindTestMetadataOptions): Promise<TestMetadata[]> {
+  await logger.info(`Finding export metadata: ${sourceFile.fileName}`)
   const exportMetadata = findExportsFromSourceFile(sourceFile, typeChecker)
   const exportedTestMetadata = exportMetadata.filter(
     metadata => !!findFirstChildNode(x => nodeIsTest(x, typeChecker), metadata.node),
@@ -59,6 +62,7 @@ export function findTestMetadata({
 
     return testMetadata
   })
+  await logger.debug(`TestMetadata ${sourceFile.fileName}: ${metadata}`)
 
   return metadata
 }

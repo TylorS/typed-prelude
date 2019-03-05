@@ -1,11 +1,16 @@
+import { newDefaultScheduler } from '@most/scheduler'
 import { Assertions } from '@typed/assertions'
 import { zip } from '@typed/list'
 import { Overwrite } from '@typed/objects'
 import { describe, given, it } from '@typed/test'
+import { createTestLogger } from '../logging'
 import { describe as describeTest, it as itTest, skip } from '../tests'
 import { getTestId } from '../tests/getTestId'
-import { Test, TestResult } from '../types'
+import { LogLevel, Test, TestResult } from '../types'
 import { runTest } from './runTests'
+
+const scheduler = newDefaultScheduler()
+const { logger } = createTestLogger({ logLevel: LogLevel.OFF, scheduler })
 
 export const test = describe(`runTests`, [
   given(`a passing Test`, [
@@ -60,7 +65,7 @@ async function assertResult(
   result: Overwrite<Partial<TestResult>, { results?: Array<Partial<TestResult>> }>,
   { equal }: Assertions,
 ): Promise<void> {
-  const actualResult = await runTest({ test })
+  const actualResult = await runTest({ test, logger })
 
   const keysToTest = Object.keys(result) as Array<keyof TestResult>
 
