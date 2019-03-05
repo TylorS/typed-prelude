@@ -2,13 +2,15 @@ import { Assertions, createAssertionsEnvironment } from '@typed/assertions'
 import { isPromiseLike } from '@typed/logic'
 import { delay } from '@typed/promises'
 import { TestResult, TestSpec } from '../types'
+import {
+  captureStackTrace,
+  DoneUsedWithPromiseError,
+  NoAssertionError,
+  TimeoutError,
+} from './errors'
 
 export type Done = (error?: Error) => void
 export type TestFn = (assertions: Assertions, done: Done) => any | PromiseLike<any>
-
-export const TimeoutError = new Error('Test Timeout')
-export const NoAssertionError = new Error('No Assertion Used')
-export const DoneUsedWithPromiseError = new Error('Done used with Promise')
 
 export async function runItTest(
   { timeout, skip, testId }: TestSpec,
@@ -22,10 +24,14 @@ export async function runItTest(
     const { assertions, context } = createAssertionsEnvironment()
     const done: Done = (error?: Error) =>
       error || context.count === 0
-        ? resolve({ type: 'fail', error: error || NoAssertionError, testId })
+        ? resolve({
+            type: 'fail',
+            error: captureStackTrace(error || new NoAssertionError(), test),
+            testId,
+          })
         : resolve({ type: 'pass', testId })
 
-    delay(timeout).then(() => done(TimeoutError))
+    delay(timeout).then(() => done(new TimeoutError()))
 
     try {
       const returnedValue = test(assertions, done)
@@ -36,10 +42,10 @@ export async function runItTest(
       }
 
       if (test.length === 2) {
-        return done(DoneUsedWithPromiseError)
+        return done(new DoneUsedWithPromiseError())
       }
 
-      return returnedValue.then(() => done())
+      return returnedValue.then(() => done(), done)
     } catch (error) {
       done(error)
     }
