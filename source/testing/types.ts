@@ -66,14 +66,13 @@ export const enum LogLevel {
   DEFAULT,
   INFO,
   DEBUG,
-  ALL,
 }
 
 export interface Logger {
   // Default
   readonly log: (msg: string) => Promise<void>
   readonly error: (msg: string) => Promise<void>
-  readonly clear: (msg: string) => Promise<void>
+  readonly clear: () => Promise<void>
   // Info
   readonly info: (msg: string) => Promise<void>
   // Debug
