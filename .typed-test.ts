@@ -11,4 +11,10 @@ const browserOptions: Options = {
   files: ['source/**/*.browser-test.ts'],
 }
 
-export default [nodeOptions, browserOptions]
+const configs = [nodeOptions]
+
+if (process.env.BROWSER) {
+  configs.push(browserOptions)
+}
+
+export default configs
