@@ -1,6 +1,6 @@
 import { Scheduler } from '@most/types'
 import { clone } from '@typed/objects'
-import { Log, Logger, LogLevel, Logs } from '../types'
+import { Logger, LogLevel } from '../types'
 
 export type CreateTestLoggerOptions = {
   logLevel: LogLevel
@@ -11,6 +11,16 @@ export type TestLogger = {
   logger: Logger
   getLogs: () => Logs
 }
+
+export type Logs = ReadonlyArray<Log>
+
+export type Log =
+  | { readonly type: 'log'; readonly message: string }
+  | { readonly type: 'error'; readonly message: string }
+  | { readonly type: 'clear' }
+  | { readonly type: 'info'; readonly message: string }
+  | { readonly type: 'debug'; readonly message: string }
+  | { readonly type: 'time'; readonly label: string; readonly elapsed: number }
 
 export function createTestLogger({ logLevel, scheduler }: CreateTestLoggerOptions): TestLogger {
   const logs: Log[] = []

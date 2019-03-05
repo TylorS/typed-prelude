@@ -22,13 +22,6 @@ export const enum TestModifier {
   SKIP,
 }
 
-export const enum TestEnvironment {
-  DEFAULT,
-  NODE,
-  BROWSER,
-  BOTH,
-}
-
 export interface TestConfig {
   readonly id: Uuid
   readonly name: string
@@ -88,12 +81,8 @@ export interface Logger {
   readonly time: (label: string) => () => Promise<void>
 }
 
-export type Logs = ReadonlyArray<Log>
-
-export type Log =
-  | { readonly type: 'log'; readonly message: string }
-  | { readonly type: 'error'; readonly message: string }
-  | { readonly type: 'clear' }
-  | { readonly type: 'info'; readonly message: string }
-  | { readonly type: 'debug'; readonly message: string }
-  | { readonly type: 'time'; readonly label: string; readonly elapsed: number }
+export type TestingApi = {
+  readonly logger: Logger
+  readonly runTest: (test: Test) => Promise<TestResult>
+  readonly reportTestResults: (results: TestResult[]) => Promise<boolean>
+}
