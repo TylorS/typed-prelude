@@ -54,7 +54,6 @@ export type Curry<T extends Fn> = ArgsOf<T> extends [infer A]
   : never
 
 export type ArgsOf<T extends Fn> = T extends Fn<infer Args, any> ? Args : []
-export type PotentialArgsOf<T extends Fn> = T extends Fn<infer Args, any> ? PotentialOf<Args> : []
 export type PartialArgsOf<T extends Fn> = T extends (...args: infer TArgs) => any
   ? Partial<TArgs>
   : never
@@ -65,7 +64,6 @@ export type HeadArg<F extends Function> = F extends (head: infer A, ...tail: any
   ? A
   : never
 export type InitArgsOf<F extends Fn> = Init<ArgsOf<F>>
-export type LastArgOf<F extends Fn> = Last<ArgsOf<F>>
 
 export type Flip<T extends Fn> = ArgsOf<T> extends []
   ? Fn<[], ReturnType<T>>
@@ -107,30 +105,6 @@ export type Head<A extends any[]> = HeadArg<Fn<A>>
 
 export type Defined<T> = T extends undefined ? never : T
 
-// Frowned-upon recursion - may not work in future versions of TS
-
-// Works beautifully with 3.2, even keeps the original variable names without addition work.
-
-export type PotentialOf<A extends any[], B extends any[] = A> = {
-  continue: PotentialOf<Init<A>, B | Init<A>>
-  end: B
-}[A extends [] ? 'end' : 'continue']
-
-export type Last<A extends any[], B extends any = A[0]> = {
-  continue: Last<Tail<A>, A[0]>
-  end: B
-}[A extends [] ? 'end' : 'continue']
-
-export type And<A extends any[], B extends any = A> = {
-  continue: B extends A ? And<Tail<A>, Head<A>> : B & And<Tail<A>, Head<A>>
-  end: B
-}[A extends [] ? 'end' : 'continue']
-
-export type Or<A extends any[], B extends any = A> = {
-  continue: B extends A ? Or<Tail<A>, Head<A>> : B | Or<Tail<A>, Head<A>>
-  end: B
-}[A extends [] ? 'end' : 'continue']
-
 export type OrToAnd<A> = (A extends any ? (u: A) => void : never) extends ((i: infer B) => void)
   ? B
   : never
@@ -138,20 +112,5 @@ export type OrToAnd<A> = (A extends any ? (u: A) => void : never) extends ((i: i
 export type Include<A, B> = Exclude<A, Exclude<A, B>>
 export type TypeGuard<A, B extends A> = (value: A) => value is B
 
-export type CurriedFunction<T extends (...args: any) => any> = <
-  InitArgs extends PotentialOf<ArgsOf<T>>,
-  RemainingArgs extends DropFromArraySize<ArgsOf<T>, InitArgs>
->(
-  ...args: InitArgs
-) => RemainingArgs extends []
-  ? ReturnType<T>
-  : CurriedFunction<(...args: RemainingArgs) => ReturnType<T>>
-
 // Internal
 type CastArray<T> = T extends any[] ? T : []
-type DropFromArraySize<A extends any[], B extends any[]> = CastArray<
-  {
-    continue: DropFromArraySize<Tail<A>, Tail<B>>
-    end: A
-  }[B extends [] ? 'end' : 'continue']
->
