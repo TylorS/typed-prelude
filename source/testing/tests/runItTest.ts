@@ -1,5 +1,6 @@
 import { Assertions, createAssertionsEnvironment } from '@typed/assertions'
 import { isPromiseLike } from '@typed/logic'
+import { delay } from '@typed/promises'
 import { TestResult, TestSpec } from '../types'
 
 export type Done = (error?: Error) => void
@@ -25,17 +26,22 @@ export async function runItTest(
         : resolve({ type: 'pass', testId })
 
     delay(timeout).then(() => done(TimeoutError))
-    const returnedValue = test(assertions, done)
-    const isPromise = isPromiseLike(returnedValue)
 
-    if (!isPromise) {
-      return done()
+    try {
+      const returnedValue = test(assertions, done)
+      const isPromise = isPromiseLike(returnedValue)
+
+      if (!isPromise) {
+        return done()
+      }
+
+      if (test.length === 2) {
+        return done(DoneUsedWithPromiseError)
+      }
+
+      return returnedValue.then(() => done())
+    } catch (error) {
+      done(error)
     }
-
-    if (test.length === 2) {
-      return done(DoneUsedWithPromiseError)
-    }
-
-    return returnedValue.then(() => done())
   })
 }

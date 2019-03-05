@@ -1,4 +1,4 @@
 export * from './types'
 
 export { describe, given, it, skip, only, isRunningTest, isTestCollection } from './tests'
-export * from './findTests'
+export * from './findTestMetadata'

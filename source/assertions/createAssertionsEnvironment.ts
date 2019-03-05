@@ -1,4 +1,5 @@
 import { ok } from 'power-assert'
+import { doesNotThrow } from './doesNotThrow'
 import { equal } from './equal'
 import { notEqual } from './notEqual'
 import { notOk } from './notOk'
@@ -22,6 +23,7 @@ export interface Assertions {
   readonly rejects: typeof rejects
   readonly same: typeof same
   readonly throws: typeof throws
+  readonly doesNotThrow: typeof doesNotThrow
 }
 
 export interface AssertionContext {
@@ -43,6 +45,7 @@ export function createAssertionsEnvironment(): AssertionEnvironment {
       rejects: wrapAssertionInProxy(rejects, context),
       same: wrapAssertionInProxy(same, context),
       throws: wrapAssertionInProxy(throws, context),
+      doesNotThrow: wrapAssertionInProxy(doesNotThrow, context),
     },
   }
 }

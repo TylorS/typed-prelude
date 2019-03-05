@@ -1,6 +1,5 @@
-import { TYPED_TEST } from '@typed/test'
-import { RunningTest, Test } from '../types'
+import { RunningTest, Test, TYPED_TEST } from '../types'
 
 export function isRunningTest(test: Test): test is RunningTest {
-  return test.hasOwnProperty(TYPED_TEST)
+  return !!(test as RunningTest)[TYPED_TEST]
 }

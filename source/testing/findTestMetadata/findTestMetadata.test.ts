@@ -1,7 +1,7 @@
 import { describe, given, it } from '@typed/test'
 import { createProject, findTsConfig } from '@typed/typescript'
 import { join } from 'path'
-import { findTests } from './findTests'
+import { findTestMetadata } from './findTestMetadata'
 
 const testFixtures = join(__dirname, 'test-fixtures')
 
@@ -15,7 +15,7 @@ export const test = describe(`findTests`, [
         sourceFiles: [sourceFile],
         typeChecker,
       } = project.getSourceFiles()
-      const [passing, failing] = findTests(sourceFile, typeChecker)
+      const [passing, failing] = findTestMetadata({ sourceFile, typeChecker })
 
       equal(
         "export const basicPassingTest = it('Is Basic (Passing)', ({ ok }) => ok(true))",
@@ -38,7 +38,7 @@ export const test = describe(`findTests`, [
         sourceFiles: [sourceFile],
         typeChecker,
       } = project.getSourceFiles()
-      const [describeMetadata] = findTests(sourceFile, typeChecker)
+      const [describeMetadata] = findTestMetadata({ sourceFile, typeChecker })
       const {
         additionalTests: [givenMetadata],
       } = describeMetadata

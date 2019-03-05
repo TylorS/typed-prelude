@@ -14,7 +14,15 @@ const EXPORT_REGEX = /export\s(var|let|const)\s/
 const EQUALS_REGEX = /\s?=\s?/
 const EMPTY_STRING = ''
 
-export function findTests(sourceFile: SourceFile, typeChecker: TypeChecker): TestMetadata[] {
+export type FindTestMetadataOptions = {
+  sourceFile: SourceFile
+  typeChecker: TypeChecker
+}
+
+export function findTestMetadata({
+  sourceFile,
+  typeChecker,
+}: FindTestMetadataOptions): TestMetadata[] {
   const exportMetadata = findExportsFromSourceFile(sourceFile, typeChecker)
   const exportedTestMetadata = exportMetadata.filter(
     metadata => !!findFirstChildNode(x => nodeIsTest(x, typeChecker), metadata.node),
