@@ -80,9 +80,3 @@ export interface Logger {
   readonly debug: (msg: string) => Promise<void>
   readonly time: (label: string) => () => Promise<void>
 }
-
-export type TestingApi = {
-  readonly logger: Logger
-  readonly runTest: (test: Test) => Promise<TestResult>
-  readonly reportTestResults: (results: TestResult[]) => Promise<boolean>
-}
