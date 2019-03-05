@@ -7,6 +7,9 @@ export class NodeGenerator implements RandomNumberGenerator {
     this.nodeCrypto = require('crypto')
   }
 
-  public randomUuidSeed = (): UuidSeed =>
-    (this.nodeCrypto.randomBytes(VALID_UUID_LENGTH) as any) as UuidSeed
+  public randomUuidSeed = (): UuidSeed => {
+    const { data } = this.nodeCrypto.randomBytes(VALID_UUID_LENGTH).toJSON()
+
+    return data as UuidSeed
+  }
 }

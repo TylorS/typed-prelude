@@ -8,5 +8,5 @@ export class BrowserGenerator implements RandomNumberGenerator {
   }
 
   public randomUuidSeed = (): UuidSeed =>
-    (this.browserCrypto.getRandomValues(new Uint8Array(VALID_UUID_LENGTH)) as any) as UuidSeed
+    Array.from(this.browserCrypto.getRandomValues(new Uint8Array(VALID_UUID_LENGTH))) as UuidSeed
 }

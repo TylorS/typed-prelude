@@ -1,4 +1,6 @@
-export type Uuid = string & { readonly _uuid?: undefined }
+import { NewType } from '@typed/new-type'
+
+export type Uuid = NewType<string, 'Uuid'>
 
 export type UuidSeed = [
   number,
