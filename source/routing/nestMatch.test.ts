@@ -13,14 +13,12 @@ export const test: Test = describe(`nestMatch`, [
       const sut = nestMatch(route, match)
 
       const validPath = '/user/42/foo'
-      const expectedValidParams = { id: 42, foo: 1 }
-
       const actualValidPathParams = sut(validPath)
 
       ok(isJust(actualValidPathParams))
 
       if (isJust(actualValidPathParams)) {
-        equal(expectedValidParams, fromJust(actualValidPathParams))
+        equal([{ id: 42 }, { foo: 1 }], fromJust(actualValidPathParams))
       }
 
       ok(isNothing(sut('/user/42')))
