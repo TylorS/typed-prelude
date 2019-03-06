@@ -1,7 +1,6 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
 import { Subscriber } from 'cote'
-import { TestResult } from '../types'
 import { eventNames, ResultsEvent } from './common'
 
 export type CreateResultsServerOptions = {
@@ -9,8 +8,8 @@ export type CreateResultsServerOptions = {
 }
 
 export type ResultsServer = Disposable & {
-  readonly subscribe: (testRunId: number, cb: (results: TestResult[]) => void) => Disposable
-  readonly once: (testRunId: number) => Promise<TestResult[]>
+  readonly subscribe: (testRunId: number, cb: (results: ResultsEvent) => void) => Disposable
+  readonly once: (testRunId: number) => Promise<ResultsEvent>
 }
 
 export function createResultsServer({ namespace }: CreateResultsServerOptions): ResultsServer {
@@ -20,18 +19,15 @@ export function createResultsServer({ namespace }: CreateResultsServerOptions): 
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
     number,
-    TestResult[]
+    ResultsEvent
   >()
-
   const dispose = () => {
     clearSubscriptions()
     subscriber.removeAllListeners()
     subscriber.close()
   }
 
-  subscriber.on(eventNames[0], ({ testRunId, results }: ResultsEvent) =>
-    publish(testRunId, results),
-  )
+  subscriber.on(eventNames[0], (event: ResultsEvent) => publish(event.testRunId, event))
 
   return { subscribe, once, dispose }
 }

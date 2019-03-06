@@ -7,12 +7,12 @@ import { createTestLogger } from '../logging'
 import { describe as describeTest, it as itTest, skip } from '../tests'
 import { getTestId } from '../tests/getTestId'
 import { LogLevel, Test, TestResult } from '../types'
-import { runTest } from './runTests'
+import { runTest } from './runTest'
 
 const scheduler = newDefaultScheduler()
 const { logger } = createTestLogger({ logLevel: LogLevel.OFF, scheduler })
 
-export const test = describe(`runTests`, [
+export const test = describe(`runTest`, [
   given(`a passing Test`, [
     it(`returns its result`, async assertions => {
       const passing = itTest('passes', ({ ok }) => ok(true))
