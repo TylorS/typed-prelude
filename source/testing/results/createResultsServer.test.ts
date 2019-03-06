@@ -15,19 +15,12 @@ export const test = timeout(
   20000,
   describe(`createResultsServer`, [
     given(`a namespace and a callback`, [
-      it(`receives results`, ({ equal }, done) => {
+      it(`receives results`, async ({ equal }) => {
         const namespace = getMachineId()
         const testRunId = 100
         const testResults: TestResult[] = [{ testId: uuid(), type: 'pass' }]
         const server = createResultsServer({
           namespace,
-          onTestResults: (id, results) => {
-            equal(testRunId, id)
-            equal(testResults, results)
-
-            dispose()
-            done()
-          },
         })
         const publisher = createResultsPublisher({
           namespace,
@@ -40,6 +33,9 @@ export const test = timeout(
         setTimeout(() => {
           publisher.publish(testRunId, testResults)
         }, 3000)
+
+        equal(testResults, await server.once(testRunId))
+        dispose()
       }),
     ]),
   ]),
