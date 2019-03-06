@@ -31,7 +31,7 @@ export async function runItTest(
           })
         : resolve({ type: 'pass', testId })
 
-    delay(timeout).then(() => done(new TimeoutError()))
+    delay(timeout).then(() => done(new TimeoutError(timeout)))
 
     try {
       const returnedValue = test(assertions, done)

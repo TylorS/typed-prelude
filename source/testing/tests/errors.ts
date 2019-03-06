@@ -1,7 +1,7 @@
 export class TimeoutError extends Error {
   public static is = (err: Error): err is TimeoutError => err instanceof TimeoutError
 
-  constructor() {
+  constructor(public timeout: number) {
     super('Test Timeout')
   }
 }
