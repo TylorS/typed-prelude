@@ -14,8 +14,6 @@ export function createLoggingServer({ logger, namespace }: CreateLoggingServerOp
     { log: false },
   )
 
-  const timers: Record<string, () => Promise<void>> = {}
-
   subscriber.on('log', event => {
     logger.log((event as any).val)
   })
@@ -34,20 +32,10 @@ export function createLoggingServer({ logger, namespace }: CreateLoggingServerOp
     logger.debug((event as any).val)
   })
 
-  subscriber.on('timeStart', event => {
-    const label: string = (event as any).val
+  subscriber.on('time', event => {
+    const { label, elapsed } = event as any
 
-    timers[label] = logger.time(label)
-  })
-
-  subscriber.on('timeEnd', event => {
-    const label: string = (event as any).val
-
-    if (timers[label]) {
-      timers[label]()
-
-      delete timers[label]
-    }
+    logger.time(label)(elapsed)
   })
 
   const dispose = () => {

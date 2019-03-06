@@ -40,10 +40,7 @@ export function createConsoleLogger({ logLevel, scheduler }: CreateConsoleLogger
 
       const start = scheduler.currentTime()
 
-      return async () => {
-        const end = scheduler.currentTime()
-        const elapsed = end - start
-
+      return async (elapsed: number = scheduler.currentTime() - start) => {
         await logger.debug(`${label}: ${elapsed}ms`)
       }
     },

@@ -1,4 +1,4 @@
-import { Disposable } from '@most/types'
+import { Disposable, Scheduler } from '@most/types'
 import { delay } from '@typed/promises'
 import { Publisher } from 'cote'
 import { Logger } from '../../types'
@@ -6,12 +6,14 @@ import { eventNames } from './eventNames'
 
 export type CreateServerLoggerOptions = {
   namespace: string
+  scheduler: Scheduler
 }
 
 export type ServerLogger = Disposable & Logger
 
 export async function createServerLogger({
   namespace,
+  scheduler,
 }: CreateServerLoggerOptions): Promise<ServerLogger> {
   const publisher = new Publisher(
     { namespace, name: 'Server Logger', broadcasts: eventNames },
@@ -35,10 +37,10 @@ export async function createServerLogger({
       publisher.publish('debug', { type: 'debug', val: msg })
     },
     time: (label: string) => {
-      publisher.publish('timeStart', { type: 'timeStart', val: label })
+      const start = scheduler.currentTime()
 
-      return async () => {
-        publisher.publish('timeEnd', { type: 'timeEnd', val: label })
+      return async (elapsed: number = scheduler.currentTime() - start) => {
+        publisher.publish('time', { type: 'time', label, elapsed })
       }
     },
   }

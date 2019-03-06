@@ -57,10 +57,7 @@ export function createTestLogger({ logLevel, scheduler }: CreateTestLoggerOption
 
       const start = scheduler.currentTime()
 
-      return async () => {
-        const end = scheduler.currentTime()
-        const elapsed = end - start
-
+      return async (elapsed: number = scheduler.currentTime() - start) => {
         logs.push({ type: 'time', label, elapsed })
       }
     },

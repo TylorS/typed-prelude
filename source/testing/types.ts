@@ -77,5 +77,5 @@ export interface Logger {
   readonly info: (msg: string) => Promise<void>
   // Debug
   readonly debug: (msg: string) => Promise<void>
-  readonly time: (label: string) => () => Promise<void>
+  readonly time: (label: string) => (elapsed?: number) => Promise<void>
 }

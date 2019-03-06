@@ -26,7 +26,10 @@ export const test = timeout(
           scheduler,
         })
         const loggingServer = createLoggingServer({ logger: testLogger, namespace })
-        const serverLogger = await createServerLogger({ namespace })
+        const serverLogger = await createServerLogger({
+          namespace,
+          scheduler: newDefaultScheduler(),
+        })
         const disposable = disposeAll([serverLogger, loggingServer])
 
         await serverLogger.log('Hi')

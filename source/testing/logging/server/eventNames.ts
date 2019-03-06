@@ -1,1 +1,1 @@
-export const eventNames = ['log', 'error', 'clear', 'info', 'debug', 'timeStart', 'timeEnd']
+export const eventNames = ['log', 'error', 'clear', 'info', 'debug', 'time']
