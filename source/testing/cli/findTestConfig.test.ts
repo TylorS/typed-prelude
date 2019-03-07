@@ -9,7 +9,7 @@ export const test = describe(`findTestConfig`, [
         environment: TestEvironment.Chrome,
       }
 
-      equal(testConfig, findTestConfig(__dirname, 'test-fixtures/test-config.ts'))
+      equal([testConfig], findTestConfig(__dirname, 'test-fixtures/test-config.ts'))
     }),
   ]),
 

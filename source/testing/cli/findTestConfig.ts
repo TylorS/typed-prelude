@@ -3,7 +3,10 @@ import { relative } from 'path'
 import { findConfigFile, sys } from 'typescript'
 import { TestConfig } from './types'
 
-export function findTestConfig(directory: string, fileName: string = '.typed-test.ts'): TestConfig {
+export function findTestConfig(
+  directory: string,
+  fileName: string = '.typed-test.ts',
+): TestConfig[] {
   const path = findConfigFile(
     directory,
     sys.fileExists,
@@ -15,6 +18,7 @@ export function findTestConfig(directory: string, fileName: string = '.typed-tes
   }
 
   const contents = require(path)
+  const config = contents.hasOwnProperty('default') ? contents.default : contents
 
-  return contents.hasOwnProperty('default') ? contents.default : contents
+  return Array.isArray(config) ? config : [config]
 }
