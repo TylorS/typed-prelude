@@ -32,6 +32,7 @@
     "@types/rimraf": "^2.0.2",
     "@types/source-map-support": "^0.4.1",
     "@types/tempy": "^0.2.0",
+    "@types/yargs": "^12.0.9",
     "lint-staged": "8.1.0",
     "prettier": "1.16.1",
     "ts-node": "8.0.1",
@@ -61,6 +62,7 @@
     "tempy": "^0.2.1",
     "tsconfig-paths": "^3.7.0",
     "uglify-es": "^3.3.9",
-    "uglify-js": "^3.4.9"
+    "uglify-js": "^3.4.9",
+    "yargs": "^13.2.2"
   }
 }

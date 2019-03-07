@@ -34,7 +34,10 @@ export const test = timeout(
           publisher.publish(testRunId, testResults)
         }, 3000)
 
-        equal(testResults, await server.once(testRunId))
+        const actual = await server.once(testRunId)
+
+        equal(testResults, actual.results)
+        equal(testRunId, actual.testRunId)
         dispose()
       }),
     ]),
