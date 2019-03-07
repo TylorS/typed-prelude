@@ -61,8 +61,6 @@ export function parseCliArgs({ directory, args, version }: ParseCliArgsOptions):
 
   const argv = y.parse(args)
 
-  console.log(argv)
-
   const options: CliOptions = {
     fileGlobs: argv._,
     config: argv.config

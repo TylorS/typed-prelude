@@ -37,7 +37,7 @@ export const test = describe(`parseCliArgs`, [
     it(`returns CliOptions with default .typed-test.ts config path`, ({ equal }) => {
       const args = ['--config']
 
-      equal(config({ config: Maybe.of(join(directory, '.typed-test.ts')) }), cli(...args, '--help'))
+      equal(config({ config: Maybe.of(join(directory, '.typed-test.ts')) }), cli(...args))
     }),
   ]),
 ])

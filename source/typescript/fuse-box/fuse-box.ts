@@ -1,5 +1,5 @@
 import { certificateFor } from 'devcert'
-import { FuseBox, FuseBoxOptions, QuantumPlugin, WebIndexPlugin } from 'fuse-box'
+import { FuseBox, FuseBoxOptions, Plugin, QuantumPlugin, WebIndexPlugin } from 'fuse-box'
 import { ServerOptions } from 'fuse-box/devServer/Server'
 import { IndexPluginOptions } from 'fuse-box/plugins/WebIndexPlugin'
 import { join, relative } from 'path'
@@ -16,6 +16,7 @@ export type CreateFuseBoxOptions = {
   hash?: boolean
   indexHtmlPath?: string
   log?: boolean
+  plugins?: Plugin[]
 }
 
 export async function createFuseBox({
@@ -28,6 +29,7 @@ export async function createFuseBox({
   hash = true,
   indexHtmlPath,
   log = false,
+  plugins,
 }: CreateFuseBoxOptions): Promise<FuseBox> {
   const useDevServer = !!devServer || !!ssl
   const { compilerOptions, configPath } = tsConfig
@@ -46,7 +48,7 @@ export async function createFuseBox({
     transformers: customTransformers,
     hash,
     output,
-    plugins: [],
+    plugins: plugins || [],
     log,
     emitHMRDependencies: true,
     sourceMaps: useDevServer
