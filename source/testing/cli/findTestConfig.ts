@@ -1,19 +1,14 @@
 import { makeAbsolute } from '@typed/typescript'
-import { relative } from 'path'
-import { findConfigFile, sys } from 'typescript'
+import { existsSync } from 'fs'
 import { TestConfig } from './types'
 
 export function findTestConfig(
   directory: string,
   fileName: string = '.typed-test.ts',
 ): TestConfig[] {
-  const path = findConfigFile(
-    directory,
-    sys.fileExists,
-    relative(directory, makeAbsolute(directory, fileName)),
-  )
+  const path = makeAbsolute(directory, fileName)
 
-  if (!path) {
+  if (!existsSync(path)) {
     throw new Error(`Unable to find TestConfig ${fileName}`)
   }
 

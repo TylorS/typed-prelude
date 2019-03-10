@@ -16,6 +16,11 @@ export function parseCliArgs({ directory, args, version }: ParseCliArgsOptions):
       alias: 'c',
       describe: 'Absolute or relative path to @typed/test configuration.',
     })
+    .option('tsconfig', {
+      alias: 'ts',
+      describe: 'Absolute or relative path to tsconfig.json',
+      string: true,
+    })
     .option('environment', {
       alias: 'e',
       describe: 'Environment where you would like to run your tests',
@@ -62,7 +67,7 @@ export function parseCliArgs({ directory, args, version }: ParseCliArgsOptions):
   const argv = y.parse(args)
 
   const options: CliOptions = {
-    fileGlobs: argv._,
+    fileGlobs: argv._.length === 0 ? Nothing : Maybe.of(argv._),
     config: argv.config
       ? Maybe.of(
           isString(argv.config)
@@ -70,6 +75,7 @@ export function parseCliArgs({ directory, args, version }: ParseCliArgsOptions):
             : makeAbsolute(directory, '.typed-test.ts'),
         )
       : Nothing,
+    tsConfig: argv.tsconfig ? Maybe.of(argv.tsconfig) : Nothing,
     environment: toEvironment(argv.environment),
     timeout: argv.timeout,
     typeCheck: argv.typeCheck,

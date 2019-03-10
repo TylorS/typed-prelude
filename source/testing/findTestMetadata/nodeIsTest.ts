@@ -1,17 +1,17 @@
-import { isCallLikeExpression, isIdentifier, Node, Type, TypeChecker } from 'typescript'
+import { isCallLikeExpression, Node, Type, TypeChecker } from 'typescript'
 
 export function nodeIsTest(node: Node, typeChecker: TypeChecker): boolean {
-  if (isIdentifier(node)) {
-    return false
-  }
-
   const type = getTypeOfNode(node, typeChecker)
 
-  if (!type || !type.isUnionOrIntersection()) {
+  if (!type) {
     return false
   }
 
-  return type.types.some(type => typeIsTest(type))
+  if (type.isUnionOrIntersection()) {
+    return type.types.some(type => typeIsTest(type))
+  }
+
+  return typeIsTest(type)
 }
 
 function getTypeOfNode(node: Node, typeChecker: TypeChecker): Type | null {
@@ -36,6 +36,6 @@ function typeIsTest(type: Type): boolean {
   return properties.some(x => {
     const name = x.getEscapedName().toString()
 
-    return name.includes('__@TYPED_TEST@') || name.includes('__@TYPED_TEST_COLLECTION@')
+    return name.startsWith('__@TYPED_TEST@') || name.startsWith('__@TYPED_TEST_COLLECTION@')
   })
 }

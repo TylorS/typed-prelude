@@ -46,6 +46,10 @@ function findExportMetadata(sourceFile: SourceFile, typeChecker: TypeChecker): E
   const exportMetadata: ExportMetadata[] = []
 
   function findExportMetadata(node: Node, identifier?: string) {
+    if (!node) {
+      return
+    }
+
     // ExportDeclaration
     // ExportAssignment to Identifier
     if (identifier) {

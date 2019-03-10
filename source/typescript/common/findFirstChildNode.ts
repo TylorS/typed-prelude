@@ -1,5 +1,6 @@
 import { curry } from '@typed/lambda'
 import { Node } from 'typescript'
+import { getChildNodes } from '../getChildNodes'
 
 export const findFirstChildNode: {
   (predicate: (node: Node) => boolean, root: Node): Node | null
@@ -7,7 +8,7 @@ export const findFirstChildNode: {
 } = curry(__findFirstNode)
 
 function __findFirstNode(predicate: (node: Node) => boolean, root: Node): Node | null {
-  const nodesToProcess: Node[] = Array.from(root.getChildren())
+  const nodesToProcess: Node[] = getChildNodes(root)
 
   while (nodesToProcess.length > 0) {
     const node = nodesToProcess.shift() as Node
@@ -16,9 +17,7 @@ function __findFirstNode(predicate: (node: Node) => boolean, root: Node): Node |
       return node
     }
 
-    for (const child of node.getChildren()) {
-      nodesToProcess.push(child)
-    }
+    nodesToProcess.push(...getChildNodes(node))
   }
 
   return null

@@ -10,6 +10,10 @@ export function isNull(x: any): x is null {
   return x === null
 }
 
+export function isNotNull<A extends any>(value: A): value is Exclude<A, null> {
+  return value !== null
+}
+
 export function isArray<A = unknown>(x: any): x is A[] {
   return Array.isArray(x)
 }

@@ -1,5 +1,5 @@
 import { Disposable, Scheduler } from '@most/types'
-import { delay } from '@typed/promises'
+import { Subscriptions } from '@typed/common/Subscriptions'
 import { Publisher } from 'cote'
 import { Logger } from '../../types'
 import { eventNames } from './eventNames'
@@ -9,16 +9,24 @@ export type CreateServerLoggerOptions = {
   scheduler: Scheduler
 }
 
-export type ServerLogger = Disposable & Logger
+export type ServerLogger = Disposable &
+  Logger & {
+    readonly onAdded: (fn: () => void) => Disposable
+  }
 
-export async function createServerLogger({
+export function createServerLogger({
   namespace,
   scheduler,
-}: CreateServerLoggerOptions): Promise<ServerLogger> {
+}: CreateServerLoggerOptions): ServerLogger {
   const publisher = new Publisher(
     { namespace, name: 'Server Logger', broadcasts: eventNames },
     { log: false },
   )
+
+  const { subscribe, publish: added } = new Subscriptions<1, void>()
+  const onAdded = (fn: () => void) => subscribe(1, fn)
+
+  publisher.on('cote:added', () => added(1))
 
   const logger: Logger = {
     log: async (msg: string) => {
@@ -50,10 +58,7 @@ export async function createServerLogger({
     publisher.close()
   }
 
-  const serverLogger = { ...logger, dispose }
-
-  // Official examples use 3000ms
-  await delay(3000)
+  const serverLogger = { ...logger, onAdded, dispose }
 
   return serverLogger
 }

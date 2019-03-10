@@ -12,8 +12,9 @@ export type TestConfig = {
 }
 
 export type CliOptions = {
-  fileGlobs: string[]
+  fileGlobs: Maybe<string[]>
   config: Maybe<string>
+  tsConfig: Maybe<string>
   environment: TestEvironment
   timeout: number
   typeCheck: boolean

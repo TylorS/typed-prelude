@@ -1,3 +1,4 @@
+import { isNotNull } from '@typed/logic'
 import {
   findChildNodes,
   findExportsFromSourceFile,
@@ -5,8 +6,17 @@ import {
   NodePosition,
   NodeTree,
 } from '@typed/typescript'
-import { findFirstChildNode } from '@typed/typescript/common/findFirstChildNode'
-import { SourceFile, TypeChecker } from 'typescript'
+import { getChildNodes } from '@typed/typescript/getChildNodes'
+import { uuid } from '@typed/uuid'
+import {
+  isIdentifier,
+  isVariableDeclaration,
+  isVariableDeclarationList,
+  isVariableStatement,
+  Node,
+  SourceFile,
+  TypeChecker,
+} from 'typescript'
 import { Logger, NodeMetadata, TestMetadata } from '../types'
 import { nodeIsTest } from './nodeIsTest'
 
@@ -25,46 +35,62 @@ export async function findTestMetadata({
   typeChecker,
   logger,
 }: FindTestMetadataOptions): Promise<TestMetadata[]> {
-  await logger.info(`Finding export metadata: ${sourceFile.fileName}`)
-  const exportMetadata = findExportsFromSourceFile(sourceFile, typeChecker)
-  const exportedTestMetadata = exportMetadata.filter(
-    metadata => !!findFirstChildNode(x => nodeIsTest(x, typeChecker), metadata.node),
-  )
-  const metadata: TestMetadata[] = exportedTestMetadata.map(({ exportNames, node, sourceFile }) => {
-    const nodeText = node.getText().replace(EXPORT_REGEX, EMPTY_STRING)
-    const nodeTexts = [
-      nodeText,
-      ...exportNames.map(name =>
-        nodeText.replace(name, EMPTY_STRING).replace(EQUALS_REGEX, EMPTY_STRING),
-      ),
-    ]
-    const nodePosition = getNodePosition(sourceFile, node)
-    const additionalTestNodeTree = findChildNodes(node => {
-      const text = node.getText()
-      // Avoid duplicates
-      if (nodeTexts.some(x => text === x)) {
-        return false
+  await logger.debug(`Finding export metadata: ${sourceFile.fileName}`)
+  const exportMetadata = findExportsFromSourceFile(sourceFile, typeChecker).filter(x => !!x.node)
+  const metadata = exportMetadata
+    .map(({ node, exportNames, sourceFile }) => {
+      const children = getChildNodes(node)
+
+      if (exportNodeIsTest(node, children, typeChecker)) {
+        const text = node.getText(sourceFile).replace(EXPORT_REGEX, EMPTY_STRING)
+        const nodeTexts = [
+          text,
+          ...exportNames.map(exportName =>
+            text
+              .replace(exportName, EMPTY_STRING)
+              .replace(EQUALS_REGEX, EMPTY_STRING)
+              .trim(),
+          ),
+        ]
+        const matchesTexts = (node: Node) => nodeTexts.indexOf(node.getText(sourceFile)) > -1
+        const nodePosition = getNodePosition(sourceFile, node)
+        const additionalTestNodeTree = findChildNodes(
+          node => !isIdentifier(node) && nodeIsTest(node, typeChecker) && !matchesTexts(node),
+          [node],
+        )
+        const additionalTests = additionalTestNodeTree.map(node =>
+          nodeTreeToNodeMetadata(node, sourceFile),
+        )
+        const testInfo = getTestInfo(nodePosition, sourceFile)
+        const testMetadata: TestMetadata = {
+          id: uuid(),
+          ...nodePosition,
+          ...testInfo,
+          exportNames,
+          filePath: sourceFile.fileName,
+          additionalTests,
+        }
+
+        return testMetadata
       }
 
-      return nodeIsTest(node, typeChecker)
-    }, node.getChildren())
-    const additionalTests = additionalTestNodeTree.map(node =>
-      nodeTreeToNodeMetadata(node, sourceFile),
-    )
-    const testInfo = getTestInfo(nodePosition, sourceFile)
-    const testMetadata: TestMetadata = {
-      ...nodePosition,
-      ...testInfo,
-      exportNames,
-      filePath: sourceFile.fileName,
-      additionalTests,
-    }
+      return null
+    })
+    .filter(isNotNull)
 
-    return testMetadata
-  })
-  await logger.debug(`TestMetadata ${sourceFile.fileName}: ${metadata}`)
+  await logger.debug(`TestMetadata ${sourceFile.fileName}: ${JSON.stringify(metadata, null, 2)}`)
 
   return metadata
+}
+
+function exportNodeIsTest(node: Node, children: Node[], typeChecker: TypeChecker): boolean {
+  if (isVariableStatement(node) || isVariableDeclarationList(node)) {
+    return !!findChildNodes(x => isVariableDeclaration(x), children).some(x =>
+      nodeIsTest(x.node, typeChecker),
+    )
+  }
+
+  return nodeIsTest(node, typeChecker)
 }
 
 function getTestInfo(

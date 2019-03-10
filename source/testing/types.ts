@@ -80,3 +80,25 @@ export interface Logger {
   readonly debug: (msg: string) => Promise<void>
   readonly time: (label: string) => (elapsed?: number) => Promise<void>
 }
+
+export interface TestIdToMetadataId extends ReadonlyMap<Uuid, Uuid> {}
+export interface TestIdToTestConfig extends ReadonlyMap<Uuid, TestConfig> {}
+
+export interface TestInformation {
+  readonly testMetadataById: ReadonlyMap<Uuid, TestMetadata>
+  readonly testIdToMetadataId: TestIdToMetadataId
+  readonly testIdToTestConfig: TestIdToTestConfig
+  readonly testResults: TestResult[]
+}
+
+export interface TestMetadataWithResult extends TestMetadata {
+  readonly config: TestConfig
+  readonly result: TestResult
+  readonly additionalTests: NodeMetadataWithResult[]
+}
+
+export interface NodeMetadataWithResult extends NodeMetadata {
+  readonly config: TestConfig
+  readonly result: TestResult
+  readonly additionalTests: NodeMetadataWithResult[]
+}

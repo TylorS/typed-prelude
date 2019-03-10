@@ -8,8 +8,9 @@ const directory = __dirname
 const cli = (...args: string[]) => parseCliArgs({ directory, args, version: '1.0.0' })
 
 const config = (options: Partial<CliOptions> = {}): CliOptions => ({
-  fileGlobs: [],
+  fileGlobs: Nothing,
   config: Nothing,
+  tsConfig: Nothing,
   environment: TestEvironment.Node,
   timeout: 2000,
   typeCheck: false,
@@ -29,7 +30,7 @@ export const test = describe(`parseCliArgs`, [
     it(`returns CliOptions with fileGlobs`, ({ equal }) => {
       const fileGlobs = ['source/**/*.test.ts']
 
-      equal(config({ fileGlobs }), cli(...fileGlobs))
+      equal(config({ fileGlobs: Maybe.of(fileGlobs) }), cli(...fileGlobs))
     }),
   ]),
 

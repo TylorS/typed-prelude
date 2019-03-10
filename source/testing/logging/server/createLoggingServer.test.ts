@@ -26,11 +26,13 @@ export const test = timeout(
           scheduler,
         })
         const loggingServer = createLoggingServer({ logger: testLogger, namespace })
-        const serverLogger = await createServerLogger({
+        const serverLogger = createServerLogger({
           namespace,
           scheduler: newDefaultScheduler(),
         })
         const disposable = disposeAll([serverLogger, loggingServer])
+
+        await new Promise(resolve => serverLogger.onAdded(resolve))
 
         await serverLogger.log('Hi')
         await serverLogger.error('Uh-oh')
@@ -39,6 +41,8 @@ export const test = timeout(
         await serverLogger.debug('Debugging')
         await serverLogger.time('Test')()
 
+        // Wait for requests to complete
+        // Official cote examples use 3000ms
         await delay(3000)
 
         const logs = getLogs()

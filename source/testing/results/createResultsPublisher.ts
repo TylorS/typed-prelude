@@ -1,4 +1,6 @@
 import { Disposable } from '@most/types'
+import { Subscriptions } from '@typed/common/Subscriptions'
+import { Uuid } from '@typed/uuid'
 import { Publisher } from 'cote'
 import { TestResult } from '../types'
 import { eventNames, ResultsEvent } from './common'
@@ -7,8 +9,15 @@ export type CreateResultsPublisherOptions = {
   namespace: string
 }
 
+export type ResultsPublisherOptions = {
+  testRunId: number
+  testMetadataId: Uuid
+  results: TestResult[]
+}
+
 export type ResultsPublisher = Disposable & {
-  readonly publish: (testRunId: number, results: TestResult[]) => void
+  readonly publish: (options: ResultsPublisherOptions) => void
+  readonly onAdded: (fn: () => void) => Disposable
 }
 
 export function createResultsPublisher({
@@ -19,13 +28,21 @@ export function createResultsPublisher({
     { log: false },
   )
 
-  const publish = (testRunId: number, results: TestResult[]) =>
-    publisher.publish<ResultsEvent>(eventNames[0], { type: 'testResults', testRunId, results })
+  const { subscribe, publish: added } = new Subscriptions<1, void>()
+  const onAdded = (fn: () => void) => subscribe(1, fn)
+
+  const publish = (options: ResultsPublisherOptions) =>
+    publisher.publish<ResultsEvent>(eventNames[0], {
+      type: 'testResults',
+      ...options,
+    })
+
+  publisher.on('cote:added', () => added(1))
 
   const dispose = () => {
     publisher.removeAllListeners()
     publisher.close()
   }
 
-  return { publish, dispose }
+  return { publish, onAdded, dispose }
 }

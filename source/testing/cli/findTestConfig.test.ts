@@ -1,4 +1,5 @@
 import { describe, given, it } from '@typed/test'
+import { findTsConfig, installNodeSupport } from '@typed/typescript'
 import { findTestConfig } from './findTestConfig'
 import { TestConfig, TestEvironment } from './types'
 
@@ -9,7 +10,14 @@ export const test = describe(`findTestConfig`, [
         environment: TestEvironment.Chrome,
       }
 
+      const dispose = installNodeSupport({
+        directory: __dirname,
+        compilerOptions: findTsConfig({ directory: __dirname }).compilerOptions,
+      })
+
       equal([testConfig], findTestConfig(__dirname, 'test-fixtures/test-config.ts'))
+
+      dispose()
     }),
   ]),
 

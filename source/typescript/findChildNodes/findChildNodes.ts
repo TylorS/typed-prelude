@@ -1,5 +1,6 @@
 import { curry } from '@typed/lambda'
 import { Node } from 'typescript'
+import { getChildNodes } from '../getChildNodes'
 import { NodeTree } from '../types'
 
 export const findChildNodes: {
@@ -22,9 +23,7 @@ function findAllNodes(predicate: (node: Node) => boolean, nodes: Node[]): Node[]
       nodeTrees.push(node)
     }
 
-    for (const child of node.getChildren()) {
-      nodesToProcess.push(child)
-    }
+    nodesToProcess.push(...getChildNodes(node))
   }
 
   return nodeTrees

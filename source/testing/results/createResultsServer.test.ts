@@ -30,9 +30,9 @@ export const test = timeout(
           publisher.dispose()
         }
 
-        setTimeout(() => {
-          publisher.publish(testRunId, testResults)
-        }, 3000)
+        await new Promise(resolve => publisher.onAdded(resolve))
+
+        publisher.publish({ testRunId, results: testResults, testMetadataId: uuid() })
 
         const actual = await server.once(testRunId)
 
