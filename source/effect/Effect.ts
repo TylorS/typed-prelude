@@ -3,7 +3,7 @@ import { Disposable, Scheduler } from '@most/types'
 import { Arity1, Arity2, curry, IO, noOp } from '@typed/lambda'
 import { callbackTask } from './callbackTask'
 
-export type EffectResources<A extends {} = {}> = A & { scheduler: Scheduler }
+export type EffectResources<A extends {} = {}> = A & { readonly scheduler: Scheduler }
 
 // Generic Effect type
 export interface Effect<A, B extends {} = {}> {

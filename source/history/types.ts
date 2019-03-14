@@ -1,3 +1,6 @@
 export type Path = string
 
-export type HistoryResources = { location: Readonly<Location>; history: Readonly<History> }
+export type HistoryResources = {
+  readonly location: Readonly<Location>
+  readonly history: Readonly<History>
+}
