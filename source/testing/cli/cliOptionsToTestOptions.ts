@@ -1,8 +1,8 @@
 import { unwrap } from '@typed/maybe'
-import { CliOptions, TestConfig } from './types'
+import { CliOptions, TestOptions } from './types'
 
-export function cliOptionsToTestConfig(options: CliOptions): TestConfig {
-  const config: TestConfig = {}
+export function cliOptionsToTestOptions(options: CliOptions): TestOptions {
+  const config: TestOptions = {}
 
   unwrap(environment => (config.environment = environment), options.environment)
   unwrap(fileGlobs => (config.fileGlobs = fileGlobs), options.fileGlobs)

@@ -2,7 +2,7 @@ import { Maybe } from '@typed/maybe'
 import { CreateFuseBoxOptions, TsConfig } from '@typed/typescript'
 import { LogLevel } from '../types'
 
-export type TestConfig = {
+export type TestOptions = {
   fileGlobs?: string[]
   environment?: TestEvironment
   timeout?: number

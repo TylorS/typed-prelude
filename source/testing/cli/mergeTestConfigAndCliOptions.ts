@@ -1,8 +1,8 @@
 import { Maybe, withDefault } from '@typed/maybe'
-import { CliOptions, TestConfig } from './types'
+import { CliOptions, TestOptions } from './types'
 
 export function mergeTestConfigAndCliOptions(
-  testConfig: TestConfig,
+  testConfig: TestOptions,
   cliOptions: CliOptions,
 ): CliOptions {
   const fileGlobs = withDefault(testConfig.fileGlobs, cliOptions.fileGlobs)

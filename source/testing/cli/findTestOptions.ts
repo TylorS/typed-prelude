@@ -1,11 +1,11 @@
 import { makeAbsolute } from '@typed/typescript'
 import { existsSync } from 'fs'
-import { TestConfig } from './types'
+import { TestOptions } from './types'
 
-export function findTestConfig(
+export function findTestOptions(
   directory: string,
   fileName: string = '.typed-test.ts',
-): TestConfig[] {
+): TestOptions[] {
   const path = makeAbsolute(directory, fileName)
 
   if (!existsSync(path)) {
