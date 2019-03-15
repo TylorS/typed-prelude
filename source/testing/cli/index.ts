@@ -1,3 +1,7 @@
 export * from './types'
 export * from './findTestConfig'
 export * from './parseCliArgs'
+export * from './mergeTestConfigAndCliOptions'
+export * from './cliOptionsToRunOptions'
+export * from './cliOptionsToTestConfig'
+export * from './findRunOptions'

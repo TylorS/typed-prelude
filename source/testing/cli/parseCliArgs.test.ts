@@ -2,7 +2,7 @@ import { Maybe, Nothing } from '@typed/maybe'
 import { describe, given, it } from '@typed/test'
 import { join } from 'path'
 import { parseCliArgs } from './parseCliArgs'
-import { CliOptions, TestEvironment } from './types'
+import { CliOptions } from './types'
 
 const directory = __dirname
 const cli = (...args: string[]) => parseCliArgs({ directory, args, version: '1.0.0' })
@@ -11,11 +11,13 @@ const config = (options: Partial<CliOptions> = {}): CliOptions => ({
   fileGlobs: Nothing,
   config: Nothing,
   tsConfig: Nothing,
-  environment: TestEvironment.Node,
-  timeout: 2000,
-  typeCheck: false,
-  watch: false,
-  keepAlive: false,
+  environment: Nothing,
+  timeout: Nothing,
+  typeCheck: Nothing,
+  watch: Nothing,
+  keepAlive: Nothing,
+  logLevel: Nothing,
+  fuseBoxOptions: Nothing,
   ...options,
 })
 
