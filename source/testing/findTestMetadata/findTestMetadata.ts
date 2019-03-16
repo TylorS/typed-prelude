@@ -55,7 +55,7 @@ export async function findTestMetadata({
         const matchesTexts = (node: Node) => nodeTexts.indexOf(node.getText(sourceFile)) > -1
         const nodePosition = getNodePosition(sourceFile, node)
         const additionalTestNodeTree = findChildNodes(
-          node => !isIdentifier(node) && nodeIsTest(node, typeChecker) && !matchesTexts(node),
+          node => !isIdentifier(node) && !matchesTexts(node) && nodeIsTest(node, typeChecker),
           [node],
         )
         const additionalTests = additionalTestNodeTree.map(node =>

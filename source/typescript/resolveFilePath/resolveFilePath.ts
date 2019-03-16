@@ -2,13 +2,17 @@ import { memoize } from '@typed/lambda'
 import resolve from 'resolve'
 import { createMatchPath } from 'tsconfig-paths'
 import { preferEsModule as packageFilter } from '../common/preferEsModule'
-import { findTsConfig } from '../findTsConfig'
+import { TsConfig } from '../types'
 
 const mainFields = ['module', 'jsnext:main', 'main']
 const browserMainFiles = ['module', 'jsnext:main', 'browser', 'main']
 const moduleDirectory = ['node_modules', '@types']
 
-export function createResolveFilePath({ extensions, browser }: CreateResolveFilePathOptions) {
+export function createResolveFilePath({
+  extensions,
+  browser,
+  tsConfig,
+}: CreateResolveFilePathOptions) {
   const fields = browser ? browserMainFiles : mainFields
   const options: resolve.SyncOpts = {
     extensions,
@@ -19,7 +23,7 @@ export function createResolveFilePath({ extensions, browser }: CreateResolveFile
 
   return function resolveFilePath(basedir: string, moduleSpecifier: string) {
     try {
-      const matchPath = tryCreateMatchPath(basedir, fields)
+      const matchPath = tryCreateMatchPath(fields, tsConfig)
 
       if (matchPath) {
         const path = matchPath(moduleSpecifier, undefined, undefined, extensions)
@@ -42,11 +46,10 @@ export function createResolveFilePath({ extensions, browser }: CreateResolveFile
 }
 
 const tryCreateMatchPath = memoize(function tryCreateMatchPath(
-  directory: string,
   mainFields: string[],
+  { compilerOptions }: TsConfig,
 ) {
   try {
-    const { compilerOptions } = findTsConfig({ directory })
     const { baseUrl, paths } = compilerOptions
 
     if (baseUrl && paths) {
@@ -59,5 +62,6 @@ const tryCreateMatchPath = memoize(function tryCreateMatchPath(
 
 export type CreateResolveFilePathOptions = {
   extensions: string[]
+  tsConfig: TsConfig
   browser?: boolean
 }

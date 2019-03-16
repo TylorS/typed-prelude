@@ -1,3 +1,5 @@
+import { Disposable } from '@most/types'
+import { Arity1 } from '@typed/lambda'
 import { Immutable } from '@typed/objects'
 import {
   CompilerOptions,
@@ -29,6 +31,14 @@ export type Project = {
     program: Program
     typeChecker: TypeChecker
   }
+  watchSourceFiles(
+    cb: Arity1<{
+      sourceFiles: SourceFile[]
+      program: Program
+      typeChecker: TypeChecker
+    }>,
+    debounceMS?: number,
+  ): Promise<Disposable>
 }
 
 export type DependencyMap = Record<string, string[]>
