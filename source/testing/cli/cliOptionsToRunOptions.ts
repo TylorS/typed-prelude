@@ -1,5 +1,6 @@
 import { withDefault } from '@typed/maybe'
 import { findTsConfig } from '@typed/typescript'
+import { uuid } from '@typed/uuid'
 import { LogLevel } from '../types'
 import { CliOptions, RunOptions, TestEvironment } from './types'
 
@@ -14,6 +15,7 @@ export function cliOptionsToRunOptions(directory: string, cliOptions: CliOptions
   const tsConfigFileGlobs = [...files, ...include, ...exclude.map(x => `!${x}`)]
   const fileGlobs = withDefault(tsConfigFileGlobs, cliOptions.fileGlobs)
   const options: RunOptions = {
+    testRunId: uuid(),
     fileGlobs,
     tsConfig,
     environment: withDefault(TestEvironment.Node, cliOptions.environment),

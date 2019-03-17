@@ -1,5 +1,6 @@
 import { Maybe } from '@typed/maybe'
 import { CreateFuseBoxOptions, TsConfig } from '@typed/typescript'
+import { Uuid } from '@typed/uuid'
 import { LogLevel } from '../types'
 
 export type TestOptions = {
@@ -28,6 +29,7 @@ export type CliOptions = {
 }
 
 export type RunOptions = {
+  testRunId: Uuid
   fileGlobs: string[]
   tsConfig: TsConfig
   environment: TestEvironment
