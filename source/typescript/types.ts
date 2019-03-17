@@ -1,4 +1,5 @@
 import { Disposable } from '@most/types'
+import { Logger } from '@typed/common/logger'
 import { Arity1 } from '@typed/lambda'
 import { Immutable } from '@typed/objects'
 import {
@@ -37,8 +38,13 @@ export type Project = {
       program: Program
       typeChecker: TypeChecker
     }>,
-    debounceMS?: number,
+    options: WatchSourceFilesOptions,
   ): Promise<Disposable>
+}
+
+export type WatchSourceFilesOptions = {
+  debounceMS?: number
+  logger?: Logger
 }
 
 export type DependencyMap = Record<string, string[]>

@@ -16,7 +16,7 @@ import { createDependencyManager } from '../createDependencyManager/createDepend
 import { createFileVersionManager } from '../createFileVersionManager'
 import { createLanguageService } from '../createLanguageService/createLanguageService'
 import { createResolveFilePath } from '../resolveFilePath'
-import { DependencyMap, Project, TsConfig } from '../types'
+import { DependencyMap, Project, TsConfig, WatchSourceFilesOptions } from '../types'
 
 export type CreateProjectOptions = {
   tsConfig: TsConfig
@@ -112,16 +112,33 @@ export function createProject(options: CreateProjectOptions): Project {
   }
 
   async function watchSourceFiles(
-    cb: Arity1<ReturnType<typeof getSourceFiles>>,
-    debounceMS: number = 1000,
+    cb: Arity1<ReturnType<typeof getSourceFiles>, Promise<void>>,
+    options: WatchSourceFilesOptions = {},
   ): Promise<Disposable> {
-    function runCallback() {
+    const { debounceMS = 1000, logger } = options
+    let runningCallback = false
+    let shouldRerunCallback = false
+
+    async function runCallback() {
+      if (runningCallback) {
+        shouldRerunCallback = true
+        return
+      }
+
+      runningCallback = true
       const { sourceFiles, program, typeChecker } = getSourceFiles()
 
       if (sourceFiles.length > 0) {
-        cb({ sourceFiles, program, typeChecker })
+        await cb({ sourceFiles, program, typeChecker })
 
         sourceFiles.forEach(sourceFile => updateDependencies(sourceFile, program))
+      }
+
+      runningCallback = false
+
+      if (shouldRerunCallback) {
+        shouldRerunCallback = false
+        runCallback()
       }
     }
 
@@ -132,6 +149,10 @@ export function createProject(options: CreateProjectOptions): Project {
           const path = join(directory, file)
 
           fileVersionManager.addFileVersion(path)
+
+          if (logger) {
+            logger.debug(`Added ${path}`)
+          }
         }
 
         if (event.action === 1) {
@@ -140,6 +161,10 @@ export function createProject(options: CreateProjectOptions): Project {
 
           fileVersionManager.removeFileVersion(path)
           dependencyManager.removeFile(path)
+
+          if (logger) {
+            logger.debug(`Deleted ${path}`)
+          }
         }
 
         if (event.action === 2) {
@@ -147,6 +172,10 @@ export function createProject(options: CreateProjectOptions): Project {
           const path = join(directory, file)
 
           fileVersionManager.updateFileVersion(path)
+
+          if (logger) {
+            logger.debug(`Updated ${path}`)
+          }
         }
 
         if (event.action === 3) {
@@ -156,6 +185,10 @@ export function createProject(options: CreateProjectOptions): Project {
 
           fileVersionManager.removeFileVersion(oldPath)
           fileVersionManager.addFileVersion(newPath)
+
+          if (logger) {
+            logger.debug(`Renamed ${oldPath} to ${newPath}`)
+          }
         }
       })
 
