@@ -1,11 +1,12 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
 import { Subscriber } from 'cote'
-import { TestConfig } from '../types'
+import { LogLevel, TestConfig } from '../types'
 import { eventNames, TestConfigEvent } from './common'
 
 export type CreateTestConfigServerOptions = {
   namespace: string
+  logLevel: LogLevel
 }
 
 export type TestConfigServer = Disposable & {
@@ -15,10 +16,11 @@ export type TestConfigServer = Disposable & {
 
 export function createTestConfigServer({
   namespace,
+  logLevel,
 }: CreateTestConfigServerOptions): TestConfigServer {
   const subscriber = new Subscriber(
     { namespace, name: 'TestConfig Server', subscribesTo: eventNames },
-    { log: false },
+    { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
     number,

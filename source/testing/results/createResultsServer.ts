@@ -1,10 +1,12 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
 import { Subscriber } from 'cote'
+import { LogLevel } from '../types'
 import { eventNames, ResultsEvent } from './common'
 
 export type CreateResultsServerOptions = {
   namespace: string
+  logLevel: LogLevel
 }
 
 export type ResultsServer = Disposable & {
@@ -12,10 +14,13 @@ export type ResultsServer = Disposable & {
   readonly once: (testRunId: number) => Promise<ResultsEvent>
 }
 
-export function createResultsServer({ namespace }: CreateResultsServerOptions): ResultsServer {
+export function createResultsServer({
+  namespace,
+  logLevel,
+}: CreateResultsServerOptions): ResultsServer {
   const subscriber = new Subscriber(
     { namespace, name: 'Results Server', subscribesTo: eventNames },
-    { log: false },
+    { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
     number,

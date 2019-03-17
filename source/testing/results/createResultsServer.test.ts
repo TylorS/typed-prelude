@@ -1,7 +1,7 @@
 import { describe, given, it, Test, TYPED_TEST } from '@typed/test'
 import { uuid } from '@typed/uuid'
 import { getMachineId } from '../getMachineId'
-import { TestResult } from '../types'
+import { LogLevel, TestResult } from '../types'
 import { createResultsPublisher } from './createResultsPublisher'
 import { createResultsServer } from './createResultsServer'
 
@@ -21,6 +21,7 @@ export const test = timeout(
         const testResults: TestResult[] = [{ testId: uuid(), type: 'pass' }]
         const server = createResultsServer({
           namespace,
+          logLevel: LogLevel.OFF,
         })
         const publisher = createResultsPublisher({
           namespace,
