@@ -1,6 +1,8 @@
 import { NodePosition } from '@typed/typescript'
 import { Uuid } from '../uuid'
 
+export * from '@typed/common/logger'
+
 export const TYPED_TEST = Symbol('Test')
 export const TYPED_TEST_COLLECTION = Symbol('TestCollection')
 
@@ -60,25 +62,6 @@ export interface TestMetadata extends NodeMetadata {
 export interface NodeMetadata extends NodePosition {
   readonly text: string
   readonly additionalTests: NodeMetadata[]
-}
-
-export const enum LogLevel {
-  OFF,
-  DEFAULT,
-  INFO,
-  DEBUG,
-}
-
-export interface Logger {
-  // Default
-  readonly log: (msg: string) => Promise<void>
-  readonly error: (msg: string) => Promise<void>
-  readonly clear: () => Promise<void>
-  // Info
-  readonly info: (msg: string) => Promise<void>
-  // Debug
-  readonly debug: (msg: string) => Promise<void>
-  readonly time: (label: string) => (elapsed?: number) => Promise<void>
 }
 
 export interface TestIdToMetadataId extends ReadonlyMap<Uuid, Uuid> {}
