@@ -1,8 +1,8 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
 import { Subscriber } from 'cote'
-import { LogLevel, TestConfig } from '../types'
-import { eventNames, TestConfigEvent } from './common'
+import { LogLevel, TestIdToTestConfig } from '../types'
+import { TestConfigEvent, testConfigEventNames } from './common'
 
 export type CreateTestConfigServerOptions = {
   namespace: string
@@ -10,8 +10,8 @@ export type CreateTestConfigServerOptions = {
 }
 
 export type TestConfigServer = Disposable & {
-  readonly subscribe: (testRunId: number, cb: (configs: TestConfig[]) => void) => Disposable
-  readonly once: (testRunId: number) => Promise<TestConfig[]>
+  readonly subscribe: (testRunId: number, cb: (configs: TestIdToTestConfig) => void) => Disposable
+  readonly once: (testRunId: number) => Promise<TestIdToTestConfig>
 }
 
 export function createTestConfigServer({
@@ -19,12 +19,12 @@ export function createTestConfigServer({
   logLevel,
 }: CreateTestConfigServerOptions): TestConfigServer {
   const subscriber = new Subscriber(
-    { namespace, name: 'TestConfig Server', subscribesTo: eventNames },
+    { namespace, name: 'TestConfig Server', subscribesTo: testConfigEventNames },
     { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
     number,
-    TestConfig[]
+    TestIdToTestConfig
   >()
   const dispose = () => {
     clearSubscriptions()
@@ -32,8 +32,11 @@ export function createTestConfigServer({
     subscriber.close()
   }
 
-  subscriber.on(eventNames[0], ({ testRunId, testConfigs }: TestConfigEvent) =>
-    publish(testRunId, testConfigs),
+  subscriber.on(testConfigEventNames[0], ({ testRunId, testConfigs }: TestConfigEvent) =>
+    publish(
+      testRunId,
+      testConfigs.reduce((map, testConfig) => map.set(testConfig.id, testConfig), new Map()),
+    ),
   )
 
   return { subscribe, once, dispose }

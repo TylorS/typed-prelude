@@ -115,7 +115,7 @@ export function createProject(options: CreateProjectOptions): Project {
     cb: Arity1<ReturnType<typeof getSourceFiles>, Promise<void>>,
     options: WatchSourceFilesOptions = {},
   ): Promise<Disposable> {
-    const { debounceMS = 1000, logger } = options
+    const { debounceMS = 1000, logger, onFileRemoved } = options
     let runningCallback = false
     let shouldRerunCallback = false
 
@@ -164,6 +164,10 @@ export function createProject(options: CreateProjectOptions): Project {
 
           if (logger) {
             logger.debug(`Deleted ${path}`)
+          }
+
+          if (onFileRemoved) {
+            onFileRemoved(path)
           }
         }
 

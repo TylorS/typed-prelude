@@ -1,16 +1,23 @@
 import { mapToList } from '@typed/objects/mapToList'
+import { sys } from 'typescript'
 import { FileVersionManager } from '../types'
 
 const EMPTY_VERSION: VersionModification = { version: -1 }
 
 export function createFileVersionManager(
-  fileVersions: Record<string, { version: number }>,
+  fileVersions: Record<string, { version: number; text: string }>,
 ): FileVersionManager {
   let queue: Record<string, VersionModification> = Object.create(null)
 
   function addFileVersion(filePath: string) {
     if (!queue[filePath]) {
       queue[filePath] = { version: 0 }
+    }
+
+    const text = sys.readFile(filePath)
+
+    if (text && text === fileVersions[filePath].text) {
+      return
     }
 
     queue[filePath].version++
@@ -28,7 +35,7 @@ export function createFileVersionManager(
       if (value.version === -1) {
         delete fileVersions[key]
       } else {
-        fileVersions[key] = value
+        fileVersions[key] = { version: value.version, text: sys.readFile(key)! }
       }
 
       return [key, value.version]

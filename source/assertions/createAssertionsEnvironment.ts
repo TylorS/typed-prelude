@@ -42,9 +42,13 @@ export function createAssertionsEnvironment(): AssertionEnvironment {
       notOk: wrapAssertionInProxy(notOk, context),
       notSame: wrapAssertionInProxy(notSame, context),
       ok: wrapAssertionInProxy(ok, context),
-      rejects: wrapAssertionInProxy(rejects, context),
+      rejects: wrapAssertionInProxy(rejects, context) as <Err extends Error = Error>(
+        promise: Promise<any>,
+      ) => Promise<Err>,
       same: wrapAssertionInProxy(same, context),
-      throws: wrapAssertionInProxy(throws, context),
+      throws: wrapAssertionInProxy(throws, context) as <Err extends Error = Error>(
+        fn: () => any,
+      ) => Err,
       doesNotThrow: wrapAssertionInProxy(doesNotThrow, context),
     },
   }

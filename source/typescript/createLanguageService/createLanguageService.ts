@@ -7,6 +7,7 @@ export interface LanguageServiceOptions {
   directory: string
   fileGlobs?: string[]
   syntaxOnly?: boolean
+  fileVersions?: Record<string, { version: number; text: string }>
 }
 
 const DEFAULT_EXCLUDE = ['node_modules/**/*']
@@ -15,7 +16,7 @@ export function createLanguageService(
   options: LanguageServiceOptions,
 ): {
   languageService: LanguageService
-  fileVersions: Record<string, { version: number }>
+  fileVersions: Record<string, { version: number; text: string }>
   fileGlobs: string[]
 } {
   const { tsConfig, syntaxOnly, directory } = options
@@ -23,7 +24,7 @@ export function createLanguageService(
   const fileGlobs = options.fileGlobs
     ? options.fileGlobs
     : [...files, ...include, ...exclude.map(x => `!${x}`)]
-  const fileVersions: Record<string, { version: number }> = {}
+  const fileVersions: Record<string, { version: number; text: string }> = options.fileVersions || {}
   const languageServiceHost = createLanguageServiceHost({
     directory,
     fileVersions,

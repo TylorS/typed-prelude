@@ -45,6 +45,7 @@ export type Project = {
 export type WatchSourceFilesOptions = {
   debounceMS?: number
   logger?: Logger
+  onFileRemoved?: (filePath: string) => void
 }
 
 export type DependencyMap = Record<string, string[]>
