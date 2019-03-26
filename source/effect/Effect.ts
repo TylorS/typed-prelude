@@ -5,6 +5,8 @@ import { callbackTask } from './callbackTask'
 
 export type EffectResources<A extends {} = {}> = A & { readonly scheduler: Scheduler }
 
+export type EffectValue<A> = A extends Effect<infer R, any> ? R : never
+
 // Generic Effect type
 export interface Effect<A, B extends {} = {}> {
   readonly runEffect: Arity2<Arity2<A, number, void>, EffectResources<B>, Disposable>

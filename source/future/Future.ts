@@ -15,14 +15,14 @@ export namespace Future {
       const { scheduler } = resources
       let resolved = false
       const resolve = (): void => ((resolved = true), void 0)
-      const left: <A>(value: A) => void = pipe(
-        Either.left,
-        x => !resolved && cb(x as Either<A, B>, scheduler.currentTime()),
+      const left = pipe(
+        (a: A) => Either.left<A, B>(a),
+        x => !resolved && cb(x, scheduler.currentTime()),
         resolve,
       )
-      const right: <B>(value: B) => void = pipe(
-        Either.of,
-        x => !resolved && cb(x as Either<A, B>, scheduler.currentTime()),
+      const right = pipe(
+        (b: B) => Either.of<B, A>(b),
+        x => !resolved && cb(x, scheduler.currentTime()),
         resolve,
       )
 
