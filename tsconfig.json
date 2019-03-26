@@ -20,7 +20,7 @@
     "sourceMap": true,
     "target": "es5",
     "paths": {
-      "@typed/*": ["./source/*", "./node_modules/@typed/"]
+      "@typed/*": ["./source/*", "./node_modules/@typed/*"]
     }
   },
   "include": [

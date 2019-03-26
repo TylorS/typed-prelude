@@ -10,8 +10,7 @@ export type CreateResultsPublisherOptions = {
 }
 
 export type ResultsPublisherOptions = {
-  testRunId: number
-  testMetadataId: Uuid
+  testRunId: Uuid
   results: TestResult[]
 }
 

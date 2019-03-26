@@ -44,8 +44,13 @@ export async function findNodeTests({
     }
   }
 
-  for (const m of metadata) {
-    for (const test of await tryRequire(m, logger)) {
+  const metadataTests = await Promise.all(
+    metadata.map(m => tryRequire(m, logger).then(tests => [m, tests] as [TestMetadata, Test[]])),
+  )
+
+  for (const [m, tests] of metadataTests) {
+    console.log(m, tests)
+    for (const test of tests) {
       addTestWithMetadata(test, m)
     }
   }

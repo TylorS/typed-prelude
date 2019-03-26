@@ -112,6 +112,7 @@ function nodeTreeToNodeMetadata(
   const info = getTestInfo(position, sourceFile)
 
   const metadata: NodeMetadata = {
+    id: uuid(),
     ...position,
     ...info,
     additionalTests: children.map(tree => nodeTreeToNodeMetadata(tree, sourceFile)),

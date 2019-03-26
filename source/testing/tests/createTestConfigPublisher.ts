@@ -1,5 +1,6 @@
 import { Disposable } from '@most/types'
 import { LogLevel } from '@typed/common/logger'
+import { Uuid } from '@typed/uuid'
 import { Publisher } from 'cote'
 import { TestConfig } from '../types'
 import { TestConfigEvent, testConfigEventNames } from './common'
@@ -10,7 +11,7 @@ export type CreateTestConfigPublisherOptions = {
 }
 
 export type TestConfigPublisher = Disposable & {
-  readonly publish: (testRunId: number, configs: TestConfig[]) => void
+  readonly publish: (testRunId: Uuid, configs: TestConfig[]) => void
 }
 
 export function createTestConfigPublisher({
@@ -21,7 +22,7 @@ export function createTestConfigPublisher({
     { namespace, name: 'TestConfig Publisher', broadcasts: testConfigEventNames },
     { log: LogLevel.DEBUG === logLevel },
   )
-  const publish = (testRunId: number, testConfigs: TestConfig[]) =>
+  const publish = (testRunId: Uuid, testConfigs: TestConfig[]) =>
     publisher.publish<TestConfigEvent>(testConfigEventNames[0], {
       type: 'testConfig',
       testRunId,

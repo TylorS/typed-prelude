@@ -1,5 +1,6 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
+import { Uuid } from '@typed/uuid'
 import { Subscriber } from 'cote'
 import { LogLevel, TestIdToMetadataId } from '../types'
 import { metadataEventNames, MetadataToTestIdEvent } from './common'
@@ -11,10 +12,10 @@ export type CreateTestIdToMetadataIdServerOptions = {
 
 export type TestIdToMetadataIdServer = Disposable & {
   readonly subscribe: (
-    testRunId: number,
+    testRunId: Uuid,
     cb: (TestIdToMetadataId: TestIdToMetadataId) => void,
   ) => Disposable
-  readonly once: (testRunId: number) => Promise<TestIdToMetadataId>
+  readonly once: (testRunId: Uuid) => Promise<TestIdToMetadataId>
 }
 
 export function createTestIdToMetadataIdServer({
@@ -26,7 +27,7 @@ export function createTestIdToMetadataIdServer({
     { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
-    number,
+    Uuid,
     TestIdToMetadataId
   >()
   const dispose = () => {

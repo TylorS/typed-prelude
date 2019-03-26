@@ -17,6 +17,8 @@ export type CreateFuseBoxOptions = {
   indexHtmlPath?: string
   log?: boolean
   plugins?: Plugin[]
+  writeBundles?: boolean
+  inlineSourceMaps?: boolean
 }
 
 export async function createFuseBox({
@@ -30,6 +32,8 @@ export async function createFuseBox({
   indexHtmlPath,
   log = false,
   plugins,
+  writeBundles,
+  inlineSourceMaps,
 }: CreateFuseBoxOptions): Promise<FuseBox> {
   const useDevServer = !!devServer || !!ssl
   const { compilerOptions, configPath } = tsConfig
@@ -48,14 +52,16 @@ export async function createFuseBox({
     transformers: customTransformers,
     hash,
     output,
+    writeBundles,
     plugins: plugins || [],
     log,
     emitHMRDependencies: true,
-    sourceMaps: useDevServer
-      ? {
-          inline: true,
-        }
-      : true,
+    sourceMaps:
+      inlineSourceMaps || useDevServer
+        ? {
+            inline: true,
+          }
+        : true,
   }
 
   if (useDevServer || indexHtmlPath) {

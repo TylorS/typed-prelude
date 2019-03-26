@@ -1,5 +1,6 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
+import { Uuid } from '@typed/uuid'
 import { Subscriber } from 'cote'
 import { LogLevel } from '../types'
 import { eventNames, ResultsEvent } from './common'
@@ -10,8 +11,8 @@ export type CreateResultsServerOptions = {
 }
 
 export type ResultsServer = Disposable & {
-  readonly subscribe: (testRunId: number, cb: (results: ResultsEvent) => void) => Disposable
-  readonly once: (testRunId: number) => Promise<ResultsEvent>
+  readonly subscribe: (testRunId: Uuid, cb: (results: ResultsEvent) => void) => Disposable
+  readonly once: (testRunId: Uuid) => Promise<ResultsEvent>
 }
 
 export function createResultsServer({
@@ -23,7 +24,7 @@ export function createResultsServer({
     { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
-    number,
+    Uuid,
     ResultsEvent
   >()
   const dispose = () => {

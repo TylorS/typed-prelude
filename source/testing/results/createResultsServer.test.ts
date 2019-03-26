@@ -17,7 +17,7 @@ export const test = timeout(
     given(`a namespace and a callback`, [
       it(`receives results`, async ({ equal }) => {
         const namespace = getMachineId()
-        const testRunId = 100
+        const testRunId = uuid()
         const testResults: TestResult[] = [{ testId: uuid(), type: 'pass' }]
         const server = createResultsServer({
           namespace,
@@ -33,7 +33,7 @@ export const test = timeout(
 
         await new Promise(resolve => publisher.onAdded(resolve))
 
-        publisher.publish({ testRunId, results: testResults, testMetadataId: uuid() })
+        publisher.publish({ testRunId, results: testResults })
 
         const actual = await server.once(testRunId)
 

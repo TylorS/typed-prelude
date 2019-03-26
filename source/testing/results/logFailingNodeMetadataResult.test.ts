@@ -13,6 +13,7 @@ export const test = describe(`logFailingNodeMetadataResult`, [
       const startingPosition = 25
       const endingPosition = startingPosition + text.length
       const result: NodeMetadataWithResult = {
+        id: uuid(),
         config: {
           id: testId,
           name: 'describe Things',

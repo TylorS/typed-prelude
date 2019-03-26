@@ -20,11 +20,10 @@ export function createResolveFilePath({
     moduleDirectory,
     basedir: '',
   }
+  const matchPath = tryCreateMatchPath(fields, tsConfig)
 
   return function resolveFilePath(basedir: string, moduleSpecifier: string) {
     try {
-      const matchPath = tryCreateMatchPath(fields, tsConfig)
-
       if (matchPath) {
         const path = matchPath(moduleSpecifier, undefined, undefined, extensions)
 

@@ -1,5 +1,6 @@
 import { Disposable } from '@most/types'
 import { Subscriptions } from '@typed/common/Subscriptions'
+import { Uuid } from '@typed/uuid'
 import { Subscriber } from 'cote'
 import { LogLevel, TestIdToTestConfig } from '../types'
 import { TestConfigEvent, testConfigEventNames } from './common'
@@ -10,8 +11,8 @@ export type CreateTestConfigServerOptions = {
 }
 
 export type TestConfigServer = Disposable & {
-  readonly subscribe: (testRunId: number, cb: (configs: TestIdToTestConfig) => void) => Disposable
-  readonly once: (testRunId: number) => Promise<TestIdToTestConfig>
+  readonly subscribe: (testRunId: Uuid, cb: (configs: TestIdToTestConfig) => void) => Disposable
+  readonly once: (testRunId: Uuid) => Promise<TestIdToTestConfig>
 }
 
 export function createTestConfigServer({
@@ -23,7 +24,7 @@ export function createTestConfigServer({
     { log: LogLevel.DEBUG === logLevel },
   )
   const { subscribe, once, dispose: clearSubscriptions, publish } = new Subscriptions<
-    number,
+    Uuid,
     TestIdToTestConfig
   >()
   const dispose = () => {

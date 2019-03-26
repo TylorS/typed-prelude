@@ -53,13 +53,13 @@ export type GroupResult = {
 }
 
 export interface TestMetadata extends NodeMetadata {
-  readonly id: Uuid
   readonly exportNames: string[]
   readonly filePath: string
   readonly additionalTests: NodeMetadata[]
 }
 
 export interface NodeMetadata extends NodePosition {
+  readonly id: Uuid
   readonly text: string
   readonly additionalTests: NodeMetadata[]
 }

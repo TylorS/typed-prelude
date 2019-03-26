@@ -15,8 +15,10 @@ export function createFileVersionManager(
     }
 
     const text = sys.readFile(filePath)
+    const versions = fileVersions[filePath]
 
-    if (text && text === fileVersions[filePath].text) {
+    // Don't update version if file has not changed
+    if (text && versions && text === versions.text) {
       return
     }
 

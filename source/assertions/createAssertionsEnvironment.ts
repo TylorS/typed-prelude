@@ -1,3 +1,4 @@
+import { curry } from '@typed/lambda'
 import { ok } from 'power-assert'
 import { doesNotThrow } from './doesNotThrow'
 import { equal } from './equal'
@@ -37,29 +38,17 @@ export function createAssertionsEnvironment(): AssertionEnvironment {
     stats: context,
     context,
     assertions: {
-      equal: wrapAssertionInProxy(equal, context),
-      notEqual: wrapAssertionInProxy(notEqual, context),
-      notOk: wrapAssertionInProxy(notOk, context),
-      notSame: wrapAssertionInProxy(notSame, context),
-      ok: wrapAssertionInProxy(ok, context),
-      rejects: wrapAssertionInProxy(rejects, context) as <Err extends Error = Error>(
-        promise: Promise<any>,
-      ) => Promise<Err>,
-      same: wrapAssertionInProxy(same, context),
-      throws: wrapAssertionInProxy(throws, context) as <Err extends Error = Error>(
-        fn: () => any,
-      ) => Err,
-      doesNotThrow: wrapAssertionInProxy(doesNotThrow, context),
+      equal: curry((a, b) => (context.count++, equal(a, b))),
+      notEqual: curry((a, b) => (context.count++, notEqual(a, b))),
+      notOk: x => (context.count++, notOk(x)),
+      notSame: curry((a, b) => (context.count++, notSame(a, b))),
+      ok: x => (context.count++, ok(x)),
+      rejects: <Err extends Error = Error>(promise: Promise<any>) => (
+        context.count++, rejects<Err>(promise)
+      ),
+      same: curry((a, b) => (context.count++, same(a, b))),
+      throws: <Err extends Error = Error>(fn: () => any) => (context.count++, throws<Err>(fn)),
+      doesNotThrow: x => (context.count++, doesNotThrow(x)),
     },
   }
-}
-
-function wrapAssertionInProxy<A extends Function>(fn: A, context: AssertionContext): A {
-  return new Proxy(fn, {
-    apply(target, that, args) {
-      context.count++
-
-      return target.apply(that, args)
-    },
-  })
 }
