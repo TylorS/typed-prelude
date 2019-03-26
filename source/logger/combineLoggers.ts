@@ -1,5 +1,5 @@
-import { Logger } from '@typed/common/logger'
 import { noOp } from '@typed/lambda'
+import { Logger } from './types'
 
 export function combineLoggers(...loggers: Logger[]): Logger {
   const logger: Logger = {

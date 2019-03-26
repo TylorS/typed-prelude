@@ -1,5 +1,5 @@
 import { Scheduler } from '@most/types'
-import { Logger, LogLevel } from '../types'
+import { Logger, LogLevel } from './types'
 
 export type CreateConsoleLoggerOptions = {
   logLevel: LogLevel

@@ -1,6 +1,6 @@
 import { Scheduler } from '@most/types'
 import { clone } from '@typed/objects'
-import { Logger, LogLevel } from '../types'
+import { Logger, LogLevel } from './types'
 
 export type CreateTestLoggerOptions = {
   logLevel: LogLevel
