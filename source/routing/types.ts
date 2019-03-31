@@ -11,3 +11,5 @@ export interface Route<A = unknown> {
 export type Routes<A = any> = Array<Route<A>>
 export type RouteParams<A> = A extends Route<infer R> ? R : never
 export type RoutesOf<A extends any[]> = { [K in keyof A]: Route<A[K]> }
+
+export { Path }
