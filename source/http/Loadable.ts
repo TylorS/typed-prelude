@@ -23,6 +23,9 @@ export namespace Loadable {
 export const isLoading = <A>(loadable: Loadable<A>): loadable is LoadingState =>
   (loadable as LoadingState)[LOADING] === true
 
+export const isErrorState = <A>(loadable: Loadable<A>): loadable is ErrorState =>
+  loadable.hasOwnProperty(ERROR)
+
 export const isDoneLoading = isJust as <A>(loadable: Loadable<A>) => loadable is Just<A>
 
 export const unwrapLoadable = <A, B>(loadable: Loadable<A>, fn: Arity1<A, B>): B | null =>
