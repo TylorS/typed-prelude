@@ -1,6 +1,6 @@
-import { createPerformanceTimer } from './createClockTimer'
-import { setTimeoutDelay } from './setTimeoutDelay'
+import { createPerformanceClock } from './clock'
+import { createClockTimer } from './createClockTimer'
 
 export function createTimer() {
-  return createPerformanceTimer(setTimeoutDelay)
+  return createClockTimer(createPerformanceClock())
 }

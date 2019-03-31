@@ -1,13 +1,28 @@
-import { createPerformanceClock } from './clock'
+import { Arity1 } from '@typed/lambda'
 import { Clock, Timer } from './types'
 
-export function createClockTimer(clock: Clock, delay: Timer['delay']): Timer {
+export function createClockTimer(clock: Clock): Timer {
   return {
     ...clock,
-    delay,
+    delay: (f, ms) => {
+      if (ms <= 0) {
+        return asap(f, clock)
+      }
+
+      const id = setTimeout(() => f(clock.currentTime()), ms)
+      const dispose = () => clearTimeout(id)
+
+      return { dispose }
+    },
   }
 }
 
-export function createPerformanceTimer(delay: Timer['delay']): Timer {
-  return createClockTimer(createPerformanceClock(), delay)
+function asap(f: Arity1<number>, clock: Clock) {
+  let disposed = false
+
+  Promise.resolve().then(() => !disposed && f(clock.currentTime()))
+
+  const dispose = () => (disposed = true)
+
+  return { dispose }
 }
