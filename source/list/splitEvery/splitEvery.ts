@@ -1,8 +1,11 @@
 import { curry } from '@typed/lambda'
 
-export const splitEvery = curry(function splitEvery<A>(amount: number, list: A[]): A[][] {
+export const splitEvery = curry(function splitEvery<A>(
+  amount: number,
+  list: ReadonlyArray<A>,
+): A[][] {
   if (amount <= 0) {
-    return [list]
+    return [list.slice()]
   }
 
   const result: A[][] = []
@@ -14,6 +17,6 @@ export const splitEvery = curry(function splitEvery<A>(amount: number, list: A[]
 
   return result
 }) as {
-  <A>(amount: number, list: A[]): A[][]
-  <A>(amount: number): (list: A[]) => A[][]
+  <A>(amount: number, list: ReadonlyArray<A>): A[][]
+  <A>(amount: number): (list: ReadonlyArray<A>) => A[][]
 }

@@ -4,6 +4,8 @@ import { toMaybe } from './toMaybe'
 
 export type Maybe<A> = Just<A> | Nothing
 
+export type MaybeOf<A> = { [K in keyof A]: Maybe<A[K]> }
+
 export type MaybeValue<A extends Maybe<any>> = A extends Maybe<infer R> ? R : never
 
 export namespace Maybe {

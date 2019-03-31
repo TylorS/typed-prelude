@@ -3,12 +3,17 @@ import { equals } from '@typed/logic'
 
 const isZero = equals(0)
 
-export const remove = curry(function remove<A>(index: number, amount: number, list: A[]): A[] {
+export const remove = curry(function remove<A>(
+  index: number,
+  amount: number,
+  list: ReadonlyArray<A>,
+): A[] {
   const length = list.length
 
   if (isZero(amount) || isZero(length) || index >= length) {
-    return list
+    return list.slice()
   }
+
   if (isZero(index) && amount >= length) {
     return []
   }
@@ -25,10 +30,10 @@ export const remove = curry(function remove<A>(index: number, amount: number, li
 
   return newList
 }) as {
-  <A>(index: number, amount: number, list: A[]): A[]
-  (index: number, amount: number): <A>(list: A[]) => A[]
+  <A>(index: number, amount: number, list: ReadonlyArray<A>): A[]
+  (index: number, amount: number): <A>(list: ReadonlyArray<A>) => A[]
   (index: number): {
-    <A>(amount: number, list: A[]): A[]
-    (amount: number): <A>(list: A[]) => A[]
+    <A>(amount: number, list: ReadonlyArray<A>): A[]
+    (amount: number): <A>(list: ReadonlyArray<A>) => A[]
   }
 }

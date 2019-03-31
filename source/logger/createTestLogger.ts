@@ -1,10 +1,11 @@
-import { Scheduler } from '@most/types'
+import { Env } from '@typed/env'
 import { clone } from '@typed/objects'
+import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
 
 export type CreateTestLoggerOptions = {
   logLevel: LogLevel
-  scheduler: Scheduler
+  clock: Clock
 }
 
 export type TestLogger = {
@@ -20,47 +21,62 @@ export type Log =
   | { readonly type: 'clear' }
   | { readonly type: 'info'; readonly message: string }
   | { readonly type: 'debug'; readonly message: string }
-  | { readonly type: 'time'; readonly label: string; readonly elapsed: number }
+  | { readonly type: 'timeStart'; readonly label: string; readonly time: number }
+  | { readonly type: 'timeEnd'; readonly label: string; readonly time: number }
 
-export function createTestLogger({ logLevel, scheduler }: CreateTestLoggerOptions): TestLogger {
+export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): TestLogger {
   const logs: Log[] = []
   const logger: Logger = {
-    log: async (msg: string) => {
-      if (logLevel > LogLevel.OFF) {
-        logs.push({ type: 'log', message: msg })
-      }
-    },
-    error: async (msg: string) => {
-      if (logLevel > LogLevel.OFF) {
-        logs.push({ type: 'error', message: msg })
-      }
-    },
-    clear: async () => {
-      if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
-        logs.push({ type: 'clear' })
-      }
-    },
-    info: async (msg: string) => {
-      if (logLevel >= LogLevel.INFO) {
-        logs.push({ type: 'info', message: msg })
-      }
-    },
-    debug: async (msg: string) => {
-      if (logLevel >= LogLevel.DEBUG) {
-        logs.push({ type: 'debug', message: msg })
-      }
-    },
-    time: (label: string) => {
-      if (logLevel < LogLevel.DEBUG) {
-        return async () => void 0
-      }
+    log: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF) {
+          logs.push({ type: 'log', message: msg })
+        }
+      }),
+    error: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF) {
+          logs.push({ type: 'error', message: msg })
+        }
+      }),
+    clear: () =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
+          logs.push({ type: 'clear' })
+        }
+      }),
+    info: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel >= LogLevel.INFO) {
+          logs.push({ type: 'info', message: msg })
+        }
+      }),
+    debug: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel >= LogLevel.DEBUG) {
+          logs.push({ type: 'debug', message: msg })
+        }
+      }),
+    timeStart: (label: string) =>
+      Env.fromIO(() => {
+        if (logLevel < LogLevel.DEBUG) {
+          return
+        }
 
-      const start = scheduler.currentTime()
+        const time = clock.currentTime()
 
-      return async (elapsed: number = scheduler.currentTime() - start) => {
-        logs.push({ type: 'time', label, elapsed })
-      }
-    },
+        logs.push({ type: 'timeStart', label, time })
+      }),
+    timeEnd: (label: string) =>
+      Env.fromIO(() => {
+        if (logLevel < LogLevel.DEBUG) {
+          return
+        }
+
+        const time = clock.currentTime()
+
+        logs.push({ type: 'timeEnd', label, time })
+      }),
   }
 
   return {

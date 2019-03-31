@@ -1,5 +1,6 @@
-import { Future } from '@typed/future'
-import { Disposable } from 'fuse-box/EventEmitter'
+import { Disposable } from '@typed/disposable'
+import { Env } from '@typed/env'
+import { Loadable } from './Loadable'
 
 export type HttpOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
@@ -16,9 +17,9 @@ export type HttpResponse = {
 
 // A type-param is used to represent a parsed type
 // @ts-ignore
-export interface Request<A extends {}> extends Future<Error, HttpResponse, HttpResources> {}
+export interface Request<A extends {}> extends Env<HttpEnv, Loadable<HttpResponse>> {}
 
-export type HttpResources = {
+export type HttpEnv = {
   readonly http: (
     url: string,
     options: HttpOptions,

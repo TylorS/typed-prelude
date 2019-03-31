@@ -2,7 +2,7 @@ import { curry } from '@typed/lambda'
 import { includes } from '../includes'
 
 export const uniqBy = curry(
-  <A, B>(toComparisonValue: (value: A, index: number) => B, list: A[]): A[] => {
+  <A, B>(toComparisonValue: (value: A, index: number) => B, list: ReadonlyArray<A>): A[] => {
     const valuesSeen: B[] = []
     const result: A[] = []
 
@@ -21,6 +21,6 @@ export const uniqBy = curry(
     return result
   },
 ) as {
-  <A, B>(toComparisonValue: (value: A, index: number) => B, list: A[]): A[]
-  <A, B>(toComparisonValue: (value: A, index: number) => B): (list: A[]) => A[]
+  <A, B>(toComparisonValue: (value: A, index: number) => B, list: ReadonlyArray<A>): A[]
+  <A, B>(toComparisonValue: (value: A, index: number) => B): (list: ReadonlyArray<A>) => A[]
 }

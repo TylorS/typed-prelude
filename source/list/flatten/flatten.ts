@@ -1,6 +1,6 @@
-export type NestedArray<A> = Array<A | A[]>
+export type NestedArray<A> = ReadonlyArray<A | ReadonlyArray<A>>
 
-export function flatten<A>(list: A[] | NestedArray<A>): A[] {
+export function flatten<A>(list: ReadonlyArray<A> | NestedArray<A>): A[] {
   return (list as A[]).reduce(flattenReducer, [] as A[])
 }
 

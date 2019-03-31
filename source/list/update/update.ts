@@ -1,6 +1,10 @@
 import { curry } from '@typed/lambda'
 
-export const update = curry(function update<A>(index: number, value: A, list: A[]): A[] {
+export const update = curry(function update<A>(
+  index: number,
+  value: A,
+  list: ReadonlyArray<A>,
+): A[] {
   const length = list.length
   const newList = list.slice()
 
@@ -12,10 +16,10 @@ export const update = curry(function update<A>(index: number, value: A, list: A[
 
   return newList
 }) as {
-  <A>(index: number, value: A, list: A[]): A[]
-  <A>(index: number, value: A): (list: A[]) => A[]
+  <A>(index: number, value: A, list: ReadonlyArray<A>): A[]
+  <A>(index: number, value: A): (list: ReadonlyArray<A>) => A[]
   (index: number): {
-    <A>(value: A, list: A[]): A[]
-    <A>(value: A): (list: A[]) => A[]
+    <A>(value: A, list: ReadonlyArray<A>): A[]
+    <A>(value: A): (list: ReadonlyArray<A>) => A[]
   }
 }

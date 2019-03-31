@@ -3,7 +3,7 @@ import { Match } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 
 export interface Route<A = unknown> {
-  readonly path: string
+  readonly path: Path
   readonly match: Match<Path, A>
   readonly createPath: (params: A, trailingSlash?: boolean) => Maybe<Path>
 }

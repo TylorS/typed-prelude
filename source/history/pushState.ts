@@ -1,20 +1,22 @@
-import { asap, currentTime } from '@most/scheduler'
-import { Effect } from '@typed/effect'
-import { callbackTask } from '@typed/effect/callbackTask'
+import { Disposable } from '@typed/disposable'
+import { Env } from '@typed/env'
 import { curry } from '@typed/lambda'
-import { HistoryResources } from './types'
+import { Tuple } from '@typed/tuple'
+import { HistoryEnv, Path } from './types'
 
-export const pushState = curry(
-  (data: any, url: string): Effect<Location, HistoryResources> =>
-    Effect.create((cb, { history, location, scheduler }) => {
-      function pushState() {
-        history.pushState(data, '', url)
+export const pushState: {
+  <A>(data: A, path: Path): Env<HistoryEnv<A>, Tuple<A, Location>>
+  <A>(data: A): (path: Path) => Env<HistoryEnv<A>, Tuple<A, Location>>
+} = curry(
+  <A>(data: A, path: Path): Env<HistoryEnv<A>, Tuple<A, Location>> => ({
+    runEnv: (f, { history, location }) => {
+      history.pushState(data, '', path)
 
-        cb(location, currentTime(scheduler))
-      }
+      f([data, location])
 
-      return asap(callbackTask(pushState, void 0), scheduler)
-    }),
+      return Disposable.None
+    },
+  }),
 )
 
 export const pushPath = pushState(null)

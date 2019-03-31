@@ -23,7 +23,12 @@ export const reduceBy = curry(
 ) as ReduceByArity4
 
 export interface ReduceByArity4 {
-  <A, B>(f: (acc: B, value: A) => B, seed: B, by: (a: A) => PropertyKey | number, list: A[]): {
+  <A, B>(
+    f: (acc: B, value: A) => B,
+    seed: B,
+    by: (a: A) => PropertyKey | number,
+    list: ReadonlyArray<A>,
+  ): {
     readonly [key: string]: B
   }
 
@@ -33,14 +38,16 @@ export interface ReduceByArity4 {
 }
 
 export interface ReduceByArity3<A, B> {
-  (seed: B, by: (a: A) => PropertyKey | number, list: A[]): { readonly [key: string]: B }
+  (seed: B, by: (a: A) => PropertyKey | number, list: ReadonlyArray<A>): {
+    readonly [key: string]: B
+  }
   (seed: B, by: (a: A) => PropertyKey | number): ReduceByArity1<A, B>
   (seed: B): ReduceByArity2<A, B>
 }
 
 export interface ReduceByArity2<A, B> {
-  (by: (a: A) => PropertyKey | number, list: A[]): { readonly [key: string]: B }
+  (by: (a: A) => PropertyKey | number, list: ReadonlyArray<A>): { readonly [key: string]: B }
   (by: (a: A) => PropertyKey | number): ReduceByArity1<A, B>
 }
 
-export type ReduceByArity1<A, B> = (list: A[]) => { readonly [key: string]: B }
+export type ReduceByArity1<A, B> = (list: ReadonlyArray<A>) => { readonly [key: string]: B }

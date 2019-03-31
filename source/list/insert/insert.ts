@@ -1,15 +1,15 @@
 import { curry } from '@typed/lambda'
 
 export const insert = curry(__insert) as {
-  <A>(index: number, value: A, list: A[]): A[]
-  <A>(index: number, value: A): (list: A[]) => A[]
+  <A>(index: number, value: A, list: ReadonlyArray<A>): A[]
+  <A>(index: number, value: A): (list: ReadonlyArray<A>) => A[]
   <A>(index: number): {
     (value: A, list: A[]): A[]
     (value: A): (list: A[]) => A[]
   }
 }
 
-function __insert<A>(index: number, value: A, list: A[]): A[] {
+function __insert<A>(index: number, value: A, list: ReadonlyArray<A>): A[] {
   const length = list.length
 
   if (length === 0) {

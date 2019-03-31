@@ -1,49 +1,64 @@
-import { Scheduler } from '@most/types'
+import { Env } from '@typed/env'
+import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
 
 export type CreateConsoleLoggerOptions = {
   logLevel: LogLevel
-  scheduler: Scheduler
+  clock: Clock
 }
 
-export function createConsoleLogger({ logLevel, scheduler }: CreateConsoleLoggerOptions): Logger {
+export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOptions): Logger {
+  const timers: Record<string, number> = {}
+
   const logger: Logger = {
-    log: async (msg: string) => {
-      if (logLevel > LogLevel.OFF) {
-        console.log(msg)
-      }
-    },
-    error: async (msg: string) => {
-      if (logLevel > LogLevel.OFF) {
-        console.error(msg)
-      }
-    },
-    clear: async () => {
-      if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
-        console.clear()
-      }
-    },
-    info: async (msg: string) => {
-      if (logLevel >= LogLevel.INFO) {
-        console.info(msg)
-      }
-    },
-    debug: async (msg: string) => {
-      if (logLevel >= LogLevel.DEBUG) {
-        console.debug(msg)
-      }
-    },
-    time: (label: string) => {
-      if (logLevel < LogLevel.DEBUG) {
-        return async () => void 0
-      }
+    log: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF) {
+          console.log(msg)
+        }
+      }),
+    error: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF) {
+          console.error(msg)
+        }
+      }),
+    clear: () =>
+      Env.fromIO(() => {
+        if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
+          console.clear()
+        }
+      }),
+    info: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel >= LogLevel.INFO) {
+          console.info(msg)
+        }
+      }),
+    debug: (msg: string) =>
+      Env.fromIO(() => {
+        if (logLevel >= LogLevel.DEBUG) {
+          console.debug(msg)
+        }
+      }),
+    timeStart: (label: string) =>
+      Env.fromIO(() => {
+        if (logLevel < LogLevel.DEBUG) {
+          return
+        }
 
-      const start = scheduler.currentTime()
+        timers[label] = clock.currentTime()
+      }),
+    timeEnd: (label: string) =>
+      Env.fromIO(() => {
+        if (logLevel < LogLevel.DEBUG || !timers[label]) {
+          return
+        }
 
-      return async (elapsed: number = scheduler.currentTime() - start) => {
-        await logger.debug(`${label}: ${elapsed}ms`)
-      }
-    },
+        const startTime = timers[label]
+
+        console.debug(`${label}: ${startTime - clock.currentTime()}ms`)
+      }),
   }
 
   return logger

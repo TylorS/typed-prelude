@@ -3,9 +3,9 @@ import { ascend } from '../ascend'
 import { chain } from '../chain'
 import { groupBy } from '../groupBy'
 
-export function multiSort<A>(sortFns: Array<Arity1<A, PropertyKey>>, list: A[]): A[] {
+export function multiSort<A>(sortFns: Array<Arity1<A, PropertyKey>>, list: ReadonlyArray<A>): A[] {
   if (sortFns.length === 0 || list.length === 0) {
-    return list
+    return list.slice()
   }
 
   const initialObject = groupBy(sortFns[0], list)

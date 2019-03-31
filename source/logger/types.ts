@@ -1,3 +1,5 @@
+import { Pure } from '@typed/env'
+
 export const enum LogLevel {
   OFF,
   DEFAULT,
@@ -7,12 +9,13 @@ export const enum LogLevel {
 
 export interface Logger {
   // Default
-  readonly log: (msg: string) => Promise<void>
-  readonly error: (msg: string) => Promise<void>
-  readonly clear: () => Promise<void>
+  readonly log: (msg: string) => Pure<void>
+  readonly error: (msg: string) => Pure<void>
+  readonly clear: () => Pure<void>
   // Info
-  readonly info: (msg: string) => Promise<void>
+  readonly info: (msg: string) => Pure<void>
   // Debug
-  readonly debug: (msg: string) => Promise<void>
-  readonly time: (label: string) => (elapsed?: number) => Promise<void>
+  readonly debug: (msg: string) => Pure<void>
+  readonly timeStart: (label: string) => Pure<void>
+  readonly timeEnd: (label: string) => Pure<void>
 }

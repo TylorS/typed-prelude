@@ -1,11 +1,11 @@
 import { curry } from '@typed/lambda'
 
 export const join = curry(__join) as {
-  <A>(separator: string, list: A[]): string
-  <A>(separator: string): (list: A[]) => string
+  <A>(separator: string, list: ArrayLike<A>): string
+  <A>(separator: string): (list: ArrayLike<A>) => string
 }
 
-function __join<A>(separator: string, list: A[]): string {
+function __join<A>(separator: string, list: ArrayLike<A>): string {
   let str = ''
   const length = list.length
 

@@ -3,20 +3,20 @@ import { equals, greaterThan, ifElse, lessThan, or } from '@typed/logic'
 import { decrement, increment } from '@typed/math'
 
 export const move = curry(__move) as {
-  <A>(fromIndex: number, toIndex: number, list: A[]): A[]
-  (fromIndex: number, toIndex: number): <A>(list: A[]) => A[]
+  <A>(fromIndex: number, toIndex: number, list: ArrayLike<A>): A[]
+  (fromIndex: number, toIndex: number): <A>(list: ArrayLike<A>) => A[]
   (fromIndex: number): {
-    <A>(toIndex: number, list: A[]): A[]
-    (toIndex: number): <A>(list: A[]) => A[]
+    <A>(toIndex: number, list: ArrayLike<A>): A[]
+    (toIndex: number): <A>(list: ArrayLike<A>) => A[]
   }
 }
 
-function __move<A>(fromIndex: number, toIndex: number, list: A[]): A[] {
+function __move<A>(fromIndex: number, toIndex: number, list: ArrayLike<A>): A[] {
   const length = list.length
   const newArray = Array(length)
 
   if (outOfBounds(length, toIndex) || outOfBounds(length, fromIndex)) {
-    return list
+    return Array.from(list)
   }
 
   for (let i = 0; i < length; ++i) {

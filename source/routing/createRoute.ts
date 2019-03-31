@@ -11,7 +11,7 @@ export function createRoute<A extends Record<string, string | number> = {}>(
   const parts = pathParts(path)
 
   return {
-    path,
+    path: pathJoin(['/', path]),
     match: (href: Path): Maybe<A> => {
       const matches = regex.exec(href)
 
