@@ -1,13 +1,13 @@
 import { Disposable } from '@typed/disposable'
-import { IO } from '@typed/lambda'
+import { Arity1, IO } from '@typed/lambda'
 import { createVirtualClock } from './createVirtualClock'
 import { VirtualTimer } from './types'
 
 export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
-  const tasks: Map<number, IO[]> = new Map()
+  const tasks: Map<number, Array<Arity1<number>>> = new Map()
   const clock = createVirtualClock(startingTime)
 
-  function removeTask(time: number, f: IO) {
+  function removeTask(time: number, f: Arity1<number>) {
     const tasksAtTime = tasks.get(time)
 
     if (!tasksAtTime) {
@@ -25,7 +25,7 @@ export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
     }
   }
 
-  function addTask(time: number, f: IO) {
+  function addTask(time: number, f: Arity1<number>) {
     const tasksAtTime = tasks.get(time) || []
 
     tasksAtTime.push(f)
@@ -48,10 +48,10 @@ export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
   function timesToRun(currentTime: number) {
     const times = Array.from(tasks.keys())
 
-    return times.sort().filter(x => x <= currentTime)
+    return times.filter(x => x <= currentTime).sort()
   }
 
-  function delay(f: () => void, delayMS: number): Disposable {
+  function delay(f: Arity1<number>, delayMS: number): Disposable {
     const time = clock.currentTime() + delayMS
 
     addTask(time, f)
