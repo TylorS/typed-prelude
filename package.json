@@ -24,21 +24,16 @@
   },
   "devDependencies": {
     "@typed/test": "9.0.0",
-    "@types/node": "10.12.18",
+    "@types/node": "11.12.2",
     "lint-staged": "8.1.5",
     "prettier": "1.16.4",
     "ts-node": "8.0.3",
-    "tslint": "5.14.1",
+    "tslint": "5.14.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "^3.4.0-dev.20190326"
+    "typescript": "^3.4.1"
   },
   "peerDependencies": {
-    "typescript": "^3.4.0-dev.20190326"
-  },
-  "dependencies": {
-    "@most/disposable": "1.2.1",
-    "@most/scheduler": "1.2.2",
-    "@most/types": "1.0.1"
+    "typescript": "^3.4.1"
   }
 }
