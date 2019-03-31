@@ -1,5 +1,6 @@
 import { Disposable } from '@typed/disposable'
-import { Arity1, IO } from '@typed/lambda'
+import { Arity1, id, IO } from '@typed/lambda'
+import { ascend } from '@typed/list'
 import { createVirtualClock } from './createVirtualClock'
 import { VirtualTimer } from './types'
 
@@ -48,7 +49,7 @@ export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
   function timesToRun(currentTime: number) {
     const times = Array.from(tasks.keys())
 
-    return times.filter(x => x <= currentTime).sort()
+    return times.filter(x => x <= currentTime).sort(ascend(id))
   }
 
   function delay(f: Arity1<number>, delayMS: number): Disposable {
