@@ -5,11 +5,9 @@ import { Arity1, Arity2, IO } from '@typed/lambda'
 export interface Env<A = any, B = any> {
   readonly runEnv: Arity2<Arity1<B>, A, Disposable>
 }
-export interface Pure<A = any> extends Env<never, A> {
-  readonly runEnv: Arity1<Arity1<A>, Disposable>
-}
+export interface Pure<A = any> extends Env<{}, A> {}
 
-export type EnvOf<A, B> = { [K in keyof B]: Env<A, B[K]> }
+export type EnvOf<A, B> = { readonly [K in keyof B]: Env<A, B[K]> }
 
 export type Handle<A, E extends Env<any, any>> = Exclude<
   keyof EnvResources<E>,
@@ -25,4 +23,14 @@ export namespace Env {
   /** Can not be cancelled */
   export const of = <A>(value: A): Pure<A> => ({ runEnv: cb => (cb(value), Disposable.None) })
   export const fromIO = <A>(fn: IO<A>): Pure<A> => ({ runEnv: cb => (cb(fn()), Disposable.None) })
+
+  export const create = <E, A>(runEnv: Env<E, A>['runEnv']): Env<E, A> => ({ runEnv })
+}
+
+export function isEnv<A, B>(x: any): x is Env<A, B> {
+  return x && x.runEnv && typeof x.runEnv === 'function'
+}
+
+export function runPure<A>(f: Arity1<A>, { runEnv }: Pure<A> | Env<{}, A>): Disposable {
+  return runEnv(a => f(a), {})
 }
