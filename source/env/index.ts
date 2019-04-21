@@ -7,3 +7,5 @@ export * from './withEnv'
 export * from './combineArray'
 export * from './mapTo'
 export * from './repeat'
+
+export * from '../common/executionEnvironment'

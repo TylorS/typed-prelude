@@ -1,4 +1,4 @@
-export const NOTHING = Symbol.for('Nothing')
+export const NOTHING = '@typed/Nothing' as const
 export type NOTHING = typeof Nothing
 /**
  * The Nothing type, used in place of nulls or undefined.

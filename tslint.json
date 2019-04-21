@@ -1,6 +1,12 @@
 {
-  "extends": ["tslint:recommended", "tslint-config-prettier"],
-  "rulesDirectory": ["tslint-plugin-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-prettier",
+    "tslint-no-circular-imports"
+  ],
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ],
   "rules": {
     "prettier": true,
     "no-namespace": false,

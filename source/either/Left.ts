@@ -1,4 +1,4 @@
-export const LEFT = Symbol.for('Left')
+export const LEFT = '@typed/Left' as const
 export type LEFT = typeof LEFT
 
 /**

@@ -1,6 +1,5 @@
 import { Just } from './Just'
 import { Nothing } from './Nothing'
-import { toMaybe } from './toMaybe'
 
 export type Maybe<A> = Just<A> | Nothing
 
@@ -14,5 +13,6 @@ export namespace Maybe {
    * a `Nothing` will be returned. All other values will be wrapped in a `Just`.
    * @name Maybe.of<A>(value: A): Maybe<A>
    */
-  export const of: <A>(value: A | null | undefined | void) => Maybe<A> = toMaybe
+  export const of = <A>(value: A | null | undefined | void): Maybe<A> =>
+    value == null ? Nothing : Just.of<A>(value)
 }

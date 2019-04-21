@@ -1,4 +1,4 @@
-export const JUST = Symbol.for('JUST')
+export const JUST = '@typed/Just' as const
 export type JUST = typeof JUST
 /**
  * A JSON-serializable Just data-structure

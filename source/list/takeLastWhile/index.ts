@@ -1,5 +1,5 @@
 import { curry } from '@typed/lambda'
-import { slice } from '@typed/list'
+import { slice } from '../slice'
 
 export const takeLastWhile: {
   <A>(f: (a: A, i: number) => boolean, list: ArrayLike<A>): A[]
