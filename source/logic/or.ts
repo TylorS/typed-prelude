@@ -1,5 +1,12 @@
 import { curry, Is, Predicate } from '@typed/lambda'
 
+/**
+ * Returns true if either predicates return true.
+ * @param predicate1 :: (a -> boolean)
+ * @param predicate2 :: (a -> boolean)
+ * @param value :: a
+ * @returns :: boolean
+ */
 export const or = curry(__or) as {
   <C, A extends C, B extends C>(predicate1: Is<A>, predicate2: Is<B>, value: C): value is A | B
   <C, A extends C, B extends C>(predicate1: Is<A>, predicate2: Is<B>): (value: C) => value is A | B

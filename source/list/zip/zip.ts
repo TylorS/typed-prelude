@@ -1,5 +1,11 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Zip together two lists into a list of Tuples
+ * @param xs :: [a]
+ * @param ys :: [b]
+ * @returns :: [(a, b)]
+ */
 export const zip = curry(function zip<A, B>(
   xs: ReadonlyArray<A>,
   ys: ReadonlyArray<B>,

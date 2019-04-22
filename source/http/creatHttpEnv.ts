@@ -6,6 +6,9 @@ import { HttpEnv, HttpOptions, HttpResponse } from './types'
 
 const IS_HTTPS = /https/
 
+/**
+ * Creates an Http Environment that works in browser and node.
+ */
 export function createHttpEnv(): HttpEnv {
   return { http: httpRequest }
 }

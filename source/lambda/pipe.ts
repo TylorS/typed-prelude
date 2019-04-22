@@ -1,6 +1,11 @@
 import { Arity1, IO } from './types'
 
+/** Left-to-right composition for exactly two function */
 export const pipe2 = <A, B, C>(f: Arity1<A, B>, g: Arity1<B, C>) => (x: A): C => g(f(x))
+
+/**
+ * Generic Left-to-right composition
+ */
 export const pipe: Pipe = ((...fns: Arity1[]) =>
   fns.length > 1 ? fns.slice(1).reduce(pipe2, fns[0]) : fns[0]) as Pipe
 

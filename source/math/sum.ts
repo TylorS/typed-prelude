@@ -1,3 +1,4 @@
 import { add } from './add'
 
-export const sum = (numbers: number[]): number => numbers.reduce(add, 0)
+/** Get the sum of a list of numbers */
+export const sum = (numbers: ReadonlyArray<number>): number => numbers.reduce(add, 0)

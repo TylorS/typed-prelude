@@ -1,5 +1,11 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Going together a list into a string separated by some string.
+ * @param separator :: string
+ * @param list :: [a]
+ * @returns :: string
+ */
 export const join = curry(__join) as {
   <A>(separator: string, list: ArrayLike<A>): string
   <A>(separator: string): (list: ArrayLike<A>) => string

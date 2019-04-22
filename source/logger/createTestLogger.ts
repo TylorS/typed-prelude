@@ -24,6 +24,9 @@ export type Log =
   | { readonly type: 'timeStart'; readonly label: string; readonly time: number }
   | { readonly type: 'timeEnd'; readonly label: string; readonly time: number }
 
+/**
+ * Create a logger suitable for testing environments.
+ */
 export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): TestLogger {
   const logs: Log[] = []
   const logger: Logger = {

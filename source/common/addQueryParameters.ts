@@ -5,6 +5,13 @@ export function addQueryParameters(
 export function addQueryParameters(
   url: string,
 ): (queryParams: Record<string, string | undefined>) => string
+
+/**
+ * Append Query Parameters to a Url
+ * @param url :: String
+ * @param queryParams :: Record<string, string | undefined>
+ * @returns string
+ */
 export function addQueryParameters(url: string, queryParams?: Record<string, string | undefined>) {
   if (queryParams === undefined) {
     return (queryParams: Record<string, string | undefined>) =>

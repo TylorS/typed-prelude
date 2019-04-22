@@ -44,27 +44,27 @@ lib.es2015
 .tmp
 .cache-loader
 /common/
-/effect/
 /either/
-/future/
+/env/
+/history/
+/http/
 /lambda/
 /list/
+/logger/
 /logic/
 /math/
 /maybe/
+/new-type/
 /objects/
+/promises/
+/routing/
+/storage/
 /strings/
-/tuple/
+/subscription/
 /uuid/
 /index.js
 /index.d.ts
 /index.js.map
-/dom/
-/history/
-/http/
-/storage/
-/routing/
-/store/
 
 # other stuff
 src/test.ts

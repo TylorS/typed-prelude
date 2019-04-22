@@ -1,5 +1,12 @@
 import { ComparableValues, ComparisonNumbers, curry } from '@typed/lambda'
 
+/**
+ * Sort a function in ascending order given a comparison function.
+ * @param f :: (a -> b)
+ * @param a :: a
+ * @param b :: a
+ * @returns :: int
+ */
 export const ascend = curry(function ascend<A, B extends ComparableValues>(
   f: (a: A) => B,
   a: A,

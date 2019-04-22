@@ -1,7 +1,6 @@
 import { describe, given, it, Test } from '@typed/test'
 
-import { Uuid } from '../Uuid'
-import { UuidSeed } from '../Uuid'
+import { Uuid, UuidSeed } from '../types'
 import { uuid4 } from './uuid4'
 
 export const test: Test = describe(`uuid4`, [

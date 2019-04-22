@@ -1,5 +1,11 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Split a list into a list of lists containing a specified amount of values.
+ * @param amount :: int
+ * @param list :: [a]
+ * @returns :: [[a]]
+ */
 export const splitEvery = curry(function splitEvery<A>(
   amount: number,
   list: ReadonlyArray<A>,

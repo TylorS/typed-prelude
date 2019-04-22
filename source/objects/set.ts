@@ -1,6 +1,9 @@
 import { curry } from '@typed/lambda'
 import { clone } from '../common/clone'
 
+/**
+ * Set the value of an object
+ */
 export const set = curry(__set) as {
   <K extends PropertyKey, V, O extends { [Key in K]: V }>(key: K, value: V, obj: O): O
   <K extends PropertyKey, V>(key: K, value: V): <O extends { [Key in K]: V }>(obj: O) => O

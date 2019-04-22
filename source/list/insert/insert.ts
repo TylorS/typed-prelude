@@ -1,5 +1,12 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Insert a value at a given index
+ * @param index :: int
+ * @param value :: a
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const insert = curry(__insert) as {
   <A>(index: number, value: A, list: ReadonlyArray<A>): A[]
   <A>(index: number, value: A): (list: ReadonlyArray<A>) => A[]

@@ -1,5 +1,12 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Replace a value at a given index
+ * @param index :: int
+ * @param value :: a
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const update = curry(function update<A>(
   index: number,
   value: A,

@@ -1,11 +1,11 @@
 import { describe, given, it, Test } from '@typed/test'
-import { pathJoin } from './pathJoin'
+import { Path, pathJoin } from './pathJoin'
 
 export const test: Test = describe(`pathJoin`, [
   given(`a array of paths without deliminators`, [
     it(`joins the path parts with deliminators`, ({ equal }) => {
       const parts = ['a', 'b', 'c']
-      const expected = '/a/b/c'
+      const expected = '/a/b/c' as Path
       const actual = pathJoin(parts)
 
       equal(expected, actual)
@@ -15,7 +15,7 @@ export const test: Test = describe(`pathJoin`, [
   given(`a array of paths with many deliminators`, [
     it(`joins the path parts with only a single deliminator between each`, ({ equal }) => {
       const parts = ['//a//', '//b////', 'c//']
-      const expected = '/a/b/c/'
+      const expected = '/a/b/c/' as Path
       const actual = pathJoin(parts)
 
       equal(expected, actual)
@@ -25,7 +25,7 @@ export const test: Test = describe(`pathJoin`, [
   given(`an array with && expressions`, [
     it(`filters out non-string values`, ({ equal }) => {
       const parts = ['a', false && 'b', 'c']
-      const expected = '/a/c'
+      const expected = '/a/c' as Path
       const actual = pathJoin(parts)
 
       equal(expected, actual)
@@ -35,7 +35,7 @@ export const test: Test = describe(`pathJoin`, [
   given('an array of paths and trailingSlash=true', [
     it(`returns a path with a trailing slash`, ({ equal }) => {
       const parts = ['a', 'b', 'c']
-      const expected = '/a/b/c/'
+      const expected = '/a/b/c/' as Path
       const actual = pathJoin(parts, true)
 
       equal(expected, actual)

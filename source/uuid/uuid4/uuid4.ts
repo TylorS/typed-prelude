@@ -1,4 +1,4 @@
-import { Uuid, UuidSeed } from '../Uuid'
+import { Uuid, UuidSeed } from '../types'
 
 export function uuid4(seed: UuidSeed): Uuid {
   return ((seed[0].toString(16) +

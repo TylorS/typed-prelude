@@ -7,8 +7,13 @@ const isString = (x: any) => typeof x === 'string'
 
 export type Path = NewType<string, 'Path'>
 
+/**
+ *
+ * @param paths :: string[] A list of paths to join together
+ * @param trailingSlash :: boolean whether or not to append a trailing slash
+ */
 export function pathJoin(
-  paths: Array<string | undefined | null | void | boolean>,
+  paths: ReadonlyArray<string | Path | undefined | null | void | boolean>,
   trailingSlash: boolean = false,
 ): Path {
   const path = `/${paths.filter(isString).join(PATH_SEPARATOR)}`.replace(

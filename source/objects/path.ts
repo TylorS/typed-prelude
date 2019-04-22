@@ -3,6 +3,9 @@ import { chain, Maybe } from '@typed/maybe'
 import { prop } from './prop'
 import { ObjectPath } from './types'
 
+/**
+ * Get value at a given path.
+ */
 export const path = curry(
   <Keys extends PropertyKey[], A extends object>(keys: Keys, obj: A): Maybe<ObjectPath<A, Keys>> =>
     (keys.length === 0

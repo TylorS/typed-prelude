@@ -1,20 +1,10 @@
+import { tryCatch } from '@typed/either'
 import { Env, map } from '@typed/env'
-import { fromJust } from '@typed/maybe'
-import { isDoneLoading, Loadable } from './Loadable'
-import { HttpEnv, Request } from './types'
+import { chain, Loadable } from '@typed/loadable'
+import { HttpEnv, HttpRequest } from './types'
 
-export const toJson = <A extends {} = {}>(request: Request<A>): Env<HttpEnv, Loadable<A>> =>
-  map(loadable => {
-    if (!isDoneLoading(loadable)) {
-      return loadable
-    }
-
-    try {
-      const { responseText } = fromJust(loadable)
-      const json = JSON.parse(responseText)
-
-      return Loadable.of(json)
-    } catch (error) {
-      return Loadable.error(error)
-    }
-  }, request)
+export const toJson = <A>(request: HttpRequest): Env<HttpEnv, Loadable<Error, A>> =>
+  map(
+    loadable => chain(({ responseText }) => tryCatch(() => JSON.parse(responseText)), loadable),
+    request,
+  )

@@ -7,6 +7,9 @@ export type CreateConsoleLoggerOptions = {
   clock: Clock
 }
 
+/**
+ * Create a logger that wraps the console.
+ */
 export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOptions): Logger {
   const timers: Record<string, number> = {}
 

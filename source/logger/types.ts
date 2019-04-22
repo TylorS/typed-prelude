@@ -7,6 +7,9 @@ export const enum LogLevel {
   DEBUG,
 }
 
+/**
+ * Generic logging type
+ */
 export interface Logger {
   // Default
   readonly log: (msg: string) => Pure<void>

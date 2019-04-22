@@ -1,6 +1,12 @@
 import { curry } from '@typed/lambda'
 import { includes } from '../includes'
 
+/**
+ * Remove duplicate values from a list given a comparison function.
+ * @param comparison :: (a -> int -> b)
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const uniqBy = curry(
   <A, B>(toComparisonValue: (value: A, index: number) => B, list: ReadonlyArray<A>): A[] => {
     const valuesSeen: B[] = []

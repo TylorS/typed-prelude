@@ -1,7 +1,7 @@
-import { RandomNumberGenerator, UuidSeed } from '../Uuid'
+import { UuidEnv, UuidSeed } from '../types'
 import { VALID_UUID_LENGTH } from './constants'
 
-export class NodeGenerator implements RandomNumberGenerator {
+export class NodeGenerator implements UuidEnv {
   private nodeCrypto: typeof import('crypto')
   constructor() {
     this.nodeCrypto = require('crypto')

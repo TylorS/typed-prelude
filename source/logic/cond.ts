@@ -1,12 +1,18 @@
 import { curry, Predicate } from '@typed/lambda'
 import { Maybe, Nothing } from '@typed/maybe'
 
+/**
+ * Basic pattern matching
+ * @param conditionals :: [((a -> boolean), (a -> b))]
+ * @param value :: a
+ * @returns :: Maybe b
+ */
 export const cond = curry(__cond) as {
-  <A, B>(conditions: Array<Conditional<A, B>>, value: A): Maybe<B>
-  <A, B>(conditions: Array<Conditional<A, B>>): (value: A) => Maybe<B>
+  <A, B>(conditions: ReadonlyArray<Conditional<A, B>>, value: A): Maybe<B>
+  <A, B>(conditions: ReadonlyArray<Conditional<A, B>>): (value: A) => Maybe<B>
 }
 
-function __cond<A, B>(conditionals: Array<Conditional<A, B>>, value: A): Maybe<B> {
+function __cond<A, B>(conditionals: ReadonlyArray<Conditional<A, B>>, value: A): Maybe<B> {
   const itemCount = conditionals.length
 
   for (let i = 0; i < itemCount; ++i) {

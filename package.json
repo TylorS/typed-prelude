@@ -2,25 +2,16 @@
   "name": "@typed/prelude",
   "version": "5.0.0",
   "description": "The TypeScript Standard Library",
-  "main": "lib/index.js",
-  "module": "./index.js",
-  "typings": "index.d.ts",
-  "types": "index.d.ts",
-  "repository": "https://github.com/TylorS/typed-test",
+  "repository": "https://github.com/TylorS/typed-prelude",
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "clean:commonjs": "rm -rf lib",
-    "clean:es2015": "ts-node tools/cleanup.ts",
-    "clean:all": "npm run clean:commonjs && npm run clean:es2015",
-    "build:commonjs": "npm run clean:commonjs && tsc --module commonjs --outDir lib",
-    "build:es2015": "npm run clean:es2015 && tsc --module es2015 --outDir ./",
-    "build": "npm run build:commonjs && npm run build:es2015",
-    "test": "typed-test",
+    "build": "tsc --module es2015 --ourDir lib && rm -rf lib",
+    "test": "typed-test && tslint -p tsconfig.json --fix",
     "preversion": "npm test && npm run build",
     "postversion": "npm publish",
-    "postpublish": "npm run clean:all"
+    "postinstall": "tsc --module es2015 --outDir ../"
   },
   "devDependencies": {
     "@typed/test": "9.2.0",
@@ -28,6 +19,7 @@
     "lint-staged": "8.1.5",
     "prettier": "1.17.0",
     "ts-node": "8.1.0",
+    "tslib": "^1.9.3",
     "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-no-circular-imports": "^0.6.2",
@@ -35,6 +27,7 @@
     "typescript": "^3.4.4"
   },
   "peerDependencies": {
-    "typescript": "^3.4.4"
+    "typescript": "^3.4.4",
+    "tslib": "^1.9.3"
   }
 }

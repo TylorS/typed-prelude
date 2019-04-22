@@ -1,5 +1,11 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Append 's' to a value if numOfItems != 1
+ * @param str :: string
+ * @param numOfItems :: number
+ * @returns :: string
+ */
 export const plural = curry(__plural) as {
   (str: string, numOfItems: number): string
   (str: string): (numOfItems: number) => string

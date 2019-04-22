@@ -1,6 +1,12 @@
 import { curry, Predicate } from '@typed/lambda'
 import { Maybe, Nothing } from '@typed/maybe'
 
+/**
+ * Find a value in an array-like starting from the end of the array-like
+ * @param predicate :: (a -> boolean)
+ * @param list :: [a]
+ * @returns :: Maybe a
+ */
 export const findLast = curry(__findLast) as {
   <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A>
   <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<A>

@@ -4,10 +4,14 @@ import rimraf = require('rimraf')
 
 const rootPath = join(__dirname, '..')
 const sourcePath = join(rootPath, 'source')
-const libs = readdirSync(sourcePath).filter(x => statSync(x).isDirectory())
+const libs = readdirSync(sourcePath).filter(x => statSync(join(sourcePath, x)).isDirectory())
 
 for (const lib of libs) {
-  rimraf.sync(join(rootPath, lib))
+  const libPath = join(rootPath, lib)
+
+  if (existsSync(libPath)) {
+    rimraf.sync(libPath)
+  }
 }
 
 const indexPaths = ['index.js', 'index.js.map', 'index.d.ts']

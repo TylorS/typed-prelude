@@ -1,3 +1,4 @@
 import { multiply } from './multiply'
 
-export const product = (numbers: number[]): number => numbers.reduce(multiply, 1)
+/** Get the product of a list of numbers */
+export const product = (numbers: ReadonlyArray<number>): number => numbers.reduce(multiply, 1)

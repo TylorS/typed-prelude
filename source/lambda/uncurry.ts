@@ -1,5 +1,10 @@
 import { Fn, Uncurry } from './types'
 
+/**
+ * Convert a function like (a -> b -> c -> d) into ((a, b, c) -> d)
+ * @param fn :: Function to uncurry
+ * @returns Function that accepts all arguments at once.
+ */
 export function uncurry<F extends Fn>(f: F): Uncurry<F> {
   if (typeof f !== 'function' || f.length === 0) {
     return f as Uncurry<F>

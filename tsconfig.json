@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": ".",
     "declaration": true,
     "downlevelIteration": true,
     "esModuleInterop": true,
@@ -12,7 +11,7 @@
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "lib",
+    "outDir": "./",
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
@@ -27,6 +26,8 @@
     "source/**/*"
   ],
   "exclude": [
+    "source/**/*.test.ts",
+    "source/**/*.browser-test.ts",
     "source/**/test-fixtures/**/*"
   ]
 }

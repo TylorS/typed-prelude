@@ -2,6 +2,9 @@ import { Disposable } from '@typed/disposable'
 import { Arity1, curry } from '@typed/lambda'
 import { Env } from './Env'
 
+/**
+ * Chain together multiple environments.
+ */
 export const chain = curry(__chain) as {
   <A, B, C, D>(fn: Arity1<A, Env<B, C>>, env: Env<D, A>): Env<B & D, C>
   <A, B, C>(fn: Arity1<A, Env<B, C>>): <D>(env: Env<D, A>) => Env<B & D, C>

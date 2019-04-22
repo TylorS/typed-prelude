@@ -1,7 +1,7 @@
-import { RandomNumberGenerator, UuidSeed } from '../Uuid'
+import { UuidEnv, UuidSeed } from '../types'
 import { VALID_UUID_LENGTH } from './constants'
 
-export class BrowserGenerator implements RandomNumberGenerator {
+export class BrowserGenerator implements UuidEnv {
   private browserCrypto: Crypto
   constructor() {
     this.browserCrypto = crypto || msCrypto

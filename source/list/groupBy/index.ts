@@ -1,5 +1,11 @@
 import { Arity1, curry } from '@typed/lambda'
 
+/**
+ * Converts a list of values into groups keyed by passed in function.
+ * @param f :: a -> b
+ * @param list :: [a]
+ * @returns { [key: B]: A }
+ */
 export const groupBy = curry(__groupBy) as {
   <A, B extends PropertyKey>(f: Arity1<A, B>, list: ReadonlyArray<A>): Record<B, A[]>
   <A, B extends PropertyKey>(f: Arity1<A, B>): (list: ReadonlyArray<A>) => Record<B, A[]>

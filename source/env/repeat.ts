@@ -3,6 +3,12 @@ import { range } from '@typed/list'
 import { chain } from './chain'
 import { Env } from './Env'
 
+/**
+ * Run a environment-dependent calculation n-times
+ * @param times :: number
+ * @param env :: Env e a
+ * @returns Env e a
+ */
 export const repeat = curry(__repeat) as {
   <E, A>(times: number, env: Env<E, A>): Env<E, A>
   (times: number): <E, A>(env: Env<E, A>) => Env<E, A>

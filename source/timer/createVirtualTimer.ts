@@ -4,6 +4,10 @@ import { createVirtualClock } from './createVirtualClock'
 import { Timeline } from './Timeline'
 import { VirtualTimer } from './types'
 
+/**
+ * Create a VirtualTimer. Useful for testing.
+ * @param startingTime (optional) :: number
+ */
 export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
   const timeline = new Timeline()
   const clock = createVirtualClock(startingTime)

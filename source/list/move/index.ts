@@ -2,6 +2,13 @@ import { curry, id } from '@typed/lambda'
 import { equals, greaterThan, ifElse, lessThan, or } from '@typed/logic'
 import { decrement, increment } from '@typed/math'
 
+/**
+ * Move a value from one index to another
+ * @param fromIndex :: int
+ * @param toIndex :: int
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const move = curry(__move) as {
   <A>(fromIndex: number, toIndex: number, list: ArrayLike<A>): A[]
   (fromIndex: number, toIndex: number): <A>(list: ArrayLike<A>) => A[]

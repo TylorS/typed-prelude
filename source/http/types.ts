@@ -1,6 +1,7 @@
 import { Disposable } from '@typed/disposable'
+import { Either } from '@typed/either'
 import { Env } from '@typed/env'
-import { Loadable } from './Loadable'
+import { Loadable } from '@typed/loadable'
 
 export type HttpOptions = {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
@@ -15,9 +16,7 @@ export type HttpResponse = {
   headers: Record<string, string | undefined>
 }
 
-// A type-param is used to represent a parsed type
-// @ts-ignore
-export interface Request<A extends {}> extends Env<HttpEnv, Loadable<HttpResponse>> {}
+export type HttpRequest<E extends HttpEnv = HttpEnv> = Env<E, Loadable<Either<Error, HttpResponse>>>
 
 export type HttpEnv = {
   readonly http: (

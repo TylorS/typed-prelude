@@ -2,6 +2,9 @@ import { curry } from '@typed/lambda'
 import { Maybe, Nothing } from '@typed/maybe'
 import { hasOwnProperty } from './hasOwnProperty'
 
+/**
+ * Get a value from an object.
+ */
 export const prop = curry(
   <K extends PropertyKey, O extends Partial<{ [_ in K]: any }>>(key: K, obj: O): Maybe<O[K]> =>
     hasOwnProperty(key, obj) ? Maybe.of(obj[key]) : Nothing,

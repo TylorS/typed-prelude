@@ -2,6 +2,12 @@ import { Disposable } from '@typed/disposable'
 import { Arity1, curry, pipe } from '@typed/lambda'
 import { Subscriber, Subscription } from './Subscription'
 
+/**
+ * Map over a subscription
+ * @param f :: (b -> c)
+ * @param subscription :: Subscription a b
+ * @returns Subscription a c
+ */
 export const map = curry(
   <A, B, C>(fn: Arity1<B, C>, subscription: Subscription<A, B>): Subscription<A, C> => {
     const subscribe = (subscriber: Subscriber<C>): Disposable =>

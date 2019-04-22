@@ -1,7 +1,12 @@
 import { isJust, Nothing } from '@typed/maybe'
 import { Match } from './types'
 
-export function oneOf<A, B>(matches: Array<Match<A, B>>): Match<A, B> {
+/**
+ * Combine a list of matches into one.
+ * @param matches :: [Match a b]
+ * @returns :: Match a b
+ */
+export function oneOf<A, B>(matches: ReadonlyArray<Match<A, B>>): Match<A, B> {
   return (a: A) => {
     for (const match of matches) {
       const value = match(a)

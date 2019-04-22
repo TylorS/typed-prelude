@@ -1,7 +1,10 @@
 import { isBrowser } from '@typed/common/executionEnvironment'
 import { Clock } from './types'
 
+/** Create a performance clock */
 export const createPerformanceClock = () => createRelativeClock(performanceClock)
+
+/** Create a clock relative to the current time */
 export const createRelativeClock = (clock: Clock): Clock =>
   new RelativeClock(clock, clock.currentTime())
 

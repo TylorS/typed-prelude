@@ -1,6 +1,12 @@
 import { curry } from '@typed/lambda'
 import { slice } from '../slice'
 
+/**
+ * Take values from the ending of a list while predicate is true
+ * @param n :: int
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const takeLastWhile: {
   <A>(f: (a: A, i: number) => boolean, list: ArrayLike<A>): A[]
   <A>(f: (a: A, i: number) => boolean): (list: ArrayLike<A>) => A[]

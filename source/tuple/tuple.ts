@@ -1,4 +1,4 @@
-export type Tuple<A = any, B = A> = [A, B]
+export type Tuple<A = any, B = A> = readonly [A, B]
 export type First<A extends Tuple> = A[0]
 export type Second<A extends Tuple> = A[1]
 

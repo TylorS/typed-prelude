@@ -2,6 +2,11 @@ import { indexOf } from './indexOf'
 import { mapArrayLike } from './mapArrayLike'
 import { quote } from './quote'
 
+/**
+ * Convert anything into a string
+ * @param x :: any
+ * @returns a string representation of a value
+ */
 export const toString = (x: any): string => _toString(x, [])
 
 function _toString(x: any, seen: any[]): string {

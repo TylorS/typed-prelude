@@ -7,6 +7,12 @@ type Nothing = { [NOTHING]: true }
 type Just<A> = { [NOTHING]: false; value: A }
 type Maybe<A> = Just<A> | Nothing
 
+/**
+ * Perform an operation with the previous value returned
+ * @param withFn :: (a -> *)
+ * @param fn: (...* -> a)
+ * @returns (...* -> a)
+ */
 export const withPrevious = curry(function withPrevious<A, Args extends any[]>(
   withFn: Arity1<A, void>,
   fn: Fn<Args, A>,

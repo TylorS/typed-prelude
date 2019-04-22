@@ -1,6 +1,12 @@
 import { Arity1, curry } from '@typed/lambda'
 import { equals as _equals } from '../common/equals'
 
+/**
+ * Check if two values have value-equality.
+ * @param a :: a
+ * @param b :: a
+ * @returns :: boolean
+ */
 export const equals = curry(<A>(a: A, b: A) => _equals(a, b, [], [])) as Equals
 
 export type Equals = {

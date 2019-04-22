@@ -1,13 +1,16 @@
 import { Disposable } from '@typed/disposable'
 import { Subscription } from './Subscription'
 
-export const once = async <A>({
+/**
+ * Subscribe to a subscription just once.
+ */
+export const once = async <A, B>({
   subscribe,
 }: {
-  subscribe: Subscription<A>['subscribe']
-}): Promise<A> => {
+  subscribe: Subscription<A, B>['subscribe']
+}): Promise<B> => {
   let disposable = Disposable.None
-  const a = await new Promise<A>(resolve => {
+  const a = await new Promise<B>(resolve => {
     disposable = subscribe(resolve)
   })
 

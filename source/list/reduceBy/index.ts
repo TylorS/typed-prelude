@@ -1,5 +1,12 @@
 import { curry } from '@typed/lambda'
 
+/**
+ * Group and reduce a list of values.
+ * @param f :: (b -> a -> b)
+ * @param seed :: b
+ * @param by :: (a -> PropertyKey)
+ * @returns { [PropertyKey]: B }
+ */
 export const reduceBy = curry(
   <A, B>(
     f: (acc: B, x: A) => B,

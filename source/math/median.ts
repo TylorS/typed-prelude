@@ -1,7 +1,8 @@
 import { Maybe, Nothing } from '@typed/maybe'
 import { mean } from './mean'
 
-export function median(numbers: number[]): Maybe<number> {
+/** Get the median of a list of numbers */
+export function median(numbers: ReadonlyArray<number>): Maybe<number> {
   const length = numbers.length
 
   if (length === 0) {

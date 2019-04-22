@@ -1,3 +1,8 @@
+/**
+ * Capitalize a string
+ * @param str :: string
+ * @returns :: string
+ */
 export function capitalize(str: string): string {
   return capitalizeFirst(
     str

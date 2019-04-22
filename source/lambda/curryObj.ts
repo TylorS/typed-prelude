@@ -3,6 +3,10 @@ import { Arity1 } from './types'
 const ALL_PROPERTIES_NOT_FOUND = new Error('All Properties Not Found')
 const defaultObject: {} = Object.freeze(Object.create(null))
 
+/**
+ * Uses ES2015 Proxy to partially apply a function that takes in an options object
+ * @param f :: Object a => (a -> b)
+ */
 export const curryObj = <A extends {}, B>(f: Arity1<A, B>): CurryObj<A, B> =>
   _curryObj(f, defaultObject) as CurryObj<A, B>
 

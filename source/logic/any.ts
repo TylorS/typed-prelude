@@ -1,5 +1,11 @@
 import { curry, Predicate } from '@typed/lambda'
 
+/**
+ * Returns true if any values in a list pass the given predicate.
+ * @param predicate :: (a -> boolean)
+ * @param list :: [a]
+ * @returns :: boolean
+ */
 // tslint:disable-next-line:variable-name
 export const any = curry(__any) as {
   <A>(predicate: Predicate<A>, list: A[]): boolean

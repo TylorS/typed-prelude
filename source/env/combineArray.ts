@@ -2,6 +2,9 @@ import { disposeAll } from '@typed/disposable'
 import { curry, Fn } from '@typed/lambda'
 import { Env, EnvOf } from './Env'
 
+/**
+ * Combine many Environments into one
+ */
 export const combineArray = (curry(__combineArray) as any) as {
   <A extends any[], R, E>(fn: Fn<A, R>, envs: EnvOf<E, A>): Env<E, R>
   <A extends any[], R>(fn: Fn<A, R>): <E>(envs: EnvOf<E, A>) => Env<E, R>

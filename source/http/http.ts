@@ -1,27 +1,32 @@
-import { curry, pipe } from '@typed/lambda'
+import { Either, Left, Right } from '@typed/either'
+import { Env } from '@typed/env'
+import { ArgsOf, Fn } from '@typed/lambda'
+import { Loadable, Loading } from '@typed/loadable'
+import { HttpEnv, HttpOptions, HttpResponse } from './types'
 
-import { Loadable, Loading } from './Loadable'
-import { HttpOptions, Request } from './types'
+export function http(
+  url: string,
+  options: HttpOptions = {},
+): Env<HttpEnv, Loadable<Either<Error, HttpResponse>>> {
+  return {
+    runEnv: (f, { http }) => {
+      let hasLoaded = false
+      const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>) => {
+        if (!hasLoaded) {
+          hasLoaded = true
 
-// TODO: Write some tests
-// I ripped this out of a side-project
+          return f(...args)
+        }
+      }
 
-export const http: {
-  <A>(url: string, options?: HttpOptions): Request<A>
-  <A>(url: string): (options?: HttpOptions) => Request<A>
-} = curry(
-  <A>(url: string, options: HttpOptions = {}): Request<A> => ({
-    runEnv: (f, { http }) => (
-      f(Loading),
-      http(
+      f(Loading)
+
+      return http(
         url,
         options,
-        pipe(
-          Loadable.of,
-          f,
-        ),
-        pipe(Loadable.error),
+        ifNotLoaded((response: HttpResponse) => f(Loadable.of(Right.of(response)))),
+        ifNotLoaded((error: Error) => f(Loadable.of(Left.of(error)))),
       )
-    ),
-  }),
-)
+    },
+  }
+}

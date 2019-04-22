@@ -3,6 +3,13 @@ import { equals } from '@typed/logic'
 
 const isZero = equals(0)
 
+/**
+ * Remove values from a list at a given index.
+ * @param index :: int
+ * @param amount :: int
+ * @param list :: [a]
+ * @returns :: [a]
+ */
 export const remove = curry(function remove<A>(
   index: number,
   amount: number,

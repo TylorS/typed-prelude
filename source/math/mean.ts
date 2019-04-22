@@ -1,4 +1,5 @@
 import { divide } from './divide'
 import { sum } from './sum'
 
-export const mean = (numbers: number[]): number => divide(numbers.length, sum(numbers))
+/** Get the mean of a list of numbers */
+export const mean = (numbers: ReadonlyArray<number>): number => divide(numbers.length, sum(numbers))

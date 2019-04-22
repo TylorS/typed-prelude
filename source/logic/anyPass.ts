@@ -1,11 +1,17 @@
 import { curry, Predicate } from '@typed/lambda'
 
+/**
+ * Returns true if value matches any predicates
+ * @param predicates :: [(a -> boolean)]
+ * @param value :: a
+ * @returns :: boolean
+ */
 export const anyPass = curry(__anyPass) as {
-  <A>(predicates: Array<Predicate<A>>, value: A): boolean
-  <A>(predicates: Array<Predicate<A>>): (value: A) => boolean
+  <A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean
+  <A>(predicates: ReadonlyArray<Predicate<A>>): (value: A) => boolean
 }
 
-function __anyPass<A>(predicates: Array<Predicate<A>>, value: A): boolean {
+function __anyPass<A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean {
   for (const predicate of predicates) {
     if (predicate(value)) {
       return true

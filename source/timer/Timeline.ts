@@ -1,6 +1,10 @@
 import { Arity1, id } from '@typed/lambda'
 import { ascend, chain } from '@typed/list'
 
+/**
+ * Timeline is responsible for storing tasks at a given time and
+ * returns what tasks are ready at the current time.
+ */
 export class Timeline {
   private tasks: Map<number, Array<Arity1<number>>> = new Map()
 

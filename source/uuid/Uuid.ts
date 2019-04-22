@@ -1,26 +1,8 @@
-import { NewType } from '@typed/new-type'
+import { Env, withEnv } from '@typed/env'
+import { Uuid, UuidEnv } from './types'
+import { uuid4 } from './uuid4'
 
-export type Uuid = NewType<string, 'Uuid'>
-
-export type UuidSeed = [
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number,
-  number
-]
-
-export interface RandomNumberGenerator {
-  readonly randomUuidSeed: () => UuidSeed
-}
+/** Create a random uuid */
+export const uuid: Env<UuidEnv, Uuid> = withEnv<UuidEnv, Uuid>(({ randomUuidSeed }) =>
+  uuid4(randomUuidSeed()),
+)

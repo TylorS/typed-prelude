@@ -1,3 +1,8 @@
+/**
+ * Create an in-memory implementation of Storage
+ * @param map :: Map string string - Initial values
+ * @returns :: Storage
+ */
 export function serverStorage(map?: Map<string, string>): Storage {
   return new Proxy(new ServerStorage(map), { get, set }) as Storage
 }

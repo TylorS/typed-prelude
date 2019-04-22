@@ -2,14 +2,20 @@ import { Disposable } from '@typed/disposable'
 import { Arity1 } from '@typed/lambda'
 import { equals } from '@typed/logic'
 
+/**
+ * A generic subscription type
+ */
 export interface Subscription<A, B = A> {
   readonly subscribe: Arity1<Subscriber<B>, Disposable>
   readonly publish: Arity1<A>
-  readonly reset: () => void
+  readonly clearSubscribers: () => void
 }
 
 export type Subscriber<A> = Arity1<A>
 
+/**
+ * Create a simple subscription
+ */
 export function createSubscription<A>(): Subscription<A> {
   let subscribers: Array<Subscriber<A>> = []
   const unsubscribe = (subscriber: Subscriber<A>): void => {
@@ -30,5 +36,5 @@ export function createSubscription<A>(): Subscription<A> {
 
   const publish = (value: A) => subscribers.forEach(f => f(value))
 
-  return { subscribe, publish, reset }
+  return { subscribe, publish, clearSubscribers: reset }
 }
