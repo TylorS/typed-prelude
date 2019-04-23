@@ -6,7 +6,10 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "jsx": "react",
-    "lib": ["es2016", "dom"],
+    "lib": [
+      "es2016",
+      "dom"
+    ],
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -19,8 +22,19 @@
     "sourceMap": true,
     "target": "es5",
     "paths": {
-      "@typed/*": ["./source/*", "./node_modules/@typed/*"]
-    }
+      "@typed/*": [
+        "./source/*"
+      ]
+    },
+    "plugins": [
+      {
+        "transform": "typescript-transform-paths",
+      },
+      {
+        "transform": "typescript-transform-paths",
+        "afterDeclarations": true,
+      }
+    ]
   },
   "include": [
     "source/**/*"

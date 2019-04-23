@@ -39,8 +39,8 @@ jspm_packages
 # generated files
 build
 dist
-lib
-lib.es2015
+esm
+cjs
 .tmp
 .cache-loader
 /common/

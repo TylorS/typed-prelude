@@ -6,12 +6,19 @@
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "MIT",
   "private": false,
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "main:ts": "./source/index.ts",
+  "types": "./esm/index.d.ts",
   "scripts": {
-    "build": "tsc --module es2015 --ourDir lib && rm -rf lib",
-    "test": "typed-test && tslint -p tsconfig.json --fix",
+    "build:cjs": "rm -rf cjs && ttsc --module commonjs --outDir cjs",
+    "build:esm": "rm -rf esm && ttsc --module es2015 --outDir esm",
+    "build": "npm run build:cjs && npm run build:esm",
+    "test:build": "ttsc --module es2015 --outDir .tmp && rm -rf .tmp",
+    "lint": "tslint -p tsconfig.json --fix",
+    "test": "typed-test && npm run lint && npm run test:build",
     "preversion": "npm test && npm run build",
-    "postversion": "npm publish",
-    "postinstall": "tsc --module es2015 --outDir ../"
+    "postversion": "npm publish"
   },
   "devDependencies": {
     "@typed/test": "9.2.0",
@@ -24,7 +31,9 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-no-circular-imports": "^0.6.2",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "^3.4.4"
+    "ttypescript": "^1.5.6",
+    "typescript": "^3.4.4",
+    "typescript-transform-paths": "^1.0.1"
   },
   "peerDependencies": {
     "typescript": "^3.4.4",
