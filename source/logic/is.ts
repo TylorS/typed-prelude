@@ -51,13 +51,28 @@ export function isArrayLike<A = unknown>(x: any): x is ArrayLike<A> {
 }
 
 export function isMap<A = unknown, B = unknown>(x: any): x is Map<A, B> {
+  if (!x) {
+    return false
+  }
+
+  const map = x as Map<A, B>
+
   return (
-    x && typeof (x as Map<A, B>).delete === 'function' && typeof (x as Map<A, B>).set === 'function'
+    isFunction(map.set) &&
+    isFunction(map.get) &&
+    isFunction(map.has) &&
+    isFunction(map.delete) &&
+    isFunction(map.clear) &&
+    isFunction(map[Symbol.iterator])
   )
 }
 
+function isFunction(x: any) {
+  return typeof x === 'function'
+}
+
 export function isNumber(x: any): x is number {
-  return typeof x === 'number'
+  return typeof x === 'number' && !Number.isNaN(x)
 }
 
 export function isString(x: any): x is string {
@@ -73,9 +88,21 @@ export function isObject<A extends object = Object>(x: any): x is A {
 }
 
 export function isPromiseLike<A = any>(x: any): x is PromiseLike<A> {
-  return x && typeof x.then === 'function'
+  return x && isFunction(x.then)
 }
 
 export function isSet<A = any>(x: any): x is Set<A> {
-  return x && typeof (x as Set<A>).delete === 'function' && typeof (x as Set<A>).add === 'function'
+  if (!x) {
+    return false
+  }
+
+  const set = x as Set<A>
+
+  return (
+    isFunction(set.add) &&
+    isFunction(set.clear) &&
+    isFunction(set.delete) &&
+    isFunction(set.has) &&
+    isFunction(set[Symbol.iterator])
+  )
 }
