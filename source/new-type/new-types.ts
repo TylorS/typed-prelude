@@ -1,4 +1,5 @@
-import { Base, isNewType, NewType } from './new-type'
+import { Primitive } from '@typed/lambda'
+import { isNewType, NewType } from './new-type'
 
 const and = <A>(f: (value: A) => boolean, g: (value: A) => boolean) => (value: A) =>
   f(value) && g(value)
@@ -6,8 +7,8 @@ const or = <A>(f: (value: A) => boolean, g: (value: A) => boolean) => (value: A)
   f(value) || g(value)
 
 export type Combine<A, B> = A extends NewType<infer AB, infer AT>
-  ? B extends NewType<AB, infer BT>
-    ? NewType<Base<A>, AT & BT>
+  ? B extends NewType<infer BB, infer BT>
+    ? NewType<AB | BB, AT & BT>
     : never
   : never
 
@@ -43,12 +44,12 @@ export const isNegativeInteger = isNewType<NegativeInteger>(and(isNegative, isIn
 
 export type NonNegativeInteger = Zero | PositiveInteger
 export const isNonNegativeInteger = isNewType<NonNegativeInteger>(
-  or<number>(isZero, isPositiveInteger),
+  or<number>(isZero, isPositiveInteger as any),
 )
 
 export type NonPositiveInteger = Zero | NegativeInteger
 export const isNonPositiveInteger = isNewType<NonNegativeInteger>(
-  or<number>(isZero, isNegativeInteger),
+  or<number>(isZero, isNegativeInteger as any),
 )
 
 export type EmptyString = NewType<string & { readonly length: Zero }, 'EmptyString'>
