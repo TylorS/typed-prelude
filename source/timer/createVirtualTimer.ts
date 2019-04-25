@@ -2,15 +2,14 @@ import { Disposable } from '@typed/disposable'
 import { Arity1 } from '@typed/lambda'
 import { createVirtualClock } from './createVirtualClock'
 import { Timeline } from './Timeline'
-import { VirtualTimer } from './types'
+import { VirtualClock, VirtualTimer } from './types'
 
 /**
  * Create a VirtualTimer. Useful for testing.
  * @param startingTime (optional) :: number
  */
-export function createVirtualTimer(startingTime: number = 0): VirtualTimer {
+export function createVirtualTimer(clock: VirtualClock = createVirtualClock()): VirtualTimer {
   const timeline = new Timeline()
-  const clock = createVirtualClock(startingTime)
 
   function delay(f: Arity1<number>, delayMS: number): Disposable {
     const time = clock.currentTime() + delayMS

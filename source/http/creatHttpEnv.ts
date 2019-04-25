@@ -1,45 +1,44 @@
 import { Disposable } from '@typed/disposable'
+import { noOp } from '@typed/lambda'
 import { hasOwnProperty } from '@typed/objects'
 import { IncomingMessage } from 'http'
 import { isBrowser } from '../common/executionEnvironment'
-import { HttpEnv, HttpOptions, HttpResponse } from './types'
+import { HttpCallbacks, HttpEnv, HttpOptions } from './types'
+import { withHttpManagement, WithHttpManagementOptions } from './withHttpManagement'
 
 const IS_HTTPS = /https/
 
 /**
  * Creates an Http Environment that works in browser and node.
  */
-export function createHttpEnv(): HttpEnv {
-  return { http: httpRequest }
+export function createHttpEnv(options?: WithHttpManagementOptions): HttpEnv {
+  const env: HttpEnv = { http: httpRequest }
+
+  return options ? withHttpManagement(options, env) : env
 }
 
-function httpRequest(
-  url: string,
-  options: HttpOptions,
-  resolve: (response: HttpResponse) => void,
-  reject: (error: Error) => void,
-) {
+function httpRequest(url: string, options: HttpOptions, callbacks: HttpCallbacks) {
   return isBrowser
-    ? browserHttpRequest(url, options, resolve, reject)
-    : nodeHttpRequest(url, options, resolve, reject)
+    ? browserHttpRequest(url, options, callbacks)
+    : nodeHttpRequest(url, options, callbacks)
 }
 
-function nodeHttpRequest(
-  url: string,
-  options: HttpOptions,
-  resolve: (response: HttpResponse) => void,
-  reject: (error: Error) => void,
-): Disposable {
+function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
+  const { success, failure, onStart } = callbacks
   const { method = 'GET', headers, body } = options
   const protocol = IS_HTTPS.test(url) ? 'https:' : 'http:'
-  const http = protocol === 'https:' ? require('https') : require('http')
+  const http: typeof import('https') = protocol === 'https:' ? require('https') : require('http')
 
   const request = http.request(url, { method, headers, protocol }, (response: IncomingMessage) => {
     const data: string[] = []
 
+    if (onStart) {
+      onStart()
+    }
+
     response.setEncoding('utf8')
     response.on('data', chunk => data.push(chunk.toString()))
-    response.on('error', reject)
+    response.on('error', failure)
     response.on('close', () => {
       const headersMap: Record<string, string | undefined> = {}
 
@@ -51,10 +50,10 @@ function nodeHttpRequest(
         }
       }
 
-      resolve({
+      success({
         responseText: data.join(''),
-        status: response.statusCode as number,
-        statusText: response.statusMessage as string,
+        status: response.statusCode!,
+        statusText: response.statusMessage!,
         headers: headersMap,
       })
     })
@@ -72,12 +71,14 @@ function nodeHttpRequest(
 function browserHttpRequest(
   url: string,
   options: HttpOptions,
-  resolve: (response: HttpResponse) => void,
-  reject: (error: Error) => void,
+  callbacks: HttpCallbacks,
 ): Disposable {
+  const { success, failure, onStart } = callbacks
   const { method = 'GET', headers, body } = options
   const request = new XMLHttpRequest()
-  request.onerror = () => reject(new Error(request.statusText))
+
+  request.onerror = () => failure(new Error(request.statusText))
+  request.onloadstart = onStart || noOp
 
   request.addEventListener('load', () => {
     const headers = request.getAllResponseHeaders()
@@ -95,7 +96,7 @@ function browserHttpRequest(
       headerMap[header] = value
     })
 
-    resolve({
+    success({
       responseText: request.responseText,
       status: request.status,
       statusText: request.statusText,

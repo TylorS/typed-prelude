@@ -7,5 +7,7 @@ export * from './withEnv'
 export * from './combineArray'
 export * from './mapTo'
 export * from './repeat'
+export * from './createTestEnv'
+export * from './collectEvents'
 
 export * from '../common/executionEnvironment'

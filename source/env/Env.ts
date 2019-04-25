@@ -1,6 +1,6 @@
 import { DropKeys } from '@typed/common/types'
 import { Disposable } from '@typed/disposable'
-import { IO } from '@typed/lambda'
+import { IO, noOp } from '@typed/lambda'
 
 /**
  * Generic type for computations that depend on resources
@@ -63,8 +63,16 @@ export function isEnv<A, B>(x: any): x is Env<A, B> {
 /**
  * Runs a Pure Env with the given callback
  * @param f :: (a -> void) Callback for pure Value
- * @param pure :: Pure<A>  Pure to rune
+ * @param pure :: Pure<A>  Pure to run
+ * @returns :: Disposable
  */
 export function runPure<A>(f: (value: A) => void, { runEnv }: Pure<A> | Env<{}, A>): Disposable {
   return runEnv(f, {})
 }
+
+/**
+ * Execute a pure ignoring the value it produces.
+ * @param pure :: Pure *
+ * @returns :: Disposable
+ */
+export const execPure = (pure: Pure<any> | Env<{}, any>): Disposable => runPure(noOp, pure)
