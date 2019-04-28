@@ -7,4 +7,4 @@ export * from './toLowerCase'
 export * from './toUpperCase'
 export * from './trim'
 
-export * from '../common/toString'
+export { toString } from '@typed/common'

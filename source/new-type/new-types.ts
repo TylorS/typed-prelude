@@ -1,4 +1,3 @@
-import { Primitive } from '@typed/lambda'
 import { isNewType, NewType } from './new-type'
 
 const and = <A>(f: (value: A) => boolean, g: (value: A) => boolean) => (value: A) =>
@@ -16,19 +15,19 @@ export type Integer = NewType<number, 'Integer'>
 export const isInteger = isNewType<Integer>(Number.isInteger)
 
 export type Zero = NewType<number, 'Zero'>
-export const isZero = isNewType<Zero>(x => x === 0)
+export const isZero = isNewType<Zero>((x: number) => x === 0)
 
 export type NonZero = NewType<number, 'NonZero'>
-export const isNonZero = isNewType<Zero>(x => x !== 0)
+export const isNonZero = isNewType<Zero>((x: number) => x !== 0)
 
 export type NonZeroInteger = Combine<NonZero, Integer>
 export const isNonZeroInteger = isNewType<NonZeroInteger>(and(isNonZero, isInteger))
 
 export type Positive = NewType<number, 'Positive'>
-export const isPositive = isNewType<Positive>(x => x > 0)
+export const isPositive = isNewType<Positive>((x: number) => x > 0)
 
 export type Negative = NewType<number, 'Negative'>
-export const isNegative = isNewType<Positive>(x => x < 0)
+export const isNegative = isNewType<Positive>((x: number) => x < 0)
 
 export type NonNegative = Zero | Positive
 export const isNonNegative = isNewType<NonNegative>(or(isZero, isPositive))
@@ -53,13 +52,13 @@ export const isNonPositiveInteger = isNewType<NonNegativeInteger>(
 )
 
 export type EmptyString = NewType<string & { readonly length: Zero }, 'EmptyString'>
-export const isEmptyString = isNewType<EmptyString>(x => x === '')
+export const isEmptyString = isNewType<EmptyString>((x: string) => x === '')
 
 export type NonEmptyString = NewType<
   string & { readonly length: PositiveInteger },
   'NonEmptyString'
 >
-export const isNonEmptyString = isNewType<NonEmptyString>(x => x !== '')
+export const isNonEmptyString = isNewType<NonEmptyString>((x: string) => x !== '')
 
 export type Character = NewType<string & { readonly length: 1 }, 'Character'>
-export const isCharacter = isNewType<Character>(x => x.length === 1)
+export const isCharacter = isNewType<Character>((x: string) => x.length === 1)

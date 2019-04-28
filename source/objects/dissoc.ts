@@ -1,5 +1,5 @@
+import { DropKeys } from '@typed/common'
 import { curry } from '@typed/lambda'
-import { DropKeys } from '../common/types'
 import { clone } from './clone'
 
 /**

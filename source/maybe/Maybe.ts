@@ -14,5 +14,5 @@ export namespace Maybe {
    * @name Maybe.of<A>(value: A): Maybe<A>
    */
   export const of = <A>(value: A | null | undefined | void): Maybe<A> =>
-    value == null ? Nothing : Just.of<A>(value)
+    value === null || value === undefined ? Nothing : Just.of<A>(value as A)
 }

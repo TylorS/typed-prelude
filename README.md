@@ -1,3 +1,3 @@
 # Typed
 
-The TypeScript Standard Library
+> Highly testable and reliable software.

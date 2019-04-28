@@ -1,4 +1,4 @@
-import { isBrowser } from '@typed/common/executionEnvironment'
+import { isBrowser } from '@typed/common'
 import { Disposable } from '@typed/disposable'
 import { Arity2 } from '@typed/lambda'
 import { Timer } from './types'

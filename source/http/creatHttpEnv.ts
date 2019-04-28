@@ -1,8 +1,8 @@
+import { isBrowser } from '@typed/common'
 import { Disposable } from '@typed/disposable'
 import { noOp } from '@typed/lambda'
 import { hasOwnProperty } from '@typed/objects'
 import { IncomingMessage } from 'http'
-import { isBrowser } from '../common/executionEnvironment'
 import { HttpCallbacks, HttpEnv, HttpOptions } from './types'
 import { withHttpManagement, WithHttpManagementOptions } from './withHttpManagement'
 

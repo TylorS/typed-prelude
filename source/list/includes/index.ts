@@ -1,4 +1,4 @@
-import { indexOf } from '@typed/common/indexOf'
+import { indexOf } from '@typed/common'
 import { curry } from '@typed/lambda'
 
 /**

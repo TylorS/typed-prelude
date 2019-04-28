@@ -1,6 +1,6 @@
+import { pathJoin } from '@typed/common'
 import { Path } from '@typed/history'
 import { Maybe, Nothing } from '@typed/maybe'
-import { pathJoin } from '../common/pathJoin'
 import { Param, pathParts, pathToRegex } from './pathToRegex'
 import { Route } from './types'
 

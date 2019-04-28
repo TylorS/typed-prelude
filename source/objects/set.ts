@@ -1,5 +1,5 @@
+import { clone } from '@typed/common'
 import { curry } from '@typed/lambda'
-import { clone } from '../common/clone'
 
 /**
  * Set the value of an object

@@ -1,4 +1,4 @@
-import { mapArrayLike } from '@typed/common/mapArrayLike'
+import { mapArrayLike } from '@typed/common'
 import { Arity1, curry } from '@typed/lambda'
 
 /**

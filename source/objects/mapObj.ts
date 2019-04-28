@@ -1,5 +1,5 @@
+import { mapObj as __mapObj } from '@typed/common'
 import { curry } from '@typed/lambda'
-import { mapObj as __mapObj } from '../common/mapObj'
 
 /**
  * Map over values contained in an object.

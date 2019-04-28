@@ -1,4 +1,4 @@
-import { toString } from '@typed/common/toString'
+import { toString } from '@typed/common'
 import { ArgsOf, Fn } from './types'
 
 /**

@@ -1,5 +1,5 @@
+import { Path, pathJoin } from '@typed/common'
 import { curry } from '@typed/lambda'
-import { Path, pathJoin } from '../common/pathJoin'
 import { basePathFromRoute } from './basePathFromRoute'
 import { Route } from './types'
 

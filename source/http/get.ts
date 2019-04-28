@@ -1,6 +1,5 @@
+import { addQueryParameters, DropKeys } from '@typed/common'
 import { MergeObjects } from '@typed/objects'
-import { addQueryParameters } from '../common/addQueryParameters'
-import { DropKeys } from '../common/types'
 import { http } from './http'
 import { HttpOptions, HttpRequest } from './types'
 

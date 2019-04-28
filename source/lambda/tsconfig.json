@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "sourceMap": true,
+    "target": "es5",
+    "rootDir": "../",
+    "baseUrl": ".",
+    "paths": {
+      "@typed/*": [
+        "../*"
+      ]
+    }
+  },
+  "references": [
+    {
+      "path": "../common"
+    }
+  ],
+  "exclude": [
+    "./**/*.test.ts",
+    "./**/*.browser-test.ts",
+    "./cjs/**",
+    "./esm/**",
+  ]
+}

@@ -1,4 +1,4 @@
-import { isBrowser } from '@typed/common/executionEnvironment'
+import { isBrowser } from '@typed/common'
 import { Clock } from './types'
 
 /** Create a performance clock */

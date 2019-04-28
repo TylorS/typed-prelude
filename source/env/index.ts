@@ -10,4 +10,4 @@ export * from './repeat'
 export * from './createTestEnv'
 export * from './collectEvents'
 
-export * from '../common/executionEnvironment'
+export { isBrowser } from '@typed/common'

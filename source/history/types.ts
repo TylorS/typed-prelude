@@ -5,4 +5,4 @@ export type HistoryEnv<A = null> = {
   readonly history: History
 }
 
-export { Path } from '../common/pathJoin'
+export { Path, pathJoin, isPath } from '@typed/common'

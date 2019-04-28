@@ -1,5 +1,5 @@
+import { equals } from '@typed/common'
 import { curry } from '@typed/lambda'
-import { equals } from '../common/equals'
 
 /**
  * Returns true if a property is equal to a given value

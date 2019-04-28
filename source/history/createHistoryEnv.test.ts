@@ -1,6 +1,6 @@
 import { describe, given, it, Test } from '@typed/test'
 
-import { isBrowser } from '../common/executionEnvironment'
+import { isBrowser } from '@typed/common'
 import { createHistoryEnv } from './createHistoryEnv'
 
 export const test: Test = describe(`createHistoryEnv`, [

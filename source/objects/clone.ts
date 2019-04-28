@@ -1,4 +1,4 @@
-import { clone as _clone } from '../common/clone'
+import { clone as _clone } from '@typed/common'
 
 /**
  * Make a deep clone of a given value

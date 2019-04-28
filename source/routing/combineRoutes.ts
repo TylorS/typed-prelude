@@ -1,4 +1,4 @@
-import { pathJoin } from '../common/pathJoin'
+import { pathJoin } from '@typed/common'
 import { createRoute } from './createRoute'
 import { Route, Routes } from './types'
 

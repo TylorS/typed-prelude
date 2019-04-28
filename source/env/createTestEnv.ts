@@ -24,7 +24,7 @@ export function createTestEnv<A>(startingTime: number = 0): TestEnv<A> {
   function getAllEvents() {
     const events: A[] = []
 
-    for (const values of eventMap.values()) {
+    for (const values of Array.from(eventMap.values())) {
       events.push(...values)
     }
 

@@ -1,0 +1,11 @@
+{
+  "packages": [
+    "source/*"
+  ],
+  "version": "independent",
+  "command": {
+    "init": {
+      "exact": true
+    }
+  }
+}

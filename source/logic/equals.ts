@@ -1,5 +1,5 @@
+import { equals as _equals } from '@typed/common'
 import { Arity1, curry } from '@typed/lambda'
-import { equals as _equals } from '../common/equals'
 
 /**
  * Check if two values have value-equality.

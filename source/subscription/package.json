@@ -1,0 +1,29 @@
+{
+  "name": "@typed/subscription",
+  "version": "0.0.0",
+  "description": "Generic one-to-many subscriptions",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
+  "types": "esm/index.d.ts",
+  "main:ts": "index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylors/typed-prelude.git"
+  },
+  "keywords": [
+    "typed",
+    "typescript",
+    "subscription"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylors/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/tylors/typed-prelude#readme",
+  "dependencies": {
+    "@typed/disposable": "0.0.0",
+    "@typed/lambda": "0.0.0",
+    "@typed/logic": "3.0.0"
+  }
+}

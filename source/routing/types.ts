@@ -1,4 +1,4 @@
-import { Path } from '@typed/common/pathJoin'
+import { Path } from '@typed/common'
 import { Match } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 

@@ -1,4 +1,4 @@
-import { indexOf as _indexOf } from '@typed/common/indexOf'
+import { indexOf as _indexOf } from '@typed/common'
 import { curry } from '@typed/lambda'
 import { Maybe, Nothing } from '@typed/maybe'
 

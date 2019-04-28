@@ -1,4 +1,4 @@
-import { isBrowser } from '@typed/common/executionEnvironment'
+import { isBrowser } from '@typed/common'
 import { ServerHistory, ServerLocation } from './server'
 import { HistoryEnv } from './types'
 

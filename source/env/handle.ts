@@ -1,4 +1,4 @@
-import { DropKeys } from '@typed/common/types'
+import { DropKeys } from '@typed/common'
 import { Arity1, curry } from '@typed/lambda'
 import { Env, Handle } from './Env'
 

@@ -4,9 +4,7 @@ export * from './pushState'
 export * from './replaceState'
 export * from './types'
 
-export * from '../common/addQueryParameters'
-export * from '../common/pathJoin'
-
+export { addQueryParameters, pathJoin, Path, isPath } from '@typed/common'
 import { createHistoryEnv } from './createHistoryEnv'
 
 // ALLOW Overriding Default HREF via node environment variables

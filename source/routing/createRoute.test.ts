@@ -1,4 +1,4 @@
-import { Path } from '@typed/http'
+import { Path } from '@typed/history'
 import { isJust, isNothing, withDefault } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
 import { createRoute } from './createRoute'
