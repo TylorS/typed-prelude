@@ -31,9 +31,6 @@
     },
     {
       "path": "../maybe/tsconfig.json"
-    },
-    {
-      "path": "../new-type/tsconfig.json"
     }
   ]
 }

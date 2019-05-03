@@ -2,13 +2,13 @@ import { Options } from '@typed/test'
 
 const nodeOptions: Options = {
   typeCheck: false,
-  files: ['source/**/*.test.ts'],
+  files: ['packages/**/*.test.ts'],
 }
 
 const browserOptions: Options = {
   ...nodeOptions,
   mode: 'browser',
-  files: ['source/**/*.browser-test.ts'],
+  files: ['packages/**/*.browser-test.ts'],
 }
 
 const configs = [nodeOptions]

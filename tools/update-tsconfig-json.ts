@@ -31,12 +31,11 @@ for (const pkg of PACKAGES) {
   const tsconfigEsmPath = path.join(pkgDirectory, 'tsconfig.json')
   const tsconfigCjsPath = path.join(pkgDirectory, 'tsconfig.cjs.json')
 
-  updatePackageConfig(pkg, tsconfigEsmPath, typedDependencies, applyEsmDefaults)
-  updatePackageConfig(pkg, tsconfigCjsPath, typedDependencies, applyCommonjsDefaults)
+  updatePackageConfig(tsconfigEsmPath, typedDependencies, applyEsmDefaults)
+  updatePackageConfig(tsconfigCjsPath, typedDependencies, applyCommonjsDefaults)
 }
 
 function updatePackageConfig(
-  currentPkg: string,
   configPath: string,
   typedDependencies: string[],
   effects: (data: any) => void,
@@ -44,7 +43,7 @@ function updatePackageConfig(
   console.log(`Updating TsConfig: ${configPath}...`)
   const data = getOrCreateJsonFile(configPath)
   effects(data)
-  updateReferences(currentPkg, data, typedDependencies)
+  updateReferences(data, typedDependencies)
   fs.writeFileSync(configPath, JSON.stringify(data, null, '  '))
 }
 
@@ -110,7 +109,7 @@ function uniq<A>(values: A[]): A[] {
   return Array.from(new Set(values)).sort()
 }
 
-function updateReferences(currentPkg: string, tsconfig: any, typedDependencies: string[]) {
+function updateReferences(tsconfig: any, typedDependencies: string[]) {
   if (tsconfig.references) {
     delete tsconfig.references
   }

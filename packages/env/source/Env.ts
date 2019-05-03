@@ -13,7 +13,7 @@ export type Env<A = any, B = any> = {
 /**
  * A computation that has all evironmental dependencies handled
  */
-export interface Pure<A = any> extends Env<{}, A> { }
+export interface Pure<A = any> extends Env<{}, A> {}
 
 /**
  * Mapped-type to environments of A

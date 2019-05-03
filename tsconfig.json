@@ -1,0 +1,11 @@
+{
+  "extends": "./packages/tsconfig.base.json",
+  "compilerOptions": {
+    "declarationMap": false,
+    "composite": false,
+    "incremental": false
+  },
+  "include": [
+    "./packages/**/*.ts"
+  ]
+}
