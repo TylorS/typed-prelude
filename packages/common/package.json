@@ -1,0 +1,31 @@
+{
+  "name": "@typed/common",
+  "version": "0.0.0",
+  "description": "Assortment of shared functions & types for Typed libraries",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylors/typed-prelude.git"
+  },
+  "keywords": [
+    "typed",
+    "typescript",
+    "common"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylors/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/tylors/typed-prelude#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc -b ./tsconfig.json && ./../node_modules/.bin/tsc -b ./tsconfig.cjs.json",
+    "prepublish": "npm run build"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "references": [
+    {
+      "path": "./common/tsconfig.cjs.json"
+    },
+    {
+      "path": "./lambda/tsconfig.cjs.json"
+    },
+    {
+      "path": "./disposable/tsconfig.cjs.json"
+    },
+    {
+      "path": "./new-type/tsconfig.cjs.json"
+    },
+    {
+      "path": "./strings/tsconfig.cjs.json"
+    },
+    {
+      "path": "./timer/tsconfig.cjs.json"
+    },
+    {
+      "path": "./list/tsconfig.cjs.json"
+    },
+    {
+      "path": "./subscription/tsconfig.cjs.json"
+    },
+    {
+      "path": "./tuple/tsconfig.cjs.json"
+    },
+    {
+      "path": "./either/tsconfig.cjs.json"
+    },
+    {
+      "path": "./maybe/tsconfig.cjs.json"
+    },
+    {
+      "path": "./env/tsconfig.cjs.json"
+    },
+    {
+      "path": "./loadable/tsconfig.cjs.json"
+    },
+    {
+      "path": "./promises/tsconfig.cjs.json"
+    },
+    {
+      "path": "./history/tsconfig.cjs.json"
+    },
+    {
+      "path": "./http/tsconfig.cjs.json"
+    },
+    {
+      "path": "./logger/tsconfig.cjs.json"
+    },
+    {
+      "path": "./logic/tsconfig.cjs.json"
+    },
+    {
+      "path": "./math/tsconfig.cjs.json"
+    },
+    {
+      "path": "./routing/tsconfig.cjs.json"
+    },
+    {
+      "path": "./storage/tsconfig.cjs.json"
+    },
+    {
+      "path": "./uuid/tsconfig.cjs.json"
+    },
+    {
+      "path": "./objects/tsconfig.cjs.json"
+    }
+  ],
+  "files": []
+}

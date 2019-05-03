@@ -41,34 +41,13 @@ build
 dist
 esm
 cjs
+lib
 .tmp
 .cache-loader
-/common/
-/either/
-/env/
-/history/
-/http/
-/lambda/
-/list/
-/logger/
-/logic/
-/math/
-/maybe/
-/new-type/
-/objects/
-/promises/
-/routing/
-/storage/
-/strings/
-/subscription/
-/uuid/
-/index.js
-/index.d.ts
-/index.js.map
 
 # other stuff
 src/test.ts
 .DS_STORE
 .vscode
 .fusebox
-
+tsconfig*.tsbuildinfo

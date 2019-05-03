@@ -1,0 +1,35 @@
+{
+  "name": "@typed/math",
+  "version": "3.0.0",
+  "description": "Common mathematical needs",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylors/typed-prelude.git"
+  },
+  "keywords": [
+    "typed",
+    "typescript",
+    "math"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylors/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/tylors/typed-prelude#readme",
+  "dependencies": {
+    "@typed/lambda": "0.0.0",
+    "@typed/maybe": "7.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "../../node_modules/.bin/tsc -b ./tsconfig.json && ./../node_modules/.bin/tsc -b ./tsconfig.cjs.json",
+    "prepublish": "npm run build"
+  }
+}
