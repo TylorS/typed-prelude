@@ -14,11 +14,6 @@ for (const pkg of PACKAGES) {
 
   const packageJSONData = JSON.parse(fs.readFileSync(packageJSONPath).toString())
   delete packageJSONData.scripts
-  packageJSONData.scripts = {
-    build:
-      '../../node_modules/.bin/tsc -b ./tsconfig.json && ./../node_modules/.bin/tsc -b ./tsconfig.cjs.json',
-    prepublish: 'npm run build',
-  }
   packageJSONData.main = './cjs/index.js'
   packageJSONData.module = './esm/index.js'
   delete packageJSONData.type

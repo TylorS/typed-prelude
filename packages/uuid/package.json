@@ -27,9 +27,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "scripts": {
-    "build": "../../node_modules/.bin/tsc -b ./tsconfig.json && ./../node_modules/.bin/tsc -b ./tsconfig.cjs.json",
-    "prepublish": "npm run build"
   }
 }
