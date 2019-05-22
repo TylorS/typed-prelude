@@ -23,5 +23,8 @@
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.9.3"
   }
 }

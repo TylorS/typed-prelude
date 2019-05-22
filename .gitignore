@@ -50,4 +50,5 @@ src/test.ts
 .DS_STORE
 .vscode
 .fusebox
+.history
 tsconfig*.tsbuildinfo

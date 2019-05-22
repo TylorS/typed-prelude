@@ -22,5 +22,8 @@ for (const pkg of PACKAGES) {
   packageJSONData.publishConfig = {
     access: 'public',
   }
+  packageJSONData.peerDependencies = {
+    tslib: '^1.9.3',
+  }
   fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSONData, null, '  '))
 }

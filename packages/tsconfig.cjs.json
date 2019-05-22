@@ -55,6 +55,9 @@
       "path": "./storage/tsconfig.cjs.json"
     },
     {
+      "path": "./store/tsconfig.cjs.json"
+    },
+    {
       "path": "./strings/tsconfig.cjs.json"
     },
     {
