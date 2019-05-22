@@ -55,9 +55,6 @@
       "path": "./storage/tsconfig.json"
     },
     {
-      "path": "./store/tsconfig.json"
-    },
-    {
       "path": "./strings/tsconfig.json"
     },
     {
