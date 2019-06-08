@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import { EOL } from 'os'
 import * as path from 'path'
 import { PACKAGES, sourceDirectory } from './common'
 
@@ -15,7 +16,7 @@ function updateRootConfig(configName: string) {
   delete rootTsConfig.include
   delete rootTsConfig.exclude
 
-  fs.writeFileSync(rootTsConfigPath, JSON.stringify(rootTsConfig, null, '  '))
+  fs.writeFileSync(rootTsConfigPath, JSON.stringify(rootTsConfig, null, '  ') + EOL)
 }
 
 for (const pkg of PACKAGES) {
@@ -44,7 +45,7 @@ function updatePackageConfig(
   const data = getOrCreateJsonFile(configPath)
   effects(data)
   updateReferences(data, typedDependencies)
-  fs.writeFileSync(configPath, JSON.stringify(data, null, '  '))
+  fs.writeFileSync(configPath, JSON.stringify(data, null, '  ') + EOL)
 }
 
 function getOrCreateJsonFile(filePath: string) {

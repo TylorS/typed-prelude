@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+import { EOL } from 'os'
 import * as path from 'path'
 import { PACKAGES, sourceDirectory } from './common'
 
@@ -25,5 +26,5 @@ for (const pkg of PACKAGES) {
   packageJSONData.peerDependencies = {
     tslib: '^1.9.3',
   }
-  fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSONData, null, '  '))
+  fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSONData, null, '  ') + EOL)
 }
