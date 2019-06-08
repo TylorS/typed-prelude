@@ -3,9 +3,12 @@
   "compilerOptions": {
     "declarationMap": false,
     "composite": false,
-    "incremental": false
+    "incremental": false,
+    "noEmit": true
   },
   "include": [
-    "./packages/**/*.ts"
+    "./packages/**/*.ts",
+    "./tools/**/*.ts",
+    "./*.ts"
   ]
 }
