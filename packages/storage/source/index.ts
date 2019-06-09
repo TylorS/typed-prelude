@@ -1,5 +1,7 @@
 export * from './types'
 export * from './clear'
 export * from './getItem'
+export * from './removeItem'
 export * from './setItem'
+export * from './scopeStorage'
 export * from './serverStorage'

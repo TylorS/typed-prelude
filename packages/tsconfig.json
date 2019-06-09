@@ -7,6 +7,9 @@
       "path": "./disposable/tsconfig.json"
     },
     {
+      "path": "./dom/tsconfig.json"
+    },
+    {
       "path": "./either/tsconfig.json"
     },
     {
@@ -47,6 +50,9 @@
     },
     {
       "path": "./promises/tsconfig.json"
+    },
+    {
+      "path": "./react/tsconfig.json"
     },
     {
       "path": "./routing/tsconfig.json"

@@ -1,0 +1,79 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "rootDir": "./source",
+    "module": "es2015",
+    "outDir": "./esm",
+    "jsx": "react"
+  },
+  "include": [
+    "source"
+  ],
+  "exclude": [
+    "./cjs/**",
+    "./esm/**",
+    "./source/**/*.browser-test.ts",
+    "./source/**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../disposable/tsconfig.json"
+    },
+    {
+      "path": "../dom/tsconfig.json"
+    },
+    {
+      "path": "../either/tsconfig.json"
+    },
+    {
+      "path": "../env/tsconfig.json"
+    },
+    {
+      "path": "../history/tsconfig.json"
+    },
+    {
+      "path": "../http/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../loadable/tsconfig.json"
+    },
+    {
+      "path": "../logger/tsconfig.json"
+    },
+    {
+      "path": "../list/tsconfig.json"
+    },
+    {
+      "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../new-type/tsconfig.json"
+    },
+    {
+      "path": "../objects/tsconfig.json"
+    },
+    {
+      "path": "../routing/tsconfig.json"
+    },
+    {
+      "path": "../storage/tsconfig.json"
+    },
+    {
+      "path": "../subscription/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
+    },
+    {
+      "path": "../uuid/tsconfig.json"
+    }
+  ]
+}

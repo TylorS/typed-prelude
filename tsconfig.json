@@ -4,11 +4,17 @@
     "declarationMap": false,
     "composite": false,
     "incremental": false,
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react",
+    "lib": [
+      "es2015",
+      "dom"
+    ]
   },
   "include": [
     "./packages/**/*.ts",
     "./tools/**/*.ts",
-    "./*.ts"
+    "./*.ts",
+    "packages/react/source/Context.tsx"
   ]
 }

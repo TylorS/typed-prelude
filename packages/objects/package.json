@@ -32,5 +32,6 @@
   },
   "peerDependencies": {
     "tslib": "^1.9.3"
-  }
+  },
+  "sideEffects": false
 }

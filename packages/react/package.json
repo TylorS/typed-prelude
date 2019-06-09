@@ -1,0 +1,57 @@
+{
+  "name": "@typed/react",
+  "version": "0.0.0",
+  "description": "React Integration for Typed",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "React",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "devDependencies": {
+    "@types/react": "^16.8.19",
+    "react": "^16.8.6"
+  },
+  "peerDependencies": {
+    "tslib": "^1.9.3"
+  },
+  "dependencies": {
+    "@typed/disposable": "0.0.0",
+    "@typed/dom": "0.0.0",
+    "@typed/either": "4.0.0",
+    "@typed/env": "0.0.0",
+    "@typed/history": "2.0.0",
+    "@typed/http": "0.0.0",
+    "@typed/lambda": "0.0.0",
+    "@typed/loadable": "0.0.0",
+    "@typed/logger": "0.0.0",
+    "@typed/list": "3.0.0",
+    "@typed/logic": "3.0.0",
+    "@typed/maybe": "7.0.0",
+    "@typed/new-type": "0.0.0",
+    "@typed/objects": "3.0.0",
+    "@typed/routing": "0.0.0",
+    "@typed/storage": "0.0.0",
+    "@typed/subscription": "0.0.0",
+    "@typed/timer": "0.0.0",
+    "@typed/uuid": "2.0.0",
+    "react": "^16.8.6"
+  },
+  "sideEffects": false
+}

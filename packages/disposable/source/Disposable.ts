@@ -18,3 +18,16 @@ export namespace Disposable {
    */
   export const lazy = (fn: () => Disposable): Disposable => ({ dispose: () => fn().dispose() })
 }
+
+export const withIsDisposed = (fn: (isDisposed: () => boolean) => void): Disposable => {
+  let disposed = false
+  const isDisposed = () => disposed
+
+  fn(isDisposed)
+
+  return {
+    dispose: () => {
+      disposed = true
+    },
+  }
+}

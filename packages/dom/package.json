@@ -1,0 +1,35 @@
+{
+  "name": "@typed/dom",
+  "version": "0.0.0",
+  "description": "Typed extensions for the DOM",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "DOM"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "peerDependencies": {
+    "tslib": "^1.9.3"
+  },
+  "dependencies": {
+    "@typed/disposable": "0.0.0",
+    "@typed/maybe": "7.0.0"
+  },
+  "sideEffects": false
+}

@@ -7,6 +7,9 @@
       "path": "./disposable/tsconfig.cjs.json"
     },
     {
+      "path": "./dom/tsconfig.cjs.json"
+    },
+    {
       "path": "./either/tsconfig.cjs.json"
     },
     {
@@ -47,6 +50,9 @@
     },
     {
       "path": "./promises/tsconfig.cjs.json"
+    },
+    {
+      "path": "./react/tsconfig.cjs.json"
     },
     {
       "path": "./routing/tsconfig.cjs.json"

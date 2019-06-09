@@ -24,7 +24,9 @@ for (const pkg of PACKAGES) {
     access: 'public',
   }
   packageJSONData.peerDependencies = {
+    ...(packageJSONData.peerDependencies || {}),
     tslib: '^1.9.3',
   }
+  packageJSONData.sideEffects = false
   fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSONData, null, '  ') + EOL)
 }

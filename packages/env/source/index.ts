@@ -9,5 +9,6 @@ export * from './mapTo'
 export * from './repeat'
 export * from './createTestEnv'
 export * from './collectEvents'
+export * from './onDispose'
 
 export { isBrowser } from '@typed/common'

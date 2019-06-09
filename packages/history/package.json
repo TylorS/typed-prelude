@@ -30,6 +30,7 @@
     "@typed/env": "0.0.0",
     "@typed/lambda": "0.0.0",
     "@typed/new-type": "0.0.0",
+    "@typed/subscription": "0.0.0",
     "@typed/tuple": "0.0.0"
   },
   "publishConfig": {
@@ -37,5 +38,6 @@
   },
   "peerDependencies": {
     "tslib": "^1.9.3"
-  }
+  },
+  "sideEffects": false
 }
