@@ -22,7 +22,10 @@ export function useRouter<A, B = null>(...router: Router<any[], A>): UseRouter<A
   const matcher = getMatcher()
   const [matchedValue, setMatchedValue, clear] = useMaybe<A>(matcher(path))
 
-  useDisposable(() => execPure(withDefault(clear, map(setMatchedValue, matcher(path)))), [path])
+  useDisposable(() => execPure(withDefault(clear, map(setMatchedValue, matcher(path)))), [
+    path,
+    ...router,
+  ])
 
   return {
     match: matchedValue,
