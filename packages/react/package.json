@@ -50,6 +50,7 @@
     "@typed/storage": "0.0.0",
     "@typed/subscription": "0.0.0",
     "@typed/timer": "0.0.0",
+    "@typed/tuple": "0.0.0",
     "@typed/uuid": "2.0.0",
     "react": "^16.8.6"
   },
