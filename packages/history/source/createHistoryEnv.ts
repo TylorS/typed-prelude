@@ -85,5 +85,5 @@ function wrapHistory(
     subscription.publish({ history: updatedHistory, location })
   }
 
-  return history
+  return updatedHistory
 }
