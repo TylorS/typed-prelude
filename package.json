@@ -19,7 +19,7 @@
     "watch": "npm run build:cjs -- --watch & npm run build:esm -- --watch",
     "lint": "tslint -p tsconfig.json --fix",
     "test": "typed-test && npm run lint",
-    "release": "npm run clean && npm run clean:ts && lerna bootstrap && npm run rebuild && npm run test && lerna publish --verify-access",
+    "release": "lerna bootstrap && npm run rebuild && npm run test && lerna publish --verify-access",
     "release:beta": "npm run release -- --canary --preid beta --dist-tag beta",
     "release:alpha": "npm run release -- --canary --preid alpha --dist-tag alpha"
   },

@@ -1,6 +1,5 @@
 import { Env, handle, Pure } from '@typed/env'
 import { HistoryEnv, wrapInSubscription } from '@typed/history'
-import { withDefault } from '@typed/maybe'
 import { MergeObjects, valuesOf } from '@typed/objects'
 import { createContext, createElement, PropsWithChildren, useCallback, useContext } from 'react'
 import { useSubscription } from '../hooks'
@@ -24,7 +23,7 @@ export function HistoryProvider<A>({
   return createElement(
     HistoryContext.Provider,
     {
-      value: { ...withDefault(wrappedHistoryEnv, updatedEnv), updateLocation },
+      value: { ...updatedEnv, updateLocation },
     },
     children,
   )
