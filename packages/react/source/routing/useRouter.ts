@@ -21,7 +21,7 @@ export function useRouter<A, B = null>(router: Router<any[], A>, scope?: Path): 
     [historyEnv, scope],
   )
   const wrappedEnv = wrapHistoryEnv()
-  const path = location.pathname as Path
+  const path = historyEnv.location.pathname as Path
   const getMatcher = useCallback(
     () =>
       oneOf(
