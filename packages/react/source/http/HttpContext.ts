@@ -1,12 +1,12 @@
 import { createHttpEnv, HttpEnv, WithHttpManagementOptions } from '@typed/http'
-import { createContext, createElement, PropsWithChildren, useCallback, useContext } from 'react'
+import { createContext, createElement, PropsWithChildren, useContext, useMemo } from 'react'
 
 export const HttpContext = createContext(createHttpEnv())
 
 export function HttpProvider({ options, children }: PropsWithChildren<HttpProviderProps>) {
-  const createHttp = useCallback(() => createHttpEnv(options), [options])
+  const value = useMemo(() => createHttpEnv(options), [options])
 
-  return createElement(HttpContext.Provider, { value: createHttp() }, children)
+  return createElement(HttpContext.Provider, { value }, children)
 }
 
 export type HttpProviderProps = {

@@ -1,6 +1,6 @@
 {
   "name": "@typed/common",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.177+f2959b1",
   "description": "Assortment of shared functions & types for Typed libraries",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -27,5 +27,6 @@
   "peerDependencies": {
     "tslib": "^1.9.3"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db"
 }

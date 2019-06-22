@@ -50,6 +50,9 @@ export namespace Env {
 export namespace Pure {
   export const of = Env.of
   export const fromIO = Env.fromIO
+
+  // Does nothing
+  export const empty: Pure<any> = Env.create(() => Disposable.None)
 }
 
 /**

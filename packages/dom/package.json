@@ -1,6 +1,6 @@
 {
   "name": "@typed/dom",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.177+f2959b1",
   "description": "Typed extensions for the DOM",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -28,8 +28,9 @@
     "tslib": "^1.9.3"
   },
   "dependencies": {
-    "@typed/disposable": "0.0.0",
-    "@typed/maybe": "7.0.0"
+    "@typed/disposable": "^0.0.1-alpha.177+f2959b1",
+    "@typed/maybe": "^7.0.1-alpha.177+f2959b1"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db"
 }

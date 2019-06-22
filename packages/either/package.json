@@ -1,6 +1,6 @@
 {
   "name": "@typed/either",
-  "version": "4.0.0",
+  "version": "4.0.1-alpha.177+f2959b1",
   "description": "Well-typed data-structure for representing varying outcomes",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "0.0.0"
+    "@typed/lambda": "^0.0.1-alpha.177+f2959b1"
   },
   "publishConfig": {
     "access": "public"
@@ -30,5 +30,6 @@
   "peerDependencies": {
     "tslib": "^1.9.3"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db"
 }
