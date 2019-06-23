@@ -1,6 +1,9 @@
 {
   "references": [
     {
+      "path": "./asynciterable/tsconfig.json"
+    },
+    {
       "path": "./common/tsconfig.json"
     },
     {
@@ -20,6 +23,9 @@
     },
     {
       "path": "./http/tsconfig.json"
+    },
+    {
+      "path": "./iterable/tsconfig.json"
     },
     {
       "path": "./lambda/tsconfig.json"

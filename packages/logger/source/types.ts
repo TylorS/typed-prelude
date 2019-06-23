@@ -14,7 +14,7 @@ export interface Logger {
   // Default
   readonly log: (msg: string) => Pure<void>
   readonly error: (msg: string) => Pure<void>
-  readonly clear: () => Pure<void>
+  readonly clear: () => Pure<void> // Ignored if > DEBUG
   // Info
   readonly info: (msg: string) => Pure<void>
   // Debug

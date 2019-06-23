@@ -40,13 +40,13 @@
       "path": "../lambda/tsconfig.json"
     },
     {
+      "path": "../list/tsconfig.json"
+    },
+    {
       "path": "../loadable/tsconfig.json"
     },
     {
       "path": "../logger/tsconfig.json"
-    },
-    {
-      "path": "../list/tsconfig.json"
     },
     {
       "path": "../logic/tsconfig.json"
@@ -71,6 +71,9 @@
     },
     {
       "path": "../timer/tsconfig.json"
+    },
+    {
+      "path": "../tuple/tsconfig.json"
     },
     {
       "path": "../uuid/tsconfig.json"

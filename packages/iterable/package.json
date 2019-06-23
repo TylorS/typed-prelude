@@ -1,0 +1,35 @@
+{
+  "name": "@typed/iterable",
+  "version": "0.0.0",
+  "description": "Comninators for iterables",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude-next.git"
+  },
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "Iterables"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude-next/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude-next#readme",
+  "dependencies": {
+    "@typed/lambda": "0.0.1-alpha.177+f2959b1",
+    "@typed/logic": "3.0.1-alpha.177+f2959b1"
+  },
+  "peerDependencies": {
+    "tslib": "^1.9.3"
+  },
+  "sideEffects": false
+}
