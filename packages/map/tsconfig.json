@@ -1,0 +1,30 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "rootDir": "./source",
+    "module": "es2015",
+    "outDir": "./esm"
+  },
+  "include": [
+    "source"
+  ],
+  "exclude": [
+    "./cjs/**",
+    "./esm/**",
+    "./source/**/*.browser-test.ts",
+    "./source/**/*.test.ts"
+  ],
+  "references": [
+    {
+      "path": "../iterable/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../logic/tsconfig.json"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { Disposable } from '@typed/disposable'
 import { Either } from '@typed/either'
 import { Env } from '@typed/env'
 import { Loadable } from '@typed/loadable'
+import { Maybe } from '@typed/maybe'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
 
@@ -12,16 +13,19 @@ export type HttpOptions = {
   readonly type?: 'always-fetch' | 'prefer-last' | 'prefer-current'
 }
 
-export type HttpResponse = {
+// @ts-ignore - Allow phantom type
+export type HttpResponse<A = unknown> = {
   readonly responseText: string
   readonly status: number
   readonly statusText: string
   readonly headers: Readonly<Record<string, string | undefined>>
 }
 
-export type LoadableResponse = Loadable<Either<Error, HttpResponse>>
+export type RemoteData<A = unknown> = Maybe<LoadableResponse<A>>
+export type LoadableResponse<A = unknown> = Loadable<Either<Error, HttpResponse<A>>>
 
-export interface HttpRequest<E extends HttpEnv = HttpEnv> extends Env<E, LoadableResponse> {
+export interface HttpRequest<A = unknown, E extends HttpEnv = HttpEnv>
+  extends Env<E, LoadableResponse<A>> {
   readonly url: string
   readonly options: HttpOptions
 }

@@ -91,7 +91,7 @@ function browserHttpRequest(
     const headerMap: Record<string, string> = {}
     arr.forEach((line: string) => {
       const parts = line.split(': ')
-      const header = parts.shift() as string
+      const header = parts.shift()!
       const value = parts.join(': ')
       headerMap[header] = value
     })

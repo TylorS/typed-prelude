@@ -36,6 +36,9 @@
       "path": "../loadable/tsconfig.json"
     },
     {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
       "path": "../objects/tsconfig.json"
     },
     {

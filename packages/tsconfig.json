@@ -43,6 +43,9 @@
       "path": "./logic/tsconfig.json"
     },
     {
+      "path": "./map/tsconfig.json"
+    },
+    {
       "path": "./math/tsconfig.json"
     },
     {
@@ -62,6 +65,9 @@
     },
     {
       "path": "./routing/tsconfig.json"
+    },
+    {
+      "path": "./set/tsconfig.json"
     },
     {
       "path": "./storage/tsconfig.json"

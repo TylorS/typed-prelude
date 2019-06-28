@@ -1,9 +1,5 @@
 # Typed
 
-> Highly testable and reliable software.
+> Highly testable and reliable software for Browsers & Node. Designed for TypeScript.
 
 More coming soon..
-
-> FWIW I attempted to avoid spaces that have other open-source 
-> libraries actively maintained that are shipping TypeScript definitions,
-> ES modules, and are well tested.

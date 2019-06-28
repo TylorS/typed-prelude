@@ -1,22 +1,17 @@
 {
-  "name": "@typed/asynciterable",
+  "name": "@typed/map",
   "version": "0.0.0",
-  "description": "Async Iterables Combinators",
+  "description": "Combinators for working with ReadonlyMap",
   "main": "./cjs/index.js",
-  "module": "./esm/index.js",
-  "types": "./esm/index.d.ts",
-  "main:ts": "./source/index.ts",
-  "publishConfig": {
-    "access": "public"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TylorS/typed-prelude.git"
   },
   "keywords": [
-    "Typed",
+    "Map",
+    "ReadonlyMap",
     "TypeScript",
-    "AsyncIterable"
+    "Typed"
   ],
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "MIT",
@@ -25,8 +20,15 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
+    "@typed/iterable": "0.0.0",
     "@typed/lambda": "0.0.1-alpha.177+f2959b1",
     "@typed/logic": "3.0.1-alpha.177+f2959b1"
+  },
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
   },
   "peerDependencies": {
     "tslib": "^1.9.3"

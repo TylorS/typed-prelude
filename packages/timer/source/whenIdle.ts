@@ -27,7 +27,7 @@ declare global {
  * Attempts to schedule a task to be performed when the event queue is clear.
  * @param fn :: ({ didTimeout:: boolean; timeRemaining :: (* -> number) } -> number -> *)
  * @param timer :: Timer
- * @returns :: Disposable
+ * @returns Disposable
  */
 export function whenIdle(
   fn: Arity2<RequestIdleCallbackDeadline, number>,
@@ -36,6 +36,15 @@ export function whenIdle(
   return whenIdleWithTimeout(fn, Infinity, timer)
 }
 
+/**
+ * Run a function when idle when in a browser falling back to
+ * a specified timeout within node.
+ *
+ * @param fn :: (RequestIdleCallbackDeadline -> number -> *)
+ * @param timeout :: number
+ * @param timer :: Timer
+ * @returns Disposable
+ */
 export function whenIdleWithTimeout(
   fn: Arity2<RequestIdleCallbackDeadline, number>,
   timeout: number,

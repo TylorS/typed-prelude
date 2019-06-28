@@ -13,5 +13,5 @@ export type GetOptions = Partial<
  * @param options :: GetOptions
  * @returns :: Request<A>
  */
-export const get = (url: string, options: GetOptions = {}): HttpRequest =>
+export const get = <A = unknown>(url: string, options: GetOptions = {}): HttpRequest<A> =>
   http(addQueryParameters(url, options.queryParameters || {}), options)

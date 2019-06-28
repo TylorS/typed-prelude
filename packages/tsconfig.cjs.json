@@ -43,6 +43,9 @@
       "path": "./logic/tsconfig.cjs.json"
     },
     {
+      "path": "./map/tsconfig.cjs.json"
+    },
+    {
       "path": "./math/tsconfig.cjs.json"
     },
     {
@@ -62,6 +65,9 @@
     },
     {
       "path": "./routing/tsconfig.cjs.json"
+    },
+    {
+      "path": "./set/tsconfig.cjs.json"
     },
     {
       "path": "./storage/tsconfig.cjs.json"

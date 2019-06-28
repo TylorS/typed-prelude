@@ -1,4 +1,5 @@
 import { ArgsOf } from '@typed/lambda'
+import { parseHref } from './server'
 import { HistoryEnv, Path, pathJoin } from './types'
 
 export function scopeHistoryEnv<A>(
@@ -34,9 +35,19 @@ export function scopeHistoryEnv<A>(
   }
 
   const updatedLocation: Location = {
-    assign: location.assign.bind(location),
+    assign: url => {
+      const { protocol, host, relative } = parseHref(url)
+      const href = protocol + `//` + pathJoin([host, scope, relative])
+
+      return location.assign(href)
+    },
     reload: location.reload.bind(location),
-    replace: location.replace.bind(location),
+    replace: url => {
+      const { protocol, host, relative } = parseHref(url)
+      const href = protocol + `//` + pathJoin([host, scope, relative])
+
+      return location.replace(href)
+    },
     ...location,
     get pathname() {
       return location.pathname.replace(pathJoin(['/', scope], true), '')

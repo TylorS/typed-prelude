@@ -26,6 +26,7 @@
     "@typed/env": "^0.0.1-alpha.177+f2959b1",
     "@typed/lambda": "^0.0.1-alpha.177+f2959b1",
     "@typed/loadable": "^0.0.1-alpha.177+f2959b1",
+    "@typed/maybe": "^7.0.1-alpha.177+f2959b1",
     "@typed/objects": "^3.0.1-alpha.177+f2959b1",
     "@typed/timer": "^0.0.1-alpha.177+f2959b1"
   },

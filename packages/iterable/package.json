@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TylorS/typed-prelude-next.git"
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
   },
   "keywords": [
     "Typed",
@@ -21,9 +21,9 @@
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TylorS/typed-prelude-next/issues"
+    "url": "https://github.com/TylorS/typed-prelude/issues"
   },
-  "homepage": "https://github.com/TylorS/typed-prelude-next#readme",
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
     "@typed/lambda": "0.0.1-alpha.177+f2959b1",
     "@typed/logic": "3.0.1-alpha.177+f2959b1"

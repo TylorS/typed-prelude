@@ -3,7 +3,7 @@ import { ArgsOf, Fn } from '@typed/lambda'
 import { Loadable, Loading } from '@typed/loadable'
 import { HttpOptions, HttpRequest, HttpResponse } from './types'
 
-export function http(url: string, options: HttpOptions = {}): HttpRequest {
+export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
   return {
     url,
     options,
