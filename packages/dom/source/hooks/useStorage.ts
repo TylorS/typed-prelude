@@ -26,5 +26,5 @@ export function useStorage(key: string, storage: Storage): UseStorage {
 export type UseStorage = readonly [
   Maybe<string>,
   (value: string) => Pure<string>,
-  Pure<Maybe<string>>
+  Pure<Maybe<string>>,
 ]

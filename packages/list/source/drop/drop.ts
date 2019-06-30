@@ -6,8 +6,8 @@ import { curry } from '@typed/lambda'
  * @param list :: [a]
  * @returns :: [a]
  */
-export const drop = curry(
-  <A>(quantity: number, list: ReadonlyArray<A>): A[] => list.slice(quantity),
+export const drop = curry(<A>(quantity: number, list: ReadonlyArray<A>): A[] =>
+  list.slice(quantity),
 ) as {
   <A>(quantity: number, list: ReadonlyArray<A>): A[]
   <A>(quantity: number): (list: ReadonlyArray<A>) => A[]

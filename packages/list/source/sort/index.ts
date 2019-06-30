@@ -6,8 +6,8 @@ import { ComparisonNumbers, curry } from '@typed/lambda'
  * @param list :: [a]
  * @returns :: [a]
  */
-export const sort = curry(
-  <A>(sortFn: SortFn<A>, list: ReadonlyArray<A>): A[] => list.slice().sort(sortFn),
+export const sort = curry(<A>(sortFn: SortFn<A>, list: ReadonlyArray<A>): A[] =>
+  list.slice().sort(sortFn),
 ) as {
   <A>(sortFn: SortFn<A>, list: ReadonlyArray<A>): A[]
   <A>(sortFn: SortFn<A>): (list: ReadonlyArray<A>) => A[]

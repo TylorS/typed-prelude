@@ -48,5 +48,5 @@ export function useHttp<A, B>(fn: (value: A) => HttpRequest<B>, value: A): UseHt
 
 export type UseHttp<A, B> = [
   RemoteData<Error, HttpResponse<B>>,
-  (value: A) => Pure<RemoteData<Error, HttpResponse<B>>>
+  (value: A) => Pure<RemoteData<Error, HttpResponse<B>>>,
 ]

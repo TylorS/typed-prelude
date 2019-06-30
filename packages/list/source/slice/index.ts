@@ -7,8 +7,8 @@ import { curry } from '@typed/lambda'
  * @param list :: [a]
  * @returns :: [a]
  */
-export const slice = curry(
-  <A>(from: number, to: number, list: ArrayLike<A>): A[] => Array.from(list).slice(from, to),
+export const slice = curry(<A>(from: number, to: number, list: ArrayLike<A>): A[] =>
+  Array.from(list).slice(from, to),
 ) as {
   <A>(from: number, to: number, list: ArrayLike<A>): A[]
   (from: number, to: number): <A>(list: ArrayLike<A>) => A[]

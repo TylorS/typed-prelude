@@ -12,5 +12,5 @@ export function useList<A>(defaultValue: ReadonlyArray<A> = []): UseList<A> {
 
 export type UseList<A> = readonly [
   ReadonlyArray<A>,
-  (fn: (value: ReadonlyArray<A>) => ArrayLike<A> | Iterable<A>) => Pure<ReadonlyArray<A>>
+  (fn: (value: ReadonlyArray<A>) => ArrayLike<A> | Iterable<A>) => Pure<ReadonlyArray<A>>,
 ]

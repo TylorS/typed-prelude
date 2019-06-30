@@ -12,8 +12,8 @@ import { remove } from '../remove'
  * @param items :: [a]
  * @returns :: [a]
  */
-export const appendOrRemove = curry(
-  <A>(item: A, items: ReadonlyArray<A>): A[] => __appendOrRemove(item, items, id),
+export const appendOrRemove = curry(<A>(item: A, items: ReadonlyArray<A>): A[] =>
+  __appendOrRemove(item, items, id),
 ) as {
   <A>(item: A, items: ReadonlyArray<A>): A[]
   <A>(item: A): (items: ReadonlyArray<A>) => A[]

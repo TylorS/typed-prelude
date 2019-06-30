@@ -14,5 +14,5 @@ export function useEither<A, B>(defaultValue: Either<A, B>): UseEither<A, B> {
 export type UseEither<A, B> = [
   Either<A, B>,
   (value: A) => Pure<Either<A, B>>,
-  (value: B) => Pure<Either<A, B>>
+  (value: B) => Pure<Either<A, B>>,
 ]

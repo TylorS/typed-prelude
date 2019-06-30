@@ -58,5 +58,5 @@ export function useHttp<A extends any[], B>(
 
 export type UseHttp<A extends any[], B> = [
   RemoteData<Error, HttpResponse<B>>,
-  (...values: A) => Pure<RemoteData<Error, HttpResponse<B>>>
+  (...values: A) => Pure<RemoteData<Error, HttpResponse<B>>>,
 ]
