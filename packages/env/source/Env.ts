@@ -1,5 +1,5 @@
 import { DropKeys } from '@typed/common'
-import { Disposable } from '@typed/disposable'
+import { Disposable, withIsDisposed } from '@typed/disposable'
 import { IO, noOp } from '@typed/lambda'
 
 /**
@@ -41,8 +41,10 @@ export namespace Env {
    * @param value :: A
    * @returns Pure<A>
    */
-  export const of = <A>(value: A): Pure<A> => ({ runEnv: cb => (cb(value), Disposable.None) })
-  export const fromIO = <A>(fn: IO<A>): Pure<A> => ({ runEnv: cb => (cb(fn()), Disposable.None) })
+  export const of = <A>(value: A): Pure<A> => fromIO(() => value)
+  export const fromIO = <A>(fn: IO<A>): Pure<A> => ({
+    runEnv: cb => withIsDisposed(isDisposed => !isDisposed() && cb(fn())),
+  })
 
   export const create = <E, A>(runEnv: Env<E, A>['runEnv']): Env<E, A> => ({ runEnv })
 }

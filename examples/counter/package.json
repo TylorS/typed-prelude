@@ -1,0 +1,11 @@
+{
+  "name": "counter",
+  "version": "1.0.0",
+  "description": "",
+  "devDependencies": {
+    "parcel": "^1.12.3"
+  },
+  "scripts": {
+    "start": "parcel index.html"
+  }
+}

@@ -1,22 +1,40 @@
 import { isBrowser } from '@typed/common'
 import { Clock } from './types'
 
-/** Create a performance clock */
-export const createPerformanceClock = () => createRelativeClock(performanceClock)
-
 /** Create a clock relative to the current time */
 export const createRelativeClock = (clock: Clock): Clock =>
   new RelativeClock(clock, clock.currentTime())
 
-// tslint:disable-next-line:no-var-requires
-const performanceInstance: Performance = isBrowser ? performance : require('perf_hooks').performance
-const performanceClock: Clock = { currentTime: () => performanceInstance.now() }
+export const createClock = (): Clock => {
+  const clock = isBrowser
+    ? { currentTime: () => performance.now() }
+    : new HRTimeClock(process.hrtime, process.hrtime())
+
+  const relative = createRelativeClock(clock)
+
+  console.log('relative', relative)
+
+  return relative
+}
 
 // tslint:disable-next-line:max-classes-per-file
 class RelativeClock implements Clock {
   constructor(private clock: Clock, private origin: number) {}
 
-  public currentTime() {
+  public currentTime = () => {
     return this.clock.currentTime() - this.origin
+  }
+}
+
+// tslint:disable-next-line:max-classes-per-file
+class HRTimeClock implements Clock {
+  constructor(
+    private hrtime: typeof process.hrtime,
+    private origin: ReturnType<typeof process.hrtime>,
+  ) {}
+
+  public currentTime(): number {
+    const hrt = this.hrtime(this.origin)
+    return (hrt[0] * 1e9 + hrt[1]) / 1e6
   }
 }
