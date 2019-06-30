@@ -1,3 +1,3 @@
 import { makeBundle } from '../../tools/makeBundle'
 
-makeBundle({ entry: 'source/app.ts' })
+makeBundle({ cwd: __dirname, entry: 'source/app.ts' })

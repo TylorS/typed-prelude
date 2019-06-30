@@ -1,10 +1,11 @@
-import { createDomEnv, html, render, useState, withHooks } from '../../../packages/dom/esm'
-import { decrement, increment } from '../../../packages/math/esm'
+import { createDomEnv, html, render, useState, withHooks } from '@typed/dom'
+import { pipe } from '@typed/lambda'
+import { decrement, increment } from '@typed/math'
 
 const { document } = createDomEnv()
 
-const Counter = withHooks(() => {
-  const [count, setCount] = useState(1)
+const Counter = () => {
+  const [count, setCount] = useState(0)
 
   return html`
     <section>
@@ -13,12 +14,24 @@ const Counter = withHooks(() => {
       <button onclick=${() => setCount(increment)}>Increment</button>
     </section>
   `
-})
+}
+
+const Container = (node: Node) =>
+  html`
+    <section style=${{ margin: '1rem', padding: '1rem', border: '1px solid #efefef' }}>
+      ${node}
+    </section>
+  `
+
+const ContainedCounter = pipe(
+  Counter,
+  Container,
+)
 
 const Counters = () => html`
   <main>
-    ${Counter()} ${Counter()}
+    ${ContainedCounter()} ${ContainedCounter()} ${ContainedCounter()}
   </main>
 `
 
-render(document.body, Counters)
+render(document.body, withHooks(Counters))

@@ -9,5 +9,9 @@
   "scripts": {
     "start": "ts-node bundle",
     "build": "rm -rf dist && NODE_ENV=production ts-node bundle"
+  },
+  "dependencies": {
+    "@typed/dom": "0.0.1-alpha.183",
+    "@typed/math": "^3.0.1-alpha.183"
   }
 }

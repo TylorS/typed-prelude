@@ -8,24 +8,25 @@ import { gzip } from 'zlib'
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
 export type MakeBundleOptions = {
+  readonly cwd: string
   readonly entry: string
 
-  readonly cwd?: string
   readonly filesToWatch?: Array<[string, string]>
-
   readonly port?: number
 }
 
 export function makeBundle(options: MakeBundleOptions) {
-  const HOME_DIR = join(__dirname, '..')
   const { cwd = process.cwd(), entry, filesToWatch = [], port = 1234 } = options
+
+  process.chdir(cwd)
+
   const TSCONFIG = join(cwd, 'tsconfig.json')
   const TSLINT = join(cwd, 'tslint.json')
   const SOURCE = join(cwd, 'source')
   const DIST = join(cwd, 'dist')
   const MAIN_BUNDLE = join(cwd, entry)
   const MAIN_BUNDLE_NAME = basename(MAIN_BUNDLE, extname(MAIN_BUNDLE))
-  const MAIN_INSTRUCTIONS = relative(HOME_DIR, MAIN_BUNDLE)
+  const MAIN_INSTRUCTIONS = relative(cwd, MAIN_BUNDLE)
 
   if (!existsSync(MAIN_BUNDLE)) {
     console.error('Unable to find entry file:', MAIN_BUNDLE)
@@ -80,7 +81,7 @@ export function makeBundle(options: MakeBundleOptions) {
     }
 
     const fuse = FuseBox.init({
-      homeDir: HOME_DIR,
+      homeDir: cwd,
       tsConfig: TSCONFIG,
       target: 'browser@es6',
       output: join(DIST, NODE_ENV === 'production' ? '$name.$hash.js' : '$name.js'),

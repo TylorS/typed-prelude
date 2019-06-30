@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "declaration": true,
     "declarationMap": true,
     "downlevelIteration": true,
@@ -19,14 +20,7 @@
     "lib": [
       "dom",
       "es2015"
-    ],
-    "baseUrl": "../../",
-    "paths": {
-      "@typed/*": [
-        "packages/*",
-        "node_modules/@typed/*"
-      ]
-    }
+    ]
   },
   "files": [
     "./source/app.ts"
