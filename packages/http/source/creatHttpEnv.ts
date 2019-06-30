@@ -27,7 +27,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
   const { success, failure, onStart } = callbacks
   const { method = 'GET', headers, body } = options
   const protocol = IS_HTTPS.test(url) ? 'https:' : 'http:'
-  const http: typeof import('https') = protocol === 'https:' ? require('https') : require('http')
+  const http = protocol === 'https:' ? require('https') : require('http')
 
   const request = http.request(url, { method, headers, protocol }, (response: IncomingMessage) => {
     const data: string[] = []

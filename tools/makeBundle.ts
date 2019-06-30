@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, watchFile, writeFileSync } from 'fs'
-import { Bundle, EnvPlugin, FuseBox, Plugin, QuantumPlugin, WebIndexPlugin } from 'fuse-box'
+import { Bundle, EnvPlugin, FuseBox, Plugin, WebIndexPlugin } from 'fuse-box'
 import { TypeChecker } from 'fuse-box-typechecker'
 import { ITypeCheckerOptions } from 'fuse-box-typechecker/dist/commonjs/interfaces'
 import { basename, extname, join, relative } from 'path'
@@ -10,20 +10,28 @@ const NODE_ENV = process.env.NODE_ENV || 'development'
 export type MakeBundleOptions = {
   readonly cwd: string
   readonly entry: string
-
+  readonly dist?: string
   readonly filesToWatch?: Array<[string, string]>
   readonly port?: number
+  readonly mode?: 'development' | 'production'
+  readonly skipTypeCheck?: boolean
+  readonly noHash?: boolean
 }
 
-export function makeBundle(options: MakeBundleOptions) {
-  const { cwd = process.cwd(), entry, filesToWatch = [], port = 1234 } = options
-
-  process.chdir(cwd)
-
+export async function makeBundle(options: MakeBundleOptions) {
+  const {
+    cwd = process.cwd(),
+    entry,
+    filesToWatch = [],
+    port = 1234,
+    mode = NODE_ENV,
+    skipTypeCheck = false,
+    noHash = false,
+  } = options
   const TSCONFIG = join(cwd, 'tsconfig.json')
   const TSLINT = join(cwd, 'tslint.json')
   const SOURCE = join(cwd, 'source')
-  const DIST = join(cwd, 'dist')
+  const DIST = join(cwd, options.dist || 'dist')
   const MAIN_BUNDLE = join(cwd, entry)
   const MAIN_BUNDLE_NAME = basename(MAIN_BUNDLE, extname(MAIN_BUNDLE))
   const MAIN_INSTRUCTIONS = relative(cwd, MAIN_BUNDLE)
@@ -48,51 +56,60 @@ export function makeBundle(options: MakeBundleOptions) {
   // get typechecker
   const typechecker = TypeChecker(typeCheckerOptions)
 
-  if (NODE_ENV === 'development') {
+  if (!skipTypeCheck && mode === 'development') {
     typechecker.startTreadAndWait()
   }
 
   async function makeBundle(name: string, instructions: string) {
     const plugins: Array<Plugin | Plugin[]> = [
       EnvPlugin({
-        NODE_ENV,
+        NODE_ENV: mode,
       }),
     ]
 
     if (name === MAIN_BUNDLE_NAME) {
-      plugins.push(
-        WebIndexPlugin({
-          template: join(SOURCE, 'index.html'),
-          appendBundles: true,
-          async: true,
-          path: '/',
-        }),
-      )
+      const template = join(SOURCE, 'index.html')
 
-      if (NODE_ENV === 'production') {
+      if (existsSync(template)) {
         plugins.push(
-          QuantumPlugin({
-            uglify: true,
-            replaceProcessEnv: true,
-            treeshake: true,
+          WebIndexPlugin({
+            template,
+            appendBundles: true,
+            async: true,
+            path: '/',
           }),
         )
       }
+
+      // if (mode === 'production') {
+      //   plugins.push(
+      //     QuantumPlugin({
+      //       uglify: true,
+      //       replaceProcessEnv: true,
+      //       treeshake: true,
+      //       bakeApiIntoBundle: name,
+      //     }),
+      //   )
+      // }
     }
 
+    const useHash = !noHash && mode === 'production'
     const fuse = FuseBox.init({
       homeDir: cwd,
       tsConfig: TSCONFIG,
       target: 'browser@es6',
-      output: join(DIST, NODE_ENV === 'production' ? '$name.$hash.js' : '$name.js'),
+      output: join(DIST, useHash ? '$name.$hash.js' : '$name.js'),
       plugins,
       useTypescriptCompiler: true,
       useJsNext: true,
       sourceMaps: true,
-      hash: NODE_ENV === 'production',
+      hash: useHash,
+      log: {
+        showBundledFiles: false,
+      },
     })
 
-    if (NODE_ENV === 'development' && name === MAIN_BUNDLE_NAME) {
+    if (mode === 'development' && name === MAIN_BUNDLE_NAME) {
       fuse.dev({ port, fallback: 'index.html', root: DIST })
     }
 
@@ -100,7 +117,7 @@ export function makeBundle(options: MakeBundleOptions) {
 
     const producer = await fuse.run()
 
-    if (NODE_ENV === 'production') {
+    if (mode === 'production') {
       producer.bundles.forEach(bundle => {
         const { path } = bundle.context.output.lastPrimaryOutput
         const contents = readFileSync(path)
@@ -117,7 +134,7 @@ export function makeBundle(options: MakeBundleOptions) {
   }
 
   function watchBundle(bundle: Bundle) {
-    return NODE_ENV === 'development'
+    return mode === 'development'
       ? bundle
           .hmr()
           .watch(
@@ -133,7 +150,7 @@ export function makeBundle(options: MakeBundleOptions) {
     for (const [fromPath, toPath] of files) {
       writeFileSync(toPath, readFileSync(fromPath))
 
-      if (NODE_ENV === 'development') {
+      if (mode === 'development') {
         watchFile(fromPath, () => writeFileSync(toPath, readFileSync(fromPath)))
       }
     }
@@ -141,19 +158,23 @@ export function makeBundle(options: MakeBundleOptions) {
 
   let id: any = void 0
   function scheduleNextRun() {
-    clearTimeout(id)
-    id = setTimeout(() => typechecker.useThreadAndTypecheck(), 1000)
+    if (!skipTypeCheck) {
+      clearTimeout(id)
+      id = setTimeout(() => typechecker.useThreadAndTypecheck(), 1000)
+    }
   }
 
-  if (NODE_ENV === 'production') {
+  if (!skipTypeCheck && mode === 'production') {
     typechecker.runSync()
   }
 
-  Promise.all([makeBundle(MAIN_BUNDLE_NAME, `> ${MAIN_INSTRUCTIONS}`)]).catch(error => {
+  try {
+    await makeBundle(MAIN_BUNDLE_NAME, `> ${MAIN_INSTRUCTIONS}`)
+  } catch (error) {
     console.error(error)
 
     process.exit(1)
-  })
+  }
 
   watchAndCopy(...filesToWatch)
 }

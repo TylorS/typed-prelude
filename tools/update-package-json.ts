@@ -16,6 +16,7 @@ for (const pkg of PACKAGES) {
   const packageJSONData = JSON.parse(fs.readFileSync(packageJSONPath).toString())
   delete packageJSONData.scripts
   packageJSONData.main = './cjs/index.js'
+  packageJSONData.unpkg = './umd/index.js'
   packageJSONData.module = './esm/index.js'
   delete packageJSONData.type
   packageJSONData.types = './esm/index.d.ts'

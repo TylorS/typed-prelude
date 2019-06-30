@@ -41,6 +41,7 @@ build
 dist
 esm
 cjs
+umd
 lib
 .tmp
 .cache-loader

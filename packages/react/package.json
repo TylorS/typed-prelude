@@ -55,5 +55,6 @@
     "react": "^16.8.6"
   },
   "sideEffects": false,
-  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db"
+  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db",
+  "unpkg": "./umd/index.js"
 }
