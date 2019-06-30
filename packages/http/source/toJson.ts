@@ -1,12 +1,12 @@
-import { chain as chainEither, Either, tryCatch } from '@typed/either'
+import { tryCatch } from '@typed/either'
 import { Env, map } from '@typed/env'
-import { Loadable, map as mapLoadable } from '@typed/loadable'
+import { chain, RemoteData } from '@typed/remote-data'
 import { HttpEnv, HttpRequest } from './types'
 
 export const toJson = <A = unknown, E extends HttpEnv = HttpEnv>(
   request: HttpRequest<A, E>,
-): Env<E, Loadable<Either<Error, A>>> =>
+): Env<E, RemoteData<Error, A>> =>
   map(
-    mapLoadable(chainEither(({ responseText }) => tryCatch(() => JSON.parse(responseText)))),
+    chain(({ responseText }) => RemoteData.fromEither(tryCatch<A>(() => JSON.parse(responseText)))),
     request,
   )

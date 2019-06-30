@@ -33,13 +33,13 @@
       "path": "../lambda/tsconfig.json"
     },
     {
-      "path": "../loadable/tsconfig.json"
-    },
-    {
       "path": "../maybe/tsconfig.json"
     },
     {
       "path": "../objects/tsconfig.json"
+    },
+    {
+      "path": "../remote-data/tsconfig.json"
     },
     {
       "path": "../timer/tsconfig.json"

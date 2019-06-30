@@ -1,5 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { Either, fromLeft, fromRight, isLeft } from '@typed/either'
+import { isFailure, isSuccess, RemoteData } from '@typed/remote-data'
 import { Timer } from '@typed/timer'
 import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
 
@@ -9,10 +9,10 @@ import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
  * @param timer :: Timer
  */
 export function createTestHttpEnv(
-  testHttp: (url: string, options: HttpOptions) => Either<Error, HttpResponse>,
+  testHttp: (url: string, options: HttpOptions) => RemoteData<Error, HttpResponse>,
   timer: Timer,
 ): TestHttpEnv {
-  const responses: Array<Either<Error, HttpResponse>> = []
+  const responses: Array<RemoteData<Error, HttpResponse>> = []
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success, failure, onStart } = callbacks
@@ -26,12 +26,13 @@ export function createTestHttpEnv(
 
       responses.push(response)
 
-      const cb = (isLeft(response) ? failure : success) as (either: Error | HttpResponse) => void
-      const unwrap = (isLeft(response) ? fromLeft : fromRight) as (
-        either: Either<Error, HttpResponse>,
-      ) => Error | HttpResponse
+      if (isFailure(response)) {
+        failure(response.value)
+      }
 
-      cb(unwrap(response))
+      if (isSuccess(response)) {
+        success(response.value)
+      }
     }
 
     return timer.delay(getResponse, 0)
@@ -44,15 +45,15 @@ export function createTestHttpEnv(
 }
 
 export function createSuccessfulResponse(options: Partial<HttpResponse> = {}) {
-  return Either.of<HttpResponse, Error>(createHttpResponse(options))
+  return RemoteData.of<Error, HttpResponse>(createHttpResponse(options))
 }
 
 export function createFailedResponse(error: Error) {
-  return Either.left<Error, HttpResponse>(error)
+  return RemoteData.failure<Error, HttpResponse>(error)
 }
 
-export function createHttpResponse(options: Partial<HttpResponse> = {}): HttpResponse {
-  const response: HttpResponse = {
+export function createHttpResponse<A>(options: Partial<HttpResponse<A>> = {}): HttpResponse<A> {
+  const response: HttpResponse<A> = {
     status: 200,
     statusText: '',
     responseText: '',

@@ -10,5 +10,5 @@ function __filter<A>(predicate: Predicate<A>, set: ReadonlySet<A>): ReadonlySet<
 
   set.forEach(x => predicate(x) && filtered.add(x))
 
-  return filtered
+  return filtered as ReadonlySet<A>
 }

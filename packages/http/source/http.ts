@@ -1,6 +1,5 @@
-import { Left, Right } from '@typed/either'
 import { ArgsOf, Fn } from '@typed/lambda'
-import { Loadable, Loading } from '@typed/loadable'
+import { Failure, Loading, Success } from '@typed/remote-data'
 import { HttpOptions, HttpRequest, HttpResponse } from './types'
 
 export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
@@ -18,8 +17,8 @@ export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpR
       }
 
       return http(url, options, {
-        success: ifNotLoaded((response: HttpResponse) => f(Loadable.of(Right.of(response)))),
-        failure: ifNotLoaded((error: Error) => f(Loadable.of(Left.of(error)))),
+        success: ifNotLoaded((response: HttpResponse<A>) => f(Success.of(response))),
+        failure: ifNotLoaded((error: Error) => f(Failure.of(error))),
         onStart: () => f(Loading),
       })
     },

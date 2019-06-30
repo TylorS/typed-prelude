@@ -1,11 +1,11 @@
 import { Disposable } from '@typed/disposable'
 import { Right } from '@typed/either'
 import { collectEvents, handle } from '@typed/env'
-import { Loadable, Loading } from '@typed/loadable'
+import { Loading, RemoteData } from '@typed/remote-data'
 import { describe, given, it } from '@typed/test'
 import { createHttpResponse } from './createTestHttpEnv'
 import { http } from './http'
-import { HttpEnv, LoadableResponse } from './types'
+import { HttpEnv } from './types'
 
 export const test = describe(`http`, [
   given(`a url`, [
@@ -17,7 +17,7 @@ export const test = describe(`http`, [
       equal({}, request.options)
       const response = createHttpResponse()
 
-      const pure = handle<HttpEnv, HttpEnv, LoadableResponse>(
+      const pure = handle<HttpEnv, HttpEnv, RemoteData>(
         {
           http: (_, __, { success, onStart }) => (
             onStart && onStart(), success(response), Disposable.None
@@ -28,7 +28,7 @@ export const test = describe(`http`, [
       const [one, two] = await collectEvents(pure, 2)
 
       equal(Loading, one)
-      equal(Loadable.of(Right.of(response)), two)
+      equal(RemoteData.of(response), two)
     }),
   ]),
 ])

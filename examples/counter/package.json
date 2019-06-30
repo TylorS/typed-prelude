@@ -1,11 +1,13 @@
 {
+  "private": true,
   "name": "counter",
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "parcel": "^1.12.3"
+    "ts-node": "^8.3.0"
   },
   "scripts": {
-    "start": "parcel index.html"
+    "start": "ts-node bundle",
+    "build": "rm -rf dist && NODE_ENV=production ts-node bundle"
   }
 }

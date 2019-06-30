@@ -28,7 +28,7 @@ export type OptionalProperties<A> = Pick<A, OptionalPropertyNames<A>>
 export type RequiredProperties<A> = Pick<A, RequiredPropertyNames<A>>
 
 export type MergeObjects<A, B> = {
-  [K in RequiredPropertyNames<A & B>]: K extends keyof B
+  [K in Exclude<RequiredPropertyNames<A & B>, OptionalPropertyNames<A & B>>]: K extends keyof B
     ? K extends keyof A
       ? Defined<A[K] | B[K]>
       : B[K]
@@ -46,22 +46,7 @@ export type MergeObjects<A, B> = {
       : never
   }
 
-export type Overwrite<A, B> = B extends A
-  ? B
-  : {
-      [K in Exclude<RequiredPropertyNames<A & B>, OptionalPropertyNames<B>>]: K extends keyof B
-        ? B[K]
-        : K extends keyof A
-        ? A[K]
-        : never
-    } &
-      {
-        [K in OptionalPropertyNames<A> | OptionalPropertyNames<B>]?: K extends keyof B
-          ? B[K]
-          : K extends keyof A
-          ? A[K]
-          : never
-      }
+export type Overwrite<A, B> = B & MergeObjects<DropKeys<A, keyof B>, B>
 
 export type OptionalKeys<A, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A, K>>
 

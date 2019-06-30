@@ -1,4 +1,3 @@
-import { Overwrite } from '@typed/objects'
 import * as React from 'react'
 
 export type ContainerComponent<A extends {}, B> = React.FunctionComponent<ContainerProps<A, B>>
@@ -9,7 +8,7 @@ export type ContainerProps<A extends {}, B> = DropChildren<A> & {
 export type DropChildren<A> = Pick<A, Exclude<keyof A, 'children'>>
 
 export type ContextComponent<A extends {}, B> = {
-  readonly Provider: React.ComponentType<Overwrite<A, { children: React.ReactNode }>>
+  readonly Provider: React.ComponentType<A>
   readonly Consumer: React.Consumer<B>
 
   readonly useContext: () => B

@@ -1,5 +1,5 @@
 import { createTestEnv, handle } from '@typed/env'
-import { Loadable, Loading } from '@typed/loadable'
+import { Loading, RemoteData } from '@typed/remote-data'
 import { describe, given, it } from '@typed/test'
 import {
   createFailedResponse,
@@ -7,13 +7,12 @@ import {
   createTestHttpEnv,
 } from './createTestHttpEnv'
 import { http } from './http'
-import { LoadableResponse } from './types'
 import { withHttpManagement } from './withHttpManagement'
 
 export const test = describe(`withHttpManagement`, [
   given(`some options and an HttpEnv`, [
     it(`returns a new HttpEnv that caches requests`, ({ equal }) => {
-      const { timer, recordEvents, getEvents } = createTestEnv<LoadableResponse>()
+      const { timer, recordEvents, getEvents } = createTestEnv<RemoteData>()
       const success = createSuccessfulResponse({ status: 204 })
       const failed = createFailedResponse(new Error('Failed'))
       const expectedUrl = 'http://somewhere.com'
@@ -22,8 +21,8 @@ export const test = describe(`withHttpManagement`, [
       const httpEnv = withHttpManagement({ timer, expiration }, original)
       const successRequest = handle(httpEnv, http(expectedUrl))
       const failedRequest = handle(httpEnv, http('anywhere'))
-      const expectedSuccessEvents = [Loading, Loadable.of(success)]
-      const expectedFailedEvents = [Loading, Loadable.of(failed)]
+      const expectedSuccessEvents = [Loading, success]
+      const expectedFailedEvents = [Loading, failed]
 
       recordEvents(successRequest)
       recordEvents(failedRequest)
@@ -38,7 +37,7 @@ export const test = describe(`withHttpManagement`, [
       timer.timePast(expiration + 1)
 
       equal([success, failed, failed], original.getResponses())
-      equal([...expectedSuccessEvents, Loadable.of(success)], getEvents(successRequest))
+      equal([...expectedSuccessEvents, success], getEvents(successRequest))
       equal([...expectedFailedEvents, ...expectedFailedEvents], getEvents(failedRequest))
 
       recordEvents(successRequest)
@@ -47,7 +46,7 @@ export const test = describe(`withHttpManagement`, [
 
       equal([success, failed, failed, success, failed], original.getResponses())
       equal(
-        [...expectedSuccessEvents, Loadable.of(success), ...expectedSuccessEvents],
+        [...expectedSuccessEvents, success, ...expectedSuccessEvents],
         getEvents(successRequest),
       )
       equal(

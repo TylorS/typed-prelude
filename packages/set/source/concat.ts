@@ -10,6 +10,6 @@ export const concat: {
     a.forEach(x => set.add(x))
     b.forEach(x => set.add(x))
 
-    return set
+    return set as ReadonlySet<A>
   },
 )

@@ -14,9 +14,10 @@ export const path = curry(
       ? prop(keys[0], obj)
       : keys
           .slice(1)
-          .reduce((maybe, key) => chain(prop(key), maybe) as any, prop(keys[0], obj))) as Maybe<
-      ObjectPath<A, Keys>
-    >,
+          .reduce(
+            (maybe, key) => chain(prop(key) as any, maybe) as any,
+            prop(keys[0], obj),
+          )) as Maybe<ObjectPath<A, Keys>>,
 ) as {
   <Keys extends PropertyKey[], A extends object>(keys: Keys, obj: A): Maybe<ObjectPath<A, Keys>>
   <Keys extends PropertyKey[]>(keys: Keys): <A extends object>(obj: A) => Maybe<ObjectPath<A, Keys>>

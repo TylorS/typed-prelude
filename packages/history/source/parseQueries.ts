@@ -14,14 +14,14 @@ const QUERYSTRING_REGEX = /(?:^|&)([^&=]*)=?([^&]*)/g
  *
  * console.log(parseQueries(location)) // logs => { q: 'hello', lang: 'en' }
  */
-export function parseQueries<Queries extends Record<string, string> = {}>(
+export function parseQueries<Queries extends Record<string, string> = Record<string, string>>(
   location: Location,
 ): Readonly<Queries> {
   const { search } = location
-  const queries = {} as Queries
+  const queries: any = {}
 
   if (!search) {
-    return queries
+    return queries as Readonly<Queries>
   }
 
   search.substring(1).replace(QUERYSTRING_REGEX, (_: string, name: string, value: string) => {
@@ -32,5 +32,5 @@ export function parseQueries<Queries extends Record<string, string> = {}>(
     return value
   })
 
-  return queries
+  return queries as Readonly<Queries>
 }

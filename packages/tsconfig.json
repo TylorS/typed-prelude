@@ -34,9 +34,6 @@
       "path": "./list/tsconfig.json"
     },
     {
-      "path": "./loadable/tsconfig.json"
-    },
-    {
       "path": "./logger/tsconfig.json"
     },
     {
@@ -62,6 +59,9 @@
     },
     {
       "path": "./react/tsconfig.json"
+    },
+    {
+      "path": "./remote-data/tsconfig.json"
     },
     {
       "path": "./routing/tsconfig.json"

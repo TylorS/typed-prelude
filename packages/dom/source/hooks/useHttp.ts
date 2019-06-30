@@ -1,9 +1,9 @@
 import { Disposable } from '@typed/disposable'
-import { Either } from '@typed/either'
 import { chain, Env, handle, mapTo, Pure } from '@typed/env'
-import { HttpEnv, HttpRequest, HttpResponse, LoadableResponse } from '@typed/http'
-import { Loadable } from '@typed/loadable'
-import { Maybe } from '@typed/maybe'
+import { HttpEnv, HttpRequest, HttpResponse } from '@typed/http'
+import { id } from '@typed/lambda'
+import { unpack } from '@typed/maybe'
+import { NoData, RemoteData } from '@typed/remote-data'
 import { useCallback, useMemo, useState } from '../tagged'
 import { useBoolean } from './useBoolean'
 import { useEnv } from './useEnv'
@@ -22,12 +22,12 @@ export function useHttp<A extends any[], B>(
   const [disposable, setDisposable] = useState(Disposable.None)
   const [isLoading, setIsLoading] = useBoolean(false)
   const deps = [fn, ...values]
-  const makeRequest = useCallback((...values: A): Pure<LoadableResponse> => {
+  const makeRequest = useCallback((...values: A): Pure<RemoteData<Error, HttpResponse<B>>> => {
     const httpRequest = fn(...values)
     const requestType = httpRequest.options.type
 
     if (isLoading && requestType === 'prefer-last') {
-      return Pure.empty
+      return Pure.of(NoData)
     }
 
     if (isLoading && requestType === 'prefer-current') {
@@ -51,11 +51,12 @@ export function useHttp<A extends any[], B>(
 
   const request = useMemo(() => makeRequest(...values), deps)
   const response = useEnv(request, httpEnv)
+  const remoteData = unpack(id, (): RemoteData<Error, HttpResponse<B>> => NoData, response)
 
-  return [response, makeRequest]
+  return [remoteData, makeRequest]
 }
 
 export type UseHttp<A extends any[], B> = [
-  Maybe<Loadable<Either<Error, HttpResponse<B>>>>,
-  (...values: A) => Pure<Loadable<Either<Error, HttpResponse<B>>>>
+  RemoteData<Error, HttpResponse<B>>,
+  (...values: A) => Pure<RemoteData<Error, HttpResponse<B>>>
 ]

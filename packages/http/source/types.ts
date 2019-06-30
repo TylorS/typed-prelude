@@ -1,8 +1,6 @@
 import { Disposable } from '@typed/disposable'
-import { Either } from '@typed/either'
 import { Env } from '@typed/env'
-import { Loadable } from '@typed/loadable'
-import { Maybe } from '@typed/maybe'
+import { RemoteData } from '@typed/remote-data'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
 
@@ -21,11 +19,8 @@ export type HttpResponse<A = unknown> = {
   readonly headers: Readonly<Record<string, string | undefined>>
 }
 
-export type RemoteData<A = unknown> = Maybe<LoadableResponse<A>>
-export type LoadableResponse<A = unknown> = Loadable<Either<Error, HttpResponse<A>>>
-
 export interface HttpRequest<A = unknown, E extends HttpEnv = HttpEnv>
-  extends Env<E, LoadableResponse<A>> {
+  extends Env<E, RemoteData<Error, HttpResponse<A>>> {
   readonly url: string
   readonly options: HttpOptions
 }
@@ -41,5 +36,5 @@ export interface HttpEnv {
 }
 
 export interface TestHttpEnv extends HttpEnv {
-  readonly getResponses: () => ReadonlyArray<Either<Error, HttpResponse>>
+  readonly getResponses: () => ReadonlyArray<RemoteData<Error, HttpResponse>>
 }

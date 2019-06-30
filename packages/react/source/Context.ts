@@ -1,4 +1,3 @@
-import { Overwrite } from '@typed/objects'
 import * as React from 'react'
 import {
   CombinedProps,
@@ -15,11 +14,10 @@ export function createContextFromContainer<A extends {}, B>(
   // No Default Value means unable
   const Context = React.createContext(void 0 as any)
 
-  function Provider(props: Overwrite<A, { children: React.ReactNode }>) {
-    return React.createElement(Container as any, props as any, (value: B) =>
+  const Provider: React.ComponentType<A> = props =>
+    React.createElement(Container as any, props, (value: B) =>
       React.createElement(Context.Provider, { value }, props.children),
     )
-  }
 
   return {
     Provider,
@@ -41,18 +39,14 @@ export function combineContexts<A extends Contexts>(
   const Providers = combineProviders(keys, contexts)
   const Consumers = combineConsumers(keys, contexts)
 
-  function Provider({
-    children,
-    ...providerProps
-  }: Overwrite<CombinedProps<A>, { children: React.ReactNode }>) {
-    return React.createElement(
+  const Provider: ProviderComponent<A> = ({ children, ...providerProps }) =>
+    React.createElement(
       Providers,
       providerProps as any,
       React.createElement(Consumers, null, (value: CombinedRenderProps<A>) =>
         React.createElement(Context.Provider, { value }, children),
       ),
     )
-  }
 
   return {
     Provider,
@@ -61,10 +55,7 @@ export function combineContexts<A extends Contexts>(
   }
 }
 
-type ProviderComponent<A extends Contexts> = React.FunctionComponent<
-  Overwrite<CombinedProps<A>, { children: React.ReactNode }>
->
-
+type ProviderComponent<A extends Contexts> = React.FunctionComponent<CombinedProps<A>>
 type ConsumerComponent<A extends Contexts> = React.FunctionComponent<CombinedRenderProps<A>>
 
 function combineProviders<A extends Contexts>(
