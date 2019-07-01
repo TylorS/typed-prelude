@@ -3,7 +3,7 @@ import { capitalize } from '../packages/strings/source'
 import { PACKAGES, sourceDirectory } from './common'
 import { makeBundle } from './makeBundle'
 
-async function bundlePackages() {
+export async function bundlePackages() {
   for (const pkg of PACKAGES) {
     const cwd = join(sourceDirectory, pkg)
     const additionalArithmetic = pkg === 'dom' ? `-basichtml` : void 0
@@ -17,10 +17,16 @@ async function bundlePackages() {
       noHash: true,
       additionalArithmetic,
       globals: {
-        default: `typed${capitalize(pkg.replace('-', ' ')).replace(' ', '')}`,
+        default: `typed${makePackageName(pkg)}`,
       },
     })
   }
 }
 
-bundlePackages()
+export function makePackageName(pkg: string): string {
+  return capitalize(pkg.replace('-', ' ')).replace(' ', '')
+}
+
+if (process.mainModule === module) {
+  bundlePackages()
+}

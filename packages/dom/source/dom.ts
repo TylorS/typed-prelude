@@ -64,3 +64,17 @@ export function createDomEnv<A>(options: CreateDomEnvOptions = {}): DomEnv<A> {
     CustomEvent,
   }
 }
+
+export const {
+  window,
+  document,
+  location,
+  history,
+  localStorage,
+  sessionStorage,
+  customElements,
+  Event,
+  CustomEvent,
+} = createDomEnv({
+  serverUrl: typeof process !== 'undefined' ? process.env.TYPED_SERVER_URL : void 0,
+})

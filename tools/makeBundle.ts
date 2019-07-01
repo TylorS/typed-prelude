@@ -4,6 +4,7 @@ import { TypeChecker } from 'fuse-box-typechecker'
 import { ITypeCheckerOptions } from 'fuse-box-typechecker/dist/commonjs/interfaces'
 import { basename, extname, join, relative } from 'path'
 import { gzip } from 'zlib'
+import { makePackageName } from './bundlePackages'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 
@@ -16,6 +17,7 @@ export type MakeBundleOptions = {
   readonly mode?: 'development' | 'production'
   readonly skipTypeCheck?: boolean
   readonly noHash?: boolean
+  readonly isServer?: boolean
   readonly additionalArithmetic?: string
   readonly globals?: Record<string, string>
 }
@@ -31,9 +33,11 @@ export async function makeBundle(options: MakeBundleOptions) {
     noHash = false,
     additionalArithmetic = '',
     globals,
+    isServer = false,
   } = options
   const TSCONFIG = join(cwd, 'tsconfig.json')
   const TSLINT = join(cwd, 'tslint.json')
+  const PKG_JSON = require(join(cwd, 'package.json'))
   const SOURCE = join(cwd, 'source')
   const DIST = join(cwd, options.dist || 'dist')
   const MAIN_BUNDLE = join(cwd, entry)
@@ -101,7 +105,7 @@ export async function makeBundle(options: MakeBundleOptions) {
     const fuse = FuseBox.init({
       homeDir: cwd,
       tsConfig: TSCONFIG,
-      target: 'browser@es6',
+      target: isServer ? 'server@es6' : 'browser@es6',
       output: join(DIST, useHash ? '$name.$hash.js' : '$name.js'),
       plugins,
       useTypescriptCompiler: true,
@@ -112,43 +116,58 @@ export async function makeBundle(options: MakeBundleOptions) {
         showBundledFiles: false,
       },
       globals,
+      package: globals
+        ? {
+            name: makePackageName(PKG_JSON.name.replace('@typed/', '')),
+            main: instructions.replace('> ', '').trim(),
+          }
+        : void 0,
     })
 
-    if (mode === 'development' && name === MAIN_BUNDLE_NAME) {
+    if (!isServer && mode === 'development' && name === MAIN_BUNDLE_NAME) {
       fuse.dev({ port, fallback: 'index.html', root: DIST })
     }
 
-    watchBundle(fuse.bundle(name).instructions(instructions + ' ' + additionalArithmetic))
+    const bundle = watchBundle(
+      fuse.bundle(name).instructions(instructions + ' ' + additionalArithmetic),
+    )
 
-    const producer = await fuse.run()
+    fuse.run().then(producer => {
+      if (mode === 'production') {
+        producer.bundles.forEach(bundle => {
+          const { path } = bundle.context.output.lastPrimaryOutput
+          const contents = readFileSync(path)
 
-    if (mode === 'production') {
-      producer.bundles.forEach(bundle => {
-        const { path } = bundle.context.output.lastPrimaryOutput
-        const contents = readFileSync(path)
+          gzip(contents, (error, buffer) => {
+            if (error) {
+              throw error
+            }
 
-        gzip(contents, (error, buffer) => {
-          if (error) {
-            throw error
-          }
-
-          writeFileSync(path + '.gz', buffer)
+            writeFileSync(path + '.gz', buffer)
+          })
         })
-      })
-    }
+      }
+    })
+
+    return bundle
   }
 
   function watchBundle(bundle: Bundle) {
-    return mode === 'development'
-      ? bundle
-          .hmr()
-          .watch(
-            void 0,
-            path =>
-              !path.includes('.fusebox') && !path.includes('.history') && !path.includes('.vscode'),
-          )
-          .completed(scheduleNextRun)
-      : bundle
+    if (mode === 'development') {
+      if (!isServer) {
+        bundle = bundle.hmr()
+      }
+
+      bundle = bundle
+        .watch(
+          void 0,
+          path =>
+            !path.includes('.fusebox') && !path.includes('.history') && !path.includes('.vscode'),
+        )
+        .completed(scheduleNextRun)
+    }
+
+    return bundle
   }
 
   function watchAndCopy(...files: Array<[string, string]>): void {
@@ -173,13 +192,10 @@ export async function makeBundle(options: MakeBundleOptions) {
     typechecker.runSync()
   }
 
-  try {
-    await makeBundle(MAIN_BUNDLE_NAME, `> ${MAIN_INSTRUCTIONS}`)
-  } catch (error) {
-    console.error(error)
-
-    process.exit(1)
-  }
-
   watchAndCopy(...filesToWatch)
+
+  return makeBundle(
+    MAIN_BUNDLE_NAME,
+    isServer ? `> [${MAIN_INSTRUCTIONS}]` : `> ${MAIN_INSTRUCTIONS}`,
+  )
 }

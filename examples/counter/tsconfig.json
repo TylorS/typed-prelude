@@ -23,6 +23,6 @@
     ]
   },
   "files": [
-    "./source/app.ts"
+    "source/client.ts"
   ]
 }

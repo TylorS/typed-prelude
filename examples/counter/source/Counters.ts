@@ -1,8 +1,6 @@
-import { createDomEnv, html, render, useState, withHooks } from '@typed/dom'
+import { html, useState } from '@typed/dom'
 import { pipe } from '@typed/lambda'
 import { decrement, increment } from '@typed/math'
-
-const { document } = createDomEnv()
 
 const Counter = () => {
   const [count, setCount] = useState(0)
@@ -28,10 +26,8 @@ const ContainedCounter = pipe(
   Container,
 )
 
-const Counters = () => html`
+export const Counters = () => html`
   <main>
     ${ContainedCounter()} ${ContainedCounter()} ${ContainedCounter()}
   </main>
 `
-
-render(document.body, withHooks(Counters))

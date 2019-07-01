@@ -4,14 +4,20 @@
   "version": "1.0.0",
   "description": "",
   "devDependencies": {
-    "ts-node": "^8.3.0"
+    "@types/express": "^4.17.0",
+    "@types/node": "^12.0.10",
+    "ts-node": "^8.3.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.5.2"
   },
   "scripts": {
     "start": "ts-node bundle",
     "build": "rm -rf dist && NODE_ENV=production ts-node bundle"
   },
   "dependencies": {
-    "@typed/dom": "0.0.1-alpha.183",
-    "@typed/math": "^3.0.1-alpha.183"
+    "@typed/dom": "0.0.1-alpha.188",
+    "@typed/math": "^3.0.1-alpha.188",
+    "basichtml": "^0.24.0",
+    "express": "^4.17.1"
   }
 }
