@@ -4,7 +4,7 @@ import { TypeChecker } from 'fuse-box-typechecker'
 import { ITypeCheckerOptions } from 'fuse-box-typechecker/dist/commonjs/interfaces'
 import { basename, extname, join, relative } from 'path'
 import { gzip } from 'zlib'
-import { makePackageName } from './bundlePackages'
+import { makePackageName } from './helpers'
 
 const NODE_ENV = process.env.NODE_ENV || 'development'
 

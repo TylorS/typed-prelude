@@ -1,6 +1,6 @@
 import { join } from 'path'
-import { capitalize } from '../packages/strings/source'
 import { PACKAGES, sourceDirectory } from './common'
+import { makePackageName } from './helpers'
 import { makeBundle } from './makeBundle'
 
 export async function bundlePackages() {
@@ -21,10 +21,6 @@ export async function bundlePackages() {
       },
     })
   }
-}
-
-export function makePackageName(pkg: string): string {
-  return capitalize(pkg.replace('-', ' ')).replace(' ', '')
 }
 
 if (process.mainModule === module) {
