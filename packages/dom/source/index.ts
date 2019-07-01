@@ -1,11 +1,3 @@
-export * from './addEventListener'
-export * from './checks'
-export * from './dom'
-export * from './hooks'
-export * from './querySelector'
-export * from './tagged'
-export * from './types'
-
 import { createDomEnv } from './dom'
 
 export const {
@@ -21,3 +13,11 @@ export const {
 } = createDomEnv({
   serverUrl: typeof process !== 'undefined' ? process.env.TYPED_SERVER_URL : void 0,
 })
+
+export * from './addEventListener'
+export * from './checks'
+export * from './dom'
+export * from './hooks'
+export * from './querySelector'
+export * from './tagged'
+export * from './types'
