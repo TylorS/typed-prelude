@@ -17,6 +17,7 @@ export type MakeBundleOptions = {
   readonly skipTypeCheck?: boolean
   readonly noHash?: boolean
   readonly additionalArithmetic?: string
+  readonly globals?: Record<string, string>
 }
 
 export async function makeBundle(options: MakeBundleOptions) {
@@ -29,6 +30,7 @@ export async function makeBundle(options: MakeBundleOptions) {
     skipTypeCheck = false,
     noHash = false,
     additionalArithmetic = '',
+    globals,
   } = options
   const TSCONFIG = join(cwd, 'tsconfig.json')
   const TSLINT = join(cwd, 'tslint.json')
@@ -109,6 +111,7 @@ export async function makeBundle(options: MakeBundleOptions) {
       log: {
         showBundledFiles: false,
       },
+      globals,
     })
 
     if (mode === 'development' && name === MAIN_BUNDLE_NAME) {

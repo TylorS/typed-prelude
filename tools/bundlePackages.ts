@@ -1,4 +1,5 @@
 import { join } from 'path'
+import { capitalize } from '../packages/strings/source'
 import { PACKAGES, sourceDirectory } from './common'
 import { makeBundle } from './makeBundle'
 
@@ -15,6 +16,9 @@ async function bundlePackages() {
       skipTypeCheck: true,
       noHash: true,
       additionalArithmetic,
+      globals: {
+        default: `typed${capitalize(pkg.replace('-', ' ')).replace(' ', '')}`,
+      },
     })
   }
 }
