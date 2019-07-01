@@ -1,5 +1,5 @@
 import { existsSync, readFileSync, watchFile, writeFileSync } from 'fs'
-import { Bundle, EnvPlugin, FuseBox, Plugin, WebIndexPlugin } from 'fuse-box'
+import { Bundle, EnvPlugin, FuseBox, Plugin, QuantumPlugin, WebIndexPlugin } from 'fuse-box'
 import { TypeChecker } from 'fuse-box-typechecker'
 import { ITypeCheckerOptions } from 'fuse-box-typechecker/dist/commonjs/interfaces'
 import { basename, extname, join, relative } from 'path'
@@ -24,7 +24,7 @@ export type MakeBundleOptions = {
 
 export async function makeBundle(options: MakeBundleOptions) {
   const {
-    cwd = process.cwd(),
+    cwd,
     entry,
     filesToWatch = [],
     port = 1234,
@@ -89,16 +89,16 @@ export async function makeBundle(options: MakeBundleOptions) {
         )
       }
 
-      // if (mode === 'production') {
-      //   plugins.push(
-      //     QuantumPlugin({
-      //       uglify: true,
-      //       replaceProcessEnv: true,
-      //       treeshake: true,
-      //       bakeApiIntoBundle: name,
-      //     }),
-      //   )
-      // }
+      if (mode === 'production') {
+        plugins.push(
+          QuantumPlugin({
+            uglify: true,
+            replaceProcessEnv: true,
+            treeshake: true,
+            bakeApiIntoBundle: name,
+          }),
+        )
+      }
     }
 
     const useHash = !noHash && mode === 'production'
