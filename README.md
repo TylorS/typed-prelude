@@ -135,6 +135,7 @@ These Typed Packages have a few non-Typed dependencies which meet the following 
 > 36.3KB  Minified / 13.7KB Gzipped
 
 > Depends on [lighterhtml](https://github.com/WebReflection/lighterhtml) for rendering
+
 > Peer dependency on [basichtml](https://github.com/WebReflection/basicHTML) for node support. Adds 86.1KB Minified / 28.5KB Gzipped.
 
 #### React
