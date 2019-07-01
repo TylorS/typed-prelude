@@ -128,8 +128,9 @@ These Typed Packages have a few well-tested non-Typed dependencies.
 
 #### DOM
 
-> 122.4KB Minified / 42.2KB Gzipped 
-> Depends on [lighterhtml](https://github.com/WebReflection/lighterhtml) for rendering and [basichtml](https://github.com/WebReflection/basicHTML) for node support.
+> 122.4KB Minified / 42.2KB Gzipped
+> Depends on [lighterhtml](https://github.com/WebReflection/lighterhtml) for rendering
+> Depends on [basichtml](https://github.com/WebReflection/basicHTML) for node support. Accounts for 86.2kB/29.2kB of the bundle size.
 
 #### React
 

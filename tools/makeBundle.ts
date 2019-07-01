@@ -16,6 +16,7 @@ export type MakeBundleOptions = {
   readonly mode?: 'development' | 'production'
   readonly skipTypeCheck?: boolean
   readonly noHash?: boolean
+  readonly additionalArithmetic?: string
 }
 
 export async function makeBundle(options: MakeBundleOptions) {
@@ -27,6 +28,7 @@ export async function makeBundle(options: MakeBundleOptions) {
     mode = NODE_ENV,
     skipTypeCheck = false,
     noHash = false,
+    additionalArithmetic = '',
   } = options
   const TSCONFIG = join(cwd, 'tsconfig.json')
   const TSLINT = join(cwd, 'tslint.json')
@@ -113,7 +115,7 @@ export async function makeBundle(options: MakeBundleOptions) {
       fuse.dev({ port, fallback: 'index.html', root: DIST })
     }
 
-    watchBundle(fuse.bundle(name).instructions(instructions))
+    watchBundle(fuse.bundle(name).instructions(instructions + ' ' + additionalArithmetic))
 
     const producer = await fuse.run()
 

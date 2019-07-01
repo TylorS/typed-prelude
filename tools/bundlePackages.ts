@@ -5,6 +5,7 @@ import { makeBundle } from './makeBundle'
 async function bundlePackages() {
   for (const pkg of PACKAGES) {
     const cwd = join(sourceDirectory, pkg)
+    const additionalArithmetic = pkg === 'dom' ? `-basichtml` : void 0
 
     await makeBundle({
       cwd,
@@ -13,6 +14,7 @@ async function bundlePackages() {
       dist: 'umd',
       skipTypeCheck: true,
       noHash: true,
+      additionalArithmetic,
     })
   }
 }

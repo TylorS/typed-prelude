@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "peerDependencies": {
+    "basichtml": "^0.24.0",
     "tslib": "^1.10.0"
   },
   "dependencies": {
@@ -48,7 +49,6 @@
     "@typed/timer": "^0.0.1-alpha.177+f2959b1",
     "@typed/tuple": "^0.0.1-alpha.177+f2959b1",
     "@typed/uuid": "^2.0.1-alpha.177+f2959b1",
-    "basichtml": "^0.24.0",
     "dom-augmentor": "^0.3.1",
     "lighterhtml-plus": "^0.15.2"
   },
