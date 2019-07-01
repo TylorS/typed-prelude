@@ -124,15 +124,18 @@ These Typed Packages have no non-typed dependencies.
 
 ### Exceptions
 
-These Typed Packages have a few well-tested non-Typed dependencies.
+These Typed Packages have a few non-Typed dependencies which meet the following criteria:
+
+- Well Tested
+- Distribute with `module` in their `package.json`
+- Have well-maintained types either in original repository or `@types/*`
 
 #### DOM
 
-> 122.4KB Minified / 42.2KB Gzipped
+> 36.3KB  Minified / 13.7KB Gzipped
 
 > Depends on [lighterhtml](https://github.com/WebReflection/lighterhtml) for rendering
-
-> Depends on [basichtml](https://github.com/WebReflection/basicHTML) for node support. Accounts for 86.2kB/29.2kB of the bundle size.
+> Peer dependency on [basichtml](https://github.com/WebReflection/basicHTML) for node support. Adds 86.1KB Minified / 28.5KB Gzipped.
 
 #### React
 
