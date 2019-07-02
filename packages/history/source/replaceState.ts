@@ -25,4 +25,6 @@ export const replaceState: {
   }),
 )
 
-export const replacePath = replaceState(null)
+export const replacePath: (
+  path: Path,
+) => Env<HistoryEnv<null>, Tuple<null, Location>> = replaceState(null)

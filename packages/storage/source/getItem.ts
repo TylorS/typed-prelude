@@ -1,4 +1,4 @@
-import { withEnv } from '@typed/env'
+import { Env, withEnv } from '@typed/env'
 import { Maybe } from '@typed/maybe'
 import { StorageEnv } from './types'
 
@@ -7,5 +7,5 @@ import { StorageEnv } from './types'
  * @param key :: string
  * @returns :: Env StorageEnv (Maybe string)
  */
-export const getItem = (key: string) =>
+export const getItem = (key: string): Env<StorageEnv, Maybe<string>> =>
   withEnv<StorageEnv, Maybe<string>>(({ storage }) => Maybe.of(storage.getItem(key)))

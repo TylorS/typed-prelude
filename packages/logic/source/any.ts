@@ -7,7 +7,10 @@ import { curry, Predicate } from '@typed/lambda'
  * @returns :: boolean
  */
 // tslint:disable-next-line:variable-name
-export const any = curry(__any) as {
+export const any: {
+  <A>(predicate: Predicate<A>, list: A[]): boolean
+  <A>(predicate: Predicate<A>): (list: A[]) => boolean
+} = curry(__any) as {
   <A>(predicate: Predicate<A>, list: A[]): boolean
   <A>(predicate: Predicate<A>): (list: A[]) => boolean
 }

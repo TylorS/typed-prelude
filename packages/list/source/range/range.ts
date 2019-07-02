@@ -6,7 +6,10 @@ import { curry } from '@typed/lambda'
  * @param to :: int
  * @retuns :: [int]
  */
-export const range = curry(__range)
+export const range: {
+  (from: number, to: number): number[]
+  (from: number): (to: number) => number[]
+} = curry(__range)
 
 function __range(from: number, to: number): number[] {
   const length = to - from

@@ -7,7 +7,7 @@ import { Arity1, curry } from '@typed/lambda'
  * @param b :: a
  * @returns :: boolean
  */
-export const equals = curry(<A>(a: A, b: A) => _equals(a, b, [], [])) as Equals
+export const equals: Equals = curry(<A>(a: A, b: A) => _equals(a, b, [], [])) as Equals
 
 export type Equals = {
   <A, B = A>(a: A, b: B): B extends A ? boolean : false

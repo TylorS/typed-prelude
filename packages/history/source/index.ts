@@ -9,6 +9,6 @@ export { addQueryParameters } from '@typed/common'
 import { createHistoryEnv } from './createHistoryEnv'
 
 // ALLOW Overriding Default HREF via node environment variables
-const DEFAULT_HREF: string | undefined = process.env.TYPED_HISTORY_HREF || '/'
+const DEFAULT_HREF: string = process.env.TYPED_HISTORY_HREF || '/'
 
 export const { history, location } = createHistoryEnv(DEFAULT_HREF)

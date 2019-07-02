@@ -8,7 +8,10 @@ import { Maybe, Nothing } from '@typed/maybe'
  * @param list :: [a]
  * @returns :: Maybe int
  */
-export const indexOf = curry(
+export const indexOf: {
+  <A>(value: A, list: ArrayLike<A>): Maybe<number>
+  <A>(value: A): (list: ArrayLike<A>) => Maybe<number>
+} = curry(
   <A>(value: A, list: ArrayLike<A>): Maybe<number> => {
     const index = _indexOf(list, value)
 

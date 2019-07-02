@@ -7,7 +7,10 @@ import { Maybe, Nothing } from '@typed/maybe'
  * @param value :: a
  * @returns :: Maybe b
  */
-export const cond = curry(__cond) as {
+export const cond: {
+  <A, B>(conditions: ReadonlyArray<Conditional<A, B>>, value: A): Maybe<B>
+  <A, B>(conditions: ReadonlyArray<Conditional<A, B>>): (value: A) => Maybe<B>
+} = curry(__cond) as {
   <A, B>(conditions: ReadonlyArray<Conditional<A, B>>, value: A): Maybe<B>
   <A, B>(conditions: ReadonlyArray<Conditional<A, B>>): (value: A) => Maybe<B>
 }

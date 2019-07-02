@@ -6,7 +6,10 @@ import { curry } from '@typed/lambda'
  * @param numOfItems :: number
  * @returns :: string
  */
-export const plural = curry(__plural) as {
+export const plural: {
+  (str: string, numOfItems: number): string
+  (str: string): (numOfItems: number) => string
+} = curry(__plural) as {
   (str: string, numOfItems: number): string
   (str: string): (numOfItems: number) => string
 }

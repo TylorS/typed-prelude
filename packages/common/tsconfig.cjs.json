@@ -13,7 +13,8 @@
     "./cjs/**",
     "./esm/**",
     "./source/**/*.browser-test.ts",
-    "./source/**/*.test.ts"
+    "./source/**/*.test.ts",
+    "./umd/**"
   ],
   "extends": "../tsconfig.base.json"
 }

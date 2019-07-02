@@ -15,8 +15,8 @@
     "build": "rm -rf dist && NODE_ENV=production ts-node bundle"
   },
   "dependencies": {
-    "@typed/dom": "0.0.1-alpha.194",
-    "@typed/math": "^3.0.1-alpha.194",
+    "@typed/dom": "0.0.1-alpha.195",
+    "@typed/math": "^3.0.1-alpha.195",
     "basichtml": "^0.24.0",
     "express": "^4.17.1"
   }

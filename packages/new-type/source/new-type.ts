@@ -22,7 +22,10 @@ export const unsafeCoerce = <A extends NewType<any, any>>(value: Base<A>): A => 
  * @param value :: a
  * @returns :: boolean
  */
-export const isNewType = (curry(__isType) as any) as {
+export const isNewType: {
+  <A extends NewType<any, any>>(predicate: Predicate<Base<A>>, value: A | Base<A>): value is A
+  <A extends NewType<any, any>>(predicate: Predicate<Base<A>>): (value: A | Base<A>) => value is A
+} = (curry(__isType) as any) as {
   <A extends NewType<any, any>>(predicate: Predicate<Base<A>>, value: A | Base<A>): value is A
   <A extends NewType<any, any>>(predicate: Predicate<Base<A>>): (value: A | Base<A>) => value is A
 }

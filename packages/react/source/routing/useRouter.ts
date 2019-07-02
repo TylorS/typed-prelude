@@ -1,5 +1,5 @@
 import { Env, execPure, handle, Pure } from '@typed/env'
-import { HistoryEnv, Path, scopeHistoryEnv } from '@typed/history'
+import { HistoryEnv, Path, pathJoin, scopeHistoryEnv } from '@typed/history'
 import { pipe } from '@typed/lambda'
 import { Match, oneOf } from '@typed/logic'
 import { chain, map, Maybe, withDefault } from '@typed/maybe'
@@ -14,10 +14,10 @@ export type Router<A extends any[], B = unknown> = {
   readonly [K in keyof A]: readonly [Route<A[K]>, Match<A[K], B>]
 }
 
-export function useRouter<A, B = null>(router: Router<any[], A>, scope?: Path): UseRouter<A, B> {
+export function useRouter<A, B = null>(router: Router<any[], A>, scope?: string): UseRouter<A, B> {
   const { updateLocation, ...historyEnv } = useHistory<B>()
   const wrapHistoryEnv = useCallback(
-    () => (scope ? scopeHistoryEnv(scope, historyEnv) : historyEnv),
+    () => (scope ? scopeHistoryEnv(pathJoin(['/', scope]), historyEnv) : historyEnv),
     [historyEnv, scope],
   )
   const wrappedEnv = wrapHistoryEnv()

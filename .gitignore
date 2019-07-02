@@ -53,3 +53,4 @@ src/test.ts
 .fusebox
 .history
 tsconfig*.tsbuildinfo
+.rpt2_cache

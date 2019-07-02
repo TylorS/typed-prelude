@@ -11,7 +11,7 @@ import {
   useRef,
   useState,
 } from 'dom-augmentor'
-import { hook, html as lHtml, render as lRender, svg as lSvg } from 'lighterhtml-plus'
+import { hook, html as lHtml, render as lRender, svg as lSvg } from 'lighterhtml'
 
 export const { html, svg } = hook(useRef) as {
   readonly html: <A = HTMLElement>(...args: ArgsOf<typeof lHtml>) => A

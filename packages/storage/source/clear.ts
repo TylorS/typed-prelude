@@ -1,7 +1,9 @@
-import { withEnv } from '@typed/env'
+import { Env, withEnv } from '@typed/env'
 import { StorageEnv } from './types'
 
 /**
  * Clear storage
  */
-export const clear = withEnv<StorageEnv, void>(({ storage }) => storage.clear())
+export const clear: Env<StorageEnv, void> = withEnv<StorageEnv, void>(({ storage }) =>
+  storage.clear(),
+)

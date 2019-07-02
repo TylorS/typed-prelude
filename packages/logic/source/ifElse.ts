@@ -8,7 +8,7 @@ import { Arity1, curry, Is, Predicate } from '@typed/lambda'
  * @param value :: a
  * @returns :: b
  */
-export const ifElse = curry(__ifElse) as IfElseFn
+export const ifElse: IfElseFn = curry(__ifElse) as IfElseFn
 
 function __ifElse<A, B>(
   predicate: Predicate<A>,

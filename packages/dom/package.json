@@ -50,7 +50,7 @@
     "@typed/tuple": "^0.0.1-alpha.177+f2959b1",
     "@typed/uuid": "^2.0.1-alpha.177+f2959b1",
     "dom-augmentor": "^0.3.1",
-    "lighterhtml-plus": "^0.15.2"
+    "lighterhtml": "^0.14.5"
   },
   "sideEffects": false,
   "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db",

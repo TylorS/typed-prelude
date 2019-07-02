@@ -7,7 +7,10 @@ import { not } from './not'
  * @param value :: a
  * @returns :: boolean
  */
-export const allPass = curry(__allPass) as {
+export const allPass: {
+  <A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean
+  <A>(predicates: ReadonlyArray<Predicate<A>>): Predicate<A>
+} = curry(__allPass) as {
   <A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean
   <A>(predicates: ReadonlyArray<Predicate<A>>): Predicate<A>
 }

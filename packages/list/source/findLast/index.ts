@@ -7,7 +7,10 @@ import { Maybe, Nothing } from '@typed/maybe'
  * @param list :: [a]
  * @returns :: Maybe a
  */
-export const findLast = curry(__findLast) as {
+export const findLast: {
+  <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A>
+  <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<A>
+} = curry(__findLast) as {
   <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A>
   <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<A>
 }

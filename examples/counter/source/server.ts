@@ -15,7 +15,6 @@ try {
 `
 
   const ending = `
-    <script src="/dist/app.js"></script>
   </body>
 </html>
 `

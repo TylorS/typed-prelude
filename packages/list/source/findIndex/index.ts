@@ -7,7 +7,10 @@ import { Maybe, Nothing } from '@typed/maybe'
  * @param list :: [a]
  * @returns :: Maybe number
  */
-export const findIndex = curry(
+export const findIndex: {
+  <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<number>
+  <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<number>
+} = curry(
   <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<number> => {
     for (let i = 0; i < list.length; ++i) {
       if (predicate(list[i])) {

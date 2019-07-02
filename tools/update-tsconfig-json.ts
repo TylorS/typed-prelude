@@ -3,8 +3,19 @@ import { EOL } from 'os'
 import * as path from 'path'
 import { PACKAGES, sourceDirectory } from './common'
 
+const FILES_TO_EXCLUDE = [
+  './source/**/*.test.ts',
+  './source/**/*.browser-test.ts',
+  './cjs/**',
+  './esm/**',
+  './umd/**',
+]
+
 updateRootConfig('tsconfig.json')
 updateRootConfig('tsconfig.cjs.json')
+updateRootConfig('tsconfig.umd.json')
+
+PACKAGES.forEach(updatePackage)
 
 function updateRootConfig(configName: string) {
   const rootTsConfigPath = path.join(sourceDirectory, configName)
@@ -19,7 +30,7 @@ function updateRootConfig(configName: string) {
   fs.writeFileSync(rootTsConfigPath, JSON.stringify(rootTsConfig, null, '  ') + EOL)
 }
 
-for (const pkg of PACKAGES) {
+function updatePackage(pkg: string) {
   const pkgDirectory = path.join(sourceDirectory, pkg)
   const packageJSONPath = path.join(pkgDirectory, 'package.json')
 
@@ -31,9 +42,11 @@ for (const pkg of PACKAGES) {
   const typedDependencies = getTypedDependencies(packageJSONData)
   const tsconfigEsmPath = path.join(pkgDirectory, 'tsconfig.json')
   const tsconfigCjsPath = path.join(pkgDirectory, 'tsconfig.cjs.json')
+  const tsconfigUmdPath = path.join(pkgDirectory, 'tsconfig.umd.json')
 
   updatePackageConfig(tsconfigEsmPath, typedDependencies, applyEsmDefaults)
   updatePackageConfig(tsconfigCjsPath, typedDependencies, applyCommonjsDefaults)
+  updatePackageConfig(tsconfigUmdPath, typedDependencies, applyUmdDefaults)
 }
 
 function updatePackageConfig(
@@ -72,13 +85,7 @@ function applyEsmDefaults(tsconfig: any) {
 
   delete tsconfig.files
 
-  tsconfig.exclude = uniq([
-    ...(tsconfig.exclude || []),
-    './source/**/*.test.ts',
-    './source/**/*.browser-test.ts',
-    './cjs/**',
-    './esm/**',
-  ])
+  tsconfig.exclude = uniq([...(tsconfig.exclude || []), ...FILES_TO_EXCLUDE])
 }
 
 function applyCommonjsDefaults(tsconfig: any) {
@@ -97,13 +104,26 @@ function applyCommonjsDefaults(tsconfig: any) {
 
   delete tsconfig.files
 
-  tsconfig.exclude = uniq([
-    ...(tsconfig.exclude || []),
-    './source/**/*.test.ts',
-    './source/**/*.browser-test.ts',
-    './cjs/**',
-    './esm/**',
-  ])
+  tsconfig.exclude = uniq([...(tsconfig.exclude || []), ...FILES_TO_EXCLUDE])
+}
+
+function applyUmdDefaults(tsconfig: any) {
+  tsconfig.extends = '../tsconfig.base.json'
+
+  tsconfig.compilerOptions = {
+    ...(tsconfig.compilerOptions || {}),
+    composite: true,
+    incremental: true,
+    rootDir: './source',
+    module: 'umd',
+    outDir: 'umd',
+  }
+
+  tsconfig.include = uniq([...(tsconfig.files || []), ...(tsconfig.include || []), 'source'])
+
+  delete tsconfig.files
+
+  tsconfig.exclude = uniq([...(tsconfig.exclude || []), ...FILES_TO_EXCLUDE])
 }
 
 function uniq<A>(values: A[]): A[] {

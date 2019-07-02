@@ -6,7 +6,10 @@ import { curry, Predicate } from '@typed/lambda'
  * @param value :: a
  * @returns :: boolean
  */
-export const anyPass = curry(__anyPass) as {
+export const anyPass: {
+  <A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean
+  <A>(predicates: ReadonlyArray<Predicate<A>>): (value: A) => boolean
+} = curry(__anyPass) as {
   <A>(predicates: ReadonlyArray<Predicate<A>>, value: A): boolean
   <A>(predicates: ReadonlyArray<Predicate<A>>): (value: A) => boolean
 }

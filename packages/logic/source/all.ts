@@ -7,7 +7,10 @@ import { not } from './not'
  * @param list :: [a]
  * @returns :: boolean
  */
-export const all = curry(__all)
+export const all: {
+  <A>(predicates: Predicate<A>, value: A): boolean
+  <A>(predicates: Predicate<A>): Predicate<A>
+} = curry(__all)
 
 function __all<A>(predicate: Predicate<A>, list: ReadonlyArray<A>): boolean {
   for (const value of list) {

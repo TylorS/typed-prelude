@@ -25,4 +25,6 @@ export const pushState: {
   }),
 )
 
-export const pushPath = pushState(null)
+export const pushPath: (path: Path) => Env<HistoryEnv<null>, Tuple<null, Location>> = pushState(
+  null,
+)

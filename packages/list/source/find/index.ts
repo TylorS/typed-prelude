@@ -8,7 +8,10 @@ import { findIndex } from '../findIndex'
  * @param list :: [a]
  * @returns :: Maybe a
  */
-export const find = curry(
+export const find: {
+  <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A>
+  <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<A>
+} = curry(
   <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<A> =>
     map((index: number) => list[index], findIndex(predicate, list)),
 ) as {

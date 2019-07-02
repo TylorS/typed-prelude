@@ -7,7 +7,14 @@ import { curry } from '@typed/lambda'
  * @param obj :: { [PropertyKey]?: a }
  * @returns :: a
  */
-export const propOr = curry(__propOr) as {
+export const propOr: {
+  <A, K extends PropertyKey>(defaultValue: A, key: K, obj: { [Key in K]: A }): A
+  <A, K extends PropertyKey>(defaultValue: A, key: K): (obj: { [Key in K]: A }) => A
+  <A>(defaultValue: A): {
+    <K extends PropertyKey>(key: K, obj: { [Key in K]: A }): A
+    <K extends PropertyKey>(key: K): (obj: { [Key in K]: A }) => A
+  }
+} = curry(__propOr) as {
   <A, K extends PropertyKey>(defaultValue: A, key: K, obj: { [Key in K]: A }): A
   <A, K extends PropertyKey>(defaultValue: A, key: K): (obj: { [Key in K]: A }) => A
   <A>(defaultValue: A): {
