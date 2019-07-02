@@ -14,10 +14,14 @@ const readDirectory = promisify(fs.readdir)
 const MAKE_BUNDLE_CLI = join(__dirname, 'makeUmdBundleCli.ts')
 
 if (process.mainModule === module) {
-  bundlePackages()
+  bundlePackages(sourceDirectory, PACKAGES, 'source/index.ts')
 }
 
-export async function bundlePackages() {
+export async function bundlePackages(
+  sourceDirectory: string,
+  PACKAGES: readonly string[],
+  entry: string,
+) {
   const numOfCpus = cpus().length
   const packages = PACKAGES.slice()
   let bundling = 0
@@ -31,7 +35,7 @@ export async function bundlePackages() {
 
     if (pkg) {
       bundling++
-      await bundlePackage(pkg)
+      await bundlePackage(sourceDirectory, pkg, entry)
       bundling--
       await runNextPackage()
     }
@@ -40,7 +44,7 @@ export async function bundlePackages() {
   await Promise.all([runNextPackage(), runNextPackage(), runNextPackage()])
 }
 
-async function bundlePackage(pkg: string) {
+async function bundlePackage(sourceDirectory: string, pkg: string, entry: string) {
   const directory = join(sourceDirectory, pkg)
 
   console.log(`Bundling @typed/${pkg}...`)
@@ -54,12 +58,12 @@ async function bundlePackage(pkg: string) {
     await temporarilyRemoveFiles(filesToRemove, () =>
       makeBundleInAnotherProcess({
         directory,
-        entry: 'source/index.ts',
+        entry,
         external: [`basichtml`, `react`], // peer dependencies
       }),
     )
   } else {
-    await makeBundleInAnotherProcess({ directory, entry: 'source/index.ts' })
+    await makeBundleInAnotherProcess({ directory, entry })
   }
 
   console.log(`Bundled @typed/${pkg}.`)

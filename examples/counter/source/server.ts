@@ -3,45 +3,40 @@ import { pathJoin } from '@typed/history'
 import express from 'express'
 import { Counters } from './Counters'
 
-try {
-  const beginning = `
+const beginning = `
   <!doctype html>
   <html>
     <head>
+      <title>Typed SSR</title>
     </head>
 
   <body>
 
 `
 
-  const ending = `
+const ending = `
+    <script src="/client.js"></script>
   </body>
 </html>
 `
 
-  const app = express()
+const app = express()
 
-  app.use(express.static(`dist`))
+app.use(express.static(`dist`))
 
-  app.use((req, res) => {
-    res.writeHead(200, { 'Content-Type': 'text/html' })
+app.use((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/html' }).write(beginning)
 
-    res.write(beginning)
-
-    const { document } = createDomEnv({
-      serverUrl: pathJoin([req.headers.host || '/', req.url]),
-    })
-
-    const view = render(document.body, withHooks(Counters))
-
-    res.write(view.outerHTML)
-    res.write(ending)
-    res.end()
+  const { document } = createDomEnv({
+    serverUrl: req.protocol + '//' + pathJoin([req.headers.host || '/', req.url]),
   })
 
-  app.listen(8080, () => {
-    console.log('Listening on 8080')
-  })
-} catch (error) {
-  console.error(error)
-}
+  const view = render(document.body, withHooks(Counters))
+
+  res.write(view.outerHTML + ending)
+  res.end()
+})
+
+app.listen(8080, () => {
+  console.log('Listening on 8080')
+})
