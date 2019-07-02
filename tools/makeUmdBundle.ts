@@ -36,7 +36,7 @@ export async function makeUmdBundle({
   const UMD_NAME = makePackageName(PKG_JSON.name.replace('@typed/', ''))
   const output: rollup.OutputOptions = {
     file: makeAbsolute(directory, distName || PKG_JSON.unpkg || 'dist/index.js'),
-    name: UMD_NAME,
+    name: `Typed.${UMD_NAME}`,
     format: 'umd',
     sourcemap: true,
   }
