@@ -17,7 +17,5 @@ export const {
 export * from './addEventListener'
 export * from './checks'
 export * from './dom'
-export * from './hooks'
 export * from './querySelector'
-export * from './tagged'
 export * from './types'
