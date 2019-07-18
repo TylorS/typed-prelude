@@ -1,6 +1,6 @@
 {
   "name": "@typed/set",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "ReadonlySet TypeScript utilities",
   "main": "./cjs/index.js",
   "repository": {
@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "0.0.1-alpha.177+f2959b1"
+    "@typed/lambda": "^1.0.0"
   },
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",

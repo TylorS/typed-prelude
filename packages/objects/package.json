@@ -1,6 +1,6 @@
 {
   "name": "@typed/objects",
-  "version": "3.0.1-alpha.177+f2959b1",
+  "version": "4.0.0",
   "description": "Functions for working with objects",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^0.0.1-alpha.177+f2959b1",
-    "@typed/lambda": "^0.0.1-alpha.177+f2959b1",
-    "@typed/maybe": "^7.0.1-alpha.177+f2959b1"
+    "@typed/common": "^1.0.0",
+    "@typed/lambda": "^1.0.0",
+    "@typed/maybe": "^8.0.0"
   },
   "publishConfig": {
     "access": "public"
