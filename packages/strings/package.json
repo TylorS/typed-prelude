@@ -1,6 +1,6 @@
 {
   "name": "@typed/strings",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "String-related operations",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^1.0.0",
-    "@typed/lambda": "^1.0.0"
+    "@typed/common": "^1.0.1",
+    "@typed/lambda": "^1.0.1"
   },
   "publishConfig": {
     "access": "public"
@@ -32,6 +32,6 @@
     "tslib": "^1.10.0"
   },
   "sideEffects": false,
-  "gitHead": "f2959b16cb2ab1b763ba988902554391b15001db",
+  "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae",
   "unpkg": "./umd/index.js"
 }
