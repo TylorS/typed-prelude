@@ -12,8 +12,6 @@ export const createClock = (): Clock => {
 
   const relative = createRelativeClock(clock)
 
-  console.log('relative', relative)
-
   return relative
 }
 

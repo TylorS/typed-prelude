@@ -1,0 +1,28 @@
+{
+  "name": "@typed/hooks",
+  "version": "0.0.0",
+  "description": "Hooks for TypeScript",
+  "main": "cjs/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "Hooks",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "dependencies": {
+    "@typed/disposable": "^1.0.1",
+    "@typed/timer": "^1.0.1"
+  }
+}
