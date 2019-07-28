@@ -67,7 +67,13 @@ export function findOrCreateHookContext(hooksContext: HooksContext): CreateHookC
 }
 
 function addContext(parent: HooksContext | null, child: HooksContext) {
-  if (parent !== parentContexts.get(child)) {
+  const currentParent = parentContexts.get(child)
+
+  if (parent !== currentParent) {
+    if (currentParent) {
+      childContexts.get(currentParent)!.delete(child)
+    }
+
     parentContexts.set(child, parent)
   }
 
