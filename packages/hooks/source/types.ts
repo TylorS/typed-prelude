@@ -2,7 +2,7 @@ import { Disposable } from '@typed/disposable'
 import { Arity1, IO } from '@typed/lambda'
 import { Timer } from '@typed/timer'
 
-export interface Context<A = any> {
+export type Channel<A = any> = {
   readonly defaultValue: A
 }
 
@@ -21,14 +21,15 @@ export interface HooksContext extends Disposable {
   readonly resetId: () => void
   readonly timer: Timer
   readonly hooks: Map<number, Hook>
-  readonly contexts: WeakMap<Context, any>
+  readonly channelValues: WeakMap<Channel, any>
   readonly update: () => void
 }
 
 export interface CreateHookContext {
   readonly timer: Timer
   readonly hasBeenUpdated: () => void
-  readonly provide: <A>(context: Context<A>, value: A) => void
+  readonly provide: <A>(channel: Channel<A>, value: A) => void
+  readonly consume: <A>(channel: Channel<A>) => A
 }
 
 export type CreateHook<A extends readonly any[] = any[], B = any> = (

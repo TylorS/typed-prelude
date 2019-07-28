@@ -1,6 +1,6 @@
 import { Timer } from '@typed/timer'
 import { defaultTimer } from './manager'
-import { Context, Hook, HooksContext } from './types'
+import { Channel, Hook, HooksContext } from './types'
 
 export function createHooksContext(
   fn: (...args: any) => any,
@@ -8,12 +8,13 @@ export function createHooksContext(
 ): HooksContext {
   const state: HooksContext['state'] = createFnContext(fn)
   const hooks = new Map<number, Hook>()
-  const contexts = new Map<Context, any>()
+  const channelValues = new Map<Channel, any>()
   const nextId = () => state.currentId++
   const resetId = () => (state.currentId = 0)
   const dispose = () => {
     hooks.forEach(x => x.dispose())
     hooks.clear()
+    channelValues.clear()
   }
   const update = () =>
     state.shouldRerunHooks
@@ -24,7 +25,7 @@ export function createHooksContext(
     state,
     timer,
     hooks,
-    contexts,
+    channelValues,
     update,
     dispose,
     nextId,
