@@ -1,4 +1,4 @@
-import { getCurrentContext } from './manager'
+import { findOrCreateHookContext, getCurrentContext } from './manager'
 import { CreateHook } from './types'
 
 export function createHook<A extends readonly any[], B>(create: CreateHook<A, B>) {
@@ -15,7 +15,7 @@ export function createHook<A extends readonly any[], B>(create: CreateHook<A, B>
     let hook = hooks.get(id)
 
     if (!hook) {
-      hook = create({ hasBeenUpdated: context.update, timer: context.timer }, ...args)
+      hook = create(findOrCreateHookContext(context), ...args)
       hooks.set(id, hook)
     }
 

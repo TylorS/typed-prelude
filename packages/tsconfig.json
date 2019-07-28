@@ -22,6 +22,9 @@
       "path": "./history/tsconfig.json"
     },
     {
+      "path": "./hooks/tsconfig.json"
+    },
+    {
       "path": "./http/tsconfig.json"
     },
     {

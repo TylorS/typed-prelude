@@ -1,4 +1,3 @@
-import { Disposable } from '@typed/disposable'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
 import { useEffect } from './useEffect'

@@ -1,4 +1,3 @@
-import { Disposable } from '@typed/disposable'
 import { Fn } from '@typed/lambda'
 import { Timer } from '@typed/timer'
 import { createHooksContext } from './createHooksContext'
@@ -27,7 +26,7 @@ export function withHooks<A extends any[], B>(
     while (state.hasBeenUpdated) {
       resetId()
       state.hasBeenUpdated = state.shouldRerunHooks = false
-      state.returnValue = fn.apply(this, ...args)
+      state.returnValue = fn.apply(this, args)
     }
 
     dispose()

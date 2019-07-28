@@ -4,11 +4,11 @@ import { defaultTimer, setCurrentContext } from './manager'
 
 export const test = describe(`createHooksContext`, [
   given(`a Function`, [
-    it(`returns a hooks context for that function`, ({ equal, ok, notOk }) => {
+    it(`returns a hooks context for that function`, ({ equal, ok }) => {
       const that = {}
       const args = [1, 2, 3]
       let called = 0
-      function test(...input: typeof args) {
+      function test(this: any, ...input: typeof args) {
         called++
         equal(that, this)
         equal(args, input)

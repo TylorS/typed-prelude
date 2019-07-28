@@ -2,10 +2,7 @@
   "name": "@typed/hooks",
   "version": "0.0.0",
   "description": "Hooks for TypeScript",
-  "main": "cjs/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "main": "./cjs/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TylorS/typed-prelude.git"
@@ -23,6 +20,18 @@
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
     "@typed/disposable": "^1.0.1",
+    "@typed/subscription": "^1.0.1",
     "@typed/timer": "^1.0.1"
-  }
+  },
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false
 }
