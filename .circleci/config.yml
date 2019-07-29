@@ -34,7 +34,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm test
+      - run: npm run test:ci
 
   test-latest:
     executor: latest
@@ -52,7 +52,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm test
+      - run: npm run test:ci
 
 workflows:
   version: 2
