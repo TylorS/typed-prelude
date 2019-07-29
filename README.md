@@ -1,4 +1,4 @@
-# Typed
+# Typed [![CircleCI](https://circleci.com/gh/TylorS/typed-prelude/tree/master.svg?style=svg)](https://circleci.com/gh/TylorS/typed-prelude/tree/master)
 
 > Reliable software for browsers & Node. Designed for TypeScript and progressive web applications.
 
