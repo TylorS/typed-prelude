@@ -61,9 +61,6 @@
       "path": "./promises/tsconfig.json"
     },
     {
-      "path": "./react/tsconfig.json"
-    },
-    {
       "path": "./remote-data/tsconfig.json"
     },
     {
