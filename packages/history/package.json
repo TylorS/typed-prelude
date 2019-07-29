@@ -1,6 +1,6 @@
 {
   "name": "@typed/history",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Testable interfaces for the history API",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -26,12 +26,12 @@
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
     "@typed/common": "^1.0.1",
-    "@typed/disposable": "^1.0.1",
-    "@typed/env": "^1.0.1",
-    "@typed/lambda": "^1.0.1",
-    "@typed/new-type": "^1.0.1",
-    "@typed/subscription": "^1.0.1",
-    "@typed/tuple": "^1.0.1"
+    "@typed/disposable": "^1.0.2",
+    "@typed/env": "^1.0.2",
+    "@typed/lambda": "^1.0.2",
+    "@typed/new-type": "^1.0.2",
+    "@typed/subscription": "^1.0.2",
+    "@typed/tuple": "^1.0.2"
   },
   "publishConfig": {
     "access": "public"

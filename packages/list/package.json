@@ -1,6 +1,6 @@
 {
   "name": "@typed/list",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Common functions for working with arrays and array-like values",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,11 +25,11 @@
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
     "@typed/common": "^1.0.1",
-    "@typed/lambda": "^1.0.1",
-    "@typed/logic": "^4.0.1",
-    "@typed/math": "^4.0.1",
-    "@typed/maybe": "^8.0.1",
-    "@typed/tuple": "^1.0.1"
+    "@typed/lambda": "^1.0.2",
+    "@typed/logic": "^4.0.2",
+    "@typed/math": "^4.0.2",
+    "@typed/maybe": "^8.0.2",
+    "@typed/tuple": "^1.0.2"
   },
   "publishConfig": {
     "access": "public"

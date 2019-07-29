@@ -1,6 +1,6 @@
 {
   "name": "@typed/lambda",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Helpful functions for working in a functional style",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
