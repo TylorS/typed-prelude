@@ -22,6 +22,9 @@
       "path": "./history/tsconfig.cjs.json"
     },
     {
+      "path": "./hooks/tsconfig.cjs.json"
+    },
+    {
       "path": "./http/tsconfig.cjs.json"
     },
     {

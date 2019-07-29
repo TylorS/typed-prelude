@@ -36,7 +36,7 @@ export interface Curry5<A, B, C, D, E, F>
     Arity2<A, B, Curry3<C, D, E, F>>,
     Arity1<A, Curry4<B, C, D, E, F>> {}
 
-export type Fn<Args extends any[] = any[], R = any> = (...args: Args) => R
+export type Fn<Args extends readonly any[] = any[], R = any> = (...args: Args) => R
 
 // tslint:disable:no-shadowed-variable
 export type Curry<T extends Fn> = ArgsOf<T> extends [infer A]
