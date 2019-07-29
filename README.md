@@ -13,113 +13,61 @@ These Typed Packages have no non-typed dependencies.
 
 > NOTE: All packages sizes include ALL (Node & Browser!) dependencies and were calculated using [bundlephobia.com](https://bundlephobia.com). 
 
-#### AsyncIterable 
+#### AsyncIterable ![Minified](https://badgen.net/bundlephobia/min/@typed/asynciterable) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/asynciterable)
 
-> 6.8KB Minified / 1.8KB Gzipped
+#### Common ![Minified](https://badgen.net/bundlephobia/min/@typed/common) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/common)
 
-#### Common
+#### Disposable ![Minified](https://badgen.net/bundlephobia/min/@typed/disposable) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/disposable)
 
-> 5.2KB Minified / 2KB Gzipped
+#### Either ![Minified](https://badgen.net/bundlephobia/min/@typed/either) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/either)
 
-#### Disposable
+#### Env ![Minified](https://badgen.net/bundlephobia/min/@typed/env) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/env)
 
-> 538B Minified / 299B Gzipped
+#### History ![Minified](https://badgen.net/bundlephobia/min/@typed/history) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/history)
 
-#### Either
+#### Hooks ![Minified](https://badgen.net/bundlephobia/min/@typed/hooks) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/hooks)
 
-> 1.6KB Minified / 602B Gzipped
+#### HTTP ![Minified](https://badgen.net/bundlephobia/min/@typed/http) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/http)
 
-#### Env
+#### Iterable ![Minified](https://badgen.net/bundlephobia/min/@typed/iterable) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/iterable)
 
-> 4.4KB Minified / 1.8KB Gzipped
+#### Lambda ![Minified](https://badgen.net/bundlephobia/min/@typed/lambda) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/lambda)
 
-#### History
+#### List ![Minified](https://badgen.net/bundlephobia/min/@typed/list) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/list)
 
-> 7.5KB Minified / 2.8KB Gzipped
+#### Logger ![Minified](https://badgen.net/bundlephobia/min/@typed/logger) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/logger)
 
-#### HTTP
+#### Logic ![Minified](https://badgen.net/bundlephobia/min/@typed/logic) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/logic)
 
-> 5KB Minified / 2.2KB Gzipped
+#### Map ![Minified](https://badgen.net/bundlephobia/min/@typed/map) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/map)
 
-#### Iterable
+#### Math ![Minified](https://badgen.net/bundlephobia/min/@typed/math) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/math)
 
-> 3.5KB Minified / 1.3KB Gzipped
+#### Maybe ![Minified](https://badgen.net/bundlephobia/min/@typed/maybe) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/maybe)
 
-#### Lambda
+#### NewType ![Minified](https://badgen.net/bundlephobia/min/@typed/new-type) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/new-type)
 
-> 5.1KB Minified / 2KB Gzipped
+#### Objects ![Minified](https://badgen.net/bundlephobia/min/@typed/objects) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/objects)
 
-#### List
+#### Promises ![Minified](https://badgen.net/bundlephobia/min/@typed/promises) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/promises)
 
-> 9KB Minified / 3KB Gzipped
+#### RemoteData ![Minified](https://badgen.net/bundlephobia/min/@typed/remote-data) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/remote-data)
 
-#### Logger
+#### Routing ![Minified](https://badgen.net/bundlephobia/min/@typed/routing) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/routing)
 
-> 2.6KB Minified / 1KB Gzipped
+#### Set ![Minified](https://badgen.net/bundlephobia/min/@typed/set) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/set)
 
-#### Logic
+#### Storage ![Minified](https://badgen.net/bundlephobia/min/@typed/storage) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/storage)
 
-> 5.8KB Minified / 1.9KB Gzipped
+#### Strings ![Minified](https://badgen.net/bundlephobia/min/@typed/strings) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/strings)
 
-#### Map
+#### Subscription ![Minified](https://badgen.net/bundlephobia/min/@typed/subscription) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/subscription)
 
-> 1.3KB Minified / 598B Gzipped
+#### Timer ![Minified](https://badgen.net/bundlephobia/min/@typed/timer) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/timer)
 
-#### Math
+#### Tuple ![Minified](https://badgen.net/bundlephobia/min/@typed/tuple) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/tuple)
 
-> 1.6KB Minified / 650B Gzipped
-
-#### Maybe
-
-> 1.5KB Minified / 616B Gzipped
-
-#### NewType
-
-> 1.3KB Minified / 489B Gzipped
-
-#### Objects
-
-> 2.1KB Minified / 299B Gzipped
-
-#### Promises
-
-> 530B Minified / 283B Gzipped
-
-#### RemoteData
-
-> 3.3KB Minified / 944B Gzipped
-
-#### Routing
-
-> 3.2KB Minified / 1.4KB Gzipped
-
-#### Set
-
-> 1.8KB Minified / 598B Gzipped
-
-#### Storage
-
-> 2KB Minified / 909B Gzipped
-
-#### Strings
-
-> 4.7KB Minified / 1.7KB Gzipped
-
-#### Subscription
-
-> 2.9KB Minified / 1.3KB Gzipped
-
-#### Timer
-
-> 2.9KB Minified / 1.2KB Gzipped
-
-#### Tuple
-
-> 816B Minified / 358B Gzipped
-
-#### UUID
-
-> 1.7KB Minified / 773B Gzipped
+#### UUID ![Minified](https://badgen.net/bundlephobia/min/@typed/uuid) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/uuid)
 
 
 ### Exceptions
@@ -130,17 +78,7 @@ These Typed Packages have a few non-Typed dependencies which meet the following 
 - Distribute with `module` in their `package.json`
 - Have well-maintained types either in original repository or `@types/*`
 
-#### DOM
-
-> 36.3KB  Minified / 13.7KB Gzipped
-
-> Depends on [lighterhtml](https://github.com/WebReflection/lighterhtml) for rendering
+#### DOM ![Minified](https://badgen.net/bundlephobia/min/@typed/dom) ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/dom)
 
 > Peer dependency on [basichtml](https://github.com/WebReflection/basicHTML) for node support. Adds 86.1KB Minified / 28.5KB Gzipped.
-
-#### React
-
-> 21.9KB Minified / 8KB Gzipped
-
-> react and react-dom are peer dependencies
 
