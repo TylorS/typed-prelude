@@ -1,6 +1,6 @@
 {
   "name": "@typed/uuid",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Cross-platform TypeScript implementation of UUID",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
