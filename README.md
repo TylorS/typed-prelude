@@ -4,7 +4,7 @@
 
 Typed is TypeScript toolkit composed of many à-la-carte single purposed libraries to help build applications
 that work in both browsers & Node. With few [documented exceptions](#exceptions), all the Typed libraries have no non-Typed dependencies, are side-effect free, and provide a tree-shakable API around functions. While many of these libraries individually 
-should support many *different** use-cases, the general purpose of the whole is to streamline progressive web app development.
+should support many *different* use-cases, the general purpose of the whole is to streamline progressive web app development.
 
 Only modern environments are supported out of the box. The last 2 major versions of Chrome, Firefox, Safari, and Edge are supported, as well as the lastest stable and long-term-support releases for Node.
 
