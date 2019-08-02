@@ -10,6 +10,8 @@ export const {
   customElements,
   Event,
   CustomEvent,
+  Image,
+  HTMLElement,
 } = createDomEnv({
   serverUrl: typeof process !== 'undefined' ? process.env.TYPED_SERVER_URL : void 0,
 })
