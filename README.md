@@ -49,7 +49,7 @@ All Typed Packages have no non-typed dependencies, with the exception of [`@type
 
 Typed is designed to work in modern browsers and Node. This means that there are some code paths that are not used in one or the other. This is more important when making bundles for the browser as every byte parsed is impacting your time to load. To get around this you can use a plugin for your particular bundler to replace some of the conditionals used with `true/false` values to ensure unused code paths are removed.
 
-| Conditional | Replace for Browser | Replace for Node | Packages |
+| Value to replace | Browser | Node | Packages |
 | ----------- | ------------------- | ---------------- | -------- |
 | `typeof window !== 'undefined' && typeof document !== 'undefined'` | `true` | `false` | `dom`, `env`, `history`, `http`, `timer` |
 | `typeof crypto !== 'undefined'` | `true` | `false` | `uuid` |
