@@ -4,7 +4,7 @@
 > Reliable software for browsers & Node. Designed for TypeScript and progressive web applications.
 
 Typed is TypeScript toolkit composed of many à-la-carte single purposed libraries to help build applications
-that work in both browsers & Node. With few [documented exceptions](#exceptions), all the Typed libraries have no non-Typed dependencies, are side-effect free, and provide a tree-shakable API around functions. While many of these libraries individually 
+that work in both browsers & Node. All Typed libraries have no non-Typed dependencies, are side-effect free, and provide a tree-shakable API around functions. While many of these libraries individually 
 should support many *different* use-cases, the general purpose of the whole is to streamline progressive web app development.
 
 Only modern environments are supported out of the box. The last 2 major versions of Chrome, Firefox, Safari, and Edge are supported, as well as the lastest stable and long-term-support releases for Node.
@@ -45,3 +45,19 @@ These Typed Packages have no non-typed dependencies.
 | [UUID](./packages/uuid/readme.md) | ![Deps](https://badgen.net/david/dep/TylorS/typed-prelude/packages/uuid) |![DevDeps](https://badgen.net/david/dev/TylorS/typed-prelude/packages/uuid) | ![PeerDeps](https://badgen.net/david/peer/TylorS/typed-prelude/packages/uuid) | ![Minified](https://badgen.net/bundlephobia/min/@typed/uuid) | ![MinZip](https://badgen.net/bundlephobia/minzip/@typed/uuid) |
 
 
+## Helpful information
+
+Typed is designed to work in modern browsers and Node. This means that there are some code paths that are not used in one or the other. This is more important when making bundles for the browser as every byte parsed is impacting your time to load. To get around this you can use a plugin for your particular bundler to replace some of the conditionals used with `true/false` values to ensure unused code paths are removed.
+
+| Conditional | Replace for Browser | Replace for Node | Packages |
+| ----------- | ------------------- | ---------------- | -------- |
+| `typeof window !== 'undefined' && typeof document !== 'undefined'` | `true` | `false` | `dom`, `env`, `history`, `http`, `timer` |
+| `typeof crypto !== 'undefined'` | `true` | `false` | `uuid` |
+| `typeof process !== 'undefined'` | `false` | `true` | `dom` |
+
+Here's some examples of a replace plugin
+
+| Bundler | Replace Plugin |
+| ------- | -------------- |
+| Rollup | https://github.com/rollup/rollup-plugin-replace |
+| Webpack | https://www.npmjs.com/package/webpack-plugin-replace |
