@@ -1,7 +1,7 @@
 # Typed [![CircleCI](https://circleci.com/gh/TylorS/typed-prelude/tree/master.svg?style=svg)](https://circleci.com/gh/TylorS/typed-prelude/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 
-> Reliable software for browsers & Node. Designed for TypeScript and progressive web applications.
+> Reliable, Standards-oriented software for browsers & Node. Designed for TypeScript and progressive web applications.
 
 Typed is TypeScript toolkit composed of many à-la-carte single purposed libraries to help build applications
 that work in both browsers & Node. All Typed libraries have no non-Typed dependencies, are side-effect free, and provide a tree-shakable API around functions. While many of these libraries individually 
@@ -11,7 +11,7 @@ Only modern environments are supported out of the box. The last 2 major versions
 
 ## Packages
 
-These Typed Packages have no non-typed dependencies.
+All Typed Packages have no non-typed dependencies, with the exception of [`@typed/dom`](./packages/dom/readme.md) having a node-only peer dependency.
 
 | Package | Dependencies | DevDependencies | PeerDependencies | Minified | Gzipped |
 | ------- | ------------ | --------------- | ---------------- | -------- | ------- |
