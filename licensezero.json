@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "licensezero": [
+    {
+      "agentSignature": "9dfecff052016f9c6c2c3ba8621747070a9fab862e3dd7e1b2cb8f2c7950f1f1b8482636f2d76ae4466b7664bac52b89f3cb41f274da63231171b675849cb00e",
+      "license": {
+        "homepage": "https://github.com/TylorS/typed-prelude",
+        "jurisdiction": "US-RI",
+        "name": "Tylor Steinberger",
+        "projectID": "52afd698-c5c7-4034-b229-ef1243d4caeb",
+        "publicKey": "ff9b1c83a35987dcfbaa426b00388fbefc42560344b83c738dbe7c0d49937e39",
+        "terms": "parity",
+        "version": "6.0.0"
+      },
+      "licensorSignature": "20b690146c7f136ce0d712d37a26e314fbdd3cce3f583cd39d48771bf8041d169e3420a03e41d285f99c387e7392a6721bed8c54997e3c01d9e9030650381505"
+    }
+  ]
+}

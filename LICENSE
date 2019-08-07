@@ -1,0 +1,59 @@
+The Parity Public License 6.0.0
+
+Contributor: Tylor Steinberger
+
+Source Code: https://github.com/TylorS/typed-prelude
+
+This license lets you use and share this software for free, as
+long as you contribute software you make with it. Specifically:
+
+If you follow the rules below, you may do everything with this
+software that would otherwise infringe either the contributor's
+copyright in it, any patent claim the contributor can license,
+or both.
+
+1. Contribute changes and additions you make to this software.
+
+2. If you combine this software with other software, contribute
+   that other software.
+
+3. Contribute software you develop, deploy, monitor, or run with
+   this software.
+
+4. Ensure everyone who gets a copy of this software from you, in
+   source code or any other form, gets the text of this license
+   and the contributor and source code lines above.
+
+5. Do not make any legal claim against anyone accusing this
+   software, with or without changes, alone or with other
+   software, of infringing any patent claim.
+
+To contribute software, publish all its source code, in the
+preferred form for making changes, through a freely accessible
+distribution system widely used for similar source code, and
+license contributions not already licensed to the public on terms
+as permissive as this license accordingly.
+
+You are excused for unknowingly breaking 1, 2, or 3 if you
+contribute as required, or stop doing anything requiring this
+license, within 30 days of learning you broke the rule.
+
+**As far as the law allows, this software comes as is, without
+any warranty, and the contributor will not be liable to anyone
+for any damages related to this software or this license, for any
+kind of legal claim.**
+
+
+---
+
+Licensor Signature (Ed25519):
+
+bd51d814e8a5ab1b3cb9dd027507cb8e29fd9e159c532f121aa3f42c90755b1c
+8727e88333be2d82189c28177e9533d5ed984e8abedaee124c2919e856b86f04
+
+---
+
+Agent Signature (Ed25519):
+
+f0d6467304be0f663df1c98a92350b95c00b27ec7e83ac39e9a5092964665af6
+e9dfb591a2d69b8ac7590cf558481ee23815901d521fe758f50b200bbecf040f
