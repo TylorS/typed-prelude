@@ -1,6 +1,6 @@
 {
   "name": "@typed/logic",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Logical operations all programs need",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^1.0.1",
-    "@typed/lambda": "^1.0.2",
-    "@typed/maybe": "^8.0.2"
+    "@typed/common": "^1.0.2",
+    "@typed/lambda": "^1.0.3",
+    "@typed/maybe": "^8.0.3"
   },
   "publishConfig": {
     "access": "public"

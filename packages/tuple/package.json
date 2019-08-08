@@ -1,6 +1,6 @@
 {
   "name": "@typed/tuple",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Functions for working with tuples",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^1.0.2"
+    "@typed/lambda": "^1.0.3"
   },
   "publishConfig": {
     "access": "public"
