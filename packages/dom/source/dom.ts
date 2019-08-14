@@ -1,7 +1,10 @@
 import { isBrowser } from '@typed/common'
 import { createHistoryEnv, wrapInSubscription } from '@typed/history'
 import { serverStorage } from '@typed/storage'
-import { DomEnv } from './types'
+import { NodeFilter as ServerNodeFilter } from './NodeFilter'
+import { NodeIteratorImpl } from './NodeIterator'
+import { TreeWalkerImpl } from './TreeWalker'
+import { DomEnv, INodeFilter } from './types'
 
 export type CreateDomEnvOptions = {
   serverUrl?: string // Location.href to fallback to in node environment
@@ -10,6 +13,8 @@ export type CreateDomEnvOptions = {
   customElements?: CustomElementRegistry // Share customElements across DomEnvs
   setGlobals?: boolean // Will add DomEnv to 'global' in node environment
   window?: any // Custom value for window - defaults to 'global'
+  innerHeight?: number
+  innerWidth?: number
 }
 
 const POPSTATE_EVENT_TYPE = 'popstate'
@@ -31,8 +36,29 @@ export function createDomEnv<A>(options: CreateDomEnvOptions = {}): DomEnv<A> {
     const window = (options.window || (global as any)) as Window
     const document = new basic.Document(customElements)
 
+    if (options.innerHeight !== void 0) {
+      ;(window as any).innerHeight = options.innerHeight
+    }
+
+    if (options.innerWidth !== void 0) {
+      ;(window as any).innerWidth = options.innerWidth
+    }
+
+    document.createNodeIterator = (
+      root: Node,
+      whatToShow: number = NodeFilter.SHOW_ALL,
+      filter?: INodeFilter | null,
+    ) => new NodeIteratorImpl(root, whatToShow, filter ? filter : void 0)
+
+    document.createTreeWalker = (
+      root: Node,
+      whatToShow: number = NodeFilter.SHOW_ALL,
+      filter?: INodeFilter | null,
+    ) => new TreeWalkerImpl(root, whatToShow, filter ? filter : void 0)
+
     const NodeImage = (width?: number | undefined, height?: number | undefined) =>
       basic.Image(document, width, height)
+
     class NodeHTMLElement extends basic.HTMLElement {
       constructor(name: string) {
         super(document, name)
@@ -54,23 +80,7 @@ export function createDomEnv<A>(options: CreateDomEnvOptions = {}): DomEnv<A> {
       }
     })
 
-    if (options.setGlobals) {
-      const win = global as any
-
-      win.window = window
-      win.document = document
-      win.customElements = customElements
-      win.history = history
-      win.location = location
-      win.localStorage = localStorage
-      win.sessionStorage = sessionStorage
-      win.HTMLElement = NodeHTMLElement
-      win.Event = basic.Event
-      win.CustomEvent = basic.CustomEvent
-      win.Image = NodeImage
-    }
-
-    return {
+    const domEnv: DomEnv<A> = {
       window,
       document,
       location,
@@ -79,10 +89,19 @@ export function createDomEnv<A>(options: CreateDomEnvOptions = {}): DomEnv<A> {
       sessionStorage,
       customElements,
       HTMLElement: (NodeHTMLElement as any) as typeof HTMLElement,
+      NodeFilter: ServerNodeFilter,
       Event: basic.Event,
       CustomEvent: basic.CustomEvent,
       Image: (NodeImage as any) as typeof Image,
     }
+
+    if (options.setGlobals) {
+      const win = global as any
+
+      Object.keys(domEnv).forEach(key => (win[key] = domEnv[key as keyof DomEnv<A>]))
+    }
+
+    return domEnv
   }
 
   return {
@@ -94,6 +113,7 @@ export function createDomEnv<A>(options: CreateDomEnvOptions = {}): DomEnv<A> {
     sessionStorage: window.sessionStorage,
     customElements: window.customElements,
     HTMLElement,
+    NodeFilter,
     Event,
     CustomEvent,
     Image,

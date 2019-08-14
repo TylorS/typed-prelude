@@ -7,7 +7,10 @@ export interface DomEnv<A = null> extends HistoryEnv<A> {
   readonly sessionStorage: Storage
   readonly customElements: CustomElementRegistry
   readonly HTMLElement: typeof HTMLElement
+  readonly NodeFilter: typeof NodeFilter
   readonly Event: typeof Event
   readonly CustomEvent: typeof CustomEvent
   readonly Image: typeof Image
 }
+
+export type INodeFilter = NodeFilter
