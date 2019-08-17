@@ -18,8 +18,7 @@ for (const pkg of PACKAGES) {
   packageJSONData.main = './cjs/index.js'
   packageJSONData.unpkg = './umd/index.js'
   packageJSONData.module = './esm/index.js'
-  packageJSONData.license =
-    'Parity Public Licence 3.0 <https://licensezero.com/ids/52afd698-c5c7-4034-b229-ef1243d4caeb/>'
+  packageJSONData.license = 'Parity-6.0.0'
   delete packageJSONData.type
   packageJSONData.types = './esm/index.d.ts'
   packageJSONData['main:ts'] = './source/index.ts'

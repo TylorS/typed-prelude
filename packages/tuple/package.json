@@ -16,7 +16,7 @@
     "tuple"
   ],
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
-  "license": "Parity Public Licence 3.0 <https://licensezero.com/ids/52afd698-c5c7-4034-b229-ef1243d4caeb/>",
+  "license": "Parity-6.0.0",
   "bugs": {
     "url": "https://github.com/tylors/typed-prelude/issues"
   },

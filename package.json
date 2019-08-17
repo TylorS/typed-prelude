@@ -3,7 +3,7 @@
   "description": "The TypeScript Standard Library",
   "repository": "https://github.com/TylorS/typed-prelude",
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
-  "license": "Parity Public Licence 3.0",
+  "license": "Parity-6.0.0",
   "private": true,
   "scripts": {
     "clean:cjs": "lerna exec rimraf cjs && tsc --build packages/tsconfig.cjs.json --clean",
