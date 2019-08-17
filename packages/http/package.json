@@ -1,6 +1,6 @@
 {
   "name": "@typed/http",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "HTTP requests for node and browsers",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -20,15 +20,15 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^1.0.2",
-    "@typed/disposable": "^1.0.3",
-    "@typed/either": "^5.0.3",
-    "@typed/env": "^1.0.3",
-    "@typed/lambda": "^1.0.3",
-    "@typed/maybe": "^8.0.3",
-    "@typed/objects": "^4.0.3",
-    "@typed/remote-data": "^1.0.3",
-    "@typed/timer": "^1.0.3"
+    "@typed/common": "^1.0.3",
+    "@typed/disposable": "^1.0.4",
+    "@typed/either": "^5.0.4",
+    "@typed/env": "^1.0.4",
+    "@typed/lambda": "^1.0.4",
+    "@typed/maybe": "^8.0.4",
+    "@typed/objects": "^4.0.4",
+    "@typed/remote-data": "^1.0.4",
+    "@typed/timer": "^1.0.4"
   },
   "publishConfig": {
     "access": "public"

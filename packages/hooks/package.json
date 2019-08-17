@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Hooks for TypeScript",
   "main": "./cjs/index.js",
   "repository": {
@@ -19,11 +19,11 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
-    "@typed/disposable": "^1.0.3",
-    "@typed/lambda": "^1.0.3",
-    "@typed/logic": "^4.0.3",
-    "@typed/subscription": "^1.0.3",
-    "@typed/timer": "^1.0.3"
+    "@typed/disposable": "^1.0.4",
+    "@typed/lambda": "^1.0.4",
+    "@typed/logic": "^4.0.4",
+    "@typed/subscription": "^1.0.4",
+    "@typed/timer": "^1.0.4"
   },
   "unpkg": "./umd/index.js",
   "module": "./esm/index.js",
