@@ -31,7 +31,7 @@
     "@typed/test": "9.3.0",
     "@types/node": "12.7.3",
     "@types/yargs": "13.0.0",
-    "lerna": "3.15.0",
+    "lerna": "3.16.4",
     "lint-staged": "9.0.1",
     "prettier": "1.18.2",
     "rollup": "1.16.4",
