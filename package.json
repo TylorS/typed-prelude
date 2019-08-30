@@ -50,7 +50,7 @@
     "tslint-no-circular-imports": "0.7.0",
     "tslint-plugin-prettier": "2.0.1",
     "typescript": "3.6.2",
-    "yargs": "13.2.4"
+    "yargs": "14.0.0"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"
