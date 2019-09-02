@@ -1,6 +1,9 @@
 import { describe, given, it } from '@typed/test'
-import { useState } from './useState'
-import { withHooks } from './withHooks'
+import { createDefaultHooks } from './hooks'
+import { createManager } from './manager'
+
+const { withHooks, createHook } = createManager()
+const { useState } = createDefaultHooks(createHook)
 
 export const test = describe(`useState`, [
   given(`a starting value`, [

@@ -1,6 +1,9 @@
 import { describe, given, it } from '@typed/test'
-import { useRef } from './useRef'
-import { withHooks } from './withHooks'
+import { createDefaultHooks } from './hooks'
+import { createManager } from './manager'
+
+const { withHooks, createHook } = createManager()
+const { useRef } = createDefaultHooks(createHook)
 
 export const test = describe(`useRef`, [
   it(`returns MutableRefObject`, ({ equal, same }) => {

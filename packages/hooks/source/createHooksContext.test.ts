@@ -1,6 +1,8 @@
 import { describe, given, it } from '@typed/test'
-import { createHooksContext } from './createHooksContext'
-import { defaultTimer, setCurrentContext } from './manager'
+import { createManager } from './manager'
+
+const { contextManager, defaultTimer } = createManager()
+const { createHooksContext, setCurrentContext } = contextManager
 
 export const test = describe(`createHooksContext`, [
   given(`a Function`, [

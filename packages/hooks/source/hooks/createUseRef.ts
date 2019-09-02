@@ -1,9 +1,7 @@
-import { createHook } from './createHook'
-import { CreateHookContext, Hook } from './types'
+import { CreateHookContext, Hook } from '../types'
 
-export const useRef = createHook(
-  <A>(_: CreateHookContext, current: A | null = null) => new UseRef<A>({ current }),
-)
+export const createUseRef = <A>(_: CreateHookContext, current: A | null = null) =>
+  new UseRef<A>({ current })
 
 export type MutableRefObject<A> = { current: A | null }
 

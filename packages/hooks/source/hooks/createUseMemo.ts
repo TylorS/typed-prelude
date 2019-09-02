@@ -1,14 +1,13 @@
 import { Fn } from '@typed/lambda'
 import { equals } from '@typed/logic'
-import { createHook } from './createHook'
-import { CreateHookContext, Hook } from './types'
+import { CreateHookContext, Hook } from '../types'
+import { empty } from './common'
 
-const empty: readonly any[] = []
-
-export const useMemo = createHook(
-  <A extends readonly any[], B>(_: CreateHookContext, fn: Fn<A, B>, deps: A = empty as A) =>
-    new UseMemo(fn, deps),
-)
+export const createUseMemo = <A extends readonly any[], B>(
+  _: CreateHookContext,
+  fn: Fn<A, B>,
+  deps: A = empty as A,
+) => new UseMemo(fn, deps)
 
 export class UseMemo<A extends readonly any[], B> implements Hook<[Fn<A, B>, A], B> {
   private value: B

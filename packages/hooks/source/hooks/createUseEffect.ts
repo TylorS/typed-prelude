@@ -2,10 +2,8 @@ import { Disposable } from '@typed/disposable'
 import { Fn } from '@typed/lambda'
 import { equals } from '@typed/logic'
 import { Timer } from '@typed/timer'
-import { createHook } from './createHook'
-import { CreateHookContext, Hook } from './types'
-
-const empty: readonly any[] = []
+import { CreateHookContext, Hook } from '../types'
+import { empty } from './common'
 
 export type UseEffectOptions<A extends readonly any[]> = {
   readonly args?: A
@@ -15,13 +13,11 @@ export type UseEffectOptions<A extends readonly any[]> = {
 
 const defaultOptions = {}
 
-export const useEffect = createHook(
-  <A extends readonly any[]>(
-    { timer }: CreateHookContext,
-    fn: Fn<A, Disposable>,
-    options: UseEffectOptions<A> = defaultOptions,
-  ) => new UseEffect(timer, fn, options),
-)
+export const createUseEffect = <A extends readonly any[]>(
+  { timer }: CreateHookContext,
+  fn: Fn<A, Disposable>,
+  options: UseEffectOptions<A> = defaultOptions,
+) => new UseEffect(timer, fn, options)
 
 export class UseEffect<A extends readonly any[]>
   implements Hook<[Fn<A, Disposable>, UseEffectOptions<A>?], Disposable> {

@@ -1,8 +1,10 @@
 import { describe, given, it } from '@typed/test'
 import { createChannel } from './createChannel'
-import { useChannel } from './useChannel'
-import { useProvider } from './useProvider'
-import { withHooks } from './withHooks'
+import { createDefaultHooks } from './hooks'
+import { createManager } from './manager'
+
+const { withHooks, createHook } = createManager()
+const { useChannel, useProvider } = createDefaultHooks(createHook)
 
 export const test = describe(`useChannel`, [
   given(`a channel`, [

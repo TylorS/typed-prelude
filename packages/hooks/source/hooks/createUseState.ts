@@ -1,12 +1,9 @@
 import { equals } from '@typed/logic'
-import { createHook } from './createHook'
-import { getInitialValue, getUpdatedValue } from './helpers'
-import { CreateHookContext, Hook, InitialValue, ValueOrUpdate } from './types'
+import { getInitialValue, getUpdatedValue } from '../helpers'
+import { CreateHookContext, Hook, InitialValue, ValueOrUpdate } from '../types'
 
-export const useState = createHook(
-  <A>(context: CreateHookContext, initialState: InitialValue<A>) =>
-    new UseState<A>(context, getInitialValue(initialState)),
-)
+export const createUseState = <A>(context: CreateHookContext, initialState: InitialValue<A>) =>
+  new UseState<A>(context, getInitialValue(initialState))
 
 export type CurrentAndUpdateState<A> = readonly [A, (update: ValueOrUpdate<A>) => A]
 

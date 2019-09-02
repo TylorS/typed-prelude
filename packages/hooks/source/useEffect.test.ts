@@ -1,7 +1,10 @@
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
-import { useEffect } from './useEffect'
-import { withHooks } from './withHooks'
+import { createDefaultHooks } from './hooks'
+import { createManager } from './manager'
+
+const { withHooks, createHook } = createManager()
+const { useEffect } = createDefaultHooks(createHook)
 
 export const test = describe(`useEffect`, [
   given(`() => Disposable`, [

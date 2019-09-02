@@ -1,13 +1,12 @@
 import { equals } from '@typed/logic'
-import { createHook } from './createHook'
-import { Channel, CreateHookContext, Hook } from './types'
+import { Channel, CreateHookContext, Hook } from '../types'
 
-export const useProvider = createHook(
-  <A>(context: CreateHookContext, channel: Channel<A>, initialValue?: A) =>
-    new UseProvider(context, channel, initialValue),
-)
+export const createUseProvider = <A>(
+  context: CreateHookContext,
+  channel: Channel<A>,
+  initialValue?: A,
+) => new UseProvider(context, channel, initialValue)
 
-// tslint:disable-next-line:max-classes-per-file
 export class UseProvider<A> implements Hook<[Channel<A>, A?], readonly [A, (value: A) => A]> {
   private returnValue: [A, (value: A) => A]
 
