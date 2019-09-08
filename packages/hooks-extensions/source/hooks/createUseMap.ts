@@ -16,7 +16,7 @@ export const createUseMap = <A, B>(
 ) => {
   const createUseMapHook = withCreateHook(
     createHook => [createHook(createUsePureState), createHook(createUseMemo)] as const,
-    ([useState, useMemo], initial: InitialValue<ReadonlyMap<A, B>>) => {
+    ([useState, useMemo], initial: InitialValue<ReadonlyMap<A, B>> = new Map()) => {
       const [map, setMap] = useState(initial)
       const updates = useMemo(set => updateMapFns<A, B>(set), [setMap])
 

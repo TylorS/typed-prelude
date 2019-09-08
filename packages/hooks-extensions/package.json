@@ -31,6 +31,8 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/asynciterable": "^1.0.5",
+    "@typed/common": "^1.0.3",
+    "@typed/disposable": "^1.0.5",
     "@typed/dom": "^1.2.2",
     "@typed/either": "^5.0.5",
     "@typed/env": "^1.0.5",
@@ -52,6 +54,7 @@
     "@typed/storage": "^1.0.5",
     "@typed/strings": "^5.0.5",
     "@typed/subscription": "^1.0.5",
+    "@typed/timer": "^1.0.5",
     "@typed/tuple": "^1.0.5",
     "@typed/uuid": "^3.0.6"
   }
