@@ -16,7 +16,7 @@ export function withCreateHook<A, B extends readonly any[], C>(
     private id = 0
 
     constructor(private context: CreateHookContext) {
-      this.hooks = init(this.createHook)
+      this.hooks = init(this.createHook.bind(this))
     }
 
     public update = (...args: B): C => {
@@ -34,8 +34,11 @@ export function withCreateHook<A, B extends readonly any[], C>(
       this.hooksCache.clear()
     }
 
-    private nextId = () => this.id++
-    private createHook = <A extends readonly any[], B>(create: CreateHook<A, B>) => {
+    private nextId() {
+      return this.id++
+    }
+
+    private createHook<A extends readonly any[], B>(create: CreateHook<A, B>) {
       return (...args: A): B => {
         const id = this.nextId()
         let hook = this.hooksCache.get(id)

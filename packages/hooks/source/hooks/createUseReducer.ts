@@ -1,8 +1,8 @@
 import { Fn } from '@typed/lambda'
-import { createUseState } from '../../esm'
 import { CreateHookContext, InitialValue } from '../types'
 import { withCreateHook } from '../withCreateHook'
 import { createUseCallback } from './createUseCallback'
+import { createUseState } from './createUseState'
 
 export const createUseReducer = <A, B>(
   context: CreateHookContext,
