@@ -1,6 +1,6 @@
 {
   "name": "@typed/subscription",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generic one-to-many subscriptions",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,9 +22,9 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/disposable": "^1.0.4",
-    "@typed/lambda": "^1.0.4",
-    "@typed/logic": "^4.0.4"
+    "@typed/disposable": "^1.0.5",
+    "@typed/lambda": "^1.0.5",
+    "@typed/logic": "^4.0.5"
   },
   "publishConfig": {
     "access": "public"

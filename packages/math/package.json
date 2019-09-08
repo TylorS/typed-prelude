@@ -1,6 +1,6 @@
 {
   "name": "@typed/math",
-  "version": "4.0.4",
+  "version": "4.0.5",
   "description": "Common mathematical needs",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^1.0.4",
-    "@typed/maybe": "^8.0.4"
+    "@typed/lambda": "^1.0.5",
+    "@typed/maybe": "^8.0.5"
   },
   "publishConfig": {
     "access": "public"

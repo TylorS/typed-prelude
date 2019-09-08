@@ -1,6 +1,6 @@
 {
   "name": "@typed/logger",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Logging interface for TypeScript",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/env": "^1.0.4",
-    "@typed/objects": "^4.0.4",
-    "@typed/timer": "^1.0.4"
+    "@typed/env": "^1.0.5",
+    "@typed/objects": "^4.0.5",
+    "@typed/timer": "^1.0.5"
   },
   "publishConfig": {
     "access": "public"
