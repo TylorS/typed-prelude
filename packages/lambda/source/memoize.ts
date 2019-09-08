@@ -5,10 +5,10 @@ import { ArgsOf, Fn } from './types'
  * Memoize a function
  * @param f Function to memoize
  */
-export const memoize = <F extends Fn>(f: F) => {
+export const memoize = <F extends Fn>(f: F): F => {
   const cache = new Map<any, any>()
 
-  return (...args: ArgsOf<F>): ReturnType<F> => {
+  return ((...args: ArgsOf<F>): ReturnType<F> => {
     const key = args.reduce((x, y) => x + toString(y), '')
 
     if (cache.has(key)) {
@@ -24,5 +24,5 @@ export const memoize = <F extends Fn>(f: F) => {
     cache.set(key, result)
 
     return result
-  }
+  }) as F
 }
