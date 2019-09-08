@@ -3,11 +3,10 @@ import {
   CreateHookContext,
   createUseMemo,
   InitialValue,
-  useMemo,
   ValueOrUpdate,
   withCreateHook,
 } from '@typed/hooks'
-import { Predicate } from '@typed/lambda'
+import { Fn, Predicate } from '@typed/lambda'
 import { append, findIndex, includes } from '@typed/list'
 import { map } from '@typed/maybe'
 import { createUsePureState } from './createUsePureState'
@@ -22,7 +21,7 @@ export const createUseList = <A>(
     createHook => [createHook(createUsePureState), createHook(createUseMemo)] as const,
     ([useState, useMemo], initial: InitialValue<ReadonlyArray<A>>) => {
       const [list, setList] = useState<ReadonlyArray<A>>(initial)
-      const updateFns = useMemo(createUpdateFns, [setList, list])
+      const updateFns = useMemo(createUpdateFns, [setList, list, useMemo])
 
       return [list, updateFns] as const
     },
@@ -34,6 +33,7 @@ export const createUseList = <A>(
 function createUpdateFns<A>(
   updateList: (value: ValueOrUpdate<ReadonlyArray<A>>) => Pure<ReadonlyArray<A>>,
   list: ReadonlyArray<A>,
+  useMemo: <A extends readonly any[], B>(fn: Fn<A, B>, deps?: A | undefined) => B,
 ) {
   return {
     append: (value: A) => updateList(append(value)),

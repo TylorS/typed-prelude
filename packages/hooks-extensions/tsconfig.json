@@ -43,6 +43,9 @@
       "path": "../iterable/tsconfig.json"
     },
     {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
       "path": "../list/tsconfig.json"
     },
     {

@@ -38,6 +38,7 @@
     "@typed/hooks": "^1.1.0",
     "@typed/http": "^1.0.5",
     "@typed/iterable": "^1.0.5",
+    "@typed/lambda": "^1.0.5",
     "@typed/list": "^4.0.5",
     "@typed/logger": "^1.0.5",
     "@typed/logic": "^4.0.5",
