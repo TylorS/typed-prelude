@@ -1,10 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { Arity1, IO } from '@typed/lambda'
 import { Timer } from '@typed/timer'
-
-export type Channel<A = any> = {
-  readonly defaultValue: A
-}
+import { Channel } from './Channel'
 
 export interface HooksContext extends Disposable {
   readonly state: {
@@ -43,3 +40,9 @@ export interface Hook<A extends readonly any[] = any, B = any> extends Disposabl
 
 export type InitialValue<A> = IO<A> | A
 export type ValueOrUpdate<A> = Arity1<A, A> | A
+
+export type HookArgs<A> = A extends Hook<infer R, any> ? R : never
+export type HookValue<A> = A extends Hook<readonly any[], infer R> ? R : never
+
+export type CreateHookArgs<A> = A extends CreateHook ? HookArgs<ReturnType<A>> : never
+export type CreateHookValue<A> = A extends CreateHook ? HookValue<ReturnType<A>> : never

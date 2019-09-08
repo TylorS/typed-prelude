@@ -1,4 +1,5 @@
-import { Channel, HooksContext } from '../types'
+import { Channel } from '../Channel'
+import { HooksContext } from '../types'
 import { ManagerState } from './createManagerState'
 
 export type ChannelManager = ReturnType<typeof createChannelManager>

@@ -1,6 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { Timer } from '@typed/timer'
-import { Channel, Hook, HooksContext } from '../types'
+import { Channel } from '../Channel'
+import { Hook, HooksContext } from '../types'
 import { createAddContext } from './createAddContext'
 import { createHooksContextState } from './createHooksContextState'
 import { ManagerState } from './createManagerState'

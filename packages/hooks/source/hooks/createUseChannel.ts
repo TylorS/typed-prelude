@@ -1,4 +1,5 @@
-import { Channel, CreateHookContext, Hook } from '../types'
+import { Channel } from '../Channel'
+import { CreateHookContext, Hook } from '../types'
 
 export const createUseChannel = <A>(context: CreateHookContext, _: Channel<A>) =>
   new UseChannel<A>(context)

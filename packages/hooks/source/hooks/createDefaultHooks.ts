@@ -1,5 +1,6 @@
-import { Fn } from '@typed/lambda'
+import { Fn, memoize } from '@typed/lambda'
 import { HooksManager } from '../manager'
+import { InitialValue } from '../types'
 import { createUseChannel } from './createUseChannel'
 import { createUseEffect } from './createUseEffect'
 import { createUseMemo } from './createUseMemo'
@@ -16,11 +17,17 @@ export function createDefaultHooks(createHook: HooksManager['createHook']) {
   const useState = createHook(createUseState)
 
   const useCallback = <A extends readonly any[], B>(fn: Fn<A, B>, deps: ReadonlyArray<any> = []) =>
-    useMemo<readonly any[], Fn<A, B>>(() => fn, deps)
+    useMemo<readonly any[], Fn<A, B>>(
+      () => memoize(fn as Fn<any, any>) /*TODO: why is this required?*/,
+      deps,
+    )
 
-  const useReducer = <A, B>(reducer: Fn<[B, A], B>, seed: B): readonly [B, Fn<[A], B>] => {
+  const useReducer = <A, B>(
+    reducer: Fn<[B, A], B>,
+    seed: InitialValue<B>,
+  ): readonly [B, Fn<[A], B>] => {
     const [state, setState] = useState(seed)
-    const dispatch = useCallback((value: A) => setState(reducer(state, value)))
+    const dispatch = useCallback((value: A) => setState(reducer(state, value)), [state])
 
     return [state, dispatch]
   }

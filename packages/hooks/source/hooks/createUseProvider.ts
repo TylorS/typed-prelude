@@ -1,5 +1,6 @@
 import { equals } from '@typed/logic'
-import { Channel, CreateHookContext, Hook } from '../types'
+import { Channel } from '../Channel'
+import { CreateHookContext, Hook } from '../types'
 
 export const createUseProvider = <A>(
   context: CreateHookContext,
