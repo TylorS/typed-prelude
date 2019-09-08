@@ -64,7 +64,6 @@ export class UseEffect<A extends readonly any[]>
     const { args = empty as A, delayMs = 0, timer = this.timer } = options
 
     const changed =
-      !equals(this.fn, fn) ||
       !equals(this.timer, timer) ||
       !equals(this.options.delayMs, delayMs) ||
       !equals(this.options.args, args)

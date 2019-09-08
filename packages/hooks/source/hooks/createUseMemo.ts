@@ -12,12 +12,12 @@ export const createUseMemo = <A extends readonly any[], B>(
 export class UseMemo<A extends readonly any[], B> implements Hook<[Fn<A, B>, A], B> {
   private value: B
 
-  constructor(private fn: Fn<A, B>, private deps: A) {
+  constructor(fn: Fn<A, B>, private deps: A) {
     this.value = fn(...deps)
   }
 
   public update = (fn: Fn<A, B>, deps: A = empty as A): B => {
-    if (this.hasChanged(fn, deps)) {
+    if (this.hasChanged(deps)) {
       this.value = fn(...deps)
     }
 
@@ -26,11 +26,10 @@ export class UseMemo<A extends readonly any[], B> implements Hook<[Fn<A, B>, A],
 
   public dispose = () => void 0
 
-  private hasChanged = (fn: Fn<A, B>, deps: A) => {
-    const changed = !equals(fn, this.fn) || !equals(deps, this.deps)
+  private hasChanged = (deps: A) => {
+    const changed = !equals(deps, this.deps)
 
     if (changed) {
-      this.fn = fn
       this.deps = deps
     }
 
