@@ -1,6 +1,6 @@
 import { DropKeys } from '@typed/common'
 import { Disposable, withIsDisposed } from '@typed/disposable'
-import { IO, noOp } from '@typed/lambda'
+import { curry, IO, noOp } from '@typed/lambda'
 
 /**
  * Generic type for computations that depend on resources
@@ -71,9 +71,13 @@ export function isEnv<A, B>(x: any): x is Env<A, B> {
  * @param pure :: Pure<A>  Pure to run
  * @returns :: Disposable
  */
-export function runPure<A>(f: (value: A) => void, { runEnv }: Pure<A> | Env<{}, A>): Disposable {
+
+export const runPure: {
+  <A>(f: (value: A) => void, pure: Pure<A> | Env<{}, A>): Disposable
+  <A>(f: (value: A) => void): (pure: Pure<A> | Env<{}, A>) => Disposable
+} = curry(function runPure<A>(f: (value: A) => void, { runEnv }: Pure<A> | Env<{}, A>): Disposable {
   return runEnv(f, {})
-}
+})
 
 /**
  * Execute a pure ignoring the value it produces.
