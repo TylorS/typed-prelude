@@ -3,19 +3,19 @@ import { CreateHookContext, createUseEffect, createUseMemo, withCreateHook } fro
 import { Arity1 } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 
-const publishValue = <A>(subscription: Subscription<A>) => (value: A) =>
+const publishValue = <A, B = A>(subscription: Subscription<A, B>) => (value: A) =>
   Pure.fromIO(() => (subscription.publish(value), value))
 
-export const createUseSubscription = <A>(
+export const createUseSubscription = <A, B = A>(
   context: CreateHookContext,
-  subscription: Subscription<A>,
-  fn: Arity1<A>,
+  subscription: Subscription<A, B>,
+  fn: Arity1<B>,
 ) => {
   const createUseSubscriptionHook = withCreateHook(
     createHook => [createHook(createUseEffect), createHook(createUseMemo)] as const,
-    ([useEffect, useMemo], subscription: Subscription<A>, fn: Arity1<A>) => {
+    ([useEffect, useMemo], subscription: Subscription<A, B>, fn: Arity1<B>) => {
       const publish = useMemo(publishValue, [subscription])
-      const disposable = useEffect(sub => sub.subscribe(fn), {
+      const disposable = useEffect(({ subscribe }) => subscribe(fn), {
         args: [subscription],
       })
 

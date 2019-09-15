@@ -1,6 +1,6 @@
 import { createChannel } from '@typed/hooks'
 import { createHttpEnv, HttpEnv } from '@typed/http'
-import { createChannelHooks } from '../hooks/createChannelHooks'
+import { createChannelHooks } from '../hooks'
 
 export const HttpEnvChannel = createChannel<HttpEnv>(createHttpEnv())
 

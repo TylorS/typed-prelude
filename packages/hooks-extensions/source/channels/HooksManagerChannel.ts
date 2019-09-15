@@ -1,5 +1,5 @@
 import { createChannel, createManager, HooksManager } from '@typed/hooks'
-import { createChannelHooks } from '../hooks/createChannelHooks'
+import { createChannelHooks } from '../hooks'
 
 export const defaultHooksManager = createManager()
 export const HooksManagerChannel = createChannel<HooksManager>(defaultHooksManager)

@@ -5,6 +5,11 @@ import { CreateHook, CreateHookContext, Hook } from './types'
 /**
  * Allows creating hooks that use other hooks without knowing what
  * hooks manager is going to be used.
+ *
+ * `init` function is used and requires you to call createHook yourself.
+ * It's recommended to use TypeScript 3.6+ and to return an array with `as const`
+ * to use it's inference which is much better than the types we can currently write
+ * if we did this for you including generic functions.
  */
 export function withCreateHook<A, B extends readonly any[], C>(
   init: Arity1<HooksManager['createHook'], A>,

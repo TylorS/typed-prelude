@@ -8,8 +8,7 @@ import {
   withCreateHook,
 } from '@typed/hooks'
 import { id } from '@typed/lambda'
-import { createUseSubscription } from '../hooks/createUseSubscription'
-import { withUseChannel } from '../hooks/withUseChannel'
+import { createUseSubscription, withUseChannel } from '../hooks'
 
 export const HistoryEnvChannel = createChannel<HistoryEnv<unknown>>(createHistoryEnv<unknown>())
 
