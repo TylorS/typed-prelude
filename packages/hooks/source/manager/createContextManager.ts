@@ -21,8 +21,6 @@ export function createContextManager(state: ManagerState, defaultTimer: Timer) {
 
     currentContext = context
 
-    addContext(previousContext, currentContext)
-
     const { state, resetId } = context
 
     state.hasBeenUpdated = true
@@ -73,5 +71,15 @@ export function createContextManager(state: ManagerState, defaultTimer: Timer) {
     }
   }
 
-  return { createHooksContext, getCurrentContext, setCurrentContext, reset } as const
+  function setParentContext(context: HooksContext) {
+    addContext(getCurrentContext(), context)
+  }
+
+  return {
+    createHooksContext,
+    getCurrentContext,
+    setCurrentContext,
+    setParentContext,
+    reset,
+  } as const
 }

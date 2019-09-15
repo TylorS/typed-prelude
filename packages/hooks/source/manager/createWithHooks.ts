@@ -8,12 +8,18 @@ export type WithHooksOptions = {
   context?: HooksContext
 }
 
-export function createWithHooks({ createHooksContext, setCurrentContext }: ContextManager) {
+export function createWithHooks({
+  createHooksContext,
+  setCurrentContext,
+  setParentContext,
+}: ContextManager) {
   return function withHooks<A extends any[], B>(
     fn: Fn<A, B>,
     { timer, context }: WithHooksOptions = {},
   ): Fn<A, B> & { readonly context: HooksContext } {
     const hooksContext = context || createHooksContext(wrappedInHooks, timer)
+
+    setParentContext(hooksContext)
 
     wrappedInHooks.context = hooksContext
 
