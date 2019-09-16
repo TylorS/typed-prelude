@@ -26,7 +26,8 @@
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
     "@typed/lambda": "^1.0.5",
-    "@typed/logic": "^4.0.5"
+    "@typed/logic": "^4.0.5",
+    "@typed/maybe": "^8.0.5"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"
