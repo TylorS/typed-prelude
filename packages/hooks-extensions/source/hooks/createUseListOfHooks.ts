@@ -1,4 +1,11 @@
-import { CreateHookContext, createUseMemo, HooksContext, withCreateHook } from '@typed/hooks'
+import { Disposable } from '@typed/disposable'
+import {
+  CreateHookContext,
+  createUseEffect,
+  createUseMemo,
+  HooksContext,
+  withCreateHook,
+} from '@typed/hooks'
 import { Arity1 } from '@typed/lambda'
 import { map } from '@typed/list'
 import { createUseHooksManager } from '../channels/HooksManagerChannel'
@@ -12,9 +19,14 @@ export function createUseListOfHooks<A, B, C>(
   list: ReadonlyArray<A>,
 ) {
   const createManageListOfHooksHook = withCreateHook(
-    createHook => [createHook(createUseMemo), createHook(createUseHooksManager)] as const,
+    createHook =>
+      [
+        createHook(createUseMemo),
+        createHook(createUseHooksManager),
+        createHook(createUseEffect),
+      ] as const,
     (
-      [useMemo, useHooksManager],
+      [useMemo, useHooksManager, useEffect],
       fn: Arity1<A, B>,
       by: Arity1<A, C>,
       list: ReadonlyArray<A>,
@@ -30,23 +42,8 @@ export function createUseListOfHooks<A, B, C>(
           >(),
         [withHooks],
       )
-      const keys = useMemo(map(by), [list])
 
-      useMemo(
-        _ => {
-          for (const key of Array.from(contextMap.keys())) {
-            if (!keys.includes(key)) {
-              const fn = contextMap.get(key)
-
-              if (fn) {
-                fn.context.dispose()
-                contextMap.delete(key)
-              }
-            }
-          }
-        },
-        [keys],
-      )
+      useEffect(cleanupContextMap, { args: [contextMap, useMemo(map(by), [list])] })
 
       const values = list.map((value: A) => {
         const key = by(value)
@@ -67,4 +64,27 @@ export function createUseListOfHooks<A, B, C>(
   )
 
   return createManageListOfHooksHook(context, fn, by, list)
+}
+
+function cleanupContextMap<A, B, C>(
+  contextMap: Map<
+    C,
+    Arity1<A, B> & {
+      readonly context: HooksContext
+    }
+  >,
+  keys: C[],
+) {
+  for (const key of Array.from(contextMap.keys())) {
+    if (!keys.includes(key)) {
+      const fn = contextMap.get(key)
+
+      if (fn) {
+        fn.context.dispose()
+        contextMap.delete(key)
+      }
+    }
+  }
+
+  return Disposable.None
 }
