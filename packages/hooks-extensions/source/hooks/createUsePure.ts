@@ -11,7 +11,7 @@ export function createUsePure<A>(
 ) {
   const createUsePureHook = withCreateHook(
     createHook => [createHook(createUseEffect)] as const,
-    ([useEffect], pure: Pure<A>, fn: Arity1<A>, options: UseEffectOptions<readonly any[]>) => {
+    ([useEffect], pure: Pure<A>, fn: Arity1<A>, options: UseEffectOptions<readonly any[]> = {}) => {
       const args = [fn, pure] as const
 
       return useEffect(runPure as Fn<typeof args, Disposable>, {
