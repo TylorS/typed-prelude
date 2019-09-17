@@ -12,7 +12,7 @@ export const createUseMatch = <A, B, C>(
   const createUseMatchHook = withCreateHook(
     createHook => [createHook(createUseMemo)] as const,
     ([useMemo], value: A, match: Match<A, B>, withMatch: Arity1<B, C>) =>
-      useMemo(findMatch, [value, match, withMatch] as ArgsOf<typeof findMatch>),
+      useMemo(findMatch, [value, match, withMatch] as ArgsOf<typeof findMatch>) as Maybe<C>,
   )
 
   return createUseMatchHook(context, value, match, withMatch)
