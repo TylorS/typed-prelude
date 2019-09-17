@@ -1,7 +1,8 @@
 import { createDomEnv, DomEnv } from '@typed/dom'
 import { Channel, createChannel, CreateHookContext } from '@typed/hooks'
 import { id } from '@typed/lambda'
-import { withUseChannel, withUseProvider } from '../hooks'
+import { withUseProvider } from '../hooks/withProvideChannel'
+import { withUseChannel } from '../hooks/withUseChannel'
 
 export const DomEnvChannel = createChannel(createDomEnv<unknown>())
 

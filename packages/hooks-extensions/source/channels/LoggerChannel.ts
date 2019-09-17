@@ -1,6 +1,6 @@
 import { createChannel } from '@typed/hooks'
 import { createConsoleLogger, LogLevel } from '@typed/logger'
-import { createChannelHooks } from '../hooks'
+import { createChannelHooks } from '../hooks/createChannelHooks'
 import { TimerChannel } from './TimerChannel'
 
 export const LoggerChannel = createChannel(

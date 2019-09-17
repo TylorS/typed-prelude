@@ -1,6 +1,6 @@
 import { Channel, createChannel } from '@typed/hooks'
 import { createTimer, Timer } from '@typed/timer'
-import { createChannelHooks } from '../hooks'
+import { createChannelHooks } from '../hooks/createChannelHooks'
 
 export const TimerChannel: Channel<Timer> = createChannel(createTimer())
 

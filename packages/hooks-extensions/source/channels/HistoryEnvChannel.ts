@@ -15,7 +15,8 @@ import {
 } from '@typed/hooks'
 
 import { NewType } from '@typed/new-type'
-import { createUseSubscription, withUseChannel } from '../hooks'
+import { createUseSubscription } from '../hooks/createUseSubscription'
+import { withUseChannel } from '../hooks/withUseChannel'
 
 export const HistoryEnvChannel = createChannel<HistoryEnv<unknown>>(createHistoryEnv<unknown>())
 
