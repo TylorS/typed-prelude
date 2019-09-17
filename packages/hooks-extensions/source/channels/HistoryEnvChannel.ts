@@ -1,4 +1,10 @@
-import { createHistoryEnv, HistoryEnv, wrapInSubscription } from '@typed/history'
+import {
+  createHistoryEnv,
+  HistoryEnv,
+  Path,
+  scopeHistoryEnv,
+  wrapInSubscription,
+} from '@typed/history'
 import {
   Channel,
   createChannel,
@@ -7,17 +13,29 @@ import {
   createUseProvider,
   withCreateHook,
 } from '@typed/hooks'
-import { id } from '@typed/lambda'
+
+import { NewType } from '@typed/new-type'
 import { createUseSubscription, withUseChannel } from '../hooks'
 
 export const HistoryEnvChannel = createChannel<HistoryEnv<unknown>>(createHistoryEnv<unknown>())
 
-export const createUseHistoryEnv = <A>(context: CreateHookContext) =>
-  withUseChannel(id, HistoryEnvChannel as Channel<HistoryEnv<A>>)(context)
+export const createUseHistoryEnv = <A>(
+  context: CreateHookContext,
+  scope?: NewType<string, 'Path'>, // TS complains about portability of NewType
+) =>
+  withUseChannel(
+    (env, scope?: Path) => (scope ? scopeHistoryEnv(scope, env) : env),
+    HistoryEnvChannel as Channel<HistoryEnv<A>>,
+  )(context, scope)
+
+export type ProvideHistoryEnvOptions<A> = {
+  readonly historyEnv?: HistoryEnv<A>
+  readonly scope?: Path
+}
 
 export const createProvideHistoryEnv = <A>(
   context: CreateHookContext,
-  historyEnv?: HistoryEnv<A>,
+  options: ProvideHistoryEnvOptions<A>,
 ) =>
   withCreateHook(
     createHook =>
@@ -26,11 +44,19 @@ export const createProvideHistoryEnv = <A>(
         createHook(createUseMemo),
         createHook(createUseSubscription),
       ] as const,
-    ([useProvider, useMemo, useSubscription], initialValue?: HistoryEnv<A>) => {
-      const [historyEnv, setHistoryEnv] = useProvider(HistoryEnvChannel, initialValue)
+    (
+      [useProvider, useMemo, useSubscription],
+      { historyEnv: initialValue, scope }: ProvideHistoryEnvOptions<A> = {},
+    ) => {
+      const [historyEnv, setHistoryEnv] = useProvider(
+        HistoryEnvChannel,
+        initialValue && scope ? scopeHistoryEnv(scope, initialValue) : void 0,
+      )
       const { subscription } = useMemo(wrapInSubscription, [historyEnv])
-      const [, disposable] = useSubscription(subscription, setHistoryEnv)
+      const [, disposable] = useSubscription(subscription, env =>
+        setHistoryEnv(scope ? scopeHistoryEnv(scope, env) : env),
+      )
 
       return [historyEnv, setHistoryEnv, disposable] as const
     },
-  )(context, historyEnv)
+  )(context, options)
