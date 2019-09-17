@@ -2,6 +2,7 @@ import { HooksManager } from '@typed/hooks'
 import { createUseBool } from './createUseBool'
 import { createUseConditional } from './createUseConditional'
 import { createUseEither } from './createUseEither'
+import { createUseFilter } from './createUseFilter'
 import { createUseForceUpdate } from './createUseForceUpdate'
 import { createUseHttp } from './createUseHttp'
 import { createUseIterable } from './createUseIterable'
@@ -28,6 +29,7 @@ export function createDefaultHookExtensions(createHook: HooksManager['createHook
     useBool: createHook(createUseBool),
     usConditional: createHook(createUseConditional),
     useEither: createHook(createUseEither),
+    useFilter: createHook(createUseFilter),
     useForceUpdate: createHook(createUseForceUpdate),
     useHttp: createHook(createUseHttp),
     useIterable: createHook(createUseIterable),
