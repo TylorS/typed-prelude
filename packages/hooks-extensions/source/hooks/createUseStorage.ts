@@ -1,14 +1,10 @@
-import { handle, map } from '@typed/env'
+import { handle, map, Pure } from '@typed/env'
 import { createUseChannel, createUseMemo, withCreateHook } from '@typed/hooks'
-import { noOp, tap } from '@typed/lambda'
+import { tap } from '@typed/lambda'
+import { Maybe } from '@typed/maybe'
 import { clear, getItem, removeItem, scopeStorage, setItem } from '@typed/storage'
 import { StorageChannel } from '../channels'
-
-const createUseForceUpdate = withCreateHook(
-  createHook =>
-    createHook(context => ({ update: () => () => context.hasBeenUpdated(), dispose: noOp })),
-  useForceUpdate => useForceUpdate(),
-)
+import { createUseForceUpdate } from './createUseForceUpdate'
 
 export const createUseStorage = withCreateHook(
   createHook =>
@@ -35,23 +31,23 @@ export const createUseStorage = withCreateHook(
 )
 
 function getStorageItem(storage: Storage) {
-  return (key: string) => {
+  return (key: string): Pure<Maybe<string>> => {
     return handle({ storage }, getItem(key))
   }
 }
 
 function setStorageItem(storage: Storage, forceUpdate: () => void) {
-  return (key: string, value: string) => {
+  return (key: string, value: string): Pure<string> => {
     return handle({ storage }, map(tap(forceUpdate), setItem(key, value)))
   }
 }
 
 function removeStorageItem(storage: Storage, forceUpdate: () => void) {
-  return (key: string) => {
+  return (key: string): Pure<void> => {
     return handle({ storage }, map(tap(forceUpdate), removeItem(key)))
   }
 }
 
-function clearStorage(storage: Storage) {
+function clearStorage(storage: Storage): Pure<void> {
   return handle({ storage }, clear)
 }
