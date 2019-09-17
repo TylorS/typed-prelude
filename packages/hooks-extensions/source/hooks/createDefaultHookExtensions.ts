@@ -18,6 +18,7 @@ import { createUseRecord } from './createUseRecord'
 import { createUseRemoteData } from './createUseRemoteData'
 import { createUseRoute } from './createUseRoute'
 import { createUseSet } from './createUseSet'
+import { createUseSort } from './createUseSort'
 import { createUseString } from './createUseString'
 import { createUseSubscription } from './createUseSubscription'
 import { createUseTimer } from './createUseTimer'
@@ -45,6 +46,7 @@ export function createDefaultHookExtensions(createHook: HooksManager['createHook
     useRemoteData: createHook(createUseRemoteData),
     useRoute: createHook(createUseRoute),
     useSet: createHook(createUseSet),
+    useSort: createHook(createUseSort),
     useString: createHook(createUseString),
     useSubscription: createHook(createUseSubscription),
     useTimer: createHook(createUseTimer),
