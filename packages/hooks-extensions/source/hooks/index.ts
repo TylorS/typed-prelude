@@ -1,4 +1,5 @@
 export * from './createChannelHooks'
+export * from './createDefaultHookExtensions'
 export * from './createUseBool'
 export * from './createUseConditional'
 export * from './createUseEither'

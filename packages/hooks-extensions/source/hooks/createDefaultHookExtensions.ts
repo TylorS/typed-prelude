@@ -1,0 +1,52 @@
+import { HooksManager } from '@typed/hooks'
+import { createUseBool } from './createUseBool'
+import { createUseConditional } from './createUseConditional'
+import { createUseEither } from './createUseEither'
+import { createUseForceUpdate } from './createUseForceUpdate'
+import { createUseHttp } from './createUseHttp'
+import { createUseIterable } from './createUseIterable'
+import { createUseList } from './createUseList'
+import { createUseListOfHooks } from './createUseListOfHooks'
+import { createUseMap } from './createUseMap'
+import { createUseMatch } from './createUseMatch'
+import { createUseMaybe } from './createUseMaybe'
+import { createUsePromise } from './createUsePromise'
+import { createUsePure } from './createUsePure'
+import { createUsePureState } from './createUsePureState'
+import { createUseRecord } from './createUseRecord'
+import { createUseRemoteData } from './createUseRemoteData'
+import { createUseRoute } from './createUseRoute'
+import { createUseSet } from './createUseSet'
+import { createUseString } from './createUseString'
+import { createUseSubscription } from './createUseSubscription'
+import { createUseTimer } from './createUseTimer'
+import { createUseTuple } from './createUseTuple'
+import { createUseUuid } from './createUseUuid'
+
+export function createDefaultHookExtensions(createHook: HooksManager['createHook']) {
+  return {
+    useBool: createHook(createUseBool),
+    usConditional: createHook(createUseConditional),
+    useEither: createHook(createUseEither),
+    useForceUpdate: createHook(createUseForceUpdate),
+    useHttp: createHook(createUseHttp),
+    useIterable: createHook(createUseIterable),
+    useList: createHook(createUseList),
+    useListOfHooks: createHook(createUseListOfHooks),
+    useMap: createHook(createUseMap),
+    useMaybe: createHook(createUseMaybe),
+    useMatch: createHook(createUseMatch),
+    usePromise: createHook(createUsePromise),
+    usePure: createHook(createUsePure),
+    useState: createHook(createUsePureState),
+    useRecord: createHook(createUseRecord),
+    useRemoteData: createHook(createUseRemoteData),
+    useRoute: createHook(createUseRoute),
+    useSet: createHook(createUseSet),
+    useString: createHook(createUseString),
+    useSubscription: createHook(createUseSubscription),
+    useTimer: createHook(createUseTimer),
+    useTuple: createHook(createUseTuple),
+    useUuid: createHook(createUseUuid),
+  } as const
+}
