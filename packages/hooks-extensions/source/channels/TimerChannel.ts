@@ -4,4 +4,4 @@ import { createChannelHooks } from '../hooks'
 
 export const TimerChannel: Channel<Timer> = createChannel(createTimer())
 
-export const [createUseTimer, createProvideTimer] = createChannelHooks(TimerChannel)
+export const [createUseTimerEnv, createProvideTimer] = createChannelHooks(TimerChannel)
