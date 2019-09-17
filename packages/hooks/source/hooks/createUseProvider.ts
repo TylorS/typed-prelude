@@ -14,7 +14,7 @@ export class UseProvider<A> implements Hook<[Channel<A>, A?], readonly [A, (valu
   constructor(
     private context: CreateHookContext,
     private channel: Channel<A>,
-    private initialValue: A = channel.defaultValue,
+    initialValue: A = context.consume(channel),
   ) {
     this.returnValue = [initialValue, this.updateValue]
     this.context.provide(channel, initialValue)
@@ -22,7 +22,7 @@ export class UseProvider<A> implements Hook<[Channel<A>, A?], readonly [A, (valu
 
   public update = (
     channel: Channel<A>,
-    initialValue: A = channel.defaultValue,
+    initialValue: A = this.getDefaultValue(),
   ): readonly [A, (value: A) => A] => {
     if (!equals(this.channel, channel)) {
       this.returnValue[0] = initialValue
@@ -33,7 +33,7 @@ export class UseProvider<A> implements Hook<[Channel<A>, A?], readonly [A, (valu
   }
 
   public dispose = () => {
-    this.returnValue[0] = this.initialValue
+    this.returnValue[0] = this.getDefaultValue()
   }
 
   private updateValue = (value: A) => {
@@ -45,4 +45,6 @@ export class UseProvider<A> implements Hook<[Channel<A>, A?], readonly [A, (valu
 
     return value
   }
+
+  private getDefaultValue = () => this.context.consume(this.channel)
 }
