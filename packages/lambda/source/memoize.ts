@@ -1,11 +1,11 @@
 import { toString } from '@typed/common'
-import { ArgsOf, Fn } from './types'
+import { ArgsOf } from './types'
 
 /**
  * Memoize a function
  * @param f Function to memoize
  */
-export const memoize = <F extends Fn>(f: F): F => {
+export const memoize = <F extends (...args: any[]) => any>(f: F): F => {
   const cache = new Map<any, any>()
 
   return ((...args: ArgsOf<F>): ReturnType<F> => {
