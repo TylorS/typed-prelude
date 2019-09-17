@@ -11,7 +11,7 @@ import { Fn, Predicate } from '@typed/lambda'
 import { Just, Nothing } from '@typed/maybe'
 import { createUsePureState } from './createUsePureState'
 
-export const createUseList = <A>(
+export const createUseIterable = <A>(
   context: CreateHookContext,
   initialValue: InitialValue<Iterable<A>>,
 ) => {
