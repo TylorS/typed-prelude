@@ -3,8 +3,8 @@ import { createManager, HooksManager } from '@typed/hooks'
 import { createHttpEnv, createTestHttpEnv, WithHttpManagementOptions } from '@typed/http'
 import { ArgsOf, Fn } from '@typed/lambda'
 import { createConsoleLogger, createTestLogger, LogLevel } from '@typed/logger'
-
-import { createVirtualTimer, VirtualTimer } from '@typed/timer'
+import { NoData } from '@typed/remote-data'
+import { createVirtualTimer } from '@typed/timer'
 import {
   DomEnvChannel,
   HistoryEnvChannel,
@@ -50,23 +50,25 @@ export function createHooksApp<A extends readonly any[], B, HistoryState = unkno
 }
 
 export type CreateTestHooksAppOptions = {
-  readonly http: ArgsOf<typeof createTestHttpEnv>[0]
+  readonly http?: ArgsOf<typeof createTestHttpEnv>[0]
   readonly dom?: CreateDomEnvOptions
 }
 
 export function createTestHooksApp<A extends readonly any[], B, HistoryState = unknown>(
   main: Fn<A, B>,
-  options: CreateTestHooksAppOptions,
+  options: CreateTestHooksAppOptions = {},
 ) {
+  const { http = () => NoData, dom } = options
   const timer = createVirtualTimer()
-  const manager = createManager<VirtualTimer>(timer)
-  const { withHooks } = manager
-  const domEnv = createDomEnv<HistoryState>(options.dom)
-  const httpEnv = createTestHttpEnv(options.http, timer)
+  const manager = createManager(timer)
+  const domEnv = createDomEnv<HistoryState>(dom)
+  const httpEnv = createTestHttpEnv(http, timer)
   const logger = createTestLogger({
     logLevel: LogLevel.DEFAULT,
     clock: timer,
   })
+
+  const { withHooks } = manager
 
   const app = withHooks(main)
 
@@ -80,5 +82,13 @@ export function createTestHooksApp<A extends readonly any[], B, HistoryState = u
   channelValues.set(StorageChannel, domEnv.localStorage)
   channelValues.set(TimerChannel, timer)
 
-  return [app, manager, timer] as const
+  const data = {
+    timer,
+    manager,
+    domEnv,
+    httpEnv,
+    logger,
+  } as const
+
+  return [app, data] as const
 }
