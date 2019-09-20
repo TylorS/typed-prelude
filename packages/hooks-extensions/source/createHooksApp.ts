@@ -4,7 +4,7 @@ import { createHttpEnv, createTestHttpEnv, WithHttpManagementOptions } from '@ty
 import { ArgsOf, Fn } from '@typed/lambda'
 import { createConsoleLogger, createTestLogger, LogLevel } from '@typed/logger'
 
-import { createVirtualTimer } from '@typed/timer'
+import { createVirtualTimer, VirtualTimer } from '@typed/timer'
 import {
   DomEnvChannel,
   HistoryEnvChannel,
@@ -59,7 +59,7 @@ export function createTestHooksApp<A extends readonly any[], B, HistoryState = u
   options: CreateTestHooksAppOptions,
 ) {
   const timer = createVirtualTimer()
-  const manager = createManager(timer)
+  const manager = createManager<VirtualTimer>(timer)
   const { withHooks } = manager
   const domEnv = createDomEnv<HistoryState>(options.dom)
   const httpEnv = createTestHttpEnv(options.http, timer)
@@ -80,5 +80,5 @@ export function createTestHooksApp<A extends readonly any[], B, HistoryState = u
   channelValues.set(StorageChannel, domEnv.localStorage)
   channelValues.set(TimerChannel, timer)
 
-  return [app, timer]
+  return [app, manager, timer] as const
 }
