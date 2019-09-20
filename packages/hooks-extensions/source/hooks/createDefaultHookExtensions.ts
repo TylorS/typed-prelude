@@ -1,4 +1,5 @@
 import { HooksManager } from '@typed/hooks'
+import { createDefaultChannelHooks } from '../channels'
 import { createUseBool } from './createUseBool'
 import { createUseConditional } from './createUseConditional'
 import { createUseEither } from './createUseEither'
@@ -54,5 +55,6 @@ export function createDefaultHookExtensions(createHook: HooksManager['createHook
     useTimer: createHook(createUseTimer),
     useTuple: createHook(createUseTuple),
     useUuid: createHook(createUseUuid),
+    ...createDefaultChannelHooks(createHook),
   } as const
 }

@@ -1,3 +1,4 @@
+export * from './createDefaultChannelHooks'
 export * from './DomEnvChannel'
 export * from './HistoryEnvChannel'
 export * from './HooksManagerChannel'

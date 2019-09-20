@@ -7,8 +7,9 @@ import { Apply, Fn } from './types'
  * @param fn Function to call
  */
 export const apply = curry(
-  <Args extends any[], T extends Fn>(args: Args, fn: T): Apply<Args, T> => fn(...args),
+  <Args extends readonly any[], T extends Fn<Args>>(args: Args, fn: T): Apply<Args, T> =>
+    fn(...args),
 ) as {
-  <Args extends any[], T extends Fn>(args: Args, fn: T): Apply<Args, T>
-  <Args extends any[]>(args: Args): <T extends Fn<Args>>(fn: T) => Apply<Args, T>
+  <Args extends readonly any[], T extends Fn<Args>>(args: Args, fn: T): Apply<Args, T>
+  <Args extends readonly any[]>(args: Args): <T extends Fn<Args>>(fn: T) => Apply<Args, T>
 }

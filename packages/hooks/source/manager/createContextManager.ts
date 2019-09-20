@@ -9,6 +9,7 @@ import { ManagerState } from './createManagerState'
 export type ContextManager = ReturnType<typeof createContextManager>
 
 export function createContextManager(state: ManagerState, defaultTimer: Timer) {
+  const { parentContexts } = state
   const addContext = createAddContext(state)
   let currentContext: HooksContext | null = null
 
@@ -18,6 +19,10 @@ export function createContextManager(state: ManagerState, defaultTimer: Timer) {
 
   function setCurrentContext(context: HooksContext, fnContext: any, fnArgs: any): Disposable {
     const previousContext = currentContext
+
+    if (!parentContexts.get(context) && previousContext) {
+      addContext(previousContext, context)
+    }
 
     currentContext = context
 
