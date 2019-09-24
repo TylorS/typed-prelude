@@ -4,7 +4,9 @@ import { Arity1 } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 
 const publishValue = <A, B = A>(subscription: Subscription<A, B>) => (value: A) =>
-  Pure.fromIO(() => (subscription.publish(value), value))
+  Pure.fromIO<void>(() => {
+    subscription.publish(value)
+  })
 
 export const createUseSubscription = <A, B = A>(
   context: CreateHookContext,
