@@ -1,13 +1,12 @@
 import { HooksManager } from '@typed/hooks'
-import { createUseTimer, createUseUuid } from '../hooks'
 import { createProvideDomEnv, createUseDomEnv } from './DomEnvChannel'
 import { createProvideHistoryEnv, createUseHistoryEnv } from './HistoryEnvChannel'
 import { createProvideHooksManager, createUseHooksManager } from './HooksManagerChannel'
 import { createProvideHttpEnv, createUseHttpEnv } from './HttpEnvChannel'
 import { createProvideLogger, createUseLogger } from './LoggerChannel'
 import { createProvideStorage } from './StorageChannel'
-import { createProvideTimer } from './TimerChannel'
-import { createProvideUuidEnv } from './UuidEnvChannel'
+import { createProvideTimer, createUseTimer } from './TimerChannel'
+import { createProvideUuidEnv, createUseUuid } from './UuidEnvChannel'
 
 export function createDefaultChannelHooks(createHook: HooksManager['createHook']) {
   return {

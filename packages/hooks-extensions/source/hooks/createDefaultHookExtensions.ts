@@ -23,9 +23,7 @@ import { createUseSort } from './createUseSort'
 import { createUseStorage } from './createUseStorage'
 import { createUseString } from './createUseString'
 import { createUseSubscription } from './createUseSubscription'
-import { createUseTimer } from './createUseTimer'
 import { createUseTuple } from './createUseTuple'
-import { createUseUuid } from './createUseUuid'
 
 export function createDefaultHookExtensions(createHook: HooksManager['createHook']) {
   return {
@@ -52,9 +50,7 @@ export function createDefaultHookExtensions(createHook: HooksManager['createHook
     useSort: createHook(createUseSort),
     useString: createHook(createUseString),
     useSubscription: createHook(createUseSubscription),
-    useTimer: createHook(createUseTimer),
     useTuple: createHook(createUseTuple),
-    useUuid: createHook(createUseUuid),
     ...createDefaultChannelHooks(createHook),
   } as const
 }
