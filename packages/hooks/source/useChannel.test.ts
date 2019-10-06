@@ -10,16 +10,18 @@ export const test = describe(`useChannel`, [
   given(`a channel`, [
     it(`allows communicating values across functions`, ({ equal }) => {
       const channel = createChannel(0)
-      const f = withHooks(() => useChannel(channel))
-      const g = withHooks(() => {
-        const a = useChannel(channel)
-
-        equal(f(), a)
-
-        return a
-      })
       const h = withHooks(() => {
         const [a, setA] = useProvider(channel)
+
+        const g = withHooks(() => {
+          const a = useChannel(channel)
+
+          const f = withHooks(() => useChannel(channel))
+
+          equal(f(), a)
+
+          return a
+        })
 
         equal(a, g())
 

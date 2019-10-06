@@ -28,7 +28,7 @@ export const test = describe(`useEffect`, [
 
       const disposable = fn()
 
-      timer.timePast(delayMs)
+      timer.progressTimeBy(delayMs)
 
       disposable.dispose()
       equal(1, called)

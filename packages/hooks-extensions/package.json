@@ -1,0 +1,64 @@
+{
+  "name": "@typed/hooks-extensions",
+  "version": "0.0.0",
+  "description": "Typed Extensions to @typed/hooks",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "Hooks",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/asynciterable": "^1.0.5",
+    "@typed/common": "^1.0.3",
+    "@typed/disposable": "^1.0.5",
+    "@typed/dom": "^1.2.2",
+    "@typed/either": "^5.0.5",
+    "@typed/env": "^1.0.5",
+    "@typed/history": "^3.0.5",
+    "@typed/hooks": "^1.1.0",
+    "@typed/http": "^1.0.5",
+    "@typed/iterable": "^1.0.5",
+    "@typed/lambda": "^1.0.5",
+    "@typed/list": "^4.0.5",
+    "@typed/logger": "^1.0.5",
+    "@typed/logic": "^4.0.5",
+    "@typed/map": "^2.0.4",
+    "@typed/maybe": "^8.0.5",
+    "@typed/new-type": "^1.0.5",
+    "@typed/objects": "^4.0.5",
+    "@typed/remote-data": "^1.0.5",
+    "@typed/routing": "^1.0.5",
+    "@typed/set": "^1.0.5",
+    "@typed/storage": "^1.0.5",
+    "@typed/strings": "^5.0.5",
+    "@typed/subscription": "^1.0.5",
+    "@typed/timer": "^1.0.5",
+    "@typed/tuple": "^1.0.5",
+    "@typed/uuid": "^3.0.6"
+  },
+  "exports": {
+    ".": "./esm/index.js"
+  }
+}

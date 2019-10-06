@@ -12,7 +12,7 @@ export interface Clock {
  * An extension of Clock useful for testing
  */
 export interface VirtualClock extends Clock {
-  readonly timePast: (delayMS: number) => void
+  readonly progressTimeBy: (delayMS: number) => void
 }
 
 /**

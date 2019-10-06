@@ -1,7 +1,8 @@
-import { CreateHookContext, Hook } from '../types'
+import { getInitialValue } from '../helpers'
+import { CreateHookContext, Hook, InitialValue } from '../types'
 
-export const createUseRef = <A>(_: CreateHookContext, current: A | null = null) =>
-  new UseRef<A>({ current })
+export const createUseRef = <A>(_: CreateHookContext, current: InitialValue<A | null> = null) =>
+  new UseRef<A>({ current: getInitialValue(current) })
 
 export type MutableRefObject<A> = { current: A | null }
 

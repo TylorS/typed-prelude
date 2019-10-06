@@ -17,7 +17,7 @@ export type Predicate<A> = Arity1<A, boolean>
 export type Is<A> = (value: any) => value is A
 export type Predicate2<A, B> = Arity2<A, B, boolean>
 export type ComparisonNumbers = -1 | 0 | 1
-export type ComparableValues = keyof any | boolean
+export type ComparableValues = keyof any | boolean | Date
 
 export interface Curry2<A, B, C> extends Arity2<A, B, C>, Arity1<A, Arity1<B, C>> {}
 export interface Curry3<A, B, C, D>
@@ -36,7 +36,7 @@ export interface Curry5<A, B, C, D, E, F>
     Arity2<A, B, Curry3<C, D, E, F>>,
     Arity1<A, Curry4<B, C, D, E, F>> {}
 
-export type Fn<Args extends readonly any[] = any[], R = any> = (...args: Args) => R
+export type Fn<Args extends readonly any[] = readonly any[], R = any> = (...args: Args) => R
 
 // tslint:disable:no-shadowed-variable
 export type Curry<T extends Fn> = ArgsOf<T> extends [infer A]
@@ -79,11 +79,10 @@ export type Flip<T extends Fn> = ArgsOf<T> extends []
   ? Fn<[B, A, C, D, E], ReturnType<T>>
   : never
 
-export type Apply<Args extends any[] = any[], T extends Fn<Args> = Fn<Args>> = T extends (
-  ...args: Args
-) => infer R
-  ? R
-  : never
+export type Apply<
+  Args extends readonly any[] = readonly any[],
+  T extends Fn<Args> = Fn<Args>
+> = T extends (...args: Args) => infer R ? R : never
 
 export type Uncurry<Fun extends Fn> = Fun extends (
   a: infer A,
@@ -97,11 +96,11 @@ export type Uncurry<Fun extends Fn> = Fun extends (
   ? (a: A, b: B) => C
   : Fun
 
-export type Init<A extends any[], B extends any[] = Tail<A>> = CastArray<
+export type Init<A extends readonly any[], B extends readonly any[] = Tail<A>> = CastArray<
   { [K in keyof B]: A[keyof A & K] }
 >
-export type Tail<A extends any[]> = TailArgsOf<Fn<A>>
-export type Head<A extends any[]> = HeadArg<Fn<A>>
+export type Tail<A extends readonly any[]> = TailArgsOf<Fn<A>>
+export type Head<A extends readonly any[]> = HeadArg<Fn<A>>
 
 export type Defined<T> = T extends undefined ? never : T
 
@@ -113,4 +112,4 @@ export type Include<A, B> = Exclude<A, Exclude<A, B>>
 export type TypeGuard<A, B extends A> = (value: A) => value is B
 
 // Internal
-type CastArray<T> = T extends any[] ? T : []
+type CastArray<T> = T extends readonly any[] ? T : []

@@ -23,7 +23,7 @@ export const test = describe(`createTestHttpEnv`, [
 
       testEnv.recordEvents(request)
       testEnv.recordEvents(failedRequest)
-      testEnv.timer.timePast(1)
+      testEnv.timer.progressTimeBy(1)
 
       equal([expectedResponse, failedResponse], testHttpEnv.getResponses())
       equal([Loading, expectedResponse, Loading, failedResponse], testEnv.getAllEvents())

@@ -1,5 +1,5 @@
 import { describe, it } from '@typed/test'
-import { createDomEnv } from './dom'
+import { createDomEnv } from './createDomEnv'
 
 export const test = describe(`createDomEnv`, [
   it(`returns a node-friendly DOM implementation`, ({ equal, same }, done) => {

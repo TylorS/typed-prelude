@@ -1,4 +1,4 @@
-import { Fn } from '@typed/lambda'
+import { apply, Fn } from '@typed/lambda'
 import { Timer } from '@typed/timer'
 import { HooksContext } from '../types'
 import { ContextManager } from './createContextManager'
@@ -8,12 +8,18 @@ export type WithHooksOptions = {
   context?: HooksContext
 }
 
-export function createWithHooks({ createHooksContext, setCurrentContext }: ContextManager) {
-  return function withHooks<A extends any[], B>(
+export function createWithHooks({
+  createHooksContext,
+  setCurrentContext,
+  setParentContext,
+}: ContextManager) {
+  return function withHooks<A extends readonly any[], B>(
     fn: Fn<A, B>,
     { timer, context }: WithHooksOptions = {},
   ): Fn<A, B> & { readonly context: HooksContext } {
     const hooksContext = context || createHooksContext(wrappedInHooks, timer)
+
+    setParentContext(hooksContext)
 
     wrappedInHooks.context = hooksContext
 
@@ -26,7 +32,7 @@ export function createWithHooks({ createHooksContext, setCurrentContext }: Conte
       while (state.hasBeenUpdated) {
         resetId()
         state.hasBeenUpdated = state.shouldRerunHooks = false
-        state.returnValue = fn.apply(this, args)
+        state.returnValue = apply(args, fn)
       }
 
       dispose()

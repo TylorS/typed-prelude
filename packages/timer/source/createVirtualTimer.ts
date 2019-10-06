@@ -29,8 +29,8 @@ export function createVirtualTimer(clock: VirtualClock = createVirtualClock()): 
   return {
     ...clock,
     delay,
-    timePast: delay => {
-      clock.timePast(delay)
+    progressTimeBy: delay => {
+      clock.progressTimeBy(delay)
       runTasks()
     },
   }

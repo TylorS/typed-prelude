@@ -26,7 +26,7 @@ export class Timeline {
     const index = tasksAtTime.findIndex(x => x === f)
 
     if (index > -1) {
-      tasksAtTime.splice(index)
+      tasksAtTime.splice(index, 1)
     }
 
     if (tasksAtTime.length === 0) {

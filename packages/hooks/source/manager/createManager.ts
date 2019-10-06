@@ -7,7 +7,7 @@ import { createWithHooks } from './createWithHooks'
 
 export type HooksManager = ReturnType<typeof createManager>
 
-export function createManager(defaultTimer: Timer = createTimer()) {
+export function createManager<A extends Timer = Timer>(defaultTimer: A = createTimer() as A) {
   const state = createManagerState()
   const contextManager = createContextManager(state, defaultTimer)
   const channelManager = createChannelManager(state)

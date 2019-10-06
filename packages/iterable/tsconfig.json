@@ -23,6 +23,9 @@
     },
     {
       "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
     }
   ]
 }

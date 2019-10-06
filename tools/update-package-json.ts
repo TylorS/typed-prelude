@@ -20,6 +20,10 @@ for (const pkg of PACKAGES) {
   packageJSONData.module = './esm/index.js'
   packageJSONData.license = 'Parity-6.0.0'
   delete packageJSONData.type
+  delete packageJSONData.exports
+  packageJSONData.exports = {
+    '.': './esm/index.js',
+  }
   packageJSONData.types = './esm/index.d.ts'
   packageJSONData['main:ts'] = './source/index.ts'
   packageJSONData.publishConfig = {

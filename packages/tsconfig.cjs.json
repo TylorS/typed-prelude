@@ -25,6 +25,9 @@
       "path": "./hooks/tsconfig.cjs.json"
     },
     {
+      "path": "./hooks-extensions/tsconfig.cjs.json"
+    },
+    {
       "path": "./http/tsconfig.cjs.json"
     },
     {

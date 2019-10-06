@@ -26,12 +26,16 @@
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
     "@typed/lambda": "^1.0.5",
-    "@typed/logic": "^4.0.5"
+    "@typed/logic": "^4.0.5",
+    "@typed/maybe": "^8.0.5"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"
   },
   "sideEffects": false,
   "unpkg": "./umd/index.js",
-  "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae"
+  "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae",
+  "exports": {
+    ".": "./esm/index.js"
+  }
 }

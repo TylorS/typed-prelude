@@ -26,7 +26,7 @@ export const test = describe(`withHttpManagement`, [
 
       recordEvents(successRequest)
       recordEvents(failedRequest)
-      timer.timePast(1)
+      timer.progressTimeBy(1)
 
       equal([success, failed], original.getResponses())
       equal(expectedSuccessEvents, getEvents(successRequest))
@@ -34,7 +34,7 @@ export const test = describe(`withHttpManagement`, [
 
       recordEvents(successRequest)
       recordEvents(failedRequest)
-      timer.timePast(expiration + 1)
+      timer.progressTimeBy(expiration + 1)
 
       equal([success, failed, failed], original.getResponses())
       equal([...expectedSuccessEvents, success], getEvents(successRequest))
@@ -42,7 +42,7 @@ export const test = describe(`withHttpManagement`, [
 
       recordEvents(successRequest)
       recordEvents(failedRequest)
-      timer.timePast(1)
+      timer.progressTimeBy(1)
 
       equal([success, failed, failed, success, failed], original.getResponses())
       equal(
