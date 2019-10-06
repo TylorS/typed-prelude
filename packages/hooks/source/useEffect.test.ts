@@ -1,9 +1,9 @@
 import { describe, given, it } from '@typed/test'
-import { createTimer, createVirtualTimer } from '@typed/timer'
+import { createVirtualTimer } from '@typed/timer'
 import { createDefaultHooks } from './hooks'
 import { createManager } from './manager'
 
-const { withHooks, createHook } = createManager(createTimer())
+const { withHooks, createHook } = createManager()
 const { useEffect } = createDefaultHooks(createHook)
 
 export const test = describe(`useEffect`, [
