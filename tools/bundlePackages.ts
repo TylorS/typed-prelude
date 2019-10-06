@@ -49,7 +49,7 @@ async function bundlePackage(sourceDirectory: string, pkg: string, entry: string
 
   console.log(`Bundling @typed/${pkg}...`)
 
-  if (pkg === 'dom' || pkg === 'react') {
+  if (pkg === 'dom') {
     // Fix rollup resolving to file without exports
     // Rollup resolves to index.js instead of path defined by package.json main or module :/
     const conflictingPackages = await findConflictingNodeModules(directory)
@@ -59,7 +59,7 @@ async function bundlePackage(sourceDirectory: string, pkg: string, entry: string
       makeBundleInAnotherProcess({
         directory,
         entry,
-        external: [`basichtml`, `react`], // peer dependencies
+        external: [`basichtml`, `css-mediaquery`], // peer dependencies
       }),
     )
   } else {
