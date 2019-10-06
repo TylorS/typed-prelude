@@ -1,6 +1,6 @@
 {
   "name": "@typed/promises",
-  "version": "3.0.5",
+  "version": "4.0.0",
   "description": "Functions for working with promises",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^1.0.5"
+    "@typed/lambda": "^2.0.0"
   },
   "publishConfig": {
     "access": "public"

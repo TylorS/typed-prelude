@@ -1,6 +1,6 @@
 {
   "name": "@typed/iterable",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Comninators for iterables",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,9 +25,9 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^1.0.5",
-    "@typed/logic": "^4.0.5",
-    "@typed/maybe": "^8.0.5"
+    "@typed/lambda": "^2.0.0",
+    "@typed/logic": "^5.0.0",
+    "@typed/maybe": "^9.0.0"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"

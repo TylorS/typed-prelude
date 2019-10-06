@@ -1,6 +1,6 @@
 {
   "name": "@typed/dom",
-  "version": "1.2.2",
+  "version": "2.0.0",
   "description": "Typed extensions for the DOM",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -30,11 +30,11 @@
     "tslib": "^1.10.0"
   },
   "dependencies": {
-    "@typed/common": "^1.0.3",
-    "@typed/disposable": "^1.0.5",
-    "@typed/history": "^3.0.5",
-    "@typed/maybe": "^8.0.5",
-    "@typed/storage": "^1.0.5"
+    "@typed/common": "^2.0.0",
+    "@typed/disposable": "^2.0.0",
+    "@typed/history": "^4.0.0",
+    "@typed/maybe": "^9.0.0",
+    "@typed/storage": "^2.0.0"
   },
   "sideEffects": false,
   "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae",
