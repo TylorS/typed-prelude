@@ -1,4 +1,4 @@
-import { Timer } from '@typed/timer'
+import { createTimer, Timer } from '@typed/timer'
 import { CreateHook, CreateHookContext, HooksContext } from '../types'
 import { createChannelManager } from './createChannelManager'
 import { createContextManager } from './createContextManager'
@@ -7,7 +7,7 @@ import { createWithHooks } from './createWithHooks'
 
 export type HooksManager = ReturnType<typeof createManager>
 
-export function createManager<A extends Timer>(defaultTimer: A) {
+export function createManager<A extends Timer = Timer>(defaultTimer: A = createTimer() as A) {
   const state = createManagerState()
   const contextManager = createContextManager(state, defaultTimer)
   const channelManager = createChannelManager(state)
