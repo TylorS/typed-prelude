@@ -22,6 +22,12 @@
       "path": "../asynciterable/tsconfig.json"
     },
     {
+      "path": "../common/tsconfig.json"
+    },
+    {
+      "path": "../disposable/tsconfig.json"
+    },
+    {
       "path": "../dom/tsconfig.json"
     },
     {
@@ -83,6 +89,9 @@
     },
     {
       "path": "../subscription/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     },
     {
       "path": "../tuple/tsconfig.json"

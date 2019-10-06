@@ -57,5 +57,8 @@
     "@typed/timer": "^1.0.5",
     "@typed/tuple": "^1.0.5",
     "@typed/uuid": "^3.0.6"
+  },
+  "exports": {
+    ".": "./esm/index.js"
   }
 }

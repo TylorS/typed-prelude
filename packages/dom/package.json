@@ -26,6 +26,7 @@
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "peerDependencies": {
     "basichtml": "^1.1.1",
+    "css-mediaquery": "^0.1.2",
     "tslib": "^1.10.0"
   },
   "dependencies": {
@@ -40,5 +41,8 @@
   "unpkg": "./umd/index.js",
   "devDependencies": {
     "basichtml": "1.1.1"
+  },
+  "exports": {
+    ".": "./esm/index.js"
   }
 }
