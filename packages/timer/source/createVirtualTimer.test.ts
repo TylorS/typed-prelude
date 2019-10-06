@@ -19,11 +19,11 @@ export const test = describe(`createVirtualTimer`, [
         timer.delay(() => callback(2), 100)
         timer.delay(() => callback(3), 200)
 
-        timer.timePast(100)
+        timer.progressTimeBy(100)
 
         equal(1, expectedValues.length)
 
-        timer.timePast(100)
+        timer.progressTimeBy(100)
 
         equal(0, expectedValues.length)
       }),

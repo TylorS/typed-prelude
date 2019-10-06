@@ -15,8 +15,8 @@ export const test = describe(`createUseListOfHooks`, [
     const delay = 1000
 
     const next = () => {
-      timer.timePast(1) // run effects
-      timer.timePast(delay + 1) // wait on effects
+      timer.progressTimeBy(1) // run effects
+      timer.progressTimeBy(delay + 1) // wait on effects
     }
 
     const f = ({ id }: { id: number }) => {

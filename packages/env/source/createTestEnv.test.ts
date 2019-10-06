@@ -9,9 +9,9 @@ export const test = describe(`createTestEnv`, [
         const value = 1
         const pure = Pure.of(value)
         const { recordEvents, getAllEvents, timer } = createTestEnv()
-
         recordEvents(pure)
-        timer.timePast(1)
+
+        timer.progressTimeBy(1)
 
         const events = getAllEvents()
 
@@ -28,7 +28,7 @@ export const test = describe(`createTestEnv`, [
 
       recordEvents(one)
       recordEvents(two)
-      timer.timePast(1)
+      timer.progressTimeBy(1)
 
       const events = getAllEvents()
 
@@ -44,7 +44,7 @@ export const test = describe(`createTestEnv`, [
 
         recordEvents(one)
         recordEvents(two)
-        timer.timePast(1)
+        timer.progressTimeBy(1)
 
         equal([1], getEvents(one))
         equal([2], getEvents(two))

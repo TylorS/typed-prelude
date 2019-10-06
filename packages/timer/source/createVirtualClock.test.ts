@@ -25,7 +25,7 @@ export const test = describe(`createVirtualClock`, [
         const delay = 100
         const clock = createVirtualClock()
 
-        clock.timePast(delay)
+        clock.progressTimeBy(delay)
 
         equal(delay, clock.currentTime())
       }),

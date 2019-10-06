@@ -1,5 +1,5 @@
 import { describe, given, it } from '@typed/test'
-import { createDomEnv } from './dom'
+import { createDomEnv } from './createDomEnv'
 import { NodeIteratorImpl } from './NodeIterator'
 
 export const test = describe(`NodeIterator`, [

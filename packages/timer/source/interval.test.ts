@@ -13,9 +13,9 @@ export const test = describe(`interval`, [
       const timer = createVirtualTimer()
       const disposable = interval(test, delay, timer)
 
-      timer.timePast(delay)
-      timer.timePast(delay)
-      timer.timePast(delay)
+      timer.progressTimeBy(delay)
+      timer.progressTimeBy(delay)
+      timer.progressTimeBy(delay)
 
       equal(0, expected.length)
 
