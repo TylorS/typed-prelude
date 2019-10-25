@@ -18,7 +18,7 @@ export type Zero = NewType<number, 'Zero'>
 export const isZero = isNewType<Zero>((x: number) => x === 0)
 
 export type NonZero = NewType<number, 'NonZero'>
-export const isNonZero = isNewType<Zero>((x: number) => x !== 0)
+export const isNonZero = isNewType<NonZero>((x: number) => x !== 0)
 
 export type NonZeroInteger = Combine<NonZero, Integer>
 export const isNonZeroInteger = isNewType<NonZeroInteger>(and(isNonZero, isInteger))
@@ -27,7 +27,7 @@ export type Positive = NewType<number, 'Positive'>
 export const isPositive = isNewType<Positive>((x: number) => x > 0)
 
 export type Negative = NewType<number, 'Negative'>
-export const isNegative = isNewType<Positive>((x: number) => x < 0)
+export const isNegative = isNewType<Negative>((x: number) => x < 0)
 
 export type NonNegative = Zero | Positive
 export const isNonNegative = isNewType<NonNegative>(or(isZero, isPositive))
@@ -47,7 +47,7 @@ export const isNonNegativeInteger = isNewType<NonNegativeInteger>(
 )
 
 export type NonPositiveInteger = Zero | NegativeInteger
-export const isNonPositiveInteger = isNewType<NonNegativeInteger>(
+export const isNonPositiveInteger = isNewType<NonPositiveInteger>(
   or<number>(isZero, isNegativeInteger as any),
 )
 
