@@ -1,0 +1,41 @@
+{
+  "name": "@typed/json-rpc",
+  "version": "0.0.0",
+  "description": "JSON-RPC tools for TypeScript",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "JSON-RPC",
+    "TypeScript",
+    "Protocol-Agnostic"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "exports": {
+    ".": "./esm/index.js"
+  },
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@typed/disposable": "2.0.0",
+    "@typed/lambda": "2.0.0",
+    "@typed/logic": "5.0.0",
+    "@typed/subscription": "2.1.0"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false
+}
