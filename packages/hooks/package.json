@@ -35,8 +35,5 @@
   "peerDependencies": {
     "tslib": "^1.10.0"
   },
-  "sideEffects": false,
-  "exports": {
-    ".": "./esm/index.js"
-  }
+  "sideEffects": false
 }

@@ -42,8 +42,5 @@
   "devDependencies": {
     "basichtml": "1.1.1",
     "css-mediaquery": "0.1.2"
-  },
-  "exports": {
-    ".": "./esm/index.js"
   }
 }

@@ -34,8 +34,5 @@
   },
   "sideEffects": false,
   "unpkg": "./umd/index.js",
-  "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae",
-  "exports": {
-    ".": "./esm/index.js"
-  }
+  "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae"
 }
