@@ -16,38 +16,44 @@ export type StructuredType = ReadonlyArray<unknown> | Record<string, unknown>
 export type Batchable<A> = A | readonly A[]
 
 export type Notification<
-  Method extends string = string,
-  Params extends StructuredType | undefined = undefined
-> = Params extends undefined
-  ? {
-      readonly jsonrpc: JSON_RPC_VERSION
-      readonly method: Method
-    }
-  : {
-      readonly jsonrpc: JSON_RPC_VERSION
-      readonly method: Method
-      readonly params: Params
-    }
+  Method extends string,
+  Params extends StructuredType | undefined
+> = Params extends StructuredType
+  ? ParameterizedNotification<Method, Params>
+  : SimpleNotification<Method>
+
+export type SimpleNotification<Method extends string = string> = {
+  readonly jsonrpc: JSON_RPC_VERSION
+  readonly method: Method
+}
+
+export type ParameterizedNotification<Method extends string, Params extends StructuredType> = {
+  readonly jsonrpc: JSON_RPC_VERSION
+  readonly method: Method
+  readonly params: Params
+}
 
 export type Request<
-  Method extends string = string,
-  Params extends StructuredType | undefined = undefined
-> = Params extends undefined
-  ? {
-      readonly jsonrpc: JSON_RPC_VERSION
-      readonly method: Method
-      readonly id: Id
-    }
-  : {
-      readonly jsonrpc: JSON_RPC_VERSION
-      readonly method: Method
-      readonly params: Params
-      readonly id: Id
-    }
+  Method extends string,
+  Params extends StructuredType | undefined
+> = Params extends StructuredType ? ParameterizedRequest<Method, Params> : SimpleRequest<Method>
+
+export type SimpleRequest<Method extends string> = {
+  readonly jsonrpc: JSON_RPC_VERSION
+  readonly method: Method
+  readonly id: Id
+}
+
+export type ParameterizedRequest<Method extends string, Params extends StructuredType> = {
+  readonly jsonrpc: JSON_RPC_VERSION
+  readonly method: Method
+  readonly id: Id
+  readonly params: Params
+}
 
 export type ErrorData = StructuredType | Primitive
 
-export type Response<Result = any, Data extends ErrorData = undefined> =
+export type Response<Result, Data extends ErrorData> =
   | SuccessfulResponse<Result>
   | FailureResponse<Data>
 
@@ -60,10 +66,10 @@ export type SuccessfulResponse<Result = any> = {
 export type FailureResponse<Data extends ErrorData = undefined> = {
   readonly jsonrpc: JSON_RPC_VERSION
   readonly id: Id // used to correspond with a request
-  readonly error: ResponseError<Data>
+  readonly error: ErrorResponse<Data>
 }
 
-export type ResponseError<Data extends ErrorData = ErrorData> = Data extends undefined
+export type ErrorResponse<Data extends ErrorData = ErrorData> = Data extends undefined
   ? {
       readonly code: number // integer
       readonly message: string
@@ -74,13 +80,8 @@ export type ResponseError<Data extends ErrorData = ErrorData> = Data extends und
       readonly data: Data
     }
 
-export type NotificationMethod<A> = A extends Notification<infer R> ? R : never
+export type NotificationMethod<A> = A extends Notification<infer R, any> ? R : never
 export type NotificationParams<A> = A extends Notification<any, infer R> ? R : never
 
 export type ResponseResult<A> = A extends SuccessfulResponse<infer R> ? R : never
-
-export type ResponseErrorData<A> = A extends ResponseError<infer R>
-  ? A extends Response<any, infer R>
-    ? R
-    : R
-  : never
+export type ResponseErrorData<A> = A extends FailureResponse<infer R> ? R : never

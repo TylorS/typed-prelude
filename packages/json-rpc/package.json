@@ -20,9 +20,6 @@
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "unpkg": "./umd/index.js",
   "module": "./esm/index.js",
-  "exports": {
-    ".": "./esm/index.js"
-  },
   "types": "./esm/index.d.ts",
   "main:ts": "./source/index.ts",
   "publishConfig": {
@@ -30,9 +27,12 @@
   },
   "dependencies": {
     "@typed/disposable": "2.0.0",
+    "@typed/either": "^6.0.0",
     "@typed/lambda": "2.0.0",
-    "@typed/logic": "5.0.0",
-    "@typed/subscription": "2.1.0"
+    "@typed/logic": "^5.0.0",
+    "@typed/maybe": "^9.0.0",
+    "@typed/subscription": "2.1.0",
+    "@typed/uuid": "^4.0.1"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"

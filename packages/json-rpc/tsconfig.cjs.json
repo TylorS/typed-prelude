@@ -16,5 +16,28 @@
     "./source/**/*.browser-test.ts",
     "./source/**/*.test.ts",
     "./umd/**"
+  ],
+  "references": [
+    {
+      "path": "../disposable/tsconfig.json"
+    },
+    {
+      "path": "../either/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../subscription/tsconfig.json"
+    },
+    {
+      "path": "../uuid/tsconfig.json"
+    }
   ]
 }
