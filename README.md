@@ -1,4 +1,4 @@
-# Typed [![CircleCI](https://circleci.com/gh/TylorS/typed-prelude/tree/master.svg?style=svg)](https://circleci.com/gh/TylorS/typed-prelude/tree/master) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
+# Typed [![CircleCI](https://circleci.com/gh/TylorS/typed-prelude/tree/master.svg?style=svg)](https://circleci.com/gh/TylorS/typed-prelude/tree/master) [![Total alerts](https://img.shields.io/lgtm/alerts/g/TylorS/typed-prelude.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TylorS/typed-prelude/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/TylorS/typed-prelude.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TylorS/typed-prelude/context:javascript) [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 
 > Reliable, Standards-oriented software for browsers & Node. Designed for TypeScript and progressive web applications.
