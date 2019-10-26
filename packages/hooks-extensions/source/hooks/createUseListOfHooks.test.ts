@@ -26,7 +26,6 @@ export const test = describe(`createUseListOfHooks`, [
         () =>
           interval(
             () => {
-              console.log('interval')
               setState(x => x + 1)
             },
             delay,
