@@ -59,4 +59,4 @@ workflows:
   test-node:
     jobs:
       - test-lts
-      # - test-latest
+      - test-latest

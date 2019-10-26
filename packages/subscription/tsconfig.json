@@ -26,6 +26,9 @@
     },
     {
       "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }

@@ -5,7 +5,7 @@
   "version": "independent",
   "command": {
     "publish": {
-      "ignoreChanges": ["*.md", "*.test.ts", "*.browser-test.ts"]
+      "ignoreChanges": ["*.md", "*.test.ts", "*.browser-test.ts", "package.json", "package-lock.json"]
     },
     "init": {
       "exact": true
