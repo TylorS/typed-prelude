@@ -3,6 +3,7 @@ import { Either } from '@typed/either'
 import { Arity1, HeadArg } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 import {
+  Batchable,
   ErrorResponse,
   FailureResponse,
   Id,
@@ -52,8 +53,8 @@ export type Connection = {
 }
 
 export interface MessageContext {
-  readonly incoming: Subscription<Message>
-  readonly outgoing: Subscription<Message>
+  readonly incoming: Subscription<Batchable<Message>>
+  readonly outgoing: Subscription<Batchable<Message>>
 }
 
 export type RequestHandlers<A extends string> = {

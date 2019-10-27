@@ -1,4 +1,4 @@
-import { Id, Message, Notification, Request, Response } from './json-rpc'
+import { Batchable, Id, Message, Notification, Request, Response } from './json-rpc'
 
 export function isRequest(message: Message): message is Request<any, any> {
   return !!message && message.hasOwnProperty('id')
@@ -13,4 +13,10 @@ export function isResponse<A extends Response<any, any>>(id: Id, message: Messag
 
 export function isNotification(message: Message): message is Notification<any, any> {
   return !isRequest(message)
+}
+
+export function isBatchable(
+  message: Batchable<Message>,
+): message is ReadonlyArray<Request<string, any>> {
+  return Array.isArray(message)
 }
