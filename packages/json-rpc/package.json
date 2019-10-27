@@ -1,6 +1,6 @@
 {
   "name": "@typed/json-rpc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "JSON-RPC tools for TypeScript",
   "main": "./cjs/index.js",
   "repository": {
