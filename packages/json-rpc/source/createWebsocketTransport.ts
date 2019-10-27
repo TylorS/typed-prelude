@@ -1,5 +1,6 @@
 import { isBrowser } from '@typed/common'
 import { Disposable } from '@typed/disposable'
+import { noOp } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 import { createUuid } from '@typed/uuid'
 import { disposeAll } from '../../disposable/umd'
@@ -27,11 +28,13 @@ export async function createClientWebsocketTransport({
 
 export type CreateWebsocketServerTransportOptions = {
   readonly serverOptions: import('ws').ServerOptions
+  readonly brokenConnectionCheckDelayMs?: number
 }
 
-// Only supports Node
+// Only supports Node, can manage many connections
 export function createWebsocketServerTransport({
   serverOptions,
+  brokenConnectionCheckDelayMs = 30 * 1000,
 }: CreateWebsocketServerTransportOptions): JsonRpcTransport {
   const ws = require('ws')
 
@@ -44,7 +47,20 @@ export function createWebsocketServerTransport({
         disposables.push(wrapWebsocketConnect(socket as any, connections)),
       )
 
-      return Disposable.lazy(() => disposeAll(disposables))
+      const interval = setInterval(function ping() {
+        server.clients.forEach((ws: any) => {
+          if (ws.isAlive === false) {
+            return ws.close()
+          }
+
+          ws.isAlive = false
+          ws.ping(noOp)
+        })
+      }, brokenConnectionCheckDelayMs)
+
+      disposables.push({ dispose: () => clearInterval(interval) })
+
+      return disposeAll(disposables)
     },
   }
 }
@@ -65,6 +81,13 @@ function wrapWebsocketConnect(ws: WebSocket, connections: Subscription<Connectio
   const dispose = () => {
     ws.close(-1, 'Disposed')
     cleanup()
+  }
+
+  // Support polling for broken connections on Node
+  if ((ws as any).on) {
+    ;(ws as any).on('pong', function(this: any) {
+      this.isAlive = true
+    })
   }
 
   ws.onopen = () => {

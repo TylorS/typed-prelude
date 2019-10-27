@@ -1,29 +1,37 @@
-import { createResponseError } from './creators'
+import { createResponse, createResponseError } from './creators'
 import { ErrorCodes } from './error-codes'
 import { hasValidParams } from './hasValidParams'
 import { isFailure } from './isFailure'
 import {
   JsonRpcHandler,
+  JsonRpcStats,
   NotificationHandlers,
   NotificationsFrom,
   RequestHandlers,
   ResponseFor,
 } from './types'
 
+export const RPC_STATS_METHOD = 'rpc.stats'
+export type RPC_STATS_METHOD = typeof RPC_STATS_METHOD
+
 export function createJsonRpcHandler<
   Methods extends Exclude<keyof A, number | PropertyKey>,
   A extends RequestHandlers<Methods>,
   B extends NotificationHandlers
 >(requestHandlers: A, notificationHandlers: B): JsonRpcHandler<A, B> {
-  const sendRequest = createSendRequest(requestHandlers)
-  const sendNotification = <A extends NotificationsFrom<B>>(notification: A) =>
-    notificationHandlers[notification.method](notification)
-
   const stats = {
     openRequestCount: 0,
     requestCount: 0,
     failureResponseCount: 0,
     notificationCount: 0,
+  }
+  const sendRequest = createSendRequest(requestHandlers, stats)
+  const sendNotification = <A extends NotificationsFrom<B>>(notification: A) => {
+    const { method } = notification
+
+    if (method in notificationHandlers) {
+      notificationHandlers[method](notification)
+    }
   }
 
   return {
@@ -53,8 +61,12 @@ export function createJsonRpcHandler<
 function createSendRequest<
   Methods extends Exclude<keyof A, number | PropertyKey>,
   A extends RequestHandlers<Methods>
->(requestHandlers: A) {
+>(requestHandlers: A, stats: JsonRpcStats) {
   return async <R extends NotificationsFrom<A>>(request: R): Promise<ResponseFor<A, R>> => {
+    if (request.method === RPC_STATS_METHOD) {
+      return createResponse(request, stats) as ResponseFor<A, R>
+    }
+
     try {
       hasValidParams(request)
 
