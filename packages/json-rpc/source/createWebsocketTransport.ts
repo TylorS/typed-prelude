@@ -1,9 +1,8 @@
 import { isBrowser } from '@typed/common'
-import { Disposable } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { noOp } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 import { createUuid } from '@typed/uuid'
-import { disposeAll } from '../../disposable/umd'
 import { createMessageContext } from './createMessageContext'
 import { Connection, ConnectionEvent, JsonRpcTransport } from './types'
 
