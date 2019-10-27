@@ -30,12 +30,16 @@ export function createNotification<A extends Notification<string, any>>(
   ...args: NotificationArgs<A>
 ): A {
   const [method, params] = args
-
-  return {
+  const notification = {
     jsonrpc: JSON_RPC_VERSION,
     method,
-    params,
-  } as any // TS cannot properly infer this type as correct
+  } as A
+
+  if (params) {
+    ;(notification as any).params = params
+  }
+
+  return notification as A // TS cannot properly infer this type as correct
 }
 
 export function createRequest<A extends string, B extends StructuredType>(

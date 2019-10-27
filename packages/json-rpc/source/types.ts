@@ -1,9 +1,11 @@
+import { Disposable } from '@typed/disposable'
 import { Either } from '@typed/either'
 import { Arity1, HeadArg } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
 import {
   ErrorResponse,
   FailureResponse,
+  Id,
   Message,
   Notification,
   Request,
@@ -12,7 +14,10 @@ import {
   ResponseResult,
 } from './json-rpc'
 
-export type JsonRpcHandler<A extends RequestHandlers<any>, B extends NotificationHandlers> = {
+export type JsonRpcHandler<
+  A extends RequestHandlers<any> = RequestHandlers<any>,
+  B extends NotificationHandlers = NotificationHandlers
+> = {
   readonly stats: JsonRpcStats
   readonly sendRequest: <R extends NotificationsFrom<A> = NotificationsFrom<A>>(
     request: R,
@@ -27,6 +32,23 @@ export type JsonRpcStats = {
   readonly requestCount: number
   readonly failureResponseCount: number
   readonly notificationCount: number
+}
+
+export type JsonRpcTransport = {
+  readonly init: (options: JsonRpcTransportOptions) => Disposable
+}
+
+export type JsonRpcTransportOptions = {
+  readonly connections: Subscription<ConnectionEvent>
+}
+
+export type ConnectionEvent =
+  | { readonly type: 'add'; readonly connection: Connection }
+  | { readonly type: 'remove'; readonly connection: Connection }
+
+export type Connection = {
+  readonly id: Id
+  readonly context: MessageContext
 }
 
 export interface MessageContext {

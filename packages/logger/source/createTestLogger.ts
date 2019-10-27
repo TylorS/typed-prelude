@@ -4,13 +4,13 @@ import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
 
 export type CreateTestLoggerOptions = {
-  logLevel: LogLevel
-  clock: Clock
+  readonly logLevel: LogLevel
+  readonly clock: Clock
 }
 
 export type TestLogger = {
-  logger: Logger
-  getLogs: () => Logs
+  readonly logger: Logger
+  readonly getLogs: () => Logs
 }
 
 export type Logs = ReadonlyArray<Log>
