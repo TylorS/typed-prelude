@@ -3,8 +3,8 @@ import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
 
 export type CreateConsoleLoggerOptions = {
-  logLevel: LogLevel
-  clock: Clock
+  readonly logLevel: LogLevel
+  readonly clock: Clock
 }
 
 /**
