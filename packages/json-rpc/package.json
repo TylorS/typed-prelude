@@ -42,7 +42,7 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "@types/ws": "^6.0.3",
-    "stdio-mock": "^1.1.0"
+    "@types/ws": "6.0.3",
+    "stdio-mock": "1.1.0"
   }
 }
