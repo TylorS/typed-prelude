@@ -1,38 +1,40 @@
 import { Disposable } from '@typed/disposable'
-import { isBatchable, isNotification, isRequest } from './is'
+import { isBatchableRequest, isNotification, isRequest } from './is'
 import { Message, Notification, Request } from './json-rpc'
-import { JsonRpcHandler, MessageContext } from './types'
+import { JsonRpcMessageSender, JsonRpcNotificationHandler, JsonRpcRequestHandler } from './types'
 
 export type CreateJsonRpcHandlerConnectionOptions = {
-  readonly handler: JsonRpcHandler
-  readonly context: MessageContext
+  readonly requestHandler: JsonRpcRequestHandler
+  readonly notificationHandler: JsonRpcNotificationHandler
+  readonly sender: JsonRpcMessageSender
   readonly batchResponses?: boolean
 }
 
 export function createJsonRpcHandlerConnection({
-  handler,
-  context,
+  requestHandler,
+  notificationHandler,
+  sender,
   batchResponses = true,
 }: CreateJsonRpcHandlerConnectionOptions): Disposable {
-  const { incoming, outgoing } = context
+  const { incoming } = sender.context
 
   return incoming.subscribe(async message => {
-    if (isBatchable(message)) {
-      const promises = message.map(msg => handler.sendRequest(msg))
+    if (isBatchableRequest(message)) {
+      const promises = message.map(msg => requestHandler.handleRequest(msg))
 
       if (batchResponses) {
-        return outgoing.publish(await Promise.all(promises))
+        return sender.sendResponse(await Promise.all(promises))
       }
 
-      return promises.map(p => p.then(outgoing.publish))
+      return promises.forEach(p => p.then(sender.sendResponse))
     }
 
     if (isRequest(message as Message)) {
-      return outgoing.publish(await handler.sendRequest(message as Request<any, any>))
+      return sender.sendResponse(await requestHandler.handleRequest(message as Request<any, any>))
     }
 
     if (isNotification(message as Message)) {
-      return handler.sendNotification(message as Notification<any, any>)
+      return notificationHandler.handleNotification(message as Notification<any, any>)
     }
   })
 }
