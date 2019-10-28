@@ -1,28 +1,20 @@
-import { always, pipe } from '@typed/lambda'
-import { unwrap } from '@typed/maybe'
-import { getNotificationParams } from './getNotificationParams'
-import { Notification, NotificationParams, ParameterizedNotification } from './json-rpc'
+import { JsonRpcNotificationHandler, NotificationHandlers, NotificationsFrom } from './types'
 
-export type NotificationHandler<
-  A extends Notification<string, any>
-> = A extends ParameterizedNotification<string, any>
-  ? (params: NotificationParams<A>) => void
-  : () => void
+export function createNotificationHandler<A extends NotificationHandlers>(
+  handlers: A,
+): JsonRpcNotificationHandler<A> {
+  const stats = {
+    notificationCount: 0,
+  }
 
-export function createNotificationHandler<A extends Notification<string, any>>(
-  fn: NotificationHandler<A>,
-) {
-  return (notification: A) => {
-    const hasParams = unwrap(
-      pipe(
-        fn,
-        always(true),
-      ),
-      getNotificationParams(notification),
-    )
+  return {
+    stats,
+    handleNotification: <R extends NotificationsFrom<A>>(notification: R) => {
+      stats.notificationCount++
 
-    if (!hasParams) {
-      ;(fn as () => void)()
-    }
+      if (notification.method in handlers) {
+        handlers[notification.method](notification)
+      }
+    },
   }
 }
