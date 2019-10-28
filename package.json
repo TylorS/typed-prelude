@@ -12,7 +12,8 @@
     "clean": " npm run clean:cjs && npm run clean:esm && npm run clean:umd && lerna exec rimraf node_modules",
     "update:package": "ts-node tools/update-package-json",
     "update:tsconfig": "ts-node tools/update-tsconfig-json",
-    "update": "npm run update:package && npm run update:tsconfig && lerna bootstrap",
+    "update:code-workspace": "ts-node tools/update-code-workspace",
+    "update": "npm run update:package && npm run update:tsconfig && lerna bootstrap --hoist",
     "postinstall": "npm run update",
     "build:cjs": "tsc --build packages/tsconfig.cjs.json",
     "build:esm": "tsc --build packages/tsconfig.json",
@@ -22,7 +23,7 @@
     "watch": "npm run build:cjs -- --watch & npm run build:esm -- --watch",
     "lint": "tslint -p tsconfig.json --fix",
     "test": "typed-test && npm run lint",
-    "test:ci": "lerna bootstrap && npm run build && npm run test",
+    "test:ci": "lerna bootstrap --hoist && npm run build && npm run test",
     "release": "npm run test:ci && lerna publish --verify-access",
     "release:beta": "npm run release -- --canary --preid beta --dist-tag beta",
     "release:alpha": "npm run release -- --canary --preid alpha --dist-tag alpha"

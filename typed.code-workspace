@@ -1,0 +1,132 @@
+{
+  "folders": [
+    {
+      "name": "Typed Prelude",
+      "path": "./"
+    },
+    {
+      "name": "Asynciterable",
+      "path": "./packages/asynciterable"
+    },
+    {
+      "name": "Common",
+      "path": "./packages/common"
+    },
+    {
+      "name": "Disposable",
+      "path": "./packages/disposable"
+    },
+    {
+      "name": "Dom",
+      "path": "./packages/dom"
+    },
+    {
+      "name": "Either",
+      "path": "./packages/either"
+    },
+    {
+      "name": "Env",
+      "path": "./packages/env"
+    },
+    {
+      "name": "History",
+      "path": "./packages/history"
+    },
+    {
+      "name": "Hooks",
+      "path": "./packages/hooks"
+    },
+    {
+      "name": "Hooks Extensions",
+      "path": "./packages/hooks-extensions"
+    },
+    {
+      "name": "Http",
+      "path": "./packages/http"
+    },
+    {
+      "name": "Iterable",
+      "path": "./packages/iterable"
+    },
+    {
+      "name": "Json Rpc",
+      "path": "./packages/json-rpc"
+    },
+    {
+      "name": "Lambda",
+      "path": "./packages/lambda"
+    },
+    {
+      "name": "List",
+      "path": "./packages/list"
+    },
+    {
+      "name": "Logger",
+      "path": "./packages/logger"
+    },
+    {
+      "name": "Logic",
+      "path": "./packages/logic"
+    },
+    {
+      "name": "Map",
+      "path": "./packages/map"
+    },
+    {
+      "name": "Math",
+      "path": "./packages/math"
+    },
+    {
+      "name": "Maybe",
+      "path": "./packages/maybe"
+    },
+    {
+      "name": "New Type",
+      "path": "./packages/new-type"
+    },
+    {
+      "name": "Objects",
+      "path": "./packages/objects"
+    },
+    {
+      "name": "Promises",
+      "path": "./packages/promises"
+    },
+    {
+      "name": "Remote Data",
+      "path": "./packages/remote-data"
+    },
+    {
+      "name": "Routing",
+      "path": "./packages/routing"
+    },
+    {
+      "name": "Set",
+      "path": "./packages/set"
+    },
+    {
+      "name": "Storage",
+      "path": "./packages/storage"
+    },
+    {
+      "name": "Strings",
+      "path": "./packages/strings"
+    },
+    {
+      "name": "Subscription",
+      "path": "./packages/subscription"
+    },
+    {
+      "name": "Timer",
+      "path": "./packages/timer"
+    },
+    {
+      "name": "Tuple",
+      "path": "./packages/tuple"
+    },
+    {
+      "name": "Uuid",
+      "path": "./packages/uuid"
+    }
+  ]
+}
