@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks-extensions",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Typed Extensions to @typed/hooks",
   "main": "./cjs/index.js",
   "repository": {
@@ -33,7 +33,7 @@
     "@typed/asynciterable": "^2.0.0",
     "@typed/common": "^2.0.0",
     "@typed/disposable": "^2.0.0",
-    "@typed/dom": "^2.0.3",
+    "@typed/dom": "^2.0.4",
     "@typed/either": "^6.0.0",
     "@typed/env": "^2.0.0",
     "@typed/history": "^4.0.3",
