@@ -30,7 +30,7 @@ export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
   const localStorage = serverStorage(options.localStorage)
   const sessionStorage = serverStorage(options.sessionStorage)
   const customElements = options.customElements || new basic.CustomElementRegistry()
-  const window = (options.window || (global as any)) as Window
+  const window = (options.window || ({} as any)) as Window
   const document = new basic.Document(customElements)
 
   if (options.innerHeight !== void 0) {
@@ -83,6 +83,8 @@ export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
     CustomEvent: basic.CustomEvent,
     Image: (NodeImage as any) as typeof Image,
   }
+
+  Object.keys(domEnv).forEach(key => ((window as any)[key] = domEnv[key as keyof DomEnv<A>]))
 
   if (options.setGlobals) {
     const win = global as any
