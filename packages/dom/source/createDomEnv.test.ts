@@ -20,8 +20,6 @@ export const test = describe(`createDomEnv`, [
 
     customElements.define('my-element', MyElement)
 
-    same<any>(window, global)
-
     const myElement = document.createElement('my-element')
 
     equal(`<my-element>${innerHtml}</my-element>`, myElement.outerHTML)
