@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks-extensions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Typed Extensions to @typed/hooks",
   "main": "./cjs/index.js",
   "repository": {
@@ -38,7 +38,7 @@
     "@typed/env": "^2.0.0",
     "@typed/history": "^4.0.3",
     "@typed/hooks": "^2.0.2",
-    "@typed/http": "^2.0.0",
+    "@typed/http": "^2.1.0",
     "@typed/iterable": "^2.0.0",
     "@typed/lambda": "^2.0.0",
     "@typed/list": "^5.0.0",
