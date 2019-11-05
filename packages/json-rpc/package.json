@@ -1,6 +1,6 @@
 {
   "name": "@typed/json-rpc",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "JSON-RPC tools for TypeScript",
   "main": "./cjs/index.js",
   "repository": {
@@ -30,11 +30,11 @@
     "@typed/disposable": "^2.0.0",
     "@typed/either": "^6.0.0",
     "@typed/lambda": "2.0.0",
-    "@typed/list": "5.0.0",
-    "@typed/logic": "^5.0.0",
+    "@typed/list": "^5.0.1",
+    "@typed/logic": "^5.0.1",
     "@typed/maybe": "^9.0.0",
-    "@typed/subscription": "^2.1.1",
-    "@typed/uuid": "^4.0.1",
+    "@typed/subscription": "^2.1.2",
+    "@typed/uuid": "^4.0.2",
     "@types/ws": "^6.0.3",
     "ws": "^7.2.0"
   },

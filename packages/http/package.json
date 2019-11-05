@@ -1,6 +1,6 @@
 {
   "name": "@typed/http",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "HTTP requests for node and browsers",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -23,12 +23,12 @@
     "@typed/common": "^2.0.0",
     "@typed/disposable": "^2.0.0",
     "@typed/either": "^6.0.0",
-    "@typed/env": "^2.0.0",
+    "@typed/env": "^2.0.1",
     "@typed/lambda": "^2.0.0",
     "@typed/maybe": "^9.0.0",
     "@typed/objects": "^5.0.0",
     "@typed/remote-data": "^2.0.0",
-    "@typed/timer": "^2.0.0"
+    "@typed/timer": "^2.0.1"
   },
   "publishConfig": {
     "access": "public"

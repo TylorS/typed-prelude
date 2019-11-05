@@ -1,6 +1,6 @@
 {
   "name": "@typed/list",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Common functions for working with arrays and array-like values",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -26,7 +26,7 @@
   "dependencies": {
     "@typed/common": "^2.0.0",
     "@typed/lambda": "^2.0.0",
-    "@typed/logic": "^5.0.0",
+    "@typed/logic": "^5.0.1",
     "@typed/math": "^5.0.0",
     "@typed/maybe": "^9.0.0",
     "@typed/tuple": "^2.0.0"

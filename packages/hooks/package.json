@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Hooks for TypeScript",
   "main": "./cjs/index.js",
   "repository": {
@@ -21,9 +21,9 @@
   "dependencies": {
     "@typed/disposable": "^2.0.0",
     "@typed/lambda": "^2.0.0",
-    "@typed/logic": "^5.0.0",
-    "@typed/subscription": "^2.1.1",
-    "@typed/timer": "^2.0.0"
+    "@typed/logic": "^5.0.1",
+    "@typed/subscription": "^2.1.2",
+    "@typed/timer": "^2.0.1"
   },
   "unpkg": "./umd/index.js",
   "module": "./esm/index.js",
