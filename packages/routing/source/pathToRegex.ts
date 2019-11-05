@@ -1,5 +1,5 @@
-const rePartsMatcher = /\.\w+|\.\:\w+|\/+\w+|\/\:\w+({.+?})?|\:\w+({.+?})?|\(.+?\)/g
-const rePartMatcher = /\:?\w+|{.+?}/g
+const rePartsMatcher = /\.(\w|-)+|\.\:(\w|-)+|\/+(\w|-)+|\/\:(\w|-)+({.+?})?|\:(\w|-)+({.+?})?|\(.+?\)/g
+const rePartMatcher = /\:?(\w|-)+|{.+?}/g
 const OPTIONAL_REGEX = /^(\/)?\?/
 
 // Adapted from https://github.com/nathanfaucett/js-path_to_regexp

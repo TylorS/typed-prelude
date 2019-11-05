@@ -1,5 +1,5 @@
 import { Path } from '@typed/history'
-import { isJust, isNothing, withDefault } from '@typed/maybe'
+import { fromJust, isJust, isNothing, unwrap, withDefault } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
 import { createRoute } from './createRoute'
 
@@ -26,6 +26,13 @@ export const test: Test = describe(`createRoute`, [
 
         ok(isJust(route.match(pathname)))
       }),
+
+      it(`matches a path with hyphens`, ({ ok }) => {
+        const route = createRoute('/:storeNickname/shop-by-brand')
+        const pathname = '/tricities/shop-by-brand' as Path
+
+        ok(isJust(route.match(pathname)))
+      }),
     ]),
   ]),
 
@@ -44,6 +51,19 @@ export const test: Test = describe(`createRoute`, [
       const url = '/hello/42' as Path
 
       ok(isNothing(route.match(url)))
+    }),
+  ]),
+
+  describe(`Route.createPath`, [
+    it(`creates a path with hyphens`, ({ ok, equal }) => {
+      const route = createRoute<{ storeNickname: string }>('/:storeNickname/shop-by-brand')
+      const storeNickname = 'tricities'
+      const expected = `/${storeNickname}/shop-by-brand` as Path
+      const params = { storeNickname }
+      const actual = route.createPath(params)
+
+      ok(isJust(actual))
+      unwrap(equal(expected), actual)
     }),
   ]),
 ])

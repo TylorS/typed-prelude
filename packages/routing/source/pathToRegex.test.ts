@@ -19,4 +19,21 @@ export const test: Test = describe(`pathToRegex`, [
       )
     }),
   ]),
+
+  given(`a path with hyphens`, [
+    it(`returns a Regular Expression and Params`, ({ equal }) => {
+      const path = '/:storeNickname/shop-by-brand'
+      const url = '/tricities/shop-by-brand'
+
+      const { regex, params } = pathToRegex(path)
+
+      const match = regex.exec(url) as RegExpExecArray
+
+      equal(url, match.input)
+      equal(
+        [{ name: 'storeNickname', pattern: new RegExp('[a-zA-Z0-9-_]+'), required: true, part: 0 }],
+        params,
+      )
+    }),
+  ]),
 ])
