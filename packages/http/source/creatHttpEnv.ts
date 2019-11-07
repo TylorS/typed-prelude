@@ -29,35 +29,50 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
   const protocol = IS_HTTPS.test(url) ? 'https:' : 'http:'
   const http = protocol === 'https:' ? require('https') : require('http')
 
-  const request = http.request(url, { method, headers, protocol }, (response: IncomingMessage) => {
-    const data: string[] = []
+  const request = http.request(
+    url,
+    { method, headers: { 'Accept-Encoding': 'br,gzip,deflate', ...headers }, protocol },
+    (response: IncomingMessage) => {
+      const data: string[] = []
 
-    if (onStart) {
-      onStart()
-    }
-
-    response.setEncoding('utf8')
-    response.on('data', chunk => data.push(chunk.toString()))
-    response.on('error', failure)
-    response.on('close', () => {
-      const headersMap: Record<string, string | undefined> = {}
-
-      for (const header in response.headers) {
-        if (hasOwnProperty(header, response.headers)) {
-          const value = response.headers[header]
-
-          headersMap[header] = Array.isArray(value) ? value.join(': ') : value
-        }
+      if (onStart) {
+        onStart()
       }
 
-      success({
-        responseText: data.join(''),
-        status: response.statusCode!,
-        statusText: response.statusMessage!,
-        headers: headersMap,
+      switch (response.headers['content-encoding']) {
+        case 'br':
+          response = response.pipe(require('zlib').createBrotliDecompress())
+          break
+        case 'gzip':
+          response = response.pipe(require('zlib').createGunzip())
+          break
+        case 'deflate':
+          response = response.pipe(require('zlib').createInflate())
+          break
+      }
+
+      response.on('data', chunk => data.push(chunk.toString()))
+      response.on('error', failure)
+      response.on('close', () => {
+        const headersMap: Record<string, string | undefined> = {}
+
+        for (const header in response.headers) {
+          if (hasOwnProperty(header, response.headers)) {
+            const value = response.headers[header]
+
+            headersMap[header] = Array.isArray(value) ? value.join(': ') : value
+          }
+        }
+
+        success({
+          responseText: data.join(''),
+          status: response.statusCode!,
+          statusText: response.statusMessage!,
+          headers: headersMap,
+        })
       })
-    })
-  })
+    },
+  )
 
   if (body) {
     request.write(body)

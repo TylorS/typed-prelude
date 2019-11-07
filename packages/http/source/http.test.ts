@@ -1,5 +1,4 @@
 import { Disposable } from '@typed/disposable'
-import { Right } from '@typed/either'
 import { collectEvents, handle } from '@typed/env'
 import { Loading, RemoteData } from '@typed/remote-data'
 import { describe, given, it } from '@typed/test'
