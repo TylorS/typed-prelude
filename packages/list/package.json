@@ -1,6 +1,6 @@
 {
   "name": "@typed/list",
-  "version": "5.0.1",
+  "version": "5.1.0",
   "description": "Common functions for working with arrays and array-like values",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@typed/map",
-  "version": "3.0.1",
+  "version": "3.1.0",
   "description": "Combinators for working with ReadonlyMap",
   "main": "./cjs/index.js",
   "repository": {
