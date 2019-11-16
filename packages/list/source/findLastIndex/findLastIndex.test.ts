@@ -10,7 +10,13 @@ export const test: Test = describe(`findLast`, [
     }),
 
     it(`returns a Maybe.of(value) when found`, ({ equal }) => {
-      equal(1, withDefault(null, findLastIndex(x => x === 2, [1, 2, 3])))
+      equal(
+        1,
+        withDefault(
+          null,
+          findLastIndex(x => x === 2, [1, 2, 3]),
+        ),
+      )
     }),
   ]),
 ])

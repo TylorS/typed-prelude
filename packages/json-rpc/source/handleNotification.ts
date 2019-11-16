@@ -10,10 +10,7 @@ export function handleNotification<A extends Notification<string, any>>(
     ? (params: NotificationParams<A>) => void
     : () => void,
 ) {
-  const callFn = pipe(
-    fn,
-    toTrue,
-  )
+  const callFn = pipe(fn, toTrue)
 
   return (notification: A) => {
     if (!unwrap(callFn, getNotificationParams(notification))) {

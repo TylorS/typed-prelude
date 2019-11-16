@@ -24,13 +24,7 @@ export function createUseUndoRedo<A>(context: CreateHookContext, value: A) {
       ] as const,
     ([useList, useState, useEffect, useMemo], value: A) => {
       const [history, { append }] = useList<A>(() => [value])
-      const maxLength = useMemo(
-        pipe(
-          length,
-          decrement,
-        ),
-        [history],
-      )
+      const maxLength = useMemo(pipe(length, decrement), [history])
       const [index, setIndex] = useState<number>(0)
       const [firstRun, setFirstRun] = useState(true)
       const currentValue = history[index]

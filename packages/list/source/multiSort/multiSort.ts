@@ -45,14 +45,11 @@ export const multiSortWithOrder: {
   const initialObject = groupBy(sortFns[0], list)
   const initialKeys = Object.keys(initialObject).sort(sort(id))
   const innerSortFns = sortFns.slice(1)
-  const result = initialKeys.reduce(
-    (acc, key) => {
-      acc[key] = multiSortWithOrder(order, innerSortFns, initialObject[key])
+  const result = initialKeys.reduce((acc, key) => {
+    acc[key] = multiSortWithOrder(order, innerSortFns, initialObject[key])
 
-      return acc
-    },
-    {} as Record<string, A[]>,
-  )
+    return acc
+  }, {} as Record<string, A[]>)
 
   return chain(x => result[x], initialKeys)
 })

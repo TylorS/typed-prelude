@@ -88,10 +88,5 @@ function removeByKey<A, B>(key: A) {
 }
 
 function findKeyValueIndex<A, B>(key: A, keyValues: ReadonlyArray<Tuple<A, B>>) {
-  return keyValues.findIndex(
-    pipe(
-      first,
-      equals(key),
-    ),
-  )
+  return keyValues.findIndex(pipe(first, equals(key)))
 }

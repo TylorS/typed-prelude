@@ -93,10 +93,7 @@ function __withHttpManagement(options: WithHttpManagementOptions, env: HttpEnv):
 
     return env.http(url, options, {
       ...callbacks,
-      success: pipe(
-        cacheResponseByKey(key),
-        success,
-      ),
+      success: pipe(cacheResponseByKey(key), success),
     })
   }
 

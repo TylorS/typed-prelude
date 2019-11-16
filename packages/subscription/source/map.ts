@@ -11,12 +11,7 @@ import { Subscriber, Subscription } from './Subscription'
 export const map = curry(
   <A, B, C>(fn: Arity1<B, C>, subscription: Subscription<A, B>): Subscription<A, C> => {
     const subscribe = (subscriber: Subscriber<C>): Disposable =>
-      subscription.subscribe(
-        pipe(
-          fn,
-          subscriber,
-        ),
-      )
+      subscription.subscribe(pipe(fn, subscriber))
 
     return {
       ...subscription,

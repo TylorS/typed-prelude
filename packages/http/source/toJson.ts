@@ -7,6 +7,10 @@ export const toJson = <A = unknown, E extends HttpEnv = HttpEnv>(
   request: HttpRequest<A, E>,
 ): Env<E, RemoteData<Error, A>> =>
   map(
-    chain(({ responseText }) => RemoteData.fromEither(tryCatch<A>(() => JSON.parse(responseText)))),
+    chain(({ responseText }) =>
+      RemoteData.fromEither(
+        tryCatch<A>(() => JSON.parse(responseText)),
+      ),
+    ),
     request,
   )

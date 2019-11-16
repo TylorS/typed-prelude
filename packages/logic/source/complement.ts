@@ -6,8 +6,4 @@ import { not } from './not'
  * @param :: (a -> b)
  * @returns :: (a -> boolean)
  */
-export const complement = <A, B>(fn: Arity1<A, B>) =>
-  pipe(
-    fn,
-    not,
-  )
+export const complement = <A, B>(fn: Arity1<A, B>) => pipe(fn, not)
