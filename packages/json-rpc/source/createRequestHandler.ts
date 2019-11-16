@@ -4,10 +4,9 @@ import { hasValidParams } from './hasValidParams'
 import { isFailure } from './isFailure'
 import { JsonRpcRequestHandler, NotificationsFrom, RequestHandlers, ResponseFor } from './types'
 
-export function createRequestHandler<
-  Methods extends Exclude<keyof A, number | PropertyKey>,
-  A extends RequestHandlers<Methods>
->(requestHandlers: A): JsonRpcRequestHandler<A> {
+export function createRequestHandler<A extends RequestHandlers>(
+  requestHandlers: A,
+): JsonRpcRequestHandler<A> {
   const stats = {
     openRequestCount: 0,
     requestCount: 0,
@@ -36,10 +35,7 @@ export function createRequestHandler<
   }
 }
 
-function createSendRequest<
-  Methods extends Exclude<keyof A, number | PropertyKey>,
-  A extends RequestHandlers<Methods>
->(requestHandlers: A) {
+function createSendRequest<A extends RequestHandlers>(requestHandlers: A) {
   return async <R extends NotificationsFrom<A>>(request: R): Promise<ResponseFor<A, R>> => {
     try {
       hasValidParams(request)

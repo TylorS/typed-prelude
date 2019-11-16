@@ -4,8 +4,8 @@ import { Message, Notification, Request } from './json-rpc'
 import { JsonRpcMessageSender, JsonRpcNotificationHandler, JsonRpcRequestHandler } from './types'
 
 export type CreateJsonRpcHandlerConnectionOptions = {
-  readonly requestHandler: JsonRpcRequestHandler
-  readonly notificationHandler: JsonRpcNotificationHandler
+  readonly requestHandler: JsonRpcRequestHandler<any>
+  readonly notificationHandler: JsonRpcNotificationHandler<any>
   readonly sender: JsonRpcMessageSender
   readonly batchResponses?: boolean
 }
