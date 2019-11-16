@@ -49,7 +49,7 @@ function createSendRequest<A extends RequestHandlers>(requestHandlers: A) {
         }) as ResponseFor<A, R>
       }
 
-      const response = await handler(request)
+      const response = await handler(request as any)
 
       return response as ResponseFor<A, R>
     } catch (error) {

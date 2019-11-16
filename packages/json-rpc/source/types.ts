@@ -9,10 +9,14 @@ import {
   Id,
   Message,
   Notification,
+  ParameterizedNotification,
+  ParameterizedRequest,
   Request,
   Response,
   ResponseErrorData,
   ResponseResult,
+  SimpleNotification,
+  SimpleRequest,
 } from './json-rpc'
 
 export type JsonRpcRequestHandler<A extends RequestHandlers = RequestHandlers> = {
@@ -92,13 +96,15 @@ export interface MessageContext {
 }
 
 export type RequestHandlers = {
-  readonly [key: string]: Arity1<
-    Request<string, any>,
-    Response<any, any> | PromiseLike<Response<any, any>>
-  >
+  readonly [key: string]:
+    | Arity1<ParameterizedRequest<any, any>, Response<any, any> | PromiseLike<Response<any, any>>>
+    | Arity1<SimpleRequest<any>, Response<any, any> | PromiseLike<Response<any, any>>>
 }
+
 export type NotificationHandlers = {
-  readonly [key: string]: Arity1<Notification<string, any>>
+  readonly [key: string]:
+    | Arity1<ParameterizedNotification<any, any>>
+    | Arity1<SimpleNotification<any>>
 }
 
 export type NotificationsFrom<A> = A extends Record<string, Arity1>

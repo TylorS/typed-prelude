@@ -13,7 +13,7 @@ export function createNotificationHandler<A extends NotificationHandlers>(
       stats.notificationCount++
 
       if (notification.method in handlers) {
-        handlers[notification.method](notification)
+        handlers[notification.method](notification as any)
       }
     },
   }
