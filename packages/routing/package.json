@@ -1,6 +1,6 @@
 {
   "name": "@typed/routing",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Data structures for path-based logic",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,11 +22,11 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^2.0.0",
-    "@typed/history": "^4.0.5",
-    "@typed/lambda": "^2.0.0",
-    "@typed/logic": "^5.0.1",
-    "@typed/maybe": "^9.0.0"
+    "@typed/common": "^2.0.1",
+    "@typed/history": "^4.0.6",
+    "@typed/lambda": "^2.0.1",
+    "@typed/logic": "^5.0.2",
+    "@typed/maybe": "^9.0.1"
   },
   "publishConfig": {
     "access": "public"
