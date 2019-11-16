@@ -65,12 +65,13 @@ export function createJsonRpcConnectionManager(
   )
 
   const dispose = () => {
-    disposeAll([
+    const { dispose } = disposeAll([
       connectionDisposable,
       ...transportDisposables,
       ...Array.from(connectionDisposables.values()),
-    ]).dispose()
+    ])
 
+    dispose()
     connections = []
     connectionDisposables.clear()
   }

@@ -1,39 +1,57 @@
-import { isBrowser } from '@typed/common'
 import { Disposable, disposeAll } from '@typed/disposable'
 import { noOp } from '@typed/lambda'
 import { Subscription } from '@typed/subscription'
-import { createUuid } from '@typed/uuid'
+import { createUuid, Uuid } from '@typed/uuid'
+import { IWaterfallOptions, Tank, Waterfall } from 'hydrated-ws'
 import { createMessageContext } from './createMessageContext'
 import { Connection, ConnectionEvent, JsonRpcTransport } from './types'
 
-export type CreateClientWebsocketTransportOptions = {
+export type CreateClientWebsocketTransportOptions = IWaterfallOptions & {
   readonly connectionUrl: string
   readonly protocols?: string | string[]
+  readonly onConnection?: (
+    connectionId: Uuid,
+    websocket: WebSocket,
+  ) => readonly [WebSocket, Disposable]
 }
 
-// Works in Node and Browsers only maintains a single connection
-export async function createClientWebsocketTransport({
+export function createClientWebsocketTransport({
   connectionUrl,
   protocols,
-}: CreateClientWebsocketTransportOptions): Promise<JsonRpcTransport> {
-  const WS: new (connectionUrl: string, protocols?: string | string[]) => WebSocket = isBrowser
-    ? WebSocket
-    : require('ws')
-
+  onConnection,
+  ...waterfallOptions
+}: CreateClientWebsocketTransportOptions): JsonRpcTransport {
   return {
-    init: ({ connections }) => wrapWebsocketConnect(new WS(connectionUrl, protocols), connections),
+    init: ({ connections }) => {
+      const ws: WebSocket = new Tank(new Waterfall(connectionUrl, protocols, waterfallOptions))
+      const connectionId = createUuid()
+
+      if (onConnection) {
+        const [wrapped, disposable] = onConnection(connectionId, ws)
+
+        return disposeAll([disposable, wrapWebsocketConnect(wrapped, connections, connectionId)])
+      }
+
+      return wrapWebsocketConnect(ws, connections, connectionId)
+    },
   }
 }
 
 export type CreateWebsocketServerTransportOptions = {
   readonly serverOptions: import('ws').ServerOptions
   readonly brokenConnectionCheckDelayMs?: number
+  readonly onConnection?: (
+    connectionId: Uuid,
+    websocket: WebSocket,
+  ) => readonly [WebSocket, Disposable]
 }
 
 // Only supports Node, can manage many connections
+// Buffering is handled via hydrated-ws
 export function createWebsocketServerTransport({
   serverOptions,
   brokenConnectionCheckDelayMs = 30 * 1000,
+  onConnection,
 }: CreateWebsocketServerTransportOptions): JsonRpcTransport {
   const ws = require('ws')
 
@@ -42,9 +60,19 @@ export function createWebsocketServerTransport({
       const server: import('ws').Server = new ws.Server(serverOptions)
       const disposables: Disposable[] = []
 
-      server.on('connection', socket =>
-        disposables.push(wrapWebsocketConnect(socket as any, connections)),
-      )
+      server.on('connection', socket => {
+        let ws: WebSocket = new Tank(socket as any)
+        const connectionId = createUuid()
+
+        if (onConnection) {
+          const [wrapped, disposable] = onConnection(connectionId, ws)
+
+          ws = wrapped
+          disposables.push(disposable)
+        }
+
+        disposables.push(wrapWebsocketConnect(ws, connections, connectionId))
+      })
 
       const interval = setInterval(function ping() {
         server.clients.forEach((ws: any) => {
@@ -64,16 +92,18 @@ export function createWebsocketServerTransport({
   }
 }
 
-function wrapWebsocketConnect(ws: WebSocket, connections: Subscription<ConnectionEvent>) {
+function wrapWebsocketConnect(
+  ws: WebSocket,
+  connections: Subscription<ConnectionEvent>,
+  connectionId: Uuid,
+) {
   const context = createMessageContext()
   const connection: Connection = {
-    id: createUuid(),
+    id: connectionId,
     context,
   }
   let disposable: Disposable = Disposable.None
   const cleanup = () => {
-    context.incoming.clearSubscribers()
-    context.outgoing.clearSubscribers()
     connections.publish({ type: 'remove', connection })
     disposable.dispose()
   }

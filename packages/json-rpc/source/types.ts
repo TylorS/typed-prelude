@@ -28,7 +28,9 @@ export type RequestStats = {
   readonly failureResponseCount: number
 }
 
-export type JsonRpcNotificationHandler<A extends NotificationHandlers = NotificationHandlers> = {
+export type JsonRpcNotificationHandler<
+  A extends NotificationHandlers<any> = NotificationHandlers<any>
+> = {
   readonly stats: NotificationStats
   readonly handleNotification: <R extends NotificationsFrom<A> = NotificationsFrom<A>>(
     notification: R,
@@ -94,7 +96,9 @@ export interface MessageContext {
 export type RequestHandlers<A extends string> = {
   readonly [K in A]: Arity1<Request<K, any>, Response<any, any> | PromiseLike<Response<any, any>>>
 }
-export type NotificationHandlers = Readonly<Record<string, Arity1<Notification<any, any>>>>
+export type NotificationHandlers<A extends string> = {
+  readonly [K in A]: Arity1<Notification<K, any>>
+}
 
 export type NotificationsFrom<A> = A extends Record<string, Arity1>
   ? { [K in keyof A]: HeadArg<A[K]> }[keyof A]

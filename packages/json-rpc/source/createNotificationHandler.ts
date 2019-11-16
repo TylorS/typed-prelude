@@ -1,8 +1,9 @@
 import { JsonRpcNotificationHandler, NotificationHandlers, NotificationsFrom } from './types'
 
-export function createNotificationHandler<A extends NotificationHandlers>(
-  handlers: A,
-): JsonRpcNotificationHandler<A> {
+export function createNotificationHandler<
+  Methods extends Exclude<keyof A, number | PropertyKey>,
+  A extends NotificationHandlers<Methods>
+>(handlers: A): JsonRpcNotificationHandler<A> {
   const stats = {
     notificationCount: 0,
   }
