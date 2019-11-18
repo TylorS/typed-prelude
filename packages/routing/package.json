@@ -1,6 +1,6 @@
 {
   "name": "@typed/routing",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "Data structures for path-based logic",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

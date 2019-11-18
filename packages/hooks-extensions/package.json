@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks-extensions",
-  "version": "1.0.9",
+  "version": "2.0.0",
   "description": "Typed Extensions to @typed/hooks",
   "main": "./cjs/index.js",
   "repository": {
@@ -49,7 +49,7 @@
     "@typed/new-type": "^2.0.2",
     "@typed/objects": "^5.0.1",
     "@typed/remote-data": "^2.0.1",
-    "@typed/routing": "^2.1.2",
+    "@typed/routing": "^3.0.0",
     "@typed/set": "^2.0.1",
     "@typed/storage": "^2.0.3",
     "@typed/strings": "^6.0.1",
