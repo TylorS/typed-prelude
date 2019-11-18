@@ -2,14 +2,13 @@ import { Path } from '@typed/history'
 import { Match } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 
-export interface Route<A = unknown> {
+export interface Route<A = unknown, B = A> {
   readonly path: Path
-  readonly match: Match<Path, A>
+  readonly match: Match<Path, B>
   readonly createPath: (params: A, trailingSlash?: boolean) => Maybe<Path>
 }
 
-export type Routes<A = any> = Array<Route<A>>
 export type RouteParams<A> = A extends Route<infer R> ? R : never
-export type RoutesOf<A extends any[]> = { [K in keyof A]: Route<A[K]> }
+export type RouteValue<A> = A extends Route<any, infer R> ? R : never
 
 export { Path }

@@ -1,5 +1,5 @@
 import { Path } from '@typed/history'
-import { fromJust, isJust, isNothing, unwrap, withDefault } from '@typed/maybe'
+import { isJust, isNothing, unwrap, withDefault } from '@typed/maybe'
 import { describe, given, it, Test } from '@typed/test'
 import { createRoute } from './createRoute'
 
@@ -21,7 +21,7 @@ export const test: Test = describe(`createRoute`, [
       }),
 
       it(`returns a Just when given longer pathname`, ({ ok }) => {
-        const route = createRoute('/user/:id')
+        const route = createRoute('/user/:id*')
         const pathname = '/user/42/profile' as Path
 
         ok(isJust(route.match(pathname)))
@@ -39,15 +39,15 @@ export const test: Test = describe(`createRoute`, [
   given(`a pathname with parameters`, [
     it(`returns Just<Params> when matched`, ({ equal }) => {
       const path = '/user/:userId'
-      const route = createRoute<{ userId: number }>(path)
+      const route = createRoute<{ userId: string }>(path)
       const url = '/user/42' as Path
 
-      equal({ userId: 42 }, withDefault(null, route.match(url)))
+      equal('42', withDefault({ userId: '31' }, route.match(url)).userId)
     }),
 
     it(`returns Nothing when not matched`, ({ ok }) => {
       const path = '/user/:userId'
-      const route = createRoute<{ userId: number }>(path)
+      const route = createRoute<{ userId: string }>(path)
       const url = '/hello/42' as Path
 
       ok(isNothing(route.match(url)))

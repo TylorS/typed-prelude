@@ -10,7 +10,7 @@ export const test: Test = describe(`nestMatch`, [
     it(`returns a Match<Href, A & B>`, ({ ok, equal }) => {
       const match: Match<string, { foo: number }> = (a: string) =>
         a === '/foo' ? Maybe.of({ foo: 1 }) : Nothing
-      const route = createRoute<{ id: number }>('/user/:id/')
+      const route = createRoute<{ id: string }>('/user/:id/')
       const sut = nestMatch(route, match)
 
       const validPath = '/user/42/foo' as Path
@@ -19,7 +19,7 @@ export const test: Test = describe(`nestMatch`, [
       ok(isJust(actualValidPathParams))
 
       if (isJust(actualValidPathParams)) {
-        equal([{ id: 42 }, { foo: 1 }], fromJust(actualValidPathParams))
+        equal([{ id: '42' }, { foo: 1 }], fromJust(actualValidPathParams))
       }
 
       ok(isNothing(sut('/user/42' as Path)))
