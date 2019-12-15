@@ -19,16 +19,18 @@ export type HttpResponse<A = unknown> = {
   readonly headers: Readonly<Record<string, string | undefined>>
 }
 
-export interface HttpRequest<A = unknown, E extends HttpEnv = HttpEnv>
-  extends Env<E, RemoteData<Error, HttpResponse<A>>> {
+export type HttpRequest<A = unknown, E extends HttpEnv = HttpEnv> = Env<
+  E,
+  RemoteData<Error, HttpResponse<A>>
+> & {
   readonly url: string
   readonly options: HttpOptions
 }
 
 export type HttpCallbacks = {
-  success: (response: HttpResponse) => void
-  failure: (error: Error) => void
-  onStart?: () => void
+  success: (response: HttpResponse) => Disposable
+  failure: (error: Error) => Disposable
+  onStart?: () => Disposable
 }
 
 export interface HttpEnv {

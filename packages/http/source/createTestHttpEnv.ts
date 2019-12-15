@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { isFailure, isSuccess, RemoteData } from '@typed/remote-data'
 import { Timer } from '@typed/timer'
 import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
@@ -16,10 +16,11 @@ export function createTestHttpEnv(
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success, failure, onStart } = callbacks
+    const disposables: Disposable[] = []
 
     function getResponse() {
       if (onStart) {
-        onStart()
+        disposables.push(onStart())
       }
 
       const response = testHttp(url, options)
@@ -27,15 +28,17 @@ export function createTestHttpEnv(
       responses.push(response)
 
       if (isFailure(response)) {
-        failure(response.value)
+        disposables.push(failure(response.value))
       }
 
       if (isSuccess(response)) {
-        success(response.value)
+        disposables.push(success(response.value))
       }
     }
 
-    return timer.delay(getResponse, 0)
+    disposables.push(timer.delay(getResponse, 0))
+
+    return disposeAll(disposables)
   }
 
   return {

@@ -1,16 +1,11 @@
 import { Disposable, dispose } from '@typed/disposable'
-import { handle, Pure, runPure } from '@typed/env'
-import {
-  CreateHookContext,
-  createUseCallback,
-  createUseRef,
-  createUseState,
-  withCreateHook,
-} from '@typed/hooks'
+import { execPure, handle, runPure } from '@typed/env'
+import { CreateHookContext, createUseCallback, createUseRef, withCreateHook } from '@typed/hooks'
 import { HttpRequest, HttpResponse } from '@typed/http'
 import { Fn } from '@typed/lambda'
 import { isLoading, NoData, RemoteData } from '@typed/remote-data'
 import { createUseHttpEnv } from '../channels'
+import { createUsePureState } from './createUsePureState'
 
 export const createUseHttp = <A extends readonly any[], B>(
   context: CreateHookContext,
@@ -19,7 +14,7 @@ export const createUseHttp = <A extends readonly any[], B>(
   const createUseHttpHook = withCreateHook(
     createHook =>
       [
-        createHook(createUseState),
+        createHook(createUsePureState),
         createHook(createUseHttpEnv),
         createHook(createUseRef),
         createHook(createUseCallback),
@@ -43,7 +38,7 @@ export const createUseHttp = <A extends readonly any[], B>(
           }
 
           const disposable = (disposableRef.current = runPure(
-            setRemoteData,
+            (data: RemoteData<Error, HttpResponse<B>>) => execPure(setRemoteData(data)),
             handle(httpEnv, request),
           ))
 
@@ -51,7 +46,7 @@ export const createUseHttp = <A extends readonly any[], B>(
         },
         [httpEnv],
       )
-      const clear = Pure.fromIO(() => setRemoteData(NoData))
+      const clear = setRemoteData(NoData)
 
       return [remoteData, makeRequest, clear] as const
     },
