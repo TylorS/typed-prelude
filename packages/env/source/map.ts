@@ -16,7 +16,7 @@ export const map = curry(__map) as {
 
 function __map<E, A, B>(fn: Arity1<A, B>, env: Env<E, A>): Env<E, B> {
   if (isValueEnv(env)) {
-    return Env.of(fn(env.value))
+    return Env.of(fn(env.value)) as Env<E, B>
   }
 
   return {

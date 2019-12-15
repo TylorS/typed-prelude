@@ -14,5 +14,5 @@ export const runPure: {
   <A>(f: (value: A) => Disposable, pure: Pure<A>): Disposable
   <A>(f: (value: A) => Disposable): (pure: Pure<A>) => Disposable
 } = curry(function runPure<A>(f: (value: A) => Disposable, pure: Pure<A>): Disposable {
-  return runEnv(f, {}, pure)
+  return runEnv(f, {} as never, pure)
 })

@@ -11,8 +11,6 @@ export const onDispose = curry(dispose) as {
   }
 }
 
-function dispose<A>(fn: () => void, env: Pure<A>): Pure<A>
-function dispose<A, B>(fn: () => void, env: Env<A, B>): Env<A, B>
 function dispose<A, B>(fn: () => void, env: Env<A, B>): Env<A, B> {
   return {
     type: 'lazy',

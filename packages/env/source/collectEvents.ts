@@ -16,14 +16,11 @@ export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Pro
       const disposable = runPure(actual => {
         actualValues.push(actual)
 
-        // Without options assume one event
-        if (!expectedValues) {
+        if (!expectedValues || actualValues.length === expectedValues) {
           if (disposable) {
             disposable.dispose()
           }
 
-          resolve(actualValues)
-        } else if (actualValues.length === expectedValues) {
           resolve(actualValues)
         }
 

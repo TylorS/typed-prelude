@@ -27,7 +27,7 @@ export const handle = curry(__handle) as {
 
 function __handle<A, B, C>(resources: A, env: Env<B, C>): Handle<A, Env<B, C>> {
   if (isValueEnv(env)) {
-    return env
+    return env as Handle<A, Env<B, C>>
   }
 
   const handledEnv = {

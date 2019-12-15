@@ -13,6 +13,9 @@
       "path": "./dom/tsconfig.json"
     },
     {
+      "path": "./effects/tsconfig.json"
+    },
+    {
       "path": "./either/tsconfig.json"
     },
     {

@@ -21,6 +21,10 @@
       "path": "./packages/dom"
     },
     {
+      "name": "Effects",
+      "path": "./packages/effects"
+    },
+    {
       "name": "Either",
       "path": "./packages/either"
     },

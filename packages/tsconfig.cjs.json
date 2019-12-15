@@ -13,6 +13,9 @@
       "path": "./dom/tsconfig.cjs.json"
     },
     {
+      "path": "./effects/tsconfig.cjs.json"
+    },
+    {
       "path": "./either/tsconfig.cjs.json"
     },
     {
