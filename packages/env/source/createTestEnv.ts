@@ -1,7 +1,8 @@
 import { Disposable } from '@typed/disposable'
 import { clone } from '@typed/objects'
 import { createVirtualClock, createVirtualTimer, VirtualTimer } from '@typed/timer'
-import { Pure, runPure } from './Env'
+import { Pure } from './Env'
+import { runPure } from './runPure'
 
 export type TestEnv<A> = {
   readonly timer: VirtualTimer
@@ -18,7 +19,7 @@ export function createTestEnv<A>(startingTime: number = 0): TestEnv<A> {
   const eventMap = new Map<Pure<A>, A[]>()
 
   function recordEvents(pure: Pure<A>): Disposable {
-    return runPure(a => appendToMap(pure, a, eventMap), pure)
+    return runPure(a => (appendToMap(pure, a, eventMap), Disposable.None), pure)
   }
 
   function getAllEvents() {

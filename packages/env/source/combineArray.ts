@@ -1,6 +1,7 @@
-import { disposeAll } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { curry, Fn } from '@typed/lambda'
 import { Env, EnvOf } from './Env'
+import { runEnv } from './runEnv'
 
 /**
  * Combine many Environments into one
@@ -14,6 +15,7 @@ function __combineArray<A extends any[], R, E>(fn: Fn<A, R>, envs: EnvOf<E, A>):
   const numberOfEnvs = envs.length
 
   return {
+    type: 'lazy',
     runEnv: (f, e) => {
       const hasValues: boolean[] = Array(numberOfEnvs).fill(false)
       const values = Array(numberOfEnvs) as A
@@ -27,7 +29,9 @@ function __combineArray<A extends any[], R, E>(fn: Fn<A, R>, envs: EnvOf<E, A>):
         }
       }
 
-      const disposables = envs.map((env, i) => env.runEnv(a => addValue(a, i), e))
+      const disposables = envs.map((env, i) =>
+        runEnv(a => (addValue(a, i), Disposable.None), e, env),
+      )
 
       return disposeAll(disposables)
     },

@@ -6,6 +6,7 @@ export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpR
   return {
     url,
     options,
+    type: 'lazy',
     runEnv: (f, { http }) => {
       let hasLoaded = false
       const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>) => {

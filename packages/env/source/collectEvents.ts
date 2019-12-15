@@ -1,4 +1,6 @@
-import { Pure, runPure } from './Env'
+import { Disposable } from '@typed/disposable/source'
+import { Pure } from './Env'
+import { runPure } from './runPure'
 
 /**
  * Collect a given number of events of a given pure.
@@ -20,12 +22,12 @@ export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Pro
             disposable.dispose()
           }
 
-          return resolve(actualValues)
-        }
-
-        if (actualValues.length === expectedValues) {
+          resolve(actualValues)
+        } else if (actualValues.length === expectedValues) {
           resolve(actualValues)
         }
+
+        return Disposable.None
       }, pure)
     } catch (error) {
       reject(error)
