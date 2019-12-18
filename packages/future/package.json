@@ -1,0 +1,40 @@
+{
+  "name": "@typed/future",
+  "version": "5.0.0",
+  "description": "Asynchronous Future Values",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "Future",
+    "Env",
+    "Async"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/disposable": "2.0.1",
+    "@typed/either": "^6.0.1",
+    "@typed/env": "^2.0.3",
+    "@typed/lambda": "2.0.1"
+  }
+}
