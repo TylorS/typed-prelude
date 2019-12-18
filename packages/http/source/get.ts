@@ -4,7 +4,10 @@ import { http } from './http'
 import { HttpOptions, HttpRequest } from './types'
 
 export type GetOptions = Partial<
-  MergeObjects<DropKeys<HttpOptions, 'body'>, { queryParameters?: Record<string, string> }>
+  MergeObjects<
+    DropKeys<HttpOptions, 'body'>,
+    { queryParameters?: Record<string, string | undefined> }
+  >
 >
 
 /**
