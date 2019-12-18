@@ -4,6 +4,9 @@
       "path": "./asynciterable/tsconfig.json"
     },
     {
+      "path": "./asyncstorage/tsconfig.json"
+    },
+    {
       "path": "./common/tsconfig.json"
     },
     {
@@ -22,13 +25,10 @@
       "path": "./env/tsconfig.json"
     },
     {
+      "path": "./future/tsconfig.json"
+    },
+    {
       "path": "./history/tsconfig.json"
-    },
-    {
-      "path": "./hooks/tsconfig.json"
-    },
-    {
-      "path": "./hooks-extensions/tsconfig.json"
     },
     {
       "path": "./http/tsconfig.json"
@@ -95,6 +95,9 @@
     },
     {
       "path": "./uuid/tsconfig.json"
+    },
+    {
+      "path": "./virtual-dom/tsconfig.json"
     }
   ],
   "files": []

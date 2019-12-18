@@ -1,7 +1,7 @@
 {
-  "name": "@typed/hooks",
-  "version": "2.0.5",
-  "description": "Hooks for TypeScript",
+  "name": "@typed/virtual-dom",
+  "version": "0.0.0",
+  "description": "Typed for the virtual-dom",
   "main": "./cjs/index.js",
   "repository": {
     "type": "git",
@@ -9,8 +9,10 @@
   },
   "keywords": [
     "Typed",
-    "Hooks",
-    "TypeScript"
+    "TypeScript",
+    "virtual-dom",
+    "functional",
+    "hooks"
   ],
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "Parity-6.0.0",
@@ -18,13 +20,6 @@
     "url": "https://github.com/TylorS/typed-prelude/issues"
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
-  "dependencies": {
-    "@typed/disposable": "^2.0.1",
-    "@typed/lambda": "^2.0.1",
-    "@typed/logic": "^5.0.2",
-    "@typed/subscription": "^2.1.4",
-    "@typed/timer": "^2.0.3"
-  },
   "unpkg": "./umd/index.js",
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",
@@ -35,5 +30,10 @@
   "peerDependencies": {
     "tslib": "^1.10.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/effects": "^0.0.0",
+    "@typed/env": "^2.0.3",
+    "csstype": "^2.6.8"
+  }
 }

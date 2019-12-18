@@ -19,19 +19,10 @@
   ],
   "references": [
     {
-      "path": "../disposable/tsconfig.json"
+      "path": "../effects/tsconfig.json"
     },
     {
-      "path": "../lambda/tsconfig.json"
-    },
-    {
-      "path": "../logic/tsconfig.json"
-    },
-    {
-      "path": "../subscription/tsconfig.json"
-    },
-    {
-      "path": "../timer/tsconfig.json"
+      "path": "../env/tsconfig.json"
     }
   ]
 }

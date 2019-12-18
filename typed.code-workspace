@@ -1,12 +1,12 @@
 {
   "folders": [
     {
-      "name": "Typed Prelude",
-      "path": "./"
+      "name": "AsyncIterable",
+      "path": "./packages/asynciterable"
     },
     {
-      "name": "Asynciterable",
-      "path": "./packages/asynciterable"
+      "name": "AsyncStorage",
+      "path": "./packages/asyncstorage"
     },
     {
       "name": "Common",
@@ -33,16 +33,12 @@
       "path": "./packages/env"
     },
     {
+      "name": "Future",
+      "path": "./packages/future"
+    },
+    {
       "name": "History",
       "path": "./packages/history"
-    },
-    {
-      "name": "Hooks",
-      "path": "./packages/hooks"
-    },
-    {
-      "name": "Hooks Extensions",
-      "path": "./packages/hooks-extensions"
     },
     {
       "name": "Http",
@@ -131,6 +127,14 @@
     {
       "name": "Uuid",
       "path": "./packages/uuid"
+    },
+    {
+      "name": "Virtual DOM",
+      "path": "./packages/virtual-dom"
+    },
+    {
+      "name": "Typed Prelude",
+      "path": "./"
     }
   ]
 }
