@@ -97,8 +97,10 @@ function browserHttpRequest(
   const { method = 'GET', headers, body } = options
   const request = new XMLHttpRequest()
 
-  request.onerror = () => failure(new Error(request.statusText))
-  request.onloadstart = onStart || noOp
+  const disposables: Disposable[] = [{ dispose: () => request.abort() }]
+
+  request.onerror = () => disposables.push(failure(new Error(request.statusText)))
+  request.onloadstart = onStart ? () => disposables.push(onStart()) : noOp
 
   request.addEventListener('load', () => {
     const headers = request.getAllResponseHeaders()
@@ -116,12 +118,14 @@ function browserHttpRequest(
       headerMap[header] = value
     })
 
-    success({
-      responseText: request.responseText,
-      status: request.status,
-      statusText: request.statusText,
-      headers: headerMap,
-    })
+    disposables.push(
+      success({
+        responseText: request.responseText,
+        status: request.status,
+        statusText: request.statusText,
+        headers: headerMap,
+      }),
+    )
   })
 
   if (headers) {
@@ -133,5 +137,5 @@ function browserHttpRequest(
   request.open(method, url)
   request.send(body)
 
-  return { dispose: () => request.abort() }
+  return disposeAll(disposables)
 }

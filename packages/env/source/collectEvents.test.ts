@@ -19,6 +19,7 @@ export const test = describe(`collectEvents`, [
     it(`collects its value in a promise`, async ({ equal }) => {
       const value = {}
       const pure: Pure<typeof value> = {
+        type: 'lazy',
         runEnv: f => {
           f(value)
           f(value)

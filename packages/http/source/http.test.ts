@@ -18,9 +18,7 @@ export const test = describe(`http`, [
 
       const pure = handle<HttpEnv, HttpEnv, RemoteData>(
         {
-          http: (_, __, { success, onStart }) => (
-            onStart && onStart(), success(response), Disposable.None
-          ),
+          http: (_, __, { success, onStart }) => (onStart && onStart(), success(response)),
         },
         request,
       )

@@ -8,6 +8,7 @@ export const test = describe(`runEffects`, [
     it(`runs the effect given those resources`, ({ equal }) => {
       const x = 1
       const y = 2
+      const z = 5
       const addY = Effect.create(function*(x: number) {
         const { y } = yield* get<{ y: number }>()
 
@@ -20,8 +21,11 @@ export const test = describe(`runEffects`, [
       })
 
       const main = Effect.create(function* main() {
-        const a = yield* addY(5)
-        const b = yield* addX(5)
+        const a = yield* addY(z)
+        const b = yield* addX(z)
+
+        equal(y + z, a)
+        equal(x + z, b)
 
         return [a, b] as const
       })

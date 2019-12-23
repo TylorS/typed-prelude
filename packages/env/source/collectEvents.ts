@@ -8,18 +8,17 @@ import { runPure } from './runPure'
  * @param expectedValues :: number (default: 1)
  * @returns :: Promise [a]
  */
-export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Promise<A[]> {
+export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Promise<readonly A[]> {
   return new Promise((resolve, reject) => {
     const actualValues: A[] = []
+    let disposable = Disposable.None
 
     try {
-      const disposable = runPure(actual => {
+      disposable = runPure(actual => {
         actualValues.push(actual)
 
         if (!expectedValues || actualValues.length === expectedValues) {
-          if (disposable) {
-            disposable.dispose()
-          }
+          disposable.dispose()
 
           resolve(actualValues)
         }
