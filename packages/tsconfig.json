@@ -37,9 +37,6 @@
       "path": "./iterable/tsconfig.json"
     },
     {
-      "path": "./json-rpc/tsconfig.json"
-    },
-    {
       "path": "./lambda/tsconfig.json"
     },
     {
@@ -95,9 +92,6 @@
     },
     {
       "path": "./uuid/tsconfig.json"
-    },
-    {
-      "path": "./virtual-dom/tsconfig.json"
     }
   ],
   "files": []

@@ -49,10 +49,6 @@
       "path": "./packages/iterable"
     },
     {
-      "name": "Json Rpc",
-      "path": "./packages/json-rpc"
-    },
-    {
       "name": "Lambda",
       "path": "./packages/lambda"
     },
@@ -127,10 +123,6 @@
     {
       "name": "Uuid",
       "path": "./packages/uuid"
-    },
-    {
-      "name": "Virtual DOM",
-      "path": "./packages/virtual-dom"
     },
     {
       "name": "Typed Prelude",

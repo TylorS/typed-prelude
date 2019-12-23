@@ -1,6 +1,6 @@
 import { Env, Resources } from '@typed/env'
 
-export type Effect<A, B, C> = {
+export interface Effect<A, B, C> {
   readonly [Symbol.iterator]: () => Iterator<A, B, C>
 }
 

@@ -34,7 +34,7 @@ type U2I<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => v
 export type EnvResources<A> = A extends LazyEnv<infer R, any>
   ? R
   : A extends ValueEnv<any>
-  ? Pick<{}, never>
+  ? never
   : never
 
 export type EnvValue<A> = A extends LazyEnv<any, infer R>
