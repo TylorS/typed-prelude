@@ -27,7 +27,7 @@
     "@typed/lambda": "^2.0.1",
     "@typed/logic": "^5.0.2",
     "@typed/maybe": "^9.0.1",
-    "path-to-regexp": "^5.0.0"
+    "path-to-regexp": "^6.0.0"
   },
   "publishConfig": {
     "access": "public"
