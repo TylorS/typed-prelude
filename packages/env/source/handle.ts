@@ -1,6 +1,18 @@
 import { DropKeys } from '@typed/common'
+import { Disposable } from '@typed/disposable'
 import { Arity1, curry } from '@typed/lambda'
-import { Env, Handle } from './Env'
+import { Env, EnvResources, EnvValue, Pure } from './Env'
+import { isValueEnv } from './isEnv'
+
+/**
+ * Provide resources to an Env
+ */
+export type Handle<A, E extends Env<any, any>> = Exclude<
+  keyof EnvResources<E>,
+  keyof A
+> extends never
+  ? Pure<EnvValue<E>>
+  : Env<DropKeys<EnvResources<E>, keyof A>, EnvValue<E>>
 
 /**
  * Provide resources to an environment
@@ -14,8 +26,13 @@ export const handle = curry(__handle) as {
 }
 
 function __handle<A, B, C>(resources: A, env: Env<B, C>): Handle<A, Env<B, C>> {
+  if (isValueEnv(env)) {
+    return env as Handle<A, Env<B, C>>
+  }
+
   const handledEnv = {
-    runEnv: (f: Arity1<C>, r: DropKeys<B, keyof A>) =>
+    type: 'lazy',
+    runEnv: (f: Arity1<C, Disposable>, r: DropKeys<B, keyof A>) =>
       env.runEnv(f, Object.assign({} as B, resources, r)),
   }
 

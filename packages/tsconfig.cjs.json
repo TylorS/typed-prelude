@@ -4,6 +4,9 @@
       "path": "./asynciterable/tsconfig.cjs.json"
     },
     {
+      "path": "./asyncstorage/tsconfig.cjs.json"
+    },
+    {
       "path": "./common/tsconfig.cjs.json"
     },
     {
@@ -13,28 +16,25 @@
       "path": "./dom/tsconfig.cjs.json"
     },
     {
+      "path": "./effects/tsconfig.cjs.json"
+    },
+    {
       "path": "./either/tsconfig.cjs.json"
     },
     {
       "path": "./env/tsconfig.cjs.json"
     },
     {
+      "path": "./future/tsconfig.cjs.json"
+    },
+    {
       "path": "./history/tsconfig.cjs.json"
-    },
-    {
-      "path": "./hooks/tsconfig.cjs.json"
-    },
-    {
-      "path": "./hooks-extensions/tsconfig.cjs.json"
     },
     {
       "path": "./http/tsconfig.cjs.json"
     },
     {
       "path": "./iterable/tsconfig.cjs.json"
-    },
-    {
-      "path": "./json-rpc/tsconfig.cjs.json"
     },
     {
       "path": "./lambda/tsconfig.cjs.json"

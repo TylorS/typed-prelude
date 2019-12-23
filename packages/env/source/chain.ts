@@ -1,6 +1,7 @@
-import { Disposable } from '@typed/disposable'
 import { Arity1, curry } from '@typed/lambda'
 import { Env } from './Env'
+import { isValueEnv } from './isEnv'
+import { runEnv } from './runEnv'
 
 /**
  * Chain together multiple environments.
@@ -11,13 +12,12 @@ export const chain = curry(__chain) as {
 }
 
 function __chain<A, B, C, D>(fn: Arity1<A, Env<B, C>>, env: Env<D, A>): Env<B & D, C> {
-  return {
-    runEnv: (f, r) => {
-      let disposable = env.runEnv(a => {
-        disposable = fn(a).runEnv(f, r)
-      }, r)
+  if (isValueEnv(env)) {
+    return fn(env.value)
+  }
 
-      return Disposable.lazy(() => disposable)
-    },
+  return {
+    type: 'lazy',
+    runEnv: (f, r) => runEnv(a => runEnv(f, r, fn(a)), r, env),
   }
 }

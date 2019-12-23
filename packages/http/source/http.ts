@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { ArgsOf, Fn } from '@typed/lambda'
 import { Failure, Loading, Success } from '@typed/remote-data'
 import { HttpOptions, HttpRequest, HttpResponse } from './types'
@@ -6,14 +7,17 @@ export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpR
   return {
     url,
     options,
+    type: 'lazy',
     runEnv: (f, { http }) => {
       let hasLoaded = false
-      const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>) => {
+      const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>): Disposable => {
         if (!hasLoaded) {
           hasLoaded = true
 
           return f(...args)
         }
+
+        return Disposable.None
       }
 
       return http(url, options, {

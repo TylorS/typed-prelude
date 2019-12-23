@@ -1,5 +1,5 @@
 import { isBrowser } from '@typed/common'
-import { Disposable } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { noOp } from '@typed/lambda'
 import { hasOwnProperty } from '@typed/objects'
 import { IncomingMessage } from 'http'
@@ -28,6 +28,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
   const { method = 'GET', headers, body } = options
   const protocol = IS_HTTPS.test(url) ? 'https:' : 'http:'
   const http = protocol === 'https:' ? require('https') : require('http')
+  const disposables: Disposable[] = []
 
   const request = http.request(
     url,
@@ -36,7 +37,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
       const data: string[] = []
 
       if (onStart) {
-        onStart()
+        disposables.push(onStart())
       }
 
       switch (response.headers['content-encoding']) {
@@ -52,7 +53,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
       }
 
       response.on('data', chunk => data.push(chunk.toString()))
-      response.on('error', failure)
+      response.on('error', error => disposables.push(failure(error)))
       response.on('close', () => {
         const headersMap: Record<string, string | undefined> = {}
 
@@ -64,12 +65,14 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
           }
         }
 
-        success({
-          responseText: data.join(''),
-          status: response.statusCode!,
-          statusText: response.statusMessage!,
-          headers: headersMap,
-        })
+        disposables.push(
+          success({
+            responseText: data.join(''),
+            status: response.statusCode!,
+            statusText: response.statusMessage!,
+            headers: headersMap,
+          }),
+        )
       })
     },
   )
@@ -80,7 +83,9 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
 
   request.end()
 
-  return { dispose: () => request.abort() }
+  disposables.push({ dispose: () => request.abort() })
+
+  return disposeAll(disposables)
 }
 
 function browserHttpRequest(
@@ -92,8 +97,10 @@ function browserHttpRequest(
   const { method = 'GET', headers, body } = options
   const request = new XMLHttpRequest()
 
-  request.onerror = () => failure(new Error(request.statusText))
-  request.onloadstart = onStart || noOp
+  const disposables: Disposable[] = [{ dispose: () => request.abort() }]
+
+  request.onerror = () => disposables.push(failure(new Error(request.statusText)))
+  request.onloadstart = onStart ? () => disposables.push(onStart()) : noOp
 
   request.addEventListener('load', () => {
     const headers = request.getAllResponseHeaders()
@@ -111,12 +118,14 @@ function browserHttpRequest(
       headerMap[header] = value
     })
 
-    success({
-      responseText: request.responseText,
-      status: request.status,
-      statusText: request.statusText,
-      headers: headerMap,
-    })
+    disposables.push(
+      success({
+        responseText: request.responseText,
+        status: request.status,
+        statusText: request.statusText,
+        headers: headerMap,
+      }),
+    )
   })
 
   if (headers) {
@@ -128,5 +137,5 @@ function browserHttpRequest(
   request.open(method, url)
   request.send(body)
 
-  return { dispose: () => request.abort() }
+  return disposeAll(disposables)
 }

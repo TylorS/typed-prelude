@@ -1,4 +1,6 @@
-import { Pure, runPure } from './Env'
+import { Disposable } from '@typed/disposable/source'
+import { Pure } from './Env'
+import { runPure } from './runPure'
 
 /**
  * Collect a given number of events of a given pure.
@@ -6,26 +8,22 @@ import { Pure, runPure } from './Env'
  * @param expectedValues :: number (default: 1)
  * @returns :: Promise [a]
  */
-export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Promise<A[]> {
+export function collectEvents<A>(pure: Pure<A>, expectedValues: number = 1): Promise<readonly A[]> {
   return new Promise((resolve, reject) => {
     const actualValues: A[] = []
+    let disposable = Disposable.None
 
     try {
-      const disposable = runPure(actual => {
+      disposable = runPure(actual => {
         actualValues.push(actual)
 
-        // Without options assume one event
-        if (!expectedValues) {
-          if (disposable) {
-            disposable.dispose()
-          }
+        if (!expectedValues || actualValues.length === expectedValues) {
+          disposable.dispose()
 
-          return resolve(actualValues)
-        }
-
-        if (actualValues.length === expectedValues) {
           resolve(actualValues)
         }
+
+        return Disposable.None
       }, pure)
     } catch (error) {
       reject(error)

@@ -1,12 +1,12 @@
 {
   "folders": [
     {
-      "name": "Typed Prelude",
-      "path": "./"
+      "name": "AsyncIterable",
+      "path": "./packages/asynciterable"
     },
     {
-      "name": "Asynciterable",
-      "path": "./packages/asynciterable"
+      "name": "AsyncStorage",
+      "path": "./packages/asyncstorage"
     },
     {
       "name": "Common",
@@ -21,6 +21,10 @@
       "path": "./packages/dom"
     },
     {
+      "name": "Effects",
+      "path": "./packages/effects"
+    },
+    {
       "name": "Either",
       "path": "./packages/either"
     },
@@ -29,16 +33,12 @@
       "path": "./packages/env"
     },
     {
+      "name": "Future",
+      "path": "./packages/future"
+    },
+    {
       "name": "History",
       "path": "./packages/history"
-    },
-    {
-      "name": "Hooks",
-      "path": "./packages/hooks"
-    },
-    {
-      "name": "Hooks Extensions",
-      "path": "./packages/hooks-extensions"
     },
     {
       "name": "Http",
@@ -47,10 +47,6 @@
     {
       "name": "Iterable",
       "path": "./packages/iterable"
-    },
-    {
-      "name": "Json Rpc",
-      "path": "./packages/json-rpc"
     },
     {
       "name": "Lambda",
@@ -127,6 +123,10 @@
     {
       "name": "Uuid",
       "path": "./packages/uuid"
+    },
+    {
+      "name": "Typed Prelude",
+      "path": "./"
     }
   ]
 }

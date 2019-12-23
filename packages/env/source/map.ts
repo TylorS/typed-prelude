@@ -1,5 +1,7 @@
 import { Arity1, curry, pipe } from '@typed/lambda'
 import { Env } from './Env'
+import { isValueEnv } from './isEnv'
+import { runEnv } from './runEnv'
 
 /**
  * Map one environment-dependent computation to another
@@ -13,7 +15,12 @@ export const map = curry(__map) as {
 }
 
 function __map<E, A, B>(fn: Arity1<A, B>, env: Env<E, A>): Env<E, B> {
+  if (isValueEnv(env)) {
+    return Env.of(fn(env.value)) as Env<E, B>
+  }
+
   return {
-    runEnv: (f, e) => env.runEnv(pipe(fn, f), e),
+    type: 'lazy',
+    runEnv: (f, e) => runEnv(pipe(fn, f), e, env),
   }
 }
