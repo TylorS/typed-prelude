@@ -1,6 +1,6 @@
 {
   "name": "@typed/env",
-  "version": "2.0.3",
+  "version": "3.0.0",
   "description": "Environment dependent computations",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
