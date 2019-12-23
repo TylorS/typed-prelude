@@ -1,6 +1,6 @@
-import { Pure } from '@typed/env/source'
-import { Future } from '@typed/future/source'
-import { Maybe } from '@typed/maybe/source'
+import { Pure } from '@typed/env'
+import { Future } from '@typed/future'
+import { Maybe } from '@typed/maybe'
 import { AsyncStorage } from './AsyncStorage'
 
 // Lift synchronous storage into AsyncStorage

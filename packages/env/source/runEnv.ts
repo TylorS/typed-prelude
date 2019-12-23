@@ -1,5 +1,5 @@
-import { Disposable } from '@typed/disposable/source'
-import { curry } from '@typed/lambda/source'
+import { Disposable } from '@typed/disposable'
+import { curry } from '@typed/lambda'
 import { Env } from './Env'
 
 export const runEnv = curry(

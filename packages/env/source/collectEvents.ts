@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable/source'
+import { Disposable } from '@typed/disposable'
 import { Pure } from './Env'
 import { runPure } from './runPure'
 
