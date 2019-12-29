@@ -29,7 +29,7 @@
     "release:alpha": "npm run release -- --canary --preid alpha --dist-tag alpha"
   },
   "devDependencies": {
-    "@typed/test": "9.4.0",
+    "@typed/test": "9.5.0",
     "@types/node": "12.12.22",
     "@types/yargs": "13.0.4",
     "lerna": "3.20.0",
