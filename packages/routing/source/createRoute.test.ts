@@ -36,6 +36,16 @@ export const test: Test = describe(`createRoute`, [
     ]),
   ]),
 
+  given(`a pathname and exact=True`, [
+    it(`only matches exactly`, ({ notOk, ok }) => {
+      const route = createRoute('/user/:id', { exact: true })
+
+      notOk(isJust(route.match('/user/42/profile' as Path)))
+      ok(isJust(route.match('/user/42' as Path)))
+      ok(isJust(route.match('/user/42/' as Path)))
+    }),
+  ]),
+
   given(`a pathname with parameters`, [
     it(`returns Just<Params> when matched`, ({ equal }) => {
       const path = '/user/:userId'
