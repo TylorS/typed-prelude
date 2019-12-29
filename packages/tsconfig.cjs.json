@@ -37,6 +37,9 @@
       "path": "./iterable/tsconfig.cjs.json"
     },
     {
+      "path": "./jwt/tsconfig.cjs.json"
+    },
+    {
       "path": "./lambda/tsconfig.cjs.json"
     },
     {

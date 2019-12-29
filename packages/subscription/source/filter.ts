@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable/source'
 import { curry, Is, Predicate } from '@typed/lambda'
 import { Subscription, SubscriptionInput } from './Subscription'
 
@@ -22,6 +23,6 @@ export const filter: {
 function __filter<A>(predicate: Predicate<A>, subscription: Subscription<any, A>): Subscription<A> {
   return {
     ...subscription,
-    subscribe: fn => subscription.subscribe(a => predicate(a) && fn(a)),
+    subscribe: fn => subscription.subscribe(a => (predicate(a) ? fn(a) : Disposable.None)),
   }
 }

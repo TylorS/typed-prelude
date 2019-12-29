@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { Arity1 } from '@typed/lambda'
 import { equals } from '@typed/logic'
 
@@ -6,15 +6,15 @@ import { equals } from '@typed/logic'
  * A generic subscription type
  */
 export interface Subscription<A, B = A> {
+  readonly publish: Arity1<A, Disposable>
   readonly subscribe: Arity1<Subscriber<B>, Disposable>
-  readonly publish: Arity1<A>
   readonly clearSubscribers: () => void
 }
 
 export type SubscriptionInput<A> = A extends Subscription<infer R, any> ? R : never
 export type SubscriptionOuput<A> = A extends Subscription<any, infer R> ? R : never
 
-export type Subscriber<A> = Arity1<A>
+export type Subscriber<A> = Arity1<A, Disposable>
 
 /**
  * Create a simple subscription
@@ -33,11 +33,13 @@ export function createSubscription<A>(): Subscription<A> {
 
     return { dispose: () => unsubscribe(subscriber) }
   }
-  const reset = () => {
-    subscribers = []
+  const publish = (value: A): Disposable => disposeAll(subscribers.map(f => f(value)))
+
+  return {
+    subscribe,
+    publish,
+    clearSubscribers() {
+      subscribers = []
+    },
   }
-
-  const publish = (value: A) => subscribers.forEach(f => f(value))
-
-  return { subscribe, publish, clearSubscribers: reset }
 }

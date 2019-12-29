@@ -49,6 +49,10 @@
       "path": "./packages/iterable"
     },
     {
+      "name": "Jwt",
+      "path": "./packages/jwt"
+    },
+    {
       "name": "Lambda",
       "path": "./packages/lambda"
     },

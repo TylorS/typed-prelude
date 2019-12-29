@@ -34,8 +34,10 @@ export function combine<A extends Array<Subscription<any, any>>>(
             values[i] = a
 
             if (hasValues.every(Boolean)) {
-              subscription.publish(values)
+              return subscription.publish(values)
             }
+
+            return Disposable.None
           }),
         )
       }

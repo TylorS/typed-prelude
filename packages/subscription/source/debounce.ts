@@ -27,6 +27,8 @@ function __debounce<A, B>(
         subscription.subscribe(b => {
           disposable.dispose()
           disposable = timer.delay(() => fn(b), delayMs)
+
+          return disposable
         }),
       ])
     },
