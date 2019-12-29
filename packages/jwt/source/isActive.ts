@@ -2,14 +2,9 @@ import { getExpiration } from './getExpiration'
 import { getNotBefore } from './getNotBefore'
 import { Jwt } from './Jwt'
 
-export type IsActiveOptions = {
-  readonly notBeforeKey?: string
-  readonly expirationKey?: string
-}
-
-export function isActive(jwt: Jwt, options: IsActiveOptions = {}): boolean {
-  const notBefore = getNotBefore(jwt, options.notBeforeKey)
-  const expiration = getExpiration(jwt, options.expirationKey)
+export function isActive(jwt: Jwt): boolean {
+  const notBefore = getNotBefore(jwt)
+  const expiration = getExpiration(jwt)
   const now = new Date()
 
   return now >= notBefore && now < expiration

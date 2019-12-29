@@ -8,7 +8,18 @@ const header = encodeJson({
   typ: 'JWT',
 })
 
-export async function sign(claims: JsonObject, secret: string, crypto?: Crypto): Promise<Jwt> {
+export async function sign(
+  claims: JsonObject,
+  secret: string | CryptoKey,
+  crypto: Crypto,
+): Promise<Jwt>
+export async function sign(claims: JsonObject, secret: string, crypto?: Crypto): Promise<Jwt>
+
+export async function sign(
+  claims: JsonObject,
+  secret: string | CryptoKey,
+  crypto?: Crypto,
+): Promise<Jwt> {
   const token = `${header}.${encodeJson(claims)}`
   const jwt = `${token}.${await hmacSha256(token, secret, crypto)}`
 

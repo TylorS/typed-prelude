@@ -9,11 +9,9 @@ import { Jwt } from './Jwt'
 
 export type VerificationOptions = {
   readonly issuer?: string
+  readonly audience?: string
+  readonly subject?: string
   readonly crypto?: Crypto
-
-  readonly expirationKey?: string
-  readonly notBeforeKey?: string
-  readonly issuerKey?: string
 }
 
 const supportedAlgorithms = ['HS256']
@@ -21,7 +19,7 @@ const validTypes = ['JWT']
 
 export async function verify(
   jwt: Jwt,
-  secret: string,
+  secret: string | CryptoKey, // CryptoKey only works in browser or with options.crypto provided
   options: VerificationOptions = {},
 ): Promise<boolean> {
   const header = getHeader(jwt)
@@ -41,11 +39,19 @@ export async function verify(
 
   const claims = getClaims(jwt)
 
-  if (claims[options.expirationKey || 'exp'] && !isActive(jwt, options)) {
+  if (claims.exp && !isActive(jwt)) {
     return false
   }
 
-  if (options.issuer && claims[options.issuerKey || 'iss'] !== options.issuer) {
+  if (options.issuer && claims.iss !== options.issuer) {
+    return false
+  }
+
+  if (options.audience && claims.aud !== options.audience) {
+    return false
+  }
+
+  if (options.subject && claims.sub !== options.subject) {
     return false
   }
 

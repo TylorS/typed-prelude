@@ -1,7 +1,9 @@
 import { getClaims } from './getClaims'
 import { Jwt } from './Jwt'
 
-export function getNotBefore(jwt: Jwt, notBeforeKey: string = 'nbf'): Date {
+const notBeforeKey = 'nbf'
+
+export function getNotBefore(jwt: Jwt): Date {
   const claims = getClaims(jwt)
 
   if (notBeforeKey in claims && typeof claims[notBeforeKey] === 'number') {
