@@ -1,9 +1,9 @@
 import { Disposable } from '@typed/disposable'
-import { execPure, handle } from '@typed/env'
+import { execPure, handle, Pure } from '@typed/env'
 import { Effect, EffectResources } from './Effect'
 import { runEffect } from './runEffect'
 
-export function runEffects<A extends Effect<any, any, any>>(
+export function runEffects<A extends Effect<Pure, any, any>>(
   effect: A,
   resources: EffectResources<typeof effect>,
 ): Disposable {

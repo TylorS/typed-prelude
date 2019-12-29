@@ -1,4 +1,4 @@
-import { chain, Env } from '@typed/env'
+import { chain, Env, Pure } from '@typed/env'
 import {
   Effect,
   EffectIterator,
@@ -8,7 +8,7 @@ import {
 } from './Effect'
 import { startEffect } from './startEffect'
 
-export const runEffect = <A extends Effect<Env<any, any>, any, any>>(
+export const runEffect = <A extends Effect<Pure, any, any>>(
   effect: A,
 ): Env<EffectResources<A>, EffectValue<A>> => {
   const iterator = startEffect(effect)
@@ -16,7 +16,7 @@ export const runEffect = <A extends Effect<Env<any, any>, any, any>>(
   return runIterator(iterator, iterator.next() as EffectIteratorResult<A>)
 }
 
-const runIterator = <A extends Effect<Env<any, any>, any, any>>(
+const runIterator = <A extends Effect<Pure, any, any>>(
   iterator: EffectIterator<A>,
   result: EffectIteratorResult<A>,
 ): Env<EffectResources<A>, EffectValue<A>> =>

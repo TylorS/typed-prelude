@@ -5,14 +5,14 @@ export interface Effect<A, B, C> {
 }
 
 export namespace Effect {
-  export const of = <A, B>(value: A): Effect<A, B, B> => ({
+  export const of = <A, B = A>(value: A): Effect<A, B, B> => ({
     *[Symbol.iterator]() {
       return yield value
     },
   })
 
   export const create = <Args extends readonly any[], A, B, C>(
-    f: (...args: Args) => Generator<A, B, never>,
+    f: (...args: Args) => Generator<A, B, C>,
   ) => (...args: Args): Effect<A, B, C> => ({
     [Symbol.iterator]: () => f(...args),
   })
