@@ -1,6 +1,6 @@
 {
   "name": "@typed/jwt",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "JWT tools for TypeScript",
   "main": "./cjs/index.js",
   "keywords": [

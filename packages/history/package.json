@@ -1,6 +1,6 @@
 {
   "name": "@typed/history",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "description": "Testable interfaces for the history API",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -30,7 +30,7 @@
     "@typed/env": "^3.0.0",
     "@typed/lambda": "^2.0.1",
     "@typed/new-type": "^2.0.2",
-    "@typed/subscription": "^2.1.4",
+    "@typed/subscription": "^2.2.0",
     "@typed/tuple": "^2.0.1"
   },
   "publishConfig": {
