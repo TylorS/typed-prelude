@@ -49,7 +49,7 @@
       "path": "./packages/iterable"
     },
     {
-      "name": "JWT",
+      "name": "Jwt",
       "path": "./packages/jwt"
     },
     {
