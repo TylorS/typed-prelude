@@ -28,9 +28,7 @@ function __scan<A, B, C>(
     subscribe: fn => {
       let acc = seed
 
-      return subscription.subscribe(b => {
-        fn((acc = reducer(acc, b)))
-      })
+      return subscription.subscribe(b => fn((acc = reducer(acc, b))))
     },
   }
 }
