@@ -11,6 +11,7 @@ export interface DomEnv<A = null> extends HistoryEnv<A> {
   readonly Event: typeof Event
   readonly CustomEvent: typeof CustomEvent
   readonly Image: typeof Image
+  readonly crypto: typeof crypto
 }
 
 export type INodeFilter = NodeFilter

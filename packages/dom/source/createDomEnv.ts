@@ -19,10 +19,11 @@ export function createDomEnv<A>(options?: CreateServerDomEnvOptions): DomEnv<A> 
     localStorage: window.localStorage,
     sessionStorage: window.sessionStorage,
     customElements: window.customElements,
-    HTMLElement,
-    NodeFilter,
-    Event,
-    CustomEvent,
-    Image,
+    HTMLElement: window.HTMLElement,
+    NodeFilter: window.NodeFilter,
+    Event: window.Event,
+    CustomEvent: window.CustomEvent,
+    Image: window.Image,
+    crypto: window.crypto,
   }
 }

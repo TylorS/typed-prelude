@@ -1,10 +1,11 @@
+import { Crypto } from '@peculiar/webcrypto'
+import { Disposable } from '@typed/disposable'
 import { createHistoryEnv, HistoryEnv, wrapInSubscription } from '@typed/history'
 import { serverStorage } from '@typed/storage'
+import { createMatchMedia } from './createMatchMedia'
 import { NodeFilter as ServerNodeFilter } from './NodeFilter'
 import { NodeIteratorImpl } from './NodeIterator'
 import { TreeWalkerImpl } from './TreeWalker'
-
-import { createMatchMedia } from './createMatchMedia'
 import { DomEnv, INodeFilter } from './types'
 
 export type CreateServerDomEnvOptions = {
@@ -82,6 +83,7 @@ export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
     Event: basic.Event,
     CustomEvent: basic.CustomEvent,
     Image: (NodeImage as any) as typeof Image,
+    crypto: new Crypto(),
   }
 
   Object.keys(domEnv).forEach(key => ((window as any)[key] = domEnv[key as keyof DomEnv<A>]))
@@ -109,5 +111,7 @@ function handleHistoryChange(window: Window) {
     if (window.onpopstate) {
       window.onpopstate(event)
     }
+
+    return Disposable.None
   }
 }
