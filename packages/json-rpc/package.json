@@ -1,0 +1,32 @@
+{
+  "name": "@typed/json-rpc",
+  "version": "2.2.0",
+  "description": "JSON-RPC with superpowers",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "JSON-RPC"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false
+}
