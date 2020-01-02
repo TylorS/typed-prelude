@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable/source'
+import { Disposable } from '@typed/disposable'
 import { curry, Is, Predicate } from '@typed/lambda'
 import { Subscription, SubscriptionInput } from './Subscription'
 
