@@ -1,6 +1,6 @@
 {
   "name": "@typed/subscription",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Generic one-to-many subscriptions",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
