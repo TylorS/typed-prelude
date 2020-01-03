@@ -7,12 +7,12 @@ const NODE_BASE64_ENCODING = 'base64'
 
 export function base64Encode(message: string): string {
   return isBrowser
-    ? atob(message)
+    ? btoa(message)
     : Buffer.from(message, NODE_MESSAGE_ENCODING).toString(NODE_BASE64_ENCODING)
 }
 
 export function base64Decode(message: string): string {
   return isBrowser
-    ? btoa(message)
+    ? atob(message)
     : Buffer.from(message, NODE_BASE64_ENCODING).toString(NODE_MESSAGE_ENCODING)
 }
