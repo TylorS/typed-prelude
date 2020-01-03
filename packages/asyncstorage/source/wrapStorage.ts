@@ -1,11 +1,25 @@
 import { Pure } from '@typed/env'
 import { Future } from '@typed/future'
+import { noOp } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
 import { AsyncStorage } from './AsyncStorage'
 
 // Lift synchronous storage into AsyncStorage
 export function wrapStorage(storage: Storage): AsyncStorage<string> {
   return {
+    getKeys: delay(() => {
+      const items: string[] = []
+
+      for (let i = 0; i < storage.length; ++i) {
+        const key = storage.key(i)
+
+        if (key !== null) {
+          items.push(key)
+        }
+      }
+
+      return items
+    }),
     getItems: delay((): readonly string[] => {
       const items: string[] = []
 
@@ -30,6 +44,7 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
         return item
       }),
     clear: Pure.fromIO(() => (storage.clear(), true)),
+    dispose: noOp,
   }
 }
 

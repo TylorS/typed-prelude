@@ -4,6 +4,7 @@ import { map } from '@typed/future'
 import { AsyncStorage } from '../AsyncStorage'
 import { createIndexedDbFactory } from './createIndexedDbFactory'
 import { destroyDb } from './destroyDb'
+import { getAllKeys } from './getAllKeys'
 import { getAllValues } from './getAllValues'
 import { getValue } from './getValue'
 import { openDatabase } from './openDatabase'
@@ -12,7 +13,6 @@ import { removeValue } from './removeValue'
 
 export type CreateIndexedDbOptions = {
   readonly name: string
-  readonly keyPath?: string
   readonly indexedDbFactory?: IDBFactory
 }
 
@@ -37,10 +37,12 @@ function createIndexedDbAsyncStorage<A>(
   )
 
   return {
+    getKeys: chain(getAllKeys, read),
     getItems: chain(store => getAllValues<A>(store), read),
     getItem: key => chain(store => getValue(key, store), read),
     setItem: (key, value) => chain(store => putValue<A>(key, value, store), write),
     removeItem: key => chain(store => removeValue(key, store), write),
     clear: destroyDb(database.name, indexedDbFactory),
+    dispose: () => database.close(),
   }
 }

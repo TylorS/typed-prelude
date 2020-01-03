@@ -37,6 +37,9 @@
       "path": "./iterable/tsconfig.json"
     },
     {
+      "path": "./json-rpc/tsconfig.json"
+    },
+    {
       "path": "./jwt/tsconfig.json"
     },
     {

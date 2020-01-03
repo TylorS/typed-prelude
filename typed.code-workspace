@@ -49,6 +49,10 @@
       "path": "./packages/iterable"
     },
     {
+      "name": "Json-Rpc",
+      "path": "./packages/json-rpc"
+    },
+    {
       "name": "Jwt",
       "path": "./packages/jwt"
     },
