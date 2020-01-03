@@ -8,7 +8,6 @@ const nodeOptions: Options = {
 const browserOptions: Options = {
   ...nodeOptions,
   mode: 'browser',
-  keepAlive: true,
   files: ['packages/**/*.browser-test.ts'],
 }
 

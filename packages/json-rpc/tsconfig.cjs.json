@@ -16,5 +16,10 @@
     "./source/**/*.browser-test.ts",
     "./source/**/*.test.ts",
     "./umd/**"
+  ],
+  "references": [
+    {
+      "path": "../objects/tsconfig.json"
+    }
   ]
 }
