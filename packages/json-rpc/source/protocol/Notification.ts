@@ -9,3 +9,5 @@ export type Notification<
   readonly method: Method
   readonly params: Params
 }>
+
+export type NotificationBatch = ReadonlyArray<Notification<any, any>>

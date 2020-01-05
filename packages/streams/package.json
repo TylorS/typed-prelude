@@ -1,7 +1,7 @@
 {
-  "name": "@typed/json-rpc",
-  "version": "2.2.0",
-  "description": "JSON-RPC with superpowers",
+  "name": "@typed/streams",
+  "version": "0.0.0",
+  "description": "Typed Extensions to @most/core",
   "main": "./cjs/index.js",
   "repository": {
     "type": "git",
@@ -10,7 +10,11 @@
   "keywords": [
     "Typed",
     "TypeScript",
-    "JSON-RPC"
+    "Streams",
+    "Most",
+    "@most/core",
+    "reactive",
+    "functional"
   ],
   "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
   "license": "Parity-6.0.0",
@@ -29,27 +33,15 @@
     "tslib": "^1.10.0"
   },
   "sideEffects": false,
-  "devDependencies": {
-    "@types/ws": "5.1.0"
-  },
   "dependencies": {
-    "@typed/asyncstorage": "1.0.0",
-    "@typed/disposable": "2.0.1",
+    "@most/core": "1.5.0",
+    "@most/disposable": "1.2.2",
+    "@most/types": "1.0.2",
+    "@typed/either": "6.0.1",
     "@typed/effects": "1.1.0",
     "@typed/env": "3.0.0",
-    "@typed/future": "6.0.0",
-    "@typed/http": "3.0.0",
     "@typed/lambda": "2.0.1",
-    "@typed/jwt": "1.0.0",
-    "@typed/logic": "5.0.2",
     "@typed/maybe": "9.0.1",
-    "@typed/objects": "5.0.1",
-    "@typed/remote-data": "2.0.1",
-    "@typed/streams": "0.0.0",
-    "@typed/subscription": "2.2.1",
-    "@typed/tuple": "2.0.1",
-    "@typed/uuid": "4.0.4",
-    "hydrated-ws": "1.2.2",
-    "ws": "7.2.1"
+    "most-subject": "6.0.0"
   }
 }

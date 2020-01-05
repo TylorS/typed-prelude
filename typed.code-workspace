@@ -113,6 +113,10 @@
       "path": "./packages/storage"
     },
     {
+      "name": "Streams",
+      "path": "./packages/streams"
+    },
+    {
       "name": "Strings",
       "path": "./packages/strings"
     },

@@ -1,10 +1,10 @@
 import { Notification } from './Notification'
-import { Request, RequestBatch } from './Request'
+import { Request } from './Request'
 import { Response, ResponseBatch } from './Response'
 
 export type Message =
   | Notification<any, any>
   | Request<any, any>
-  | RequestBatch
+  | ReadonlyArray<Notification<any, any> | Request<any, any>>
   | Response<any, any>
   | ResponseBatch

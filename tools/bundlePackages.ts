@@ -14,16 +14,21 @@ const readDirectory = promisify(fs.readdir)
 const MAKE_BUNDLE_CLI = join(__dirname, 'makeUmdBundleCli.ts')
 
 if (process.mainModule === module) {
-  bundlePackages(sourceDirectory, PACKAGES, 'source/index.ts')
+  const packages = process.argv.slice(2)
+
+  bundlePackages(sourceDirectory, PACKAGES, packages, 'source/index.ts')
 }
 
 export async function bundlePackages(
   sourceDirectory: string,
   PACKAGES: readonly string[],
+  packagesToBundle: readonly string[],
   entry: string,
 ) {
   const numOfCpus = cpus().length
-  const packages = PACKAGES.slice()
+  const packages = PACKAGES.filter(
+    pkg => packagesToBundle.includes(pkg) || packagesToBundle.includes(join(sourceDirectory, pkg)),
+  )
   let bundling = 0
 
   async function runNextPackage() {

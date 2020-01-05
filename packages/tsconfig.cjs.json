@@ -85,6 +85,9 @@
       "path": "./storage/tsconfig.cjs.json"
     },
     {
+      "path": "./streams/tsconfig.cjs.json"
+    },
+    {
       "path": "./strings/tsconfig.cjs.json"
     },
     {
