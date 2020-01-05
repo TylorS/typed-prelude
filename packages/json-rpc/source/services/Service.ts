@@ -5,6 +5,6 @@ export type IOMessages = ReadonlyArray<
 >
 
 export interface Service<I extends IOMessages = IOMessages, O extends IOMessages = IOMessages> {
-  readonly i: I
-  readonly o: O
+  readonly incoming: I
+  readonly outgoing: O
 }

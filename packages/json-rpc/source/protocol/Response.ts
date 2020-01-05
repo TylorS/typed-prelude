@@ -16,8 +16,8 @@ export type Success<Result extends Json = Json> = {
 
 export type Failure<Data extends Json = never> = {
   readonly jsonrpc: '2.0'
-  readonly id: Id
-  readonly errorr: ResponseError<Data>
+  readonly id: Id | null
+  readonly error: ResponseError<Data>
 }
 
 export type ResponseError<Data extends Json = never> = DropNever<{

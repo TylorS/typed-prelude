@@ -1,3 +1,7 @@
+export * from './createFailureResponse'
+export * from './createNotification'
+export * from './createRequest'
+export * from './createSuccessResponse'
 export * from './Id'
 export * from './Json'
 export * from './JsonRpcError'
