@@ -1,3 +1,4 @@
+import { Disposable, disposeAll } from '@typed/disposable'
 import { Arity1 } from '@typed/lambda'
 import { Clock, Timer } from './types'
 
@@ -14,8 +15,13 @@ export function createSetTimeoutTimer(clock: Clock): Timer {
         return asap(f, clock)
       }
 
-      const id = setTimeout(() => f(clock.currentTime()), ms)
-      const dispose = () => clearTimeout(id)
+      let disposables: Disposable[] = []
+      const id = setTimeout(() => disposables.push(f(clock.currentTime())), ms)
+      const dispose = () => {
+        clearTimeout(id)
+        disposeAll(disposables).dispose()
+        disposables = []
+      }
 
       return { dispose }
     },

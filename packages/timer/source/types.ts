@@ -19,7 +19,7 @@ export interface VirtualClock extends Clock {
  * An extension of Clock used for scheduling delayed tasks.
  */
 export interface Timer extends Clock {
-  readonly delay: (fn: Arity1<number>, delayMs: number) => Disposable
+  readonly delay: (fn: Arity1<number, Disposable>, delayMs: number) => Disposable
 }
 
 /**

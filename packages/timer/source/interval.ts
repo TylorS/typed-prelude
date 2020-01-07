@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable'
+import { Disposable, disposeAll } from '@typed/disposable'
 import { Arity1 } from '@typed/lambda'
 import { Timer } from './types'
 
@@ -9,14 +9,14 @@ import { Timer } from './types'
  * @param timer :: Timer
  * @returns :: Disposable
  */
-export function interval(fn: Arity1<number>, interval: number, timer: Timer): Disposable {
-  let disposable = timer.delay(onInterval, interval)
+export function interval(
+  fn: Arity1<number, Disposable>,
+  interval: number,
+  timer: Timer,
+): Disposable {
+  return timer.delay(onInterval, interval)
 
   function onInterval(time: number) {
-    fn(time)
-
-    disposable = timer.delay(onInterval, interval)
+    return disposeAll([fn(time), timer.delay(onInterval, interval)])
   }
-
-  return Disposable.lazy(() => disposable)
 }
