@@ -16,7 +16,13 @@ export function createSetTimeoutTimer(clock: Clock): Timer {
       }
 
       let disposables: Disposable[] = []
-      const id = setTimeout(() => disposables.push(f(clock.currentTime())), ms)
+      const id = setTimeout(() => {
+        const disposable = f(clock.currentTime())
+
+        if (disposable !== Disposable.None) {
+          disposables.push(disposable)
+        }
+      }, ms)
       const dispose = () => {
         clearTimeout(id)
         disposeAll(disposables).dispose()

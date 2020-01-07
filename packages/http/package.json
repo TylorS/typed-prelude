@@ -25,6 +25,7 @@
     "@typed/either": "^6.0.1",
     "@typed/env": "^3.0.0",
     "@typed/lambda": "^2.0.1",
+    "@typed/logic": "5.0.2",
     "@typed/maybe": "^9.0.1",
     "@typed/objects": "^5.0.1",
     "@typed/remote-data": "^2.0.1",

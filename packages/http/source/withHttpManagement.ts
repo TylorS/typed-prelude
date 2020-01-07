@@ -86,8 +86,9 @@ function __withHttpManagement(options: WithHttpManagementOptions, env: HttpEnv):
       clearOldResponse(key)
 
       return timer.delay(() => {
-        success(lastResponse.response)
         scheduleNextClear()
+
+        return success(lastResponse.response)
       }, 0)
     }
 

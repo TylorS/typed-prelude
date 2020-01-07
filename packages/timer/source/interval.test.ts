@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from './createVirtualTimer'
 import { interval } from './interval'
@@ -9,6 +10,8 @@ export const test = describe(`interval`, [
       const expected = [delay, delay * 2, delay * 3]
       function test(value: number) {
         equal(expected.shift(), value)
+
+        return Disposable.None
       }
       const timer = createVirtualTimer()
       const disposable = interval(test, delay, timer)

@@ -1,4 +1,5 @@
 import { Disposable, disposeAll } from '@typed/disposable'
+import { isPromiseLike } from '@typed/logic'
 import { isFailure, isSuccess, Loaded, RemoteData } from '@typed/remote-data'
 import { Timer } from '@typed/timer'
 import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
@@ -19,29 +20,38 @@ export function createTestHttpEnv(
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success, failure, onStart } = callbacks
-    const disposables: Disposable[] = []
 
-    async function getResponse() {
+    function getResponse() {
+      const disposables: Disposable[] = []
+
       if (onStart) {
         disposables.push(onStart())
       }
 
-      const response = await testHttp(url, options)
+      function onResponse(response: Loaded<Error, HttpResponse>) {
+        responses.push(response)
 
-      responses.push(response)
+        if (isFailure(response)) {
+          disposables.push(failure(response.value))
+        }
 
-      if (isFailure(response)) {
-        disposables.push(failure(response.value))
+        if (isSuccess(response)) {
+          disposables.push(success(response.value))
+        }
       }
 
-      if (isSuccess(response)) {
-        disposables.push(success(response.value))
+      const response = testHttp(url, options)
+
+      if (isPromiseLike(response)) {
+        response.then(onResponse)
+      } else {
+        onResponse(response)
       }
+
+      return disposeAll(disposables)
     }
 
-    disposables.push(timer.delay(getResponse, 0))
-
-    return disposeAll(disposables)
+    return timer.delay(getResponse, 0)
   }
 
   return {

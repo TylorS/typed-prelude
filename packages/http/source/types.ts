@@ -1,6 +1,6 @@
 import { Disposable } from '@typed/disposable'
 import { Env } from '@typed/env'
-import { Loaded, RemoteData } from '@typed/remote-data'
+import { RemoteData } from '@typed/remote-data'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
 export type HttpHeaders = Readonly<Record<string, string | undefined>>
@@ -39,5 +39,5 @@ export interface HttpEnv {
 }
 
 export interface TestHttpEnv extends HttpEnv {
-  readonly getResponses: () => ReadonlyArray<Loaded<Error, HttpResponse>>
+  readonly getResponses: () => ReadonlyArray<RemoteData<Error, HttpResponse>>
 }

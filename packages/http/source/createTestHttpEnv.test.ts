@@ -1,17 +1,14 @@
 import { createTestEnv, handle } from '@typed/env'
-import { Loading, RemoteData } from '@typed/remote-data'
+import { Failure, Loading, RemoteData, Success } from '@typed/remote-data'
 import { describe, given, it } from '@typed/test'
 import { createHttpResponse, createTestHttpEnv } from './createTestHttpEnv'
 import { http } from './http'
-import { HttpResponse } from './types'
 
 export const test = describe(`createTestHttpEnv`, [
   given(`options`, [
     it(`returns test-friendly http environment`, async ({ equal }) => {
-      const expectedResponse = RemoteData.of<Error, HttpResponse>(createHttpResponse())
-      const failedResponse = RemoteData.failure<Error, HttpResponse>(
-        new Error('Endpoint does not exist'),
-      )
+      const expectedResponse = Success.of(createHttpResponse())
+      const failedResponse = Failure.of(new Error('Endpoint does not exist'))
       const expectedUrl = 'http://example.com'
       const testEnv = createTestEnv<RemoteData>()
       const testHttpEnv = createTestHttpEnv(
