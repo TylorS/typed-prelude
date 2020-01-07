@@ -1,7 +1,7 @@
 import { pipe } from '@typed/lambda'
 import { base64Encode } from './base64'
 
-export const base64UrlEncode = pipe(base64Encode, encodeTokens)
+export const base64UrlEncode: (str: string) => string = pipe(base64Encode, encodeTokens)
 
 const REPLACE_TOKENS = [[/=+$/, ''] as const, [/\+/g, '-'] as const, [/\//g, '_'] as const]
 

@@ -1,3 +1,4 @@
+import { isAbsolute, join } from 'path'
 import yargs from 'yargs'
 import { makeUmdBundle } from './makeUmdBundle'
 
@@ -18,10 +19,13 @@ const options = yargs
     type: 'string',
   }).argv
 
-process.chdir(options.directory)
+const cwd = process.cwd()
+const directory = isAbsolute(options.directory) ? options.directory : join(cwd, options.directory)
+
+process.chdir(directory)
 
 makeUmdBundle({
-  directory: options.directory,
+  directory,
   entry: options._[0],
   external: options.external ? options.external.map(x => x.toString()) : void 0,
   commonJs: options.commonJs ? JSON.parse(options.commonJs) : void 0,

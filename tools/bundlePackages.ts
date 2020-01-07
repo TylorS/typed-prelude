@@ -7,9 +7,7 @@ import { runInAnotherProcess } from './runInAnotherProcess'
 const MAKE_BUNDLE_CLI = join(__dirname, 'makeUmdBundleCli.ts')
 
 if (process.mainModule === module) {
-  const packages = process.argv.slice(2)
-
-  bundlePackages(sourceDirectory, PACKAGES, packages, 'source/index.ts')
+  bundlePackages(sourceDirectory, PACKAGES, process.argv.slice(2), 'source/index.ts')
 }
 
 export async function bundlePackages(
@@ -56,7 +54,12 @@ async function bundlePackage(sourceDirectory: string, pkg: string, entry: string
 
   console.log(`Bundling @typed/${pkg}...`)
 
-  await makeBundleInAnotherProcess({ directory, entry })
+  const { exitCode, stderr } = await makeBundleInAnotherProcess({ directory, entry })
+
+  if (exitCode !== 0) {
+    console.error(`\n\n\n`, stderr, `\n\n\n`)
+    process.exit(1)
+  }
 
   console.log(`Bundled @typed/${pkg}.`)
 }
@@ -77,5 +80,5 @@ async function makeBundleInAnotherProcess({
     args.push('--commonJs', JSON.stringify(commonJs))
   }
 
-  await runInAnotherProcess(MAKE_BUNDLE_CLI, [...args, entry])
+  return runInAnotherProcess(MAKE_BUNDLE_CLI, [...args, entry])
 }

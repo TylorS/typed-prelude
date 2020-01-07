@@ -1,7 +1,11 @@
 import { pipe } from '@typed/lambda'
 import { base64Decode } from './base64'
 
-export const base64UrlDecode = pipe(padString, replaceTokens, base64Decode)
+export const base64UrlDecode: (encoded: string) => string = pipe(
+  padString,
+  replaceTokens,
+  base64Decode,
+)
 
 const REPLACE_TOKENS = [[/\-/g, '+'] as const, [/_/g, '/'] as const]
 

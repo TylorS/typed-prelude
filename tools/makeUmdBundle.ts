@@ -50,6 +50,7 @@ export async function makeUmdBundle({
       composite: false,
       incremental: false,
       rootDir: join(__dirname, '..'),
+      objectHashIgnoreUnknownHack: true,
       check: false,
     }),
     sourceMaps(),

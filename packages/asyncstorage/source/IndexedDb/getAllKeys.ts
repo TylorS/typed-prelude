@@ -1,7 +1,8 @@
 import { Disposable } from '@typed/disposable'
 import { Future } from '@typed/future'
+import { ItemsEffect } from '../AsyncStorage'
 
-export function getAllKeys(store: IDBObjectStore) {
+export function getAllKeys(store: IDBObjectStore): ItemsEffect<string> {
   return Future.create<never, Error, readonly string[]>((reject, resolve) => {
     const request = store.getAllKeys()
 
