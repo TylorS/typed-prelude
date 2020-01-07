@@ -33,6 +33,8 @@
     "@types/ws": "5.1.0"
   },
   "dependencies": {
+    "@most/core": "1.5.0",
+    "@most/types": "1.0.2",
     "@typed/asyncstorage": "1.0.0",
     "@typed/disposable": "2.0.1",
     "@typed/effects": "1.1.0",

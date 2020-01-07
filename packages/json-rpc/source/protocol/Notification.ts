@@ -1,13 +1,15 @@
-import { DropNever } from './DropNever'
 import { StructuredJson } from './Json'
 
-export type Notification<
+export interface Notification<
   Method extends string = string,
   Params extends StructuredJson = never
-> = DropNever<{
+> {
   readonly jsonrpc: '2.0'
   readonly method: Method
   readonly params: Params
-}>
+}
 
-export type NotificationBatch = ReadonlyArray<Notification<any, any>>
+export type NotificationMethod<A> = A extends Notification<infer R, any> ? R : never
+export type NotificationParams<A> = A extends Notification<any, infer R> ? R : never
+
+export type NotificationBatch = ReadonlyArray<Notification<any>>

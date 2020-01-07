@@ -2,7 +2,7 @@ import { DropNever } from './DropNever'
 import { Id } from './Id'
 import { Json } from './Json'
 
-export type ResponseBatch = ReadonlyArray<Response<any, any>>
+export type ResponseBatch = ReadonlyArray<Response<any>>
 
 export type Response<Result extends Json = Json, ErrorData extends Json = never> =
   | Success<Result>
