@@ -1,6 +1,6 @@
 {
   "name": "@typed/asyncstorage",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Interface for storage using asynchronous methods",
   "main": "./cjs/index.js",
   "repository": {
