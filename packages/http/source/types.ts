@@ -41,3 +41,6 @@ export interface HttpEnv {
 export interface TestHttpEnv extends HttpEnv {
   readonly getResponses: () => ReadonlyArray<RemoteData<Error, HttpResponse>>
 }
+
+export type HttpRequestValue<A> = A extends HttpRequest<infer R, any> ? R : never
+export type HttpRequestEnv<A> = A extends HttpRequest<any, infer R> ? R : never
