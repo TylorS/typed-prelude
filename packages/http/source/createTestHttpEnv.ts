@@ -1,5 +1,5 @@
 import { Disposable, disposeAll } from '@typed/disposable'
-import { isFailure, isSuccess, RemoteData } from '@typed/remote-data'
+import { isFailure, isSuccess, Loaded, RemoteData } from '@typed/remote-data'
 import { Timer } from '@typed/timer'
 import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
 
@@ -9,21 +9,24 @@ import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
  * @param timer :: Timer
  */
 export function createTestHttpEnv(
-  testHttp: (url: string, options: HttpOptions) => RemoteData<Error, HttpResponse>,
+  testHttp: (
+    url: string,
+    options: HttpOptions,
+  ) => Loaded<Error, HttpResponse> | PromiseLike<Loaded<Error, HttpResponse>>,
   timer: Timer,
 ): TestHttpEnv {
-  const responses: Array<RemoteData<Error, HttpResponse>> = []
+  const responses: Array<Loaded<Error, HttpResponse>> = []
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success, failure, onStart } = callbacks
     const disposables: Disposable[] = []
 
-    function getResponse() {
+    async function getResponse() {
       if (onStart) {
         disposables.push(onStart())
       }
 
-      const response = testHttp(url, options)
+      const response = await testHttp(url, options)
 
       responses.push(response)
 

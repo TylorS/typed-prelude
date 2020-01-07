@@ -1,12 +1,13 @@
 import { Disposable } from '@typed/disposable'
 import { Env } from '@typed/env'
-import { RemoteData } from '@typed/remote-data'
+import { Loaded, RemoteData } from '@typed/remote-data'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
+export type HttpHeaders = Readonly<Record<string, string | undefined>>
 
 export type HttpOptions = {
   readonly method?: HttpMethod
-  readonly headers?: Readonly<Record<string, string | undefined>>
+  readonly headers?: HttpHeaders
   readonly body?: string
   readonly type?: 'always-fetch' | 'prefer-last' | 'prefer-current'
 }
@@ -16,7 +17,7 @@ export type HttpResponse<A = unknown> = {
   readonly responseText: string
   readonly status: number
   readonly statusText: string
-  readonly headers: Readonly<Record<string, string | undefined>>
+  readonly headers: HttpHeaders
 }
 
 export type HttpRequest<A = unknown, E extends HttpEnv = HttpEnv> = Env<
@@ -38,5 +39,5 @@ export interface HttpEnv {
 }
 
 export interface TestHttpEnv extends HttpEnv {
-  readonly getResponses: () => ReadonlyArray<RemoteData<Error, HttpResponse>>
+  readonly getResponses: () => ReadonlyArray<Loaded<Error, HttpResponse>>
 }

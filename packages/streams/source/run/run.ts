@@ -17,12 +17,13 @@ export function run<A extends Sources, B extends Sinks>(
     Env.create((cb: Arity1<Run<A, B>, Disposable>, { scheduler }: SchedulerEnv) => {
       const sinkProxies = {} as Record<keyof A, Subject<any, any>>
       const [endSink, endSignal] = create()
-      const sources = io(createProxySinks(sinkProxies, endSignal))
+      const [sources, disposable] = io(createProxySinks(sinkProxies, endSignal))
       const sinks = main(sources)
-      const disposable = replicateSinks<B>(sinks, sinkProxies, scheduler)
+      const replicationDisposable = replicateSinks<B>(sinks, sinkProxies, scheduler)
       const dispose = () => {
         endSink.event(scheduler.currentTime(), void 0)
         disposable.dispose()
+        replicationDisposable.dispose()
         disposeSources(sources)
       }
 
