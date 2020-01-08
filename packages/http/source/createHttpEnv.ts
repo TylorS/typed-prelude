@@ -128,13 +128,14 @@ function browserHttpRequest(
     )
   })
 
+  request.open(method, url)
+
   if (headers) {
     Object.keys(headers).forEach(header => {
       request.setRequestHeader(header, headers[header] || '')
     })
   }
 
-  request.open(method, url)
   request.send(body)
 
   return disposeAll(disposables)
