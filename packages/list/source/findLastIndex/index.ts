@@ -1,5 +1,6 @@
 import { curry, Predicate } from '@typed/lambda'
 import { Maybe, Nothing } from '@typed/maybe'
+import { NoInfer } from '../NoInfer'
 
 /**
  * Find the index of a value in an array-like starting from the end of the array-like.
@@ -8,10 +9,10 @@ import { Maybe, Nothing } from '@typed/maybe'
  * @returns :: Maybe a
  */
 export const findLastIndex: {
-  <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<number>
+  <A>(predicate: Predicate<NoInfer<A>>, list: ArrayLike<A>): Maybe<number>
   <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<number>
 } = curry(__findLastIndex) as {
-  <A>(predicate: Predicate<A>, list: ArrayLike<A>): Maybe<number>
+  <A>(predicate: Predicate<NoInfer<A>>, list: ArrayLike<A>): Maybe<number>
   <A>(predicate: Predicate<A>): (list: ArrayLike<A>) => Maybe<number>
 }
 
