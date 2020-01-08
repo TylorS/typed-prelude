@@ -1,4 +1,4 @@
-import { Arity1, curry } from '@typed/lambda'
+import { Arity2, curry } from '@typed/lambda'
 
 /**
  * Combine a list of lists together by applying a function to
@@ -8,8 +8,8 @@ import { Arity1, curry } from '@typed/lambda'
  * @returns :: [b]
  */
 export const chain = curry((f, list) => unnest(list.map(f))) as {
-  <A, B>(fn: Arity1<A, ReadonlyArray<B>>, list: ReadonlyArray<A>): B[]
-  <A, B>(fn: Arity1<A, ReadonlyArray<B>>): (list: ReadonlyArray<A>) => B[]
+  <A, B>(fn: Arity2<A, number, ReadonlyArray<B>>, list: ReadonlyArray<A>): B[]
+  <A, B>(fn: Arity2<A, number, ReadonlyArray<B>>): (list: ReadonlyArray<A>) => B[]
 }
 
 /**
