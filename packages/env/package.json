@@ -1,6 +1,6 @@
 {
   "name": "@typed/env",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Environment dependent computations",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -28,9 +28,9 @@
     "@typed/common": "^2.0.1",
     "@typed/disposable": "^2.0.2",
     "@typed/lambda": "^2.0.2",
-    "@typed/list": "^5.1.2",
+    "@typed/list": "^5.2.0",
     "@typed/objects": "^5.0.2",
-    "@typed/timer": "^2.1.0"
+    "@typed/timer": "^2.1.1"
   },
   "publishConfig": {
     "access": "public"
