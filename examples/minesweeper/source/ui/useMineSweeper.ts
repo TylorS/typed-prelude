@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useEffectOnce, useUpdateEffect } from 'react-use'
-import { Difficulty, Puzzle, PuzzleEvent, SquareState } from '../domain/model'
-import { updatePosition } from '../domain/services'
+import { Difficulty, NumberOfMines, Puzzle, PuzzleEvent, SquareState } from '../domain/model'
+import { numberOfMinesRemaining, updatePosition } from '../domain/services'
 
 const PUZZLE_STORAGE_KEY = `typed-minesweeper-puzzle`
 
@@ -9,6 +9,7 @@ export type UseMineSweeperOptions = {
   readonly initialDifficulty?: Difficulty
   readonly generatePuzzle: (difficulty: Difficulty) => Puzzle
   readonly storage: Storage
+  readonly numberOfMines: NumberOfMines
 }
 
 const nextDifficulty = (difficulty: Difficulty) => {
@@ -26,6 +27,7 @@ export function useMineSweeper({
   initialDifficulty = Difficulty.Beginner,
   generatePuzzle,
   storage,
+  numberOfMines,
 }: UseMineSweeperOptions) {
   const [difficulty, setDifficulty] = useState(initialDifficulty)
   const [puzzle, setPuzzle] = useState(() => generatePuzzle(difficulty))
@@ -47,15 +49,22 @@ export function useMineSweeper({
   useUpdateEffect(() => setPuzzle(generatePuzzle(difficulty)), [generatePuzzle, difficulty])
 
   useEffectOnce(() => {
-    const puzzle = storage.getItem(PUZZLE_STORAGE_KEY)
+    const puzzleString = storage.getItem(PUZZLE_STORAGE_KEY)
 
-    if (puzzle) {
-      setPuzzle(JSON.parse(puzzle))
+    if (puzzleString) {
+      const [puzzle, difficulty] = JSON.parse(puzzleString) as [Puzzle, Difficulty]
+
+      const remainingMines = numberOfMinesRemaining(puzzle)
+
+      if (remainingMines === numberOfMines[difficulty]) {
+        setDifficulty(difficulty)
+        setPuzzle(puzzle)
+      }
     }
   })
 
   useUpdateEffect(() => {
-    storage.setItem(PUZZLE_STORAGE_KEY, JSON.stringify(puzzle))
+    storage.setItem(PUZZLE_STORAGE_KEY, JSON.stringify([puzzle, difficulty]))
   }, [puzzle])
 
   return {

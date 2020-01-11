@@ -20,6 +20,7 @@ export function MineSweeper({
     initialDifficulty,
     generatePuzzle,
     storage: domEnv.localStorage,
+    numberOfMines,
   })
   const remainingMines = React.useMemo(() => numberOfMinesRemaining(puzzle), [puzzle])
   const haveLost = React.useMemo(() => numberOfMines[difficulty] > remainingMines, [
