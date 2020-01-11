@@ -15,7 +15,7 @@ export function PuzzleSquare({ square, updateState }: PuzzleSquareProps) {
 
   return (
     <td
-      className={classNames('inline-flex', 'justify-center', 'items-center')}
+      className={classNames('inline-flex', 'justify-center', 'items-center', 'ba', 'ba--black-80')}
       style={squareStyle}
       onClick={() => updateState(SquareState.Uncovered)}
       onContextMenu={ev => {

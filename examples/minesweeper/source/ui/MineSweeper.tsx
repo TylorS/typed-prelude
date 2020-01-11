@@ -1,3 +1,4 @@
+import { DomEnv } from '@typed/dom/esm'
 import * as React from 'react'
 import { Difficulty, NumberOfMines, PuzzleSizes } from '../domain/model'
 import { numberOfMinesRemaining, numberOfUncoveredClues } from '../domain/services'
@@ -8,9 +9,18 @@ import { usePuzzleGenerator } from './usePuzzleGenerator'
 
 const headerClassName = classNames('flex', 'items-center', 'justify-center', 'w-third', 'f2')
 
-export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: MineSweeperProps) {
+export function MineSweeper({
+  domEnv,
+  numberOfMines,
+  puzzleSizes,
+  initialDifficulty,
+}: MineSweeperProps) {
   const generatePuzzle = usePuzzleGenerator(numberOfMines, puzzleSizes)
-  const { difficulty, puzzle, sendEvent } = useMineSweeper({ initialDifficulty, generatePuzzle })
+  const { difficulty, puzzle, sendEvent } = useMineSweeper({
+    initialDifficulty,
+    generatePuzzle,
+    storage: domEnv.localStorage,
+  })
   const remainingMines = React.useMemo(() => numberOfMinesRemaining(puzzle), [puzzle])
   const haveLost = React.useMemo(() => numberOfMines[difficulty] > remainingMines, [
     numberOfMines,
@@ -28,8 +38,19 @@ export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: M
   }, [haveLost, puzzle])
 
   return (
-    <section className={classNames('w-100', 'h-100', 'flex', 'items-center', 'justify-center')}>
-      <table className={classNames('pa5')}>
+    <section
+      className={classNames(
+        'w-100',
+        'h-100',
+        'flex',
+        'flex-column',
+        'items-center',
+        'justify-center',
+      )}
+    >
+      <h1>MineSweeper</h1>
+
+      <table className={classNames('ma5', 'mt0', 'pa5', 'pt0', 'collapse')}>
         <thead>
           <td colSpan={puzzleSizes[difficulty][0]} className={classNames('flex', 'items-center')}>
             <section
@@ -50,7 +71,7 @@ export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: M
           </td>
         </thead>
 
-        <tbody className={classNames('ba', 'ba--black-80')}>
+        <tbody>
           <PuzzleGrid puzzle={puzzle} sendEvent={sendEvent} />
         </tbody>
       </table>
@@ -59,7 +80,8 @@ export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: M
 }
 
 export type MineSweeperProps = {
-  readonly initialDifficulty?: Difficulty
+  readonly domEnv: DomEnv
   readonly numberOfMines: NumberOfMines
   readonly puzzleSizes: PuzzleSizes
+  readonly initialDifficulty?: Difficulty
 }

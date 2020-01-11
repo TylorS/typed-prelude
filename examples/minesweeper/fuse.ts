@@ -5,7 +5,7 @@ const sourceDirectory = join(__dirname, 'source')
 const isProduction = process.env.NODE_ENV === 'production'
 
 const client = fusebox({
-  entry: join(sourceDirectory, 'client.tsx'),
+  entry: join(sourceDirectory, 'client.ts'),
   devServer: !isProduction,
   hmr: !isProduction,
   target: 'browser',

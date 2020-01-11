@@ -7,7 +7,7 @@ export function PuzzleClue({ clue }: PuzzleClueProps) {
   const { state, neighboringMineCount } = clue
 
   if (state === SquareState.Uncovered) {
-    return <label>{neighboringMineCount}</label>
+    return neighboringMineCount === 0 ? <label /> : <label>{neighboringMineCount}</label>
   }
 
   if (state === SquareState.Flagged) {
