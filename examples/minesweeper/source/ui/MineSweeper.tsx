@@ -6,7 +6,7 @@ import { PuzzleGrid } from './PuzzleGrid'
 import { useMineSweeper } from './useMineSweeper'
 import { usePuzzleGenerator } from './usePuzzleGenerator'
 
-const headerClassName = classNames('flex', 'items-center', 'justify-center', 'w-third')
+const headerClassName = classNames('flex', 'items-center', 'justify-center', 'w-third', 'f2')
 
 export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: MineSweeperProps) {
   const generatePuzzle = usePuzzleGenerator(numberOfMines, puzzleSizes)
