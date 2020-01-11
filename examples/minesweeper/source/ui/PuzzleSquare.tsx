@@ -6,8 +6,8 @@ import { PuzzleClue } from './PuzzleClue'
 import { PuzzleMine } from './PuzzleMine'
 
 const squareStyle: React.CSSProperties = {
-  height: '32px',
-  width: '32px',
+  height: '4vmin',
+  width: '4vmin',
 }
 
 export function PuzzleSquare({ square, updateState }: PuzzleSquareProps) {

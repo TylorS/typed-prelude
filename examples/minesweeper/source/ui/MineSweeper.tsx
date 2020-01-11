@@ -3,7 +3,11 @@ import * as React from 'react'
 import Confetti from 'react-confetti'
 import { useWindowSize } from 'react-use'
 import { Difficulty, NumberOfMines, PuzzleSizes } from '../domain/model'
-import { numberOfMinesRemaining, numberOfUncoveredClues } from '../domain/services'
+import {
+  numberOfCoveredClues,
+  numberOfMinesRemaining,
+  numberOfUncoveredClues,
+} from '../domain/services'
 import { classNames } from './classNames'
 import { PuzzleGrid } from './PuzzleGrid'
 import { useMineSweeper } from './useMineSweeper'
@@ -29,13 +33,12 @@ export function MineSweeper({
   const haveLost = React.useMemo(() => numberOfMines[difficulty] > remainingMines, [
     numberOfMines,
     difficulty,
-    puzzle,
+    remainingMines,
   ])
-  const haveWon = React.useMemo(() => numberOfMines[difficulty] === remainingMines, [
-    numberOfMines,
-    difficulty,
-    puzzle,
-  ])
+  const haveWon = React.useMemo(
+    () => numberOfMines[difficulty] === remainingMines && numberOfCoveredClues(puzzle) === 0,
+    [numberOfMines, difficulty, puzzle],
+  )
   const [uncoveredClues, setUncoveredClues] = React.useState(0)
 
   React.useEffect(() => {
