@@ -99,9 +99,16 @@ function createRandomPositionGenerator(size: Size) {
   const [width, height] = getSizeIndexes(size)
 
   return (): Position => {
-    const x = Math.round(Math.min(width, Math.max(0, Math.random() * width + 1)))
-    const y = Math.round(Math.min(height, Math.max(0, Math.random() * height + 1)))
+    const x = getRandomInt(0, width)
+    const y = getRandomInt(0, height)
 
     return [x, y]
   }
+}
+
+function getRandomInt(min: number, max: number): number {
+  min = Math.ceil(min)
+  max = Math.floor(max)
+
+  return Math.floor(Math.random() * (max - min + 1)) + min
 }

@@ -48,6 +48,10 @@ export function useMineSweeper({
   }
 
   useKey(isControlPlusKey('r'), () => sendEvent(['new-puzzle']))
+  useKey(
+    ev => ev.keyCode === 32,
+    () => sendEvent(['new-puzzle']),
+  )
   useKey(isControlPlusKey('d'), () => sendEvent(['change-difficulty']))
 
   // Anytime the difficulty is changed generate a new puzzle
