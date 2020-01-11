@@ -4,6 +4,7 @@ import { fromJust, isJust, Maybe } from '@typed/maybe'
 import { Clue, Position, Puzzle, Square, Squares, SquareState } from '../model'
 import { getSurroundingPositions } from './getSurroundingPositions'
 import { isClue } from './isClue'
+import { isMine } from './isMine'
 
 export function updatePosition(state: SquareState, position: Position, puzzle: Puzzle): Puzzle {
   const { squares } = puzzle
@@ -12,21 +13,21 @@ export function updatePosition(state: SquareState, position: Position, puzzle: P
   if (isJust(squareAtPosition) && state === SquareState.Uncovered) {
     const square = fromJust(squareAtPosition)
 
-    if (square.type === 'mine') {
+    if (isMine(square)) {
       return {
         ...puzzle,
         squares: squares.map(square => ({ ...square, state })),
       }
     }
 
-    if (square.type === 'clue' && square.neighboringMineCount === 0) {
+    if (isClue(square) && square.neighboringMineCount === 0) {
       return uncoverSurroundingClues([position], puzzle)
     }
   }
 
   return {
     ...puzzle,
-    squares: updateSquareAtPosition(position, state, squares),
+    squares: updateSquaresAtPosition(new Set([position]), state, squares),
   }
 }
 
@@ -34,16 +35,9 @@ function findPosition<A extends Square>(position: Position, squares: readonly A[
   return find(square => equals(position, square.position), squares)
 }
 
-function uncoverSurroundingClues(
-  positions: readonly Position[],
-  puzzle: Puzzle,
-  positionsSeen: Set<Position> = new Set(positions),
-): Puzzle {
+function uncoverSurroundingClues(positions: readonly Position[], puzzle: Puzzle): Puzzle {
   const surroundingPositions = uniq(
-    chain(
-      pos => getSurroundingPositions(pos, puzzle.size).filter(pos => !positionsSeen.has(pos)),
-      positions,
-    ),
+    chain(pos => getSurroundingPositions(pos, puzzle.size), positions),
   )
   const cluesToUncover = findCluesToUncover(surroundingPositions, puzzle.squares)
 
@@ -53,8 +47,6 @@ function uncoverSurroundingClues(
 
   const positionsOfCluesToUncover = cluesToUncover.map(clue => clue.position)
   const cluesToRecurse = cluesToUncover.filter(x => x.neighboringMineCount === 0)
-
-  surroundingPositions.forEach(pos => positionsSeen.add(pos))
 
   const updatedPuzzle = {
     ...puzzle,
@@ -68,7 +60,6 @@ function uncoverSurroundingClues(
   return uncoverSurroundingClues(
     cluesToRecurse.map(x => x.position),
     updatedPuzzle,
-    positionsSeen,
   )
 }
 
@@ -85,21 +76,6 @@ function updateSquaresAtPosition(
 ): Squares {
   return squares.map(square => {
     if (positions.has(square.position) && canMoveToNewState(square, state)) {
-      return {
-        ...square,
-        state,
-      }
-    }
-
-    return square
-  })
-}
-
-function updateSquareAtPosition(position: Position, state: SquareState, squares: Squares): Squares {
-  const isPosition = equals(position)
-
-  return squares.map(square => {
-    if (isPosition(square.position) && canMoveToNewState(square, state)) {
       return {
         ...square,
         state,
