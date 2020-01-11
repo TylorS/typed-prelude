@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": ".",
+    "rootDirs": [
+      "../../packages",
+      "./"
+    ],
+    "paths": {
+      "@typed/*": [
+        "../../packages/*"
+      ]
+    },
+    "declaration": true,
+    "declarationMap": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
+    "jsx": "react"
+  },
+  "include": [
+    "source"
+  ]
+}

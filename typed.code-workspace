@@ -1,6 +1,10 @@
 {
   "folders": [
     {
+      "name": "Examples",
+      "path": "./examples"
+    },
+    {
       "name": "AsyncIterable",
       "path": "./packages/asynciterable"
     },

@@ -1,0 +1,35 @@
+{
+  "name": "@typed/minesweeper",
+  "version": "0.0.0",
+  "description": "Minesweeper implemented with various Typed libs",
+  "main": "index.js",
+  "scripts": {
+    "test": "typed-test 'source/**/*.test.ts'",
+    "start": "../../node_modules/.bin/ts-node fuse.ts",
+    "build": "NODE_ENV=production ../../node_modules/.bin/ts-node fuse.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "author": "Tylor Steinberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "fuse-box": "^4.0.0-next.165"
+  },
+  "dependencies": {
+    "@peculiar/webcrypto": "^1.0.22",
+    "basichtml": "^1.1.2",
+    "css-mediaquery": "^0.1.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-use": "^13.14.3",
+    "tslib": "^1.10.0"
+  }
+}
