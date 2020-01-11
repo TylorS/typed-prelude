@@ -1,5 +1,7 @@
 import { DomEnv } from '@typed/dom/esm'
 import * as React from 'react'
+import Confetti from 'react-confetti'
+import { useWindowSize } from 'react-use'
 import { Difficulty, NumberOfMines, PuzzleSizes } from '../domain/model'
 import { numberOfMinesRemaining, numberOfUncoveredClues } from '../domain/services'
 import { classNames } from './classNames'
@@ -15,6 +17,7 @@ export function MineSweeper({
   puzzleSizes,
   initialDifficulty,
 }: MineSweeperProps) {
+  const { height, width } = useWindowSize()
   const generatePuzzle = usePuzzleGenerator(numberOfMines, puzzleSizes)
   const { difficulty, puzzle, sendEvent } = useMineSweeper({
     initialDifficulty,
@@ -24,6 +27,11 @@ export function MineSweeper({
   })
   const remainingMines = React.useMemo(() => numberOfMinesRemaining(puzzle), [puzzle])
   const haveLost = React.useMemo(() => numberOfMines[difficulty] > remainingMines, [
+    numberOfMines,
+    difficulty,
+    remainingMines,
+  ])
+  const haveWon = React.useMemo(() => numberOfMines[difficulty] === remainingMines, [
     numberOfMines,
     difficulty,
     remainingMines,
@@ -76,6 +84,8 @@ export function MineSweeper({
           <PuzzleGrid puzzle={puzzle} sendEvent={sendEvent} />
         </tbody>
       </table>
+
+      {haveWon && <Confetti height={height} width={width} />}
     </section>
   )
 }
