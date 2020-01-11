@@ -1,6 +1,6 @@
 import { chain, filterMaybes, find, uniq } from '@typed/list'
 import { equals } from '@typed/logic'
-import { fromJust, isNothing, Maybe } from '@typed/maybe'
+import { fromJust, isJust, Maybe } from '@typed/maybe'
 import { Clue, Position, Puzzle, Square, Squares, SquareState } from '../model'
 import { getSurroundingPositions } from './getSurroundingPositions'
 import { isClue } from './isClue'
@@ -10,21 +10,19 @@ export function updatePosition(state: SquareState, position: Position, puzzle: P
   const { squares } = puzzle
   const squareAtPosition = findPosition(position, squares)
 
-  if (isNothing(squareAtPosition)) {
-    return puzzle
-  }
+  if (isJust(squareAtPosition) && state === SquareState.Uncovered) {
+    const square = fromJust(squareAtPosition)
 
-  const square = fromJust(squareAtPosition)
-
-  if (isMine(square)) {
-    return {
-      ...puzzle,
-      squares: squares.map(square => ({ ...square, state })),
+    if (isMine(square)) {
+      return {
+        ...puzzle,
+        squares: squares.map(square => ({ ...square, state })),
+      }
     }
-  }
 
-  if (isClue(square) && square.neighboringMineCount === 0) {
-    return uncoverSurroundingClues([position], puzzle)
+    if (isClue(square) && square.neighboringMineCount === 0) {
+      return uncoverSurroundingClues([position], puzzle)
+    }
   }
 
   return {
