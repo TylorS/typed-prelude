@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useEffectOnce, useUpdateEffect } from 'react-use'
+import { useEffectOnce, useKey, useUpdateEffect } from 'react-use'
 import { Difficulty, NumberOfMines, Puzzle, PuzzleEvent, SquareState } from '../domain/model'
 import { numberOfCoveredClues, numberOfMinesRemaining, updatePosition } from '../domain/services'
 
@@ -23,6 +23,8 @@ const nextDifficulty = (difficulty: Difficulty) => {
   }
 }
 
+const isControlPlusKey = (key: string) => (ev: KeyboardEvent) => ev.ctrlKey && ev.key === key
+
 export function useMineSweeper({
   initialDifficulty = Difficulty.Beginner,
   generatePuzzle,
@@ -44,6 +46,9 @@ export function useMineSweeper({
         return setPuzzle(updatePosition(event[0], event[1], puzzle))
     }
   }
+
+  useKey(isControlPlusKey('r'), () => sendEvent(['new-puzzle']))
+  useKey(isControlPlusKey('d'), () => sendEvent(['change-difficulty']))
 
   // Anytime the difficulty is changed generate a new puzzle
   useUpdateEffect(() => setPuzzle(generatePuzzle(difficulty)), [generatePuzzle, difficulty])
