@@ -16,7 +16,6 @@
     "downlevelIteration": true,
     "esModuleInterop": true,
     "importHelpers": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,

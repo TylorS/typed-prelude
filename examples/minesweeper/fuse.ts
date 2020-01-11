@@ -2,12 +2,11 @@ import { fusebox, pluginReplace } from 'fuse-box'
 import { join } from 'path'
 
 const sourceDirectory = join(__dirname, 'source')
-const isProduction = process.env.NODE_ENV === 'production'
 
 const client = fusebox({
   entry: join(sourceDirectory, 'client.ts'),
-  devServer: !isProduction,
-  hmr: !isProduction,
+  devServer: true,
+  hmr: true,
   target: 'browser',
   webIndex: {
     enabled: true,
@@ -22,15 +21,7 @@ const client = fusebox({
   ],
 })
 
-bundle().catch(error => {
+client.runDev().catch(error => {
   console.error(error)
   process.exit(1)
 })
-
-async function bundle() {
-  if (isProduction) {
-    await client.runProd({ screwIE: true })
-  } else {
-    await client.runDev()
-  }
-}
