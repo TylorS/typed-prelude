@@ -29,12 +29,12 @@ export function MineSweeper({
   const haveLost = React.useMemo(() => numberOfMines[difficulty] > remainingMines, [
     numberOfMines,
     difficulty,
-    remainingMines,
+    puzzle,
   ])
   const haveWon = React.useMemo(() => numberOfMines[difficulty] === remainingMines, [
     numberOfMines,
     difficulty,
-    remainingMines,
+    puzzle,
   ])
   const [uncoveredClues, setUncoveredClues] = React.useState(0)
 
