@@ -30,22 +30,24 @@ export function MineSweeper({ numberOfMines, puzzleSizes, initialDifficulty }: M
   return (
     <section className={classNames('w-100', 'h-100', 'flex', 'items-center', 'justify-center')}>
       <table className={classNames('pa5')}>
-        <thead className={classNames('flex', 'items-center')}>
-          <section
-            onClick={() => sendEvent(['change-difficulty'])}
-            className={classNames(headerClassName, 'pointer')}
-          >
-            {remainingMines}
-          </section>
+        <thead>
+          <td colSpan={puzzleSizes[difficulty][0]} className={classNames('flex', 'items-center')}>
+            <section
+              onClick={() => sendEvent(['change-difficulty'])}
+              className={classNames(headerClassName, 'pointer')}
+            >
+              {remainingMines}
+            </section>
 
-          <section
-            className={classNames(headerClassName, 'pointer')}
-            onClick={() => sendEvent(['new-puzzle'])}
-          >
-            <p dangerouslySetInnerHTML={{ __html: haveLost ? `&#128560` : `&#128515` }}></p>
-          </section>
+            <section
+              className={classNames(headerClassName, 'pointer')}
+              onClick={() => sendEvent(['new-puzzle'])}
+            >
+              <p dangerouslySetInnerHTML={{ __html: haveLost ? `&#128560` : `&#128515` }}></p>
+            </section>
 
-          <section className={headerClassName}>{uncoveredClues}</section>
+            <section className={headerClassName}>{uncoveredClues}</section>
+          </td>
         </thead>
 
         <tbody className={classNames('ba', 'ba--black-80')}>

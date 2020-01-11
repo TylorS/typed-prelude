@@ -18,9 +18,10 @@ export function PuzzleSquare({ square, updateState }: PuzzleSquareProps) {
       className={classNames('inline-flex', 'justify-center', 'items-center')}
       style={squareStyle}
       onClick={() => updateState(SquareState.Uncovered)}
-      onContextMenu={() =>
+      onContextMenu={ev => {
+        ev.preventDefault()
         updateState(state === SquareState.Flagged ? SquareState.Covered : SquareState.Flagged)
-      }
+      }}
     >
       {isClue(square) ? <PuzzleClue clue={square} /> : <PuzzleMine mine={square} />}
     </td>
