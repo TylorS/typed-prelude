@@ -1,0 +1,49 @@
+{
+  "name": "@typed/node",
+  "version": "0.0.0",
+  "description": "Tools to help with building your node applications",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "environment",
+    "variables"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "12.12.24"
+  },
+  "peerDependencies": {
+    "@types/node": "^12.12.24",
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/disposable": "2.0.2",
+    "@typed/either": "6.0.2",
+    "@typed/effects": "1.2.1",
+    "@typed/env": "3.1.1",
+    "@typed/future": "6.0.2",
+    "@typed/lambda": "2.0.2",
+    "@typed/logger": "3.0.2",
+    "@typed/logic": "5.1.0",
+    "@typed/maybe": "9.0.2",
+    "@typed/strings": "6.0.2"
+  }
+}
