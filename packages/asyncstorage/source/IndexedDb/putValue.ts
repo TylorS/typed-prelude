@@ -5,11 +5,12 @@ import { ItemEffect } from '../AsyncStorage'
 export function putValue<A>(key: string, value: A, store: IDBObjectStore): ItemEffect<A> {
   return Future.create((reject, resolve) => {
     const request = store.put(value, key)
+    const disposable = Disposable.lazy()
 
-    let disposable: Disposable = Disposable.None
-    request.onerror = ev => (disposable = reject(new Error((ev.target as any).errorCode)))
-    request.onsuccess = () => (disposable = resolve(value))
+    request.onerror = ev =>
+      disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
+    request.onsuccess = () => disposable.addDisposable(resolve(value))
 
-    return Disposable.lazy(() => disposable)
+    return disposable
   })
 }

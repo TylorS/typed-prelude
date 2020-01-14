@@ -64,6 +64,9 @@
       "path": "./new-type/tsconfig.cjs.json"
     },
     {
+      "path": "./node/tsconfig.cjs.json"
+    },
+    {
       "path": "./objects/tsconfig.cjs.json"
     },
     {

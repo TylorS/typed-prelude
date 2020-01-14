@@ -7,12 +7,13 @@ export function openDatabase(
 ): Future<number, Error, IDBDatabase> {
   return Future.create((reject, resolve) => {
     const request = indexedDbFactory.open(name)
+    const disposable = Disposable.lazy()
 
-    let disposable = Disposable.None
-    request.onerror = ev => (disposable = reject(new Error((ev.target as any).errorCode)))
-    request.onsuccess = () => (disposable = resolve(request.result))
+    request.onerror = ev =>
+      disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
+    request.onsuccess = () => disposable.addDisposable(resolve(request.result))
     request.onupgradeneeded = () => request.result.createObjectStore(name)
 
-    return Disposable.lazy(() => disposable)
+    return disposable
   })
 }

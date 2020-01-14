@@ -1,5 +1,4 @@
-import { Disposable } from './Disposable'
-import { dispose } from './dispose'
+import { Disposable, dispose } from './Disposable'
 
 /**
  * Clean up more than one disposable

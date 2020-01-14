@@ -20,10 +20,10 @@ function __debounce<A, B>(
   return {
     ...subscription,
     subscribe: (fn: Arity1<B>) => {
-      let disposable: Disposable = Disposable.None
+      let disposable = Disposable.None
 
       return disposeAll([
-        Disposable.lazy(() => disposable),
+        { dispose: () => disposable.dispose() },
         subscription.subscribe(b => {
           disposable.dispose()
           disposable = timer.delay(() => fn(b), delayMs)

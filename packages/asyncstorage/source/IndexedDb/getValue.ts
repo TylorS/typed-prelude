@@ -6,11 +6,12 @@ import { ItemEffect } from '../AsyncStorage'
 export function getValue<A>(key: string, store: IDBObjectStore): ItemEffect<Maybe<A>> {
   return Future.create((reject, resolve) => {
     const request = store.get(key)
+    const disposable = Disposable.lazy()
 
-    let disposable: Disposable = Disposable.None
-    request.onerror = ev => (disposable = reject(new Error((ev.target as any).errorCode)))
-    request.onsuccess = () => (disposable = resolve(Maybe.of(request.result)))
+    request.onerror = ev =>
+      disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
+    request.onsuccess = () => disposable.addDisposable(resolve(Maybe.of(request.result)))
 
-    return Disposable.lazy(() => disposable)
+    return disposable
   })
 }

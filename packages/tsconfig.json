@@ -64,6 +64,9 @@
       "path": "./new-type/tsconfig.json"
     },
     {
+      "path": "./node/tsconfig.json"
+    },
+    {
       "path": "./objects/tsconfig.json"
     },
     {

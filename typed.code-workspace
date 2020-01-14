@@ -89,6 +89,10 @@
       "path": "./packages/new-type"
     },
     {
+      "name": "Node",
+      "path": "./packages/node"
+    },
+    {
       "name": "Objects",
       "path": "./packages/objects"
     },

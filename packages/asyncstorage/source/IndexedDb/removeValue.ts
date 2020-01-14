@@ -11,12 +11,14 @@ export function removeValue<A>(key: string, store: IDBObjectStore): ItemEffect<M
     (value: Either<Error, Maybe<A>>) =>
       Future.create((reject, resolve) => {
         const request = store.delete(key)
+        const disposable = Disposable.lazy()
 
-        let disposable = Disposable.None
-        request.onerror = ev => (disposable = reject(new Error((ev.target as any).errorCode)))
-        request.onsuccess = () => (disposable = resolve(isLeft(value) ? Nothing : fromRight(value)))
+        request.onerror = ev =>
+          disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
+        request.onsuccess = () =>
+          disposable.addDisposable(resolve(isLeft(value) ? Nothing : fromRight(value)))
 
-        return Disposable.lazy(() => disposable)
+        return disposable
       }),
     getValue<A>(key, store),
   )
