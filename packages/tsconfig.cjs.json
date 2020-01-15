@@ -101,6 +101,9 @@
     },
     {
       "path": "./uuid/tsconfig.cjs.json"
+    },
+    {
+      "path": "./validation/tsconfig.cjs.json"
     }
   ],
   "files": []

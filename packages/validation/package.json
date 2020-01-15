@@ -1,0 +1,31 @@
+{
+  "name": "@typed/validation",
+  "version": "0.0.0",
+  "description": "Validation data-type for validating preconditions",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "Validation",
+    "Typed",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/either": "6.0.2",
+    "@typed/lambda": "2.0.2",
+    "@typed/list": "5.2.0",
+    "@typed/logic": "5.1.0",
+    "@typed/maybe": "9.0.2"
+  }
+}
