@@ -141,6 +141,10 @@
       "path": "./packages/uuid"
     },
     {
+      "name": "Validation",
+      "path": "./packages/validation"
+    }
+    {
       "name": "Typed Prelude",
       "path": "./"
     }
