@@ -1,6 +1,6 @@
 {
   "name": "@typed/asynciterable",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "Async Iterables Combinators",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,8 +25,8 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^2.0.2",
-    "@typed/logic": "^5.1.0"
+    "@typed/lambda": "^2.1.0",
+    "@typed/logic": "^5.2.0"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"
