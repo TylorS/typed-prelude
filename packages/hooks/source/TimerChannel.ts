@@ -1,4 +1,5 @@
-import { createTimer } from '@typed/timer'
+import { createTimer, Timer } from '@typed/timer'
+import { Channel } from './Channel'
 import { createChannel } from './createChannel'
 
-export const TimerChannel = createChannel(createTimer())
+export const TimerChannel: Channel<Timer> = createChannel(createTimer())
