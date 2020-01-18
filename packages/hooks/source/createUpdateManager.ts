@@ -1,5 +1,6 @@
 import { Pure } from '@typed/env'
 
+// Basic functionality to keep track of what objects have been updated
 export function createUpdateManager<A extends object>() {
   // WeakSet is used to allow GC to automatically clean things up for us
   const updated = new WeakSet<A>()

@@ -27,7 +27,7 @@ export function createHooksManager(): HooksManager {
     updateChannel,
     consumeChannel,
 
-    // Control if has been marked as updated
+    // Control if a node has been marked as updated
     setUpdated,
     hasBeenUpdated,
   }

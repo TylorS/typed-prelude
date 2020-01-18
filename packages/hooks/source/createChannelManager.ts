@@ -3,6 +3,8 @@ import { Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 
+// Keeps track of channel values and helps ensure those that need to be updated
+// by channel values are marked as updated
 export function createChannelManager<A extends object>(
   setUpdated: (node: A, updated: boolean) => Effect<Pure<any>, void, any>,
   getAllDescendants: (

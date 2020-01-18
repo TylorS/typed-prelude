@@ -1,5 +1,6 @@
 import { Pure } from '@typed/env'
 
+// Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.
 export function createTreeManager<A extends object>() {
   // WeakMap is used to allow GC to automatically clean things up for us
   const parentToChildren = new WeakMap<A, Set<A>>()
