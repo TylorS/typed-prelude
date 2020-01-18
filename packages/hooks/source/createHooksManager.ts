@@ -7,16 +7,17 @@ import { HooksManager } from './HooksManager'
 
 export function createHooksManager(): HooksManager {
   const updated = new Set<HookEnvironment>()
-  const parentToChildren = new WeakMap<HookEnvironment, HookEnvironment[]>()
+  const parentToChildren = new WeakMap<HookEnvironment, Set<HookEnvironment>>()
   const childToParent = new WeakMap<HookEnvironment, HookEnvironment>()
   const channelValues = new WeakMap<Channel<any>, WeakMap<HookEnvironment, any>>()
+  const channelConsumers = new WeakMap<Channel<any>, WeakSet<HookEnvironment>>()
+  const channelProviders = new WeakMap<Channel<any>, WeakSet<HookEnvironment>>()
 
   function removeNodeFromParent(parent: HookEnvironment, node: HookEnvironment) {
-    const children = parentToChildren.get(parent)!
-    const index = children.findIndex(equals(node))
+    const children = parentToChildren.get(parent)
 
-    if (index > -1) {
-      children.splice(index, 1)
+    if (children) {
+      children.delete(node)
     }
   }
 
@@ -26,6 +27,8 @@ export function createHooksManager(): HooksManager {
     if (parent) {
       removeNodeFromParent(parent, node)
     }
+
+    childToParent.delete(node)
   }
 
   function getChannelValues<A>(channel: Channel<A>): WeakMap<HookEnvironment, A> {
@@ -36,19 +39,35 @@ export function createHooksManager(): HooksManager {
     return channelValues.get(channel)!
   }
 
+  function getChannelConsumers<A>(channel: Channel<A>): WeakSet<HookEnvironment> {
+    if (!channelConsumers.has(channel)) {
+      channelConsumers.set(channel, new WeakSet())
+    }
+
+    return channelConsumers.get(channel)!
+  }
+
+  function getChannelProviders<A>(channel: Channel<A>): WeakSet<HookEnvironment> {
+    if (!channelProviders.has(channel)) {
+      channelProviders.set(channel, new WeakSet())
+    }
+
+    return channelProviders.get(channel)!
+  }
+
   function* setParent(child: HookEnvironment, parent: HookEnvironment) {
-    removeFromParent(child)
+    yield Pure.fromIO(() => removeFromParent(child))
 
     childToParent.set(child, parent)
 
     if (!parentToChildren.has(parent)) {
-      parentToChildren.set(parent, [])
+      parentToChildren.set(parent, new Set())
     }
 
     const children = parentToChildren.get(parent)!
 
-    if (!children.includes(child)) {
-      children.push(child)
+    if (!children.has(child)) {
+      children.add(child)
     }
 
     return
@@ -59,7 +78,7 @@ export function createHooksManager(): HooksManager {
   }
 
   function* removeNode(node: HookEnvironment) {
-    removeFromParent(node)
+    yield Pure.fromIO(() => removeFromParent(node))
 
     const children = parentToChildren.get(node)
 
@@ -70,10 +89,33 @@ export function createHooksManager(): HooksManager {
     parentToChildren.delete(node)
   }
 
+  function* getAllDescendants(
+    providers: WeakSet<HookEnvironment>,
+    consumers: WeakSet<HookEnvironment>,
+    node: HookEnvironment,
+  ): Generator<HookEnvironment, void, any> {
+    const children = parentToChildren.get(node)
+
+    if (children) {
+      for (const child of children) {
+        if (!providers.has(child)) {
+          if (consumers.has(child)) {
+            yield child
+          }
+
+          yield* getAllDescendants(providers, consumers, child)
+        }
+      }
+    }
+  }
+
   function* updateChannel<A>(channel: Channel<A>, initial: A, node: HookEnvironment) {
     const values = yield Pure.fromIO(() => getChannelValues(channel))
+    const consumers = getChannelConsumers(channel)
+    const providers = getChannelProviders(channel)
 
     values.set(node, initial)
+    providers.add(node)
 
     return function*(value: A) {
       const values = getChannelValues(channel)
@@ -82,6 +124,10 @@ export function createHooksManager(): HooksManager {
       if (!equals(currentValue, value)) {
         values.set(node, value)
         updated.add(node)
+
+        for (const child of getAllDescendants(providers, consumers, node)) {
+          updated.add(child)
+        }
       }
 
       return value
@@ -93,6 +139,9 @@ export function createHooksManager(): HooksManager {
     node: HookEnvironment,
   ): Effect<Pure<any>, A, any> {
     const values: WeakMap<HookEnvironment, A> = yield Pure.fromIO(() => getChannelValues(channel))
+    const consumers = getChannelConsumers(channel)
+
+    consumers.add(node)
 
     while (!values.has(node)) {
       const parent = childToParent.get(node)
@@ -108,15 +157,11 @@ export function createHooksManager(): HooksManager {
   }
 
   function* setUpdated(node: HookEnvironment, hasBeenUpdated: boolean) {
-    if (hasBeenUpdated) {
-      updated.add(node)
-    } else {
-      updated.delete(node)
-    }
+    hasBeenUpdated ? updated.add(node) : updated.delete(node)
   }
 
-  function hasBeenUpdated(environment: HookEnvironment) {
-    return updated.has(environment)
+  function hasBeenUpdated(node: HookEnvironment) {
+    return updated.has(node)
   }
 
   return {

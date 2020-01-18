@@ -8,7 +8,7 @@ import { Channel } from './Channel'
 import { HookEnvironment, InitialState, Ref, UseState } from './HookEnvironment'
 import { HooksManager } from './HooksManager'
 
-export function createHooksEnvironment(manager: HooksManager): HookEnvironment {
+export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = createUuid()
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()

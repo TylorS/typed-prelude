@@ -1,6 +1,6 @@
 export * from './Channel'
 export * from './createChannel'
-export * from './createHooksEnvironment'
+export * from './createHookEnvironment'
 export * from './createHooksManager'
 export * from './didRefChange'
 export * from './HookEnvironment'
