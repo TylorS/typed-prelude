@@ -6,10 +6,10 @@ import { runWithHooks } from './runWithHooks'
 export type WithHookEnvs<E> = Env<HookEnvironment, HookEnvironment> | Pure<any> | Env<E, any>
 
 // Helps to manage resetting the HooksEnvironment between function invocations
-export function withHooks<A extends readonly any[], E, B>(
-  fn: (...args: A) => Effect<WithHookEnvs<E>, B, any>,
+export function withHooks<A extends readonly any[], E, B, C>(
+  fn: (...args: A) => Effect<WithHookEnvs<E>, B, C>,
 ) {
-  return function* withHooks(...args: A): Generator<WithHookEnvs<E>, B, any> {
+  return function* withHooks(...args: A): Generator<WithHookEnvs<E>, B, HookEnvironment & C> {
     const hookEnv = yield* get<HookEnvironment>()
     let value: B | void
 

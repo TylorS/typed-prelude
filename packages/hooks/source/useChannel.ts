@@ -3,8 +3,11 @@ import { Arity1 } from '@typed/lambda'
 import { Channel, ChannelValue } from './Channel'
 import { HookEnvironment } from './HookEnvironment'
 import { useMemo } from './useMemo'
+import { WithHookEnvs } from './withHooks'
 
-export function* useChannel<A>(channel: Channel<A>) {
+export function* useChannel<A>(
+  channel: Channel<A>,
+): Generator<WithHookEnvs<never>, A, HookEnvironment> {
   const { useChannel } = yield* get<HookEnvironment>()
 
   return yield* useChannel(channel)
