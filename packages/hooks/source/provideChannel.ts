@@ -4,6 +4,7 @@ import { fromJust, Just } from '@typed/maybe'
 import { Channel } from './Channel'
 import { HookEnvironment, InitialState } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
+import { useMemo } from './useMemo'
 
 type UpdateChannel<A> = (value: A) => Effect<Env<never, any>, A, any>
 
@@ -17,5 +18,7 @@ export function* provideChannel<A>(channel: Channel<A>, initial: InitialState<A>
     setUpdateChannel(yield* provideChannel(channel, initial))
   }
 
-  return [currentValue, fromJust(updateChannel.current as Just<UpdateChannel<A>>)] as const
+  const update = yield* useMemo(fromJust, [updateChannel.current as Just<UpdateChannel<A>>])
+
+  return [currentValue, update] as const
 }
