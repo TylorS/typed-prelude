@@ -53,7 +53,7 @@ export function createTreeManager<A extends object>() {
   function* removeNode(node: A) {
     yield Pure.fromIO(() => removeFromParent(node))
 
-    const children = parentToChildren.get(node)
+    const children = getChildren(node)
 
     if (children) {
       children.forEach(removeNode)
@@ -71,11 +71,14 @@ export function createTreeManager<A extends object>() {
 
     if (children) {
       for (const child of children) {
+        // Don't continue past provider boundaries
         if (!providers.has(child)) {
+          // Update if is a consumer
           if (consumers.has(child)) {
             yield child
           }
 
+          // Continue down the tree
           yield* getAllDescendants(providers, consumers, child)
         }
       }
