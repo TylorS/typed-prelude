@@ -1,15 +1,11 @@
 {
   "folders": [
     {
-      "name": "Examples",
-      "path": "./examples"
-    },
-    {
-      "name": "AsyncIterable",
+      "name": "Asynciterable",
       "path": "./packages/asynciterable"
     },
     {
-      "name": "AsyncStorage",
+      "name": "Asyncstorage",
       "path": "./packages/asyncstorage"
     },
     {
@@ -43,6 +39,10 @@
     {
       "name": "History",
       "path": "./packages/history"
+    },
+    {
+      "name": "Hooks",
+      "path": "./packages/hooks"
     },
     {
       "name": "Http",
@@ -143,7 +143,7 @@
     {
       "name": "Validation",
       "path": "./packages/validation"
-    }
+    },
     {
       "name": "Typed Prelude",
       "path": "./"

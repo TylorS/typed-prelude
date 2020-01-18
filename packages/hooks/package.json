@@ -1,0 +1,36 @@
+{
+  "name": "@typed/hooks",
+  "version": "2.0.5",
+  "description": "Hooks powered by generator functions & effects",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "Hooks",
+    "Server",
+    "Browser",
+    "Typed",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/disposable": "2.2.0",
+    "@typed/env": "3.3.0",
+    "@typed/effects": "1.4.0",
+    "@typed/lambda": "2.1.0",
+    "@typed/logic": "5.2.0",
+    "@typed/maybe": "9.1.0",
+    "@typed/timer": "2.3.0",
+    "@typed/uuid": "5.2.0"
+  }
+}
