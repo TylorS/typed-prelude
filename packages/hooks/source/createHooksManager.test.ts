@@ -38,7 +38,7 @@ export const test = describe(`createHooksManager`, [
           // Get provideChannel Effect from manager
           const provideChannel = yield* manager.updateChannel(channel, initial, a)
 
-          // Ensure provideChannel didn't make any changes
+          // Ensure manager.updateChannel didn't make any unexpected changes
           equal(initial, yield* manager.consumeChannel(channel, a))
           equal(initial, yield* manager.consumeChannel(channel, b))
           equal(initial, yield* manager.consumeChannel(channel, c))
