@@ -69,9 +69,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   }
 
   function* useChannel<A>(channel: Channel<A>) {
-    const value = yield* manager.consumeChannel(channel, hookEnvironment)
-
-    return value
+    return yield* manager.consumeChannel(channel, hookEnvironment)
   }
 
   function* provideChannel<A>(channel: Channel<A>, initial: InitialState<A>) {
