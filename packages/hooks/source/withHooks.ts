@@ -9,7 +9,7 @@ export type WithHookEnvs<E> = Env<HookEnvironment, HookEnvironment> | Pure<any> 
 export function withHooks<A extends readonly any[], E, B, C>(
   fn: (...args: A) => Effect<WithHookEnvs<E>, B, C>,
 ) {
-  return function* withHooks(...args: A): Generator<WithHookEnvs<E>, B, HookEnvironment & C> {
+  return function* withHooks(...args: A): Generator<WithHookEnvs<E>, B, HookEnvironment & B & C> {
     const hookEnv = yield* get<HookEnvironment>()
     let value: B | void
 
