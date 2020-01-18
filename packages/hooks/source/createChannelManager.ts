@@ -54,10 +54,10 @@ export function createChannelManager<A extends object>(
 
       if (!equals(currentValue, value)) {
         values.set(node, value)
-        setUpdated(node, true)
+        yield* setUpdated(node, true)
 
         for (const child of getAllDescendants(providers, consumers, node)) {
-          setUpdated(child, true)
+          yield* setUpdated(child, true)
         }
       }
 
