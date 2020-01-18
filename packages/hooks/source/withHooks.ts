@@ -1,9 +1,7 @@
 import { Effect, get } from '@typed/effects'
-import { Env, Pure } from '@typed/env'
 import { HookEnvironment } from './HookEnvironment'
 import { runWithHooks } from './runWithHooks'
-
-export type WithHookEnvs<E> = Env<HookEnvironment, HookEnvironment> | Pure<any> | Env<E, any>
+import { WithHookEnvs } from './WithHookEnvs'
 
 // Helps to manage resetting the HooksEnvironment between function invocations
 export function withHooks<A extends readonly any[], E, B, C>(

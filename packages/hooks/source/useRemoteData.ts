@@ -5,7 +5,7 @@ import { HookEnvironment } from './HookEnvironment'
 import { useEffect } from './useEffect'
 import { useMemo } from './useMemo'
 import { useState } from './useState'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useRemoteData<E, A, B>(
   env: Env<E, RemoteData<A, B>>,

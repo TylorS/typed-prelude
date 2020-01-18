@@ -5,7 +5,7 @@ import { Route } from '@typed/routing'
 import { HookEnvironment } from './HookEnvironment'
 import { useMatches } from './useMatches'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useRouter<A, B = null>(
   routes: ReadonlyArray<Route<any, A>>,

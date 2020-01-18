@@ -5,7 +5,7 @@ import { unwrap, withDefault } from '@typed/maybe'
 import { HookEnvironment } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useTimer } from './useTimer'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 const empty: [] = []
 

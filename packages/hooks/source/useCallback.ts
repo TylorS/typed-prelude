@@ -1,7 +1,7 @@
 import { Arity1, memoize } from '@typed/lambda'
 import { HookEnvironment } from './HookEnvironment'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useCallback<A, B>(
   fn: Arity1<A, B>,

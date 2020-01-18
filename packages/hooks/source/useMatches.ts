@@ -2,7 +2,7 @@ import { Match, oneOf } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { HookEnvironment } from './HookEnvironment'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useMatches<A, B>(
   value: A,

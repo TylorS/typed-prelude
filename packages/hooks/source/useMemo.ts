@@ -2,7 +2,7 @@ import { Fn } from '@typed/lambda'
 import { HookEnvironment } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useState } from './useState'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useMemo<A extends readonly any[], B>(
   fn: Fn<A, B>,

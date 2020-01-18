@@ -5,7 +5,7 @@ import { Channel } from './Channel'
 import { HookEnvironment, InitialState } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 type UpdateChannel<A> = (value: A) => Effect<Env<never, any>, A, any>
 

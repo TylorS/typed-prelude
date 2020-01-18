@@ -4,7 +4,7 @@ import { handle, Pure } from '@typed/env'
 import { Future } from '@typed/future'
 import { HookEnvironment } from './HookEnvironment'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 const createEffect = <E, A, B>(
   resources: E,

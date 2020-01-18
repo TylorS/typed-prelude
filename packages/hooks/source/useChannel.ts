@@ -3,7 +3,7 @@ import { Arity1 } from '@typed/lambda'
 import { Channel, ChannelValue } from './Channel'
 import { HookEnvironment } from './HookEnvironment'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useChannel<A>(
   channel: Channel<A>,

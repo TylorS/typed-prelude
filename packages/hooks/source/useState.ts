@@ -1,6 +1,6 @@
 import { get } from '@typed/effects'
 import { HookEnvironment, InitialState, UseState } from './HookEnvironment'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useState<A>(
   inititalState: InitialState<A>,

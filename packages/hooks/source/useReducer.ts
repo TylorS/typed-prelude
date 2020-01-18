@@ -3,7 +3,7 @@ import { Env } from '@typed/env'
 import { Arity2 } from '@typed/lambda'
 import { useMemo } from './useMemo'
 import { useState } from './useState'
-import { WithHookEnvs } from './withHooks'
+import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useReducer<A, B>(
   reducer: Arity2<A, B, A>,
