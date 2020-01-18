@@ -1,6 +1,6 @@
 {
   "name": "@typed/node",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Tools to help with building your node applications",
   "main": "./cjs/index.js",
   "repository": {
@@ -39,7 +39,7 @@
     "@typed/effects": "^1.4.0",
     "@typed/either": "^6.1.0",
     "@typed/env": "^3.3.0",
-    "@typed/future": "^6.2.0",
+    "@typed/future": "^6.3.0",
     "@typed/lambda": "^2.1.0",
     "@typed/logger": "^3.2.0",
     "@typed/logic": "^5.2.0",
