@@ -1,7 +1,13 @@
-import { Pure } from '@typed/env'
+import { Env, Pure } from '@typed/env'
 
 // Basic functionality to keep track of what objects have been updated
-export function createUpdateManager<A extends object>() {
+export function createUpdateManager<A extends object>(): {
+  readonly setUpdated: (
+    node: A,
+    hasBeenUpdated: boolean,
+  ) => Generator<Env<never, void>, void, unknown>
+  readonly hasBeenUpdated: (node: A) => boolean
+} {
   // WeakSet is used to allow GC to automatically clean things up for us
   const updated = new WeakSet<A>()
 

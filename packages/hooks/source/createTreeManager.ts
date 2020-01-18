@@ -1,7 +1,7 @@
-import { Pure } from '@typed/env'
+import { Env, Pure } from '@typed/env'
 
 // Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.
-export function createTreeManager<A extends object>() {
+export function createTreeManager<A extends object>(): TreeManager<A> {
   // WeakMap is used to allow GC to automatically clean things up for us
   const parentToChildren = new WeakMap<A, Set<A>>()
   const childToParent = new WeakMap<A, A>()
@@ -97,4 +97,17 @@ export function createTreeManager<A extends object>() {
     getChildren,
     getAllDescendants,
   } as const
+}
+
+type TreeManager<A extends object> = {
+  readonly setParent: (child: A, parent: A) => Generator<Env<never, void>, void, unknown>
+  readonly setChild: (parent: A, child: A) => Generator<Env<never, void>, void, unknown>
+  readonly removeNode: (node: A) => Generator<Env<never, void>, void, unknown>
+  readonly getParent: (node: A) => A | undefined
+  readonly getChildren: (node: A) => Set<A> | undefined
+  readonly getAllDescendants: (
+    providers: WeakSet<A>,
+    consumers: WeakSet<A>,
+    node: A,
+  ) => Generator<A, void, any>
 }
