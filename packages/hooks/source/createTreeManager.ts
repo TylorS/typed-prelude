@@ -1,6 +1,7 @@
 import { Pure } from '@typed/env'
 
 export function createTreeManager<A extends object>() {
+  // WeakMap is used to allow GC to automatically clean things up for us
   const parentToChildren = new WeakMap<A, Set<A>>()
   const childToParent = new WeakMap<A, A>()
 

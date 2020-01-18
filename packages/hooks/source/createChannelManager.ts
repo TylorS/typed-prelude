@@ -12,6 +12,7 @@ export function createChannelManager<A extends object>(
   ) => Generator<A, void, any>,
   getParent: (node: A) => A | undefined,
 ) {
+  // WeakMap & WeakSet are used to allow GC to automatically clean things up for us
   const channelValues = new WeakMap<Channel<any>, WeakMap<A, any>>()
   const channelConsumers = new WeakMap<Channel<any>, WeakSet<A>>()
   const channelProviders = new WeakMap<Channel<any>, WeakSet<A>>()
