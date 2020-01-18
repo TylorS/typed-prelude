@@ -1,4 +1,3 @@
-import { Pure } from '@typed/env'
 import { Fn } from '@typed/lambda'
 import { didRefChange } from './didRefChange'
 import { useRef } from './useRef'
@@ -10,7 +9,7 @@ export function* useMemo<A extends readonly any[], B>(fn: Fn<A, B>, deps: A) {
   const depsUpdated = didRefChange(depsRef, setDepsRef, deps)
 
   if (depsUpdated) {
-    yield Pure.fromIO(() => setValue(() => fn(...deps)))
+    yield* setValue(() => fn(...deps))
   }
 
   return getValue()
