@@ -69,18 +69,20 @@ export function createTreeManager<A extends object>() {
   ): Generator<A, void, any> {
     const children = getChildren(node)
 
-    if (children) {
-      for (const child of children) {
-        // Don't continue past provider boundaries
-        if (!providers.has(child)) {
-          // Update if is a consumer
-          if (consumers.has(child)) {
-            yield child
-          }
+    if (!children) {
+      return
+    }
 
-          // Continue down the tree
-          yield* getAllDescendants(providers, consumers, child)
+    for (const child of children) {
+      // Don't continue past provider boundaries
+      if (!providers.has(child)) {
+        // Update if is a consumer
+        if (consumers.has(child)) {
+          yield child
         }
+
+        // Continue down the tree
+        yield* getAllDescendants(providers, consumers, child)
       }
     }
   }
