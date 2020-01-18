@@ -29,10 +29,9 @@ export const test = describe(`useState`, [
         }
       })
 
-      runEffects(test(), hooksEnv)
-      runEffects(test(), hooksEnv)
-      runEffects(test(), hooksEnv)
-      runEffects(test(), hooksEnv)
+      do {
+        runEffects(test(), hooksEnv)
+      } while (hooksEnv.updated)
     }),
   ]),
 ])
