@@ -5,8 +5,10 @@ import { Channel } from './Channel'
 import { HookEnvironment } from './HookEnvironment'
 import { HooksManager } from './HooksManager'
 
+// A HooksManager keeps track of the hierarchy of a number of HookEnvironments.
+// This is how @typed/hooks allows for providing and consuming values via its Channel API.
 export function createHooksManager(): HooksManager {
-  const updated = new Set<HookEnvironment>()
+  const updated = new WeakSet<HookEnvironment>()
   const parentToChildren = new WeakMap<HookEnvironment, Set<HookEnvironment>>()
   const childToParent = new WeakMap<HookEnvironment, HookEnvironment>()
   const channelValues = new WeakMap<Channel<any>, WeakMap<HookEnvironment, any>>()
@@ -165,12 +167,17 @@ export function createHooksManager(): HooksManager {
   }
 
   return {
+    // Control hierarchy
     setParent,
     setChild,
     removeNode,
+
+    // Control Channels
     updateChannel,
     consumeChannel,
-    hasBeenUpdated,
+
+    // Control if has been marked as updated
     setUpdated,
+    hasBeenUpdated,
   }
 }
