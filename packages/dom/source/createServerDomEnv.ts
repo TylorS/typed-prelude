@@ -1,8 +1,6 @@
-import { Crypto } from '@peculiar/webcrypto'
 import { Disposable } from '@typed/disposable'
 import { createHistoryEnv, HistoryEnv, wrapInSubscription } from '@typed/history'
 import { serverStorage } from '@typed/storage'
-import { createMatchMedia } from './createMatchMedia'
 import { NodeFilter as ServerNodeFilter } from './NodeFilter'
 import { NodeIteratorImpl } from './NodeIterator'
 import { TreeWalkerImpl } from './TreeWalker'
@@ -23,6 +21,8 @@ export type CreateServerDomEnvOptions = {
 const POPSTATE_EVENT_TYPE = 'popstate'
 
 export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
+  const { createMatchMedia }: typeof import('./createMatchMedia') = require('./createMatchMedia')
+  const { Crypto }: typeof import('@peculiar/webcrypto') = require('@peculiar/webcrypto')
   const basic = require('basichtml')
 
   const { history, location, subscription } = wrapInSubscription(
