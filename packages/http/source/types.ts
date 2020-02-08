@@ -1,6 +1,6 @@
 import { Disposable } from '@typed/disposable'
 import { Effects } from '@typed/effects'
-import { Either } from '@typed/either/source'
+import { Either } from '@typed/either'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
 export type HttpHeaders = Readonly<Record<string, string | undefined>>

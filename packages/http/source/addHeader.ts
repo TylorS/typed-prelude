@@ -5,7 +5,7 @@ export const addHeader = curry(
   (name: string, value: string, { http }: HttpEnv): HttpEnv => {
     return {
       http: (url, options, callbacks) =>
-        http(url, { ...options, headers: { [name]: value, ...options.headers } }, callbacks),
+        http(url, { ...options, headers: { ...options.headers, [name]: value } }, callbacks),
     }
   },
 )

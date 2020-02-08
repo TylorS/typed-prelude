@@ -1,5 +1,5 @@
 import { Env, Pure, Resources } from '@typed/env'
-import { OrToAnd } from '@typed/lambda/source'
+import { OrToAnd } from '@typed/lambda'
 
 export type Effects<A, B> = Effect<Env<A, any> | Pure<any>, B, any>
 

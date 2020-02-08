@@ -1,7 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { Effect } from '@typed/effects'
 import { Either, Left, Right } from '@typed/either'
-import { Env } from '@typed/env/source'
+import { Env } from '@typed/env'
 import { ArgsOf, Fn } from '@typed/lambda'
 import { HttpEnv, HttpOptions, HttpRequest, HttpResponse } from './types'
 
