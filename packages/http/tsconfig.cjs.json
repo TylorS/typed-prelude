@@ -25,10 +25,16 @@
       "path": "../disposable/tsconfig.json"
     },
     {
+      "path": "../effects/tsconfig.json"
+    },
+    {
       "path": "../either/tsconfig.json"
     },
     {
       "path": "../env/tsconfig.json"
+    },
+    {
+      "path": "../hooks/tsconfig.json"
     },
     {
       "path": "../lambda/tsconfig.json"
