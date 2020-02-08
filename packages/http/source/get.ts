@@ -3,10 +3,12 @@ import { MergeObjects } from '@typed/objects'
 import { http } from './http'
 import { HttpOptions, HttpRequest } from './types'
 
-export type GetOptions = Partial<
-  MergeObjects<
-    DropKeys<HttpOptions, 'body'>,
-    { queryParameters?: Record<string, string | undefined> }
+export type GetOptions = Readonly<
+  Partial<
+    MergeObjects<
+      DropKeys<HttpOptions, 'body'>,
+      { readonly queryParameters?: Record<string, string | undefined> }
+    >
   >
 >
 

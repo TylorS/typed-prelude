@@ -1,6 +1,6 @@
 import { Disposable } from '@typed/disposable'
-import { Env } from '@typed/env'
-import { RemoteData } from '@typed/remote-data'
+import { Effects } from '@typed/effects'
+import { Either } from '@typed/either/source'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
 export type HttpHeaders = Readonly<Record<string, string | undefined>>
@@ -20,18 +20,12 @@ export type HttpResponse<A = unknown> = {
   readonly headers: HttpHeaders
 }
 
-export type HttpRequest<A = unknown, E extends HttpEnv = HttpEnv> = Env<
-  E,
-  RemoteData<Error, HttpResponse<A>>
-> & {
-  readonly url: string
-  readonly options: HttpOptions
-}
+export interface HttpRequest<A = unknown>
+  extends Effects<HttpEnv, Either<Error, HttpResponse<A>>> {}
 
 export type HttpCallbacks = {
-  success: (response: HttpResponse) => Disposable
-  failure: (error: Error) => Disposable
-  onStart?: () => Disposable
+  readonly success: (response: HttpResponse) => Disposable
+  readonly failure: (error: Error) => Disposable
 }
 
 export interface HttpEnv {
@@ -39,8 +33,7 @@ export interface HttpEnv {
 }
 
 export interface TestHttpEnv extends HttpEnv {
-  readonly getResponses: () => ReadonlyArray<RemoteData<Error, HttpResponse>>
+  readonly getResponses: () => ReadonlyArray<Either<Error, HttpResponse>>
 }
 
-export type HttpRequestValue<A> = A extends HttpRequest<infer R, any> ? R : never
-export type HttpRequestEnv<A> = A extends HttpRequest<any, infer R> ? R : never
+export type HttpRequestValue<A> = A extends HttpRequest<infer R> ? R : never

@@ -1,7 +1,7 @@
-import { Disposable, disposeAll } from '@typed/disposable'
+import { Disposable } from '@typed/disposable'
+import { Either, fromLeft, fromRight, isLeft, Left, Right } from '@typed/either'
 import { isPromiseLike } from '@typed/logic'
-import { isFailure, isSuccess, Loaded, RemoteData } from '@typed/remote-data'
-import { Timer } from '@typed/timer'
+import { Json } from './Json'
 import { HttpCallbacks, HttpOptions, HttpResponse, TestHttpEnv } from './types'
 
 /**
@@ -13,31 +13,24 @@ export function createTestHttpEnv(
   testHttp: (
     url: string,
     options: HttpOptions,
-  ) => Loaded<Error, HttpResponse> | PromiseLike<Loaded<Error, HttpResponse>>,
-  timer: Timer,
+  ) => Either<Error, HttpResponse> | PromiseLike<Either<Error, HttpResponse>>,
 ): TestHttpEnv {
-  const responses: Array<Loaded<Error, HttpResponse>> = []
+  const responses: Array<Either<Error, HttpResponse>> = []
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
-    const { success, failure, onStart } = callbacks
+    const { success, failure } = callbacks
 
     function getResponse() {
-      const disposables: Disposable[] = []
+      const disposable = Disposable.lazy()
 
-      if (onStart) {
-        disposables.push(onStart())
-      }
-
-      function onResponse(response: Loaded<Error, HttpResponse>) {
+      function onResponse(response: Either<Error, HttpResponse>) {
         responses.push(response)
 
-        if (isFailure(response)) {
-          disposables.push(failure(response.value))
+        if (isLeft(response)) {
+          return disposable.addDisposable(failure(fromLeft(response)))
         }
 
-        if (isSuccess(response)) {
-          disposables.push(success(response.value))
-        }
+        disposable.addDisposable(success(fromRight(response)))
       }
 
       const response = testHttp(url, options)
@@ -48,10 +41,10 @@ export function createTestHttpEnv(
         onResponse(response)
       }
 
-      return disposeAll(disposables)
+      return disposable
     }
 
-    return timer.delay(getResponse, 0)
+    return getResponse()
   }
 
   return {
@@ -60,12 +53,12 @@ export function createTestHttpEnv(
   }
 }
 
-export function createSuccessfulResponse(options: Partial<HttpResponse> = {}) {
-  return RemoteData.of<Error, HttpResponse>(createHttpResponse(options))
+export function createSuccessfulResponse<A = unknown>(options: Partial<HttpResponse<A>> = {}) {
+  return Right.of(createHttpResponse<A>(options))
 }
 
 export function createFailedResponse(error: Error) {
-  return RemoteData.failure<Error, HttpResponse>(error)
+  return Left.of(error)
 }
 
 export function createHttpResponse<A>(options: Partial<HttpResponse<A>> = {}): HttpResponse<A> {
@@ -80,9 +73,9 @@ export function createHttpResponse<A>(options: Partial<HttpResponse<A>> = {}): H
   return response
 }
 
-export function createJsonResponse(
-  jsonReadyValue: any,
-  options: Partial<HttpResponse> = {},
+export function createJsonResponse<A extends Json>(
+  jsonReadyValue: A,
+  options: Partial<HttpResponse<A>> = {},
 ): HttpResponse {
   const responseText = JSON.stringify(jsonReadyValue)
 
