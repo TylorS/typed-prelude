@@ -5,7 +5,7 @@ import { runEffect } from './runEffect'
 
 export function runEffects<A extends Effect<Pure, any, any>>(
   effect: A,
-  resources: EffectResources<typeof effect>,
+  resources: EffectResources<A>,
 ): Disposable {
   return execPure(handle(resources, runEffect(effect)))
 }

@@ -1,5 +1,7 @@
 import { Pure } from '@typed/env'
 
+export type LoggerEnv = { readonly logger: Logger }
+
 export const enum LogLevel {
   OFF,
   DEFAULT,
@@ -20,5 +22,5 @@ export interface Logger {
   // Debug
   readonly debug: (msg: string) => Pure<void>
   readonly timeStart: (label: string) => Pure<void>
-  readonly timeEnd: (label: string) => Pure<void>
+  readonly timeEnd: (label: string) => Pure<number>
 }

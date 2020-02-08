@@ -28,6 +28,7 @@ export type Log =
  * Create a logger suitable for testing environments.
  */
 export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): TestLogger {
+  const timers: Record<string, number> = {}
   const logs: Log[] = []
   const logger: Logger = {
     log: (msg: string) =>
@@ -67,18 +68,24 @@ export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): 
         }
 
         const time = clock.currentTime()
+        timers[label] = time
 
         logs.push({ type: 'timeStart', label, time })
       }),
     timeEnd: (label: string) =>
       Env.fromIO(() => {
         if (logLevel < LogLevel.DEBUG) {
-          return
+          return -1
         }
 
         const time = clock.currentTime()
+        const startTime = timers[label]
+        const elapsed = startTime - time
+        delete timers[label]
 
         logs.push({ type: 'timeEnd', label, time })
+
+        return elapsed
       }),
   }
 

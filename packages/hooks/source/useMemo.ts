@@ -1,13 +1,12 @@
 import { Fn } from '@typed/lambda'
-import { HookEnvironment } from './HookEnvironment'
+import { HookEffects } from './HookEffects'
 import { useDepChange } from './useDepChange'
 import { useState } from './useState'
-import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useMemo<A extends readonly any[], B>(
   fn: Fn<A, B>,
   deps: A,
-): Generator<WithHookEnvs<never>, B, HookEnvironment> {
+): HookEffects<never, B> {
   const [getValue, setValue] = yield* useState(() => fn(...deps))
   const depsUpdated = yield* useDepChange(deps)
 

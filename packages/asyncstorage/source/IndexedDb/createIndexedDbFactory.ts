@@ -1,10 +1,4 @@
-import { isBrowser } from '@typed/env'
-
-export function createIndexedDbFactory(testing: boolean = false): IDBFactory {
-  if (isBrowser) {
-    return indexedDB
-  }
-
+export function createServerIndexedDbFactory(testing: boolean = false): IDBFactory {
   if (testing) {
     const FDBFactory: new () => IDBFactory = require('fake-indexeddb/build/FDBFactory').default
 

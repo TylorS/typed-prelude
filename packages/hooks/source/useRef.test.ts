@@ -1,6 +1,7 @@
 import { runEffects } from '@typed/effects'
 import { Maybe } from '@typed/maybe'
 import { describe, it } from '@typed/test'
+import { NodeGenerator } from '@typed/uuid'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
 import { useRef } from './useRef'
@@ -8,7 +9,7 @@ import { withHooks } from './withHooks'
 
 export const test = describe(`useRef`, [
   it(`allows keeping state across function invocations`, ({ equal }, done) => {
-    const manager = createHooksManager()
+    const manager = createHooksManager(new NodeGenerator())
     const hooksEnv = createHookEnvironment(manager)
     const initialValue: number = 1
     const endingValue: number = 100

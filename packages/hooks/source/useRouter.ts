@@ -2,15 +2,14 @@ import { get } from '@typed/effects'
 import { HistoryEnv, Path, scopeHistoryEnv } from '@typed/history'
 import { Maybe } from '@typed/maybe'
 import { Route } from '@typed/routing'
-import { HookEnvironment } from './HookEnvironment'
+import { HookEffects } from './HookEffects'
 import { useMatches } from './useMatches'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useRouter<A, B = null>(
   routes: ReadonlyArray<Route<any, A>>,
   scope?: Path,
-): Generator<WithHookEnvs<HistoryEnv<B>>, Maybe<A>, HookEnvironment & HistoryEnv<B>> {
+): HookEffects<HistoryEnv<B>, Maybe<A>> {
   const historyEnv = yield* get<HistoryEnv<B>>()
   const { location } = yield* useMemo(
     (scope, historyEnv) => (scope ? scopeHistoryEnv(scope, historyEnv) : historyEnv),

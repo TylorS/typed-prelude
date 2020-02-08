@@ -1,34 +1,39 @@
-import { get, runEffects } from '@typed/effects'
-import { Env, handle, Pure, runPure } from '@typed/env'
-import { NoData, RemoteData } from '@typed/remote-data'
-import { HookEnvironment } from './HookEnvironment'
-import { useEffect } from './useEffect'
+import { Effects } from '@typed/effects'
+import { Arity1, IO } from '@typed/lambda'
+import { Failure, Loading, NoData, RemoteData, Success } from '@typed/remote-data'
+import { HookEffects } from './HookEffects'
+import { InitialState } from './HookEnvironment'
 import { useMemo } from './useMemo'
 import { useState } from './useState'
-import { WithHookEnvs } from './WithHookEnvs'
 
-export function* useRemoteData<E, A, B>(
-  env: Env<E, RemoteData<A, B>>,
-): Generator<WithHookEnvs<E>, RemoteData<A, B>, HookEnvironment & E> {
-  const resources = yield* get<E>()
-  const [getRemoteData, updateRemoteData] = yield* useState<RemoteData<A, B>>(NoData)
-  const pure = yield* useMemo<[E, Env<E, RemoteData<A, B>>], Pure<RemoteData<A, B>>>(handle, [
-    resources,
-    env,
-  ])
+export type RemoteDataActions<A, B> = {
+  readonly set: (remoteData: RemoteData<A, B>) => Effects<never, RemoteData<A, B>>
+  readonly update: (
+    updateFn: Arity1<RemoteData<A, B>, RemoteData<A, B>>,
+  ) => Effects<never, RemoteData<A, B>>
+  readonly loading: () => Effects<never, RemoteData<A, B>>
+  readonly clear: () => Effects<never, RemoteData<A, B>>
+  readonly success: (value: B) => Effects<never, RemoteData<A, B>>
+  readonly failure: (value: A) => Effects<never, RemoteData<A, B>>
+}
 
-  yield* useEffect(
-    pure =>
-      runPure(
-        (data: RemoteData<A, B>) =>
-          runEffects(
-            updateRemoteData(() => data),
-            resources,
-          ),
-        pure,
-      ),
-    [pure],
+export function* useRemoteData<A, B>(
+  initial: InitialState<RemoteData<A, B>> = NoData,
+): HookEffects<never, readonly [IO<RemoteData<A, B>>, RemoteDataActions<A, B>]> {
+  const [getRemoteData, update] = yield* useState<RemoteData<A, B>>(initial)
+  const set = (remoteData: RemoteData<A, B>) => update(() => remoteData)
+  const actions = yield* useMemo(
+    () =>
+      ({
+        set,
+        update,
+        loading: () => set(Loading),
+        clear: () => set(NoData),
+        success: (value: B) => set(Success.of(value)),
+        failure: (value: A) => set(Failure.of(value)),
+      } as const),
+    [],
   )
 
-  return getRemoteData()
+  return [getRemoteData, actions] as const
 }

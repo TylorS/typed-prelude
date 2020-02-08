@@ -10,6 +10,6 @@ export function querySelector<A extends Element, B extends Element = A>(
 export function querySelectorAll<A extends Element, B extends Element = A>(
   cssSelector: string,
   node: A,
-): B[] {
+): readonly B[] {
   return Array.from(node.querySelectorAll(cssSelector))
 }

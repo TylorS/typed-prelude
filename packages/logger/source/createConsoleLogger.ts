@@ -55,12 +55,16 @@ export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOpti
     timeEnd: (label: string) =>
       Env.fromIO(() => {
         if (logLevel < LogLevel.DEBUG || !timers[label]) {
-          return
+          return -1
         }
 
         const startTime = timers[label]
+        const elapsed = startTime - clock.currentTime()
+        delete timers[label]
 
-        console.debug(`${label}: ${startTime - clock.currentTime()}ms`)
+        console.debug(`${label}: ${elapsed}ms`)
+
+        return elapsed
       }),
   }
 

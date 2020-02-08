@@ -8,5 +8,7 @@ export class BrowserGenerator implements UuidEnv {
   }
 
   public randomUuidSeed = (): UuidSeed =>
-    Array.from(this.browserCrypto.getRandomValues(new Uint8Array(VALID_UUID_LENGTH))) as UuidSeed
+    (Array.from(
+      this.browserCrypto.getRandomValues(new Uint8Array(VALID_UUID_LENGTH)),
+    ) as any) as UuidSeed
 }

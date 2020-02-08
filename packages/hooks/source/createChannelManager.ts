@@ -1,4 +1,4 @@
-import { Effect } from '@typed/effects'
+import { Effect, Effects } from '@typed/effects'
 import { Env, Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
@@ -6,7 +6,7 @@ import { Channel } from './Channel'
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
 export function createChannelManager<A extends object>(
-  setUpdated: (node: A, updated: boolean) => Effect<Pure<any>, void, any>,
+  setUpdated: (node: A, updated: boolean) => Effects<never, void>,
   getAllDescendants: (
     providers: WeakSet<A>,
     consumers: WeakSet<A>,
@@ -18,11 +18,7 @@ export function createChannelManager<A extends object>(
     channel: Channel<B>,
     initial: B,
     node: A,
-  ) => Generator<
-    Env<never, WeakMap<A, B>>,
-    (value: B) => Generator<Env<never, any>, B, any>,
-    unknown
-  >
+  ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
   readonly consumeChannel: <B>(channel: Channel<B>, node: A) => Effect<Env<never, any>, B, any>
 } {
   // WeakMap & WeakSet are used to allow GC to automatically clean things up for us

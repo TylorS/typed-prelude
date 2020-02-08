@@ -3,13 +3,13 @@ import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
 import { equals } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
-import { createUuid } from '@typed/uuid'
+import { uuid4 } from '@typed/uuid'
 import { Channel } from './Channel'
 import { HookEnvironment, InitialState, Ref, UseState } from './HookEnvironment'
 import { HooksManager } from './HooksManager'
 
 export function createHookEnvironment(manager: HooksManager): HookEnvironment {
-  const id = createUuid()
+  const id = uuid4(manager.uuidEnv.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
   const hookEnvironment: HookEnvironment = {

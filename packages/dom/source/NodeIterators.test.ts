@@ -1,11 +1,11 @@
 import { describe, given, it } from '@typed/test'
-import { createDomEnv } from './createDomEnv'
+import { createServerDomEnv } from './createServerDomEnv'
 import { NodeIteratorImpl } from './NodeIterator'
 
 export const test = describe(`NodeIterator`, [
   given(`a node`, [
     it(`traverse the node tree`, ({ same }) => {
-      const { document } = createDomEnv()
+      const { document } = createServerDomEnv()
       const [a, b, c, d, e, f, g, h, i] = Array(9)
         .fill(null)
         .map((_, i) => {

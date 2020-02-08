@@ -1,6 +1,6 @@
-import { createTestEnv, handle } from '@typed/env'
-import { Loading, RemoteData } from '@typed/remote-data'
+import { runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
+import { createVirtualTimer } from '@typed/timer'
 import {
   createFailedResponse,
   createSuccessfulResponse,
@@ -12,47 +12,40 @@ import { withHttpManagement } from './withHttpManagement'
 export const test = describe(`withHttpManagement`, [
   given(`some options and an HttpEnv`, [
     it(`returns a new HttpEnv that caches requests`, ({ equal }) => {
-      const { timer, recordEvents, getEvents } = createTestEnv<RemoteData>()
+      const timer = createVirtualTimer()
       const success = createSuccessfulResponse({ status: 204 })
       const failed = createFailedResponse(new Error('Failed'))
       const expectedUrl = 'http://somewhere.com'
       const expiration = 1000
-      const original = createTestHttpEnv(url => (url === expectedUrl ? success : failed), timer)
+      const original = createTestHttpEnv(url => (url === expectedUrl ? success : failed))
       const httpEnv = withHttpManagement({ timer, expiration }, original)
-      const successRequest = handle(httpEnv, http(expectedUrl))
-      const failedRequest = handle(httpEnv, http('anywhere'))
-      const expectedSuccessEvents = [Loading, success]
-      const expectedFailedEvents = [Loading, failed]
+      const successRequest = http(expectedUrl)
+      const failedRequest = http('anywhere')
 
-      recordEvents(successRequest)
-      recordEvents(failedRequest)
-      timer.progressTimeBy(1)
+      function* sut() {
+        yield* successRequest
+        yield* failedRequest
 
-      equal([success, failed], original.getResponses())
-      equal(expectedSuccessEvents, getEvents(successRequest))
-      equal(expectedFailedEvents, getEvents(failedRequest))
+        timer.progressTimeBy(1)
 
-      recordEvents(successRequest)
-      recordEvents(failedRequest)
-      timer.progressTimeBy(expiration + 1)
+        equal([success, failed], original.getResponses())
 
-      equal([success, failed, failed], original.getResponses())
-      equal([...expectedSuccessEvents, success], getEvents(successRequest))
-      equal([...expectedFailedEvents, ...expectedFailedEvents], getEvents(failedRequest))
+        yield* successRequest
+        yield* failedRequest
 
-      recordEvents(successRequest)
-      recordEvents(failedRequest)
-      timer.progressTimeBy(1)
+        timer.progressTimeBy(expiration + 1)
 
-      equal([success, failed, failed, success, failed], original.getResponses())
-      equal(
-        [...expectedSuccessEvents, success, ...expectedSuccessEvents],
-        getEvents(successRequest),
-      )
-      equal(
-        [...expectedFailedEvents, ...expectedFailedEvents, ...expectedFailedEvents],
-        getEvents(failedRequest),
-      )
+        equal([success, failed, failed], original.getResponses())
+
+        yield* successRequest
+        yield* failedRequest
+
+        timer.progressTimeBy(1)
+
+        equal([success, failed, failed, success, failed], original.getResponses())
+      }
+
+      runEffects(sut(), httpEnv)
     }),
   ]),
 ])

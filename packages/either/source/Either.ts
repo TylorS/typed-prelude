@@ -14,7 +14,7 @@ export namespace Either {
    * Creates an Either<A, B> that is of type Right<B>
    * @name Either.of<A>(value: A): Either<B, A>
    */
-  export const of: <A, B = unknown>(value: A) => Either<B, A> = Right.of
+  export const of: <A = unknown, B = unknown>(value: B) => Either<A, B> = Right.of
   /**
    * Creates an Either<A, B> that is of type Left<A>
    * @name Either.left<A>(value: A): Either<A, B>

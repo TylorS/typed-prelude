@@ -1,43 +1,42 @@
-import { Disposable, disposeAll } from '@typed/disposable'
+import { Disposable } from '@typed/disposable'
+import { Effect, runEffect } from '@typed/effects'
+import { Either } from '@typed/either'
 import { Env, handle, runPure } from '@typed/env'
-import { isDoneLoading, Loaded, RemoteData } from '@typed/remote-data'
-import { HttpRequest, HttpRequestEnv, HttpRequestValue, HttpResponse } from './types'
+import { HttpEnv, HttpRequest, HttpRequestValue, HttpResponse } from './types'
 
-export type Combined<A extends ReadonlyArray<HttpRequest<any, any>>> = {
-  readonly [K in keyof A]: Loaded<Error, HttpResponse<HttpRequestValue<A[K]>>>
+export type Combined<A extends ReadonlyArray<HttpRequest<any>>> = {
+  readonly [K in keyof A]: Either<Error, HttpResponse<HttpRequestValue<A[K]>>>
 }
 
-export type CombinedEnv<A extends ReadonlyArray<HttpRequest<any, any>>> = {
-  readonly [K in keyof A]: HttpRequestEnv<A[K]>
-}[number]
-
-export function combine<A extends ReadonlyArray<HttpRequest<any, any>>>(
+export function combine<A extends ReadonlyArray<HttpRequest<any>>>(
   ...requests: A
-): Env<CombinedEnv<A>, Combined<A>> {
-  return Env.create((cb, env) => {
-    const hasValues = Array(requests.length).fill(false)
-    const values = Array(requests.length)
+): Effect<Env<HttpEnv, Combined<A>>, Combined<A>, Combined<A>> {
+  return Effect.fromEnv(
+    Env.create<HttpEnv, Combined<A>>((cb, env) => {
+      const hasValues = Array(requests.length).fill(false)
+      const values = Array(requests.length)
+      const disposable = Disposable.lazy()
 
-    function onHttp(b: RemoteData<Error, HttpResponse<any>>, index: number) {
-      hasValues[index] = isDoneLoading(b)
-      values[index] = b
+      function onHttp(b: Either<Error, HttpResponse<any>>, index: number) {
+        hasValues[index] = true
+        values[index] = b
 
-      if (hasValues.every(Boolean)) {
-        return cb(values as any)
+        if (hasValues.every(Boolean)) {
+          return cb(values as any)
+        }
+
+        return Disposable.None
       }
 
-      return Disposable.None
-    }
+      requests.forEach((request, i) => {
+        const pure = handle(env, runEffect(request))
 
-    const disposables: Disposable[] = [
-      ...requests.map((request, i) =>
-        runPure(
-          (data: RemoteData<Error, HttpResponse<any>>) => onHttp(data, i),
-          handle(env, request),
-        ),
-      ),
-    ]
+        disposable.addDisposable(
+          runPure((either: Either<Error, HttpResponse<any>>) => onHttp(either, i), pure),
+        )
+      })
 
-    return disposeAll(disposables)
-  })
+      return disposable
+    }),
+  )
 }

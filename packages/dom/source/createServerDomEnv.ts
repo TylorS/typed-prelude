@@ -1,5 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { createHistoryEnv, HistoryEnv, wrapInSubscription } from '@typed/history'
+import { createServerHistoryEnv, HistoryEnv, wrapInSubscription } from '@typed/history'
 import { serverStorage } from '@typed/storage'
 import { NodeFilter as ServerNodeFilter } from './NodeFilter'
 import { NodeIteratorImpl } from './NodeIterator'
@@ -26,7 +26,7 @@ export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
   const basic = require('basichtml')
 
   const { history, location, subscription } = wrapInSubscription(
-    createHistoryEnv<A>(options.serverUrl),
+    createServerHistoryEnv<A>(options.serverUrl || '/'),
   )
   const localStorage = serverStorage(options.localStorage)
   const sessionStorage = serverStorage(options.sessionStorage)
