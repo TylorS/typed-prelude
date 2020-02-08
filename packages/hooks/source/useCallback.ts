@@ -1,11 +1,10 @@
 import { Arity1, memoize } from '@typed/lambda'
-import { HookEnvironment } from './HookEnvironment'
+import { HookEffects } from './HookEffects'
 import { useMemo } from './useMemo'
-import { WithHookEnvs } from './WithHookEnvs'
 
 export function* useCallback<A, B>(
   fn: Arity1<A, B>,
   deps: ReadonlyArray<any>,
-): Generator<WithHookEnvs<never>, Arity1<A, B>, HookEnvironment> {
+): HookEffects<never, Arity1<A, B>> {
   return yield* useMemo(_ => memoize(fn), deps)
 }

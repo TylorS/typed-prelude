@@ -1,10 +1,13 @@
 import { Effect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1 } from '@typed/lambda'
+import { UuidEnv } from '@typed/uuid'
 import { Channel } from './Channel'
 import { HookEnvironment } from './HookEnvironment'
 
 export interface HooksManager {
+  readonly uuidEnv: UuidEnv
+
   readonly setParent: (
     child: HookEnvironment,
     parent: HookEnvironment,

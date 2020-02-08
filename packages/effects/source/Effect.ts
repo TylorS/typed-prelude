@@ -1,4 +1,5 @@
 import { Env, Pure, Resources } from '@typed/env'
+import { OrToAnd } from '@typed/lambda/source'
 
 export type Effects<A, B> = Effect<Env<A, any> | Pure<any>, B, any>
 
@@ -22,7 +23,9 @@ export namespace Effect {
   export const fromEnv = <A, B>(env: Env<A, B>): Effect<Env<A, B>, B, B> => of(env)
 }
 
-export type EffectResources<A> = A extends Effect<infer Env, any, any> ? Resources<Env> : never
+export type EffectResources<A> = A extends Effect<infer Env, any, any>
+  ? OrToAnd<Resources<Env>>
+  : never
 
 export type EffectValue<A> = A extends Effect<any, infer R, any> ? R : never
 

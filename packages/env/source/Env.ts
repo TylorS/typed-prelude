@@ -27,15 +27,7 @@ export type EnvOf<A, B> = { readonly [K in keyof B]: Env<A, B[K]> }
 /**
  * Extracts the resources required to satify an environment
  */
-export type Resources<Env> = U2I<EnvResources<Env>>
-
-type U2I<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
-
-export type EnvResources<A> = A extends LazyEnv<infer R, any>
-  ? R
-  : A extends ValueEnv<any>
-  ? never
-  : never
+export type Resources<A> = A extends LazyEnv<infer R, any> ? R : never
 
 export type EnvValue<A> = A extends LazyEnv<any, infer R>
   ? R

@@ -1,5 +1,6 @@
 import { runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
+import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
@@ -11,7 +12,7 @@ export const test = describe(`createHooksManager`, [
       notOk,
       ok,
     }, done) => {
-      const manager = createHooksManager()
+      const manager = createHooksManager(new NodeGenerator())
       const a = createHookEnvironment(manager)
       const b = createHookEnvironment(manager)
       const c = createHookEnvironment(manager)
