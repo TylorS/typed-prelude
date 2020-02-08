@@ -1,4 +1,6 @@
-import { Env, Resources } from '@typed/env'
+import { Env, Pure, Resources } from '@typed/env'
+
+export type Effects<A, B> = Effect<Env<Partial<A>, unknown> | Pure<unknown>, B, unknown>
 
 export interface Effect<A, B, C> {
   readonly [Symbol.iterator]: () => Iterator<A, B, C>
