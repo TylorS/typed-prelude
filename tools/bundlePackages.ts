@@ -17,7 +17,7 @@ export async function bundlePackages(
   entry: string,
 ) {
   const numOfCpus = cpus().length
-  const maxProcesses = Math.min(8, numOfCpus * 2)
+  const maxProcesses = Math.min(!!process.env.CI ? 2 : 8, numOfCpus * 2)
   const packages =
     packagesToBundle.length > 0
       ? PACKAGES.filter(
