@@ -10,6 +10,6 @@ export class NodeGenerator implements UuidEnv {
   public randomUuidSeed = (): UuidSeed => {
     const { data } = this.nodeCrypto.randomBytes(VALID_UUID_LENGTH).toJSON()
 
-    return data as UuidSeed
+    return (data as any) as UuidSeed
   }
 }

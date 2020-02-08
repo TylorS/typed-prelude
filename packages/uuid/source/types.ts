@@ -2,7 +2,7 @@ import { NewType } from '@typed/new-type'
 
 export type Uuid = NewType<string, 'Uuid'>
 
-export type UuidSeed = [
+export type UuidSeed = readonly [
   number,
   number,
   number,
