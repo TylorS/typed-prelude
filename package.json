@@ -33,7 +33,7 @@
     "@types/node": "12.12.26",
     "@types/yargs": "13.0.8",
     "lerna": "3.20.2",
-    "lint-staged": "9.5.0",
+    "lint-staged": "10.0.7",
     "prettier": "1.19.1",
     "rollup": "1.31.0",
     "rollup-plugin-commonjs": "10.1.0",
