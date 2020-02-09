@@ -1,6 +1,6 @@
 {
   "name": "@typed/either",
-  "version": "6.1.0",
+  "version": "7.0.0",
   "description": "Well-typed data-structure for representing varying outcomes",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

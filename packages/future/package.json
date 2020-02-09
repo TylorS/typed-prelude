@@ -1,6 +1,6 @@
 {
   "name": "@typed/future",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "Asynchronous Future Values",
   "main": "./cjs/index.js",
   "repository": {
@@ -33,8 +33,8 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/disposable": "^2.2.0",
-    "@typed/either": "^6.1.0",
-    "@typed/env": "^3.3.0",
+    "@typed/either": "^7.0.0",
+    "@typed/env": "^4.0.0",
     "@typed/lambda": "^2.1.0"
   }
 }
