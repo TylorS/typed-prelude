@@ -1,6 +1,7 @@
 import { Disposable, dispose, disposeAll } from '@typed/disposable'
 import { Fn, IO } from '@typed/lambda'
 import { unwrap, withDefault } from '@typed/maybe'
+import { getHookEnv } from './getHookEnv'
 import { HookEffects } from './HookEffects'
 import { useDepChange } from './useDepChange'
 import { useTimer } from './useTimer'
