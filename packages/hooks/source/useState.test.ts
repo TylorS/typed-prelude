@@ -16,7 +16,7 @@ export const test = describe(`useState`, [
       const test = withHooks(function*() {
         const [getX, updateX] = yield* useState(1)
         const expected = expectedValues.shift()
-        const actual = getX()
+        const actual = yield* getX()
 
         if (!expected) {
           return done()

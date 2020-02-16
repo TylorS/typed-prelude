@@ -37,16 +37,10 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       hookStates.set(id, getInitialValue(initial))
     }
 
-    const getState = (): A => hookStates.get(id)!
+    const getState = () => Effect.fromEnv(Pure.fromIO((): A => hookStates.get(id)!))
     function* setState(update: Arity1<A, A>): Generator<Pure, A, any> {
-      const [current, updated] = yield* Effect.fromEnv(
-        Pure.fromIO(() => {
-          const current = getState()
-          const updated = update(current)
-
-          return [current, updated] as const
-        }),
-      )
+      const current = yield* getState()
+      const updated = update(current)
 
       if (!equals(current, updated)) {
         hookStates.set(id, updated)
@@ -54,7 +48,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
         yield* manager.setUpdated(hookEnvironment, true)
       }
 
-      return getState()
+      return yield* getState()
     }
 
     return [getState, setState] as const
