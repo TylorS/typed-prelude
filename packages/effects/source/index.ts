@@ -1,5 +1,7 @@
+export * from './combine'
 export * from './Effect'
 export * from './get'
+export * from './race'
 export * from './runEffect'
 export * from './runEffects'
 export * from './startEffect'
