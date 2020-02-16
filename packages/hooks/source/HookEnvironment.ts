@@ -10,7 +10,9 @@ export type HookEnv = { readonly hookEnvironment: HookEnvironment }
 
 export interface HookEnvironment extends LazyDisposable {
   readonly id: Uuid
-  readonly useRef: <A>(initialState?: InitialState<A>) => Effect<Pure<UseRef<A>>, UseRef<A>, any>
+  readonly useRef: <A>(
+    initialState?: InitialState<A | null | undefined | void>,
+  ) => Effect<Pure<UseRef<A>>, UseRef<A>, any>
   readonly useState: <A>(
     initialState: InitialState<A>,
   ) => Effect<Pure<UseState<A>>, UseState<A>, any>

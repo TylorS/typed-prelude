@@ -20,7 +20,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     useRef,
     useChannel,
     provideChannel,
-    resetId: () => Effect.fromEnv(Pure.fromIO(resetId)),
+    resetId,
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
     },
@@ -54,7 +54,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     return [getState, setState] as const
   }
 
-  function* useRef<A>(initial?: InitialState<A>) {
+  function* useRef<A>(initial?: InitialState<A | null | undefined | void>) {
     const id = nextId()
 
     if (!hookStates.has(id)) {
@@ -86,9 +86,12 @@ function getInitialValue<A>(initial: InitialState<A>) {
 function createIdGenerator() {
   let id = 0
   const nextId = () => ++id
-  const resetId = () => {
-    id = 0
-  }
+  const resetId = () =>
+    Effect.fromEnv(
+      Pure.fromIO(() => {
+        id = 0
+      }),
+    )
 
   return { nextId, resetId } as const
 }
