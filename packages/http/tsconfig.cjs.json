@@ -34,9 +34,6 @@
       "path": "../env/tsconfig.json"
     },
     {
-      "path": "../hooks/tsconfig.json"
-    },
-    {
       "path": "../lambda/tsconfig.json"
     },
     {
@@ -47,9 +44,6 @@
     },
     {
       "path": "../objects/tsconfig.json"
-    },
-    {
-      "path": "../remote-data/tsconfig.json"
     },
     {
       "path": "../timer/tsconfig.json"
