@@ -1,3 +1,4 @@
+import { LazyDisposable } from '@typed/disposable'
 import { Effect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
@@ -5,7 +6,9 @@ import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
 import { Channel } from './Channel'
 
-export interface HookEnvironment {
+export type HookEnv = { readonly hookEnvironment: HookEnvironment }
+
+export interface HookEnvironment extends LazyDisposable {
   readonly id: Uuid
   readonly useRef: <A>(initialState?: InitialState<A>) => Effect<Pure<UseRef<A>>, UseRef<A>, any>
   readonly useState: <A>(

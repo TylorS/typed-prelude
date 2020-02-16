@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { Effect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
@@ -12,6 +13,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = uuid4(manager.uuidEnv.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
+  const disposable = Disposable.lazy()
   const hookEnvironment: HookEnvironment = {
     id,
     useState,
@@ -23,6 +25,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       return manager.hasBeenUpdated(hookEnvironment)
     },
     clearUpdated: () => manager.setUpdated(hookEnvironment, false),
+    ...disposable,
   }
 
   return hookEnvironment
