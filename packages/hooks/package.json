@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "Hooks powered by generator functions & effects",
   "main": "./cjs/index.js",
   "keywords": [
