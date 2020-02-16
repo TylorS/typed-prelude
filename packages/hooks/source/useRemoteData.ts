@@ -19,7 +19,7 @@ export type RemoteDataActions<A, B> = {
 
 export function* useRemoteData<A, B>(
   initial: InitialState<RemoteData<A, B>> = NoData,
-): HookEffects<never, readonly [IO<RemoteData<A, B>>, RemoteDataActions<A, B>]> {
+): HookEffects<never, readonly [IO<Effects<never, RemoteData<A, B>>>, RemoteDataActions<A, B>]> {
   const [getRemoteData, update] = yield* useState<RemoteData<A, B>>(initial)
   const set = (remoteData: RemoteData<A, B>) => update(() => remoteData)
   const actions = yield* useMemo(
