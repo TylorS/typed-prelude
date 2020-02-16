@@ -1,20 +1,20 @@
-import { get } from '@typed/effects'
+import { runEffect } from '@typed/effects'
+import { handle } from '@typed/env'
+import { getHookEnv } from './getHookEnv'
 import { HookEffects } from './HookEffects'
-import { HookEnvironment } from './HookEnvironment'
-import { runWithHooks } from './runWithHooks'
 
 // Helps to manage resetting the HooksEnvironment between function invocations
 export function withHooks<A extends readonly any[], E, B>(fn: (...args: A) => HookEffects<E, B>) {
   return function* withHooks(...args: A): HookEffects<E, B> {
-    const hookEnv = yield* get<HookEnvironment>()
+    const hookEnvironment = yield* getHookEnv()
     let value: B | void
 
     do {
-      yield* hookEnv.clearUpdated()
-      yield* hookEnv.resetId
+      yield* hookEnvironment.clearUpdated()
+      yield* hookEnvironment.resetId()
 
-      value = yield* runWithHooks(fn(...args), hookEnv)
-    } while (hookEnv.updated)
+      value = (yield handle({ hookEnvironment }, runEffect(fn(...args)))) as B
+    } while (hookEnvironment.updated)
 
     return value!
   }

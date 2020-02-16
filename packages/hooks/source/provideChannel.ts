@@ -1,8 +1,8 @@
-import { get } from '@typed/effects'
 import { fromJust, Just } from '@typed/maybe'
 import { Channel } from './Channel'
+import { getHookEnv } from './getHookEnv'
 import { HookEffects } from './HookEffects'
-import { HookEnvironment, InitialState } from './HookEnvironment'
+import { InitialState } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useMemo } from './useMemo'
 
@@ -12,7 +12,7 @@ export function* provideChannel<A>(
   channel: Channel<A>,
   initial: InitialState<A>,
 ): HookEffects<never, readonly [A, UpdateChannel<A>]> {
-  const { useChannel, provideChannel, useRef } = yield* get<HookEnvironment>()
+  const { useChannel, provideChannel, useRef } = yield* getHookEnv()
   const [updateChannel, setUpdateChannel] = yield* useRef<UpdateChannel<A>>()
   const channelHasChanged = yield* useDepChange(channel)
   const currentValue = yield* useChannel(channel)

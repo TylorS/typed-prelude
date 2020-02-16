@@ -21,7 +21,7 @@ export interface HookEnvironment extends LazyDisposable {
     initial: InitialState<A>,
   ) => Effect<Pure<any>, (value: A) => Effect<Pure<any>, A, any>, any>
 
-  readonly resetId: Effect<Pure<any>, void, any>
+  readonly resetId: () => Effect<Pure<any>, void, any>
   readonly updated: boolean // true when useState has been updated
   readonly clearUpdated: () => Effect<Pure<any>, void, any>
 }

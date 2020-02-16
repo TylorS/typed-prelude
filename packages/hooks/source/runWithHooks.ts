@@ -4,6 +4,7 @@ import { HookEffects } from './HookEffects'
 import { HookEnvironment } from './HookEnvironment'
 import { withHooks } from './withHooks'
 
+// Run nested environments with their own hookEnvironment
 export function* runWithHooks<E, A>(
   effect: HookEffects<E, A>,
   hookEnvironment: HookEnvironment,

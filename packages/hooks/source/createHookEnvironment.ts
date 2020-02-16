@@ -20,7 +20,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     useRef,
     useChannel,
     provideChannel,
-    resetId: Effect.fromEnv(Pure.fromIO(resetId)),
+    resetId: () => Effect.fromEnv(Pure.fromIO(resetId)),
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
     },
