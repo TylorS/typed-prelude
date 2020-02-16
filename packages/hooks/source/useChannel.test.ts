@@ -1,10 +1,10 @@
-import { runEffect, runEffects } from '@typed/effects'
-import { handle } from '@typed/env'
+import { runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
+import { runWithHooks } from './runWithHooks'
 import { useChannel } from './useChannel'
 
 export const test = describe(`useChannel`, [
@@ -22,7 +22,7 @@ export const test = describe(`useChannel`, [
           const provide = yield* env.provideChannel(channel, value)
 
           equal(value, yield* provide(value))
-          equal(value, yield handle(env, runEffect(useChannel(channel))))
+          equal(value, yield* runWithHooks(useChannel(channel), env))
         }
       }
 

@@ -10,7 +10,7 @@ import { withHooks } from './withHooks'
 export const test = describe(`useRef`, [
   it(`allows keeping state across function invocations`, ({ equal }, done) => {
     const manager = createHooksManager(new NodeGenerator())
-    const hooksEnv = createHookEnvironment(manager)
+    const hookEnvironment = createHookEnvironment(manager)
     const initialValue: number = 1
     const endingValue: number = 100
     const test = withHooks(function*(value: number) {
@@ -28,7 +28,7 @@ export const test = describe(`useRef`, [
     })
 
     for (let i = initialValue; i <= endingValue; ++i) {
-      runEffects(test(i), hooksEnv)
+      runEffects(test(i), { hookEnvironment })
     }
   }),
 ])

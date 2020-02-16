@@ -1,7 +1,4 @@
 import { LazyEnv, Pure } from '@typed/env'
-import { HookEnvironment } from './HookEnvironment'
+import { HookEnv } from './HookEnvironment'
 
-export type WithHookEnvs<E> =
-  | LazyEnv<HookEnvironment, HookEnvironment>
-  | LazyEnv<E, any>
-  | Pure<any>
+export type WithHookEnvs<E> = LazyEnv<HookEnv, HookEnv> | LazyEnv<E, any> | Pure<any>

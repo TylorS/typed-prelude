@@ -14,5 +14,5 @@ export function* useMemo<A extends readonly any[], B>(
     yield* setValue(() => fn(...deps))
   }
 
-  return getValue()
+  return yield* getValue()
 }

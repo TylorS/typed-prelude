@@ -3,6 +3,15 @@ import { Env, Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 
+export type ChannelManager<A extends object> = {
+  readonly updateChannel: <B>(
+    channel: Channel<B>,
+    initial: B,
+    node: A,
+  ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
+  readonly consumeChannel: <B>(channel: Channel<B>, node: A) => Effect<Env<never, any>, B, any>
+}
+
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
 export function createChannelManager<A extends object>(
@@ -13,15 +22,9 @@ export function createChannelManager<A extends object>(
     node: A,
   ) => Generator<A, void, any>,
   getParent: (node: A) => A | undefined,
-): {
-  readonly updateChannel: <B>(
-    channel: Channel<B>,
-    initial: B,
-    node: A,
-  ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
-  readonly consumeChannel: <B>(channel: Channel<B>, node: A) => Effect<Env<never, any>, B, any>
-} {
-  // WeakMap & WeakSet are used to allow GC to automatically clean things up for us
+): ChannelManager<A> {
+  // WeakMap & WeakSet are used to requires GC to automatically clean things up for us
+  // This is a tradeoff made for convenience
   const channelValues = new WeakMap<Channel<any>, WeakMap<A, any>>()
   const channelConsumers = new WeakMap<Channel<any>, WeakSet<A>>()
   const channelProviders = new WeakMap<Channel<any>, WeakSet<A>>()

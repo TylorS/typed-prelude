@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { Effect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
@@ -12,17 +13,19 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = uuid4(manager.uuidEnv.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
+  const disposable = Disposable.lazy()
   const hookEnvironment: HookEnvironment = {
     id,
     useState,
     useRef,
     useChannel,
     provideChannel,
-    resetId: Effect.fromEnv(Pure.fromIO(resetId)),
+    resetId,
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
     },
     clearUpdated: () => manager.setUpdated(hookEnvironment, false),
+    ...disposable,
   }
 
   return hookEnvironment
@@ -34,16 +37,10 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       hookStates.set(id, getInitialValue(initial))
     }
 
-    const getState = (): A => hookStates.get(id)!
+    const getState = () => Effect.fromEnv(Pure.fromIO((): A => hookStates.get(id)!))
     function* setState(update: Arity1<A, A>): Generator<Pure, A, any> {
-      const [current, updated] = yield* Effect.fromEnv(
-        Pure.fromIO(() => {
-          const current = getState()
-          const updated = update(current)
-
-          return [current, updated] as const
-        }),
-      )
+      const current = yield* getState()
+      const updated = update(current)
 
       if (!equals(current, updated)) {
         hookStates.set(id, updated)
@@ -51,13 +48,13 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
         yield* manager.setUpdated(hookEnvironment, true)
       }
 
-      return getState()
+      return yield* getState()
     }
 
     return [getState, setState] as const
   }
 
-  function* useRef<A>(initial?: InitialState<A>) {
+  function* useRef<A>(initial?: InitialState<A | null | undefined | void>) {
     const id = nextId()
 
     if (!hookStates.has(id)) {
@@ -89,9 +86,12 @@ function getInitialValue<A>(initial: InitialState<A>) {
 function createIdGenerator() {
   let id = 0
   const nextId = () => ++id
-  const resetId = () => {
-    id = 0
-  }
+  const resetId = () =>
+    Effect.fromEnv(
+      Pure.fromIO(() => {
+        id = 0
+      }),
+    )
 
   return { nextId, resetId } as const
 }

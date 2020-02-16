@@ -11,12 +11,12 @@ export const test = describe(`useState`, [
   given(`an initial state`, [
     it(`returns a current state and updater fn`, ({ equal }, done) => {
       const manager = createHooksManager(new NodeGenerator())
-      const hooksEnv = createHookEnvironment(manager)
+      const hookEnvironment = createHookEnvironment(manager)
       const expectedValues = [1, 2, 3]
       const test = withHooks(function*() {
         const [getX, updateX] = yield* useState(1)
         const expected = expectedValues.shift()
-        const actual = getX()
+        const actual = yield* getX()
 
         if (!expected) {
           return done()
@@ -30,9 +30,7 @@ export const test = describe(`useState`, [
         }
       })
 
-      do {
-        runEffects(test(), hooksEnv)
-      } while (hooksEnv.updated)
+      runEffects(test(), { hookEnvironment })
     }),
   ]),
 ])
