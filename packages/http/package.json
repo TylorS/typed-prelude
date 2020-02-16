@@ -1,6 +1,6 @@
 {
   "name": "@typed/http",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "HTTP requests for node and browsers",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,7 +22,7 @@
   "dependencies": {
     "@typed/common": "^2.1.0",
     "@typed/disposable": "^2.2.0",
-    "@typed/effects": "^2.0.0",
+    "@typed/effects": "^2.1.0",
     "@typed/either": "^7.0.0",
     "@typed/env": "^4.0.0",
     "@typed/lambda": "^2.1.0",
