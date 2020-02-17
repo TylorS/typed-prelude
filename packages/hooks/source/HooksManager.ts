@@ -5,9 +5,7 @@ import { UuidEnv } from '@typed/uuid'
 import { Channel } from './Channel'
 import { HookEnvironment } from './HookEnvironment'
 
-export interface HooksManager<E> {
-  readonly uuidEnv: UuidEnv
-
+export interface HooksManager<E> extends UuidEnv {
   readonly setParent: (
     child: HookEnvironment<E>,
     parent: HookEnvironment<E>,

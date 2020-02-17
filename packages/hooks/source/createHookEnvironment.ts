@@ -10,7 +10,7 @@ import { HookEnvironment, InitialState, Ref, UseRef, UseState } from './HookEnvi
 import { HooksManager } from './HooksManager'
 
 export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironment<E> {
-  const id = uuid4(manager.uuidEnv.randomUuidSeed())
+  const id = uuid4(manager.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
   const channelUpdates = new WeakMap<Channel<E, any>, UseState<any>>()
@@ -78,7 +78,7 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
       return channelUpdates.get(channel)!
     }
 
-    const getValue = () => yield* manager.consumeChannel(channel, hookEnvironment)
+    const getValue = () => manager.consumeChannel(channel, hookEnvironment)
     const provide = yield* manager.updateChannel(channel, hookEnvironment)
 
     function* updateChannel(update: Arity1<A, A>) {

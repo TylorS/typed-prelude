@@ -19,7 +19,7 @@ export function createHooksManager<E>(uuidEnv: UuidEnv): HooksManager<E> {
   )
 
   return {
-    uuidEnv,
+    ...uuidEnv,
 
     // Control hierarchy
     setParent,
