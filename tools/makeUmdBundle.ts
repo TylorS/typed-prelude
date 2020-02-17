@@ -32,7 +32,6 @@ export async function makeUmdBundle({
   distName,
 }: MakeUmdBundleOptions) {
   const PKG_JSON = require(join(directory, 'package.json'))
-  const { compilerOptions } = require(join(directory, 'tsconfig.json'))
   const UMD_NAME = makePackageName(PKG_JSON.name.replace('@typed/', ''))
   const output: rollup.OutputOptions = {
     file: makeAbsolute(directory, distName || PKG_JSON.unpkg || 'dist/index.js'),
@@ -45,11 +44,15 @@ export async function makeUmdBundle({
     commonjs(commonJs),
     resolve({ mainFields: ['module', 'main'] }),
     ts({
-      ...compilerOptions,
-      declaration: false,
-      composite: false,
-      incremental: false,
-      rootDir: join(__dirname, '..'),
+      tsconfig: join(directory, 'tsconfig.json'),
+      tsconfigOverride: {
+        compilerOptions: {
+          declaration: false,
+          composite: false,
+          incremental: false,
+          rootDir: join(__dirname, '..'),
+        },
+      },
       objectHashIgnoreUnknownHack: true,
       check: false,
     }),

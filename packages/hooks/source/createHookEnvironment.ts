@@ -2,12 +2,14 @@ import { Disposable } from '@typed/disposable'
 import { Effect, Effects } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1 } from '@typed/lambda'
-import { equals, isIterable } from '@typed/logic'
+import { equals } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { uuid4 } from '@typed/uuid'
 import { Channel } from './Channel'
 import { HookEnvironment, InitialState, Ref, UseRef, UseState } from './HookEnvironment'
 import { HooksManager } from './HooksManager'
+
+const toNull = () => Effect.fromEnv(Pure.of(null))
 
 export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironment<E> {
   const id = uuid4(manager.randomUuidSeed())
@@ -55,12 +57,12 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
   }
 
   function* useRef<A>(
-    initial?: InitialState<A | null | undefined | void>,
+    initial: InitialState<A | null | undefined | void> = toNull,
   ): Effects<never, UseRef<A>> {
     const id = nextId()
 
     if (!hookStates.has(id)) {
-      hookStates.set(id, { current: Maybe.of(isIterable(initial) ? yield* initial() : initial) })
+      hookStates.set(id, { current: Maybe.of(yield* initial()) })
     }
 
     const ref: Ref<A> = hookStates.get(id)!

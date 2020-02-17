@@ -3,9 +3,6 @@ import { Env } from './Env'
 import { isValueEnv } from './isEnv'
 import { runEnv } from './runEnv'
 
-/**
- * Chain together multiple environments.
- */
 export const chain = curry(__chain) as {
   <A, B, C, D>(fn: Arity1<A, Env<B, C>>, env: Env<D, A>): Env<B & D, C>
   <A, B, C>(fn: Arity1<A, Env<B, C>>): <D>(env: Env<D, A>) => Env<B & D, C>

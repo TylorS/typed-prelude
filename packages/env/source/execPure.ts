@@ -1,7 +1,9 @@
 import { Disposable } from '@typed/disposable'
+import { always } from '@typed/lambda'
 import { Pure } from './Env'
-import { noOp } from './noOp'
 import { runPure } from './runPure'
+
+const noOp = always(Disposable.None)
 
 /**
  * Execute a pure ignoring the value it produces.

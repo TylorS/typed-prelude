@@ -33,7 +33,7 @@ export function* useCombineChannels<E, A extends ReadonlyArray<Channel<E, any>>>
 export function* useReduceChannel<E, A, B>(
   reducer: Arity2<A, B, A>,
   channel: Channel<E, A>,
-): Effects<E, readonly [IO<Effects<never, A>>, Arity1<B, Effects<E, A>>]> {
+): HookEffects<E, readonly [IO<Effects<never, A>>, Arity1<B, Effects<E, A>>]> {
   const [getState, updateState] = yield* useChannel(channel)
   const deps = [reducer, updateState] as const
   const dispatch = yield* useMemo<typeof deps, Arity1<B, Effects<E, A>>>(createDispatch, deps)
