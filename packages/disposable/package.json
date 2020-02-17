@@ -1,6 +1,6 @@
 {
   "name": "@typed/disposable",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Generic interface for representing disposable resources or other cleanup.",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

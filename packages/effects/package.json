@@ -1,6 +1,6 @@
 {
   "name": "@typed/effects",
-  "version": "2.2.0",
+  "version": "3.0.0",
   "description": "Generator-powered Effect management",
   "main": "./cjs/index.js",
   "repository": {
@@ -30,8 +30,8 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/disposable": "^2.2.0",
-    "@typed/env": "^4.0.0",
+    "@typed/disposable": "^2.3.0",
+    "@typed/env": "^5.0.0",
     "@typed/lambda": "^2.1.0"
   }
 }
