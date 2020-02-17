@@ -3,18 +3,17 @@ import { Env, Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 
-export type ChannelManager<A extends object> = {
+export type ChannelManager<E, A extends object> = {
   readonly updateChannel: <B>(
-    channel: Channel<B>,
-    initial: B,
+    channel: Channel<E, B>,
     node: A,
   ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
-  readonly consumeChannel: <B>(channel: Channel<B>, node: A) => Effect<Env<never, any>, B, any>
+  readonly consumeChannel: <B>(channel: Channel<E, B>, node: A) => Effect<Env<never, any>, B, any>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
-export function createChannelManager<A extends object>(
+export function createChannelManager<E, A extends object>(
   setUpdated: (node: A, updated: boolean) => Effects<never, void>,
   getAllDescendants: (
     providers: WeakSet<A>,
@@ -22,14 +21,14 @@ export function createChannelManager<A extends object>(
     node: A,
   ) => Generator<A, void, any>,
   getParent: (node: A) => A | undefined,
-): ChannelManager<A> {
+): ChannelManager<E, A> {
   // WeakMap & WeakSet are used to requires GC to automatically clean things up for us
   // This is a tradeoff made for convenience
-  const channelValues = new WeakMap<Channel<any>, WeakMap<A, any>>()
-  const channelConsumers = new WeakMap<Channel<any>, WeakSet<A>>()
-  const channelProviders = new WeakMap<Channel<any>, WeakSet<A>>()
+  const channelValues = new WeakMap<Channel<E, any>, WeakMap<A, any>>()
+  const channelConsumers = new WeakMap<Channel<E, any>, WeakSet<A>>()
+  const channelProviders = new WeakMap<Channel<E, any>, WeakSet<A>>()
 
-  function getChannelValues<B>(channel: Channel<B>): WeakMap<A, B> {
+  function getChannelValues<B>(channel: Channel<E, B>): WeakMap<A, B> {
     if (!channelValues.has(channel)) {
       channelValues.set(channel, new WeakMap())
     }
@@ -37,7 +36,7 @@ export function createChannelManager<A extends object>(
     return channelValues.get(channel)!
   }
 
-  function getChannelConsumers<B>(channel: Channel<B>): WeakSet<A> {
+  function getChannelConsumers<B>(channel: Channel<E, B>): WeakSet<A> {
     if (!channelConsumers.has(channel)) {
       channelConsumers.set(channel, new WeakSet())
     }
@@ -45,7 +44,7 @@ export function createChannelManager<A extends object>(
     return channelConsumers.get(channel)!
   }
 
-  function getChannelProviders<B>(channel: Channel<B>): WeakSet<A> {
+  function getChannelProviders<B>(channel: Channel<E, B>): WeakSet<A> {
     if (!channelProviders.has(channel)) {
       channelProviders.set(channel, new WeakSet())
     }
@@ -53,8 +52,9 @@ export function createChannelManager<A extends object>(
     return channelProviders.get(channel)!
   }
 
-  function* updateChannel<B>(channel: Channel<B>, initial: B, node: A) {
-    const values = yield Pure.fromIO(() => getChannelValues(channel))
+  function* updateChannel<B>(channel: Channel<E, B>, node: A) {
+    const initial = yield* channel.defaultValue()
+    const values = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
 
@@ -62,11 +62,11 @@ export function createChannelManager<A extends object>(
     providers.add(node)
 
     return function*(value: B) {
-      const values = getChannelValues(channel)
       const currentValue = values.get(node)
 
       if (!equals(currentValue, value)) {
         values.set(node, value)
+
         yield* setUpdated(node, true)
 
         for (const child of getAllDescendants(providers, consumers, node)) {
@@ -78,7 +78,7 @@ export function createChannelManager<A extends object>(
     }
   }
 
-  function* consumeChannel<B>(channel: Channel<B>, node: A): Effect<Pure<any>, B, any> {
+  function* consumeChannel<B>(channel: Channel<E, B>, node: A): Effect<Pure<any>, B, any> {
     const values: WeakMap<A, B> = yield Pure.fromIO(() => getChannelValues(channel))
     const consumers = getChannelConsumers(channel)
 
@@ -88,7 +88,7 @@ export function createChannelManager<A extends object>(
       const parent = getParent(node)
 
       if (!parent) {
-        return channel.defaultValue
+        return yield* channel.defaultValue()
       }
 
       node = parent

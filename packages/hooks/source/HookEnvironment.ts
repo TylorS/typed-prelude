@@ -1,38 +1,32 @@
 import { LazyDisposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { Effects } from '@typed/effects'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
 import { Channel } from './Channel'
 
-export type HookEnv = { readonly hookEnvironment: HookEnvironment }
+export type HookEnv<E> = { readonly hookEnvironment: HookEnvironment<E> }
 
-export interface HookEnvironment extends LazyDisposable {
+export interface HookEnvironment<E> extends LazyDisposable {
   readonly id: Uuid
+
   readonly useRef: <A>(
     initialState?: InitialState<A | null | undefined | void>,
-  ) => Effect<Pure<UseRef<A>>, UseRef<A>, any>
-  readonly useState: <A>(
-    initialState: InitialState<A>,
-  ) => Effect<Pure<UseState<A>>, UseState<A>, any>
+  ) => Effects<never, UseRef<A>>
 
-  readonly useChannel: <A>(channel: Channel<A>) => Effect<Pure<A>, A, any>
-  readonly provideChannel: <A>(
-    channel: Channel<A>,
-    initial: InitialState<A>,
-  ) => Effect<Pure<any>, (value: A) => Effect<Pure<any>, A, any>, any>
+  readonly useState: <A>(initialState: InitialState<A>) => Effects<never, UseState<A>>
+  readonly useChannel: <A>(channel: Channel<E, A>) => Effects<E, UseState<A>>
 
-  readonly resetId: () => Effect<Pure<any>, void, any>
+  readonly resetId: () => Effects<never, void>
   readonly updated: boolean // true when useState has been updated
-  readonly clearUpdated: () => Effect<Pure<any>, void, any>
+  readonly clearUpdated: () => Effects<never, void>
 }
 
-export type InitialState<A> = A | IO<A>
+export type InitialState<A> = () => Effects<never, A>
 
 export type UseState<A> = readonly [
-  IO<Effect<Pure<A>, A, A>>,
-  (updateFn: Arity1<A, A>) => Effect<Pure<A>, A, any>,
+  IO<Effects<never, A>>,
+  (updateFn: Arity1<A, A>) => Effects<never, A>,
 ]
 
 export type UseRef<A> = readonly [Ref<A>, Arity1<A | undefined | void | null, void>]

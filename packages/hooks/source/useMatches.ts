@@ -8,7 +8,9 @@ export function* useMatches<A, B>(
   matches: ReadonlyArray<Match<A, B>>,
 ): HookEffects<never, Maybe<B>> {
   const match = yield* useMemo(oneOf, [matches])
-  const maybe: Maybe<B> = yield* useMemo((x, f) => f(x), [value, match] as const)
+  const maybe: Maybe<B> = yield* useMemo(call, [value, match])
 
   return maybe
 }
+
+const call = <A, B>(value: A, match: Match<A, B>) => match(value)
