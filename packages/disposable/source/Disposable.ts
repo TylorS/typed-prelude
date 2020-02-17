@@ -40,13 +40,17 @@ export namespace Disposable {
     return {
       addDisposable(disposable: Disposable) {
         if (isDisposed) {
-          dispose(disposable)
-        } else {
-          disposables.push(disposable)
+          disposable.dispose()
+
+          return Disposable.None
         }
 
+        const dispose = () => removeDisposable(disposable)
+
+        disposables.push(onDisposed(dispose, disposable))
+
         return {
-          dispose: () => removeDisposable(disposable),
+          dispose,
         }
       },
       dispose() {
@@ -71,6 +75,21 @@ export const withIsDisposed = (fn: (isDisposed: () => boolean) => void): Disposa
   return {
     dispose: () => {
       disposed = true
+    },
+  }
+}
+
+export function onDisposed<A extends Error>(
+  fn: (error?: A) => void,
+  disposable: Disposable,
+): Disposable {
+  return {
+    dispose: () => {
+      try {
+        disposable.dispose()
+      } catch (error) {
+        fn(error)
+      }
     },
   }
 }
