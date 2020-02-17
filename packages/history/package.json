@@ -1,6 +1,6 @@
 {
   "name": "@typed/history",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "Testable interfaces for the history API",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -27,7 +27,7 @@
   "dependencies": {
     "@typed/common": "^2.1.0",
     "@typed/disposable": "^2.2.0",
-    "@typed/effects": "^2.1.0",
+    "@typed/effects": "^2.2.0",
     "@typed/env": "^4.0.0",
     "@typed/lambda": "^2.1.0",
     "@typed/new-type": "^2.1.0",
