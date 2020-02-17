@@ -64,7 +64,7 @@ export function createFailedResponse(error: Error) {
 export function createHttpResponse<A>(options: Partial<HttpResponse<A>> = {}): HttpResponse<A> {
   const response: HttpResponse<A> = {
     status: 200,
-    statusText: '',
+    statusText: 'OK',
     responseText: '',
     headers: {},
     ...options,
@@ -76,8 +76,12 @@ export function createHttpResponse<A>(options: Partial<HttpResponse<A>> = {}): H
 export function createJsonResponse<A extends Json>(
   jsonReadyValue: A,
   options: Partial<HttpResponse<A>> = {},
-): HttpResponse {
+): HttpResponse<A> {
   const responseText = JSON.stringify(jsonReadyValue)
 
-  return createHttpResponse({ ...options, responseText })
+  return createHttpResponse<A>({
+    ...options,
+    headers: { 'Content-Type': 'application/json', ...options.headers },
+    responseText,
+  })
 }
