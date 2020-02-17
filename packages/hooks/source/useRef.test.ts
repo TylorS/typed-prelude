@@ -5,6 +5,7 @@ import { describe, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
+import { InitialState } from './HookEnvironment'
 import { useRef } from './useRef'
 import { withHooks } from './withHooks'
 
@@ -15,7 +16,7 @@ export const test = describe(`useRef`, [
     const initialValue: number = 1
     const endingValue: number = 100
     const test = withHooks(function*(value: number) {
-      const [ref] = yield* useRef<number>(() => Effect.fromEnv(Pure.of(value)))
+      const [ref] = yield* useRef<number>(InitialState.of(value))
 
       try {
         equal(Maybe.of(initialValue), ref.current)

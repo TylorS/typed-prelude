@@ -5,6 +5,7 @@ import { NodeGenerator } from '@typed/uuid'
 import { increment } from '../../math/source'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
+import { InitialState } from './HookEnvironment'
 import { useState } from './useState'
 import { withHooks } from './withHooks'
 
@@ -15,7 +16,7 @@ export const test = describe(`useState`, [
       const hookEnvironment = createHookEnvironment(manager)
       const expectedValues = [1, 2, 3]
       const test = withHooks(function*() {
-        const [getX, updateX] = yield* useState(() => Effect.fromEnv(Pure.of(1)))
+        const [getX, updateX] = yield* useState(InitialState.of(1))
         const expected = expectedValues.shift()
         const actual = yield* getX()
 

@@ -1,6 +1,6 @@
 import { LazyDisposable } from '@typed/disposable'
 import { Effect, Effects } from '@typed/effects'
-import { Pure } from '@typed/env/source'
+import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
