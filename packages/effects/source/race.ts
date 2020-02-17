@@ -1,12 +1,14 @@
 import { Disposable, disposeAll } from '@typed/disposable'
 import { Env, handle, runPure } from '@typed/env'
 import { pipe } from '@typed/lambda'
-import { Effect, Effects } from './Effect'
+import { Effect, EffectResources, Effects, EffectValue } from './Effect'
 import { runEffect } from './runEffect'
 
-export function race<E, A>(...effects: ReadonlyArray<Effects<E, A>>): Effects<E, A> {
+export function race<E extends ReadonlyArray<Effects<any, any>>>(
+  ...effects: E
+): Effects<EffectResources<E[keyof E]>, EffectValue<E[keyof E]>> {
   return Effect.fromEnv(
-    Env.create<E, A>((cb, e: E) => {
+    Env.create<EffectResources<E[keyof E]>, EffectValue<E[keyof E]>>((cb, e) => {
       let resolved = false
       const pures = effects.map(pipe(runEffect, handle(e)))
       const pureDisposables: Disposable[] = pures.map((pure, i) =>
@@ -14,7 +16,7 @@ export function race<E, A>(...effects: ReadonlyArray<Effects<E, A>>): Effects<E,
       )
       const effectDisposable = Disposable.lazy()
 
-      function ifNotResolved(value: A, index: number) {
+      function ifNotResolved(value: EffectValue<E[keyof E]>, index: number) {
         if (!resolved) {
           resolved = true
 

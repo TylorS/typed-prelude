@@ -1,11 +1,13 @@
 import { combineArray } from '@typed/env'
-import { Effect, Effects } from './Effect'
+import { Effect, Effects, EffectValue } from './Effect'
 import { runEffect } from './runEffect'
 
-export function combine<E, A>(...effects: ReadonlyArray<Effects<E, A>>): Effects<E, readonly A[]> {
-  return Effect.fromEnv(
+export function* combine<E extends ReadonlyArray<Effects<any, any>>>(
+  ...effects: E
+): Effects<E, { readonly [K in keyof E]: EffectValue<E[K]> }> {
+  return yield* Effect.fromEnv(
     combineArray(
-      Array as (...values: readonly A[]) => readonly A[],
+      (...values) => values as any,
       effects.map(eff => runEffect(eff)),
     ),
   )
