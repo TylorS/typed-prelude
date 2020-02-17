@@ -9,7 +9,10 @@ import { map } from './map'
  * @param value :: Env a b
  * @returns :: Env a c
  */
-export const ap = curry(__ap) as {
+export const ap: {
+  <A, B, C, D>(fn: Env<A, Arity1<B, C>>, value: Env<D, B>): Env<A & D, C>
+  <A, B, C>(fn: Env<A, Arity1<B, C>>): <D>(value: Env<D, B>) => Env<A & D, C>
+} = curry(__ap) as {
   <A, B, C, D>(fn: Env<A, Arity1<B, C>>, value: Env<D, B>): Env<A & D, C>
   <A, B, C>(fn: Env<A, Arity1<B, C>>): <D>(value: Env<D, B>) => Env<A & D, C>
 }
