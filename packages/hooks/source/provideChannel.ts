@@ -10,7 +10,7 @@ type UpdateChannel<A> = (value: A) => HookEffects<never, A>
 
 export function* provideChannel<A>(
   channel: Channel<A>,
-  initial: InitialState<A>,
+  initial: InitialState<A> = () => channel.defaultValue,
 ): HookEffects<never, readonly [A, UpdateChannel<A>]> {
   const { useChannel, provideChannel, useRef } = yield* getHookEnv()
   const [updateChannel, setUpdateChannel] = yield* useRef<UpdateChannel<A>>()
