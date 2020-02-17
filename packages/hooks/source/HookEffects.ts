@@ -1,5 +1,4 @@
-import { Effects } from '@typed/effects'
-import { Resources } from '@typed/env'
+import { Effect } from '@typed/effects'
 import { WithHookEnvs } from './WithHookEnvs'
 
-export type HookEffects<A, B> = Effects<Resources<WithHookEnvs<A>>, B>
+export type HookEffects<A, B> = Effect<WithHookEnvs<A>, B, any>
