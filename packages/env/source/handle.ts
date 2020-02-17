@@ -1,15 +1,21 @@
 import { DropKeys } from '@typed/common'
 import { Disposable } from '@typed/disposable'
 import { Arity1, curry } from '@typed/lambda'
-import { Env, EnvValue, Pure, Resources } from './Env'
+import { Env, Pure } from './Env'
 import { isValueEnv } from './isEnv'
 
 /**
  * Provide resources to an Env
  */
-export type Handle<A, E extends Env<any, any>> = Exclude<keyof Resources<E>, keyof A> extends never
-  ? Pure<EnvValue<E>>
-  : Env<DropKeys<Resources<E>, keyof A>, EnvValue<E>>
+export type Handle<A, E> = E extends Env<infer B, infer C>
+  ? A extends B
+    ? Pure<C>
+    : B extends never
+    ? Pure<C>
+    : B extends A
+    ? Env<Omit<B, keyof A>, C>
+    : E
+  : E
 
 /**
  * Provide resources to an environment
