@@ -9,7 +9,7 @@ import { Channel } from './Channel'
 import { HookEnvironment, InitialState, Ref, UseRef, UseState } from './HookEnvironment'
 import { HooksManager } from './HooksManager'
 
-const toNull = () => Effect.fromEnv(Pure.of(null))
+const toNull = InitialState.of(null)
 
 export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironment<E> {
   const id = uuid4(manager.randomUuidSeed())
@@ -74,7 +74,10 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
     return [ref, setState] as const
   }
 
-  function* useChannel<A>(channel: Channel<E, A>): Effects<E, UseState<A>> {
+  function* useChannel<A>(
+    channel: Channel<E, A>,
+    initial?: InitialState<A>,
+  ): Effects<E, UseState<A>> {
     // Only create updateChannel once
     if (channelUpdates.has(channel)) {
       return channelUpdates.get(channel)!
@@ -82,6 +85,10 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
 
     const getValue = () => manager.consumeChannel(channel, hookEnvironment)
     const provide = yield* manager.updateChannel(channel, hookEnvironment)
+
+    if (initial) {
+      yield* provide(yield* initial())
+    }
 
     function* updateChannel(update: Arity1<A, A>) {
       return yield* provide(update(yield* getValue()))

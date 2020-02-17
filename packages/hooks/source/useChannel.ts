@@ -3,13 +3,16 @@ import { Arity1, Arity2, IO } from '@typed/lambda'
 import { Channel, ChannelValue } from './Channel'
 import { getHookEnv } from './getHookEnv'
 import { HookEffects } from './HookEffects'
-import { UseState } from './HookEnvironment'
+import { InitialState, UseState } from './HookEnvironment'
 import { useMemo } from './useMemo'
 
-export function* useChannel<E, A>(channel: Channel<E, A>): HookEffects<E, UseState<A>> {
+export function* useChannel<E, A>(
+  channel: Channel<E, A>,
+  initial?: InitialState<A>,
+): HookEffects<E, UseState<A>> {
   const { useChannel } = yield* getHookEnv<E>()
 
-  return yield* useChannel(channel)
+  return yield* useChannel(channel, initial)
 }
 
 export function* useMapChannel<E, A, B>(
@@ -36,7 +39,7 @@ export function* useReduceChannel<E, A, B>(
 ): HookEffects<E, readonly [IO<Effects<never, A>>, Arity1<B, Effects<E, A>>]> {
   const [getState, updateState] = yield* useChannel(channel)
   const deps = [reducer, updateState] as const
-  const dispatch = yield* useMemo<typeof deps, Arity1<B, Effects<E, A>>>(createDispatch, deps)
+  const dispatch = yield* useMemo<E, typeof deps, Arity1<B, Effects<E, A>>>(createDispatch, deps)
 
   return [getState, dispatch] as const
 }

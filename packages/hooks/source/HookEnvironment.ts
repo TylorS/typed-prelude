@@ -16,7 +16,10 @@ export interface HookEnvironment<E> extends LazyDisposable {
   ) => Effects<never, UseRef<A>>
 
   readonly useState: <A>(initialState: InitialState<A>) => Effects<never, UseState<A>>
-  readonly useChannel: <A>(channel: Channel<E, A>) => Effects<E, UseState<A>>
+  readonly useChannel: <A>(
+    channel: Channel<E, A>,
+    initialState?: InitialState<A>,
+  ) => Effects<E, UseState<A>>
 
   readonly resetId: () => Effects<never, void>
   readonly updated: boolean // true when useState has been updated

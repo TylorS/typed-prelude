@@ -11,7 +11,10 @@ export function* useReducer<A, B>(
 ): HookEffects<never, readonly [IO<Effects<never, A>>, Arity1<B, Effects<never, A>>]> {
   const [getState, updateState] = yield* useState(seed)
   const deps = [reducer, updateState] as const
-  const dispatch = yield* useMemo<typeof deps, Arity1<B, Effects<never, A>>>(createDispatch, deps)
+  const dispatch = yield* useMemo<never, typeof deps, Arity1<B, Effects<never, A>>>(
+    createDispatch,
+    deps,
+  )
 
   return [getState, dispatch] as const
 }

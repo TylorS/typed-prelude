@@ -6,10 +6,10 @@ import { HookEffects } from './HookEffects'
 import { useDepChange } from './useDepChange'
 import { useState } from './useState'
 
-export function* useMemo<A extends readonly any[], B>(
-  fn: Fn<A, B | Effects<never, B>>,
+export function* useMemo<E, A extends readonly any[], B>(
+  fn: Fn<A, B | Effects<E, B>>,
   deps: A,
-): HookEffects<never, B> {
+): HookEffects<E, B> {
   const [getValue, setValue] = yield* useState<B>(() => getEffectValue(fn(...deps)))
   const depsUpdated = yield* useDepChange(deps, false)
 

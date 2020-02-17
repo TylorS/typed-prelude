@@ -1,5 +1,4 @@
-import { Effect, Effects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { Effects } from '@typed/effects'
 import { Arity1, IO } from '@typed/lambda'
 import { Failure, Loading, NoData, RemoteData, Success } from '@typed/remote-data'
 import { HookEffects } from './HookEffects'
@@ -18,10 +17,8 @@ export type RemoteDataActions<A, B> = {
   readonly failure: (value: A) => Effects<never, RemoteData<A, B>>
 }
 
-const noData = () => Effect.fromEnv(Pure.of(NoData))
-
 export function* useRemoteData<A, B>(
-  initial: InitialState<RemoteData<A, B>> = noData,
+  initial: InitialState<RemoteData<A, B>> = InitialState.of(NoData),
 ): HookEffects<never, readonly [IO<Effects<never, RemoteData<A, B>>>, RemoteDataActions<A, B>]> {
   const [getRemoteData, update] = yield* useState<RemoteData<A, B>>(initial)
   const set = (remoteData: RemoteData<A, B>) => update(() => remoteData)
