@@ -1,4 +1,5 @@
-import { runEffects } from '@typed/effects'
+import { Effect, runEffects } from '@typed/effects'
+import { Pure } from '@typed/env'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
@@ -18,7 +19,7 @@ export const test = describe(`createHooksManager`, [
       const c = createHookEnvironment(manager)
       const initial = 1
       const expected = 3
-      const channel = createChannel(initial)
+      const channel = createChannel(() => Effect.fromEnv(Pure.of(initial)))
 
       function* test() {
         try {
@@ -37,7 +38,7 @@ export const test = describe(`createHooksManager`, [
           notOk(c.updated)
 
           // Get provideChannel Effect from manager
-          const provideChannel = yield* manager.updateChannel(channel, initial, a)
+          const provideChannel = yield* manager.updateChannel(channel, a)
 
           // Ensure manager.updateChannel didn't make any unexpected changes
           equal(initial, yield* manager.consumeChannel(channel, a))

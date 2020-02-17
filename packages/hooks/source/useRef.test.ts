@@ -1,4 +1,5 @@
-import { runEffects } from '@typed/effects'
+import { Effect, runEffects } from '@typed/effects'
+import { Pure } from '@typed/env'
 import { Maybe } from '@typed/maybe'
 import { describe, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
@@ -14,7 +15,7 @@ export const test = describe(`useRef`, [
     const initialValue: number = 1
     const endingValue: number = 100
     const test = withHooks(function*(value: number) {
-      const [ref] = yield* useRef<number>(value)
+      const [ref] = yield* useRef<number>(() => Effect.fromEnv(Pure.of(value)))
 
       try {
         equal(Maybe.of(initialValue), ref.current)
