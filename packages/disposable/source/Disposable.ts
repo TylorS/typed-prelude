@@ -28,14 +28,8 @@ export namespace Disposable {
    */
   export const lazy = () => {
     let isDisposed: boolean = false
-    const disposables: Disposable[] = []
-    const removeDisposable = (disposable: Disposable) => {
-      const index = disposables.findIndex(d => d === disposable)
-
-      if (index > -1) {
-        disposables.splice(index, 1)
-      }
-    }
+    const disposables = new Set<Disposable>()
+    const removeDisposable = (disposable: Disposable) => disposables.delete(disposable)
 
     return {
       addDisposable(disposable: Disposable) {
@@ -47,7 +41,7 @@ export namespace Disposable {
 
         const dispose = () => removeDisposable(disposable)
 
-        disposables.push(onDisposed(dispose, disposable))
+        disposables.add(onDisposed(dispose, disposable))
 
         return {
           dispose,
@@ -60,6 +54,7 @@ export namespace Disposable {
 
         isDisposed = true
         disposables.forEach(dispose)
+        disposables.clear()
       },
     }
   }
