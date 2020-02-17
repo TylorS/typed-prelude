@@ -1,6 +1,6 @@
 {
   "name": "@typed/effects",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "Generator-powered Effect management",
   "main": "./cjs/index.js",
   "repository": {
