@@ -1,5 +1,6 @@
 import { LazyDisposable } from '@typed/disposable'
-import { Effects } from '@typed/effects'
+import { Effect, Effects } from '@typed/effects'
+import { Pure } from '@typed/env/source'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
@@ -23,6 +24,10 @@ export interface HookEnvironment<E> extends LazyDisposable {
 }
 
 export type InitialState<A> = () => Effects<never, A>
+
+export namespace InitialState {
+  export const of = <A>(value: A): InitialState<A> => () => Effect.fromEnv(Pure.of(value))
+}
 
 export type UseState<A> = readonly [
   IO<Effects<never, A>>,
