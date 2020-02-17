@@ -67,7 +67,7 @@ export const test = describe(`createHooksManager`, [
         }
       }
 
-      runEffects(test(), {})
+      runEffects(test(), {} as never)
     }),
   ]),
 ])

@@ -2,11 +2,13 @@ import { Effect, Effects } from '@typed/effects'
 import { Env, Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
+import { InitialState } from './HookEnvironment'
 
 export type ChannelManager<E, A extends object> = {
   readonly updateChannel: <B>(
     channel: Channel<E, B>,
     node: A,
+    initialState?: InitialState<B>,
   ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
   readonly consumeChannel: <B>(channel: Channel<E, B>, node: A) => Effect<Env<never, any>, B, any>
 }
@@ -52,13 +54,15 @@ export function createChannelManager<E, A extends object>(
     return channelProviders.get(channel)!
   }
 
-  function* updateChannel<B>(channel: Channel<E, B>, node: A) {
-    const initial = yield* channel.defaultValue()
+  function* updateChannel<B>(channel: Channel<E, B>, node: A, initialState?: InitialState<B>) {
     const values = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
 
-    values.set(node, initial)
+    if (initialState) {
+      values.set(node, yield* initialState())
+    }
+
     providers.add(node)
 
     return function*(value: B) {

@@ -3,7 +3,7 @@ import { Pure } from '@typed/env'
 import { Arity1 } from '@typed/lambda'
 import { UuidEnv } from '@typed/uuid'
 import { Channel } from './Channel'
-import { HookEnvironment } from './HookEnvironment'
+import { HookEnvironment, InitialState } from './HookEnvironment'
 
 export interface HooksManager<E> extends UuidEnv {
   readonly setParent: (
@@ -16,6 +16,7 @@ export interface HooksManager<E> extends UuidEnv {
   readonly updateChannel: <A>(
     channel: Channel<E, A>,
     node: HookEnvironment<E>,
+    initialState?: InitialState<A>,
   ) => Effects<E, Arity1<A, Effects<E, A>>>
   readonly consumeChannel: <A>(channel: Channel<E, A>, node: HookEnvironment<E>) => Effects<E, A>
 

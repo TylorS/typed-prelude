@@ -84,11 +84,7 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
     }
 
     const getValue = () => manager.consumeChannel(channel, hookEnvironment)
-    const provide = yield* manager.updateChannel(channel, hookEnvironment)
-
-    if (initial) {
-      yield* provide(yield* initial())
-    }
+    const provide = yield* manager.updateChannel(channel, hookEnvironment, initial)
 
     function* updateChannel(update: Arity1<A, A>) {
       return yield* provide(update(yield* getValue()))

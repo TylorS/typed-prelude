@@ -30,6 +30,7 @@ export type InitialState<A> = () => Effects<never, A>
 
 export namespace InitialState {
   export const of = <A>(value: A): InitialState<A> => () => Effect.fromEnv(Pure.of(value))
+  export const fromIO = <A>(io: () => A): InitialState<A> => () => Effect.fromEnv(Pure.fromIO(io))
 }
 
 export type UseState<A> = readonly [
