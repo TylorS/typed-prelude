@@ -26,7 +26,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
     url,
     { method, headers: { 'Accept-Encoding': 'br,gzip,deflate', ...headers }, protocol },
     (response: IncomingMessage) => {
-      const data: string[] = []
+      let responseText: string = ''
 
       switch (response.headers['content-encoding']) {
         case 'br':
@@ -40,9 +40,9 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
           break
       }
 
-      response.on('data', chunk => data.push(chunk.toString()))
+      response.on('data', chunk => (responseText += chunk.toString()))
       response.on('error', error => disposable.addDisposable(failure(error)))
-      response.on('close', () => {
+      response.on('end', () => {
         const headersMap: Record<string, string | undefined> = {}
 
         for (const header in response.headers) {
@@ -55,7 +55,7 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
 
         disposable.addDisposable(
           success({
-            responseText: data.join(''),
+            responseText,
             status: response.statusCode!,
             statusText: response.statusMessage!,
             headers: headersMap,
