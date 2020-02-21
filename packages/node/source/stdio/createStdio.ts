@@ -14,15 +14,6 @@ export type Stdio = {
   readonly stdout: MockWritable
 }
 
-// for developer convenience
-/**
- * Creates a standard input/output object
- * { stdin: MockReadable, stderr: MockWritable, stdout: MockWritable }
- *
- * @export
- * @param {StdioOptions} [options]
- * @returns { stdin: MockReadable, stderr: MockWritable, stdout: MockWritable }
- */
 export function createStdio(options: StdioOptions = {}): Stdio {
   const stdin = new MockReadable(options.stdin)
   const stdout = new MockWritable(options.stdout)

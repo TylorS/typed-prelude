@@ -13,8 +13,9 @@ export class MockWritable extends Writable {
     super.end()
   }
 
-  public write(data: any): boolean {
+  public write(data: Buffer | string): boolean {
     this._data.push(data)
+
     return super.write(data)
   }
 

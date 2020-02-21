@@ -2,7 +2,7 @@ import { ReadableOptions, WritableOptions } from 'stream'
 import { MockReadable } from './MockReadable'
 import { MockWritable } from './MockWritable'
 
-export interface ChildProcessOptions {
+export interface ChildProcessStdioOptions {
   readonly stdin?: WritableOptions
   readonly stdout?: ReadableOptions
   readonly stderr?: ReadableOptions
@@ -14,16 +14,7 @@ export type ChildProcessStdio = {
   readonly stdout: MockReadable
 }
 
-// for developer convenience
-/**
- * Creates a standard input/output object
- * { stdin: MockReadable, stderr: MockWritable, stdout: MockWritable }
- *
- * @export
- * @param {StdioOptions} [options]
- * @returns { stdin: MockReadable, stderr: MockWritable, stdout: MockWritable }
- */
-export function createChildProcessStdio(options: ChildProcessOptions = {}): ChildProcessStdio {
+export function createChildProcessStdio(options: ChildProcessStdioOptions = {}): ChildProcessStdio {
   const stdin = new MockWritable(options.stdin)
   const stdout = new MockReadable(options.stdout)
   const stderr = new MockReadable(options.stderr)

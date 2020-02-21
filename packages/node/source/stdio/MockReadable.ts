@@ -5,17 +5,18 @@ const defaults = {
 }
 
 export class MockReadable extends Readable {
-  // tslint:disable-next-line:variable-name
-  private _data: any[] = []
-  // tslint:disable-next-line:variable-name
-  private _immutableData: any[] = []
+  protected readData: string[] = []
+  protected writeData: string[] = []
+  protected options: ReadableOptions
 
   constructor(options?: ReadableOptions) {
-    super(Object.assign({}, defaults, options))
+    super({ ...defaults, ...options })
+
+    this.options = { ...defaults, ...options }
   }
 
   public _read(size?: number): void {
-    const data = this._data
+    const data = this.readData
 
     if (size === void 0) {
       size = data.length
@@ -26,7 +27,7 @@ export class MockReadable extends Readable {
     while (this.readable && data.length && count < size) {
       const item = data.shift()
 
-      if (!this.push(item, 'utf8')) {
+      if (!this.push(item, this.options.encoding)) {
         this.readable = false
       }
 
@@ -34,21 +35,27 @@ export class MockReadable extends Readable {
     }
   }
 
-  public write(...data: any[]): MockReadable {
+  public write(...data: Array<Buffer | string>): MockReadable {
     if (!this.readable) {
       throw new Error('This stream has already finished')
     }
 
-    this._data.push(...data)
-    this._immutableData.push(...data)
+    const values = data.map(x => x.toString())
+
+    this.readData.push(...values)
+    this.writeData.push(...values)
 
     this._read()
+
+    for (const value of values) {
+      this.emit('data', value)
+    }
 
     return this
   }
 
-  public data(): any[] {
-    return this._immutableData.slice(0)
+  public data(): readonly string[] {
+    return this.writeData.slice(0)
   }
 
   public end(...args: any[]): void {
