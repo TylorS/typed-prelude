@@ -15,4 +15,7 @@ export namespace Maybe {
    */
   export const of = <A>(value: A | null | undefined | void): Maybe<A> =>
     value === null || value === undefined ? Nothing : Just.of<A>(value as A)
+
+  export const fromString = (str: string | null | undefined | void): Maybe<string> =>
+    !str ? Nothing : Just.of(str)
 }
