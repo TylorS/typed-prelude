@@ -1,6 +1,6 @@
 {
   "name": "@typed/http",
-  "version": "5.1.4",
+  "version": "5.1.5",
   "description": "HTTP requests for node and browsers",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
