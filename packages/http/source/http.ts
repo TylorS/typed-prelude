@@ -20,9 +20,23 @@ export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpR
       }
 
       return http(url, options, {
-        success: ifNotLoaded((response: HttpResponse<A>) => f(Right.of(response))),
+        success: ifNotLoaded((response: HttpResponse<A>) => f(handleSuccess(response))),
         failure: ifNotLoaded((error: Error) => f(Left.of(error))),
       })
     }),
   )
+}
+
+function handleSuccess<A>(response: HttpResponse<A>) {
+  if (isValidStatus(response)) {
+    return Right.of(response)
+  }
+
+  const errorMessage = response.responseText || response.statusText
+
+  return Left.of(new Error(errorMessage))
+}
+
+function isValidStatus({ status }: HttpResponse<any>) {
+  return status >= 200 && status < 300
 }
