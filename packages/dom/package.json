@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "peerDependencies": {
-    "basichtml": "^1.1.1",
+    "basichtml": "^1.1.1 || ^2.0.0",
     "css-mediaquery": "^0.1.2",
     "tslib": "^1.10.0"
   },
@@ -42,7 +42,7 @@
   "unpkg": "./umd/index.js",
   "devDependencies": {
     "@peculiar/webcrypto": "1.0.22",
-    "basichtml": "1.1.2",
+    "basichtml": "2.0.2",
     "css-mediaquery": "0.1.2"
   }
 }
