@@ -1,6 +1,6 @@
 import { Effect } from '@typed/effects'
-import { fromJust, isNothing } from '@typed/maybe'
 import { Pure } from '@typed/env'
+import { fromJust, isNothing } from '@typed/maybe'
 import { findNamedArg } from './findNamedArg'
 import { getArgs } from './getArgs'
 import { ArgParser, ArgParserResult, ArgParserResultValue, ParseOptions } from './types'
