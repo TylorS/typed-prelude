@@ -10,6 +10,10 @@ export function* showHelp<A extends ReadonlyArray<ArgParser<any, any>>>(
   yield* info(`\n${underline(bold(applicationName))}\n`)
 
   for (const { help } of parsers) {
-    yield* info(`${yield* help()}`)
+    const message = yield* help()
+
+    if (message) {
+      yield* info(message)
+    }
   }
 }
