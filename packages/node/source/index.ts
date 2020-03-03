@@ -1,3 +1,4 @@
+export * from './arg-parse'
 export * from './colors'
 export * from './env-vars'
 export * from './figures'
