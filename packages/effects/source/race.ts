@@ -1,12 +1,12 @@
 import { Disposable, disposeAll } from '@typed/disposable'
 import { Env, handle, runPure } from '@typed/env'
 import { pipe } from '@typed/lambda'
-import { Effect, EffectResources, Effects, EffectValue } from './Effect'
+import { Effect, EffectResources, EffectValue } from './Effect'
 import { runEffect } from './runEffect'
 
-export function race<E extends ReadonlyArray<Effects<any, any>>>(
+export function race<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E
-): Effects<EffectResources<E[keyof E]>, EffectValue<E[keyof E]>> {
+): Effect<EffectResources<E[keyof E]>, EffectValue<E[keyof E]>> {
   return Effect.fromEnv(
     Env.create<EffectResources<E[keyof E]>, EffectValue<E[keyof E]>>((cb, e) => {
       let resolved = false

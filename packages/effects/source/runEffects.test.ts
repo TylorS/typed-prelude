@@ -1,5 +1,4 @@
 import { describe, given, it } from '@typed/test'
-import { Effect, EffectResources } from './Effect'
 import { get } from './get'
 import { runEffects } from './runEffects'
 
@@ -9,18 +8,18 @@ export const test = describe(`runEffects`, [
       const x = 1
       const y = 2
       const z = 5
-      const addY = Effect.create(function*(x: number) {
+      const addY = function*(x: number) {
         const { y } = yield* get<{ y: number }>()
 
         return x + y
-      })
-      const addX = Effect.create(function*(y: number) {
+      }
+      const addX = function*(y: number) {
         const { x } = yield* get<{ x: number }>()
 
         return x + y
-      })
+      }
 
-      const main = Effect.create(function* main() {
+      const main = function* main() {
         const a = yield* addY(z)
         const b = yield* addX(z)
 
@@ -28,7 +27,7 @@ export const test = describe(`runEffects`, [
         equal(x + z, b)
 
         return [a, b] as const
-      })
+      }
 
       runEffects(main(), { x, y })
     }),
