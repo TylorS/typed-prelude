@@ -9,25 +9,23 @@ import { disposeSources } from './disposeSources'
 import { replicateSinks } from './replicateSinks'
 import { Component, IOComponent, Run, SchedulerEnv, Sinks, Sources } from './types'
 
-export function run<A extends Sources, B extends Sinks>(
+export function* run<A extends Sources, B extends Sinks>(
   main: Component<A, B>,
   io: IOComponent<B, A>,
-): Effect<Env<SchedulerEnv, Run<A, B>>, Run<A, B>, any> {
-  return Effect.fromEnv(
-    Env.create((cb: Arity1<Run<A, B>, Disposable>, { scheduler }: SchedulerEnv) => {
-      const sinkProxies = {} as Record<keyof A, Subject<any, any>>
-      const [endSink, endSignal] = create()
-      const [sources, disposable] = io(createProxySinks(sinkProxies, endSignal))
-      const sinks = main(sources)
-      const replicationDisposable = replicateSinks<B>(sinks, sinkProxies, scheduler)
-      const dispose = () => {
-        endSink.event(scheduler.currentTime(), void 0)
-        disposable.dispose()
-        replicationDisposable.dispose()
-        disposeSources(sources)
-      }
+): Effect<SchedulerEnv, Run<A, B>> {
+  return yield Env.create((cb: Arity1<Run<A, B>, Disposable>, { scheduler }: SchedulerEnv) => {
+    const sinkProxies = {} as Record<keyof A, Subject<any, any>>
+    const [endSink, endSignal] = create()
+    const [sources, disposable] = io(createProxySinks(sinkProxies, endSignal))
+    const sinks = main(sources)
+    const replicationDisposable = replicateSinks<B>(sinks, sinkProxies, scheduler)
+    const dispose = () => {
+      endSink.event(scheduler.currentTime(), void 0)
+      disposable.dispose()
+      replicationDisposable.dispose()
+      disposeSources(sources)
+    }
 
-      return disposeAll([cb([sources, sinks]), { dispose }])
-    }),
-  )
+    return disposeAll([cb([sources, sinks]), { dispose }])
+  })
 }
