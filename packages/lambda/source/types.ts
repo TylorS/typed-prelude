@@ -110,7 +110,7 @@ export type OrToAnd<A> = (A extends any
   ? B
   : never
 
-export type Include<A, B> = Exclude<A, Exclude<A, B>>
+export type Include<A, B> = A extends B ? A : never
 
 export type TypeGuard<A, B extends A> = (value: A) => value is B
 
