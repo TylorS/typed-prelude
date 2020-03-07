@@ -42,7 +42,7 @@
   "unpkg": "./umd/index.js",
   "devDependencies": {
     "@peculiar/webcrypto": "1.0.23",
-    "basichtml": "2.1.1",
+    "basichtml": "2.1.2",
     "css-mediaquery": "0.1.2"
   }
 }
