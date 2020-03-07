@@ -1,5 +1,5 @@
 import { Effect } from '@typed/effects'
-import { Env, withEnv } from '@typed/env'
+import { withEnv } from '@typed/env'
 import { curry } from '@typed/lambda'
 import { StorageEnv } from './types'
 
@@ -10,8 +10,8 @@ import { StorageEnv } from './types'
  * @returns :: Env StorageEnv string
  */
 export const setItem: {
-  (key: string, value: string): Effect<Env<StorageEnv, string>, string, string>
-  (key: string): (value: string) => Effect<Env<StorageEnv, string>, string, string>
+  (key: string, value: string): Effect<StorageEnv, string>
+  (key: string): (value: string) => Effect<StorageEnv, string>
 } = curry((key: string, value: string) =>
   Effect.fromEnv(
     withEnv<StorageEnv, string>(({ storage }) => (storage.setItem(key, value), value)),
