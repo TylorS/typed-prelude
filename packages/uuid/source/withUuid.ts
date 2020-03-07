@@ -1,8 +1,7 @@
 import { Effect } from '@typed/effects'
-import { Env } from '@typed/env'
 import { Uuid, UuidEnv } from './types'
 import { uuid } from './uuid'
 
-export function* withUuid<A>(f: (uuid: Uuid) => A): Effect<Env<UuidEnv, Uuid>, A, Uuid> {
+export function* withUuid<A>(f: (uuid: Uuid) => A): Effect<UuidEnv, A> {
   return f(yield* uuid())
 }
