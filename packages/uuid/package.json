@@ -1,6 +1,6 @@
 {
   "name": "@typed/uuid",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "description": "Cross-platform TypeScript implementation of UUID",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/effects": "^4.0.0",
-    "@typed/env": "^6.0.0",
+    "@typed/effects": "^4.0.1",
+    "@typed/env": "^6.0.1",
     "@typed/new-type": "^3.0.0"
   },
   "publishConfig": {
