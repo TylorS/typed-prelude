@@ -11,13 +11,13 @@ import { HooksManager } from './HooksManager'
 
 const toNull = InitialState.of(null)
 
-export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironment<E> {
+export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = uuid4(manager.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
-  const channelUpdates = new WeakMap<Channel<E, any>, UseState<any>>()
+  const channelUpdates = new WeakMap<Channel<any, any>, UseState<any>>()
   const disposable = Disposable.lazy()
-  const hookEnvironment: HookEnvironment<E> = {
+  const hookEnvironment: HookEnvironment = {
     id,
     useState,
     useRef,
@@ -74,7 +74,7 @@ export function createHookEnvironment<E>(manager: HooksManager<E>): HookEnvironm
     return [ref, setState] as const
   }
 
-  function* useChannel<A>(
+  function* useChannel<E, A>(
     channel: Channel<E, A>,
     initial?: InitialState<A>,
   ): Effects<E, UseState<A>> {

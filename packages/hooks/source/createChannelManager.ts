@@ -4,18 +4,18 @@ import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 import { InitialState } from './HookEnvironment'
 
-export type ChannelManager<E, A extends object> = {
-  readonly updateChannel: <B>(
+export type ChannelManager<A extends object> = {
+  readonly updateChannel: <E, B>(
     channel: Channel<E, B>,
     node: A,
     initialState?: InitialState<B>,
   ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
-  readonly consumeChannel: <B>(channel: Channel<E, B>, node: A) => Effect<Env<never, any>, B, any>
+  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effect<never, B>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
-export function createChannelManager<E, A extends object>(
+export function createChannelManager<A extends object>(
   setUpdated: (node: A, updated: boolean) => Effects<never, void>,
   getAllDescendants: (
     providers: WeakSet<A>,
@@ -23,14 +23,14 @@ export function createChannelManager<E, A extends object>(
     node: A,
   ) => Generator<A, void, any>,
   getParent: (node: A) => A | undefined,
-): ChannelManager<E, A> {
+): ChannelManager<A> {
   // WeakMap & WeakSet are used to requires GC to automatically clean things up for us
   // This is a tradeoff made for convenience
-  const channelValues = new WeakMap<Channel<E, any>, WeakMap<A, any>>()
-  const channelConsumers = new WeakMap<Channel<E, any>, WeakSet<A>>()
-  const channelProviders = new WeakMap<Channel<E, any>, WeakSet<A>>()
+  const channelValues = new WeakMap<Channel<any, any>, WeakMap<A, any>>()
+  const channelConsumers = new WeakMap<Channel<any, any>, WeakSet<A>>()
+  const channelProviders = new WeakMap<Channel<any, any>, WeakSet<A>>()
 
-  function getChannelValues<B>(channel: Channel<E, B>): WeakMap<A, B> {
+  function getChannelValues<E, B>(channel: Channel<E, B>): WeakMap<A, B> {
     if (!channelValues.has(channel)) {
       channelValues.set(channel, new WeakMap())
     }
@@ -38,7 +38,7 @@ export function createChannelManager<E, A extends object>(
     return channelValues.get(channel)!
   }
 
-  function getChannelConsumers<B>(channel: Channel<E, B>): WeakSet<A> {
+  function getChannelConsumers<E, B>(channel: Channel<E, B>): WeakSet<A> {
     if (!channelConsumers.has(channel)) {
       channelConsumers.set(channel, new WeakSet())
     }
@@ -46,7 +46,7 @@ export function createChannelManager<E, A extends object>(
     return channelConsumers.get(channel)!
   }
 
-  function getChannelProviders<B>(channel: Channel<E, B>): WeakSet<A> {
+  function getChannelProviders<E, B>(channel: Channel<E, B>): WeakSet<A> {
     if (!channelProviders.has(channel)) {
       channelProviders.set(channel, new WeakSet())
     }
@@ -54,7 +54,7 @@ export function createChannelManager<E, A extends object>(
     return channelProviders.get(channel)!
   }
 
-  function* updateChannel<B>(channel: Channel<E, B>, node: A, initialState?: InitialState<B>) {
+  function* updateChannel<E, B>(channel: Channel<E, B>, node: A, initialState?: InitialState<B>) {
     const values = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
@@ -82,7 +82,7 @@ export function createChannelManager<E, A extends object>(
     }
   }
 
-  function* consumeChannel<B>(channel: Channel<E, B>, node: A): Effect<Pure<any>, B, any> {
+  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effect<never, B> {
     const values: WeakMap<A, B> = yield Pure.fromIO(() => getChannelValues(channel))
     const consumers = getChannelConsumers(channel)
 

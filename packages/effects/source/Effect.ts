@@ -21,11 +21,11 @@ export namespace Effect {
   }
 }
 
-export type CombinedEffectResources<A extends ReadonlyArray<Effect<any, any>>> = Compact<
+export type CombinedEffectResources<A extends ReadonlyArray<Effect<never, any>>> = Compact<
   OrToAnd<EffectResources<A[number]>>
 >
 
-export type CombinedEffectValues<A extends ReadonlyArray<Effect<any, any>>> = Return<A[number]>
+export type CombinedEffectValues<A extends ReadonlyArray<Effect<never, any>>> = Return<A[number]>
 
 export type EffectResources<A> = A extends Generator<infer B, any, any>
   ? Compact<OrToAnd<Resources<Include<B, LazyEnv<any, any>>>>>

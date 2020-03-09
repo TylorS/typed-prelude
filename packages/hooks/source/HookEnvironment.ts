@@ -6,9 +6,9 @@ import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
 import { Channel } from './Channel'
 
-export type HookEnv<E> = { readonly hookEnvironment: HookEnvironment<E> }
+export type HookEnv = { readonly hookEnvironment: HookEnvironment }
 
-export interface HookEnvironment<E> extends LazyDisposable {
+export interface HookEnvironment extends LazyDisposable {
   readonly id: Uuid
 
   readonly useRef: <A>(
@@ -16,7 +16,7 @@ export interface HookEnvironment<E> extends LazyDisposable {
   ) => Effects<never, UseRef<A>>
 
   readonly useState: <A>(initialState: InitialState<A>) => Effects<never, UseState<A>>
-  readonly useChannel: <A>(
+  readonly useChannel: <E, A>(
     channel: Channel<E, A>,
     initialState?: InitialState<A>,
   ) => Effects<E, UseState<A>>
