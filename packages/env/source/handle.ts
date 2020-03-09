@@ -1,14 +1,14 @@
 import { DropKeys } from '@typed/common'
 import { Disposable } from '@typed/disposable'
 import { Arity1, curry } from '@typed/lambda'
-import { Env, Pure } from './Env'
+import { Env, Equals, Pure } from './Env'
 import { isValueEnv } from './isEnv'
 
 /**
  * Provide resources to an Env
  */
 export type Handle<A, E> = E extends Env<infer B, infer C>
-  ? A extends B
+  ? Equals<A, B> extends true
     ? Pure<C>
     : B extends never
     ? Pure<C>

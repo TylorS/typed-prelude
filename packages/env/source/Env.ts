@@ -27,7 +27,7 @@ export type EnvOf<A, B> = { readonly [K in keyof B]: Env<A, B[K]> }
 /**
  * Extracts the resources required to satify an environment
  */
-export type Resources<A> = A extends Env<infer R, any> ? R : never
+export type Resources<A> = A extends Env<infer R, any> ? ([R] extends [never] ? never : R) : never
 
 export type EnvValue<A> = A extends LazyEnv<any, infer R>
   ? R
@@ -43,7 +43,7 @@ export type CombineResources<A, B> = Equals<A, B> extends true
   ? A
   : A & B
 
-export type Equals<A1, A2> = (<A>() => A extends A1 ? 1 : 0) extends <A>() => A extends A2
+export type Equals<A1, A2> = (<A>() => A extends A1 ? true : false) extends <A>() => A extends A2
   ? true
   : false
   ? true

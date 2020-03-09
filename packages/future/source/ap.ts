@@ -1,4 +1,4 @@
-import { CombineResources } from '@typed/env/source'
+import { CombineResources } from '@typed/env'
 import { Arity1, curry } from '@typed/lambda'
 import { chain } from './chain'
 import { Future } from './Future'

@@ -1,7 +1,8 @@
+import { Disposable } from '@typed/disposable'
 import { id } from '@typed/lambda'
 import { describe, given, it } from '@typed/test'
-import { LazyEnv } from './Env'
 import { handle } from './handle'
+import { runEnv } from './runEnv'
 import { withEnv } from './withEnv'
 
 export const test = describe(`handle`, [
@@ -10,9 +11,9 @@ export const test = describe(`handle`, [
       const expected = { a: 1, b: 2 }
       const partial = { a: 1 }
       const env = withEnv<typeof expected, typeof expected>(id)
-      const { runEnv } = handle(partial, env) as LazyEnv<{ b: number }, typeof expected>
+      const handled = handle(partial, env)
 
-      runEnv(equal(expected), { b: 2 })
+      runEnv(actual => (equal(expected, actual), Disposable.None), { b: 2 }, handled)
     }),
   ]),
 ])
