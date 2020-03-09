@@ -1,4 +1,4 @@
-import { Env } from '@typed/env/source'
+import { Env } from '@typed/env'
 import { Effect, EffectIterator, EffectResources } from './Effect'
 
 export const startEffect = <A extends Effect<never, any>>(
