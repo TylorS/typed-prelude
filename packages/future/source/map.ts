@@ -8,5 +8,5 @@ export const map = curry(__map) as {
 }
 
 function __map<E, A, B, C>(fn: Arity1<B, C>, future: Future<E, A, B>): Future<E, A, C> {
-  return chain(b => Future.of(fn(b)) as Future<E, A, C>, future)
+  return chain(b => Future.of(fn(b)) as Future<E, A, C>, future) as Future<E, A, C>
 }

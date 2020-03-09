@@ -35,6 +35,20 @@ export type EnvValue<A> = A extends LazyEnv<any, infer R>
   ? R
   : never
 
+export type CombineResources<A, B> = Equals<A, B> extends true
+  ? A
+  : [A] extends [never]
+  ? B
+  : [B] extends [never]
+  ? A
+  : A & B
+
+export type Equals<A1, A2> = (<A>() => A extends A1 ? 1 : 0) extends <A>() => A extends A2
+  ? true
+  : false
+  ? true
+  : false
+
 export namespace Env {
   /** Can not be cancelled */
   /**

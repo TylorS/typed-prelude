@@ -1,6 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { curry, pipe } from '@typed/lambda'
 import { Clock, RequestIdleCallbackDeadline, Timer, whenIdle } from '@typed/timer'
+import { isValidStatus } from './isValidStatus'
 import { HttpCallbacks, HttpEnv, HttpMethod, HttpOptions, HttpResponse } from './types'
 
 export type WithHttpManagementOptions = {
@@ -67,7 +68,9 @@ function __withHttpManagement(options: WithHttpManagementOptions, env: HttpEnv):
 
   function cacheResponseByKey(key: string) {
     return (response: HttpResponse) => {
-      cache.set(key, { timestamp: timer.currentTime(), response })
+      if (isValidStatus(response)) {
+        cache.set(key, { timestamp: timer.currentTime(), response })
+      }
 
       scheduleNextClear()
 
@@ -78,23 +81,18 @@ function __withHttpManagement(options: WithHttpManagementOptions, env: HttpEnv):
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success } = callbacks
     const key = getCacheKey(url, options)
-
     const isCacheable = methodsToCache.includes(options.method || 'GET')
     const lastResponse = cache.get(key)
 
     if (isCacheable && lastResponse) {
       clearOldResponse(key)
 
-      return timer.delay(() => {
-        scheduleNextClear()
-
-        return success(lastResponse.response)
-      }, 0)
+      return timer.delay(() => success(lastResponse.response), 0)
     }
 
     return env.http(url, options, {
       ...callbacks,
-      success: pipe(cacheResponseByKey(key), success),
+      success: isCacheable ? pipe(cacheResponseByKey(key), success) : success,
     })
   }
 

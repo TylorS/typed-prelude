@@ -10,7 +10,7 @@ export type Combined<A extends ReadonlyArray<HttpRequest<any>>> = {
 
 export function combine<A extends ReadonlyArray<HttpRequest<any>>>(
   ...requests: A
-): Effect<Env<HttpEnv, Combined<A>>, Combined<A>, Combined<A>> {
+): Effect<HttpEnv, Combined<A>> {
   return Effect.fromEnv(
     Env.create<HttpEnv, Combined<A>>((cb, env) => {
       const hasValues = Array(requests.length).fill(false)

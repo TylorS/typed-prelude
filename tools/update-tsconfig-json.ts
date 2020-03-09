@@ -74,7 +74,7 @@ function applyEsmDefaults(tsconfig: any) {
     composite: true,
     incremental: true,
     rootDir: './source',
-    module: 'es2015',
+    module: 'esnext',
     outDir: './esm',
   }
 

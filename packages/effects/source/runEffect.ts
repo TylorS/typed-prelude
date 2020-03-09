@@ -1,28 +1,21 @@
-import { chain, Env, Pure } from '@typed/env'
-import {
-  Effect,
-  EffectIterator,
-  EffectIteratorResult,
-  EffectResources,
-  EffectValue,
-} from './Effect'
+import { chain, Env } from '@typed/env'
+import { Effect, EffectIterator, EffectIteratorResult } from './Effect'
 import { startEffect } from './startEffect'
 
-export const runEffect = <A extends Effect<Pure, any, any>>(
-  effect: A,
-): Env<EffectResources<A>, EffectValue<A>> => {
-  const iterator = startEffect(effect)
+export const runEffect = <A, B>(effect: Effect<A, B>): Env<A, B> =>
+  chain(iterator => runEffectIterator<A, B>(iterator, iterator.next()), startEffect(effect))
 
-  return runIterator(iterator, iterator.next() as EffectIteratorResult<A>)
-}
-
-const runIterator = <A extends Effect<Pure, any, any>>(
-  iterator: EffectIterator<A>,
-  result: EffectIteratorResult<A>,
-): Env<EffectResources<A>, EffectValue<A>> =>
+const runEffectIterator = <A, B>(
+  iterator: EffectIterator<Effect<A, B>>,
+  result: EffectIteratorResult<Effect<A, B>>,
+): Env<A, B> =>
   result.done
-    ? (Env.of(result.value) as Env<EffectResources<A>, EffectValue<A>>)
+    ? Env.create<A, B>(cb => cb(result.value))
     : chain(
-        value => runIterator(iterator, iterator.next(value) as EffectIteratorResult<A>),
+        value =>
+          runEffectIterator<A, B>(
+            iterator,
+            iterator.next(value) as EffectIteratorResult<Effect<A, B>>,
+          ),
         result.value,
       )

@@ -19,26 +19,26 @@ export const test = describe(`withHttpManagement`, [
       const expiration = 1000
       const original = createTestHttpEnv(url => (url === expectedUrl ? success : failed))
       const httpEnv = withHttpManagement({ timer, expiration }, original)
-      const successRequest = http(expectedUrl)
-      const failedRequest = http('anywhere')
+      const successRequest = () => http(expectedUrl)
+      const failedRequest = () => http('anywhere')
 
       function* sut() {
-        yield* successRequest
-        yield* failedRequest
+        yield* successRequest()
+        yield* failedRequest()
 
         timer.progressTimeBy(1)
 
         equal([success, failed], original.getResponses())
 
-        yield* successRequest
-        yield* failedRequest
+        yield* successRequest()
+        yield* failedRequest()
 
         timer.progressTimeBy(expiration + 1)
 
         equal([success, failed, failed], original.getResponses())
 
-        yield* successRequest
-        yield* failedRequest
+        yield* successRequest()
+        yield* failedRequest()
 
         timer.progressTimeBy(1)
 

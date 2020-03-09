@@ -1,35 +1,43 @@
-import { Env, LazyEnv, Pure } from '@typed/env'
+import { Env, LazyEnv, Pure, Resources } from '@typed/env'
+import { Include, OrToAnd } from '@typed/lambda'
 
-export type Effects<A, B> = Effect<LazyEnv<A, any> | Pure<any>, B, any>
+// A collection of effects including Pure implementations
+export type Effects<A, B> = Generator<Env<A, any> | Pure<any>, B, any>
 
-export interface Effect<A, B, C> {
-  readonly [Symbol.iterator]: () => Iterator<A, B, C>
-}
+// An individual effect
+export type Effect<A, B> = Generator<Env<A, any>, B, any>
+
+export type Yield<A> = A extends Generator<infer R, any, any> ? R : never
+export type Return<A> = A extends Generator<any, infer R, any> ? R : never
+export type Next<A> = A extends Generator<any, any, infer R> ? R : never
 
 export namespace Effect {
-  export const of = <A, B = A>(value: A): Effect<A, B, B> => ({
-    *[Symbol.iterator]() {
-      return yield value
-    },
-  })
+  export function of<A>(value: A): Generator<Pure<A>, A, A> {
+    return fromEnv(Pure.of(value))
+  }
 
-  export const create = <Args extends readonly any[], A, B, C>(
-    f: (...args: Args) => Generator<A, B, C>,
-  ) => (...args: Args): Effect<A, B, C> => ({
-    [Symbol.iterator]: () => f(...args),
-  })
-
-  export const fromEnv = <A, B>(env: Env<A, B>): Effect<Env<A, B>, B, B> => of(env)
+  export function* fromEnv<A, B>(env: Env<A, B>): Generator<Env<A, B>, B, B> {
+    return yield env
+  }
 }
 
-export type EffectResources<A> = A extends Effects<infer R, any> ? R : never
+export type CombinedEffectResources<A extends ReadonlyArray<Effect<never, any>>> = Compact<
+  OrToAnd<EffectResources<A[number]>>
+>
 
-export type EffectValue<A> = A extends Effect<any, infer R, any> ? R : never
+export type CombinedEffectValues<A extends ReadonlyArray<Effect<never, any>>> = Return<A[number]>
 
-export type EffectIterator<A> = A extends Effect<infer R, infer S, infer T>
+export type EffectResources<A> = A extends Generator<infer B, any, any>
+  ? Compact<OrToAnd<Resources<Include<B, LazyEnv<any, any>>>>>
+  : never
+
+export type EffectIterator<A> = A extends Generator<infer R, infer S, infer T>
   ? Iterator<R, S, T>
   : never
 
-export type EffectIteratorResult<A> = A extends Effect<infer R, infer S, any>
+export type EffectIteratorResult<A> = A extends Generator<infer R, infer S, any>
   ? IteratorResult<R, S>
   : never
+
+// Allows combining together an intersection of objects into 1
+type Compact<A> = { [K in keyof A]: A[K] }

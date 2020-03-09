@@ -10,7 +10,7 @@ export function* useChannel<E, A>(
   channel: Channel<E, A>,
   initial?: InitialState<A>,
 ): HookEffects<E, UseState<A>> {
-  const { useChannel } = yield* getHookEnv<E>()
+  const { useChannel } = yield* getHookEnv()
 
   return yield* useChannel(channel, initial)
 }
@@ -28,7 +28,7 @@ export function* useMapChannel<E, A, B>(
 export function* useCombineChannels<E, A extends ReadonlyArray<Channel<E, any>>>(
   ...channels: A
 ): HookEffects<E, { readonly [K in keyof A]: ChannelValue<A[K]> }> {
-  return yield* combine(...channels.map(c => useMapChannel(x => x[0], c))) as {
+  return (yield* combine(...channels.map(c => useMapChannel(x => x[0], c)))) as {
     readonly [K in keyof A]: ChannelValue<A[K]>
   }
 }

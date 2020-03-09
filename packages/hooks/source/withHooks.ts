@@ -5,7 +5,7 @@ import { runWithHooks } from './runWithHooks'
 // Helps to manage resetting the HooksEnvironment between function invocations
 export function withHooks<A extends readonly any[], E, B>(fn: (...args: A) => HookEffects<E, B>) {
   return function* withHooks(...args: A): HookEffects<E, B> {
-    const hookEnvironment = yield* getHookEnv<E>()
+    const hookEnvironment = yield* getHookEnv()
     let value: B | void
 
     do {

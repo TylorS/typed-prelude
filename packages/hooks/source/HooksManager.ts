@@ -1,28 +1,21 @@
-import { Effect, Effects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { Effects } from '@typed/effects'
 import { Arity1 } from '@typed/lambda'
 import { UuidEnv } from '@typed/uuid'
 import { Channel } from './Channel'
 import { HookEnvironment, InitialState } from './HookEnvironment'
 
-export interface HooksManager<E> extends UuidEnv {
-  readonly setParent: (
-    child: HookEnvironment<E>,
-    parent: HookEnvironment<E>,
-  ) => Effects<never, void>
-  readonly setChild: (parent: HookEnvironment<E>, child: HookEnvironment<E>) => Effects<never, void>
-  readonly removeNode: (node: HookEnvironment<E>) => Effects<never, void>
+export interface HooksManager extends UuidEnv {
+  readonly setParent: (child: HookEnvironment, parent: HookEnvironment) => Effects<never, void>
+  readonly setChild: (parent: HookEnvironment, child: HookEnvironment) => Effects<never, void>
+  readonly removeNode: (node: HookEnvironment) => Effects<never, void>
 
-  readonly updateChannel: <A>(
+  readonly updateChannel: <E, A>(
     channel: Channel<E, A>,
-    node: HookEnvironment<E>,
+    node: HookEnvironment,
     initialState?: InitialState<A>,
   ) => Effects<E, Arity1<A, Effects<E, A>>>
-  readonly consumeChannel: <A>(channel: Channel<E, A>, node: HookEnvironment<E>) => Effects<E, A>
+  readonly consumeChannel: <E, A>(channel: Channel<E, A>, node: HookEnvironment) => Effects<E, A>
 
-  readonly hasBeenUpdated: (environment: HookEnvironment<E>) => boolean
-  readonly setUpdated: (
-    environment: HookEnvironment<E>,
-    updated: boolean,
-  ) => Effect<Pure<void>, void, any>
+  readonly hasBeenUpdated: (environment: HookEnvironment) => boolean
+  readonly setUpdated: (environment: HookEnvironment, updated: boolean) => Effects<never, void>
 }

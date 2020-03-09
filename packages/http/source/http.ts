@@ -3,6 +3,7 @@ import { Effect } from '@typed/effects'
 import { Either, Left, Right } from '@typed/either'
 import { Env } from '@typed/env'
 import { ArgsOf, Fn } from '@typed/lambda'
+import { isValidStatus } from './isValidStatus'
 import { HttpEnv, HttpOptions, HttpRequest, HttpResponse } from './types'
 
 export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
@@ -35,8 +36,4 @@ function handleSuccess<A>(response: HttpResponse<A>) {
   const errorMessage = response.responseText || response.statusText
 
   return Left.of(new Error(errorMessage))
-}
-
-function isValidStatus({ status }: HttpResponse<any>) {
-  return status >= 200 && status < 300
 }
