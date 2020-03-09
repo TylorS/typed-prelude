@@ -1,6 +1,5 @@
-import { Effect, Effects, get } from '@typed/effects'
+import { Effects, get } from '@typed/effects'
 import { Either, map } from '@typed/either'
-import { Pure } from '@typed/env'
 import { AsyncStorage } from '../AsyncStorage'
 import { destroyDb } from './destroyDb'
 import { getAllKeys } from './getAllKeys'
@@ -27,39 +26,42 @@ function createIndexedDbAsyncStorage<A>(
   database: IDBDatabase,
   indexedDbFactory: IDBFactory,
 ): AsyncStorage<A> {
-  const read = Effect.fromEnv(
-    Pure.fromIO(() => database.transaction(database.name, 'readonly').objectStore(database.name)),
-  )
-  const write = Effect.fromEnv(
-    Pure.fromIO(() => database.transaction(database.name, 'readwrite').objectStore(database.name)),
-  )
+  const read = () => {
+    const transaction = database.transaction(database.name, 'readonly')
+    const store = transaction.objectStore(database.name)
+
+    return { transaction, store } as const
+  }
+  const write = () => {
+    const transaction = database.transaction(database.name, 'readwrite')
+    const store = transaction.objectStore(database.name)
+    return { transaction, store } as const
+  }
 
   function* getKeys() {
-    const store = yield* read
+    const { store } = read()
 
     return yield* getAllKeys(store)
   }
-
   function* getItems() {
-    const store = yield* read
-
+    const { store } = read()
     return yield* getAllValues<A>(store)
   }
 
   function* getItem(key: string) {
-    const store = yield* read
+    const { store } = read()
 
     return yield* getValue<A>(key, store)
   }
 
   function* setItem(key: string, value: A) {
-    const store = yield* write
+    const { store } = write()
 
     return yield* putValue<A>(key, value, store)
   }
 
   function* removeItem(key: string) {
-    const store = yield* write
+    const { store } = write()
 
     return yield* removeValue<A>(key, store)
   }
