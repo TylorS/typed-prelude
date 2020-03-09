@@ -1,7 +1,6 @@
 import { Disposable } from '@typed/disposable'
 import { runPure } from '@typed/env'
 import { describe, given, it } from '@typed/test'
-import { Effect } from './Effect'
 import { runEffect } from './runEffect'
 
 export const test = describe(`runEffect`, [

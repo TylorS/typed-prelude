@@ -28,7 +28,9 @@ export type CombinedEffectResources<A extends ReadonlyArray<Effect<never, any>>>
 export type CombinedEffectValues<A extends ReadonlyArray<Effect<never, any>>> = Return<A[number]>
 
 export type EffectResources<A> = A extends Generator<infer B, any, any>
-  ? Compact<OrToAnd<Resources<Include<B, LazyEnv<any, any>>>>>
+  ? IsNever<B> extends true
+    ? never
+    : Compact<OrToAnd<Resources<Include<B, LazyEnv<any, any>>>>>
   : never
 
 export type EffectIterator<A> = A extends Generator<infer R, infer S, infer T>
@@ -41,3 +43,4 @@ export type EffectIteratorResult<A> = A extends Generator<infer R, infer S, any>
 
 // Allows combining together an intersection of objects into 1
 type Compact<A> = { [K in keyof A]: A[K] }
+type IsNever<A> = [A] extends [never] ? true : false
