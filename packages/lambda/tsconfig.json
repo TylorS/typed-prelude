@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "rootDir": "./source",
-    "module": "es2015",
+    "module": "esnext",
     "outDir": "./esm",
     "composite": true,
     "incremental": true
