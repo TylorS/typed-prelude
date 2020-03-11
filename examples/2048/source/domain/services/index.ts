@@ -1,0 +1,7 @@
+export * from './addNewTile'
+export * from './calculateScore'
+export * from './checkHasRemainingMoves'
+export * from './convertSizeToBounds'
+export * from './createNewGrid'
+export * from './getAllCoordinates'
+export * from './moveTilesInDirection'
