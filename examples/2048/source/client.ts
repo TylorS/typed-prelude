@@ -1,12 +1,7 @@
+import { createDomEnv } from '@typed/dom'
 import { runEffects } from '@typed/effects'
 import { Env } from '@typed/env'
-import {
-  createHookEnvironment,
-  createHooksManager,
-  getHookEnv,
-  HookEffects,
-  withHooks,
-} from '@typed/hooks'
+import { createHookEnvironment, createHooksManager, HookEffects, withHooks } from '@typed/hooks'
 import { BrowserGenerator } from '@typed/uuid'
 import { use2048 } from './application'
 import { GRID_STORAGE_KEY, ROOT_ELEMENT_SELECTOR } from './constants'
@@ -24,20 +19,22 @@ if (!rootElement) {
 const hooksManager = createHooksManager(new BrowserGenerator())
 const hookEnvironment = createHookEnvironment(hooksManager)
 
+const main = withHooks(function* main<E>(
+  repo: GridRepository<E>,
+): HookEffects<E & RenderEnv, void> {
+  console.log('running')
+  const [gameState, dispatch] = yield* use2048(repo)
+
+  yield* patch(yield* render2048(gameState, dispatch))
+})
+
 runEffects(runMainOnRaf(createGridRepository(GRID_STORAGE_KEY)), {
   hookEnvironment,
   storage: localStorage,
   floor: Math.floor,
   random: Math.random,
+  ...createDomEnv(),
   rootElement,
-})
-
-const main = withHooks(function* main<E>(
-  repo: GridRepository<E>,
-): HookEffects<E & RenderEnv, void> {
-  const [gameState, dispatch] = yield* use2048(repo)
-
-  yield* patch(render2048(gameState, dispatch))
 })
 
 function* runMainOnRaf<E>(repo: GridRepository<E>): HookEffects<E & RenderEnv, void> {
@@ -45,8 +42,6 @@ function* runMainOnRaf<E>(repo: GridRepository<E>): HookEffects<E & RenderEnv, v
 
   while (true) {
     yield* raf()
-
-    const hookEnvironment = yield* getHookEnv()
 
     if (hookEnvironment.updated) {
       yield* main(repo)

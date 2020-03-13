@@ -1,4 +1,4 @@
-import { equals } from '@typed/common/esm'
+import { equals } from '@typed/common'
 import { any } from '@typed/logic'
 import { Direction, Grid } from '../model'
 import { convertSizeToBounds } from './convertSizeToBounds'

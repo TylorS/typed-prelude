@@ -1,13 +1,13 @@
 import { Effects } from '@typed/effects/'
 import { Arity1 } from '@typed/lambda'
 import { Bounds, createNewGrid, Grid, moveTilesInDirection, Size } from '../domain'
-import { Action, Dispatch } from './types'
+import { Action } from './types'
 
 export function createDispatch(
   bounds: Bounds,
   grid: Grid,
   setGrid: (updateFn: Arity1<Grid, Grid>) => Effects<never, Grid>,
-): Dispatch {
+) {
   return function* dispatch(action: Action) {
     switch (action[0]) {
       case 'new-grid': {

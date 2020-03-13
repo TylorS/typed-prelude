@@ -1,6 +1,5 @@
-import { Effects } from '@typed/effects'
 import { Tuple } from '@typed/tuple'
-import { Direction, Grid, RandomIntEnv } from '../domain'
+import { Direction, Grid } from '../domain'
 
 export type GameState = {
   readonly grid: Grid
@@ -9,5 +8,5 @@ export type GameState = {
   readonly hasRemainingMoves: boolean
 }
 
-export type Action = Tuple<'move', Direction> | Tuple<'resize'> | readonly ['new-grid']
-export type Dispatch = (action: Action) => Effects<RandomIntEnv, void>
+export type Action = Tuple<'move', Direction> | readonly ['resize'] | readonly ['new-grid']
+export type Dispatch = (action: Action) => void
