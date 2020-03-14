@@ -29,10 +29,6 @@
       "path": "./packages/either"
     },
     {
-      "name": "Env",
-      "path": "./packages/env"
-    },
-    {
       "name": "Future",
       "path": "./packages/future"
     },

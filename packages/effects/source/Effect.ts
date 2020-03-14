@@ -1,46 +1,14 @@
-import { Env, LazyEnv, Pure, Resources } from '@typed/env'
-import { Include, OrToAnd } from '@typed/lambda'
+import { always, IO, pipe } from '@typed/lambda'
+import { Computation, Env, op, Pure, resumeLater, resumeNow, uncancelable } from 'fx-ts'
 
-// A collection of effects including Pure implementations
-export type Effects<A, B> = Generator<Env<A, any> | Pure<any>, B, any>
+export type Effect<E, A> = Computation<Env<E, unknown>, A, unknown>
+export type Effects<E, A> = Computation<Env<E, unknown> | Pure<unknown>, A, unknown>
 
-// An individual effect
-export type Effect<A, B> = Generator<Env<A, any>, B, any>
-
-export type Yield<A> = A extends Generator<infer R, any, any> ? R : never
-export type Return<A> = A extends Generator<any, infer R, any> ? R : never
-export type Next<A> = A extends Generator<any, any, infer R> ? R : never
+const toUncancelable = always(uncancelable)
 
 export namespace Effect {
-  export function of<A>(value: A): Generator<Pure<A>, A, A> {
-    return fromEnv(Pure.of(value))
-  }
+  export const of = <A>(value: A): Computation<Pure<A>, A, A> => op(_ => resumeNow(value))
 
-  export function* fromEnv<A, B>(env: Env<A, B>): Generator<Env<A, B>, B, B> {
-    return yield env
-  }
+  export const fromIO = <A>(io: IO<A>): Computation<Pure<A>, A, A> =>
+    op(_ => resumeLater(pipe(io, toUncancelable)))
 }
-
-export type CombinedEffectResources<A extends ReadonlyArray<Effect<never, any>>> = Compact<
-  OrToAnd<EffectResources<A[number]>>
->
-
-export type CombinedEffectValues<A extends ReadonlyArray<Effect<never, any>>> = Return<A[number]>
-
-export type EffectResources<A> = A extends Generator<infer B, any, any>
-  ? IsNever<B> extends true
-    ? never
-    : Compact<OrToAnd<Resources<Include<B, LazyEnv<any, any>>>>>
-  : never
-
-export type EffectIterator<A> = A extends Generator<infer R, infer S, infer T>
-  ? Iterator<R, S, T>
-  : never
-
-export type EffectIteratorResult<A> = A extends Generator<infer R, infer S, any>
-  ? IteratorResult<R, S>
-  : never
-
-// Allows combining together an intersection of objects into 1
-type Compact<A> = { [K in keyof A]: A[K] }
-type IsNever<A> = [A] extends [never] ? true : false

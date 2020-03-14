@@ -22,9 +22,6 @@
       "path": "./either/tsconfig.cjs.json"
     },
     {
-      "path": "./env/tsconfig.cjs.json"
-    },
-    {
       "path": "./future/tsconfig.cjs.json"
     },
     {

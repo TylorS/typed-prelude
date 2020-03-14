@@ -35,6 +35,7 @@
     "@typed/disposable": "^3.0.0",
     "@typed/either": "^8.0.0",
     "@typed/env": "^6.0.1",
-    "@typed/lambda": "^3.0.0"
+    "@typed/lambda": "^3.0.0",
+    "fx-ts": "^1.3.1"
   }
 }
