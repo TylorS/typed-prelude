@@ -16,6 +16,17 @@ export interface EncryptedKeyPair extends CryptoKeyPair {
   readonly encrypted: ExportedKeyPair
 }
 
+/**
+ * Using a symmetric CryptoKey, a non-extractable CryptoKeyPair is generated in addition
+ * as ArrayBuffer views of the encrypted key pair, signed with the supplied symmetric CryptoKeyPair.
+ *
+ * Ideally your supplied CryptoKey is non-extractable, never persisted, and generated with user-supplied
+ * information in a way that the key can be derived again and again. The generated CryptoKeyPair should then
+ * be used to encrypt/decrypt all application data. The encryped views of the CryptoKeyPair can safely be
+ * persisted or sent over the internet. Furthermore, if the user chooses to change their passsword
+ * one must only re-encrypt the generated CryptoKeyPair with the new CryptoKey.
+ * @param symmetricKey {CryptoKey} - A symmetrical key that is allows to encrypt/decrypt
+ */
 export function* generateEncryptedKeyPair(
   symmetricKey: CryptoKey,
 ): Effect<CryptoEnv, Either<Error, EncryptedKeyPair>> {
@@ -26,7 +37,7 @@ export function* generateEncryptedKeyPair(
     publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
     hash: HASH,
   }
-  // Generate a one-off extractable RSA key pair
+  // Generate a one-off extractable RSA key pair to allow exporting for encryption
   const errorOrKeyPair = yield* generateKey(params, true, ENCRYPT_AND_DECRYPT)
 
   if (isLeft(errorOrKeyPair)) {
