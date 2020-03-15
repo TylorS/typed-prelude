@@ -5,6 +5,9 @@ export type PureEffect<A> = Computation<Pure<any>, A, any>
 export type Effect<E, A> = Computation<Env<E, any>, A, any>
 export type Effects<E, A> = Computation<Env<E, any> | Pure<any>, A, any>
 
+export type EffectGenerator<E, A> = Generator<Env<E, any>, A, any>
+export type EffectsGenerator<E, A> = Generator<Env<E, any> | Pure<any>, A, any>
+
 const toUncancelable = always(uncancelable)
 
 export namespace Effect {
