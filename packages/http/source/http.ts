@@ -1,14 +1,13 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Either, Left, Right } from '@typed/either'
-import { Env } from '@typed/env'
+import { Left, Right } from '@typed/either'
+import { Resume } from '@typed/env'
 import { ArgsOf, Fn } from '@typed/lambda'
 import { isValidStatus } from './isValidStatus'
 import { HttpEnv, HttpOptions, HttpRequest, HttpResponse } from './types'
 
-export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
-  return Effect.fromEnv(
-    Env.create<HttpEnv, Either<Error, HttpResponse<A>>>((f, { http }) => {
+export function* http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
+  return yield ({ http }: HttpEnv) =>
+    Resume.create(f => {
       let hasLoaded = false
       const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>): Disposable => {
         if (!hasLoaded) {
@@ -24,8 +23,7 @@ export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpR
         success: ifNotLoaded((response: HttpResponse<A>) => f(handleSuccess(response))),
         failure: ifNotLoaded((error: Error) => f(Left.of(error))),
       })
-    }),
-  )
+    })
 }
 
 function handleSuccess<A>(response: HttpResponse<A>) {
