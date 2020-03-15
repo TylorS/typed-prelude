@@ -1,4 +1,4 @@
-import { Effects, get } from '@typed/effects'
+import { co, Effect, get } from '@typed/effects'
 import { Either, map } from '@typed/either'
 import { AsyncStorage } from '../AsyncStorage'
 import { destroyDb } from './destroyDb'
@@ -13,14 +13,14 @@ export type IndexedDbEnv = {
   readonly indexedDbFactory: IDBFactory
 }
 
-export function* createIndexedDb<A>(
+export const createIndexedDb: <A>(
   name: string,
-): Effects<IndexedDbEnv, Either<Error, AsyncStorage<A>>> {
+) => Effect<IndexedDbEnv, Either<Error, AsyncStorage<A>>> = co(function*<A>(name: string) {
   const { indexedDbFactory } = yield* get<IndexedDbEnv>()
   const database = yield* openDatabase(name, indexedDbFactory)
 
   return map(db => createIndexedDbAsyncStorage<A>(db, indexedDbFactory), database)
-}
+}) as <A>(name: string) => Effect<IndexedDbEnv, Either<Error, AsyncStorage<A>>>
 
 function createIndexedDbAsyncStorage<A>(
   database: IDBDatabase,
@@ -67,11 +67,11 @@ function createIndexedDbAsyncStorage<A>(
   }
 
   return {
-    getKeys,
-    getItems,
-    getItem,
-    setItem,
-    removeItem,
+    getKeys: co(getKeys),
+    getItems: co(getItems),
+    getItem: co(getItem),
+    setItem: co(setItem),
+    removeItem: co(removeItem),
     clear: () => destroyDb(database.name, indexedDbFactory),
     dispose: () => database.close(),
   }

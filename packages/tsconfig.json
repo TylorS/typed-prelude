@@ -22,9 +22,6 @@
       "path": "./either/tsconfig.json"
     },
     {
-      "path": "./future/tsconfig.json"
-    },
-    {
       "path": "./history/tsconfig.json"
     },
     {

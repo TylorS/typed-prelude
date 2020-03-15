@@ -1,4 +1,4 @@
-import { runEffects } from '@typed/effects'
+import { co, unsafeRun, use } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
 import {
   createHttpResponse,
@@ -19,7 +19,7 @@ export const test = describe(`http`, [
         equal(response, yield* request)
       }
 
-      runEffects(sut(), httpEnv)
+      unsafeRun(use(co(sut)(), httpEnv))
     }),
   ]),
 ])

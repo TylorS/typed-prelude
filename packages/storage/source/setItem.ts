@@ -1,5 +1,4 @@
-import { Effect } from '@typed/effects'
-import { withEnv } from '@typed/env'
+import { Effect, op, resumeNow } from '@typed/effects'
 import { curry } from '@typed/lambda'
 import { StorageEnv } from './types'
 
@@ -13,7 +12,5 @@ export const setItem: {
   (key: string, value: string): Effect<StorageEnv, string>
   (key: string): (value: string) => Effect<StorageEnv, string>
 } = curry((key: string, value: string) =>
-  Effect.fromEnv(
-    withEnv<StorageEnv, string>(({ storage }) => (storage.setItem(key, value), value)),
-  ),
+  op<StorageEnv, string>(({ storage }) => (storage.setItem(key, value), resumeNow(value))),
 )

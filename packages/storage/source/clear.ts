@@ -1,11 +1,7 @@
-import { Effect } from '@typed/effects'
-import { withEnv } from '@typed/env'
+import { Effect, op, resumeNow } from '@typed/effects'
 import { StorageEnv } from './types'
 
 /**
  * Clear storage
  */
-export const clear = (): Effect<StorageEnv, void> =>
-  Effect.fromEnv(
-    withEnv<StorageEnv, void>(({ storage }) => storage.clear()),
-  )
+export const clear = (): Effect<StorageEnv, void> => op(({ storage }) => resumeNow(storage.clear()))

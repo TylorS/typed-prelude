@@ -1,6 +1,5 @@
 export { addQueryParameters } from '@typed/common'
 export * from './addHeader'
-export * from './combine'
 export * from './createHttpEnv'
 export * from './createServerHttpEnv'
 export * from './createTestHttpEnv'

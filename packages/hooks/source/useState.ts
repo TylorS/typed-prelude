@@ -1,9 +1,11 @@
+import { co, Effects } from '@typed/effects'
 import { getHookEnv } from './getHookEnv'
-import { HookEffects } from './HookEffects'
-import { InitialState, UseState } from './HookEnvironment'
+import { HookEnv, InitialState, UseState } from './HookEnvironment'
 
-export function* useState<A>(inititalState: InitialState<A>): HookEffects<never, UseState<A>> {
-  const { useState } = yield* getHookEnv()
+export const useState: <A>(inititalState: InitialState<A>) => Effects<HookEnv, UseState<A>> = co(
+  function* useState<A>(inititalState: InitialState<A>) {
+    const { useState } = yield* getHookEnv()
 
-  return yield* useState(inititalState)
-}
+    return yield* useState(inititalState)
+  },
+)

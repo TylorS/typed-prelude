@@ -1,8 +1,8 @@
-import { Effects, get } from '@typed/effects'
+import { co, Effects, get } from '@typed/effects'
 import { LoggerEnv } from './types'
 
-export function* clear(): Effects<LoggerEnv, void> {
+export const clear: () => Effects<LoggerEnv, void> = co(function* clear() {
   const { logger } = yield* get<LoggerEnv>()
 
-  yield logger.clear()
-}
+  yield* logger.clear()
+})

@@ -1,5 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { Effects } from '@typed/effects'
+import { PureEffect } from '@typed/effects'
 import { Either } from '@typed/either'
 import { Maybe } from '@typed/maybe'
 
@@ -10,8 +10,8 @@ export interface AsyncStorage<A> extends Disposable {
   readonly getItem: (key: string) => ItemEffect<Maybe<A>>
   readonly setItem: (key: string, value: A) => ItemEffect<A>
   readonly removeItem: (key: string) => ItemEffect<Maybe<A>>
-  readonly clear: () => Effects<never, boolean>
+  readonly clear: () => ItemEffect<boolean>
 }
 
-export type ItemEffect<A> = Effects<never, Either<Error, A>>
-export type ItemsEffect<A> = Effects<never, Either<Error, readonly A[]>>
+export type ItemEffect<A> = PureEffect<Either<Error, A>>
+export type ItemsEffect<A> = PureEffect<Either<Error, readonly A[]>>

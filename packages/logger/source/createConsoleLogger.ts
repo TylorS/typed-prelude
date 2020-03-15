@@ -1,4 +1,4 @@
-import { Env } from '@typed/env'
+import { Effect } from '@typed/effects'
 import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
 
@@ -15,37 +15,37 @@ export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOpti
 
   const logger: Logger = {
     log: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF) {
           console.log(msg)
         }
       }),
     error: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF) {
           console.error(msg)
         }
       }),
     clear: () =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
           console.clear()
         }
       }),
     info: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel >= LogLevel.INFO) {
           console.info(msg)
         }
       }),
     debug: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel >= LogLevel.DEBUG) {
           console.debug(msg)
         }
       }),
     timeStart: (label: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel < LogLevel.DEBUG) {
           return
         }
@@ -53,7 +53,7 @@ export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOpti
         timers[label] = clock.currentTime()
       }),
     timeEnd: (label: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel < LogLevel.DEBUG || !timers[label]) {
           return -1
         }

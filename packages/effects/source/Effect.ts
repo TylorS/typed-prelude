@@ -1,8 +1,9 @@
 import { always, IO, pipe } from '@typed/lambda'
 import { Computation, Env, op, Pure, resumeLater, resumeNow, uncancelable } from 'fx-ts'
 
-export type Effect<E, A> = Computation<Env<E, unknown>, A, unknown>
-export type Effects<E, A> = Computation<Env<E, unknown> | Pure<unknown>, A, unknown>
+export type PureEffect<A> = Computation<Pure<any>, A, any>
+export type Effect<E, A> = Computation<Env<E, any>, A, any>
+export type Effects<E, A> = Computation<Env<E, any> | Pure<any>, A, any>
 
 const toUncancelable = always(uncancelable)
 

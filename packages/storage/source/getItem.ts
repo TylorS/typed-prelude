@@ -1,5 +1,4 @@
-import { Effect } from '@typed/effects'
-import { withEnv } from '@typed/env'
+import { Effect, op, resumeNow } from '@typed/effects'
 import { Maybe } from '@typed/maybe'
 import { StorageEnv } from './types'
 
@@ -9,6 +8,4 @@ import { StorageEnv } from './types'
  * @returns :: Env StorageEnv (Maybe string)
  */
 export const getItem = (key: string): Effect<StorageEnv, Maybe<string>> =>
-  Effect.fromEnv(
-    withEnv<StorageEnv, Maybe<string>>(({ storage }) => Maybe.of(storage.getItem(key))),
-  )
+  op<StorageEnv, Maybe<string>>(({ storage }) => resumeNow(Maybe.of(storage.getItem(key))))

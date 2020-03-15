@@ -1,20 +1,15 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Future } from '@typed/future'
+import { Future } from '@typed/effects'
 import { ItemEffect } from '../AsyncStorage'
 
 export function openDatabase(name: string, indexedDbFactory: IDBFactory): ItemEffect<IDBDatabase> {
-  return Effect.fromEnv(
-    Future.create<never, Error, IDBDatabase>((reject, resolve) => {
-      const request = indexedDbFactory.open(name)
-      const disposable = Disposable.lazy()
+  return Future.create<unknown, Error, IDBDatabase>((reject, resolve) => {
+    const request = indexedDbFactory.open(name)
 
-      request.onerror = ev =>
-        disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
-      request.onsuccess = () => disposable.addDisposable(resolve(request.result))
-      request.onupgradeneeded = () => request.result.createObjectStore(name)
+    request.onerror = ev => reject(new Error((ev.target as any).errorCode))
+    request.onsuccess = () => resolve(request.result)
+    request.onupgradeneeded = () => request.result.createObjectStore(name)
 
-      return disposable
-    }),
-  )
+    return Disposable.None
+  })
 }

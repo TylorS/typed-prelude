@@ -25,9 +25,6 @@
       "path": "../either/tsconfig.json"
     },
     {
-      "path": "../env/tsconfig.json"
-    },
-    {
       "path": "../lambda/tsconfig.json"
     },
     {

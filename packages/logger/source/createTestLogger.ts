@@ -1,4 +1,4 @@
-import { Env } from '@typed/env'
+import { Effect } from '@typed/effects'
 import { clone } from '@typed/objects'
 import { Clock } from '@typed/timer'
 import { Logger, LogLevel } from './types'
@@ -32,37 +32,37 @@ export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): 
   const logs: Log[] = []
   const logger: Logger = {
     log: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF) {
           logs.push({ type: 'log', message: msg })
         }
       }),
     error: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF) {
           logs.push({ type: 'error', message: msg })
         }
       }),
     clear: () =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel > LogLevel.OFF && logLevel < LogLevel.DEBUG) {
           logs.push({ type: 'clear' })
         }
       }),
     info: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel >= LogLevel.INFO) {
           logs.push({ type: 'info', message: msg })
         }
       }),
     debug: (msg: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel >= LogLevel.DEBUG) {
           logs.push({ type: 'debug', message: msg })
         }
       }),
     timeStart: (label: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel < LogLevel.DEBUG) {
           return
         }
@@ -73,7 +73,7 @@ export function createTestLogger({ logLevel, clock }: CreateTestLoggerOptions): 
         logs.push({ type: 'timeStart', label, time })
       }),
     timeEnd: (label: string) =>
-      Env.fromIO(() => {
+      Effect.fromIO(() => {
         if (logLevel < LogLevel.DEBUG) {
           return -1
         }

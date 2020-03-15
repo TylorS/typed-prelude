@@ -39,7 +39,6 @@
     "@most/types": "1.0.2",
     "@typed/effects": "^4.0.1",
     "@typed/either": "^8.0.0",
-    "@typed/env": "^6.0.1",
     "@typed/lambda": "^3.0.0",
     "@typed/maybe": "^10.0.0",
     "most-subject": "6.0.0"

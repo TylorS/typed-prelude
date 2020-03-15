@@ -1,3 +1,6 @@
 export * from 'fx-ts'
 export * from './Effect'
+export * from './Future'
+export * from './runEffects'
 export * from './sequence'
+export * from './tryCatch'

@@ -1,19 +1,14 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Future } from '@typed/future'
+import { Future } from '@typed/effects'
 import { ItemsEffect } from '../AsyncStorage'
 
 export function getAllValues<A>(store: IDBObjectStore): ItemsEffect<A> {
-  return Effect.fromEnv(
-    Future.create<never, Error, readonly A[]>((reject, resolve) => {
-      const request = store.getAll()
-      const disposable = Disposable.lazy()
+  return Future.create<unknown, Error, readonly A[]>((reject, resolve) => {
+    const request = store.getAll()
 
-      request.onerror = ev =>
-        disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
-      request.onsuccess = () => disposable.addDisposable(resolve(request.result))
+    request.onerror = ev => reject(new Error((ev.target as any).errorCode))
+    request.onsuccess = () => resolve(request.result)
 
-      return disposable
-    }),
-  )
+    return Disposable.None
+  })
 }

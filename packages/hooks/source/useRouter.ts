@@ -1,15 +1,18 @@
-import { get } from '@typed/effects'
+import { co, Effects, get } from '@typed/effects'
 import { HistoryEnv, Path, scopeHistoryEnv } from '@typed/history'
 import { Maybe } from '@typed/maybe'
 import { Route } from '@typed/routing'
-import { HookEffects } from './HookEffects'
+import { HookEnv } from './HookEnvironment'
 import { useMatches } from './useMatches'
 import { useMemo } from './useMemo'
 
-export function* useRouter<A, B = null>(
+export const useRouter: <A, B = null>(
   routes: ReadonlyArray<Route<any, A>>,
   scope?: Path,
-): HookEffects<HistoryEnv<B>, Maybe<A>> {
+) => Effects<HookEnv & HistoryEnv<B>, Maybe<A>> = co(function* useRouter<A, B = null>(
+  routes: ReadonlyArray<Route<any, A>>,
+  scope?: Path,
+) {
   const historyEnv = yield* get<HistoryEnv<B>>()
   const { location } = yield* useMemo(
     (scope, historyEnv) => (scope ? scopeHistoryEnv(scope, historyEnv) : historyEnv),
@@ -18,4 +21,4 @@ export function* useRouter<A, B = null>(
   const matches = yield* useMemo(routes => routes.map(r => r.match), [routes])
 
   return yield* useMatches(location.pathname as Path, matches)
-}
+})

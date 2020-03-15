@@ -38,8 +38,6 @@
     "@typed/disposable": "^3.0.0",
     "@typed/effects": "^4.0.1",
     "@typed/either": "^8.0.0",
-    "@typed/env": "^6.0.1",
-    "@typed/future": "^9.0.1",
     "@typed/lambda": "^3.0.0",
     "@typed/logger": "^6.0.1",
     "@typed/logic": "^6.0.0",

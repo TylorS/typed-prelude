@@ -1,10 +1,8 @@
-import { Disposable } from '@typed/disposable'
-import { runEffect, runEffects } from '@typed/effects'
+import { co, unsafeRun, use } from '@typed/effects'
 import { Either, fromLeft, fromRight, isLeft } from '@typed/either'
-import { runPure } from '@typed/env'
-import { chain, map } from '@typed/future'
 import { Maybe, Nothing } from '@typed/maybe'
 import { describe, given, it } from '@typed/test'
+import { AsyncStorage } from '../AsyncStorage'
 import { createIndexedDb } from './createIndexedDb'
 import { createServerIndexedDbFactory } from './createIndexedDbFactory'
 
@@ -14,9 +12,8 @@ export const test = describe(`createIndexedDb`, [
       it(`returns a computation`, ({ equal }, done) => {
         const key = 'key'
         const indexedDbFactory = createServerIndexedDbFactory(true)
-
-        function* sut() {
-          const table = yield* createIndexedDb('test')
+        const sut = co(function* sut() {
+          const table: Either<Error, AsyncStorage<number>> = yield* createIndexedDb<number>('test')
 
           if (isLeft(table)) {
             return done(fromLeft(table))
@@ -30,9 +27,9 @@ export const test = describe(`createIndexedDb`, [
           } catch (error) {
             done(error)
           }
-        }
+        })
 
-        runEffects(sut(), { indexedDbFactory })
+        unsafeRun(use(sut(), { indexedDbFactory }))
       }),
     ]),
 
@@ -41,9 +38,8 @@ export const test = describe(`createIndexedDb`, [
         const key = 'key'
         const expected = 7
         const indexedDbFactory = createServerIndexedDbFactory(true)
-
-        function* sut() {
-          const table = yield* createIndexedDb('test')
+        const sut = co(function* sut() {
+          const table = yield* createIndexedDb<number>('test')
 
           if (isLeft(table)) {
             return done(fromLeft(table))
@@ -61,9 +57,9 @@ export const test = describe(`createIndexedDb`, [
           } catch (error) {
             done(error)
           }
-        }
+        })
 
-        runEffects(sut(), { indexedDbFactory })
+        unsafeRun(use(sut(), { indexedDbFactory }))
       }),
     ]),
   ]),
@@ -75,8 +71,8 @@ export const test = describe(`createIndexedDb`, [
         const value = 7
         const indexedDbFactory = createServerIndexedDbFactory(true)
 
-        function* sut() {
-          const table = yield* createIndexedDb('test')
+        const sut = co(function* sut() {
+          const table = yield* createIndexedDb<number>('test')
 
           if (isLeft(table)) {
             return done(fromLeft(table))
@@ -94,9 +90,9 @@ export const test = describe(`createIndexedDb`, [
           } catch (error) {
             done(error)
           }
-        }
+        })
 
-        runEffects(sut(), { indexedDbFactory })
+        unsafeRun(use(sut(), { indexedDbFactory }))
       }),
     ]),
   ]),
