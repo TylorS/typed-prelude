@@ -1,17 +1,18 @@
+import { EmptyObject } from '@typed/common'
 import { Disposable } from '@typed/disposable'
-import { execPure, handle } from '@typed/env'
-import { EffectResources, Effects } from './Effect'
+import { execPure, provide, Pure } from '@typed/env'
+import { Capabilities, Effects, Return } from './Effect'
 import { runEffect } from './runEffect'
 
-export function runEffects<A extends Effects<never, any>>(effect: A): Disposable
+export function runEffects<A extends Effects<EmptyObject, any>>(effect: A): Disposable
 export function runEffects<A extends Effects<any, any>>(
   effect: A,
-  resources: EffectResources<A>,
+  resources: Capabilities<A>,
 ): Disposable
 
 export function runEffects<A extends Effects<any, any>>(
   effect: A,
-  resources: EffectResources<A> = {} as EffectResources<A>,
+  resources: Capabilities<A> = {} as Capabilities<A>,
 ): Disposable {
-  return execPure(handle(resources, runEffect(effect)))
+  return execPure(provide(runEffect(effect), resources) as Pure<Return<A>>)
 }

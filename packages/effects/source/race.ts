@@ -1,42 +1,40 @@
-import { Disposable, disposeAll } from '@typed/disposable'
-import { Env, handle, runPure } from '@typed/env'
-import { pipe } from '@typed/lambda'
-import { CombinedEffectResources, Effect, Return } from './Effect'
+import { Disposable } from '@typed/disposable'
+import { Env, provide, Pure, Resume, runPure } from '@typed/env'
+import { CombinedCapabilities, Effect, Return } from './Effect'
 import { runEffect } from './runEffect'
 
-export function race<E extends ReadonlyArray<Effect<any, any>>>(
+export function* race<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E
-): Effect<CombinedEffectResources<E>, Return<E[keyof E]>> {
-  return Effect.fromEnv(
-    Env.create<CombinedEffectResources<E>, Return<E[keyof E]>>((cb, e) => {
-      let resolved = false
-      const pures = effects.map(pipe(runEffect, handle(e)))
-      const pureDisposables: Disposable[] = pures.map((pure, i) =>
-        runPure(a => ifNotResolved(a, i), pure),
-      )
-      const effectDisposable = Disposable.lazy()
+): Effect<CombinedCapabilities<E>, Return<E[keyof E]>> {
+  const env: Env<CombinedCapabilities<E>, Return<E[keyof E]>> = (c: CombinedCapabilities<E>) =>
+    Resume.create<Return<E[keyof E]>>(cb => {
+      const disposable = Disposable.lazy()
+      const ifNotResolved = createIfNotResolved<Return<E[keyof E]>>(cb, disposable)
 
-      function ifNotResolved(value: Return<E[keyof E]>, index: number) {
-        if (!resolved) {
-          resolved = true
+      for (const effect of effects) {
+        const pure = provide(runEffect(effect), c as any) as Pure<Return<E[keyof E]>>
 
-          for (let i = 0; i < effects.length; ++i) {
-            if (i !== index) {
-              pureDisposables[i].dispose()
-            }
-          }
-
-          const disposable = cb(value)
-
-          return disposeAll([effectDisposable.addDisposable(disposable), disposable])
-        }
-
-        return Disposable.None
+        disposable.addDisposable(runPure(ifNotResolved, pure))
       }
 
-      effectDisposable.addDisposable(disposeAll(pureDisposables))
+      return disposable
+    })
 
-      return effectDisposable
-    }),
-  )
+  return yield env
+}
+
+function createIfNotResolved<A>(cb: (value: A) => Disposable, disposable: Disposable) {
+  let resolved = false
+
+  return (value: A) => {
+    if (!resolved) {
+      resolved = true
+
+      disposable.dispose()
+
+      return cb(value)
+    }
+
+    return Disposable.None
+  }
 }

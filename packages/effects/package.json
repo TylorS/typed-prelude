@@ -30,8 +30,10 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@typed/common": "^3.0.0",
     "@typed/disposable": "^3.0.0",
     "@typed/env": "^6.0.1",
+    "@typed/future": "^9.0.1",
     "@typed/lambda": "^3.0.0"
   }
 }

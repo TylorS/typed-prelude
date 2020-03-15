@@ -1,10 +1,11 @@
-import { Env, handle, Handle, Resources } from '@typed/env'
-import { Effect, Effects } from './Effect'
+import { Provide, provide, Pure } from '@typed/env'
 import { runEffect } from './runEffect'
 
-export function* runWith<E, A, E1>(
-  effect: Effect<E, A>,
-  resources: E1,
-): Effects<E1 extends E ? never : Resources<Handle<E1, Env<E, A>>>, A> {
-  return yield handle(resources, runEffect(effect))
+export function* runWith<Y extends Pure<any>, R, N, C>(
+  effect: Generator<Y, R, N>,
+  capabilities: C,
+): Generator<Provide<Y, C>, R, R> {
+  const env: Provide<Y, C> = provide(runEffect(effect), capabilities) as any
+
+  return yield env
 }
