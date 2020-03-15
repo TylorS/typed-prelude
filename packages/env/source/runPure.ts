@@ -9,10 +9,9 @@ import { runEnv } from './runEnv'
  * @param pure :: Pure<A>  Pure to run
  * @returns :: Disposable
  */
-
 export const runPure: {
   <A>(f: (value: A) => Disposable, pure: Pure<A>): Disposable
   <A>(f: (value: A) => Disposable): (pure: Pure<A>) => Disposable
 } = curry(function runPure<A>(f: (value: A) => Disposable, pure: Pure<A>): Disposable {
-  return runEnv(f, {} as never, pure)
+  return runEnv(f, {}, pure)
 })

@@ -1,23 +1,16 @@
-import { Arity1, curry } from '@typed/lambda'
-import { CombineResources, Env } from './Env'
-import { isValueEnv } from './isEnv'
-import { runEnv } from './runEnv'
+import { Compact } from '@typed/common'
+import { curry } from '@typed/lambda'
+import { Env } from './Env'
+import { Resume } from './Resume'
 
 export const chain = curry(__chain) as {
-  <A, B, C>(fn: Arity1<A, Env<B, C>>, env: Env<B, A>): Env<B, C>
-  <A, B, C>(fn: Arity1<A, Env<B, C>>): (env: Env<B, A>) => Env<B, C>
-
-  <A, B, C, D>(fn: Arity1<A, Env<B, C>>, env: Env<D, A>): Env<CombineResources<B, D>, C>
-  <A, B, C>(fn: Arity1<A, Env<B, C>>): <D>(env: Env<D, A>) => Env<CombineResources<B, D>, C>
+  <A, E1, B, E2>(fn: (value: A) => Env<E1, B>, env: Env<E2, A>): Env<Compact<E1 & E2>, B>
+  <A, E1, B>(fn: (value: A) => Env<E1, B>): <E2>(env: Env<E2, A>) => Env<Compact<E1 & E2>, B>
 }
 
-function __chain<A, B, C, D>(fn: Arity1<A, Env<B, C>>, env: Env<D, A>): Env<B & D, C> {
-  if (isValueEnv(env)) {
-    return fn(env.value)
-  }
-
-  return {
-    type: 'lazy',
-    runEnv: (f, r) => runEnv(a => runEnv(f, r, fn(a)), r, env),
-  }
+function __chain<A, E1, B, E2>(
+  fn: (value: A) => Env<E1, B>,
+  env: Env<E2, A>,
+): Env<Compact<E1 & E2>, B> {
+  return c => Resume.chain(a => fn(a)(c), env(c))
 }

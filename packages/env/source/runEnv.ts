@@ -1,10 +1,11 @@
 import { Disposable } from '@typed/disposable'
 import { curry } from '@typed/lambda'
 import { Env } from './Env'
+import { Resume } from './Resume'
 
 export const runEnv = curry(
   <A extends {}, B>(fn: (value: B) => Disposable, resources: A, env: Env<A, B>): Disposable =>
-    env.type === 'value' ? fn(env.value) : env.runEnv(fn, resources),
+    Resume.run(fn, env(resources)),
 ) as {
   <A extends {}, B>(fn: (value: B) => Disposable, resources: A, env: Env<A, B>): Disposable
   <A extends {}, B>(fn: (value: B) => Disposable, resources: A): (env: Env<A, B>) => Disposable

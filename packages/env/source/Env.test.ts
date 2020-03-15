@@ -1,7 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { always, pipe } from '@typed/lambda'
 import { describe, given, it } from '@typed/test'
-import { Env } from './Env'
+import { Pure } from './Env'
 import { runPure } from './runPure'
 
 export const test = describe(`Env`, [
@@ -10,7 +10,7 @@ export const test = describe(`Env`, [
       it(`returns a function which takes a callback for the value`, ({ same }) => {
         const value = {}
 
-        runPure(pipe(same(value), always(Disposable.None)), Env.of(value))
+        runPure(pipe(same(value), always(Disposable.None)), Pure.of(value))
       }),
     ]),
   ]),
