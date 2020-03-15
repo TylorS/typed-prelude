@@ -1,7 +1,7 @@
 import { describe, it } from '@typed/test'
 import { createServerDomEnv } from './createServerDomEnv'
 
-export const test = describe(`createDomEnv`, [
+export const test = describe(`createServerDomEnv`, [
   it(`returns a node-friendly DOM implementation`, ({ equal, same }, done) => {
     const serverUrl = 'https://tylors.github.io/typed-prelude'
     const state = {}
