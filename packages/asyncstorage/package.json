@@ -1,6 +1,6 @@
 {
   "name": "@typed/asyncstorage",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Interface for storage using asynchronous methods",
   "main": "./cjs/index.js",
   "repository": {
@@ -31,14 +31,14 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/disposable": "^3.0.0",
-    "@typed/effects": "^4.0.1",
-    "@typed/either": "^8.0.0",
-    "@typed/env": "^6.0.1",
-    "@typed/future": "^9.0.1",
-    "@typed/lambda": "^3.0.0",
-    "@typed/logic": "^6.0.0",
-    "@typed/maybe": "^10.0.0",
+    "@typed/disposable": "^3.0.1",
+    "@typed/effects": "^5.0.0",
+    "@typed/either": "^8.0.1",
+    "@typed/env": "^7.0.0",
+    "@typed/future": "^10.0.0",
+    "@typed/lambda": "^3.0.1",
+    "@typed/logic": "^6.0.1",
+    "@typed/maybe": "^10.0.1",
     "fake-indexeddb": "^3.0.0"
   }
 }
