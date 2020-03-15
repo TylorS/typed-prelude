@@ -1,41 +1,33 @@
 import { Effect } from '@typed/effects'
 import { Either, fromRight, isLeft } from '@typed/either'
+import { AES_ALGORITHM, HASH } from './constants'
 import { CryptoEnv } from './CryptoEnv'
 import { deriveSalt } from './deriveSalt'
 import { deriveKey, importKey } from './effects'
 import { stringToArrayBuffer } from './stringToArrayBuffer'
 
 const DEFAULT_ITERATIONS = 2000
-const HASH = 'SHA-512'
 const EXTRACTABLE = false
+const encryptAndDecrypt = ['encrypt', 'decrypt']
 
 export interface SymmetricalKeyOptions {
   readonly password: string
   readonly salt: string
-
   readonly iterations?: number
-  readonly extractable?: boolean
-  readonly hash?: string
 }
 
 /**
  * Derives a Symmetrical CryptoKey from your password and a salt (e.g. email)
  */
-export function* deriveSymmetricalKey(
+export function* deriveAesKey(
   options: SymmetricalKeyOptions,
 ): Effect<CryptoEnv, Either<Error, CryptoKey>> {
-  const {
-    salt,
-    password,
-    iterations = DEFAULT_ITERATIONS,
-    extractable = EXTRACTABLE,
-    hash = HASH,
-  } = options
+  const { salt, password, iterations = DEFAULT_ITERATIONS } = options
   const params: Pbkdf2Params = {
     name: 'PBKDF2',
-    hash,
+    hash: HASH,
     iterations,
-    salt: yield* deriveSalt(salt),
+    salt: deriveSalt(salt),
   }
   const errorOrCryptoKey = yield* importKey('raw', stringToArrayBuffer(password), params, false, [
     'deriveKey',
@@ -48,8 +40,8 @@ export function* deriveSymmetricalKey(
   return yield* deriveKey(
     params,
     fromRight(errorOrCryptoKey),
-    { name: 'AES-GCM', hash },
-    extractable,
-    ['encrypt', 'decrypt'],
+    { name: AES_ALGORITHM, hash: HASH, length: 256 },
+    EXTRACTABLE,
+    encryptAndDecrypt,
   )
 }
