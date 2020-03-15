@@ -1,5 +1,7 @@
 export * from './addQueryParameters'
 export * from './clone'
+export * from './Compact'
+export * from './EmptyObject'
 export * from './equals'
 export * from './executionEnvironment'
 export * from './functionName'

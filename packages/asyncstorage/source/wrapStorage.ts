@@ -1,5 +1,4 @@
 import { Effect } from '@typed/effects'
-import { Pure } from '@typed/env'
 import { Future } from '@typed/future'
 import { noOp } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
@@ -10,7 +9,7 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
   return {
     getKeys: () =>
       Effect.fromEnv(
-        delay(() => {
+        tryCatch(() => {
           const items: string[] = []
 
           for (let i = 0; i < storage.length; ++i) {
@@ -26,7 +25,7 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
       ),
     getItems: () =>
       Effect.fromEnv(
-        delay((): readonly string[] => {
+        tryCatch((): readonly string[] => {
           const items: string[] = []
 
           for (let i = 0; i < storage.length; ++i) {
@@ -40,11 +39,11 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
           return items
         }),
       ),
-    getItem: key => Effect.fromEnv(delay(() => Maybe.of(storage.getItem(key)))),
-    setItem: (key, value) => Effect.fromEnv(delay(() => (storage.setItem(key, value), value))),
+    getItem: key => Effect.fromEnv(tryCatch(() => Maybe.of(storage.getItem(key)))),
+    setItem: (key, value) => Effect.fromEnv(tryCatch(() => (storage.setItem(key, value), value))),
     removeItem: key =>
       Effect.fromEnv(
-        delay(() => {
+        tryCatch(() => {
           const item = Maybe.of(storage.getItem(key))
 
           storage.removeItem(key)
@@ -52,11 +51,17 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
           return item
         }),
       ),
-    clear: () => Effect.fromEnv(Pure.fromIO(() => (storage.clear(), true))),
+    clear: () => Effect.fromEnv(tryCatch(() => (storage.clear(), true))),
     dispose: noOp,
   }
 }
 
-function delay<A>(fn: () => A): Future<never, Error, A> {
-  return Future.create((_, resolve) => resolve(fn()))
+function tryCatch<A>(fn: () => A): Future<unknown, Error, A> {
+  return Future.create((reject, resolve) => {
+    try {
+      return resolve(fn())
+    } catch (error) {
+      return reject(error)
+    }
+  })
 }

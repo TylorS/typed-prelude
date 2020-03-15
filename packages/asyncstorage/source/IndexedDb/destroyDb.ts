@@ -1,19 +1,32 @@
-import { withIsDisposed } from '@typed/disposable'
-import { Effect, Effects } from '@typed/effects'
-import { Env } from '@typed/env'
+import { Disposable, withIsDisposed } from '@typed/disposable'
+import { Effect } from '@typed/effects'
+import { Future } from '@typed/future'
+import { ItemEffect } from '../AsyncStorage'
 
-export function destroyDb(
-  name: string,
-  indexedDbFactory: typeof indexedDB,
-): Effects<never, boolean> {
+export function destroyDb(name: string, indexedDbFactory: typeof indexedDB): ItemEffect<boolean> {
   return Effect.fromEnv(
-    Env.create<never, boolean>(cb => {
-      const request = indexedDbFactory.deleteDatabase(name)
+    Future.create<unknown, Error, boolean>((reject, resolve) => {
+      const disposable = Disposable.lazy()
 
-      return withIsDisposed(isDisposed => {
-        request.onerror = () => !isDisposed() && cb(false)
-        request.onsuccess = () => !isDisposed() && cb(true)
-      })
+      disposable.addDisposable(
+        withIsDisposed(isDisposed => {
+          const request = indexedDbFactory.deleteDatabase(name)
+          request.onerror = () => {
+            if (!isDisposed()) {
+              disposable.addDisposable(
+                reject(new Error(request.error?.message ?? `Failed to destroy db ${name}`)),
+              )
+            }
+          }
+          request.onsuccess = () => {
+            if (isDisposed()) {
+              disposable.addDisposable(resolve(true))
+            }
+          }
+        }),
+      )
+
+      return disposable
     }),
   )
 }

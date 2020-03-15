@@ -5,7 +5,7 @@ import { ItemsEffect } from '../AsyncStorage'
 
 export function getAllKeys(store: IDBObjectStore): ItemsEffect<string> {
   return Effect.fromEnv(
-    Future.create<never, Error, readonly string[]>((reject, resolve) => {
+    Future.create<unknown, Error, readonly string[]>((reject, resolve) => {
       const request = store.getAllKeys()
       const disposable = Disposable.lazy()
       request.onerror = ev =>

@@ -5,7 +5,7 @@ import { ItemEffect } from '../AsyncStorage'
 
 export function putValue<A>(key: string, value: A, store: IDBObjectStore): ItemEffect<A> {
   return Effect.fromEnv(
-    Future.create<never, Error, A>((reject, resolve) => {
+    Future.create<unknown, Error, A>((reject, resolve) => {
       const request = store.put(value, key)
       const disposable = Disposable.lazy()
 

@@ -6,7 +6,7 @@ import { ItemEffect } from '../AsyncStorage'
 
 export function getValue<A>(key: string, store: IDBObjectStore): ItemEffect<Maybe<A>> {
   return Effect.fromEnv(
-    Future.create<never, Error, Maybe<A>>((reject, resolve) => {
+    Future.create<unknown, Error, Maybe<A>>((reject, resolve) => {
       const request = store.get(key)
       const disposable = Disposable.lazy()
 

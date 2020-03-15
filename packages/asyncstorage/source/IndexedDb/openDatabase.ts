@@ -5,7 +5,7 @@ import { ItemEffect } from '../AsyncStorage'
 
 export function openDatabase(name: string, indexedDbFactory: IDBFactory): ItemEffect<IDBDatabase> {
   return Effect.fromEnv(
-    Future.create<never, Error, IDBDatabase>((reject, resolve) => {
+    Future.create<unknown, Error, IDBDatabase>((reject, resolve) => {
       const request = indexedDbFactory.open(name)
       const disposable = Disposable.lazy()
 
