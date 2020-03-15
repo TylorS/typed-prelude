@@ -1,0 +1,45 @@
+{
+  "name": "@typed/crypto",
+  "version": "0.0.0",
+  "description": "Cryptography tools for web applications",
+  "main": "./cjs/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TylorS/typed-prelude.git"
+  },
+  "keywords": [
+    "Crypto",
+    "WebCrypto",
+    "Typed",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "bugs": {
+    "url": "https://github.com/TylorS/typed-prelude/issues"
+  },
+  "homepage": "https://github.com/TylorS/typed-prelude#readme",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@peculiar/webcrypto": "1.0.25",
+    "tslib": "^1.10.0"
+  },
+  "devDependencies": {
+    "@peculiar/webcrypto": "1.0.25"
+  },
+  "dependencies": {
+    "@typed/disposable": "^3.0.1",
+    "@typed/either": "^8.0.1",
+    "@typed/effects": "^5.0.0",
+    "@typed/env": "^7.0.0",
+    "@typed/future": "10.0.0",
+    "@typed/lambda": "^3.0.1"
+  },
+  "sideEffects": false
+}

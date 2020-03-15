@@ -22,6 +22,18 @@ export namespace Future {
 
       return fn(ifNotResolved<A>(pipe(Left.of, cb)), ifNotResolved<B>(pipe(Right.of, cb)), e)
     })
+
+  export const fromPromise = <A>(promise: PromiseLike<A>): PureFuture<Error, A> =>
+    create<unknown, Error, A>((reject, resolve) => {
+      const disposable = Disposable.lazy()
+
+      promise.then(
+        a => disposable.addDisposable(resolve(a)),
+        e => disposable.addDisposable(reject(e)),
+      )
+
+      return disposable
+    })
 }
 
 function createIfNotResolved() {

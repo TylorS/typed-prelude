@@ -10,6 +10,9 @@
       "path": "./common/tsconfig.cjs.json"
     },
     {
+      "path": "./crypto/tsconfig.cjs.json"
+    },
+    {
       "path": "./disposable/tsconfig.cjs.json"
     },
     {

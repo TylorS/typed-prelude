@@ -13,6 +13,10 @@
       "path": "./packages/common"
     },
     {
+      "name": "Crypto",
+      "path": "./packages/crypto"
+    },
+    {
       "name": "Disposable",
       "path": "./packages/disposable"
     },
