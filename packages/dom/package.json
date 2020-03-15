@@ -41,7 +41,7 @@
   "gitHead": "44de53576265995c67a5f4b5a2bdb72cfd3456ae",
   "unpkg": "./umd/index.js",
   "devDependencies": {
-    "@peculiar/webcrypto": "1.0.23",
+    "@peculiar/webcrypto": "1.0.25",
     "basichtml": "2.1.4",
     "css-mediaquery": "0.1.2"
   }
