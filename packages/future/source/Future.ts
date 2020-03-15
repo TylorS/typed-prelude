@@ -1,13 +1,14 @@
 import { Disposable } from '@typed/disposable'
-import { Either } from '@typed/either'
-import { Env } from '@typed/env'
-import { Arity1 } from '@typed/lambda'
+import { Either, Left, Right } from '@typed/either'
+import { Env, Pure, Resume } from '@typed/env'
+import { Arity1, pipe } from '@typed/lambda'
 
 // Futures should only ever contain 1 value
 export type Future<E, A, B> = Env<E, Either<A, B>>
+export type PureFuture<A, B> = Pure<Either<A, B>>
 
 export namespace Future {
-  export const of = <A, B>(value: B): Future<never, A, B> => Env.of(Either.of(value))
+  export const of = <A, B>(value: B): PureFuture<A, B> => Pure.of(Either.of(value))
 
   export const create = <E, A, B>(
     fn: (
@@ -15,25 +16,26 @@ export namespace Future {
       resolve: Arity1<B, Disposable>,
       environment: E,
     ) => Disposable,
-  ): Future<E, A, B> =>
-    Env.create((cb, environment) => {
-      let resolved = false
-      const ifNotResolved = <A>(fn: (value: A) => Disposable) => {
-        return (value: A) => {
-          if (!resolved) {
-            resolved = true
+  ): Future<E, A, B> => (e: E) =>
+    Resume.create(cb => {
+      const ifNotResolved = createIfNotResolved()
 
-            return fn(value)
-          }
+      return fn(ifNotResolved<A>(pipe(Left.of, cb)), ifNotResolved<B>(pipe(Right.of, cb)), e)
+    })
+}
 
-          return Disposable.None
-        }
+function createIfNotResolved() {
+  let resolved = false
+
+  return <A>(fn: (value: A) => Disposable) => {
+    return (value: A) => {
+      if (!resolved) {
+        resolved = true
+
+        return fn(value)
       }
 
-      return fn(
-        ifNotResolved<A>(a => cb(Either.left(a))),
-        ifNotResolved<B>(b => cb(Either.of(b))),
-        environment,
-      )
-    })
+      return Disposable.None
+    }
+  }
 }
