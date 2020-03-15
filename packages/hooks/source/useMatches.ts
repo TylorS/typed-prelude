@@ -6,7 +6,7 @@ import { useMemo } from './useMemo'
 export function* useMatches<A, B>(
   value: A,
   matches: ReadonlyArray<Match<A, B>>,
-): HookEffects<never, Maybe<B>> {
+): HookEffects<unknown, Maybe<B>> {
   const match = yield* useMemo(oneOf, [matches])
   const maybe: Maybe<B> = yield* useMemo(call, [value, match])
 

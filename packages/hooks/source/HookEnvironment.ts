@@ -1,5 +1,5 @@
 import { LazyDisposable } from '@typed/disposable'
-import { Effect, Effects } from '@typed/effects'
+import { Effect, Effects, PureEffect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
@@ -11,32 +11,31 @@ export type HookEnv = { readonly hookEnvironment: HookEnvironment }
 export interface HookEnvironment extends LazyDisposable {
   readonly id: Uuid
 
-  readonly useRef: <A>(
-    initialState?: InitialState<A | null | undefined | void>,
-  ) => Effects<never, UseRef<A>>
-
-  readonly useState: <A>(initialState: InitialState<A>) => Effects<never, UseState<A>>
+  readonly useRef: <E, A>(
+    initialState?: InitialState<E, A | null | undefined | void>,
+  ) => Effect<E, UseRef<A>>
+  readonly useState: <E, A>(initialState: InitialState<E, A>) => Effect<E, UseState<A>>
   readonly useChannel: <E, A>(
     channel: Channel<E, A>,
-    initialState?: InitialState<A>,
-  ) => Effects<E, UseState<A>>
+    initialState?: InitialState<E, A>,
+  ) => Effects<E, UseChannel<E, A>>
 
-  readonly resetId: () => Effects<never, void>
+  readonly resetId: () => PureEffect<void>
   readonly updated: boolean // true when useState has been updated
-  readonly clearUpdated: () => Effects<never, void>
+  readonly clearUpdated: () => PureEffect<void>
 }
 
-export type InitialState<A> = () => Effects<never, A>
+export type InitialState<E, A> = () => Effects<E, A>
 
 export namespace InitialState {
-  export const of = <A>(value: A): InitialState<A> => () => Effect.fromEnv(Pure.of(value))
-  export const fromIO = <A>(io: () => A): InitialState<A> => () => Effect.fromEnv(Pure.fromIO(io))
+  export const of = <A>(value: A): InitialState<never, A> => () => Effect.of(value)
+  export const fromIO = <A>(io: () => A): InitialState<never, A> => () =>
+    Effect.fromEnv(Pure.fromIO(io))
 }
 
-export type UseState<A> = readonly [
-  IO<Effects<never, A>>,
-  (updateFn: Arity1<A, A>) => Effects<never, A>,
-]
+export type UseState<A> = readonly [IO<PureEffect<A>>, (updateFn: Arity1<A, A>) => PureEffect<A>]
+
+export type UseChannel<E, A> = readonly [IO<Effect<E, A>>, (updateFn: Arity1<A, A>) => Effect<E, A>]
 
 export type UseRef<A> = readonly [Ref<A>, Arity1<A | undefined | void | null, void>]
 export type Ref<A> = { current: Maybe<A> }

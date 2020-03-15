@@ -1,4 +1,5 @@
-import { Env, Pure } from '@typed/env'
+import { PureEffect } from '@typed/effects/source'
+import { Pure } from '@typed/env'
 
 // Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.
 export function createTreeManager<A extends object>(): TreeManager<A> {
@@ -100,9 +101,9 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
 }
 
 type TreeManager<A extends object> = {
-  readonly setParent: (child: A, parent: A) => Generator<Env<never, void>, void, unknown>
-  readonly setChild: (parent: A, child: A) => Generator<Env<never, void>, void, unknown>
-  readonly removeNode: (node: A) => Generator<Env<never, void>, void, unknown>
+  readonly setParent: (child: A, parent: A) => PureEffect<void>
+  readonly setChild: (parent: A, child: A) => PureEffect<void>
+  readonly removeNode: (node: A) => PureEffect<void>
   readonly getParent: (node: A) => A | undefined
   readonly getChildren: (node: A) => Set<A> | undefined
   readonly getAllDescendants: (

@@ -36,5 +36,5 @@ export type CombinedCapabilities<A extends ReadonlyArray<Effect<any, any>>> = Co
   OrToAnd<Capabilities<A[number]>>
 >
 export type CombinedValues<A extends ReadonlyArray<Effect<any, any>>> = {
-  [K in keyof A]: Return<A[K]>
+  readonly [K in keyof A]: Return<A[K]>
 }

@@ -1,5 +1,5 @@
-import { Effect, Effects } from '@typed/effects'
-import { Env, Pure } from '@typed/env'
+import { Effect, PureEffect } from '@typed/effects'
+import { Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 import { InitialState } from './HookEnvironment'
@@ -8,15 +8,15 @@ export type ChannelManager<A extends object> = {
   readonly updateChannel: <E, B>(
     channel: Channel<E, B>,
     node: A,
-    initialState?: InitialState<B>,
-  ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
-  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effect<never, B>
+    initialState?: InitialState<E, B>,
+  ) => Effect<E, (value: B) => PureEffect<B>>
+  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effect<E, B>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
 export function createChannelManager<A extends object>(
-  setUpdated: (node: A, updated: boolean) => Effects<never, void>,
+  setUpdated: (node: A, updated: boolean) => PureEffect<void>,
   getAllDescendants: (
     providers: WeakSet<A>,
     consumers: WeakSet<A>,
@@ -54,7 +54,11 @@ export function createChannelManager<A extends object>(
     return channelProviders.get(channel)!
   }
 
-  function* updateChannel<E, B>(channel: Channel<E, B>, node: A, initialState?: InitialState<B>) {
+  function* updateChannel<E, B>(
+    channel: Channel<E, B>,
+    node: A,
+    initialState?: InitialState<E, B>,
+  ) {
     const values = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
@@ -82,7 +86,7 @@ export function createChannelManager<A extends object>(
     }
   }
 
-  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effect<never, B> {
+  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effect<E, B> {
     const values: WeakMap<A, B> = yield Pure.fromIO(() => getChannelValues(channel))
     const consumers = getChannelConsumers(channel)
 

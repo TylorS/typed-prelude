@@ -24,6 +24,7 @@
   },
   "sideEffects": false,
   "dependencies": {
+    "@typed/common": "^3.0.0",
     "@typed/disposable": "^3.0.0",
     "@typed/effects": "^4.0.1",
     "@typed/either": "^8.0.0",

@@ -11,9 +11,9 @@ const empty: [] = []
 export function* useEffect<A extends readonly any[]>(
   fn: Fn<A, Disposable>,
   deps: A,
-): HookEffects<never, Disposable> {
+): HookEffects<unknown, Disposable> {
   const { useRef, addDisposable } = yield* getHookEnv()
-  const [disposable, setDisposable] = yield* useRef<Disposable>()
+  const [disposable, setDisposable] = yield* useRef<unknown, Disposable>()
   const depsChanged = yield* useDepChange(deps)
   const timer = yield* useTimer()
 
@@ -28,6 +28,6 @@ export function* useEffect<A extends readonly any[]>(
   return withDefault(Disposable.None, disposable.current)
 }
 
-export function* useEffectOnce(fn: IO<Disposable>): HookEffects<never, Disposable> {
+export function* useEffectOnce(fn: IO<Disposable>): HookEffects<unknown, Disposable> {
   return yield* useEffect(fn, empty)
 }

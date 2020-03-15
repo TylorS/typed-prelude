@@ -1,7 +1,7 @@
-import { Provide, provide, Pure } from '@typed/env'
+import { Env, Provide, provide, Pure } from '@typed/env'
 import { runEffect } from './runEffect'
 
-export function* runWith<Y extends Pure<any>, R, N, C>(
+export function* runWith<Y extends Pure<any> | Env<any, any>, R, N, C>(
   effect: Generator<Y, R, N>,
   capabilities: C,
 ): Generator<Provide<Y, C>, R, R> {

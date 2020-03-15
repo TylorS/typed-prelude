@@ -1,5 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
+import { PureEffect } from '@typed/effects'
 import { Either } from '@typed/either'
 import { Future } from '@typed/future'
 import * as fs from 'fs'
@@ -7,20 +7,18 @@ import * as fs from 'fs'
 export function* writeFile(
   filePath: string,
   contents: string | Buffer,
-): Effect<never, Either<Error, void>> {
-  return yield* Effect.fromEnv(
-    Future.create<never, Error, void>((reject, resolve) => {
-      const disposable = Disposable.lazy()
+): PureEffect<Either<Error, void>> {
+  return yield Future.create<unknown, Error, void>((reject, resolve) => {
+    const disposable = Disposable.lazy()
 
-      fs.writeFile(filePath, contents, err => {
-        if (err) {
-          return disposable.addDisposable(reject(err))
-        }
+    fs.writeFile(filePath, contents, err => {
+      if (err) {
+        return disposable.addDisposable(reject(err))
+      }
 
-        disposable.addDisposable(resolve())
-      })
+      disposable.addDisposable(resolve())
+    })
 
-      return disposable
-    }),
-  )
+    return disposable
+  })
 }

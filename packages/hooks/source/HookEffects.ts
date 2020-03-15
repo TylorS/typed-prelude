@@ -1,6 +1,5 @@
-import { Effect, Effects } from '@typed/effects'
-import { CombineResources } from '@typed/env'
+import { Env, Pure } from '@typed/env'
 import { HookEnv } from './HookEnvironment'
 
-export type HookEffect<A, B> = Effect<CombineResources<HookEnv, A>, B>
-export type HookEffects<A, B> = Effects<CombineResources<HookEnv, A>, B>
+export type HookEffect<A, B> = Generator<Env<HookEnv, any> | Env<A, any>, B, any>
+export type HookEffects<A, B> = Generator<Env<HookEnv, any> | Env<A, any> | Pure<any>, B, any>
