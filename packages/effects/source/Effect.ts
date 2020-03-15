@@ -1,6 +1,8 @@
 import { Compact } from '@typed/common'
 import { CapabilitiesOf, Env, Pure } from '@typed/env'
-import { OrToAnd } from '@typed/lambda'
+import { Fn, OrToAnd } from '@typed/lambda'
+
+export type Computation<A extends readonly any[], B, C> = Fn<A, Effect<B, C>>
 
 // A collection of effects including Pure implementations
 export type Effects<A, B> = Generator<Env<A, any> | Pure<any>, B, any>
