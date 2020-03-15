@@ -1,10 +1,12 @@
-import { Effect, Effects, get } from '@typed/effects'
+import { co, Effects, get, PureEffect } from '@typed/effects'
 import { LoggerEnv } from './types'
 
-export function* time(label: string): Effects<LoggerEnv, Effects<never, number>> {
+export const time: (label: string) => Effects<LoggerEnv, PureEffect<number>> = co(function*(
+  label: string,
+) {
   const { logger } = yield* get<LoggerEnv>()
 
-  yield logger.timeStart(label)
+  yield* logger.timeStart(label)
 
-  return Effect.fromEnv(logger.timeEnd(label))
-}
+  return logger.timeEnd(label)
+})

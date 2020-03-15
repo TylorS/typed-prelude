@@ -1,5 +1,4 @@
-import { Effect } from '@typed/effects'
-import { withEnv } from '@typed/env'
+import { Effect, op, resumeNow } from '@typed/effects'
 import { StorageEnv } from './types'
 
 /**
@@ -8,6 +7,4 @@ import { StorageEnv } from './types'
  * @returns :: Env StorageEnv void
  */
 export const removeItem = (key: string): Effect<StorageEnv, void> =>
-  Effect.fromEnv(
-    withEnv<StorageEnv, void>(({ storage }) => storage.removeItem(key)),
-  )
+  op<StorageEnv, void>(({ storage }) => resumeNow(storage.removeItem(key)))

@@ -1,4 +1,4 @@
-import { Env, Pure } from '@typed/env'
+import { co, Effect, PureEffect } from '@typed/effects'
 
 // Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.
 export function createTreeManager<A extends object>(): TreeManager<A> {
@@ -33,7 +33,7 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
   }
 
   function* setParent(child: A, parent: A) {
-    yield Pure.fromIO(() => removeFromParent(child))
+    yield* Effect.fromIO(() => removeFromParent(child))
 
     childToParent.set(child, parent)
 
@@ -53,7 +53,7 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
   }
 
   function* removeNode(node: A) {
-    yield Pure.fromIO(() => removeFromParent(node))
+    yield* Effect.fromIO(() => removeFromParent(node))
 
     const children = getChildren(node)
 
@@ -90,9 +90,9 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
   }
 
   return {
-    setParent,
-    setChild,
-    removeNode,
+    setParent: co(setParent),
+    setChild: co(setChild),
+    removeNode: co(removeNode),
     getParent,
     getChildren,
     getAllDescendants,
@@ -100,9 +100,9 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
 }
 
 type TreeManager<A extends object> = {
-  readonly setParent: (child: A, parent: A) => Generator<Env<never, void>, void, unknown>
-  readonly setChild: (parent: A, child: A) => Generator<Env<never, void>, void, unknown>
-  readonly removeNode: (node: A) => Generator<Env<never, void>, void, unknown>
+  readonly setParent: (child: A, parent: A) => PureEffect<void>
+  readonly setChild: (parent: A, child: A) => PureEffect<void>
+  readonly removeNode: (node: A) => PureEffect<void>
   readonly getParent: (node: A) => A | undefined
   readonly getChildren: (node: A) => Set<A> | undefined
   readonly getAllDescendants: (

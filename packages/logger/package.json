@@ -24,7 +24,6 @@
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
     "@typed/effects": "^4.0.1",
-    "@typed/env": "^6.0.1",
     "@typed/objects": "^6.0.0",
     "@typed/timer": "^3.0.0"
   },

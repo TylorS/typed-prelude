@@ -1,4 +1,4 @@
-import { runEffects } from '@typed/effects'
+import { co, runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
@@ -25,7 +25,7 @@ export const test = describe(`useChannel`, [
         }
       }
 
-      runEffects(test(), {})
+      runEffects(co(test)(), {})
     }),
   ]),
 ])

@@ -1,39 +1,27 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Either, Left, Right } from '@typed/either'
-import { Env } from '@typed/env'
-import { ArgsOf, Fn } from '@typed/lambda'
+import { Future } from '@typed/effects'
 import { isValidStatus } from './isValidStatus'
-import { HttpEnv, HttpOptions, HttpRequest, HttpResponse } from './types'
+import { HttpOptions, HttpRequest, HttpResponse } from './types'
 
 export function http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
-  return Effect.fromEnv(
-    Env.create<HttpEnv, Either<Error, HttpResponse<A>>>((f, { http }) => {
-      let hasLoaded = false
-      const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>): Disposable => {
-        if (!hasLoaded) {
-          hasLoaded = true
-
-          return f(...args)
-        }
-
-        return Disposable.None
-      }
-
-      return http(url, options, {
-        success: ifNotLoaded((response: HttpResponse<A>) => f(handleSuccess(response))),
-        failure: ifNotLoaded((error: Error) => f(Left.of(error))),
-      })
+  return Future.create((reject, resolve, { http }) =>
+    http(url, options, {
+      success: response => (handleSuccess(response, reject, resolve), Disposable.None),
+      failure: error => (reject(error), Disposable.None),
     }),
   )
 }
 
-function handleSuccess<A>(response: HttpResponse<A>) {
+function handleSuccess<A>(
+  response: HttpResponse<A>,
+  reject: (error: Error) => void,
+  resolve: (value: HttpResponse<A>) => void,
+) {
   if (isValidStatus(response)) {
-    return Right.of(response)
+    return resolve(response)
   }
 
   const errorMessage = response.responseText || response.statusText
 
-  return Left.of(new Error(errorMessage))
+  return reject(new Error(errorMessage))
 }

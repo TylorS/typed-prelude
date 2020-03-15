@@ -1,10 +1,10 @@
-import { Effect, runEffects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { co, Effect, runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
+import { InitialState } from './HookEnvironment'
 
 export const test = describe(`createHooksManager`, [
   given(`a hierarchy of HookEnvironments`, [
@@ -19,7 +19,7 @@ export const test = describe(`createHooksManager`, [
       const c = createHookEnvironment(manager)
       const initial = 1
       const expected = 3
-      const channel = createChannel(() => Effect.fromEnv(Pure.of(initial)))
+      const channel = createChannel(InitialState.of(initial))
 
       function* test() {
         try {
@@ -67,7 +67,7 @@ export const test = describe(`createHooksManager`, [
         }
       }
 
-      runEffects(test(), {} as never)
+      runEffects(co(test)(), {})
     }),
   ]),
 ])

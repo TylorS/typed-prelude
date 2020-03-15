@@ -1,26 +1,17 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Either } from '@typed/either'
-import { Future } from '@typed/future'
+import { Future } from '@typed/effects'
 import * as fs from 'fs'
 
-export function* writeFile(
-  filePath: string,
-  contents: string | Buffer,
-): Effect<never, Either<Error, void>> {
-  return yield* Effect.fromEnv(
-    Future.create<never, Error, void>((reject, resolve) => {
-      const disposable = Disposable.lazy()
+export function writeFile(filePath: string, contents: string | Buffer): Future<never, Error, void> {
+  return Future.create<never, Error, void>((reject, resolve) => {
+    fs.writeFile(filePath, contents, err => {
+      if (err) {
+        return reject(err)
+      }
 
-      fs.writeFile(filePath, contents, err => {
-        if (err) {
-          return disposable.addDisposable(reject(err))
-        }
+      resolve()
+    })
 
-        disposable.addDisposable(resolve())
-      })
-
-      return disposable
-    }),
-  )
+    return Disposable.None
+  })
 }

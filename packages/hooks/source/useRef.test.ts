@@ -1,5 +1,4 @@
-import { Effect, runEffects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { co, runEffects } from '@typed/effects'
 import { Maybe } from '@typed/maybe'
 import { describe, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
@@ -15,19 +14,21 @@ export const test = describe(`useRef`, [
     const hookEnvironment = createHookEnvironment(manager)
     const initialValue: number = 1
     const endingValue: number = 100
-    const test = withHooks(function*(value: number) {
-      const [ref] = yield* useRef<number>(InitialState.of(value))
+    const test = withHooks(
+      co(function*(value: number) {
+        const [ref] = yield* useRef<number>(InitialState.of(value))
 
-      try {
-        equal(Maybe.of(initialValue), ref.current)
+        try {
+          equal(Maybe.of(initialValue), ref.current)
 
-        if (value === endingValue) {
-          done()
+          if (value === endingValue) {
+            done()
+          }
+        } catch (error) {
+          done(error)
         }
-      } catch (error) {
-        done(error)
-      }
-    })
+      }),
+    )
 
     for (let i = initialValue; i <= endingValue; ++i) {
       runEffects(test(i), { hookEnvironment })

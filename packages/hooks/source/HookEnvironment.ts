@@ -1,6 +1,5 @@
 import { LazyDisposable } from '@typed/disposable'
-import { Effect, Effects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { Effect, Effects, PureEffect } from '@typed/effects'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
 import { Uuid } from '@typed/uuid'
@@ -13,30 +12,28 @@ export interface HookEnvironment extends LazyDisposable {
 
   readonly useRef: <A>(
     initialState?: InitialState<A | null | undefined | void>,
-  ) => Effects<never, UseRef<A>>
+  ) => PureEffect<UseRef<A>>
 
-  readonly useState: <A>(initialState: InitialState<A>) => Effects<never, UseState<A>>
+  readonly useState: <A>(initialState: InitialState<A>) => PureEffect<UseState<A>>
   readonly useChannel: <E, A>(
     channel: Channel<E, A>,
     initialState?: InitialState<A>,
-  ) => Effects<E, UseState<A>>
+  ) => Effects<E, UseChannel<E, A>>
 
-  readonly resetId: () => Effects<never, void>
+  readonly resetId: () => PureEffect<void>
   readonly updated: boolean // true when useState has been updated
-  readonly clearUpdated: () => Effects<never, void>
+  readonly clearUpdated: () => PureEffect<void>
 }
 
-export type InitialState<A> = () => Effects<never, A>
+export type InitialState<A> = () => PureEffect<A>
 
 export namespace InitialState {
-  export const of = <A>(value: A): InitialState<A> => () => Effect.fromEnv(Pure.of(value))
-  export const fromIO = <A>(io: () => A): InitialState<A> => () => Effect.fromEnv(Pure.fromIO(io))
+  export const of = <A>(value: A): InitialState<A> => () => Effect.of(value)
+  export const fromIO = <A>(io: () => A): InitialState<A> => () => Effect.fromIO(io)
 }
 
-export type UseState<A> = readonly [
-  IO<Effects<never, A>>,
-  (updateFn: Arity1<A, A>) => Effects<never, A>,
-]
+export type UseState<A> = readonly [IO<PureEffect<A>>, (updateFn: Arity1<A, A>) => PureEffect<A>]
+export type UseChannel<E, A> = readonly [IO<Effect<E, A>>, (updateFn: Arity1<A, A>) => Effect<E, A>]
 
 export type UseRef<A> = readonly [Ref<A>, Arity1<A | undefined | void | null, void>]
 export type Ref<A> = { current: Maybe<A> }

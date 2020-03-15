@@ -1,9 +1,5 @@
-import { get } from '@typed/effects'
-import { HookEffect } from './HookEffects'
+import { Effect, op, resumeNow } from '@typed/effects'
 import { HookEnv, HookEnvironment } from './HookEnvironment'
 
-export function* getHookEnv(): HookEffect<never, HookEnvironment> {
-  const { hookEnvironment } = yield* get<HookEnv>()
-
-  return hookEnvironment
-}
+export const getHookEnv = (): Effect<HookEnv, HookEnvironment> =>
+  op<HookEnv, HookEnvironment>(c => resumeNow(c.hookEnvironment))

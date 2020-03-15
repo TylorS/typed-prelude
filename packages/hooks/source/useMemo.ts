@@ -1,31 +1,42 @@
-import { Effect, Effects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { co, Effect, Effects, get, PureEffect, use } from '@typed/effects'
 import { Fn } from '@typed/lambda'
-import { isIterable } from '@typed/logic'
-import { HookEffects } from './HookEffects'
+import { HookEnv } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useState } from './useState'
 
-export function* useMemo<E, A extends readonly any[], B>(
-  fn: Fn<A, B | Effects<E, B>>,
+export const useMemo: <A extends readonly any[], B>(
+  fn: Fn<A, B>,
   deps: A,
-): HookEffects<E, B> {
-  const [getValue, setValue] = yield* useState<B>(() => getEffectValue(fn(...deps)))
+) => Effects<HookEnv, B> = co(function* useMemo<A extends readonly any[], B>(
+  fn: Fn<A, B>,
+  deps: A,
+) {
+  const [getValue, setValue] = yield* useState<B>(() => Effect.of(fn(...deps)))
   const depsUpdated = yield* useDepChange(deps, false)
 
   if (depsUpdated) {
-    const updatedValue = yield* getEffectValue(fn(...deps))
-
-    yield* setValue(() => updatedValue)
+    yield* setValue(() => fn(...deps))
   }
 
   return yield* getValue()
-}
+})
 
-function* getEffectValue<A>(value: A | Effects<never, A>): Effects<never, A> {
-  if (isIterable(value)) {
-    return yield* value
+export const useMemoEffect: <A extends readonly any[], E, B>(
+  fn: Fn<A, Effects<E, B>>,
+  deps: A,
+) => Effects<HookEnv & E, B> = co(function* useMemo<A extends readonly any[], E, B>(
+  fn: Fn<A, Effects<E, B>>,
+  deps: A,
+) {
+  const e = yield* get<E>()
+  const [getValue, setValue] = yield* useState<B>(() => use(fn(...deps), e) as PureEffect<B>)
+  const depsUpdated = yield* useDepChange(deps, false)
+
+  if (depsUpdated) {
+    const value = yield* fn(...deps)
+
+    yield* setValue(() => value)
   }
 
-  return yield* Effect.fromEnv(Pure.of(value as A))
-}
+  return yield* getValue()
+})

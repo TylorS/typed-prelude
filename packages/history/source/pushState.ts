@@ -1,4 +1,4 @@
-import { Effects, get } from '@typed/effects'
+import { co, Effects, get } from '@typed/effects'
 import { HistoryEnv, Path } from './types'
 
 /**
@@ -7,14 +7,16 @@ import { HistoryEnv, Path } from './types'
  * @param path: Path
  * @returns Effects<HistoryEnv<A>, A>
  */
-export function* pushState<A>(data: A, path: Path): Effects<HistoryEnv<A>, A> {
-  const { history } = yield* get<HistoryEnv<A>>()
+export const pushState: <A>(data: A, path: Path) => Effects<HistoryEnv<A>, A> = co(
+  function* pushState<A>(data: A, path: Path) {
+    const { history } = yield* get<HistoryEnv<A>>()
 
-  history.pushState(data, '', path)
+    history.pushState(data, '', path)
 
-  return data
-}
+    return data
+  },
+)
 
-export function* pushPath(path: Path): Effects<HistoryEnv, void> {
-  yield* pushState(null, path)
+export function pushPath(path: Path): Effects<HistoryEnv, null> {
+  return pushState(null, path)
 }

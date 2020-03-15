@@ -1,12 +1,14 @@
-import { Effects, get } from '@typed/effects'
+import { co, Effects, get } from '@typed/effects'
 import { HistoryEnv, Path } from './types'
 
-export function* replaceState<A>(data: A, path: Path): Effects<HistoryEnv<A>, A> {
-  const { history } = yield* get<HistoryEnv<A>>()
+export const replaceState: <A>(data: A, path: Path) => Effects<HistoryEnv<A>, A> = co(
+  function* replaceState<A>(data: A, path: Path) {
+    const { history } = yield* get<HistoryEnv<A>>()
 
-  history.replaceState(data, '', path)
+    history.replaceState(data, '', path)
 
-  return data
-}
+    return data
+  },
+)
 
-export const replacePath = (path: Path) => replaceState<null>(null, path)
+export const replacePath = (path: Path): Effects<HistoryEnv, null> => replaceState<null>(null, path)

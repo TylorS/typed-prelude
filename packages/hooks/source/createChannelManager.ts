@@ -1,5 +1,4 @@
-import { Effect, Effects } from '@typed/effects'
-import { Env, Pure } from '@typed/env'
+import { co, Effect, Pure, PureEffect } from '@typed/effects'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 import { InitialState } from './HookEnvironment'
@@ -9,14 +8,14 @@ export type ChannelManager<A extends object> = {
     channel: Channel<E, B>,
     node: A,
     initialState?: InitialState<B>,
-  ) => Generator<Env<never, WeakMap<A, B>>, (value: B) => Effects<never, B>, unknown>
-  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effect<never, B>
+  ) => Effect<E, (value: B) => PureEffect<B>>
+  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effect<E, B>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
 // by channel values are marked as updated
 export function createChannelManager<A extends object>(
-  setUpdated: (node: A, updated: boolean) => Effects<never, void>,
+  setUpdated: (node: A, updated: boolean) => PureEffect<void>,
   getAllDescendants: (
     providers: WeakSet<A>,
     consumers: WeakSet<A>,
@@ -65,7 +64,7 @@ export function createChannelManager<A extends object>(
 
     providers.add(node)
 
-    return function*(value: B) {
+    return co<[B], Pure<any>, B, unknown>(function*(value: B) {
       const currentValue = values.get(node)
 
       if (!equals(currentValue, value)) {
@@ -79,11 +78,11 @@ export function createChannelManager<A extends object>(
       }
 
       return value
-    }
+    })
   }
 
-  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effect<never, B> {
-    const values: WeakMap<A, B> = yield Pure.fromIO(() => getChannelValues(channel))
+  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A) {
+    const values: WeakMap<A, B> = yield* Effect.fromIO(() => getChannelValues(channel))
     const consumers = getChannelConsumers(channel)
 
     consumers.add(node)
@@ -101,5 +100,8 @@ export function createChannelManager<A extends object>(
     return values.get(node)!
   }
 
-  return { updateChannel, consumeChannel } as const
+  return {
+    updateChannel: co(updateChannel) as ChannelManager<A>['updateChannel'],
+    consumeChannel: co(consumeChannel),
+  } as const
 }

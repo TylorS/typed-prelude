@@ -1,19 +1,14 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
-import { Future } from '@typed/future'
+import { Future } from '@typed/effects'
 import { ItemEffect } from '../AsyncStorage'
 
 export function putValue<A>(key: string, value: A, store: IDBObjectStore): ItemEffect<A> {
-  return Effect.fromEnv(
-    Future.create<never, Error, A>((reject, resolve) => {
-      const request = store.put(value, key)
-      const disposable = Disposable.lazy()
+  return Future.create<unknown, Error, A>((reject, resolve) => {
+    const request = store.put(value, key)
 
-      request.onerror = ev =>
-        disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
-      request.onsuccess = () => disposable.addDisposable(resolve(value))
+    request.onerror = ev => reject(new Error((ev.target as any).errorCode))
+    request.onsuccess = () => resolve(value)
 
-      return disposable
-    }),
-  )
+    return Disposable.None
+  })
 }

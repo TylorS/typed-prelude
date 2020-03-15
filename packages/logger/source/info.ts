@@ -1,8 +1,8 @@
-import { Effects, get } from '@typed/effects'
+import { co, Effects, get } from '@typed/effects'
 import { LoggerEnv } from './types'
 
-export function* info(msg: string): Effects<LoggerEnv, void> {
+export const info: (msg: string) => Effects<LoggerEnv, void> = co(function* info(msg: string) {
   const { logger } = yield* get<LoggerEnv>()
 
-  yield logger.info(msg)
-}
+  yield* logger.info(msg)
+})

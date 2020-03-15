@@ -1,4 +1,4 @@
-import { Pure } from '@typed/env'
+import { PureEffect } from '@typed/effects'
 
 export type LoggerEnv = { readonly logger: Logger }
 
@@ -14,13 +14,13 @@ export const enum LogLevel {
  */
 export interface Logger {
   // Default
-  readonly log: (msg: string) => Pure<void>
-  readonly error: (msg: string) => Pure<void>
-  readonly clear: () => Pure<void> // Ignored if > DEBUG
+  readonly log: (msg: string) => PureEffect<void>
+  readonly error: (msg: string) => PureEffect<void>
+  readonly clear: () => PureEffect<void> // Ignored if > DEBUG
   // Info
-  readonly info: (msg: string) => Pure<void>
+  readonly info: (msg: string) => PureEffect<void>
   // Debug
-  readonly debug: (msg: string) => Pure<void>
-  readonly timeStart: (label: string) => Pure<void>
-  readonly timeEnd: (label: string) => Pure<number>
+  readonly debug: (msg: string) => PureEffect<void>
+  readonly timeStart: (label: string) => PureEffect<void>
+  readonly timeEnd: (label: string) => PureEffect<number>
 }

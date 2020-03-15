@@ -1,17 +1,21 @@
 import { Disposable, dispose, disposeAll } from '@typed/disposable'
+import { co, Effects } from '@typed/effects'
 import { Fn, IO } from '@typed/lambda'
 import { unwrap, withDefault } from '@typed/maybe'
 import { getHookEnv } from './getHookEnv'
-import { HookEffects } from './HookEffects'
+import { HookEnv } from './HookEnvironment'
 import { useDepChange } from './useDepChange'
 import { useTimer } from './useTimer'
 
 const empty: [] = []
 
-export function* useEffect<A extends readonly any[]>(
+export const useEffect: <A extends readonly any[]>(
   fn: Fn<A, Disposable>,
   deps: A,
-): HookEffects<never, Disposable> {
+) => Effects<HookEnv, Disposable> = co(function* useEffect<A extends readonly any[]>(
+  fn: Fn<A, Disposable>,
+  deps: A,
+) {
   const { useRef, addDisposable } = yield* getHookEnv()
   const [disposable, setDisposable] = yield* useRef<Disposable>()
   const depsChanged = yield* useDepChange(deps)
@@ -26,8 +30,8 @@ export function* useEffect<A extends readonly any[]>(
   }
 
   return withDefault(Disposable.None, disposable.current)
-}
+})
 
-export function* useEffectOnce(fn: IO<Disposable>): HookEffects<never, Disposable> {
-  return yield* useEffect(fn, empty)
+export function useEffectOnce(fn: IO<Disposable>): Effects<HookEnv, Disposable> {
+  return useEffect(fn, empty)
 }
