@@ -9,3 +9,8 @@ export interface AesEncryptedKeys {
 
 // Pair of encrypted data w/ the IV used to generate it
 export type AesEncryptedData = readonly [ArrayBuffer, Uint8Array]
+
+export type ExportedKeyPair = {
+  readonly publicKey: ArrayBuffer
+  readonly privateKey: ArrayBuffer
+}

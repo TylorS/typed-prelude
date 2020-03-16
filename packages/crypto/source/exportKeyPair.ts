@@ -2,8 +2,7 @@ import { Effect } from '@typed/effects'
 import { chain, Either, map } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
 import { exportKey } from './effects'
-
-export type ExportedKeyPair = { readonly publicKey: ArrayBuffer; readonly privateKey: ArrayBuffer }
+import { ExportedKeyPair } from './types'
 
 export function* exportKeyPair({
   publicKey,

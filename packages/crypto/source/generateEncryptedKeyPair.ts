@@ -1,10 +1,8 @@
 import { combine, Effect } from '@typed/effects'
 import { chain, Either, fromRight, isLeft, map } from '@typed/either'
-import { ENCRYPT_AND_DECRYPT, RSA_PARAMS } from './constants'
 import { CryptoEnv } from './CryptoEnv'
-import { generateKey } from './effects'
 import { encryptExportedKeyPair } from './encryptExportedKeyPair'
-import { exportKeyPair } from './exportKeyPair'
+import { generateRsaExportedKeys } from './generateRsaExportedKeys'
 import { importExportedKeyPair } from './importExportedKeyPair'
 import { EncryptedKeyPair } from './types'
 
@@ -22,14 +20,7 @@ import { EncryptedKeyPair } from './types'
 export function* generateEncryptedKeyPair(
   aesKey: CryptoKey,
 ): Effect<CryptoEnv, Either<Error, EncryptedKeyPair>> {
-  // Generate a one-off extractable RSA key pair to allow exporting for encryption
-  const errorOrKeyPair = yield* generateKey(RSA_PARAMS, true, ENCRYPT_AND_DECRYPT)
-
-  if (isLeft(errorOrKeyPair)) {
-    return errorOrKeyPair
-  }
-
-  const errorOrExportedKeys = yield* exportKeyPair(fromRight(errorOrKeyPair))
+  const errorOrExportedKeys = yield* generateRsaExportedKeys()
 
   if (isLeft(errorOrExportedKeys)) {
     return errorOrExportedKeys
