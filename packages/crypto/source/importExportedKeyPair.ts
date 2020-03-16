@@ -3,7 +3,7 @@ import { chain, Either, map } from '@typed/either'
 import { HASH } from './constants'
 import { CryptoEnv } from './CryptoEnv'
 import { importKey } from './effects'
-import { ExportedKeyPair } from './exportKeyPair'
+import { ExportedKeyPair } from './types'
 
 export function* importExportedKeyPair(
   keyPair: ExportedKeyPair,
