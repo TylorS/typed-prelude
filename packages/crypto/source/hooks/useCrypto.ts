@@ -77,6 +77,26 @@ export function* useCrypto({ encryptionKeyStorage }: UseCryptoOptions) {
 
     const encryptedKeyPair = fromRight(errorOrEncryptedKeyPair)
 
+    const [errorOrSavedPublicKey, errorOrSavedPrivateKey] = yield* combine(
+      encryptionKeyStorage.setItem(AES_ENCRYPTED_PUBLIC_KEY, encryptedKeyPair.encrypted.publicKey),
+      encryptionKeyStorage.setItem(
+        AES_ENCRYPTED_PRIVATE_KEY,
+        encryptedKeyPair.encrypted.privateKey,
+      ),
+    )
+
+    if (isLeft(errorOrSavedPublicKey)) {
+      yield* updateAesEncryptedKeys(() => Maybe.of(errorOrSavedPublicKey))
+
+      return errorOrSavedPublicKey
+    }
+
+    if (isLeft(errorOrSavedPrivateKey)) {
+      yield* updateAesEncryptedKeys(() => Maybe.of(errorOrSavedPrivateKey))
+
+      return errorOrSavedPrivateKey
+    }
+
     yield* updateAesEncryptedKeys(() => Maybe.of(Right.of(encryptedKeyPair.encrypted)))
     yield* updateRsaCryptoKeyPair(() => Maybe.of(Right.of(encryptedKeyPair)))
 
@@ -128,6 +148,7 @@ export function* useCrypto({ encryptionKeyStorage }: UseCryptoOptions) {
 
   function* signOut() {
     yield* updateAesCryptoKey(() => Nothing)
+    yield* updateRsaCryptoKeyPair(() => Nothing)
   }
 
   return {
