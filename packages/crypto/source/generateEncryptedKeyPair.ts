@@ -1,4 +1,4 @@
-import { Effect } from '@typed/effects/source'
+import { combine, Effect } from '@typed/effects'
 import { chain, Either, fromRight, isLeft, map } from '@typed/either'
 import { ENCRYPT_AND_DECRYPT, RSA_PARAMS } from './constants'
 import { CryptoEnv } from './CryptoEnv'
@@ -36,8 +36,10 @@ export function* generateEncryptedKeyPair(
   }
 
   const exportedKeys = fromRight(errorOrExportedKeys)
-  const errorOrEncryptedKeys = yield* encryptExportedKeyPair(aesKey, exportedKeys)
-  const errorOrNonExtractableKeyPair = yield* importExportedKeyPair(exportedKeys)
+  const [errorOrEncryptedKeys, errorOrNonExtractableKeyPair] = yield* combine(
+    encryptExportedKeyPair(aesKey, exportedKeys),
+    importExportedKeyPair(exportedKeys),
+  )
 
   return chain(
     encrypted =>
