@@ -1,4 +1,6 @@
 export const HASH = 'SHA-256'
+export const DEFAULT_ITERATIONS = 2000
+export const EXTRACTABLE = false
 export const ENCRYPT_AND_DECRYPT = ['encrypt', 'decrypt']
 export const AES_ALGORITHM = 'AES-GCM'
 export const AES_IV_SIZE = 12

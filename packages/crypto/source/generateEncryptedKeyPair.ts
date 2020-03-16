@@ -1,9 +1,8 @@
-import { combine, Effect } from '@typed/effects'
-import { chain, Either, fromRight, isLeft, map } from '@typed/either'
+import { Effect } from '@typed/effects'
+import { Either, fromRight, isLeft } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
-import { encryptExportedKeyPair } from './encryptExportedKeyPair'
+import { exportedKeysToEncryptedKeyPair } from './exportedKeysToEncryptedKeyPair'
 import { generateRsaExportedKeys } from './generateRsaExportedKeys'
-import { importExportedKeyPair } from './importExportedKeyPair'
 import { EncryptedKeyPair } from './types'
 
 /**
@@ -26,15 +25,5 @@ export function* generateEncryptedKeyPair(
     return errorOrExportedKeys
   }
 
-  const exportedKeys = fromRight(errorOrExportedKeys)
-  const [errorOrEncryptedKeys, errorOrNonExtractableKeyPair] = yield* combine(
-    encryptExportedKeyPair(aesKey, exportedKeys),
-    importExportedKeyPair(exportedKeys),
-  )
-
-  return chain(
-    encrypted =>
-      map(nonExtractable => ({ ...nonExtractable, encrypted }), errorOrNonExtractableKeyPair),
-    errorOrEncryptedKeys,
-  )
+  return yield* exportedKeysToEncryptedKeyPair(aesKey, fromRight(errorOrExportedKeys))
 }

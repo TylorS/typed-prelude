@@ -1,15 +1,18 @@
 import { Effect } from '@typed/effects'
 import { Either, fromRight, isLeft } from '@typed/either'
-import { AES_ALGORITHM, ENCRYPT_AND_DECRYPT, HASH } from './constants'
+import {
+  AES_ALGORITHM,
+  DEFAULT_ITERATIONS,
+  ENCRYPT_AND_DECRYPT,
+  EXTRACTABLE,
+  HASH,
+} from './constants'
 import { CryptoEnv } from './CryptoEnv'
 import { deriveSalt } from './deriveSalt'
 import { deriveKey, importKey } from './effects'
 import { stringToArrayBuffer } from './stringToArrayBuffer'
 
-const DEFAULT_ITERATIONS = 2000
-const EXTRACTABLE = false
-
-export interface SymmetricalKeyOptions {
+export interface DeriveAesKeyOptions {
   readonly password: string
   readonly salt: string | number
   readonly iterations?: number
@@ -19,7 +22,7 @@ export interface SymmetricalKeyOptions {
  * Derives a Symmetrical CryptoKey from your password and a salt (e.g. email)
  */
 export function* deriveAesKey(
-  options: SymmetricalKeyOptions,
+  options: DeriveAesKeyOptions,
 ): Effect<CryptoEnv, Either<Error, CryptoKey>> {
   const { salt, password, iterations = DEFAULT_ITERATIONS } = options
   const params: Pbkdf2Params = {

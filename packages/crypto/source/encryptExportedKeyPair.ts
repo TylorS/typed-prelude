@@ -2,8 +2,7 @@ import { Effect } from '@typed/effects/source'
 import { chain, Either, map } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
 import { encryptWithAesKey } from './encryptWithAesKey'
-import { ExportedKeyPair } from './exportKeyPair'
-import { AesEncryptedKeys } from './types'
+import { AesEncryptedKeys, ExportedKeyPair } from './types'
 
 export function* encryptExportedKeyPair(
   aesKey: CryptoKey,
