@@ -1,6 +1,6 @@
 import { Effect } from '@typed/effects'
 import { Either, fromRight, isLeft } from '@typed/either'
-import { AES_ALGORITHM, HASH } from './constants'
+import { AES_ALGORITHM, ENCRYPT_AND_DECRYPT, HASH } from './constants'
 import { CryptoEnv } from './CryptoEnv'
 import { deriveSalt } from './deriveSalt'
 import { deriveKey, importKey } from './effects'
@@ -8,7 +8,6 @@ import { stringToArrayBuffer } from './stringToArrayBuffer'
 
 const DEFAULT_ITERATIONS = 2000
 const EXTRACTABLE = false
-const encryptAndDecrypt = ['encrypt', 'decrypt']
 
 export interface SymmetricalKeyOptions {
   readonly password: string
@@ -42,6 +41,6 @@ export function* deriveAesKey(
     fromRight(errorOrCryptoKey),
     { name: AES_ALGORITHM, hash: HASH, length: 256 },
     EXTRACTABLE,
-    encryptAndDecrypt,
+    ENCRYPT_AND_DECRYPT,
   )
 }
