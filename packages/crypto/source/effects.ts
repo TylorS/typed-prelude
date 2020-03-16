@@ -1,7 +1,7 @@
 import { Effect } from '@typed/effects'
 import { Either } from '@typed/either'
 import { Future } from '@typed/future'
-import { ArgsOf } from '@typed/lambda/source'
+import { ArgsOf } from '@typed/lambda'
 import { CryptoEnv } from './CryptoEnv'
 import { getSubtleCrypto } from './getSubtleCrypto'
 

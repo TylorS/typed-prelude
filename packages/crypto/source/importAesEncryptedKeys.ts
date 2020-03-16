@@ -1,5 +1,5 @@
 import { combine, Effect } from '@typed/effects'
-import { Either, fromRight, isLeft } from '@typed/either/source'
+import { Either, fromRight, isLeft } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
 import { decryptWithAesKey } from './decryptWithAesKey'
 import { importExportedKeyPair } from './importExportedKeyPair'

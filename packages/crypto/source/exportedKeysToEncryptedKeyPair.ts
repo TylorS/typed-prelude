@@ -1,5 +1,5 @@
-import { combine, Effect } from '@typed/effects/source'
-import { chain, Either, map } from '@typed/either/source'
+import { combine, Effect } from '@typed/effects'
+import { chain, Either, map } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
 import { encryptExportedKeyPair } from './encryptExportedKeyPair'
 import { importExportedKeyPair } from './importExportedKeyPair'

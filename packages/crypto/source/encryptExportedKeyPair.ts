@@ -1,4 +1,4 @@
-import { Effect } from '@typed/effects/source'
+import { Effect } from '@typed/effects'
 import { chain, Either, map } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
 import { encryptWithAesKey } from './encryptWithAesKey'
