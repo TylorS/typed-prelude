@@ -7,8 +7,8 @@ import { importExportedKeyPair } from './importExportedKeyPair'
 import { EncryptedKeyPair } from './types'
 
 /**
- * Using an AES CryptoKey, a non-extractable CryptoKeyPair is generated. In addition
- * two ArrayBuffer views of the encrypted key pair signed with the supplied symmetric CryptoKey.
+ * Using an AES CryptoKey, a non-extractable CryptoKeyPair is generated. Encrypted copies of the CryptoKeyPair
+ * are also generated to allow persistence and sending over the internet.
  *
  * Ideally your supplied CryptoKey is non-extractable, never persisted, and generated with user-supplied
  * information in a way that the key can be derived again and again. The generated CryptoKeyPair should then
