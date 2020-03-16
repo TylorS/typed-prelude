@@ -1,19 +1,16 @@
 import { Effect } from '@typed/effects/source'
 import { chain, Either, map } from '@typed/either'
 import { CryptoEnv } from './CryptoEnv'
-import { encrypt } from './effects'
+import { encryptWithAesKey } from './encryptWithAesKey'
 import { ExportedKeyPair } from './exportKeyPair'
+import { AesEncryptedKeys } from './types'
 
 export function* encryptExportedKeyPair(
-  symmetricKey: CryptoKey,
+  aesKey: CryptoKey,
   keyPair: ExportedKeyPair,
-): Effect<CryptoEnv, Either<Error, ExportedKeyPair>> {
-  const encryptedPublicKey = yield* encrypt(symmetricKey.algorithm, symmetricKey, keyPair.publicKey)
-  const encryptedPrivateKey = yield* encrypt(
-    symmetricKey.algorithm,
-    symmetricKey,
-    keyPair.privateKey,
-  )
+): Effect<CryptoEnv, Either<Error, AesEncryptedKeys>> {
+  const encryptedPublicKey = yield* encryptWithAesKey(aesKey, keyPair.publicKey)
+  const encryptedPrivateKey = yield* encryptWithAesKey(aesKey, keyPair.privateKey)
 
   return chain(
     publicKey => map(privateKey => ({ publicKey, privateKey } as const), encryptedPrivateKey),
