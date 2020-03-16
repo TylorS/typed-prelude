@@ -11,7 +11,7 @@ const EXTRACTABLE = false
 
 export interface SymmetricalKeyOptions {
   readonly password: string
-  readonly salt: string
+  readonly salt: string | number
   readonly iterations?: number
 }
 
