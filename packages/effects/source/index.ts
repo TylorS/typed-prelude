@@ -1,5 +1,6 @@
 export * from './combine'
 export * from './Effect'
+export * from './fail'
 export * from './Failure'
 export * from './get'
 export * from './race'

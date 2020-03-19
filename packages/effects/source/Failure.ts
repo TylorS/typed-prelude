@@ -4,7 +4,7 @@ export type Fail<Err> = { readonly failure: <A>(error: Err) => Resume<Failure<Er
 
 export class Failure<Err, A> {
   public static of = <Err, A>(error: Err, value: A) => new Failure<Err, A>(error, value)
-  public readonly stack!: string
+  public readonly stack: string = `Failure`
 
   constructor(readonly error: Err, readonly value: A) {
     if (Error.captureStackTrace) {
