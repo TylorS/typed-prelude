@@ -1,5 +1,4 @@
-import { Env } from '@typed/env'
-import { Resume } from '@typed/env/source/Resume'
+import { Env, Resume } from '@typed/env'
 import { Capabilities, Effect } from './Effect'
 
 export const startEffect = <A extends Effect<any, any>>(effect: A): Env<Capabilities<A>, A> => (

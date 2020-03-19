@@ -1,6 +1,5 @@
-import { Disposable } from '@typed/disposable/source'
-import { Env, runEnv } from '@typed/env'
-import { Resume } from '@typed/env/source/Resume'
+import { Disposable } from '@typed/disposable'
+import { Env, Resume, runEnv } from '@typed/env'
 import { CombinedCapabilities, CombinedValues, Effect } from './Effect'
 import { runEffect } from './runEffect'
 
