@@ -15,7 +15,9 @@ export type Yield<A> = A extends Generator<infer R, any, any> ? R : never
 export type Return<A> = A extends Generator<any, infer R, any> ? R : never
 export type Next<A> = A extends Generator<any, any, infer R> ? R : never
 
-export type Capabilities<A> = CapabilitiesOf<Yield<A>>
+export type Capabilities<A> = Compact<
+  OrToAnd<A extends Effect<infer R, any> ? R : CapabilitiesOf<Yield<A>>>
+>
 
 export namespace Effect {
   export function of<A>(value: A): Generator<Pure<A>, A, A> {
@@ -29,7 +31,6 @@ export namespace Effect {
   }
 }
 
-export type IteratorOf<A> = Iterator<Yield<A>, Return<A>, Next<A>>
 export type IteratorResultOf<A> = IteratorResult<Yield<A>, Return<A>>
 
 export type CombinedCapabilities<A extends ReadonlyArray<Effect<any, any>>> = Compact<
