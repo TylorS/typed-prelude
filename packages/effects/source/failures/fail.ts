@@ -15,7 +15,7 @@ export function* catchFailure<A extends Effect<any, any>, B extends keyof any, E
   effect: A,
   errorType: B,
   onError: (error: Err) => Return<A>,
-): Effect<CapabilitiesOf<Provide<Yield<A>, Fail<A>>>, Return<A>> {
+): Effect<CapabilitiesOf<Provide<Yield<A>, { [K in B]: Fail<Err> }>>, Return<A>> {
   return yield* runWith(effect, {
     [errorType]: (e: Err) => Resume.of(Failure.of(e, Just.of(onError(e)))),
   })
