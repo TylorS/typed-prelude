@@ -1,10 +1,9 @@
 import { Disposable } from '@typed/disposable'
 import { Resume } from '@typed/env'
-import { Capabilities, Effects, Return } from './Effect'
-import { fail } from './fail'
-import { Fail } from './Failure'
+import { Capabilities, Effects, Return } from '../Effect'
+import { fail, Fail } from '../failures'
+import { runEffects } from '../run'
 import { Fiber, FiberState } from './Fiber'
-import { runEffects } from './runEffects'
 
 export type Fork = {
   readonly fork: <A extends Effects<any, any>>(

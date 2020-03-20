@@ -1,8 +1,8 @@
 import { Disposable } from '@typed/disposable'
 import { Either, Left, Right } from '@typed/either'
 import { Resume } from '@typed/env'
-import { Effects } from './Effect'
-import { Fail } from './Failure'
+import { Effects } from '../Effect'
+import { Fail } from '../failures'
 import { Fiber, FiberState } from './Fiber'
 
 export type Join = { readonly join: <A>(fiber: Fiber<A>) => Resume<Either<Error, A>> }

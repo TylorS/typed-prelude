@@ -1,8 +1,8 @@
 import { Pure } from '@typed/env'
 import { describe, given, it } from '@typed/test'
+import { Effect } from '../Effect'
+import { runEffects } from '../run'
 import { combine } from './combine'
-import { Effect } from './Effect'
-import { runEffects } from './runEffects'
 
 export const test = describe(`combine`, [
   given(`a number of effects`, [

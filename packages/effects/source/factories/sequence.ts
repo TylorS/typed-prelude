@@ -1,5 +1,5 @@
 import { Arity1 } from '@typed/lambda'
-import { Effect } from './Effect'
+import { Effect } from '../Effect'
 
 export function* sequence<E, A, B>(
   fn: Arity1<A, Effect<E, B>>,

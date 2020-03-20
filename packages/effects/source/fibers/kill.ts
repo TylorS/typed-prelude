@@ -1,5 +1,5 @@
 import { Resume } from '@typed/env'
-import { Effect } from './Effect'
+import { Effect } from '../Effect'
 import { Fiber, FiberState } from './Fiber'
 
 export type Kill = {

@@ -1,6 +1,6 @@
 import { Resume } from '@typed/env'
 import { Timer } from '@typed/timer'
-import { Effect } from './Effect'
+import { Effect } from '../Effect'
 
 export type TimerEnv = { readonly timer: Timer }
 

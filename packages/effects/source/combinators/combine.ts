@@ -1,7 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { Env, Resume, runEnv } from '@typed/env'
-import { CombinedCapabilities, CombinedValues, Effect } from './Effect'
-import { runEffect } from './runEffect'
+import { CombinedCapabilities, CombinedValues, Effect } from '../Effect'
+import { runEffect } from '../run'
 
 export function* combine<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E

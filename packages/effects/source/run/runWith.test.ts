@@ -1,5 +1,5 @@
 import { describe, given, it } from '@typed/test'
-import { get } from './get'
+import { get } from '../factories'
 import { runEffects } from './runEffects'
 import { runWith } from './runWith'
 

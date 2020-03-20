@@ -1,7 +1,7 @@
 import { describe, given, it } from '@typed/test'
+import { get } from '../get'
+import { runEffects } from '../runEffects'
 import { catchFailure, fail } from './fail'
-import { get } from './get'
-import { runEffects } from './runEffects'
 
 export const test = describe(`handleFailure`, [
   given(`an effect that might throw an error`, [

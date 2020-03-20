@@ -1,13 +1,14 @@
 import { fromLeft, fromRight, isRight } from '@typed/either'
+import { Resume } from '@typed/env'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
-import { delay } from './delay'
+import { delay, get } from '../factories'
+import { Failure } from '../failures'
+import { runEffects } from '../run'
 import { FiberState } from './Fiber'
 import { fork, Fork } from './fork'
-import { get } from './get'
 import { join, Join } from './join'
 import { kill, Kill } from './kill'
-import { runEffects } from './runEffects'
 
 export const test = describe('Fibers', [
   describe(`fork`, [
@@ -32,7 +33,7 @@ export const test = describe('Fibers', [
           a: 1,
           timer,
           ...Fork,
-          failure: () => void 0,
+          failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
         })
 
         timer.progressTimeBy(100)
@@ -75,7 +76,7 @@ export const test = describe('Fibers', [
           timer,
           ...Fork,
           ...Join,
-          failure: () => void 0,
+          failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
         })
 
         timer.progressTimeBy(ms)
@@ -109,7 +110,7 @@ export const test = describe('Fibers', [
             timer,
             ...Fork,
             ...Kill,
-            failure: () => void 0,
+            failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
           })
         }),
       ]),

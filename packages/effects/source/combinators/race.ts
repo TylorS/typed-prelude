@@ -1,7 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { Env, provide, Pure, Resume, runPure } from '@typed/env'
-import { CombinedCapabilities, Effect, Return } from './Effect'
-import { runEffect } from './runEffect'
+import { CombinedCapabilities, Effect, Return } from '../Effect'
+import { runEffect } from '../run'
 
 export function* race<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E
