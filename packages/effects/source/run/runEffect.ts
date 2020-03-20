@@ -1,3 +1,4 @@
+import { unpack } from '@typed/either'
 import { chain, Env, Resume } from '@typed/env'
 import { Capabilities, Effect, IteratorResultOf, Return } from '../Effect'
 import { Failure } from '../failures'
@@ -20,7 +21,11 @@ const runEffectGenerator = <A extends Effect<any, any>>(
           runEffectGenerator<A>(
             generator,
             (value instanceof Failure
-              ? generator.return(value.value)
+              ? unpack(
+                  e => generator.throw(e),
+                  a => generator.return(a),
+                  value.toEither(),
+                )
               : generator.next(value)) as IteratorResultOf<A>,
           ),
         result.value,
