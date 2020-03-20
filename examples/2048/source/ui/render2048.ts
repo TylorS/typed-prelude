@@ -3,7 +3,7 @@ import { html } from 'lighterhtml'
 import { Dispatch, GameState } from '../application'
 import { Position, Tile } from '../domain'
 
-const emptyTile = (position: Position): Tile => ({
+const emptyTile = (position: Position): Omit<Tile, 'id'> => ({
   value: 0,
   position,
 })
@@ -44,7 +44,7 @@ function renderGrid({ coordinates, grid }: GameState) {
   `
 }
 
-function renderTile(tile: Tile) {
+function renderTile(tile: Omit<Tile, 'id'>) {
   const { value } = tile
 
   return html`

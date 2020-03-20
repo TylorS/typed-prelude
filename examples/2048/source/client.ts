@@ -1,11 +1,11 @@
-import { createDomEnv } from '@typed/dom'
-import { runEffects } from '@typed/effects'
-import { Env } from '@typed/env'
+import { createDomEnv, DomEnv } from '@typed/dom'
+import { PureEffect, runEffects } from '@typed/effects'
+import { Resume } from '@typed/env'
 import { createHookEnvironment, createHooksManager, HookEffects, withHooks } from '@typed/hooks'
-import { BrowserGenerator } from '@typed/uuid'
+import { BrowserGenerator, UuidEnv } from '@typed/uuid'
 import { use2048 } from './application'
 import { GRID_STORAGE_KEY, ROOT_ELEMENT_SELECTOR } from './constants'
-import { GridRepository, RenderEnv } from './domain'
+import { GridRepository, RandomIntEnv, RenderEnv } from './domain'
 import { patch } from './infrastructure/patch'
 import { createGridRepository } from './infrastructure/StorageRandomIntGridRepository'
 import { render2048 } from './ui/render2048'
@@ -21,7 +21,7 @@ const hookEnvironment = createHookEnvironment(hooksManager)
 
 const main = withHooks(function* main<E>(
   repo: GridRepository<E>,
-): HookEffects<E & RenderEnv, void> {
+): HookEffects<E & UuidEnv & DomEnv & RandomIntEnv & RenderEnv, void> {
   console.log('running')
   const [gameState, dispatch] = yield* use2048(repo)
 
@@ -35,9 +35,12 @@ runEffects(runMainOnRaf(createGridRepository(GRID_STORAGE_KEY)), {
   random: Math.random,
   ...createDomEnv(),
   rootElement,
+  ...new BrowserGenerator(),
 })
 
-function* runMainOnRaf<E>(repo: GridRepository<E>): HookEffects<E & RenderEnv, void> {
+function* runMainOnRaf<E>(
+  repo: GridRepository<E>,
+): HookEffects<E & UuidEnv & DomEnv & RandomIntEnv & RenderEnv, void> {
   yield* main(repo)
 
   while (true) {
@@ -49,11 +52,12 @@ function* runMainOnRaf<E>(repo: GridRepository<E>): HookEffects<E & RenderEnv, v
   }
 }
 
-function* raf() {
-  yield Env.create<never, number>(cb => {
-    const handle = requestAnimationFrame(cb)
-    const dispose = () => cancelAnimationFrame(handle)
+function* raf(): PureEffect<number> {
+  return yield <C>(_: C) =>
+    Resume.create<number>(cb => {
+      const handle = requestAnimationFrame(cb)
+      const dispose = () => cancelAnimationFrame(handle)
 
-    return { dispose }
-  })
+      return { dispose }
+    })
 }
