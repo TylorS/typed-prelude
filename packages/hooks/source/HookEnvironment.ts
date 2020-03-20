@@ -28,8 +28,8 @@ export interface HookEnvironment extends LazyDisposable {
 export type InitialState<E, A> = () => Effects<E, A>
 
 export namespace InitialState {
-  export const of = <A>(value: A): InitialState<never, A> => () => Effect.of(value)
-  export const fromIO = <A>(io: () => A): InitialState<never, A> => () =>
+  export const of = <A>(value: A): InitialState<unknown, A> => () => Effect.of(value)
+  export const fromIO = <A>(io: () => A): InitialState<unknown, A> => () =>
     Effect.fromEnv(Pure.fromIO(io))
 }
 

@@ -1,5 +1,4 @@
-import { Effect, runEffects } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { runEffects } from '@typed/effects'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { increment } from '../../math/source'
@@ -32,6 +31,8 @@ export const test = describe(`useState`, [
         }
       })
 
+      runEffects(test(), { hookEnvironment })
+      runEffects(test(), { hookEnvironment })
       runEffects(test(), { hookEnvironment })
     }),
   ]),
