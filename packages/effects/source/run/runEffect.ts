@@ -1,7 +1,7 @@
 import { unpack } from '@typed/either'
 import { chain, Env, Resume } from '@typed/env'
 import { Capabilities, Effect, IteratorResultOf, Return } from '../Effect'
-import { Failure } from '../failures'
+import { Failure } from '../failures/Failure'
 import { startEffect } from './startEffect'
 
 export const runEffect = <A extends Effect<any, any>>(effect: A): Env<Capabilities<A>, Return<A>> =>

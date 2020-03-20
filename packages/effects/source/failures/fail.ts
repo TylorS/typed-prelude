@@ -1,7 +1,7 @@
 import { CapabilitiesOf, Provide, Resume } from '@typed/env'
 import { Just } from '@typed/maybe'
 import { Effect, Return, Yield } from '../Effect'
-import { runWith } from '../run'
+import { runWith } from '../run/runWith'
 import { Fail, Failure } from './Failure'
 
 export function* fail<A extends keyof any, Err>(
