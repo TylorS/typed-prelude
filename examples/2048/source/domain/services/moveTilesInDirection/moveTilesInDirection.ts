@@ -58,6 +58,7 @@ export function moveTile(
     merged++
 
     const mergedTile: Tile = {
+      id: proposedTile.id,
       value: tileAtPosition.value + tile.value,
       position: proposedPosition,
     }

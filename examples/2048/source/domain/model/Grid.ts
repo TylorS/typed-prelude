@@ -1,4 +1,5 @@
 import { Tuple } from '@typed/tuple'
+import { Uuid } from '@typed/uuid'
 
 // The entire grid state
 export interface Grid {
@@ -14,6 +15,7 @@ export type Tiles = ReadonlyArray<Tile>
 
 // A Tile is a board piece that has a position and a value
 export interface Tile {
+  readonly id: Uuid
   readonly position: Position
   readonly value: number
 }
