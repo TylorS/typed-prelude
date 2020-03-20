@@ -1,32 +1,45 @@
 import { unpack } from '@typed/either'
-import { chain, Env, Resume } from '@typed/env'
+import { Env, Resume } from '@typed/env'
 import { Capabilities, Effect, IteratorResultOf, Return } from '../Effect'
 import { Failure } from '../failures/Failure'
-import { startEffect } from './startEffect'
 
-export const runEffect = <A extends Effect<any, any>>(effect: A): Env<Capabilities<A>, Return<A>> =>
-  chain(
-    iterator => runEffectGenerator<A>(iterator, iterator.next() as IteratorResultOf<A>),
-    startEffect<A>(effect),
-  )
+export const runEffect = <A extends Effect<any, any>>(
+  effect: A,
+): Env<Capabilities<A>, Return<A>> => (c: Capabilities<A>) => {
+  const generator = effect[Symbol.iterator]() as A
+
+  return runEffectGenerator(generator, generator.next() as IteratorResultOf<A>, c)
+}
+
+const nextResult = <A extends Effect<any, any>>(value: any, generator: A) => {
+  if (value instanceof Failure) {
+    return unpack(
+      e => generator.throw(e),
+      a => generator.return(a),
+      value.toEither(),
+    ) as IteratorResultOf<A>
+  }
+
+  return generator.next(value) as IteratorResultOf<A>
+}
 
 const runEffectGenerator = <A extends Effect<any, any>>(
   generator: A,
   result: IteratorResultOf<A>,
-): Env<Capabilities<A>, Return<A>> =>
-  result.done
-    ? (_: Capabilities<A>) => Resume.of(result.value)
-    : chain(
-        value =>
-          runEffectGenerator<A>(
-            generator,
-            (value instanceof Failure
-              ? unpack(
-                  e => generator.throw(e),
-                  a => generator.return(a),
-                  value.toEither(),
-                )
-              : generator.next(value)) as IteratorResultOf<A>,
-          ),
-        result.value,
+  capabilities: Capabilities<A>,
+): Resume<Return<A>> => {
+  while (!result.done) {
+    const resume = result.value(capabilities)
+
+    if (resume.type === 'lazy') {
+      return Resume.chain(
+        value => runEffectGenerator(generator, nextResult(value, generator), capabilities),
+        resume,
       )
+    }
+
+    result = nextResult(resume.value, generator)
+  }
+
+  return Resume.of(result.value)
+}
