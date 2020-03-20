@@ -4,15 +4,19 @@ import { Effect, Return, Yield } from '../Effect'
 import { runWith } from '../run'
 import { Fail, Failure } from './Failure'
 
-export function* fail<Err>(error: Err): Effect<Fail<Err>, void> {
-  yield ({ failure }) => failure(error)
+export function* fail<A extends keyof any, Err>(
+  errorType: A,
+  error: Err,
+): Effect<{ [K in A]: Fail<Err> }, void> {
+  yield c => c[errorType](error)
 }
 
-export function* catchFailure<A extends Effect<any, any>, B>(
+export function* catchFailure<A extends Effect<any, any>, B extends keyof any, Err>(
   effect: A,
-  onError: (error: B) => Return<A>,
+  errorType: B,
+  onError: (error: Err) => Return<A>,
 ): Effect<CapabilitiesOf<Provide<Yield<A>, Fail<A>>>, Return<A>> {
   return yield* runWith(effect, {
-    failure: (e: B) => Resume.of(Failure.of(e, Just.of(onError(e)))),
+    [errorType]: (e: Err) => Resume.of(Failure.of(e, Just.of(onError(e)))),
   })
 }

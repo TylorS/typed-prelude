@@ -1,9 +1,9 @@
 import { Disposable } from '@typed/disposable'
 import { Resume } from '@typed/env'
 import { Capabilities, Effects, Return } from '../Effect'
-import { fail, Fail } from '../failures'
+import { fail } from '../failures'
 import { runEffects } from '../run'
-import { Fiber, FiberState } from './Fiber'
+import { Fiber, FiberFailure, FiberState } from './Fiber'
 
 export type Fork = {
   readonly fork: <A extends Effects<any, any>>(
@@ -46,7 +46,7 @@ export const Fork = {
 
         reject(error)
 
-        yield* fail(error)
+        yield* fail(FiberFailure, error)
       }
     }
 
@@ -58,6 +58,6 @@ export const Fork = {
 
 export function* fork<A extends Effects<any, any>>(
   effect: A,
-): Effects<Capabilities<A> & Fork & Fail<Error>, Fiber<Return<A>>> {
+): Effects<Capabilities<A> & Fork & FiberFailure, Fiber<Return<A>>> {
   return yield (c: Capabilities<A> & Fork) => c.fork(effect, c)
 }

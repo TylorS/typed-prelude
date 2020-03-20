@@ -5,7 +5,7 @@ import { createVirtualTimer } from '@typed/timer'
 import { delay, get } from '../factories'
 import { Failure } from '../failures'
 import { runEffects } from '../run'
-import { FiberState } from './Fiber'
+import { FiberFailure, FiberState } from './Fiber'
 import { fork, Fork } from './fork'
 import { join, Join } from './join'
 import { kill, Kill } from './kill'
@@ -33,7 +33,7 @@ export const test = describe('Fibers', [
           a: 1,
           timer,
           ...Fork,
-          failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
+          [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
         })
 
         timer.progressTimeBy(100)
@@ -76,7 +76,7 @@ export const test = describe('Fibers', [
           timer,
           ...Fork,
           ...Join,
-          failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
+          [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
         })
 
         timer.progressTimeBy(ms)
@@ -110,7 +110,7 @@ export const test = describe('Fibers', [
             timer,
             ...Fork,
             ...Kill,
-            failure: () => Resume.of(Failure.of(new Error(`Not Implemented`))),
+            [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
           })
         }),
       ]),

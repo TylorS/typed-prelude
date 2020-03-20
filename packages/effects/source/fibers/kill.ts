@@ -11,7 +11,7 @@ export const Kill = {
     const { info } = fiber
 
     if (info.state === FiberState.Running) {
-      fiber.info = { state: FiberState.Error, error: new Error(`Killed`) }
+      fiber.info = { state: FiberState.Error, error: new KillError() }
 
       return Resume.of(fiber.dispose())
     }
@@ -22,4 +22,16 @@ export const Kill = {
 
 export function* kill<A>(f: Fiber<A>): Effect<Kill, void> {
   return yield c => c.kill(f)
+}
+
+export class KillError extends Error {
+  public static readonly message = `Kill`
+
+  constructor() {
+    super(KillError.message)
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this)
+    }
+  }
 }
