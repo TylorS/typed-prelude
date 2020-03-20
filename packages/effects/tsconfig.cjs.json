@@ -25,13 +25,19 @@
       "path": "../disposable/tsconfig.json"
     },
     {
+      "path": "../either/tsconfig.json"
+    },
+    {
       "path": "../env/tsconfig.json"
     },
     {
-      "path": "../future/tsconfig.json"
+      "path": "../lambda/tsconfig.json"
     },
     {
-      "path": "../lambda/tsconfig.json"
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }

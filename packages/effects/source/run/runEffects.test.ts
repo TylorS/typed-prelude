@@ -1,6 +1,5 @@
 import { describe, given, it } from '@typed/test'
-import { get } from './get'
-import { runEffect } from './runEffect'
+import { get } from '../factories'
 import { runEffects } from './runEffects'
 
 export const test = describe(`runEffects`, [

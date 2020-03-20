@@ -1,16 +1,13 @@
-import { EmptyObject } from '@typed/common/source'
+import { EmptyObject } from '@typed/common'
 import { CapabilitiesOf, Env, Pure } from './Env'
 
-export type Provide<E, C extends Partial<CapabilitiesOf<E>>> = E extends Env<infer C1, infer R>
+export type Provide<E, C> = E extends Env<infer C1, infer R>
   ? ProvideEnv<C, C1, R>
   : E extends Pure<any>
   ? E
   : never
 
-export function provide<E extends Env<any, any>, C extends Partial<CapabilitiesOf<E>>>(
-  env: E,
-  capabilities: C,
-): Provide<E, C> {
+export function provide<E extends Env<any, any>, C>(env: E, capabilities: C): Provide<E, C> {
   return ((c1: CapabilitiesOf<Provide<E, C>>) => env({ ...c1, ...capabilities })) as Provide<E, C>
 }
 

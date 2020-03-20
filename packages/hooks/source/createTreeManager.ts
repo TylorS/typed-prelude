@@ -1,4 +1,4 @@
-import { PureEffect } from '@typed/effects/source'
+import { PureEffect } from '@typed/effects'
 import { Pure } from '@typed/env'
 
 // Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.

@@ -1,5 +1,5 @@
 import { describe, given, it } from '@typed/test'
-import { get } from './get'
+import { get } from '../factories'
 import { runEffects } from './runEffects'
 import { runWith } from './runWith'
 
@@ -13,7 +13,7 @@ export const test = describe(`runWith`, [
         return equal(expected, yield* runWith(get<E>(), expected))
       }
 
-      runEffects(sut())
+      runEffects(sut(), {})
     }),
   ]),
 ])

@@ -1,4 +1,4 @@
-import { PureEffect } from '@typed/effects/source'
+import { PureEffect } from '@typed/effects'
 import { Pure } from '@typed/env'
 
 // Basic functionality to keep track of what objects have been updated
