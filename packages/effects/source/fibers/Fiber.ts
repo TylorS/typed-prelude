@@ -1,4 +1,6 @@
+import { Compact } from '@typed/common'
 import { LazyDisposable } from '@typed/disposable'
+import { Capabilities } from '../Effect'
 import { Fail } from '../failures'
 
 export interface Fiber<A> extends LazyDisposable {
@@ -7,6 +9,8 @@ export interface Fiber<A> extends LazyDisposable {
 
 export const FiberFailure = Symbol.for('FiberFailure')
 export type FiberFailure = { readonly [K in typeof FiberFailure]: Fail<Error> }
+
+export type FiberCapabilites<A> = Compact<Capabilities<A> & FiberFailure>
 
 export const enum FiberState {
   Running,

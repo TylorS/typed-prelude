@@ -1,4 +1,4 @@
-import { EmptyObject } from '@typed/common/source'
+import { EmptyObject } from '@typed/common'
 import { CapabilitiesOf, Env, Pure } from './Env'
 
 export type Provide<E, C> = E extends Env<infer C1, infer R>
