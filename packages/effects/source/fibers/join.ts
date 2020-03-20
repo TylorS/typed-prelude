@@ -2,8 +2,7 @@ import { Disposable } from '@typed/disposable'
 import { Either, Left, Right } from '@typed/either'
 import { Resume } from '@typed/env'
 import { Effects } from '../Effect'
-import { Fail } from '../failures'
-import { Fiber, FiberState } from './Fiber'
+import { Fiber, FiberFailure, FiberState } from './Fiber'
 
 export type Join = { readonly join: <A>(fiber: Fiber<A>) => Resume<Either<Error, A>> }
 
@@ -16,7 +15,7 @@ export const Join: Join = {
     }
 
     if (info.state === FiberState.Error) {
-      return Resume.of(Left.of<Error>(new Error(`Fiber is in errored state: ${info.error}`)))
+      return Resume.of(Left.of<Error>(info.error))
     }
 
     return Resume.create(cb => {
@@ -34,6 +33,6 @@ export const Join: Join = {
   },
 }
 
-export function* join<A>(f: Fiber<A>): Effects<Join & Fail<Error>, Either<Error, A>> {
-  return yield (c: Join & Fail<Error>) => c.join(f)
+export function* join<A>(f: Fiber<A>): Effects<Join & FiberFailure, Either<Error, A>> {
+  return yield (c: Join & FiberFailure) => c.join(f)
 }
