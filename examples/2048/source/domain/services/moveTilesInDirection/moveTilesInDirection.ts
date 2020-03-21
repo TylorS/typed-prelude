@@ -28,23 +28,25 @@ export function moveTile(
 ) {
   let merged = 0
 
-  const move = (tiles: Tiles, tile: Tile, index: number): Tiles => {
-    const tileIndex = index - merged
+  const move = (tiles: Tiles, tile: Tile, originalTilesIndex: number): Tiles => {
+    const tileIndex = originalTilesIndex - merged
     const proposedPosition: Position = movePositionInDirection(bounds, direction, tile.position)
+    const tileAtPositionIndexMaybe = findIndex(isAtPosition(proposedPosition), tiles)
+    const proposedTile: Tile = { ...tile, position: proposedPosition }
 
-    // Can't be moved - is at edge of grid
+    // If moving to unoccupied edge just make it so
+    if (isNothing(tileAtPositionIndexMaybe) && isAtEdge(proposedPosition)) {
+      return update(tileIndex, proposedTile, tiles)
+    }
+
+    // Can't be moved - is at edge of grid already
     if (equals(tile.position, proposedPosition)) {
       return tiles
     }
 
-    const proposedTile: Tile = { ...tile, position: proposedPosition }
-    const tileAtPositionIndexMaybe = findIndex(isAtPosition(proposedPosition), tiles)
-
-    // It has no other tile to contend with at this proposed position
+    // Recursively move this tile in the same direction until at edge or bumps into another tile
     if (isNothing(tileAtPositionIndexMaybe)) {
-      return isAtEdge(proposedPosition)
-        ? update(tileIndex, proposedTile, tiles) // update if at edge
-        : move(tiles, proposedTile, index) // Recursively move this tile in the same direction until at edge or bumps into another tile
+      return move(update(tileIndex, proposedTile, tiles), proposedTile, originalTilesIndex)
     }
 
     const tileAtPositionIndex = fromJust(tileAtPositionIndexMaybe)

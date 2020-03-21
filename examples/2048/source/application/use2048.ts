@@ -14,18 +14,16 @@ import { Action, Dispatch, GameState } from './types'
 export function* use2048<E>(
   repo: GridRepository<E>,
 ): HookEffects<E & UuidEnv & DomEnv & RandomIntEnv, Tuple<GameState, Dispatch>> {
-  const resources = yield* get<E>()
+  const resources = yield* get<E & UuidEnv & DomEnv & RandomIntEnv>()
   const [getGrid, setGrid] = yield* useState(() => getOrCreateGrid(repo))
   const grid = yield* getGrid()
   const bounds = yield* useMemo(convertSizeToBounds, [grid.size])
-  const dispatchEffect = yield* useMemo(createDispatch, [bounds, grid, setGrid])
-  // TODO: useMemo fails here when an array type is returned because it checks for Iterable and not Generator
+  const dispatchEffect = yield* useMemo(createDispatch, [bounds, grid.size, setGrid])
   const coordinates = yield* useMemo(getAllCoordinates, [bounds])
   const gameState = yield* useMemo(deriveState, [grid, coordinates])
-  const dispatch = yield* useMemo(
-    f => (action: Action) => runEffects(f(action), resources as any),
-    [dispatchEffect],
-  )
+  const dispatch = yield* useMemo(f => (action: Action) => runEffects(f(action), resources), [
+    dispatchEffect,
+  ])
 
   yield* useArrowKeys(direction => dispatch(['move', direction]))
 

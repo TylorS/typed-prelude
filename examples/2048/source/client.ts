@@ -26,12 +26,14 @@ const main = withHooks(function* main<E>(
   const [gameState, dispatch] = yield* use2048(repo)
 
   yield* patch(yield* render2048(gameState, dispatch))
-})
+},
+false)
 
 runEffects(runMainOnRaf(createGridRepository(GRID_STORAGE_KEY)), {
   hookEnvironment,
   storage: localStorage,
   floor: Math.floor,
+  round: Math.round,
   random: Math.random,
   ...createDomEnv(),
   rootElement,

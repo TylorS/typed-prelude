@@ -12,5 +12,5 @@ export function* getOrCreateGrid<E>(
     return fromJust(savedGame)
   }
 
-  return yield* createNewGrid([4, 4])
+  return yield* createNewGrid([3, 3])
 }
