@@ -16,8 +16,6 @@ export function* render2048(state: GameState, dispatch: Dispatch) {
   const { grid, score, hasRemainingMoves } = state
   const { size } = grid
 
-  console.log(hasRemainingMoves)
-
   return html`
     <div class="flex flex-column pa4 items-center">
       <header class="flex flex-wrap items-center">
