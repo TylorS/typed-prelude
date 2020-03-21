@@ -13,8 +13,10 @@ const emptyTile = (position: Position): Omit<Tile, 'id'> => ({
 })
 
 export function* render2048(state: GameState, dispatch: Dispatch) {
-  const { grid } = state
+  const { grid, score, hasRemainingMoves } = state
   const { size } = grid
+
+  console.log(hasRemainingMoves)
 
   return html`
     <div class="flex flex-column pa4 items-center">
@@ -22,7 +24,7 @@ export function* render2048(state: GameState, dispatch: Dispatch) {
         <span class="pa2 mh3" onclick=${() => dispatch(['resize'])}
           >Size ${size[0]}x${size[1]}</span
         >
-        <span class="pa2 mh3">${state.score}</span>
+        <span class="pa2 mh3">${score}</span>
         <span class="pa2 mh3" onclick=${() => dispatch(['new-grid'])}>Restart</span>
       </header>
 
@@ -31,9 +33,18 @@ export function* render2048(state: GameState, dispatch: Dispatch) {
       <footer>
         <p class="center">
           How to play: Use your arrow keys to move the tiles. When two tiles with the same number
-          touch, they merge into one!
+          touch, they merge together. When you combine to create a 2048 tile, you win!
         </p>
       </footer>
+
+      ${hasRemainingMoves
+        ? ``
+        : html`
+            <div class="absolute modal bg-white-90 ba b--black br3">
+              <p class="tc">No moves are left,</p>
+              <p class="tc">click restart to try again!</p>
+            </div>
+          `}
     </div>
   `
 }

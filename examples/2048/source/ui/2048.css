@@ -1,3 +1,7 @@
+body {
+  background-color: rgba(221, 221, 221, 1);
+}
+
 .grid {
   border: 1px solid black;
 }
@@ -6,4 +10,11 @@
   width: 5rem;
   height: 5rem;
   border: 1px solid black;
+}
+
+.modal {
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  padding: 2rem;
 }
