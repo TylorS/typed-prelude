@@ -12,11 +12,12 @@ export function withHooks<A extends readonly any[], E, B>(
 
     yield* combine(hookEnvironment.clearUpdated(), hookEnvironment.resetId())
     let value: B = yield* fn(...args)
+    yield* combine(hookEnvironment.clearUpdated(), hookEnvironment.resetId())
 
     if (loopOnUpdated) {
       while (hookEnvironment.updated) {
-        yield* combine(hookEnvironment.clearUpdated(), hookEnvironment.resetId())
         value = yield* fn(...args)
+        yield* combine(hookEnvironment.clearUpdated(), hookEnvironment.resetId())
       }
     }
 
