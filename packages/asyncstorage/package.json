@@ -1,6 +1,6 @@
 {
   "name": "@typed/asyncstorage",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "Interface for storage using asynchronous methods",
   "main": "./cjs/index.js",
   "repository": {
@@ -32,7 +32,7 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/disposable": "^3.0.1",
-    "@typed/effects": "^5.1.1",
+    "@typed/effects": "^5.1.2",
     "@typed/either": "^8.0.1",
     "@typed/env": "^7.1.0",
     "@typed/future": "^10.1.0",
