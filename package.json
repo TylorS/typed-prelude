@@ -29,7 +29,7 @@
   "devDependencies": {
     "@typed/test": "9.5.0",
     "@types/node": "12.12.30",
-    "@types/yargs": "13.0.8",
+    "@types/yargs": "15.0.4",
     "lerna": "3.20.2",
     "lint-staged": "9.5.0",
     "prettier": "1.19.1",
@@ -41,7 +41,7 @@
     "tslint-no-circular-imports": "0.7.0",
     "tslint-plugin-prettier": "2.2.0",
     "typescript": "3.8.3",
-    "yargs": "15.1.0"
+    "yargs": "15.3.1"
   },
   "peerDependencies": {
     "tslib": "^1.10.0"
