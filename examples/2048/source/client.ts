@@ -22,7 +22,6 @@ const hookEnvironment = createHookEnvironment(hooksManager)
 const main = withHooks(function* main<E>(
   repo: GridRepository<E>,
 ): HookEffects<E & UuidEnv & DomEnv & RandomIntEnv & RenderEnv, void> {
-  console.log('running')
   const [gameState, dispatch] = yield* use2048(repo)
 
   yield* patch(yield* render2048(gameState, dispatch))
