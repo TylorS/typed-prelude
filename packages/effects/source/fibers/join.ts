@@ -1,7 +1,8 @@
 import { Disposable } from '@typed/disposable'
-import { Either, Left, Right } from '@typed/either'
+import { Either, fromLeft, fromRight, isRight, Left, Right } from '@typed/either'
 import { Resume } from '@typed/env'
 import { Effects } from '../Effect'
+import { fail } from '../failures'
 import { Fiber, FiberFailure, FiberState } from './Fiber'
 
 export type Join = { readonly join: <A>(fiber: Fiber<A>) => Resume<Either<Error, A>> }
@@ -33,6 +34,12 @@ export const Join: Join = {
   },
 }
 
-export function* join<A>(f: Fiber<A>): Effects<Join & FiberFailure, Either<Error, A>> {
-  return yield (c: Join & FiberFailure) => c.join(f)
+export function* join<A>(f: Fiber<A>): Effects<Join & FiberFailure, A> {
+  const either: Either<Error, A> = yield (c: Join & FiberFailure) => c.join(f)
+
+  if (isRight(either)) {
+    return fromRight(either)
+  }
+
+  return yield* fail(FiberFailure, fromLeft(either)) as any
 }

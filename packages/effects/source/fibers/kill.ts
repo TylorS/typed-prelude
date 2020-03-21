@@ -3,20 +3,22 @@ import { Effect } from '../Effect'
 import { Fiber, FiberState } from './Fiber'
 
 export type Kill = {
-  readonly kill: <A>(f: Fiber<A>) => Resume<void>
+  readonly kill: <A>(f: Fiber<A>) => Resume<boolean>
 }
 
-export const Kill = {
-  kill<A>(fiber: Fiber<A>): Resume<void> {
+export const Kill: Kill = {
+  kill<A>(fiber: Fiber<A>): Resume<boolean> {
     const { info } = fiber
 
     if (info.state === FiberState.Running) {
       fiber.info = { state: FiberState.Error, error: new KillError() }
 
-      return Resume.of(fiber.dispose())
+      fiber.dispose()
+
+      return Resume.of(true)
     }
 
-    return Resume.of(void 0)
+    return Resume.of(false)
   },
 }
 

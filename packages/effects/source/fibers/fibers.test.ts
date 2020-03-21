@@ -56,19 +56,16 @@ export const test = describe('Fibers', [
         }
 
         function* sut() {
-          const fiber = yield* fork(eff())
+          try {
+            const fiber = yield* fork(eff())
 
-          equal(FiberState.Running, fiber.info.state)
+            equal(FiberState.Running, fiber.info.state)
+            equal(a, yield* join(fiber))
 
-          const errorOrValue = yield* join(fiber)
-
-          if (isRight(errorOrValue)) {
-            equal(a, fromRight(errorOrValue))
-
-            return done()
+            done()
+          } catch (error) {
+            done(error)
           }
-
-          done(fromLeft(errorOrValue))
         }
 
         runEffects(sut(), {

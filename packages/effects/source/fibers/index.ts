@@ -1,4 +1,7 @@
 export * from './Fiber'
 export * from './fork'
+export * from './forkAll'
 export * from './join'
+export * from './joinAll'
 export * from './kill'
+export * from './killAll'
