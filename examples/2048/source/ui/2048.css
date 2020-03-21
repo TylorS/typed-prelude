@@ -1,0 +1,19 @@
+.grid {
+  border: 1px solid black;
+}
+
+.tile {
+  width: 5rem;
+  height: 5rem;  
+}
+
+.tile__empty {
+  background-color: rgba(221, 221, 221, 1);
+}
+
+.modal {
+  top: 30%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  padding: 2rem;
+}
