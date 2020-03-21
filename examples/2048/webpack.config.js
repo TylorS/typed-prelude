@@ -17,12 +17,16 @@ module.exports = {
   module: {
     rules: [
       // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-      { test: /\.tsx?$/, loader: "ts-loader" }
+      { test: /\.tsx?$/, loader: "ts-loader" },
+      {    
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
+      }
     ]
   },
   resolve: {
     mainFields: ['module', 'main'],
-    extensions: [".ts", ".tsx", ".js"],
+    extensions: [".ts", ".tsx", ".js", ".css"],
     plugins: [
       new TsconfigPathsPlugin({ configFile: path.join(__dirname, 'tsconfig.json') }),
     ]

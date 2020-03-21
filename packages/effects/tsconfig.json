@@ -37,6 +37,9 @@
       "path": "../maybe/tsconfig.json"
     },
     {
+      "path": "../promises/tsconfig.json"
+    },
+    {
       "path": "../timer/tsconfig.json"
     }
   ]

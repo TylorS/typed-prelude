@@ -1,0 +1,9 @@
+.grid {
+  border: 1px solid black;
+}
+
+.tile {
+  width: 5rem;
+  height: 5rem;
+  border: 1px solid black;
+}
