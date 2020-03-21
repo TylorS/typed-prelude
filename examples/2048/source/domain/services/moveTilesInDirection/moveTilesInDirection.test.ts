@@ -41,9 +41,9 @@ export const test = describe(`moveTilesInDirection`, [
       ]
 
       equal(expectedUp, moveTilesInDirection(bounds, Direction.Up, tiles))
-      // equal(expectedDown, moveTilesInDirection(bounds, Direction.Down, tiles))
-      // equal(expectedLeft, moveTilesInDirection(bounds, Direction.Left, tiles))
-      // equal(expectedRight, moveTilesInDirection(bounds, Direction.Right, tiles))
+      equal(expectedDown, moveTilesInDirection(bounds, Direction.Down, tiles))
+      equal(expectedLeft, moveTilesInDirection(bounds, Direction.Left, tiles))
+      equal(expectedRight, moveTilesInDirection(bounds, Direction.Right, tiles))
     }),
   ]),
 

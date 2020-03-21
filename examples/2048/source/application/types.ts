@@ -6,6 +6,7 @@ export type GameState = {
   readonly coordinates: ReadonlyArray<Tuple<number>>
   readonly score: number
   readonly hasRemainingMoves: boolean
+  readonly hasWon: boolean
 }
 
 export type Action = Tuple<'move', Direction> | readonly ['resize'] | readonly ['new-grid']

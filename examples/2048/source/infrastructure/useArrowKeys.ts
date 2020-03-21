@@ -17,7 +17,7 @@ function listenForArrowKeys(fn: (direction: Direction) => void, element: HTMLEle
     }
 
     if (ev.key === 'ArrowDown') {
-      return fn(Direction.Up)
+      return fn(Direction.Down)
     }
 
     if (ev.key === 'ArrowLeft') {

@@ -1,27 +1,46 @@
-import { PureEffect } from '@typed/effects'
+import { equals } from '@typed/common'
+import { delay, PureEffect } from '@typed/effects'
 import { Arity1 } from '@typed/lambda'
+import { sortTilesForDirection } from 'source/domain/services/moveTilesInDirection/sortTiles'
 import { addNewTile, Bounds, createNewGrid, Grid, moveTilesInDirection, Size } from '../domain'
 import { Action } from './types'
 
 export function createDispatch(
   bounds: Bounds,
-  size: Size,
+  getGrid: () => PureEffect<Grid>,
   setGrid: (updateFn: Arity1<Grid, Grid>) => PureEffect<Grid>,
 ) {
   return function* dispatch(action: Action) {
     switch (action[0]) {
       case 'new-grid': {
-        const newGrid = yield* createNewGrid(size)
+        const grid = yield* getGrid()
+        const newGrid = yield* createNewGrid(grid.size)
 
         yield* setGrid(() => newGrid)
 
         break
       }
       case 'move': {
-        const updatedGrid = yield* setGrid(grid => ({
-          ...grid,
-          tiles: moveTilesInDirection(bounds, action[1], grid.tiles),
-        }))
+        const direction = action[1]
+        const grid = yield* getGrid()
+        const updatedGrid = { ...grid, tiles: moveTilesInDirection(bounds, direction, grid.tiles) }
+
+        console.log(
+          sortTilesForDirection(direction, grid.tiles),
+          sortTilesForDirection(direction, updatedGrid.tiles),
+        )
+
+        if (
+          equals(
+            sortTilesForDirection(direction, grid.tiles),
+            sortTilesForDirection(direction, updatedGrid.tiles),
+          )
+        ) {
+          break
+        }
+
+        yield* setGrid(() => updatedGrid)
+        yield* delay(100)
 
         const newGrid = yield* addNewTile(updatedGrid)
 
@@ -30,7 +49,8 @@ export function createDispatch(
         break
       }
       case 'resize': {
-        const newGrid = yield* createNewGrid(getNextSize(size))
+        const grid = yield* getGrid()
+        const newGrid = yield* createNewGrid(getNextSize(grid.size))
 
         yield* setGrid(() => newGrid)
 
