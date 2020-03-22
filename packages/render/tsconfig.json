@@ -1,0 +1,37 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "incremental": true,
+    "rootDir": "./source",
+    "module": "esnext",
+    "outDir": "./esm"
+  },
+  "include": [
+    "source"
+  ],
+  "exclude": [
+    "./cjs/**",
+    "./esm/**",
+    "./source/**/*.browser-test.ts",
+    "./source/**/*.test.ts",
+    "./umd/**"
+  ],
+  "references": [
+    {
+      "path": "../disposable/tsconfig.json"
+    },
+    {
+      "path": "../dom/tsconfig.json"
+    },
+    {
+      "path": "../effects/tsconfig.json"
+    },
+    {
+      "path": "../env/tsconfig.json"
+    },
+    {
+      "path": "../hooks/tsconfig.json"
+    }
+  ]
+}

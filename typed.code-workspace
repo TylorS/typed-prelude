@@ -105,6 +105,10 @@
       "path": "./packages/remote-data"
     },
     {
+      "name": "Render",
+      "path": "./packages/render"
+    },
+    {
       "name": "Routing",
       "path": "./packages/routing"
     },

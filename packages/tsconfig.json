@@ -79,6 +79,9 @@
       "path": "./remote-data/tsconfig.json"
     },
     {
+      "path": "./render/tsconfig.json"
+    },
+    {
       "path": "./routing/tsconfig.json"
     },
     {
