@@ -27,7 +27,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "12.12.30"
+    "@types/node": "12.12.31"
   },
   "peerDependencies": {
     "@types/node": "^12.12.24",
