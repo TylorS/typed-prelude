@@ -1,9 +1,7 @@
-import { fromLeft, fromRight, isRight } from '@typed/either'
-import { Resume } from '@typed/env'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
 import { delay, get } from '../factories'
-import { Failure } from '../failures'
+import { Fail } from '../failures'
 import { runEffects } from '../run'
 import { FiberFailure, FiberState } from './Fiber'
 import { fork, Fork } from './fork'
@@ -33,7 +31,7 @@ export const test = describe('Fibers', [
           a: 1,
           timer,
           ...Fork,
-          [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
+          [FiberFailure]: Fail,
         })
 
         timer.progressTimeBy(100)
@@ -73,7 +71,7 @@ export const test = describe('Fibers', [
           timer,
           ...Fork,
           ...Join,
-          [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
+          [FiberFailure]: Fail,
         })
 
         timer.progressTimeBy(ms)
@@ -107,7 +105,7 @@ export const test = describe('Fibers', [
             timer,
             ...Fork,
             ...Kill,
-            [FiberFailure]: <A>(err: Error) => Resume.of(Failure.of<Error, A>(err)),
+            [FiberFailure]: Fail,
           })
         }),
       ]),
