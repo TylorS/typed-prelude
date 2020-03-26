@@ -6,7 +6,6 @@ import {
   InitialState,
   useEffectOnce,
   useState,
-  withHooks,
 } from '@typed/hooks'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer, interval } from '@typed/timer'
@@ -21,7 +20,7 @@ export const test = describe(`renderOnRaf`, [
       const manager = createHooksManager(new NodeGenerator())
       const hookEnvironment = createHookEnvironment(manager)
       const i = 1000
-      const app = withHooks(function*() {
+      function* app() {
         const [getState, updateState] = yield* useState(InitialState.of<number>(1))
 
         yield* useEffectOnce(() =>
@@ -37,7 +36,7 @@ export const test = describe(`renderOnRaf`, [
         )
 
         return yield* getState()
-      })
+      }
 
       const expectedValues = [1, 2, 3]
 

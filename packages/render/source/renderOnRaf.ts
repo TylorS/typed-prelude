@@ -1,20 +1,23 @@
-import { Effects } from '@typed/effects'
-import { getHookEnv, HookEffects, HookEnv } from '@typed/hooks'
+import { combine } from '@typed/effects'
+import { getHookEnv, HookEffects } from '@typed/hooks'
 import { raf, RafEnv } from './raf'
 import { render, RenderEnv } from './Render'
 
 export function* renderOnRaf<A, B>(
   fn: () => HookEffects<A, B>,
-): Effects<HookEnv & A & RafEnv & RenderEnv<B, any>, never> {
+): HookEffects<A & RafEnv & RenderEnv<B, any>, never> {
+  const env = yield* getHookEnv()
+
+  yield* combine(env.clearUpdated(), env.resetId())
   yield* render(yield* fn())
+  yield* combine(env.resetId(), env.clearUpdated())
 
   while (true) {
     yield* raf()
 
-    const env = yield* getHookEnv()
-
     if (env.updated) {
       yield* render(yield* fn())
+      yield* combine(env.resetId(), env.clearUpdated())
     }
   }
 }

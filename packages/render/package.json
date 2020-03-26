@@ -30,12 +30,13 @@
     "@typed/env": "^7.1.0",
     "@typed/history": "^9.1.2",
     "@typed/hooks": "8.2.1",
+    "@typed/lambda": "^3.0.1",
     "@typed/logic": "^6.0.1",
     "@typed/maybe": "^10.0.1",
-    "@typed/routing": "^7.1.2"
+    "@typed/routing": "^7.1.2",
+    "@typed/timer": "^3.0.1"
   },
   "devDependencies": {
-    "@typed/timer": "^3.0.1",
     "@typed/uuid": "^8.1.2"
   }
 }

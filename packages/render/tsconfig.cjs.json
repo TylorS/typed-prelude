@@ -31,7 +31,25 @@
       "path": "../env/tsconfig.json"
     },
     {
+      "path": "../history/tsconfig.json"
+    },
+    {
       "path": "../hooks/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../routing/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }
