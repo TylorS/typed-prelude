@@ -2,24 +2,22 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "downlevelIteration": true,
-    "esModuleInterop": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "preserveConstEnums": true,
+    "preserveConstEnums": false,
     "strict": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "sourceMap": true,
-    "target": "es2018",
+    "target": "es2019",
     "lib": [
       "dom",
-      "es2018"
+      "es2019"
     ]
   }
 }
