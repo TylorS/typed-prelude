@@ -74,14 +74,12 @@ export const withIsDisposed = (fn: (isDisposed: () => boolean) => void): Disposa
   }
 }
 
-export function onDisposed<A extends Error>(
-  fn: (error?: A) => void,
-  disposable: Disposable,
-): Disposable {
+export function onDisposed<A>(fn: (error?: A) => void, disposable: Disposable): Disposable {
   return {
     dispose: () => {
       try {
         disposable.dispose()
+        fn()
       } catch (error) {
         fn(error)
       }
