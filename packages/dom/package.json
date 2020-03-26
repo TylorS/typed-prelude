@@ -1,6 +1,6 @@
 {
   "name": "@typed/dom",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "description": "Typed extensions for the DOM",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
