@@ -1,6 +1,6 @@
-import { Disposable } from '@typed/disposable'
-import { RafEnv } from '@typed/dom'
+import { Disposable, onDisposed } from '@typed/disposable'
 import { Timer } from '@typed/timer'
+import { RafEnv } from './raf'
 
 export function createTestRafEnv(timer: Timer): RafEnv {
   let nextId = 0
@@ -10,7 +10,10 @@ export function createTestRafEnv(timer: Timer): RafEnv {
     const id = nextId++
     const disposable = timer.delay(() => (f(timer.currentTime()), Disposable.None), 0)
 
-    timers.set(id, disposable)
+    timers.set(
+      id,
+      onDisposed(() => timers.delete(id), disposable),
+    )
 
     return id
   }
