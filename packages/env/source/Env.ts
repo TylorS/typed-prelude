@@ -1,5 +1,5 @@
-import { Compact, EmptyObject } from '@typed/common'
-import { IO, OrToAnd } from '@typed/lambda'
+import { EmptyObject } from '@typed/common'
+import { IO } from '@typed/lambda'
 import { Resume } from './Resume'
 
 /**
@@ -22,7 +22,7 @@ export interface Env<C extends EmptyObject, A> {
 /**
  * Extracts the capabilities required to satisfy an environment
  */
-export type CapabilitiesOf<A> = A extends Env<infer R, any> ? Compact<OrToAnd<R>> : EmptyObject
+export type CapabilitiesOf<A> = A extends Env<infer R, any> ? R : never
 
 /**
  * Get the return value of an Env

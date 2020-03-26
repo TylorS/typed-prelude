@@ -3,7 +3,7 @@ import { Env } from './Env'
 import { Resume } from './Resume'
 
 /**
- * Create an environment-dependent calculcation
+ * Create an environment-dependent calculation
  * @param fn :: (a -> b)
  */
 export function withEnv<A, B>(fn: Arity1<A, B>): Env<A, B> {
