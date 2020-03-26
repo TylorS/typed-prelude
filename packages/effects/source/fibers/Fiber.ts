@@ -1,14 +1,14 @@
 import { Compact } from '@typed/common'
 import { LazyDisposable } from '@typed/disposable'
 import { Capabilities } from '../Effect'
-import { Fail } from '../failures'
+import { FailEnv } from '../failures'
 
 export interface Fiber<A> extends LazyDisposable {
   info: FiberInfo<A> // Intended to be mutable
 }
 
 export const FiberFailure = Symbol.for('FiberFailure')
-export type FiberFailure = { readonly [K in typeof FiberFailure]: Fail<Error> }
+export type FiberFailure = FailEnv<typeof FiberFailure, Error>
 
 export type FiberCapabilites<A> = Compact<Capabilities<A> & FiberFailure>
 

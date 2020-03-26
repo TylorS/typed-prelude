@@ -1,3 +1,4 @@
+export * from './createFiber'
 export * from './Fiber'
 export * from './fork'
 export * from './forkAll'

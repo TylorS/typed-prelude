@@ -1,10 +1,9 @@
-import { Disposable } from '@typed/disposable'
 import { Resume } from '@typed/env'
-import { createDeferred } from '@typed/promises'
 import { Capabilities, Effects, Return } from '../Effect'
 import { fail } from '../failures'
 import { runEffects } from '../run/runEffects'
-import { Fiber, FiberCapabilites, FiberFailure, FiberInfo, FiberState } from './Fiber'
+import { createFiber } from './createFiber'
+import { Fiber, FiberCapabilites, FiberFailure, FiberState } from './Fiber'
 
 export type Fork = {
   readonly fork: <A extends Effects<any, any>>(
@@ -31,45 +30,6 @@ export const Fork = {
 
     return Resume.of(fiber)
   },
-}
-
-function createFiber<A>() {
-  const disposable = Disposable.lazy()
-  const [promise, resolve, reject] = createDeferred<A>()
-
-  const handleFiberInfo = (info: FiberInfo<A>) => {
-    if (info.state === FiberState.Error) {
-      return reject(info.error)
-    }
-
-    if (info.state === FiberState.Returned) {
-      return resolve(info.value)
-    }
-  }
-
-  // Besides observing when info is changed, it also coincidentally makes our fiber actually immutable for it's other fields
-  function setFiberKey(target: Fiber<A>, key: keyof Fiber<A>, value: Fiber<A>[keyof Fiber<A>]) {
-    if (key === 'info') {
-      handleFiberInfo(value as FiberInfo<A>)
-      target[key] = value as FiberInfo<A>
-
-      return true
-    }
-
-    return false
-  }
-
-  const fiber: Fiber<A> = new Proxy(
-    {
-      info: { state: FiberState.Running, promise },
-      ...disposable,
-    },
-    {
-      set: setFiberKey,
-    },
-  )
-
-  return fiber
 }
 
 export function* fork<A extends Effects<any, any>>(
