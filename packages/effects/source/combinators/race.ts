@@ -5,7 +5,7 @@ import { runEffect } from '../run'
 
 export function* race<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E
-): Effect<CombinedCapabilities<E>, Return<E[keyof E]>> {
+): Effect<Env<CombinedCapabilities<E>, Return<E[keyof E]>>, Return<E[keyof E]>> {
   const env: Env<CombinedCapabilities<E>, Return<E[keyof E]>> = (c: CombinedCapabilities<E>) =>
     Resume.create<Return<E[keyof E]>>(cb => {
       const disposable = Disposable.lazy()

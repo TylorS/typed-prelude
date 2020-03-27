@@ -1,4 +1,4 @@
-import { Effect } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import { Resume } from '@typed/env'
 
 export interface RafEnv {
@@ -6,7 +6,7 @@ export interface RafEnv {
   readonly cancelAnimationFrame: typeof cancelAnimationFrame
 }
 
-export function* raf(): Effect<RafEnv, number> {
+export function* raf(): Effects<RafEnv, number> {
   return yield ({ requestAnimationFrame, cancelAnimationFrame }) =>
     Resume.create(cb => {
       const id = requestAnimationFrame(cb)

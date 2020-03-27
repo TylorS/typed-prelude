@@ -1,5 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { Effect } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import { Either } from '@typed/either'
 
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'OPTIONS' | 'PATCH' | 'HEAD'
@@ -20,7 +20,8 @@ export type HttpResponse<A = unknown> = {
   readonly headers: HttpHeaders
 }
 
-export interface HttpRequest<A = unknown> extends Effect<HttpEnv, Either<Error, HttpResponse<A>>> {}
+export interface HttpRequest<A = unknown>
+  extends Effects<HttpEnv, Either<Error, HttpResponse<A>>> {}
 
 export type HttpCallbacks = {
   readonly success: (response: HttpResponse) => Disposable

@@ -16,7 +16,7 @@ export const test = describe(`useRef`, [
     const initialValue: number = 1
     const endingValue: number = 100
     const test = withHooks(function*(value: number) {
-      const [ref] = yield* useRef<number>(InitialState.of(value))
+      const [ref] = yield* useRef(InitialState.of(value))
 
       try {
         equal(Maybe.of(initialValue), ref.current)

@@ -1,7 +1,7 @@
 import {
   createHookEnvironment,
   getHookEnv,
-  HookEffect,
+  HookEffects,
   HookEnvironment,
   HooksManager,
 } from '@typed/hooks'
@@ -10,7 +10,7 @@ import { HookManagerEnv } from './HookManagerEnv'
 export function createHookManagerEnv(hooksManager: HooksManager): HookManagerEnv {
   const environments = new WeakMap<object, HookEnvironment>()
 
-  function* getEnvironmentByKey(key: object): HookEffect<unknown, HookEnvironment> {
+  function* getEnvironmentByKey(key: object): HookEffects<unknown, HookEnvironment> {
     const parent = yield* getHookEnv()
 
     if (environments.has(key)) {

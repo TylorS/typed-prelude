@@ -1,4 +1,3 @@
-import { EmptyObject } from '@typed/common'
 import { IO } from '@typed/lambda'
 import { Resume } from './Resume'
 
@@ -7,14 +6,14 @@ import { Resume } from './Resume'
  */
 export interface Pure<A> {
   // tslint:disable-next-line:callable-types
-  <C extends EmptyObject>(capabilities: C): Resume<A>
+  <C>(capabilities: C): Resume<A>
 }
 
 /**
  * Generic type for computations that depend on capabilities
  * from the environment.
  */
-export interface Env<C extends EmptyObject, A> {
+export interface Env<C, A> {
   // tslint:disable-next-line:callable-types
   (capabilities: C): Resume<A>
 }

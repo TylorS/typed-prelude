@@ -1,12 +1,12 @@
 import { Either, fromLeft, fromRight, isRight } from '@typed/either'
-import { Effect } from '../Effect'
+import { Effects } from '../Effect'
 import { fail } from './fail'
 import { FailEnv } from './Failure'
 
-export function* orFail<F extends PropertyKey, E, A, B>(
+export function* orFail<F extends PropertyKey, A, B, C>(
   key: F,
-  effect: Effect<E, Either<A, B>>,
-): Effect<E & FailEnv<F, A>, B> {
+  effect: Effects<A, Either<B, C>>,
+): Effects<A & FailEnv<F, B>, C> {
   const either = yield* effect
 
   if (isRight(either)) {

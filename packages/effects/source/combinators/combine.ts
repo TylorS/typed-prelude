@@ -1,24 +1,22 @@
 import { Disposable } from '@typed/disposable'
 import { Env, Resume, runEnv } from '@typed/env'
-import { CombinedCapabilities, CombinedValues, Effect } from '../Effect'
+import { CombinedCapabilities, CombinedValues, Effects } from '../Effect'
 import { runEffect } from '../run'
 
-export function* combine<E extends ReadonlyArray<Effect<any, any>>>(
+export function* combine<E extends ReadonlyArray<Effects<any, any>>>(
   ...effects: E
-): Effect<CombinedCapabilities<E>, CombinedValues<E>> {
-  const value: CombinedValues<E> = yield combineEnvs(effects.map(runEffect))
-
-  return value
+): Effects<CombinedCapabilities<E>, CombinedValues<E>> {
+  return yield combineEnvs(effects.map(runEffect))
 }
 
-function combineEnvs<E extends ReadonlyArray<Env<any, any>>>(envs: E): Env<any, any> {
+function combineEnvs<A, B extends any[]>(envs: Array<Env<any, any>>): Env<A, B> {
   return c =>
     Resume.create(cb => {
       const hasValues = Array(envs.length).fill(false)
-      const values = Array(envs.length)
+      const values = Array(envs.length) as B
       const disposable = Disposable.lazy()
 
-      function onValue(value: any, index: number) {
+      function onValue(value: B[number], index: number) {
         hasValues[index] = true
         values[index] = value
 

@@ -1,9 +1,8 @@
 import { Resume } from '@typed/env'
 import { Timer } from '@typed/timer'
-import { Effect } from '../Effect'
+import { Effect, Effects } from '../Effect'
 
 export type TimerEnv = { readonly timer: Timer }
 
-export function delay(ms: number): Effect<TimerEnv, number> {
-  return Effect.fromEnv(({ timer }) => Resume.create(cb => timer.delay(cb, ms)))
-}
+export const delay = (ms: number): Effects<TimerEnv, number> =>
+  Effect.fromEnv(({ timer }) => Resume.create(cb => timer.delay(cb, ms)))

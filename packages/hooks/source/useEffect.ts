@@ -13,7 +13,7 @@ export function* useEffect<A extends readonly any[]>(
   deps: A,
 ): HookEffects<unknown, Disposable> {
   const { useRef, addDisposable } = yield* getHookEnv()
-  const [disposable, setDisposable] = yield* useRef<unknown, Disposable>()
+  const [disposable, setDisposable] = yield* useRef<any, Disposable>()
   const depsChanged = yield* useDepChange(deps)
   const timer = yield* useTimer()
 

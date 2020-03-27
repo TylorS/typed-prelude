@@ -12,5 +12,5 @@ export function* joinAll<A extends ReadonlyArray<Fiber<any>>>(
 }
 
 export type JoinAll<A extends ReadonlyArray<Fiber<any>>> = {
-  [K in keyof A]: A[K] extends Fiber<infer R> ? R : never
+  readonly [K in keyof A]: A[K] extends Fiber<infer R> ? R : never
 }

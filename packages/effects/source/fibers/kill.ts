@@ -1,5 +1,5 @@
 import { Resume } from '@typed/env'
-import { Effect } from '../Effect'
+import { Effects } from '../Effect'
 import { Fiber, FiberState } from './Fiber'
 
 export type Kill = {
@@ -22,7 +22,7 @@ export const Kill: Kill = {
   },
 }
 
-export function* kill<A>(f: Fiber<A>): Effect<Kill, void> {
+export function* kill<A>(f: Fiber<A>): Effects<Kill, void> {
   return yield c => c.kill(f)
 }
 

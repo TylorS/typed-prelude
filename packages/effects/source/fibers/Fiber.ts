@@ -1,6 +1,4 @@
-import { Compact } from '@typed/common'
 import { LazyDisposable } from '@typed/disposable'
-import { Capabilities } from '../Effect'
 import { FailEnv } from '../failures'
 
 export interface Fiber<A> extends LazyDisposable {
@@ -9,8 +7,6 @@ export interface Fiber<A> extends LazyDisposable {
 
 export const FiberFailure = Symbol.for('FiberFailure')
 export type FiberFailure = FailEnv<typeof FiberFailure, Error>
-
-export type FiberCapabilites<A> = Compact<Capabilities<A> & FiberFailure>
 
 export const enum FiberState {
   Running,

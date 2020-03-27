@@ -1,4 +1,4 @@
-import { Effect, Effects } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import { Arity1, Arity2, IO } from '@typed/lambda'
 import { Channel } from './Channel'
 import { getHookEnv } from './getHookEnv'
@@ -28,7 +28,7 @@ export function* useMapChannel<E, A, B>(
 export function* useReduceChannel<E, A, B>(
   reducer: Arity2<A, B, A>,
   channel: Channel<E, A>,
-): HookEffects<E, readonly [IO<Effects<never, A>>, Arity1<B, Effects<E, A>>]> {
+): HookEffects<E, readonly [IO<Effects<E, A>>, Arity1<B, Effects<E, A>>]> {
   const [getState, updateState] = yield* useChannel(channel)
   const deps = [reducer, updateState] as const
   const dispatch = yield* useMemo<E, typeof deps, Arity1<B, Effects<E, A>>>(createDispatch, deps)
@@ -40,5 +40,5 @@ function createDispatch<E, A, B>(
   reducer: Arity2<A, B, A>,
   updateState: (updateFn: Arity1<A, A>) => Effects<E, A>,
 ) {
-  return (event: B): Effect<E, A> => updateState(state => reducer(state, event))
+  return (event: B): Effects<E, A> => updateState(state => reducer(state, event))
 }

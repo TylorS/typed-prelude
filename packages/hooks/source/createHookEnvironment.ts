@@ -32,7 +32,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
 
   return hookEnvironment
 
-  function* useState<E, A>(initial: InitialState<E, A>): Effect<E, UseState<A>> {
+  function* useState<E, A>(initial: InitialState<E, A>): Effects<E, UseState<A>> {
     const id = nextId()
 
     if (!hookStates.has(id)) {
@@ -61,7 +61,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       E,
       A | null | undefined | void
     >,
-  ): Effect<E, UseRef<A>> {
+  ): Effects<E, UseRef<A>> {
     const id = nextId()
 
     if (!hookStates.has(id)) {
@@ -89,7 +89,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     const getValue = () => manager.consumeChannel(channel, hookEnvironment)
     const provideValue = yield* manager.updateChannel(channel, hookEnvironment, initial)
 
-    function* updateChannel(update: Arity1<A, A>): Effect<E, A> {
+    function* updateChannel(update: Arity1<A, A>): Effects<E, A> {
       return yield* provideValue(update(yield* getValue()))
     }
 

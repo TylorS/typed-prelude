@@ -1,5 +1,5 @@
 import { Disposable } from '@most/types'
-import { Effect } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import { Resume } from '@typed/env'
 import { Arity1 } from '@typed/lambda'
 import { create, Subject } from 'most-subject'
@@ -12,7 +12,7 @@ import { Component, IOComponent, Run, SchedulerEnv, Sinks, Sources } from './typ
 export function* run<A extends Sources, B extends Sinks>(
   main: Component<A, B>,
   io: IOComponent<B, A>,
-): Effect<SchedulerEnv, Run<A, B>> {
+): Effects<SchedulerEnv, Run<A, B>> {
   return yield ({ scheduler }: SchedulerEnv) =>
     Resume.create((cb: Arity1<Run<A, B>, Disposable>) => {
       const sinkProxies = {} as Record<keyof A, Subject<any, any>>

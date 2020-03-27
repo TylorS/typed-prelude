@@ -3,17 +3,17 @@ import { Capabilities, Effects, Return } from '../Effect'
 import { fail } from '../failures'
 import { runEffects } from '../run/runEffects'
 import { createFiber } from './createFiber'
-import { Fiber, FiberCapabilites, FiberFailure, FiberState } from './Fiber'
+import { Fiber, FiberFailure, FiberState } from './Fiber'
 
 export type Fork = {
-  readonly fork: <A extends Effects<any, any>>(
+  readonly fork: <A extends Effects>(
     effect: A,
-    c: FiberCapabilites<A>,
+    c: Capabilities<A> & FiberFailure,
   ) => Resume<Fiber<Return<A>>>
 }
 
 export const Fork = {
-  fork: <A extends Effects<any, any>>(effect: A, c: FiberCapabilites<A>) => {
+  fork: <A extends Effects>(effect: A, c: Capabilities<A> & FiberFailure) => {
     const fiber = createFiber<Return<A>>()
 
     function* tryRunEffect() {
@@ -32,8 +32,8 @@ export const Fork = {
   },
 }
 
-export function* fork<A extends Effects<any, any>>(
+export function* fork<A extends Effects>(
   effect: A,
 ): Effects<Capabilities<A> & Fork & FiberFailure, Fiber<Return<A>>> {
-  return yield (c: FiberCapabilites<A> & Fork) => c.fork(effect, c)
+  return yield (c: Capabilities<A> & FiberFailure & Fork) => c.fork(effect, c)
 }

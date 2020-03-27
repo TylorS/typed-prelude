@@ -1,22 +1,24 @@
-import { CapabilitiesOf, Provide, Resume } from '@typed/env'
+import { Resume } from '@typed/env'
 import { Just } from '@typed/maybe'
-import { Effect, Return, Yield } from '../Effect'
-import { runWith } from '../run/runWith'
+import { Effect, Effects, Return } from '../Effect'
+import { runWith, RunWith } from '../run/runWith'
 import { FailEnv, Failure } from './Failure'
 
 export function* fail<A extends keyof any, Err>(
   errorType: A,
   error: Err,
-): Effect<FailEnv<A, Err>, any> {
+): Effects<FailEnv<A, Err>, any> {
   return yield c => c[errorType](error)
 }
 
-export function* catchFailure<A extends Effect<any, any>, B extends keyof any, Err>(
+export function* catchFailure<A extends Effect<any, any>, B extends PropertyKey, Err>(
   effect: A,
   errorType: B,
   onError: (error: Err) => Return<A>,
-): Effect<CapabilitiesOf<Provide<Yield<A>, FailEnv<B, Err>>>, Return<A>> {
-  return yield* runWith(effect, {
+): RunWith<A, FailEnv<B, Err>> {
+  const failEnv = {
     [errorType]: (e: Err) => Resume.of(Failure.of(e, Just.of(onError(e)))),
-  })
+  } as FailEnv<B, Err>
+
+  return yield* runWith(effect, failEnv)
 }

@@ -8,7 +8,7 @@ import { createHooksManager } from './createHooksManager'
 
 export const test = describe(`createHooksManager`, [
   given(`a hierarchy of HookEnvironments`, [
-    it(`updates descendant channel consumers of updates when ancenstors are updated`, ({
+    it(`updates descendant channel consumers of updates when ancestors are updated`, ({
       equal,
       notOk,
       ok,

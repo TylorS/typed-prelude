@@ -13,7 +13,7 @@ export const test = describe(`runWith`, [
         return equal(expected, yield* runWith(get<E>(), expected))
       }
 
-      runEffects(sut(), {})
+      runEffects(sut())
     }),
   ]),
 ])
