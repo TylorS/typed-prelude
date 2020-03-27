@@ -7,8 +7,8 @@ export interface Effect<A, B> extends Generator<A, B, any> {}
 
 export type TypeOf<A> = A extends Effect<any, infer R>
   ? Effects<Capabilities<A>, R>
-  : A extends Computation<readonly any[], infer R, infer S>
-  ? Effects<R, S>
+  : A extends (...args: readonly any[]) => Effects<any, any>
+  ? Effects<Capabilities<ReturnType<A>>, Return<ReturnType<A>>>
   : unknown
 
 export interface Computation<A extends readonly any[], B, C> extends Fn<A, Effects<B, C>> {}
@@ -20,7 +20,7 @@ export type Yield<A> = A extends Effect<infer R, any> ? R : never
 export type Return<A> = A extends Effect<any, infer R> ? R : never
 
 export type Capabilities<A> = A extends Effects<infer R, any>
-  ? R
+  ? OrToAnd<R>
   : A extends Effect<infer C, any>
   ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
   : never
