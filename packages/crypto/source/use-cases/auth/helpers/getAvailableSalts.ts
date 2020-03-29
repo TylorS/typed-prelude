@@ -1,6 +1,6 @@
 import { get } from '@typed/effects'
 import { map, uniq } from '@typed/list'
-import { EncryptionEffects, EncryptionEnv } from '../../common'
+import { EncryptionEffects, EncryptionEnv } from '../../../common'
 import { KEY_SEPARATOR } from './constants'
 import { orCryptoFailure } from './orCryptoFailure'
 

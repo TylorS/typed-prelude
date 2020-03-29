@@ -1,19 +1,19 @@
 import { Computation, fail, TypeOf } from '@typed/effects'
 import { HookEnv } from '@typed/hooks'
 import { fromJust, isNothing } from '@typed/maybe'
-import { decryptWithRsaKeyPair } from '../asymmetrical'
-import { CryptoFailure, EncryptionEnv } from '../common'
+import { encryptWithRsaKeyPair } from '../../asymmetrical'
+import { CryptoFailure, EncryptionEnv } from '../../common'
 import { useAuthChannel } from './AuthChannel'
 
-export interface DecryptUserData
+export interface EncryptUserData
   extends Computation<[ArrayBuffer], EncryptionEnv & HookEnv, ArrayBuffer> {}
 
-export function* decryptUserData(encryptedData: ArrayBuffer): TypeOf<DecryptUserData> {
+export function* encryptUserData(data: ArrayBuffer): TypeOf<EncryptUserData> {
   const { encryptedKeyPair } = yield* useAuthChannel()
 
   if (isNothing(encryptedKeyPair)) {
     return yield* fail(CryptoFailure, new Error(`Unable to retrieve encrypted key pair`))
   }
 
-  return yield* decryptWithRsaKeyPair(fromJust(encryptedKeyPair), encryptedData)
+  return yield* encryptWithRsaKeyPair(fromJust(encryptedKeyPair), data)
 }

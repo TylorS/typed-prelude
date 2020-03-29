@@ -1,7 +1,7 @@
 import { combine, get } from '@typed/effects'
 import { fromJust, isNothing, Just, Maybe, Nothing } from '@typed/maybe'
-import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../common'
-import { importEncryptedKeys } from '../../effects'
+import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../../common'
+import { importEncryptedKeys } from '../../../effects'
 import { KEY_SEPARATOR } from './constants'
 import { orCryptoFailure } from './orCryptoFailure'
 

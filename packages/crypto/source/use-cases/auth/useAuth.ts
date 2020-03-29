@@ -3,7 +3,7 @@ import { HookEnv, InitialState, useEffect } from '@typed/hooks'
 import { Arity1 } from '@typed/lambda'
 import { Just, Maybe, Nothing } from '@typed/maybe'
 import { Subscription } from '@typed/subscription'
-import { EncryptedKeyPair, EncryptionEnv } from '../common'
+import { EncryptedKeyPair, EncryptionEnv } from '../../common'
 import { AuthEvent, AuthInfo, provideAuthChannel } from './AuthChannel'
 
 export interface UseAuth

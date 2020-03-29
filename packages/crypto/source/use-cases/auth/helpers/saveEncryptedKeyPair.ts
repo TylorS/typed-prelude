@@ -1,5 +1,5 @@
 import { combine, get } from '@typed/effects'
-import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../common'
+import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../../common'
 import { orCryptoFailure } from './orCryptoFailure'
 
 export function* saveEncryptedKeyPair(

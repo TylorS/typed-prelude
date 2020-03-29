@@ -9,7 +9,7 @@ import {
 } from '@typed/hooks'
 import { Maybe, Nothing } from '@typed/maybe'
 import { createSubscription, Subscription } from '@typed/subscription'
-import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../common'
+import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../common'
 import { getAvailableSalts } from './helpers'
 
 export interface AuthInfo {
