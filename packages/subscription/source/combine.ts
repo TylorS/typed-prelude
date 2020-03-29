@@ -1,12 +1,12 @@
 import { Disposable, disposeAll } from '@typed/disposable'
-import { createSubscription, Subscription, SubscriptionOuput } from './Subscription'
+import { createSubscription, Subscription, SubscriptionOutput } from './Subscription'
 
 export type CombineSubscriptions<A extends Array<Subscription<any, any>>> = Subscription<
   SubscriptionValues<A>
 >
 
 export type SubscriptionValues<A extends Array<Subscription<any, any>>> = {
-  [K in keyof A]: SubscriptionOuput<A[K]>
+  [K in keyof A]: SubscriptionOutput<A[K]>
 }
 
 export function combine<A extends Array<Subscription<any, any>>>(

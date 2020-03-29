@@ -19,7 +19,13 @@
   ],
   "references": [
     {
+      "path": "../asyncstorage/tsconfig.json"
+    },
+    {
       "path": "../disposable/tsconfig.json"
+    },
+    {
+      "path": "../either/tsconfig.json"
     },
     {
       "path": "../effects/tsconfig.json"
@@ -31,7 +37,16 @@
       "path": "../future/tsconfig.json"
     },
     {
+      "path": "../hooks/tsconfig.json"
+    },
+    {
       "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../new-type/tsconfig.json"
     }
   ]
 }

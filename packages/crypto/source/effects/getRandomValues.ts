@@ -1,5 +1,5 @@
-import { Effect, get } from '@typed/effects'
-import { CryptoEnv } from './CryptoEnv'
+import { Effects, get } from '@typed/effects'
+import { CryptoEnv } from '../common'
 
 export function* getRandomValues<
   A extends
@@ -13,7 +13,7 @@ export function* getRandomValues<
     | Float32Array
     | Float64Array
     | DataView
->(input: A): Effect<CryptoEnv, A> {
+>(input: A): Effects<CryptoEnv, A> {
   const { crypto } = yield* get<CryptoEnv>()
 
   return crypto.getRandomValues(input)

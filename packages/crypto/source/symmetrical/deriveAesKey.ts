@@ -1,16 +1,14 @@
-import { Effect } from '@typed/effects'
-import { Either, fromRight, isLeft } from '@typed/either'
 import {
   AES_ALGORITHM,
+  CryptoEffects,
   DEFAULT_ITERATIONS,
+  deriveSalt,
   ENCRYPT_AND_DECRYPT,
   EXTRACTABLE,
   HASH,
-} from './constants'
-import { CryptoEnv } from './CryptoEnv'
-import { deriveSalt } from './deriveSalt'
-import { deriveKey, importKey } from './effects'
-import { stringToArrayBuffer } from './stringToArrayBuffer'
+  stringToArrayBuffer,
+} from '../common'
+import { deriveKey, importKey } from '../effects'
 
 export interface DeriveAesKeyOptions {
   readonly password: string
@@ -21,9 +19,7 @@ export interface DeriveAesKeyOptions {
 /**
  * Derives a Symmetrical CryptoKey from your password and a salt (e.g. email)
  */
-export function* deriveAesKey(
-  options: DeriveAesKeyOptions,
-): Effect<CryptoEnv, Either<Error, CryptoKey>> {
+export function* deriveAesKey(options: DeriveAesKeyOptions): CryptoEffects<unknown, CryptoKey> {
   const { salt, password, iterations = DEFAULT_ITERATIONS } = options
   const params: Pbkdf2Params = {
     name: 'PBKDF2',
@@ -31,17 +27,13 @@ export function* deriveAesKey(
     iterations,
     salt: deriveSalt(salt),
   }
-  const errorOrCryptoKey = yield* importKey('raw', stringToArrayBuffer(password), params, false, [
+  const cryptoKey = yield* importKey('raw', stringToArrayBuffer(password), params, false, [
     'deriveKey',
   ])
 
-  if (isLeft(errorOrCryptoKey)) {
-    return errorOrCryptoKey
-  }
-
   return yield* deriveKey(
     params,
-    fromRight(errorOrCryptoKey),
+    cryptoKey,
     { name: AES_ALGORITHM, hash: HASH, length: 256 },
     EXTRACTABLE,
     ENCRYPT_AND_DECRYPT,

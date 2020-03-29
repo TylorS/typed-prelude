@@ -18,7 +18,7 @@ export const test = describe(`useChannel`, [
 
       function* test() {
         for (const [env, value] of hooksEnvs) {
-          const [getValue, provide] = yield* env.useChannel(channel)
+          const [getValue, provide] = yield* env.provideChannel(channel)
 
           equal(value, yield* provide(() => value))
           equal(value, yield* getValue())

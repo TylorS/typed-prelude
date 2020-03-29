@@ -6,7 +6,14 @@ import { equals } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { uuid4 } from '@typed/uuid'
 import { Channel } from './Channel'
-import { HookEnvironment, InitialState, Ref, UseChannel, UseRef, UseState } from './HookEnvironment'
+import {
+  HookEnvironment,
+  InitialState,
+  ProvideChannel,
+  Ref,
+  UseRef,
+  UseState,
+} from './HookEnvironment'
 import { HooksManager } from './HooksManager'
 
 const toNull = InitialState.of(null)
@@ -15,13 +22,14 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = uuid4(manager.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
-  const channelUpdates = new WeakMap<Channel<any, any>, UseChannel<any, any>>()
+  const channelUpdates = new WeakMap<Channel<any, any>, ProvideChannel<any, any>>()
   const disposable = Disposable.lazy()
   const hookEnvironment: HookEnvironment = {
     id,
     useState,
     useRef,
     useChannel,
+    provideChannel,
     resetId,
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
@@ -77,10 +85,10 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     return [ref, setState] as const
   }
 
-  function* useChannel<E, A>(
+  function* provideChannel<E, A>(
     channel: Channel<E, A>,
     initial?: InitialState<E, A>,
-  ): Effects<E, UseChannel<E, A>> {
+  ): Effects<E, ProvideChannel<E, A>> {
     // Only create updateChannel once
     if (channelUpdates.has(channel)) {
       return channelUpdates.get(channel)!
@@ -93,11 +101,15 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       return yield* provideValue(update(yield* getValue()))
     }
 
-    const useChannel: UseChannel<E, A> = [getValue, updateChannel]
+    const useChannel: ProvideChannel<E, A> = [getValue, updateChannel]
 
     channelUpdates.set(channel, useChannel)
 
     return useChannel
+  }
+
+  function* useChannel<E, A>(channel: Channel<E, A>): Effects<E, A> {
+    return yield* manager.consumeChannel(channel, hookEnvironment)
   }
 }
 

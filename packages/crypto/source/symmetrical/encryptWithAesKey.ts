@@ -1,0 +1,19 @@
+import { AES_ALGORITHM, AES_IV_SIZE, AesEncryptedData, CryptoEffects } from '../common'
+import { encrypt, getRandomValues } from '../effects'
+
+export function* encryptWithAesKey(
+  aesKey: CryptoKey,
+  data: ArrayBuffer,
+): CryptoEffects<unknown, AesEncryptedData> {
+  const iv = yield* getRandomValues(new Uint8Array(AES_IV_SIZE))
+  const encryptedData = yield* encrypt(
+    {
+      name: AES_ALGORITHM,
+      iv,
+    },
+    aesKey,
+    data,
+  )
+
+  return [encryptedData, iv] as const
+}

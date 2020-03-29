@@ -15,10 +15,12 @@ export interface HookEnvironment extends LazyDisposable {
     initialState?: InitialState<E, A | null | undefined | void>,
   ) => Effects<E, UseRef<A>>
   readonly useState: <E, A>(initialState: InitialState<E, A>) => Effects<E, UseState<A>>
-  readonly useChannel: <E, A>(
+
+  readonly useChannel: <E, A>(channel: Channel<E, A>) => Effects<E, A>
+  readonly provideChannel: <E, A>(
     channel: Channel<E, A>,
     initialState?: InitialState<E, A>,
-  ) => Effects<E, UseChannel<E, A>>
+  ) => Effects<E, ProvideChannel<E, A>>
 
   readonly resetId: () => PureEffect<void>
   readonly updated: boolean // true when useState has been updated
@@ -35,7 +37,7 @@ export namespace InitialState {
 
 export type UseState<A> = readonly [IO<PureEffect<A>>, (updateFn: Arity1<A, A>) => PureEffect<A>]
 
-export type UseChannel<E, A> = readonly [
+export type ProvideChannel<E, A> = readonly [
   IO<Effects<E, A>>,
   (updateFn: Arity1<A, A>) => Effects<E, A>,
 ]

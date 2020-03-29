@@ -12,7 +12,7 @@ export interface Subscription<A, B = A> {
 }
 
 export type SubscriptionInput<A> = A extends Subscription<infer R, any> ? R : never
-export type SubscriptionOuput<A> = A extends Subscription<any, infer R> ? R : never
+export type SubscriptionOutput<A> = A extends Subscription<any, infer R> ? R : never
 
 export type Subscriber<A> = Arity1<A, Disposable>
 

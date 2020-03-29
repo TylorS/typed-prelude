@@ -1,8 +1,8 @@
-import { Effect } from '@typed/effects'
-import { Either } from '@typed/either'
+import { Disposable } from '@typed/disposable'
+import { Effect, orFail } from '@typed/effects'
 import { Future } from '@typed/future'
 import { ArgsOf } from '@typed/lambda'
-import { CryptoEnv } from './CryptoEnv'
+import { CryptoEffects, CryptoFailure } from '../common'
 import { getSubtleCrypto } from './getSubtleCrypto'
 
 export const decrypt = createCryptoEffect('decrypt')
@@ -11,25 +11,25 @@ export const deriveKey = createCryptoEffect('deriveKey')
 export const digest = createCryptoEffect('digest')
 export const encrypt = createCryptoEffect('encrypt')
 export const exportKey = createCryptoEffect('exportKey') as {
-  (format: 'jwk', key: CryptoKey): Effect<CryptoEnv, Either<Error, JsonWebKey>>
-  (format: 'raw' | 'pkcs8' | 'spki', key: CryptoKey): Effect<CryptoEnv, Either<Error, ArrayBuffer>>
-  (format: string, key: CryptoKey): Effect<CryptoEnv, Either<Error, JsonWebKey | ArrayBuffer>>
+  (format: 'jwk', key: CryptoKey): CryptoEffects<unknown, JsonWebKey>
+  (format: 'raw' | 'pkcs8' | 'spki', key: CryptoKey): CryptoEffects<unknown, ArrayBuffer>
+  (format: string, key: CryptoKey): CryptoEffects<unknown, ArrayBuffer | JsonWebKey>
 }
 export const generateKey = createCryptoEffect('generateKey') as {
-  (algorithm: string, extractable: boolean, keyUsages: string[]): Effect<
-    CryptoEnv,
-    Either<Error, CryptoKeyPair | CryptoKey>
+  (algorithm: string, extractable: boolean, keyUsages: string[]): CryptoEffects<
+    unknown,
+    CryptoKey | CryptoKeyPair
   >
   (
     algorithm: RsaHashedKeyGenParams | EcKeyGenParams | DhKeyGenParams,
     extractable: boolean,
     keyUsages: string[],
-  ): Effect<CryptoEnv, Either<Error, CryptoKeyPair>>
+  ): CryptoEffects<unknown, CryptoKeyPair>
   (
     algorithm: AesKeyGenParams | HmacKeyGenParams | Pbkdf2Params,
     extractable: boolean,
     keyUsages: string[],
-  ): Effect<CryptoEnv, Either<Error, CryptoKey>>
+  ): CryptoEffects<unknown, CryptoKey>
 }
 export const importKey = createCryptoEffect('importKey') as {
   (
@@ -55,7 +55,7 @@ export const importKey = createCryptoEffect('importKey') as {
       | AesKeyAlgorithm,
     extractable: boolean,
     keyUsages: string[],
-  ): Effect<CryptoEnv, Either<Error, CryptoKey>>
+  ): CryptoEffects<unknown, CryptoKey>
   (
     format: 'jwk',
     keyData: JsonWebKey,
@@ -68,7 +68,7 @@ export const importKey = createCryptoEffect('importKey') as {
       | AesKeyAlgorithm,
     extractable: boolean,
     keyUsages: string[],
-  ): Effect<CryptoEnv, Either<Error, CryptoKey>>
+  ): CryptoEffects<unknown, CryptoKey>
   (
     format: string,
     keyData:
@@ -93,7 +93,7 @@ export const importKey = createCryptoEffect('importKey') as {
       | AesKeyAlgorithm,
     extractable: boolean,
     keyUsages: string[],
-  ): Effect<CryptoEnv, Either<Error, CryptoKey>>
+  ): CryptoEffects<unknown, CryptoKey>
 }
 export const sign = createCryptoEffect('sign')
 export const unwrapKey = createCryptoEffect('unwrapKey')
@@ -105,12 +105,24 @@ function createCryptoEffect<A extends keyof SubtleCrypto>(key: A) {
     const subtle = yield* getSubtleCrypto()
     const fn: (...args: any[]) => PromiseLike<any> = (subtle[key] as any).bind(subtle)
 
-    return yield* Effect.fromEnv(Future.fromPromise(fn(...args)))
+    return yield* orFail(CryptoFailure, Effect.fromEnv(fromPromise(fn(...args))))
   }
 }
 
-type CryptoEffectFrom<A extends keyof SubtleCrypto> = Effect<
-  CryptoEnv,
-  Either<Error, PromiseValue<ReturnType<SubtleCrypto[A]>>>
+export const fromPromise = <A>(promise: PromiseLike<A>) =>
+  Future.create<unknown, Error, A>((reject, resolve) => {
+    const disposable = Disposable.lazy()
+
+    promise.then(
+      a => disposable.addDisposable(resolve(a)),
+      e => disposable.addDisposable(reject(e)),
+    )
+
+    return disposable
+  })
+
+type CryptoEffectFrom<A extends keyof SubtleCrypto> = CryptoEffects<
+  unknown,
+  PromiseValue<ReturnType<SubtleCrypto[A]>>
 >
 type PromiseValue<A> = A extends PromiseLike<infer R> ? R : never
