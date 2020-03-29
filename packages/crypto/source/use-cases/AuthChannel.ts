@@ -12,7 +12,7 @@ import { createSubscription, Subscription } from '@typed/subscription'
 import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../common'
 import { getAvailableSalts } from './helpers'
 
-export type AuthInfo = {
+export interface AuthInfo {
   readonly availableSalts: ReadonlyArray<string> // List of saved salts. Can be used to make more streamlined sign in experience.
   readonly aesKey: Maybe<CryptoKey> // AES Key, derived from the user's password + salt
   readonly encryptedKeyPair: Maybe<EncryptedKeyPair> // RSA keys in decrypted form, but non-extractable, that can be used to encrypt/decrypt data
@@ -37,6 +37,7 @@ export const AuthChannel: Channel<EncryptionEnv, AuthInfo> = createChannel(funct
 })
 
 export const useAuthChannel = () => useChannel(AuthChannel)
+
 export const provideAuthChannel = (
   initial?: InitialState<EncryptionEnv, AuthInfo>,
 ): EncryptionEffects<HookEnv, ProvideChannel<EncryptionEnv, AuthInfo>> =>

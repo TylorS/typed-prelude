@@ -9,11 +9,12 @@ import { getSavedEncryptedKeyPair } from './helpers'
 
 export type SignInOptions = DeriveAesKeyOptions & {}
 
-export type SignIn = Computation<
-  [SignInOptions],
-  EncryptionEnv & HookEnv,
-  Tuple<CryptoKey, EncryptedKeyPair>
->
+export interface SignIn
+  extends Computation<
+    [SignInOptions],
+    EncryptionEnv & HookEnv,
+    Tuple<CryptoKey, EncryptedKeyPair>
+  > {}
 
 export function* signIn({ ...deriveAesKeyOptions }: SignInOptions): TypeOf<SignIn> {
   const aesKey = yield* deriveAesKey(deriveAesKeyOptions)

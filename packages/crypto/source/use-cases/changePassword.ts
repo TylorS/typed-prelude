@@ -12,11 +12,12 @@ export interface ChangePasswordOptions extends DeriveAesKeyOptions {
   readonly newPassword: string
 }
 
-export type ChangePassword = Computation<
-  [ChangePasswordOptions],
-  EncryptionEnv & HookEnv,
-  Tuple<CryptoKey, EncryptedKeyPair>
->
+export interface ChangePassword
+  extends Computation<
+    [ChangePasswordOptions],
+    EncryptionEnv & HookEnv,
+    Tuple<CryptoKey, EncryptedKeyPair>
+  > {}
 
 export function* changePassword(options: ChangePasswordOptions): TypeOf<ChangePassword> {
   const aesKey = yield* deriveAesKey(options)
