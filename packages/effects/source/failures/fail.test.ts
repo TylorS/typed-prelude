@@ -1,9 +1,7 @@
 import { describe, given, it } from '@typed/test'
-import { TypeOf } from '../Effect'
 import { get } from '../factories'
 import { runEffects } from '../run'
 import { catchFailure, fail } from './fail'
-import { ErrorOf, FailuresOf } from './Failure'
 
 export const test = describe(`handleFailure`, [
   given(`an effect that might throw an error`, [
