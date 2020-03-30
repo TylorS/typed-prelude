@@ -1,5 +1,5 @@
 import { CryptoEffects, RSA_PARAMS } from '../common'
-import { encrypt } from '../effects'
+import { encrypt } from '../effects/subtle'
 
 export function* encryptWithRsaKeyPair(
   keyPair: CryptoKeyPair,

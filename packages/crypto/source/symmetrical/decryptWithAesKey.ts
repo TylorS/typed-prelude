@@ -1,5 +1,5 @@
 import { AES_ALGORITHM, CryptoEffects } from '../common'
-import { decrypt } from '../effects'
+import { decrypt } from '../effects/subtle'
 
 export function* decryptWithAesKey(
   aesKey: CryptoKey,

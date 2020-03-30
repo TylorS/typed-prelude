@@ -1,8 +1,17 @@
 import { equals } from '@typed/common'
-import { delay, PureEffect } from '@typed/effects'
+import { delay, Effects, PureEffect, TimerEnv } from '@typed/effects'
 import { Arity1 } from '@typed/lambda'
+import { UuidEnv } from '@typed/uuid/esm'
 import { sortTilesForDirection } from 'source/domain/services/moveTilesInDirection/sortTiles'
-import { addNewTile, Bounds, createNewGrid, Grid, moveTilesInDirection, Size } from '../domain'
+import {
+  addNewTile,
+  Bounds,
+  createNewGrid,
+  Grid,
+  moveTilesInDirection,
+  RandomIntEnv,
+  Size,
+} from '../domain'
 import { Action } from './types'
 
 export function createDispatch(
@@ -10,7 +19,7 @@ export function createDispatch(
   getGrid: () => PureEffect<Grid>,
   setGrid: (updateFn: Arity1<Grid, Grid>) => PureEffect<Grid>,
 ) {
-  return function* dispatch(action: Action) {
+  return function* dispatch(action: Action): Effects<RandomIntEnv & UuidEnv & TimerEnv, void> {
     switch (action[0]) {
       case 'new-grid': {
         const grid = yield* getGrid()

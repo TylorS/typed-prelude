@@ -8,7 +8,7 @@ import {
   HASH,
   stringToArrayBuffer,
 } from '../common'
-import { deriveKey, importKey } from '../effects'
+import { deriveKey, importKey } from '../effects/subtle'
 
 export interface DeriveAesKeyOptions {
   readonly password: string

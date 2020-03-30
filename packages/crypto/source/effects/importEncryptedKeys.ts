@@ -1,7 +1,7 @@
 import { combine } from '@typed/effects'
-import { importExportedKeyPair } from '../asymmetrical'
+import { importExportedKeyPair } from '../asymmetrical/importExportedRsaKeyPair'
 import { AesEncryptedKeys, CryptoEffects } from '../common'
-import { decryptWithAesKey } from '../symmetrical'
+import { decryptWithAesKey } from '../symmetrical/decryptWithAesKey'
 
 export function* importEncryptedKeys(
   decryptionKey: CryptoKey,

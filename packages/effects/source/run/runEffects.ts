@@ -1,6 +1,6 @@
 import { Disposable } from '@typed/disposable'
-import { execPure, provide, Pure } from '@typed/env'
-import { Capabilities, Effects, PureEffect, Return } from '../Effect'
+import { execPure, provide } from '@typed/env'
+import { Capabilities, Effects, PureEffect } from '../Effect'
 import { runEffect } from './runEffect'
 
 export function runEffects<A extends PureEffect<any>>(effect: A): Disposable
@@ -14,5 +14,5 @@ export function runEffects<A extends Effects<any, any>>(
   effect: A,
   resources: Capabilities<A> = {} as Capabilities<A>,
 ): Disposable {
-  return execPure(provide(runEffect(effect), resources) as Pure<Return<A>>)
+  return execPure(provide(runEffect(effect), resources as any))
 }

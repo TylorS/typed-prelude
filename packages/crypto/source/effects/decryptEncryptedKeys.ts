@@ -1,5 +1,5 @@
 import { AesEncryptedKeys, CryptoEffects, ExportedKeyPair } from '../common'
-import { decryptWithAesKey } from '../symmetrical'
+import { decryptWithAesKey } from '../symmetrical/decryptWithAesKey'
 
 export function* decryptEncryptedKeys(
   aesKey: CryptoKey,

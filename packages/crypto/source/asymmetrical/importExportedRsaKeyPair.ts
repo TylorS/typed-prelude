@@ -5,7 +5,7 @@ import {
   HASH,
   JsonWebKeyPair,
 } from '../common'
-import { importKey } from '../effects'
+import { importKey } from '../effects/subtle'
 
 export function* importExportedKeyPair(
   keyPair: ExportedKeyPair,

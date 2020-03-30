@@ -1,5 +1,5 @@
 import { CryptoEffects, EncryptedKeyPair } from '../common'
-import { exportedKeysToEncryptedKeyPair } from '../effects'
+import { exportedKeysToEncryptedKeyPair } from '../effects/exportedKeysToEncryptedKeyPair'
 import { generateRsaExportedKeys } from './generateRsaExportedKeys'
 
 /**

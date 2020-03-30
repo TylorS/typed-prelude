@@ -5,8 +5,8 @@ export interface Effects<A = any, B = any> extends Effect<Env<A, any>, B> {}
 
 export interface Effect<A, B> extends Generator<A, B, any> {}
 
-export type TypeOf<A> = A extends Effect<any, infer R>
-  ? Effects<Capabilities<A>, R>
+export type TypeOf<A> = A extends Effect<any, any>
+  ? Effects<Capabilities<A>, Return<A>>
   : A extends (...args: readonly any[]) => Effects<any, any>
   ? Effects<Capabilities<ReturnType<A>>, Return<ReturnType<A>>>
   : unknown
@@ -19,10 +19,10 @@ export type PureEffect<A> = Effect<Pure<any>, A>
 export type Yield<A> = A extends Effect<infer R, any> ? R : never
 export type Return<A> = A extends Effect<any, infer R> ? R : never
 
-export type Capabilities<A> = A extends Effects<infer R, any>
-  ? OrToAnd<R>
-  : A extends Effect<infer C, any>
+export type Capabilities<A> = A extends Effect<infer C, any>
   ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
+  : A extends Effects<infer R, any>
+  ? OrToAnd<R>
   : never
 
 export namespace Effect {

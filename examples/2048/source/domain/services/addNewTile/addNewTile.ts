@@ -1,4 +1,4 @@
-import { Effect } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import { equals } from '@typed/logic'
 import { uuid, UuidEnv } from '@typed/uuid'
 import { Grid, RandomIntEnv } from '../../model'
@@ -7,7 +7,7 @@ import { getAllCoordinates } from '../getAllCoordinates'
 import { choosePosition } from './choosePosition'
 import { generateNewStartingValue } from './generateNewStartingValue'
 
-export function* addNewTile(grid: Grid): Effect<RandomIntEnv & UuidEnv, Grid> {
+export function* addNewTile(grid: Grid): Effects<RandomIntEnv & UuidEnv, Grid> {
   const bounds = convertSizeToBounds(grid.size)
   const coordinates = getAllCoordinates(bounds)
   const positions = grid.tiles.map(tile => tile.position)

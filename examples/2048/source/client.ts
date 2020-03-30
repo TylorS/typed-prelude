@@ -1,15 +1,7 @@
 import { createDomEnv } from '@typed/dom'
 import { PureEffect, runEffects } from '@typed/effects'
 import { Resume } from '@typed/env'
-import {
-  createHookEnvironment,
-  createHooksManager,
-  HookEffects,
-  InitialState,
-  TimerChannel,
-  useChannel,
-  withHooks,
-} from '@typed/hooks'
+import { createHookEnvironment, createHooksManager, HookEffects, withHooks } from '@typed/hooks'
 import { createTimer } from '@typed/timer'
 import { BrowserGenerator } from '@typed/uuid'
 import { RequiredResources, use2048 } from './application'
@@ -32,8 +24,6 @@ const hookEnvironment = createHookEnvironment(hooksManager)
 const main = withHooks(function* main<E>(
   repo: GridRepository<E>,
 ): HookEffects<E & RequiredResources & RenderEnv, void> {
-  yield* useChannel(TimerChannel, InitialState.of(timer))
-
   const [gameState, dispatch] = yield* use2048(repo)
 
   yield* patch(yield* render2048(gameState, dispatch))

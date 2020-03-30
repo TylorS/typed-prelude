@@ -1,5 +1,5 @@
 import { CryptoEffects, RSA_PARAMS } from '../common'
-import { decrypt } from '../effects'
+import { decrypt } from '../effects/subtle'
 
 export function* decryptWithRsaKeyPair(
   keyPair: CryptoKeyPair,

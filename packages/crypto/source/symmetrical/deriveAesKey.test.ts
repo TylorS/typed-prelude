@@ -1,5 +1,7 @@
 import { Fail, runEffects } from '@typed/effects'
+import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
+import { createVirtualTimer } from '../../../timer/source'
 import {
   arrayBufferToString,
   createServerCrypto,
@@ -32,7 +34,11 @@ export const test = describe(`deriveAesKey`, [
         }
       }
 
-      runEffects(sut(), { crypto, [CryptoFailure]: Fail })
+      runEffects(sut(), {
+        crypto,
+        [CryptoFailure]: Fail,
+        logger: createConsoleLogger({ logLevel: LogLevel.OFF, clock: createVirtualTimer() }),
+      })
     }),
 
     it(`derives the same key`, ({ equal }, done) => {
@@ -57,7 +63,11 @@ export const test = describe(`deriveAesKey`, [
         }
       }
 
-      runEffects(sut(), { crypto, [CryptoFailure]: Fail })
+      runEffects(sut(), {
+        crypto,
+        [CryptoFailure]: Fail,
+        logger: createConsoleLogger({ logLevel: LogLevel.OFF, clock: createVirtualTimer() }),
+      })
     }),
   ]),
 ])

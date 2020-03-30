@@ -1,5 +1,6 @@
 import { AES_ALGORITHM, AES_IV_SIZE, AesEncryptedData, CryptoEffects } from '../common'
-import { encrypt, getRandomValues } from '../effects'
+import { getRandomValues } from '../effects/getRandomValues'
+import { encrypt } from '../effects/subtle'
 
 export function* encryptWithAesKey(
   aesKey: CryptoKey,

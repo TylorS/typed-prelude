@@ -5,7 +5,8 @@ import {
   RSA_PARAMS,
   stringToArrayBuffer,
 } from '../common'
-import { exportKeyPair, generateKey } from '../effects'
+import { exportKeyPair } from '../effects/exportKeyPair'
+import { generateKey } from '../effects/subtle'
 
 /**
  * Generates an exported key pair. WARNING :: be very careful about what you do with this KeyPair. We highly
