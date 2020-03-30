@@ -1,6 +1,6 @@
 {
   "name": "@typed/logger",
-  "version": "8.2.0",
+  "version": "8.2.1",
   "description": "Logging interface for TypeScript",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
