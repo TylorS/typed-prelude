@@ -1,5 +1,4 @@
 import { Effects, PureEffect } from '@typed/effects'
-import { Pure } from '@typed/env'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
 import { InitialState } from './HookEnvironment'
@@ -63,7 +62,7 @@ export function createChannelManager<A extends object>(
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
 
-    if (initialState) {
+    if (!values.has(node) && initialState) {
       values.set(node, yield* initialState())
     }
 
@@ -87,7 +86,7 @@ export function createChannelManager<A extends object>(
   }
 
   function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effects<E, B> {
-    const values: WeakMap<A, B> = yield Pure.fromIO(() => getChannelValues(channel))
+    const values: WeakMap<A, B> = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
 
     consumers.add(node)
@@ -96,7 +95,11 @@ export function createChannelManager<A extends object>(
       const parent = getParent(node)
 
       if (!parent) {
-        return yield* channel.defaultValue()
+        const value = yield* channel.defaultValue()
+
+        values.set(node, value)
+
+        return value
       }
 
       node = parent
