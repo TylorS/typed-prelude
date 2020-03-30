@@ -59,7 +59,7 @@ export function createConsoleLogger({ logLevel, clock }: CreateConsoleLoggerOpti
         }
 
         const startTime = timers[label]
-        const elapsed = startTime - clock.currentTime()
+        const elapsed = clock.currentTime() - startTime
         delete timers[label]
 
         console.debug(`${label}: ${elapsed}ms`)
