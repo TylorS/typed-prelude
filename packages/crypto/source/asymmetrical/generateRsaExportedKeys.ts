@@ -1,4 +1,10 @@
-import { CryptoEffects, ENCRYPT_AND_DECRYPT, ExportedKeyPair, RSA_PARAMS } from '../common'
+import {
+  CryptoEffects,
+  ENCRYPT_AND_DECRYPT,
+  ExportedKeyPair,
+  RSA_PARAMS,
+  stringToArrayBuffer,
+} from '../common'
 import { exportKeyPair, generateKey } from '../effects'
 
 /**
@@ -8,6 +14,10 @@ import { exportKeyPair, generateKey } from '../effects'
 export function* generateRsaExportedKeys(): CryptoEffects<unknown, ExportedKeyPair> {
   // Generate a one-off extractable RSA key pair to allow exporting for encryption
   const exportableKey = yield* generateKey(RSA_PARAMS, true, ENCRYPT_AND_DECRYPT)
+  const jsonWebKeyPair = yield* exportKeyPair(exportableKey)
 
-  return yield* exportKeyPair(exportableKey)
+  return {
+    privateKey: stringToArrayBuffer(JSON.stringify(jsonWebKeyPair.privateKey)),
+    publicKey: stringToArrayBuffer(JSON.stringify(jsonWebKeyPair.publicKey)),
+  }
 }

@@ -7,6 +7,7 @@ import {
   ProvideChannel,
   useChannel,
 } from '@typed/hooks'
+import { debug } from '@typed/logger'
 import { Maybe, Nothing } from '@typed/maybe'
 import { createSubscription, Subscription } from '@typed/subscription'
 import { EncryptedKeyPair, EncryptionEffects, EncryptionEnv } from '../../common'
@@ -26,6 +27,7 @@ export type AuthEvent =
   | readonly ['auth.signOut']
 
 export const AuthChannel: Channel<EncryptionEnv, AuthInfo> = createChannel(function*() {
+  yield* debug(`Creating AuthChannel Default Value...`)
   const availableSalts = yield* getAvailableSalts()
 
   return {

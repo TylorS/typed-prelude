@@ -1,4 +1,10 @@
-import { CryptoEffects, ExportedKeyPair, HASH } from '../common'
+import {
+  arrayBufferToString,
+  CryptoEffects,
+  ExportedKeyPair,
+  HASH,
+  JsonWebKeyPair,
+} from '../common'
 import { importKey } from '../effects'
 
 export function* importExportedKeyPair(
@@ -8,8 +14,12 @@ export function* importExportedKeyPair(
     name: 'RSA-OAEP',
     hash: HASH,
   }
-  const publicKey = yield* importKey('raw', keyPair.publicKey, params, false, ['encrypt'])
-  const privateKey = yield* importKey('raw', keyPair.privateKey, params, false, ['decrypt'])
+  const jsonWebKeyPair: JsonWebKeyPair = {
+    publicKey: JSON.parse(arrayBufferToString(keyPair.publicKey)),
+    privateKey: JSON.parse(arrayBufferToString(keyPair.privateKey)),
+  }
+  const publicKey = yield* importKey('jwk', jsonWebKeyPair.publicKey, params, false, ['encrypt'])
+  const privateKey = yield* importKey('jwk', jsonWebKeyPair.privateKey, params, false, ['decrypt'])
 
   return {
     publicKey,

@@ -25,11 +25,6 @@ export function createDispatch(
         const grid = yield* getGrid()
         const updatedGrid = { ...grid, tiles: moveTilesInDirection(bounds, direction, grid.tiles) }
 
-        console.log(
-          sortTilesForDirection(direction, grid.tiles),
-          sortTilesForDirection(direction, updatedGrid.tiles),
-        )
-
         if (
           equals(
             sortTilesForDirection(direction, grid.tiles),

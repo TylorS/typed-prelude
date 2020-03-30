@@ -14,3 +14,8 @@ export type ExportedKeyPair = {
   readonly publicKey: ArrayBuffer
   readonly privateKey: ArrayBuffer
 }
+
+export type JsonWebKeyPair = {
+  readonly publicKey: JsonWebKey
+  readonly privateKey: JsonWebKey
+}

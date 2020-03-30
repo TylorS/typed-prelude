@@ -1,12 +1,12 @@
-import { CryptoEffects, ExportedKeyPair } from '../common'
+import { CryptoEffects, JsonWebKeyPair } from '../common'
 import { exportKey } from './subtle'
 
 export function* exportKeyPair({
   publicKey,
   privateKey,
-}: CryptoKeyPair): CryptoEffects<unknown, ExportedKeyPair> {
+}: CryptoKeyPair): CryptoEffects<unknown, JsonWebKeyPair> {
   return {
-    publicKey: yield* exportKey('raw', publicKey),
-    privateKey: yield* exportKey('raw', privateKey),
+    publicKey: yield* exportKey('jwk', publicKey),
+    privateKey: yield* exportKey('jwk', privateKey),
   } as const
 }

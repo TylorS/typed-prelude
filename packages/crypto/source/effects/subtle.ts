@@ -2,6 +2,7 @@ import { Disposable } from '@typed/disposable'
 import { Effect, orFail } from '@typed/effects'
 import { Future } from '@typed/future'
 import { ArgsOf } from '@typed/lambda'
+import { debug, time } from '@typed/logger'
 import { CryptoEffects, CryptoFailure } from '../common'
 import { getSubtleCrypto } from './getSubtleCrypto'
 
@@ -101,11 +102,19 @@ export const verify = createCryptoEffect('verify')
 export const wrapKey = createCryptoEffect('wrapKey')
 
 function createCryptoEffect<A extends keyof SubtleCrypto>(key: A) {
+  let id = 0
+
   return function*(...args: ArgsOf<SubtleCrypto[A]>): CryptoEffectFrom<A> {
+    const label = `Crypto.subtle.${key}${id++}`
     const subtle = yield* getSubtleCrypto()
     const fn: (...args: any[]) => PromiseLike<any> = (subtle[key] as any).bind(subtle)
 
-    return yield* orFail(CryptoFailure, Effect.fromEnv(fromPromise(fn(...args))))
+    yield* debug(`Running ${label}...`)
+    const end = yield* time(label)
+    const value = yield* orFail(CryptoFailure, Effect.fromEnv(fromPromise(fn(...args))))
+    yield* end
+
+    return value
   }
 }
 
