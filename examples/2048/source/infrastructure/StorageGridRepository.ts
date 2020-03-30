@@ -1,10 +1,8 @@
 import { map, Maybe } from '@typed/maybe'
 import { getItem, setItem, StorageEnv } from '@typed/storage'
-import { Grid, GridRepository, RandomIntEnv } from '../domain'
+import { Grid, GridRepository } from '../domain'
 
-export interface StorageRandomIntEnv extends RandomIntEnv, StorageEnv {}
-
-export function createGridRepository(storageKey: string): GridRepository<StorageRandomIntEnv> {
+export function createGridRepository(storageKey: string): GridRepository<StorageEnv> {
   function* getGrid() {
     const gridJson = yield* getItem(storageKey)
     const grid: Maybe<Grid> = map(JSON.parse, gridJson)
