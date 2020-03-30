@@ -1,7 +1,7 @@
 import { Effect, Effects, get } from '@typed/effects'
 import { LoggerEnv } from './types'
 
-export function* time(label: string): Effects<LoggerEnv, Effects<never, number>> {
+export function* time(label: string): Effects<LoggerEnv, Effects<unknown, number>> {
   const { logger } = yield* get<LoggerEnv>()
 
   yield logger.timeStart(label)
