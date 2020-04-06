@@ -27,11 +27,11 @@
     "access": "public"
   },
   "peerDependencies": {
-    "@peculiar/webcrypto": "1.0.25",
+    "@peculiar/webcrypto": "1.0.27",
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@peculiar/webcrypto": "1.0.25"
+    "@peculiar/webcrypto": "1.0.27"
   },
   "dependencies": {
     "@typed/asyncstorage": "^6.2.0",
