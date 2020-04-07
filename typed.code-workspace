@@ -121,6 +121,10 @@
       "path": "./packages/set"
     },
     {
+      "name": "Static Land",
+      "path": "./packages/static-land"
+    }
+    {
       "name": "Storage",
       "path": "./packages/storage"
     },

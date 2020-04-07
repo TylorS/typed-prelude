@@ -91,6 +91,9 @@
       "path": "./set/tsconfig.cjs.json"
     },
     {
+      "path": "./static-land/tsconfig.cjs.json"
+    },
+    {
       "path": "./storage/tsconfig.cjs.json"
     },
     {

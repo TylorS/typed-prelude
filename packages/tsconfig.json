@@ -91,6 +91,9 @@
       "path": "./set/tsconfig.json"
     },
     {
+      "path": "./static-land/tsconfig.json"
+    },
+    {
       "path": "./storage/tsconfig.json"
     },
     {

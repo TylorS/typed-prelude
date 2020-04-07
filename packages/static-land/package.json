@@ -1,0 +1,31 @@
+{
+  "name": "@typed/static-land",
+  "version": "0.0.0",
+  "description": "Static Land implementations for Typed",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "Static",
+    "Land",
+    "static-land",
+    "Typed",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/lambda": "^3.0.1",
+    "@typed/logic": "^6.0.1",
+    "@typed/maybe": "^10.0.1"
+  }
+}
