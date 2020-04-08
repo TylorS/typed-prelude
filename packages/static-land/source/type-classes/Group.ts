@@ -1,6 +1,6 @@
-import { Type } from './Hkt'
+import { Type, Types, Values } from './Hkt'
 import { Monoid } from './Monoid'
 
-export interface Group<T> extends Monoid<T> {
-  readonly invert: <A>(a: Type<T, A>) => Type<T, A>
+export interface Group<T extends Types> extends Monoid<T> {
+  readonly invert: <A extends Values>(a: Type<T, A>) => Type<T, A>
 }

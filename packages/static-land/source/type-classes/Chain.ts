@@ -1,8 +1,8 @@
 import { Arity1 } from '@typed/lambda'
-import { Type } from './Hkt'
+import { Type, Types } from './Hkt'
 import { Apply } from './Apply'
 
-export interface Chain<T> extends Apply<T> {
+export interface Chain<T extends Types> extends Apply<T> {
   readonly chain: {
     <A, B>(fn: Arity1<A, Type<T, [B]>>, type: Type<T, [A]>): Type<T, [B]>
     <A, B, C>(fn: Arity1<A, Type<T, [B, C]>>, type: Type<T, [B, A]>): Type<T, [B, C]>

@@ -1,7 +1,7 @@
 import { Arity1 } from '@typed/lambda'
-import { Type } from '.'
+import { Type, Types } from '.'
 
-export interface Functor<T> {
+export interface Functor<T extends Types> {
   readonly map: {
     <A, B>(fn: Arity1<A, B>, functor: Type<T, [A]>): Type<T, [B]>
     <A, B, C>(fn: Arity1<A, B>, functor: Type<T, [C, A]>): Type<T, [C, B]>

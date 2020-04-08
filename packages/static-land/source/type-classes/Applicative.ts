@@ -1,6 +1,7 @@
-import { Type } from './Hkt'
+import { Type, Types } from './Hkt'
+import { Apply } from './Apply'
 
-export interface Applicative<T> {
+export interface Applicative<T extends Types> extends Apply<T> {
   readonly of: {
     <A>(value: A): Type<T, [A]>
     <A, B>(value: B): Type<T, [A, B]>

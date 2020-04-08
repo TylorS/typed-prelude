@@ -1,32 +1,33 @@
 import { Applicative } from './Applicative'
 import { Arity1 } from '@typed/lambda'
-import { Type } from './Hkt'
+import { Type, Types } from './Hkt'
 
-export interface Traversable<T> extends Applicative<T> {
+export interface Traversable<T extends Types> extends Applicative<T> {
   readonly traverse: {
-    <U, A, B>(applicative: Applicative<U>, f: Arity1<A, Type<U, [B]>>, type: Type<T, [A]>): Type<
-      U,
-      Type<T, [B]>
-    >
-    <U, A, B, C>(
+    <U extends Types, A, B>(
+      applicative: Applicative<U>,
+      f: Arity1<A, Type<U, [B]>>,
+      type: Type<T, [A]>,
+    ): Type<U, [Type<T, [B]>]>
+    <U extends Types, A, B, C>(
       applicative: Applicative<U>,
       f: Arity1<A, Type<U, [C, B]>>,
       type: Type<T, [C, A]>,
-    ): Type<U, Type<T, [C, B]>>
-    <U, A, B, C, D>(
+    ): Type<U, [Type<T, [C, B]>]>
+    <U extends Types, A, B, C, D>(
       applicative: Applicative<U>,
       f: Arity1<A, Type<U, [C, D, B]>>,
       type: Type<T, [C, D, A]>,
-    ): Type<U, Type<T, [C, D, B]>>
-    <U, A, B, C, D, E>(
+    ): Type<U, [Type<T, [C, D, B]>]>
+    <U extends Types, A, B, C, D, E>(
       applicative: Applicative<U>,
       f: Arity1<A, Type<U, [C, D, E, B]>>,
       type: Type<T, [C, D, E, A]>,
-    ): Type<U, Type<T, [C, D, E, B]>>
-    <U, A, B, C, D, E, F>(
+    ): Type<U, [Type<T, [C, D, E, B]>]>
+    <U extends Types, A, B, C, D, E, F>(
       applicative: Applicative<U>,
       f: Arity1<A, Type<U, [C, D, E, F, B]>>,
       type: Type<T, [C, D, E, F, A]>,
-    ): Type<U, Type<T, [C, D, E, F, B]>>
+    ): Type<U, [Type<T, [C, D, E, F, B]>]>
   }
 }

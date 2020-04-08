@@ -1,7 +1,7 @@
-import { Type } from './Hkt'
+import { Type, Types } from './Hkt'
 import { Semigroupoid } from './Semigroupoid'
 
-export interface Category<T> extends Semigroupoid<T> {
+export interface Category<T extends Types> extends Semigroupoid<T> {
   readonly id: {
     <A>(): Type<T, [A]>
     <A, B>(): Type<T, [A, B]>

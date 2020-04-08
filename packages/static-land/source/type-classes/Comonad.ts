@@ -1,7 +1,7 @@
-import { Type } from './Hkt'
+import { Type, Types } from './Hkt'
 import { Extend } from './Extend'
 
-export interface Comonad<T> extends Extend<T> {
+export interface Comonad<T extends Types> extends Extend<T> {
   readonly extract: {
     <A>(type: Type<T, [A]>): A
     <A, B>(type: Type<T, [A, B]>): B

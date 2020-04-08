@@ -1,5 +1,5 @@
-import { Type } from './Hkt'
+import { Type, Types, Values } from './Hkt'
 
-export interface Setoid<T> {
-  readonly equals: <A>(a: Type<T, A>, b: Type<T, A>) => boolean
+export interface Setoid<T extends Types> {
+  readonly equals: <A extends Values>(a: Type<T, A>, b: Type<T, A>) => boolean
 }

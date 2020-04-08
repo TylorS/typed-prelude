@@ -1,5 +1,5 @@
-import { Type } from './Hkt'
+import { Type, Types, Values } from './Hkt'
 
-export interface Semigroup<T> {
-  readonly concat: <A>(a: Type<T, A>, b: Type<T, A>) => Type<T, A>
+export interface Semigroup<T extends Types> {
+  readonly concat: <A extends Values>(a: Type<T, A>, b: Type<T, A>) => Type<T, A>
 }

@@ -1,7 +1,7 @@
 import { Arity1 } from '@typed/lambda'
-import { Type } from '.'
+import { Type, Types } from '.'
 
-export interface Contravariant<T> {
+export interface Contravariant<T extends Types> {
   readonly contramap: {
     <A, B>(fn: Arity1<A, B>, type: Type<T, [B]>): Type<T, [A]>
     <A, B, C>(fn: Arity1<A, B>, type: Type<T, [C, B]>): Type<T, [C, A]>
