@@ -16,12 +16,12 @@ export const either: Monad<EITHER> &
   Alternative<EITHER> &
   Extend<EITHER> &
   Foldable<EITHER> = {
-  alt: <A, B>(first: Either<A, B>, second: Either<A, B>): Either<A, B> =>
-    isLeft(first) ? second : first,
   of: Either.of,
   ap,
   map,
   chain,
+  alt: <A, B>(first: Either<A, B>, second: Either<A, B>): Either<A, B> =>
+    isLeft(first) ? second : first,
   bimap: <A, B, C, D>(f: Arity1<A, B>, g: Arity1<C, D>, either: Either<A, C>): Either<B, D> =>
     map(g, mapLeft(f, either)),
   extend: <A, B, C>(fn: (either: Either<A, B>) => C, either: Either<A, B>): Either<A, C> =>
