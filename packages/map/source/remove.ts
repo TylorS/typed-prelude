@@ -6,5 +6,5 @@ export const remove: {
   <A, B>(key: A): (map: ReadonlyMap<A, B>) => ReadonlyMap<A, B>
 } = curry(
   <A, B>(key: A, map: ReadonlyMap<A, B>): ReadonlyMap<A, B> =>
-    withMutations(x => x.delete(key), map),
+    withMutations((x) => x.delete(key), map),
 )

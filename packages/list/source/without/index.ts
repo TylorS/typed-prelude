@@ -11,5 +11,5 @@ export const without = curry(__without) as {
 }
 
 function __without<A>(values: A[], list: ReadonlyArray<A>): A[] {
-  return list.filter(x => !includes(x, values))
+  return list.filter((x) => !includes(x, values))
 }

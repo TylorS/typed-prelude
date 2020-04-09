@@ -7,5 +7,5 @@ export const ap: {
   <A, B>(fn: ReadonlySet<Arity1<A, B>>): (value: ReadonlySet<A>) => ReadonlySet<B>
 } = curry(
   <A, B>(fn: ReadonlySet<Arity1<A, B>>, value: ReadonlySet<A>): ReadonlySet<B> =>
-    chain(f => map(f, value), fn),
+    chain((f) => map(f, value), fn),
 )

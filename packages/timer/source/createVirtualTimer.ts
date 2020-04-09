@@ -23,13 +23,13 @@ export function createVirtualTimer(clock: VirtualClock = createVirtualClock()): 
     const currentTime = clock.currentTime()
     const tasks = timeline.readyTasks(currentTime)
 
-    tasks.forEach(task => task(currentTime))
+    tasks.forEach((task) => task(currentTime))
   }
 
   return {
     ...clock,
     delay,
-    progressTimeBy: delay => {
+    progressTimeBy: (delay) => {
       clock.progressTimeBy(delay)
       runTasks()
     },

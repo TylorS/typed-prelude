@@ -13,6 +13,6 @@ function __map<A extends Record<string, string>, B, C>(
 ): Route<A, C> {
   return {
     ...route,
-    match: path => mapMaybe(fn, route.match(path)),
+    match: (path) => mapMaybe(fn, route.match(path)),
   }
 }

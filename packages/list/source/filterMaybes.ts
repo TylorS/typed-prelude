@@ -30,7 +30,7 @@ export const maybeFilter: {
 
   const a = fromJust(maybe)
 
-  return list.filter(b => predicate(a, b))
+  return list.filter((b) => predicate(a, b))
 }) as {
   <A, B>(predicate: Predicate2<A, B>, maybe: Maybe<A>, list: ReadonlyArray<B>): B[]
   <A, B>(predicate: Predicate2<A, B>, maybe: Maybe<A>): (list: ReadonlyArray<B>) => B[]

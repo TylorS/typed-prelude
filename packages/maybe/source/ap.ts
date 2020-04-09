@@ -14,5 +14,5 @@ export const ap = curry(__ap) as {
 }
 
 function __ap<A, B>(fn: Maybe<(value: A) => B>, maybe: Maybe<A>): Maybe<B> {
-  return chain(f => map(f, maybe), fn)
+  return chain((f) => map(f, maybe), fn)
 }

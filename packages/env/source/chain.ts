@@ -8,5 +8,5 @@ export const chain = curry(__chain) as {
 }
 
 function __chain<A, E1, B, E2>(fn: (value: A) => Env<E1, B>, env: Env<E2, A>): Env<E1 & E2, B> {
-  return c => Resume.chain(a => fn(a)(c), env(c))
+  return (c) => Resume.chain((a) => fn(a)(c), env(c))
 }

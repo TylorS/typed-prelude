@@ -9,7 +9,7 @@ export function getAllValues<A>(store: IDBObjectStore): ItemsEffect<A> {
       const request = store.getAll()
       const disposable = Disposable.lazy()
 
-      request.onerror = ev =>
+      request.onerror = (ev) =>
         disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
       request.onsuccess = () => disposable.addDisposable(resolve(request.result))
 

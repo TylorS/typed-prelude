@@ -25,10 +25,10 @@ function __scan<A, B, C>(
 ): Subscription<A, C> {
   return {
     ...subscription,
-    subscribe: fn => {
+    subscribe: (fn) => {
       let acc = seed
 
-      return subscription.subscribe(b => fn((acc = reducer(acc, b))))
+      return subscription.subscribe((b) => fn((acc = reducer(acc, b))))
     },
   }
 }

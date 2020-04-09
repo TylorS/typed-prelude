@@ -86,12 +86,12 @@ export function createServerDomEnv<A>(options: CreateServerDomEnvOptions = {}) {
     crypto: new Crypto(),
   }
 
-  Object.keys(domEnv).forEach(key => ((window as any)[key] = domEnv[key as keyof DomEnv<A>]))
+  Object.keys(domEnv).forEach((key) => ((window as any)[key] = domEnv[key as keyof DomEnv<A>]))
 
   if (options.setGlobals) {
     const win = global as any
 
-    Object.keys(domEnv).forEach(key => (win[key] = domEnv[key as keyof DomEnv<A>]))
+    Object.keys(domEnv).forEach((key) => (win[key] = domEnv[key as keyof DomEnv<A>]))
   }
 
   return domEnv
@@ -103,7 +103,7 @@ function handleHistoryChange(window: Window) {
   return ({ history }: HistoryEnv) => {
     const event = new basic.Event(POPSTATE_EVENT_TYPE, { bubbles: true, cancelable: false })
 
-      // Add State to Event
+    // Add State to Event
     ;(event as any).state = history.state
 
     window.dispatchEvent(event)

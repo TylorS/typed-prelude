@@ -20,7 +20,7 @@ export type Subscriber<A> = Arity1<A, Disposable>
  * Create a simple subscription
  */
 export function createSubscription<A>(): Subscription<A> {
-  let subscribers: Array<Subscriber<A>> = []
+  let subscribers: Subscriber<A>[] = []
   const unsubscribe = (subscriber: Subscriber<A>): void => {
     const index = subscribers.findIndex(equals(subscriber))
 
@@ -33,7 +33,7 @@ export function createSubscription<A>(): Subscription<A> {
 
     return { dispose: () => unsubscribe(subscriber) }
   }
-  const publish = (value: A): Disposable => disposeAll(subscribers.map(f => f(value)))
+  const publish = (value: A): Disposable => disposeAll(subscribers.map((f) => f(value)))
 
   return {
     subscribe,

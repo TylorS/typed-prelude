@@ -36,7 +36,7 @@ export const test = describe(`Subscription`, [
         subscribe(f)
         subscribe(g)
 
-        expected.forEach(e => publish(e))
+        expected.forEach((e) => publish(e))
 
         same(expected.length, called)
       }),

@@ -17,7 +17,7 @@ export namespace Future {
       environment: E,
     ) => Disposable,
   ): Future<E, A, B> => (e: E) =>
-    Resume.create(cb => {
+    Resume.create((cb) => {
       const ifNotResolved = createIfNotResolved()
 
       return fn(ifNotResolved<A>(pipe(Left.of, cb)), ifNotResolved<B>(pipe(Right.of, cb)), e)
@@ -28,8 +28,8 @@ export namespace Future {
       const disposable = Disposable.lazy()
 
       promise.then(
-        a => disposable.addDisposable(resolve(a)),
-        e => disposable.addDisposable(reject(e)),
+        (a) => disposable.addDisposable(resolve(a)),
+        (e) => disposable.addDisposable(reject(e)),
       )
 
       return disposable

@@ -13,8 +13,8 @@ export const runEffect = <A extends Effect<any, any>>(
 const nextResult = <A extends Effect<any, any>>(value: any, generator: A): IteratorResultOf<A> => {
   if (value instanceof Failure) {
     return value.unpack(
-      e => generator.throw(e),
-      a => generator.return(a),
+      (e) => generator.throw(e),
+      (a) => generator.return(a),
     )
   }
 
@@ -31,7 +31,7 @@ const runEffectGenerator = <A extends Effect<any, any>>(
 
     if (resume.type === 'lazy') {
       return Resume.chain(
-        value => runEffectGenerator(generator, nextResult(value, generator), capabilities),
+        (value) => runEffectGenerator(generator, nextResult(value, generator), capabilities),
         resume,
       )
     }

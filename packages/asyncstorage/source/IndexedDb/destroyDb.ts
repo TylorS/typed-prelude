@@ -9,7 +9,7 @@ export function destroyDb(name: string, indexedDbFactory: typeof indexedDB): Ite
       const disposable = Disposable.lazy()
 
       disposable.addDisposable(
-        withIsDisposed(isDisposed => {
+        withIsDisposed((isDisposed) => {
           const request = indexedDbFactory.deleteDatabase(name)
           request.onerror = () => {
             if (!isDisposed()) {

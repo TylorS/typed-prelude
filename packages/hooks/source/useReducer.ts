@@ -23,5 +23,5 @@ function createDispatch<A, B>(
   reducer: Arity2<A, B, A>,
   updateState: (updateFn: Arity1<A, A>) => PureEffect<A>,
 ) {
-  return (event: B): PureEffect<A> => updateState(state => reducer(state, event))
+  return (event: B): PureEffect<A> => updateState((state) => reducer(state, event))
 }

@@ -19,14 +19,14 @@ export const Join: Join = {
       return Resume.of(Left.of<Error>(info.error))
     }
 
-    return Resume.create(cb => {
+    return Resume.create((cb) => {
       const disposable = Disposable.lazy()
 
       fiber.addDisposable(disposable)
 
       info.promise.then(
-        value => disposable.addDisposable(cb(Right.of(value))),
-        error => disposable.addDisposable(cb(Left.of(error))),
+        (value) => disposable.addDisposable(cb(Right.of(value))),
+        (error) => disposable.addDisposable(cb(Left.of(error))),
       )
 
       return disposable

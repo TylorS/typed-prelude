@@ -10,7 +10,7 @@ export const test = describe(`combine`, [
       const values = [0, 1, 2, 3]
 
       function* sut() {
-        equal(values, yield* combine(...values.map(value => Effect.fromEnv(Pure.of(value)))))
+        equal(values, yield* combine(...values.map((value) => Effect.fromEnv(Pure.of(value)))))
       }
 
       runEffects(sut(), {})

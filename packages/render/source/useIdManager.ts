@@ -7,7 +7,7 @@ export function* useIdManager<E, B>(
   effect: HookEffects<E, B>,
 ): Effects<HookEnv & E & HookManagerEnv, B> {
   const { getEnvironmentByKey } = yield* get<HookEnv & E & HookManagerEnv>()
-  const key = yield* useMemo(id => ({ id }), [id])
+  const key = yield* useMemo((id) => ({ id }), [id])
   const hookEnvironment = yield* getEnvironmentByKey(key)
 
   return yield* runWithHooks(effect, hookEnvironment)

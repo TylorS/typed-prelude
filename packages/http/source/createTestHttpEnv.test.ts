@@ -13,7 +13,7 @@ export const test = describe(`createTestHttpEnv`, [
       const expectedResponse = createSuccessfulResponse()
       const failedResponse = createFailedResponse(new Error('Endpoint does not exist'))
       const expectedUrl = 'http://example.com'
-      const testHttpEnv = createTestHttpEnv(url =>
+      const testHttpEnv = createTestHttpEnv((url) =>
         url === expectedUrl ? expectedResponse : failedResponse,
       )
       const request = http(expectedUrl)

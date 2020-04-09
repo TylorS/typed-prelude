@@ -13,6 +13,6 @@ export function merge<A extends ReadonlyArray<Subscription<any>>>(
 
   return {
     ...subscription,
-    subscribe: fn => disposeAll(subscriptions.map(s => s.subscribe(fn))),
+    subscribe: (fn) => disposeAll(subscriptions.map((s) => s.subscribe(fn))),
   }
 }

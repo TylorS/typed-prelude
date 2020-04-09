@@ -13,7 +13,7 @@ export const test = describe(`provide`, [
       const env = withEnv<typeof expected, typeof expected>(id)
       const handled = provide(env, partial)
 
-      runEnv(actual => (equal(expected, actual), Disposable.None), { b: 2 }, handled)
+      runEnv((actual) => (equal(expected, actual), Disposable.None), { b: 2 }, handled)
     }),
   ]),
 ])

@@ -20,7 +20,7 @@ function __chain<A, B, C, D, E>(
   future: Future<E, C, A>,
 ): Future<Compact<B & E>, C, D> {
   return chainEnv(
-    either => unpack(error => Pure.of(Left.of(error)) as Future<B, C, D>, fn, either),
+    (either) => unpack((error) => Pure.of(Left.of(error)) as Future<B, C, D>, fn, either),
     future,
   )
 }

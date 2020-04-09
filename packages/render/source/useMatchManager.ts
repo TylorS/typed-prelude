@@ -16,13 +16,14 @@ export function* useMatchManager<A, E, B>(
   matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
 ): Effects<E & HookEnv & HookManagerEnv, Maybe<B>> {
   const { getEnvironmentByKey } = yield* get<E & HookEnv & HookManagerEnv>()
-  const modifiedMatches = yield* useMemo(ms => ms.map(m => Match.map(c => [m, c] as const, m)), [
-    matches,
-  ])
+  const modifiedMatches = yield* useMemo(
+    (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
+    [matches],
+  )
   const match = yield* useMatches(matchAgainst, modifiedMatches)
 
   return yield* useMemoEffect(
-    function*(maybeMatch): Effects<E & HookEnv, Maybe<B>> {
+    function* (maybeMatch): Effects<E & HookEnv, Maybe<B>> {
       if (isNothing(maybeMatch)) {
         return maybeMatch
       }

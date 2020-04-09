@@ -41,8 +41,8 @@ function nodeHttpRequest(url: string, options: HttpOptions, callbacks: HttpCallb
           break
       }
 
-      response.on('data', chunk => (responseText += chunk.toString()))
-      response.on('error', error => {
+      response.on('data', (chunk) => (responseText += chunk.toString()))
+      response.on('error', (error) => {
         errored = true
         disposable.addDisposable(failure(error))
       })

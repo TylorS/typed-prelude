@@ -20,15 +20,12 @@ async function hmacSha256Browser(message: string, secret: string | CryptoKey, cr
 }
 
 function bufferToString(buffer: ArrayBuffer) {
-  return mapArrayLike(x => ('00' + x.toString(16)).slice(-2), new Uint8Array(buffer)).join('')
+  return mapArrayLike((x) => ('00' + x.toString(16)).slice(-2), new Uint8Array(buffer)).join('')
 }
 
 function hmacSha256Node(message: string, secret: string) {
   const crypto: typeof import('crypto') = require('crypto')
-  const hmac = crypto
-    .createHmac('sha256', secret)
-    .update(message)
-    .digest('base64')
+  const hmac = crypto.createHmac('sha256', secret).update(message).digest('base64')
 
   return encodeTokens(hmac)
 }

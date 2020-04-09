@@ -4,7 +4,7 @@ export class NodeFilterImplementation implements INodeFilter {
   constructor(private filters: ReadonlyArray<NodeFilter>, private skip: boolean) {}
 
   public acceptNode(node: Node) {
-    const matches = this.filters.some(filter => node.nodeType & filter)
+    const matches = this.filters.some((filter) => node.nodeType & filter)
 
     return matches
       ? NodeFilter.FILTER_ACCEPT

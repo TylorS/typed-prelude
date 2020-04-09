@@ -39,9 +39,9 @@ export function wrapStorage(storage: Storage): AsyncStorage<string> {
           return items
         }),
       ),
-    getItem: key => Effect.fromEnv(tryCatch(() => Maybe.of(storage.getItem(key)))),
+    getItem: (key) => Effect.fromEnv(tryCatch(() => Maybe.of(storage.getItem(key)))),
     setItem: (key, value) => Effect.fromEnv(tryCatch(() => (storage.setItem(key, value), value))),
-    removeItem: key =>
+    removeItem: (key) =>
       Effect.fromEnv(
         tryCatch(() => {
           const item = Maybe.of(storage.getItem(key))

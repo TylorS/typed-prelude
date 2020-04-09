@@ -13,5 +13,5 @@ export const map = curry(__map) as {
 }
 
 function __map<A, B>(f: (value: A) => B, maybe: Maybe<A>): Maybe<B> {
-  return chain(a => Maybe.of(f(a)), maybe)
+  return chain((a) => Maybe.of(f(a)), maybe)
 }

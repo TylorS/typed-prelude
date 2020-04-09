@@ -9,7 +9,7 @@ export function openDatabase(name: string, indexedDbFactory: IDBFactory): ItemEf
       const request = indexedDbFactory.open(name)
       const disposable = Disposable.lazy()
 
-      request.onerror = ev =>
+      request.onerror = (ev) =>
         disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
       request.onsuccess = () => disposable.addDisposable(resolve(request.result))
       request.onupgradeneeded = () => request.result.createObjectStore(name)

@@ -52,7 +52,7 @@ export type OptionalKeys<A, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A
 
 export type Immutable<A> = A extends Primitive
   ? A
-  : A extends Array<infer B>
+  : A extends (infer B)[]
   ? ImmutableArray<B>
   : A extends Map<infer K, infer V>
   ? ImmutableMap<K, V>

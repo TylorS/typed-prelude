@@ -45,5 +45,5 @@ function createDispatch<E, A, B>(
   reducer: Arity2<A, B, A>,
   updateState: (updateFn: Arity1<A, A>) => Effects<E, A>,
 ) {
-  return (event: B): Effects<E, A> => updateState(state => reducer(state, event))
+  return (event: B): Effects<E, A> => updateState((state) => reducer(state, event))
 }

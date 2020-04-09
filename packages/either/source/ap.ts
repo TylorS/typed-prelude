@@ -14,5 +14,5 @@ export const ap = curry(__ap) as {
 }
 
 function __ap<A, B, C>(fn: Either<A, (value: B) => C>, value: Either<A, B>): Either<A, C> {
-  return chain(f => map(f, value), fn)
+  return chain((f) => map(f, value), fn)
 }

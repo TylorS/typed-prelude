@@ -5,8 +5,8 @@ import { capitalize } from '../packages/strings/source'
 import { PACKAGES, rootDirectory } from './common'
 
 const workspaceFile = join(rootDirectory, 'typed.code-workspace')
-const folders: Array<{ name: string; path: string }> = [
-  ...PACKAGES.map(pkg => {
+const folders: { name: string; path: string }[] = [
+  ...PACKAGES.map((pkg) => {
     return {
       name: getPkgName(pkg),
       path: `./packages/${pkg}`,

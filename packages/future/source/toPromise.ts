@@ -4,5 +4,5 @@ import { runPure } from '@typed/env'
 import { PureFuture } from './Future'
 
 export function toPromise<A, B>(future: PureFuture<A, B>): Promise<Either<A, B>> {
-  return new Promise(resolve => runPure(either => (resolve(either), Disposable.None), future))
+  return new Promise((resolve) => runPure((either) => (resolve(either), Disposable.None), future))
 }

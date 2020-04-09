@@ -7,8 +7,8 @@ export const concat: {
   <A>(a: ReadonlySet<A>, b: ReadonlySet<A>): ReadonlySet<A> => {
     const set = new Set()
 
-    a.forEach(x => set.add(x))
-    b.forEach(x => set.add(x))
+    a.forEach((x) => set.add(x))
+    b.forEach((x) => set.add(x))
 
     return set as ReadonlySet<A>
   },

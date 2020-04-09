@@ -1,15 +1,15 @@
 import { Disposable, disposeAll } from '@typed/disposable'
 import { createSubscription, Subscription, SubscriptionOutput } from './Subscription'
 
-export type CombineSubscriptions<A extends Array<Subscription<any, any>>> = Subscription<
+export type CombineSubscriptions<A extends Subscription<any, any>[]> = Subscription<
   SubscriptionValues<A>
 >
 
-export type SubscriptionValues<A extends Array<Subscription<any, any>>> = {
+export type SubscriptionValues<A extends Subscription<any, any>[]> = {
   [K in keyof A]: SubscriptionOutput<A[K]>
 }
 
-export function combine<A extends Array<Subscription<any, any>>>(
+export function combine<A extends Subscription<any, any>[]>(
   ...subscriptions: A
 ): CombineSubscriptions<A> {
   const subscription: CombineSubscriptions<A> = createSubscription()
@@ -26,10 +26,10 @@ export function combine<A extends Array<Subscription<any, any>>>(
 
   return {
     ...subscription,
-    subscribe: fn => {
+    subscribe: (fn) => {
       if (++subscribers === 1) {
         disposables = subscriptions.map((sub, i) =>
-          sub.subscribe(a => {
+          sub.subscribe((a) => {
             hasValues[i] = true
             values[i] = a
 

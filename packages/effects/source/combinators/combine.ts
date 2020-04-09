@@ -9,9 +9,9 @@ export function* combine<E extends ReadonlyArray<Effects<any, any>>>(
   return yield combineEnvs(effects.map(runEffect))
 }
 
-function combineEnvs<A, B extends any[]>(envs: Array<Env<any, any>>): Env<A, B> {
-  return c =>
-    Resume.create(cb => {
+function combineEnvs<A, B extends any[]>(envs: Env<any, any>[]): Env<A, B> {
+  return (c) =>
+    Resume.create((cb) => {
       const hasValues = Array(envs.length).fill(false)
       const values = Array(envs.length) as B
       const disposable = Disposable.lazy()
@@ -28,7 +28,7 @@ function combineEnvs<A, B extends any[]>(envs: Array<Env<any, any>>): Env<A, B> 
       }
 
       for (let i = 0; i < envs.length; ++i) {
-        disposable.addDisposable(runEnv(value => onValue(value, i), c, envs[i]))
+        disposable.addDisposable(runEnv((value) => onValue(value, i), c, envs[i]))
       }
 
       return disposable

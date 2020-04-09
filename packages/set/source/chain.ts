@@ -7,7 +7,7 @@ export const chain: {
   <A, B>(fn: Arity1<A, ReadonlySet<B>>, set: ReadonlySet<A>): ReadonlySet<B> => {
     const bs = new Set<B>()
 
-    set.forEach(a => fn(a).forEach(b => bs.add(b)))
+    set.forEach((a) => fn(a).forEach((b) => bs.add(b)))
 
     return bs
   },

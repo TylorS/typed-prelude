@@ -8,7 +8,7 @@ export function* fail<A extends keyof any, Err>(
   errorType: A,
   error: Err,
 ): Effects<FailEnv<A, Err>, any> {
-  return yield c => c[errorType](error)
+  return yield (c) => c[errorType](error)
 }
 
 export function catchFailure<A extends Effect<any, any>, K extends FailureTypes<A>>(

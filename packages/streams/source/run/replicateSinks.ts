@@ -8,7 +8,7 @@ export function replicateSinks<A extends Sinks>(
   sinkProxies: Record<keyof A, Subject<any, any>>,
   scheduler: Scheduler,
 ): Disposable {
-  const sinkNames = Object.keys(sinks).filter(name => !!sinkProxies[name])
+  const sinkNames = Object.keys(sinks).filter((name) => !!sinkProxies[name])
 
   function replicateSink(name: keyof A): Disposable {
     return sinks[name].run(sinkProxies[name][0], scheduler)

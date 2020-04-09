@@ -7,7 +7,7 @@ import { HttpEnv, HttpOptions, HttpRequest, HttpResponse } from './types'
 
 export function* http<A = unknown>(url: string, options: HttpOptions = {}): HttpRequest<A> {
   return yield ({ http }: HttpEnv) =>
-    Resume.create(f => {
+    Resume.create((f) => {
       let hasLoaded = false
       const ifNotLoaded = <A extends Fn>(f: A) => (...args: ArgsOf<A>): Disposable => {
         if (!hasLoaded) {

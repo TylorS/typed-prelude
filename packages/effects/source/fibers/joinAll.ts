@@ -6,7 +6,7 @@ import { join, Join } from './join'
 export function* joinAll<A extends ReadonlyArray<Fiber<any>>>(
   ...fibers: A
 ): Effects<FiberFailure & Join, JoinAll<A>> {
-  const values = yield* combine<Array<Effects<any, any>>>(...fibers.map(join))
+  const values = yield* combine<Effects<any, any>[]>(...fibers.map(join))
 
   return values as JoinAll<A>
 }

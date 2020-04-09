@@ -14,5 +14,5 @@ function __mapToList<A extends keyof any, B, C>(
 ): C[] {
   const keys = Object.keys(obj) as A[]
 
-  return keys.map(key => fn(key, obj[key]))
+  return keys.map((key) => fn(key, obj[key]))
 }

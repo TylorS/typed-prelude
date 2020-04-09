@@ -5,4 +5,4 @@ import { Effect, Effects } from '../Effect'
 export type TimerEnv = { readonly timer: Timer }
 
 export const delay = (ms: number): Effects<TimerEnv, number> =>
-  Effect.fromEnv(({ timer }) => Resume.create(cb => timer.delay(cb, ms)))
+  Effect.fromEnv(({ timer }) => Resume.create((cb) => timer.delay(cb, ms)))

@@ -15,7 +15,7 @@ function __collectBy<A, B>(
 ): ReadonlyMap<B, ReadonlyArray<A>> {
   const map = new Map<B, A[]>()
 
-  forEach(a => {
+  forEach((a) => {
     const key = fn(a)
     const values = map.get(key) || []
 

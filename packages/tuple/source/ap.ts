@@ -14,5 +14,5 @@ export const ap: {
   <A, B, C>(fn: Tuple<A, Arity1<B, C>>): (value: Tuple<A, B>) => Tuple<A, C>
 } = curry(
   <A, B, C>(fn: Tuple<A, Arity1<B, C>>, value: Tuple<A, B>): Tuple<A, C> =>
-    chain(f => map(f, value), fn),
+    chain((f) => map(f, value), fn),
 )

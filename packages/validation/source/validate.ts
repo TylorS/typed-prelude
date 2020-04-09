@@ -14,7 +14,7 @@ export const validate = curry(__validate) as {
 
 function __validate<A, B, C>(error: A, match: Match<B, C>, value: B): Validation<A, C> {
   return unpack(
-    value => Validation.of(value),
+    (value) => Validation.of(value),
     () => Validation.error(error),
     match(value),
   )

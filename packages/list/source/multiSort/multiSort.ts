@@ -11,12 +11,9 @@ import { groupBy } from '../groupBy'
  * @returns :: [a]
  */
 export const multiSort: {
-  <A>(sortFns: Array<Arity1<A, PropertyKey>>, list: ReadonlyArray<A>): A[]
-  <A>(sortFns: Array<Arity1<A, PropertyKey>>): (list: ReadonlyArray<A>) => A[]
-} = curry(function multiSort<A>(
-  sortFns: Array<Arity1<A, PropertyKey>>,
-  list: ReadonlyArray<A>,
-): A[] {
+  <A>(sortFns: Arity1<A, PropertyKey>[], list: ReadonlyArray<A>): A[]
+  <A>(sortFns: Arity1<A, PropertyKey>[]): (list: ReadonlyArray<A>) => A[]
+} = curry(function multiSort<A>(sortFns: Arity1<A, PropertyKey>[], list: ReadonlyArray<A>): A[] {
   return multiSortWithOrder(SortOrder.Ascending, sortFns, list)
 })
 
@@ -26,15 +23,15 @@ export const enum SortOrder {
 }
 
 export const multiSortWithOrder: {
-  <A>(order: SortOrder, sortFns: Array<Arity1<A, PropertyKey>>, list: ReadonlyArray<A>): A[]
-  <A>(order: SortOrder, sortFns: Array<Arity1<A, PropertyKey>>): (list: ReadonlyArray<A>) => A[]
+  <A>(order: SortOrder, sortFns: Arity1<A, PropertyKey>[], list: ReadonlyArray<A>): A[]
+  <A>(order: SortOrder, sortFns: Arity1<A, PropertyKey>[]): (list: ReadonlyArray<A>) => A[]
   (order: SortOrder): {
-    <A>(sortFns: Array<Arity1<A, PropertyKey>>, list: ReadonlyArray<A>): A[]
-    <A>(sortFns: Array<Arity1<A, PropertyKey>>): (list: ReadonlyArray<A>) => A[]
+    <A>(sortFns: Arity1<A, PropertyKey>[], list: ReadonlyArray<A>): A[]
+    <A>(sortFns: Arity1<A, PropertyKey>[]): (list: ReadonlyArray<A>) => A[]
   }
 } = curry(function multiSortWithOrder<A>(
   order: SortOrder,
-  sortFns: Array<Arity1<A, PropertyKey>>,
+  sortFns: Arity1<A, PropertyKey>[],
   list: ReadonlyArray<A>,
 ): A[] {
   if (sortFns.length === 0 || list.length === 0) {
@@ -51,5 +48,5 @@ export const multiSortWithOrder: {
     return acc
   }, {} as Record<string, A[]>)
 
-  return chain(x => result[x], initialKeys)
+  return chain((x) => result[x], initialKeys)
 })

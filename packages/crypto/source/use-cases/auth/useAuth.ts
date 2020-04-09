@@ -25,7 +25,7 @@ export function* useAuth(initial?: InitialState<EncryptionEnv, AuthInfo>): TypeO
   const availableSalts = yield* getAvailableSalts()
   const availableSaltsUpdated = yield* useDepChange(availableSalts, false)
   const [getAuthInfo, updateAuthInfo] = yield* provideAuthChannel(initial)
-  const listenForEventsArgs = yield* useMemoEffect(function*() {
+  const listenForEventsArgs = yield* useMemoEffect(function* () {
     const env = yield* get<EncryptionEnv>()
     const { authEvents } = yield* getAuthInfo()
 
@@ -35,7 +35,7 @@ export function* useAuth(initial?: InitialState<EncryptionEnv, AuthInfo>): TypeO
   yield* useEffect(listenForEvents, listenForEventsArgs)
 
   if (availableSaltsUpdated) {
-    yield* updateAuthInfo(info => ({ ...info, availableSalts }))
+    yield* updateAuthInfo((info) => ({ ...info, availableSalts }))
   }
 
   const { encryptedKeyPair } = yield* getAuthInfo()
@@ -52,19 +52,19 @@ function listenForEvents(
     yield* debug(`Processing Auth Event: ${event}`)
 
     if (event[0] === 'auth.signOut') {
-      return yield* updateAuthInfo(info => ({
+      return yield* updateAuthInfo((info) => ({
         ...info,
         aesKey: Nothing,
         encryptedKeyPair: Nothing,
       }))
     }
 
-    return yield* updateAuthInfo(info => ({
+    return yield* updateAuthInfo((info) => ({
       ...info,
       aesKey: Just.of(event[1]),
       encryptedKeyPair: Just.of(event[2]),
     }))
   }
 
-  return subscription.subscribe(authEvent => runEffects(processEvent(authEvent), env))
+  return subscription.subscribe((authEvent) => runEffects(processEvent(authEvent), env))
 }

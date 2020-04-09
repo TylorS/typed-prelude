@@ -25,7 +25,7 @@ export const test = describe(`handleFailure`, [
       }
 
       function* sut() {
-        const actual = yield* catchFailure(levelOfIndirection(), errorType, err => {
+        const actual = yield* catchFailure(levelOfIndirection(), errorType, (err) => {
           same(error, err)
 
           return fallback

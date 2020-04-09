@@ -23,7 +23,7 @@ export const Kill: Kill = {
 }
 
 export function* kill<A>(f: Fiber<A>): Effects<Kill, void> {
-  return yield c => c.kill(f)
+  return yield (c) => c.kill(f)
 }
 
 export class KillError extends Error {

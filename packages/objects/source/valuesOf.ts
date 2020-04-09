@@ -8,5 +8,5 @@ export const valuesOf = <A extends Record<any, any>>(
 ): A extends Record<any, infer R> ? R[] : [] => {
   const keys = keysOf(obj)
 
-  return keys.map(x => obj[x]) as any
+  return keys.map((x) => obj[x]) as any
 }

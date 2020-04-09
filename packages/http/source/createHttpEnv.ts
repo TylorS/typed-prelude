@@ -51,7 +51,7 @@ function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disp
   request.open(method, url)
 
   if (headers) {
-    Object.keys(headers).forEach(header => {
+    Object.keys(headers).forEach((header) => {
       request.setRequestHeader(header, headers[header] || '')
     })
   }

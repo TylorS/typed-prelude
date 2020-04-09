@@ -43,7 +43,7 @@ function __appendOrRemove<A, B = A>(
   comparison: (value: A) => B,
 ): A[] {
   const b = comparison(item)
-  const index = findIndex(a => comparison(a) === b, items)
+  const index = findIndex((a) => comparison(a) === b, items)
 
   if (isNothing(index)) {
     return append(item, items)

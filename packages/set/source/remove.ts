@@ -7,5 +7,5 @@ export const remove: {
 } = curry(__remove)
 
 function __remove<A>(value: A, set: ReadonlySet<A>): ReadonlySet<A> {
-  return withMutations(x => x.delete(value), set)
+  return withMutations((x) => x.delete(value), set)
 }

@@ -10,7 +10,7 @@ export const orElse = curry(__orElse) as {
 function __orElse<A, B>(value: A, validation: Either<B, A>): A {
   return unpack(
     () => value,
-    b => b,
+    (b) => b,
     validation,
   )
 }

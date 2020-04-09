@@ -17,5 +17,5 @@ function __ap<A, B, C>(
   fn: RemoteData<A, (value: B) => C>,
   value: RemoteData<A, B>,
 ): RemoteData<A, C> {
-  return chain(f => map(f, value), fn)
+  return chain((f) => map(f, value), fn)
 }

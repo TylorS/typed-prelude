@@ -15,7 +15,7 @@ export const test = describe(`useRef`, [
     const hookEnvironment = createHookEnvironment(manager)
     const initialValue: number = 1
     const endingValue: number = 100
-    const test = withHooks(function*(value: number) {
+    const test = withHooks(function* (value: number) {
       const [ref] = yield* useRef(InitialState.of(value))
 
       try {

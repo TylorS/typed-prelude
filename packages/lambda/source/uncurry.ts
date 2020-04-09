@@ -11,7 +11,7 @@ export function uncurry<F extends Fn>(f: F): Uncurry<F> {
   }
 
   // tslint:disable-next-line:only-arrow-functions
-  return (function() {
+  return (function () {
     let r = f
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < arguments.length; i++) {

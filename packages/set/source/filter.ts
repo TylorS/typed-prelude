@@ -8,7 +8,7 @@ export const filter: {
 function __filter<A>(predicate: Predicate<A>, set: ReadonlySet<A>): ReadonlySet<A> {
   const filtered = new Set()
 
-  set.forEach(x => predicate(x) && filtered.add(x))
+  set.forEach((x) => predicate(x) && filtered.add(x))
 
   return filtered as ReadonlySet<A>
 }

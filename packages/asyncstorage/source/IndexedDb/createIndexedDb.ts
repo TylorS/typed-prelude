@@ -19,7 +19,7 @@ export function* createIndexedDb<A>(
   const { indexedDbFactory } = yield* get<IndexedDbEnv>()
   const database = yield* openDatabase(name, indexedDbFactory)
 
-  return map(db => createIndexedDbAsyncStorage<A>(db, indexedDbFactory), database)
+  return map((db) => createIndexedDbAsyncStorage<A>(db, indexedDbFactory), database)
 }
 
 function createIndexedDbAsyncStorage<A>(

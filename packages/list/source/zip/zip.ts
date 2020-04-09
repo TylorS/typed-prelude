@@ -6,10 +6,7 @@ import { curry } from '@typed/lambda'
  * @param ys :: [b]
  * @returns :: [(a, b)]
  */
-export const zip = curry(function zip<A, B>(
-  xs: ReadonlyArray<A>,
-  ys: ReadonlyArray<B>,
-): Array<[A, B]> {
+export const zip = curry(function zip<A, B>(xs: ReadonlyArray<A>, ys: ReadonlyArray<B>): [A, B][] {
   const length = Math.min(xs.length, ys.length)
   const newList = Array(length)
 
@@ -19,6 +16,6 @@ export const zip = curry(function zip<A, B>(
 
   return newList
 }) as {
-  <A, B>(xs: ReadonlyArray<A>, ys: ReadonlyArray<B>): Array<[A, B]>
-  <A>(xs: ReadonlyArray<A>): <B>(ys: ReadonlyArray<B>) => Array<[A, B]>
+  <A, B>(xs: ReadonlyArray<A>, ys: ReadonlyArray<B>): [A, B][]
+  <A>(xs: ReadonlyArray<A>): <B>(ys: ReadonlyArray<B>) => [A, B][]
 }

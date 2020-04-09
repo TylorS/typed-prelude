@@ -15,7 +15,7 @@ export function createTestHttpEnv(
     options: HttpOptions,
   ) => Either<Error, HttpResponse> | PromiseLike<Either<Error, HttpResponse>>,
 ): TestHttpEnv {
-  const responses: Array<Either<Error, HttpResponse>> = []
+  const responses: Either<Error, HttpResponse>[] = []
 
   function http(url: string, options: HttpOptions, callbacks: HttpCallbacks): Disposable {
     const { success, failure } = callbacks

@@ -8,10 +8,10 @@ export function getAllKeys(store: IDBObjectStore): ItemsEffect<string> {
     Future.create<unknown, Error, readonly string[]>((reject, resolve) => {
       const request = store.getAllKeys()
       const disposable = Disposable.lazy()
-      request.onerror = ev =>
+      request.onerror = (ev) =>
         disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
       request.onsuccess = () =>
-        disposable.addDisposable(resolve(request.result.map(x => x.toString())))
+        disposable.addDisposable(resolve(request.result.map((x) => x.toString())))
 
       return disposable
     }),

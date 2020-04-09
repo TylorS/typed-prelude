@@ -8,7 +8,7 @@ export class ServerHistory implements History {
 
   // ServerHistory specific
   // tslint:disable-next-line:variable-name
-  private _states: Array<{ state: any; url: string }>
+  private _states: { state: any; url: string }[]
   // tslint:disable-next-line:variable-name
   private _index: number = 0
   private location: Location

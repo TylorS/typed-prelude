@@ -29,7 +29,7 @@ function createScopedStorage(scope: string, storage: Storage): Storage {
     return storage.removeItem(scopedKey)
   }
   const clear = () => {
-    scopedKeys.forEach(key => storage.removeItem(key))
+    scopedKeys.forEach((key) => storage.removeItem(key))
     scopedKeys = []
   }
   const key = (i: number) => scopedKeys[i]

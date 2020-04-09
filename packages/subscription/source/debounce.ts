@@ -24,7 +24,7 @@ function __debounce<A, B>(
 
       return disposeAll([
         { dispose: () => disposable.dispose() },
-        subscription.subscribe(b => {
+        subscription.subscribe((b) => {
           disposable.dispose()
           disposable = timer.delay(() => fn(b), delayMs)
 

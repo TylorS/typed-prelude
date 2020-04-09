@@ -13,5 +13,5 @@ export const map = curry(__map) as {
 }
 
 function __map<A, B, C>(f: (value: B) => C, either: Either<A, B>): Either<A, C> {
-  return chain(value => Either.of(f(value)), either)
+  return chain((value) => Either.of(f(value)), either)
 }

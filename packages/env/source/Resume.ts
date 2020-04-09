@@ -19,7 +19,7 @@ export namespace Resume {
     isValue(resume) ? f(resume.value) : resume.resume(f)
 
   export const chain = <A, B>(fn: (value: A) => Resume<B>, resume: Resume<A>): Resume<B> =>
-    isValue(resume) ? fn(resume.value) : create(cb => run(a => run(cb, fn(a)), resume))
+    isValue(resume) ? fn(resume.value) : create((cb) => run((a) => run(cb, fn(a)), resume))
 
   export const isValue = <A>(resume: Resume<A>): resume is ValueResume<A> => resume.type === 'value'
   export const isLazy = <A>(resume: Resume<A>): resume is LazyResume<A> => resume.type === 'lazy'

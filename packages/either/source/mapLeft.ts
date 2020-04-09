@@ -13,5 +13,5 @@ export const mapLeft = curry(__mapLeft) as {
 }
 
 function __mapLeft<A, B, C>(f: (value: A) => C, either: Either<A, B>): Either<C, B> {
-  return chainLeft(value => Either.left(f(value)), either)
+  return chainLeft((value) => Either.left(f(value)), either)
 }

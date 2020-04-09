@@ -7,7 +7,7 @@ import { map } from './map'
  */
 export const ap = curry(
   <A, B>(fn: AsyncIterable<Arity1<A, B>>, value: AsyncIterable<A>): AsyncIterable<B> =>
-    chain(f => map(f, value), fn),
+    chain((f) => map(f, value), fn),
 ) as {
   <A, B>(fn: AsyncIterable<Arity1<A, B>>, value: AsyncIterable<A>): AsyncIterable<B>
   <A, B>(fn: AsyncIterable<Arity1<A, B>>): (value: AsyncIterable<A>) => AsyncIterable<B>

@@ -12,7 +12,7 @@ export function* removeValue<A>(key: string, store: IDBObjectStore): ItemEffect<
     const request = store.delete(key)
     const disposable = Disposable.lazy()
 
-    request.onerror = ev =>
+    request.onerror = (ev) =>
       disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
     request.onsuccess = () =>
       disposable.addDisposable(resolve(isLeft(value) ? Nothing : fromRight(value)))

@@ -9,7 +9,7 @@ export function putValue<A>(key: string, value: A, store: IDBObjectStore): ItemE
       const request = store.put(value, key)
       const disposable = Disposable.lazy()
 
-      request.onerror = ev =>
+      request.onerror = (ev) =>
         disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
       request.onsuccess = () => disposable.addDisposable(resolve(value))
 

@@ -17,7 +17,7 @@ export const test = describe(`withHttpManagement`, [
       const failed = createFailedResponse(new Error('Failed'))
       const expectedUrl = 'http://somewhere.com'
       const expiration = 1000
-      const original = createTestHttpEnv(url => (url === expectedUrl ? success : failed))
+      const original = createTestHttpEnv((url) => (url === expectedUrl ? success : failed))
       const httpEnv = withHttpManagement({ timer, expiration }, original)
       const successRequest = () => http(expectedUrl)
       const failedRequest = () => http('anywhere')

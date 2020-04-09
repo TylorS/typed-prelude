@@ -4,12 +4,7 @@
  * @returns :: string
  */
 export function capitalize(str: string): string {
-  return capitalizeFirst(
-    str
-      .split(' ')
-      .map(capitalizeFirst)
-      .join(' '),
-  )
+  return capitalizeFirst(str.split(' ').map(capitalizeFirst).join(' '))
 }
 
 function capitalizeFirst(str: string): string {

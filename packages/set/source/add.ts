@@ -7,5 +7,5 @@ export const add: {
 } = curry(__add)
 
 function __add<A>(value: A, set: ReadonlySet<A>): ReadonlySet<A> {
-  return withMutations(x => x.add(value), set)
+  return withMutations((x) => x.add(value), set)
 }

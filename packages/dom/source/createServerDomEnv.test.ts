@@ -28,7 +28,7 @@ export const test = describe(`createDomEnv`, [
 
     equal(serverUrl, location.href)
 
-    window.addEventListener('popstate', ev => {
+    window.addEventListener('popstate', (ev) => {
       same(state, ev.state)
       equal(pathname, location.pathname)
 

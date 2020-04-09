@@ -6,5 +6,5 @@ export interface RenderEnv<A, B> {
 }
 
 export function* render<A, B>(renderable: A): Effects<RenderEnv<A, B>, B> {
-  return yield c => c.render(renderable)
+  return yield (c) => c.render(renderable)
 }

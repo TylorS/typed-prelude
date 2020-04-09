@@ -23,6 +23,6 @@ export const filter: {
 function __filter<A>(predicate: Predicate<A>, subscription: Subscription<any, A>): Subscription<A> {
   return {
     ...subscription,
-    subscribe: fn => subscription.subscribe(a => (predicate(a) ? fn(a) : Disposable.None)),
+    subscribe: (fn) => subscription.subscribe((a) => (predicate(a) ? fn(a) : Disposable.None)),
   }
 }

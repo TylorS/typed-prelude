@@ -14,7 +14,7 @@ export const test: Test = describe(`findLast`, [
         1,
         withDefault(
           null,
-          findLastIndex(x => x === 2, [1, 2, 3]),
+          findLastIndex((x) => x === 2, [1, 2, 3]),
         ),
       )
     }),

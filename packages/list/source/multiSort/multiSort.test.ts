@@ -21,7 +21,7 @@ export const test: Test = describe(`multiSort`, [
         { a: 2, b: 2, c: 3 },
         { a: 2, b: 1, c: 2 },
       ]
-      const actual = multiSort([x => x.a, x => x.b, x => x.c], values)
+      const actual = multiSort([(x) => x.a, (x) => x.b, (x) => x.c], values)
       const expected: ABC[] = [
         { a: 1, b: 1, c: 1 },
         { a: 1, b: 1, c: 2 },

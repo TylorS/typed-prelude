@@ -6,7 +6,7 @@ import { ascend, chain } from '@typed/list'
  * returns what tasks are ready at the current time.
  */
 export class Timeline {
-  private tasks: Map<number, Array<Arity1<number>>> = new Map()
+  private tasks: Map<number, Arity1<number>[]> = new Map()
 
   public addTask = (time: number, f: Arity1<number>) => {
     const tasksAtTime = this.tasks.get(time) || []
@@ -23,7 +23,7 @@ export class Timeline {
       return
     }
 
-    const index = tasksAtTime.findIndex(x => x === f)
+    const index = tasksAtTime.findIndex((x) => x === f)
 
     if (index > -1) {
       tasksAtTime.splice(index, 1)
@@ -36,7 +36,7 @@ export class Timeline {
 
   public readyTasks = (currentTime: number) => {
     const times = Array.from(this.tasks.keys())
-    const timesToRun = times.filter(x => x <= currentTime).sort(ascend(id))
+    const timesToRun = times.filter((x) => x <= currentTime).sort(ascend(id))
 
     return chain(this.getAndDelete, timesToRun)
   }

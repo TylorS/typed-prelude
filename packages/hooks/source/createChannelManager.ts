@@ -68,7 +68,7 @@ export function createChannelManager<A extends object>(
 
     providers.add(node)
 
-    return function*(value: B): PureEffect<B> {
+    return function* (value: B): PureEffect<B> {
       const currentValue = values.get(node)
 
       if (!equals(currentValue, value)) {

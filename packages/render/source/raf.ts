@@ -8,7 +8,7 @@ export interface RafEnv {
 
 export function* raf(): Effects<RafEnv, number> {
   return yield ({ requestAnimationFrame, cancelAnimationFrame }) =>
-    Resume.create(cb => {
+    Resume.create((cb) => {
       const id = requestAnimationFrame(cb)
       const dispose = () => cancelAnimationFrame(id)
 

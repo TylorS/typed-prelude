@@ -8,12 +8,12 @@ export const test = describe(`runEffects`, [
       const x = 1
       const y = 2
       const z = 5
-      const addY = function*(x: number) {
+      const addY = function* (x: number) {
         const { y } = yield* get<{ y: number }>()
 
         return x + y
       }
-      const addX = function*(y: number) {
+      const addX = function* (y: number) {
         const { x } = yield* get<{ x: number }>()
 
         return x + y

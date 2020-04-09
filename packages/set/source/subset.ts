@@ -11,9 +11,9 @@ export const subsetOf: {
 } = curry(__subsetOf)
 
 function __subset<A>(a: ReadonlySet<A>, b: ReadonlySet<A>): boolean {
-  return Array.from(a).every(x => b.has(x))
+  return Array.from(a).every((x) => b.has(x))
 }
 
 function __subsetOf<A>(b: ReadonlySet<A>, a: ReadonlySet<A>): boolean {
-  return Array.from(a).every(x => b.has(x))
+  return Array.from(a).every((x) => b.has(x))
 }

@@ -32,7 +32,7 @@ function _toString(x: any, seen: any[]): string {
           .concat(
             mapPairs(
               x,
-              Object.keys(x).filter(k => !/^\d+$/.test(k)),
+              Object.keys(x).filter((k) => !/^\d+$/.test(k)),
             ),
           )
           .join(', ') +

@@ -26,7 +26,7 @@ export type AuthEvent =
   | readonly ['auth.signIn', CryptoKey, EncryptedKeyPair]
   | readonly ['auth.signOut']
 
-export const AuthChannel: Channel<EncryptionEnv, AuthInfo> = createChannel(function*() {
+export const AuthChannel: Channel<EncryptionEnv, AuthInfo> = createChannel(function* () {
   yield* debug(`Creating AuthChannel Default Value...`)
   const availableSalts = yield* getAvailableSalts()
 

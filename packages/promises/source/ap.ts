@@ -9,4 +9,4 @@ import { map } from './map'
  * @returns :: Promise b
  */
 export const ap = <A, B>(fn: Promise<Arity1<A, B>>, value: Promise<A>): Promise<B> =>
-  chain(f => map(f, value), fn)
+  chain((f) => map(f, value), fn)

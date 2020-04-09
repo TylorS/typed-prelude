@@ -51,7 +51,7 @@ export function whenIdleWithTimeout(
   timer: Timer,
 ): Disposable {
   if (isBrowser && 'requestIdleCallback' in window) {
-    const handle = window.requestIdleCallback(deadline => fn(deadline, timer.currentTime()), {
+    const handle = window.requestIdleCallback((deadline) => fn(deadline, timer.currentTime()), {
       timeout,
     })
 
@@ -63,7 +63,7 @@ export function whenIdleWithTimeout(
     timeRemaining: () => Infinity,
   }
 
-  const disposable = timer.delay(t => fn(deadline, t), 0)
+  const disposable = timer.delay((t) => fn(deadline, t), 0)
   const dispose = () => {
     disposable.dispose()
     deadline.timeRemaining = () => 0

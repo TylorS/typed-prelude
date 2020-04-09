@@ -18,6 +18,6 @@ function __delay<A, B>(
 ): Subscription<A, B> {
   return {
     ...subscription,
-    subscribe: fn => subscription.subscribe(b => timer.delay(() => fn(b), delayMs)),
+    subscribe: (fn) => subscription.subscribe((b) => timer.delay(() => fn(b), delayMs)),
   }
 }

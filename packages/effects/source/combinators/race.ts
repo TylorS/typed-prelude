@@ -7,7 +7,7 @@ export function* race<E extends ReadonlyArray<Effect<any, any>>>(
   ...effects: E
 ): Effect<Env<CombinedCapabilities<E>, Return<E[keyof E]>>, Return<E[keyof E]>> {
   const env: Env<CombinedCapabilities<E>, Return<E[keyof E]>> = (c: CombinedCapabilities<E>) =>
-    Resume.create<Return<E[keyof E]>>(cb => {
+    Resume.create<Return<E[keyof E]>>((cb) => {
       const disposable = Disposable.lazy()
       const ifNotResolved = createIfNotResolved<Return<E[keyof E]>>(cb, disposable)
 

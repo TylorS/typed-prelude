@@ -20,5 +20,5 @@ function __ap<E1, E2, A, B, C>(
   fn: Future<E1, A, Arity1<B, C>>,
   value: Future<E2, A, B>,
 ): Future<Compact<E1 & E2>, A, C> {
-  return chain(f => map(f, value), fn)
+  return chain((f) => map(f, value), fn)
 }

@@ -104,9 +104,7 @@ export type Head<A extends readonly any[]> = HeadArg<Fn<A>>
 
 export type Defined<T> = T extends undefined ? never : T
 
-export type OrToAnd<A> = (A extends any
-? (u: A) => void
-: never) extends (i: infer B) => void
+export type OrToAnd<A> = (A extends any ? (u: A) => void : never) extends (i: infer B) => void
   ? B
   : never
 

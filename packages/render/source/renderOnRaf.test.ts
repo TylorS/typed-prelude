@@ -27,7 +27,7 @@ export const test = describe(`renderOnRaf`, [
           interval(
             () =>
               runEffects(
-                updateState(x => x + 1),
+                updateState((x) => x + 1),
                 {},
               ),
             i,

@@ -9,7 +9,7 @@ export const once = async <A>({
   subscribe: (f: (value: A) => void) => Disposable
 }): Promise<A> => {
   let disposable = Disposable.None
-  const a = await new Promise<A>(resolve => {
+  const a = await new Promise<A>((resolve) => {
     disposable = subscribe(resolve)
   })
 

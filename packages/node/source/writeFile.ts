@@ -11,7 +11,7 @@ export function* writeFile(
   return yield Future.create<unknown, Error, void>((reject, resolve) => {
     const disposable = Disposable.lazy()
 
-    fs.writeFile(filePath, contents, err => {
+    fs.writeFile(filePath, contents, (err) => {
       if (err) {
         return disposable.addDisposable(reject(err))
       }

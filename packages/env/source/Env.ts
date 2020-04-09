@@ -29,6 +29,6 @@ export type CapabilitiesOf<A> = A extends Env<infer R, any> ? R : never
 export type ValueOf<A> = A extends Env<any, infer R> ? R : A extends Pure<infer R> ? R : never
 
 export namespace Pure {
-  export const of = <A>(value: A): Pure<A> => _ => Resume.of(value)
-  export const fromIO = <A>(io: IO<A>): Pure<A> => _ => Resume.create(cb => cb(io()))
+  export const of = <A>(value: A): Pure<A> => (_) => Resume.of(value)
+  export const fromIO = <A>(io: IO<A>): Pure<A> => (_) => Resume.create((cb) => cb(io()))
 }

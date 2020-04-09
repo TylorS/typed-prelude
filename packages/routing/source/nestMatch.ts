@@ -17,7 +17,7 @@ export function __nestMatch<A, B, C>(
   route: Route<A, B>,
   match: Match<Path, C>,
 ): Match<Path, readonly [B, C]> {
-  return href => {
+  return (href) => {
     const maybeA = route.match(href)
     const maybeB = match(stripRouteFromPath(route, href))
 

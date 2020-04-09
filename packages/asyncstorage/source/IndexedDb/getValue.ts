@@ -10,7 +10,7 @@ export function getValue<A>(key: string, store: IDBObjectStore): ItemEffect<Mayb
       const request = store.get(key)
       const disposable = Disposable.lazy()
 
-      request.onerror = ev =>
+      request.onerror = (ev) =>
         disposable.addDisposable(reject(new Error((ev.target as any).errorCode)))
       request.onsuccess = () => disposable.addDisposable(resolve(Maybe.of(request.result)))
 

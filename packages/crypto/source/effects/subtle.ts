@@ -104,7 +104,7 @@ export const wrapKey = createCryptoEffect('wrapKey')
 function createCryptoEffect<A extends keyof SubtleCrypto>(key: A) {
   let id = 0
 
-  return function*(...args: ArgsOf<SubtleCrypto[A]>): CryptoEffectFrom<A> {
+  return function* (...args: ArgsOf<SubtleCrypto[A]>): CryptoEffectFrom<A> {
     const label = `Crypto.subtle.${key}${id++}`
     const subtle = yield* getSubtleCrypto()
     const fn: (...args: any[]) => PromiseLike<any> = (subtle[key] as any).bind(subtle)
@@ -123,8 +123,8 @@ export const fromPromise = <A>(promise: PromiseLike<A>) =>
     const disposable = Disposable.lazy()
 
     promise.then(
-      a => disposable.addDisposable(resolve(a)),
-      e => disposable.addDisposable(reject(e)),
+      (a) => disposable.addDisposable(resolve(a)),
+      (e) => disposable.addDisposable(reject(e)),
     )
 
     return disposable

@@ -11,7 +11,7 @@ export function* useListManager<A, B extends keyof any, E, C>(
 ): HookEffects<E & HookManagerEnv, ReadonlyArray<C>> {
   const getIdentifier = yield* useCallback(identify, [])
   const combined = combine(
-    ...list.map(a => useIdManager(getIdentifier(a), computation(a))),
+    ...list.map((a) => useIdManager(getIdentifier(a), computation(a))),
   ) as HookEffects<E & HookManagerEnv, ReadonlyArray<C>>
 
   return yield* combined

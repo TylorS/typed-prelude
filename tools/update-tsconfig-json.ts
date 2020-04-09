@@ -19,9 +19,9 @@ PACKAGES.forEach(updatePackage)
 function updateRootConfig(configName: string) {
   const rootTsConfigPath = path.join(sourceDirectory, configName)
   const rootTsConfig = getOrCreateJsonFile(rootTsConfigPath)
-  const packagePaths = PACKAGES.map(pkg => `./${pkg}/${configName}`)
+  const packagePaths = PACKAGES.map((pkg) => `./${pkg}/${configName}`)
 
-  rootTsConfig.references = packagePaths.map(path => ({ path }))
+  rootTsConfig.references = packagePaths.map((path) => ({ path }))
   rootTsConfig.files = []
   delete rootTsConfig.include
   delete rootTsConfig.exclude
@@ -114,10 +114,10 @@ function updateReferences(tsconfig: any, typedDependencies: string[]) {
   }
 
   const references = typedDependencies.map(getTypedPackageName)
-  const referencePaths = references.map(x => `../${x}/tsconfig.json`)
+  const referencePaths = references.map((x) => `../${x}/tsconfig.json`)
 
   if (references.length > 0) {
-    tsconfig.references = referencePaths.map(path => ({ path }))
+    tsconfig.references = referencePaths.map((path) => ({ path }))
   }
 }
 
@@ -132,5 +132,5 @@ function getTypedDependencies(packageJSON: any): string[] {
 
   const dependencies = Object.keys(packageJSON.dependencies)
 
-  return dependencies.filter(x => x.startsWith('@typed/'))
+  return dependencies.filter((x) => x.startsWith('@typed/'))
 }
