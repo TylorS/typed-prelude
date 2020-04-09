@@ -27,10 +27,10 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "12.12.35"
+    "@types/node": "^13.11.1"
   },
   "peerDependencies": {
-    "@types/node": "^12.12.24",
+    "@types/node": "^13.11.1",
     "tslib": "^1.10.0"
   },
   "sideEffects": false,
