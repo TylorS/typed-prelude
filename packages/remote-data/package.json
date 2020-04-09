@@ -1,6 +1,6 @@
 {
   "name": "@typed/remote-data",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Generic type for working with values that come from remote sources",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/either": "^8.0.1",
-    "@typed/lambda": "^3.0.1"
+    "@typed/either": "^8.0.2",
+    "@typed/lambda": "^3.1.0"
   },
   "publishConfig": {
     "access": "public"
