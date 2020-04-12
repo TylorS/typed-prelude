@@ -1,5 +1,5 @@
+import { JsonObject } from '@typed/common'
 import { base64UrlDecode } from './base64UrlDecode'
-import { JsonObject } from './Json'
 import { Jwt } from './Jwt'
 
 export function getHeader(jwt: Jwt): JsonObject {

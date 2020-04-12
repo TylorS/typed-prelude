@@ -1,6 +1,6 @@
+import { JsonObject } from '@typed/common'
 import { base64UrlEncode } from './base64UrlEncode'
 import { hmacSha256 } from './hmacSha256'
-import { JsonObject } from './Json'
 import { Jwt } from './Jwt'
 
 const header = encodeJson({

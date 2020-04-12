@@ -1,4 +1,8 @@
-export function isUndefined(x: any): x is undefined {
+import { Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
+import { all } from './all'
+import { or } from './or'
+
+export function isUndefined(x: unknown): x is undefined {
   return x === undefined
 }
 
@@ -6,45 +10,46 @@ export function isNotUndefined<A>(x: A | undefined): x is A {
   return x !== undefined
 }
 
-export function isNull(x: any): x is null {
+export function isNull(x: unknown): x is null {
   return x === null
 }
 
-export function isNotNull<A extends any>(value: A): value is Exclude<A, null> {
+export function isNotNull<A>(value: A): value is Exclude<A, null> {
   return value !== null
 }
 
-export function isArray<A = unknown>(x: any): x is A[] {
+export function isArray(x: unknown): x is unknown[] {
   return Array.isArray(x)
 }
 
-export function isIterator<A = unknown>(x: any): x is Iterator<A> {
-  return x && typeof (x as Iterator<A>).next === 'function'
+export function isIterator<A = unknown>(x: unknown): x is Iterator<A> {
+  return x && isFunction((x as Iterator<A>).next)
 }
 
-export function isIterable<A = unknown>(x: any): x is Iterable<A> {
-  return x && typeof x[Symbol.iterator] === 'function' && isIterator(x[Symbol.iterator]())
+export function isIterable(x: unknown): x is Iterable<unknown> {
+  return x && isFunction((x as Iterable<unknown>)[Symbol.iterator])
 }
 
-export function isArrayLike<A = unknown>(x: any): x is ArrayLike<A> {
-  if (Array.isArray(x)) {
+export function isArrayLike<A = unknown>(x: unknown): x is ArrayLike<A> {
+  if (isArray(x)) {
     return true
   }
 
-  if (!x || typeof x !== 'object' || typeof x === 'string') {
+  if (!x || !isObject(x) || !isString(x)) {
     return false
   }
 
-  if (x.nodeType === 1) {
-    return !!x.length
-  }
+  const asObj: { length: number } = x
 
-  if (x.length === 0) {
+  if (asObj.length === 0) {
     return true
   }
 
-  if (x.length > 0) {
-    return x.hasOwnProperty(0) && x.hasOwnProperty(x.length - 1)
+  if (asObj.length > 0) {
+    return (
+      Object.prototype.hasOwnProperty.call(x, 0) &&
+      Object.prototype.hasOwnProperty.call(x, asObj.length - 1)
+    )
   }
 
   return false
@@ -67,7 +72,7 @@ export function isMap<A = unknown, B = unknown>(x: any): x is Map<A, B> {
   )
 }
 
-function isFunction(x: any) {
+export function isFunction(x: any): x is Function {
   return typeof x === 'function'
 }
 
@@ -79,11 +84,7 @@ export function isString(x: any): x is string {
   return typeof x === 'string'
 }
 
-export function isObject<A extends object = Object>(x: A | undefined | null | void): x is A
-// tslint:disable-next-line:unified-signatures
-export function isObject<A extends object = Object>(x: any): x is A
-
-export function isObject<A extends object = Object>(x: any): x is A {
+export function isObject(x: any): x is Object {
   return x && typeof x === 'object'
 }
 
@@ -105,4 +106,23 @@ export function isSet<A = any>(x: any): x is Set<A> {
     isFunction(set.has) &&
     isFunction(set[Symbol.iterator])
   )
+}
+
+export function isBoolean(x: unknown): x is boolean {
+  return typeof x === 'boolean'
+}
+
+export const isJsonPrimitive: (x: unknown) => x is JsonPrimitive = or(
+  isString,
+  or(isNumber, or(isBoolean, isNull)),
+)
+
+export const isJson: (x: unknown) => x is Json = or(isJsonPrimitive, or(isJsonArray, isJsonObject))
+
+export function isJsonArray(x: unknown): x is JsonArray {
+  return isArray(x) && all(isJson, x)
+}
+
+export function isJsonObject(x: unknown): x is JsonObject {
+  return isObject(x) && all(isJson, Object.values(x))
 }

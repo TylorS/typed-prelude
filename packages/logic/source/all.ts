@@ -8,8 +8,8 @@ import { not } from './not'
  * @returns :: boolean
  */
 export const all: {
-  <A>(predicates: Predicate<A>, value: A): boolean
-  <A>(predicates: Predicate<A>): Predicate<A>
+  <A>(predicate: Predicate<A>, value: ReadonlyArray<A>): boolean
+  <A>(predicate: Predicate<A>): Predicate<ReadonlyArray<A>>
 } = curry(__all)
 
 function __all<A>(predicate: Predicate<A>, list: ReadonlyArray<A>): boolean {

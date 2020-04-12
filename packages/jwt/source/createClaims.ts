@@ -1,4 +1,4 @@
-import { JsonObject } from './Json'
+import { JsonObject } from '@typed/common'
 
 export function createClaims<A extends JsonObject>(
   claims: A,

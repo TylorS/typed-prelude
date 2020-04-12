@@ -1,0 +1,38 @@
+{
+  "name": "@typed/json-rpc",
+  "version": "2.2.0",
+  "description": "JSON-RPC abstractions",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "JSON-RPC",
+    "Typed",
+    "TypeScript"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/common": "^3.1.1",
+    "@typed/disposable": "^3.1.1",
+    "@typed/effects": "^6.2.1",
+    "@typed/env": "^8.0.1",
+    "@typed/future": "^11.1.1",
+    "@typed/hooks": "^9.2.1",
+    "@typed/lambda": "^3.1.0",
+    "@typed/list": "^6.0.2",
+    "@typed/logic": "^6.0.2",
+    "@typed/objects": "^6.0.2",
+    "@typed/subscription": "^3.2.1",
+    "@typed/uuid": "^9.2.1"
+  }
+}

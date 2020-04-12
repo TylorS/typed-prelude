@@ -13,6 +13,7 @@ export * from './hmacSha256'
 export * from './importSecretKey'
 export * from './isActive'
 export * from './isExpired'
-export * from './Json'
 export * from './sign'
 export * from './verify'
+
+export { Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
