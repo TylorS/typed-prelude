@@ -104,7 +104,9 @@ export type Head<A extends readonly any[]> = HeadArg<Fn<A>>
 
 export type Defined<T> = T extends undefined ? never : T
 
-export type OrToAnd<A> = (A extends any ? (u: A) => void : never) extends (i: infer B) => void
+export type OrToAnd<A> = (RemoveUnknown<A> extends any
+? (u: A) => void
+: never) extends (i: infer B) => void
   ? B
   : never
 
@@ -114,3 +116,4 @@ export type TypeGuard<A, B extends A> = (value: A) => value is B
 
 // Internal
 type CastArray<T> = T extends readonly any[] ? T : []
+type RemoveUnknown<A> = [A] extends [unknown] ? never : A

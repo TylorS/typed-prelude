@@ -1,6 +1,6 @@
 import { equals } from '@typed/logic'
 import { fromJust, isNothing } from '@typed/maybe'
-import { Ref } from './HookEnvironment'
+import { Ref } from './types'
 
 export function didRefChange<A>(
   ref: Ref<A>,

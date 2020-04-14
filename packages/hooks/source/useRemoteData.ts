@@ -1,8 +1,7 @@
 import { PureEffect } from '@typed/effects'
 import { Arity1, IO } from '@typed/lambda'
 import { Failure, Loading, NoData, RemoteData, Success } from '@typed/remote-data'
-import { HookEffects } from './HookEffects'
-import { InitialState } from './HookEnvironment'
+import { HookEffects, InitialState } from './types'
 import { useMemo } from './useMemo'
 import { useState } from './useState'
 

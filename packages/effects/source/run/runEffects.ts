@@ -2,7 +2,6 @@ import { Disposable } from '@typed/disposable'
 import { execPure, provide } from '@typed/env'
 import { Capabilities, Effects, PureEffect } from '../Effect'
 import { runEffect } from './runEffect'
-
 export function runEffects<A extends PureEffect<any>>(effect: A): Disposable
 
 export function runEffects<A extends Effects<any, any>>(

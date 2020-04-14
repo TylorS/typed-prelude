@@ -1,5 +1,4 @@
-import { pipe } from '@typed/lambda'
-import { all, equals, isArray, isObject, isString, or } from '@typed/logic'
+import { all, equals, isArray, isObject, isString, or, and } from '@typed/logic'
 import { hasOwnProperty } from '@typed/objects'
 import { JsonRpcNotification } from '../../model'
 
@@ -12,7 +11,7 @@ const OPTIONAL_KEYS: ReadonlyArray<Exclude<
 const VALIDATE_NOTIFICATION_KEYS: {
   [K in keyof JsonRpcNotification<any, any>]: (value: unknown) => boolean
 } = {
-  jsonrpc: pipe(isString, equals('2.0')),
+  jsonrpc: and(isString, equals('2.0')),
   method: isString,
   params: or(isArray, isObject),
 }
@@ -22,15 +21,15 @@ export function isNotification(x: unknown): x is JsonRpcNotification {
     return false
   }
 
-  const hasPropertyAndIsValid = (key: keyof JsonRpcNotification<any, any>) =>
-    hasOwnProperty(key, x) && VALIDATE_NOTIFICATION_KEYS[key](x[key])
+  const hasPropertyAndIsValid = (key: keyof JsonRpcNotification<any, any>, defaultValue: boolean) =>
+    hasOwnProperty(key, x) ? VALIDATE_NOTIFICATION_KEYS[key](x[key]) : defaultValue
 
-  if (!all(hasPropertyAndIsValid, REQUIRED_KEYS)) {
+  if (!all(key => hasPropertyAndIsValid(key, false), REQUIRED_KEYS)) {
     return false
   }
 
   return OPTIONAL_KEYS.reduce(
-    (valid, key) => (valid ? hasPropertyAndIsValid(key) : false),
+    (valid, key) => (valid ? hasPropertyAndIsValid(key, true) : false),
     true as boolean,
   )
 }

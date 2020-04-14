@@ -1,5 +1,5 @@
 import { didRefChange } from './didRefChange'
-import { HookEffects } from './HookEffects'
+import { HookEffects } from './types'
 import { useRef } from './useRef'
 
 export function* useDepChange<A>(dep: A, firstRun: boolean = true): HookEffects<unknown, boolean> {

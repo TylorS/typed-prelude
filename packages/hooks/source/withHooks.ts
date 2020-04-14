@@ -1,6 +1,6 @@
 import { combine } from '@typed/effects'
 import { getHookEnv } from './getHookEnv'
-import { HookEffects } from './HookEffects'
+import { HookEffects } from './types'
 
 // Helps to manage resetting the HooksEnvironment between function invocations
 export function withHooks<A extends readonly any[], E, B>(

@@ -1,7 +1,6 @@
 import { Effect, Effects } from '@typed/effects'
 import { Fn } from '@typed/lambda'
-import { HookEffects } from './HookEffects'
-import { InitialState } from './HookEnvironment'
+import { HookEffects, InitialState } from './types'
 import { useDepChange } from './useDepChange'
 import { useState } from './useState'
 

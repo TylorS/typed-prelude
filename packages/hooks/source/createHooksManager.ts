@@ -2,8 +2,7 @@ import { UuidEnv } from '@typed/uuid'
 import { createChannelManager } from './createChannelManager'
 import { createTreeManager } from './createTreeManager'
 import { createUpdateManager } from './createUpdateManager'
-import { HookEnvironment } from './HookEnvironment'
-import { HooksManager } from './HooksManager'
+import { HooksManager, HookEnvironment } from './types'
 
 // A HooksManager keeps track of the hierarchy of a number of HookEnvironments.
 // This is how @typed/hooks allows for providing and consuming values via its Channel API.

@@ -1,36 +1,19 @@
 import { Disposable, onDisposed } from '@typed/disposable'
-import { Effect, FailEnv, orFail } from '@typed/effects'
-import { Resume } from '@typed/env'
+import { Effect, orFail } from '@typed/effects'
 import { Future } from '@typed/future'
 import { ArgsOf } from '@typed/lambda'
 import { createSubscription } from '@typed/subscription'
-import { uuid, UuidEnv } from '@typed/uuid'
-import { createFailedResponse, isMessage } from '../domain'
-import {
-  Connection,
-  CreateConnection,
-  JsonRpcErrorCode,
-  Message,
-  MessageDirection,
-} from '../domain/model'
-
-export interface WebsocketEnv {
-  readonly createWebsocket: () => Resume<WebSocket>
-}
-
-export const WebSocketFailure = Symbol('WebSocketFailure')
-export type WebSocketFailure = FailEnv<typeof WebSocketFailure, Error>
+import { createFailedResponse, isMessage } from '../../domain'
+import { Connection, JsonRpcErrorCode, Message, MessageDirection, Id } from '../../domain/model'
+import { WebSocketFailure } from './WebSocketFailure'
 
 const CLOSE_ARGS: ArgsOf<WebSocket['close']> = [void 0, 'Resource no longer required']
 
-export const createWebsocketConnection: CreateConnection<
-  WebsocketEnv & WebSocketFailure & UuidEnv
-> = function* () {
+export function* createConnectionFromWebSocket(webSocket: WebSocket, id: Id, onClose: () => void) {
   const incoming = createSubscription<Message>()
   const outgoing = createSubscription<Message>()
-  const webSocket = yield* Effect.fromEnv((env) => env.createWebsocket())
 
-  webSocket.onmessage = (ev) => {
+  webSocket.onmessage = ev => {
     if (isMessage(ev.data)) {
       return incoming.publish(ev.data)
     }
@@ -50,10 +33,11 @@ export const createWebsocketConnection: CreateConnection<
   webSocket.onclose = () => {
     incoming.clearSubscribers()
     outgoing.clearSubscribers()
+    onClose()
   }
 
   const connection: Connection = {
-    id: yield* uuid(),
+    id,
     [MessageDirection.Incoming]: incoming,
     [MessageDirection.Outgoing]: outgoing,
     dispose: () => webSocket.close(...CLOSE_ARGS),

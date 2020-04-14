@@ -1,6 +1,5 @@
 import { getHookEnv } from './getHookEnv'
-import { HookEffects } from './HookEffects'
-import { InitialState, UseRef } from './HookEnvironment'
+import { HookEffects, InitialState, UseRef } from './types'
 
 export function* useRef<E, A>(initialState?: InitialState<E, A>): HookEffects<E, UseRef<A>> {
   const { useRef } = yield* getHookEnv()

@@ -7,14 +7,15 @@ import { Maybe } from '@typed/maybe'
 import { uuid4 } from '@typed/uuid'
 import { Channel } from './Channel'
 import {
-  HookEnvironment,
   InitialState,
+  HooksManager,
+  HookEnvironment,
   ProvideChannel,
-  Ref,
-  UseRef,
   UseState,
-} from './HookEnvironment'
-import { HooksManager } from './HooksManager'
+  UseRef,
+  Ref,
+  HookEffects,
+} from './types'
 
 const toNull = InitialState.of(null)
 
@@ -88,7 +89,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   function* provideChannel<E, A>(
     channel: Channel<E, A>,
     initial?: InitialState<E, A>,
-  ): Effects<E, ProvideChannel<E, A>> {
+  ): HookEffects<E, ProvideChannel<E, A>> {
     // Only create updateChannel once
     if (channelUpdates.has(channel)) {
       return channelUpdates.get(channel)!
@@ -97,7 +98,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     const getValue = () => manager.consumeChannel(channel, hookEnvironment)
     const provideValue = yield* manager.updateChannel(channel, hookEnvironment, initial)
 
-    function* updateChannel(update: Arity1<A, A>): Effects<E, A> {
+    function* updateChannel(update: Arity1<A, A>): HookEffects<E, A> {
       return yield* provideValue(update(yield* getValue()))
     }
 
@@ -108,7 +109,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     return useChannel
   }
 
-  function* useChannel<E, A>(channel: Channel<E, A>): Effects<E, A> {
+  function* useChannel<E, A>(channel: Channel<E, A>): HookEffects<E, A> {
     return yield* manager.consumeChannel(channel, hookEnvironment)
   }
 }

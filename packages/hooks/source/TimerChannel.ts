@@ -1,9 +1,10 @@
-import { Effect } from '@typed/effects'
-import { Pure } from '@typed/env'
-import { createTimer, Timer } from '@typed/timer'
+import { TimerEnv, get } from '@typed/effects'
+import { Timer } from '@typed/timer'
 import { Channel } from './Channel'
 import { createChannel } from './createChannel'
 
-export const TimerChannel: Channel<unknown, Timer> = createChannel<unknown, Timer>(() =>
-  Effect.fromEnv(Pure.fromIO(createTimer)),
-)
+export const TimerChannel: Channel<TimerEnv, Timer> = createChannel<TimerEnv, Timer>(function*() {
+  const { timer } = yield* get<TimerEnv>()
+
+  return timer
+})

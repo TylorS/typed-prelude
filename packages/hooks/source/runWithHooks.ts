@@ -1,11 +1,10 @@
-import { Effects, runWith } from '@typed/effects'
-import { HookEffects } from './HookEffects'
-import { HookEnvironment } from './HookEnvironment'
+import { runWith, RunWith, Effects } from '@typed/effects'
+import { HookEnvironment, HookEnv } from './types'
 
 // Run nested environments with their own hookEnvironment
-export function* runWithHooks<E, A>(
-  effect: HookEffects<E, A>,
+export function runWithHooks<E extends Effects>(
+  effect: E,
   hookEnvironment: HookEnvironment,
-): Effects<E, A> {
-  return yield* runWith(effect, { hookEnvironment }) as Effects<E, A>
+): RunWith<E, HookEnv> {
+  return runWith<E, HookEnv>(effect, { hookEnvironment })
 }

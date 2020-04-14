@@ -1,4 +1,4 @@
-import { CapabilitiesOf, Env, Pure } from '@typed/env'
+import { CapabilitiesOf, Env, Pure, withEnv as runWithEnv } from '@typed/env'
 import { Fn, OrToAnd } from '@typed/lambda'
 
 export interface Effects<A = any, B = any> extends Effect<Env<A, any>, B> {}
@@ -19,10 +19,10 @@ export type PureEffect<A> = Effect<Pure<any>, A>
 export type Yield<A> = A extends Effect<infer R, any> ? R : never
 export type Return<A> = A extends Effect<any, infer R> ? R : never
 
-export type Capabilities<A> = A extends Effect<infer C, any>
-  ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
-  : A extends Effects<infer R, any>
+export type Capabilities<A> = A extends Effects<infer R, any>
   ? OrToAnd<R>
+  : A extends Effect<infer C, any>
+  ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
   : never
 
 export namespace Effect {
@@ -34,6 +34,12 @@ export namespace Effect {
   export function fromEnv<A>(pure: Pure<A>): Effect<Pure<A>, A>
   export function* fromEnv<A, B>(env: Env<A, B>): Effect<Env<A, B>, B> {
     return yield env
+  }
+
+  export function* withEnv<A, B>(fn: (env: A) => Effects<A, B>): Effects<A, B> {
+    const effect: Effects<A, B> = yield runWithEnv(fn)
+
+    return yield* effect
   }
 }
 

@@ -17,19 +17,19 @@ export namespace Future {
       environment: E,
     ) => Disposable,
   ): Future<E, A, B> => (e: E) =>
-    Resume.create((cb) => {
+    Resume.create(cb => {
       const ifNotResolved = createIfNotResolved()
 
       return fn(ifNotResolved<A>(pipe(Left.of, cb)), ifNotResolved<B>(pipe(Right.of, cb)), e)
     })
 
-  export const fromPromise = <A>(promise: PromiseLike<A>): PureFuture<Error, A> =>
+  export const fromPromise = <A>(promise: () => PromiseLike<A>): PureFuture<Error, A> =>
     create<unknown, Error, A>((reject, resolve) => {
       const disposable = Disposable.lazy()
 
-      promise.then(
-        (a) => disposable.addDisposable(resolve(a)),
-        (e) => disposable.addDisposable(reject(e)),
+      promise().then(
+        a => disposable.addDisposable(resolve(a)),
+        e => disposable.addDisposable(reject(e)),
       )
 
       return disposable

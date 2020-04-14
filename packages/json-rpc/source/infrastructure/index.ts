@@ -1,2 +1,1 @@
-export * from './sendMessage'
-export * from './waitForResponse'
+export * from './connections'

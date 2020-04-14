@@ -1,15 +1,15 @@
-import { Effects, PureEffect } from '@typed/effects'
+import { PureEffect } from '@typed/effects'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
-import { InitialState } from './HookEnvironment'
+import { HookEffects, InitialState } from './types'
 
 export type ChannelManager<A extends object> = {
   readonly updateChannel: <E, B>(
     channel: Channel<E, B>,
     node: A,
     initialState?: InitialState<E, B>,
-  ) => Effects<E, (value: B) => PureEffect<B>>
-  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => Effects<E, B>
+  ) => HookEffects<E, (value: B) => PureEffect<B>>
+  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => HookEffects<E, B>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
@@ -68,7 +68,7 @@ export function createChannelManager<A extends object>(
 
     providers.add(node)
 
-    return function* (value: B): PureEffect<B> {
+    return function*(value: B): PureEffect<B> {
       const currentValue = values.get(node)
 
       if (!equals(currentValue, value)) {
@@ -85,7 +85,7 @@ export function createChannelManager<A extends object>(
     }
   }
 
-  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): Effects<E, B> {
+  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): HookEffects<E, B> {
     const values: WeakMap<A, B> = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
 
