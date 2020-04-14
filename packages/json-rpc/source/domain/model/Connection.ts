@@ -23,6 +23,7 @@ export interface SendMessage<E> extends Computation<[Message, MessageDirection],
 export interface WaitForResponse<E>
   extends Computation<[JsonRpcRequest['id'], MessageDirection], E, JsonRpcResponse> {}
 
+// Send a Request and wait for the corresponding Response
 export type SendRequest<E> = <A extends JsonRpcRequest, B extends JsonRpcResponse>(
   request: A,
   direction: MessageDirection,
