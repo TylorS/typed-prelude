@@ -46,13 +46,13 @@ export type JsonRpcResponse<
 
 export type JsonRpcSuccessfulResponse<Result extends StructuredJson = StructuredJson> = {
   readonly jsonrpc: '2.0'
-  readonly id: Id | null
+  readonly id: Id
   readonly result: Result
 }
 
 export type JsonRpcFailedResponse<Code extends number = number, ErrorData extends Json = never> = {
   readonly jsonrpc: '2.0'
-  readonly id: Id | null
+  readonly id: Id
   readonly error: JsonRpcError<Code, ErrorData>
 }
 

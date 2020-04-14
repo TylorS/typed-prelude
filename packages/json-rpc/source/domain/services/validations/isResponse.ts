@@ -1,5 +1,4 @@
-import { pipe } from '@typed/lambda'
-import { all, and, equals, isArray, isNull, isNumber, isObject, isString, or } from '@typed/logic'
+import { all, and, equals, isArray, isNumber, isObject, isString, or } from '@typed/logic'
 import { hasOwnProperty } from '@typed/objects'
 import { JsonRpcFailedResponse, JsonRpcResponse, JsonRpcSuccessfulResponse } from '../../model'
 
@@ -12,8 +11,8 @@ const OPTIONAL_KEYS: ReadonlyArray<Exclude<
 const VALIDATE_RESPONSE_VALUES: {
   [K in keyof JsonRpcFailedResponse | keyof JsonRpcSuccessfulResponse]: (value: unknown) => boolean
 } = {
-  jsonrpc: pipe(isString, equals('2.0')),
-  id: or(isNull, or(isString, isNumber)),
+  jsonrpc: and(isString, equals('2.0')),
+  id: or(isString, isNumber),
   result: or(isArray, isObject),
   error: or(isString, isNumber),
 }

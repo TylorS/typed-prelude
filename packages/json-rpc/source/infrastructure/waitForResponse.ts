@@ -7,8 +7,8 @@ import {
   JsonRpcResponse,
   MessageDirection,
   WaitForResponse,
-} from '../../domain/model'
-import { isBatchResponse, isResponse } from '../../domain/services/validations'
+} from '../domain/model'
+import { isBatchResponse, isResponse } from '../domain/services/validations'
 import { getSubscription } from './getSubscription'
 
 export const waitForResponse: WaitForResponse<ConnectionEnv> = function*(
