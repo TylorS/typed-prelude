@@ -33,10 +33,11 @@ import { OrToAnd } from '@typed/lambda'
 
 export function* createServer<E>(
   serverChannel: ServerChannel<E>,
-): HookEffects<HooksManagerEnv & TimerEnv & E, Server<E>> {
+): HookEffects<HooksManagerEnv & TimerEnv & E, Server<HooksManagerEnv & TimerEnv & E>> {
   const [getServerState, updateServerState] = yield* provideChannel(serverChannel)
   const { connections, connectionEvents } = yield* getServerState()
 
+  // Register notification handlers
   const registerNotification = yield* useMemo(
     _ =>
       function* registerNotification<E2, Notification extends JsonRpcNotification>(
@@ -71,6 +72,7 @@ export function* createServer<E>(
     [updateServerState],
   )
 
+  // Register request handlers
   const registerRequest = yield* useMemo(
     _ =>
       function* registerRequest<E2, Req extends JsonRpcRequest, Res extends JsonRpcResponse>(
@@ -104,6 +106,7 @@ export function* createServer<E>(
     [updateServerState],
   )
 
+  // Handle incoming messages
   const handleIncomingMessage = yield* useMemo<
     unknown,
     [],
@@ -173,8 +176,8 @@ export function* createServer<E>(
 
   // Listen to new connections
   const connectionEventsDisposable = yield* useEffect(
-    s => s.subscribe(event => runEffects(updateServerState(applyConnectionEvent(event)), env)),
-    [connectionEvents],
+    (s, e) => s.subscribe(event => runEffects(updateServerState(applyConnectionEvent(event)), e)),
+    [connectionEvents, env] as const,
   )
 
   // Listen to all incoming messages
