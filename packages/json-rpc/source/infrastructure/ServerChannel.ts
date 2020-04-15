@@ -1,8 +1,8 @@
-import { Connection, ConnectionEvent } from '../domain'
-import { NotificationHandler, RequestHandler } from '../domain/model/Server'
 import { Channel } from '@typed/hooks'
 import { Subscription } from '@typed/subscription'
 import { Tuple } from '@typed/tuple'
+import { Connection, ConnectionEvent } from '../domain'
+import { NotificationHandler, RequestHandler } from '../domain/model/Server'
 
 export type ServerChannel<E> = Channel<E, ServerState>
 

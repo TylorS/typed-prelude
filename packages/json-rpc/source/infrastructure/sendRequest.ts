@@ -1,16 +1,16 @@
+import { FiberFailure, fork, Fork, join, Join } from '@typed/effects'
 import {
   ConnectionEnv,
-  SendRequest,
+  getOppositeDirection,
   JsonRpcRequest,
   JsonRpcResponse,
   MessageDirection,
-  getOppositeDirection,
+  SendRequest,
 } from '../domain'
-import { fork, Fork, join, Join, FiberFailure } from '@typed/effects'
-import { waitForResponse } from './waitForResponse'
 import { sendMessage } from './sendMessage'
+import { waitForResponse } from './waitForResponse'
 
-export const sendRequest: SendRequest<ConnectionEnv & Fork & Join & FiberFailure> = function*<
+export const sendRequest: SendRequest<ConnectionEnv & Fork & Join & FiberFailure> = function* <
   A extends JsonRpcRequest,
   B extends JsonRpcResponse
 >(request: A, direction: MessageDirection) {

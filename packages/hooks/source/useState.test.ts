@@ -5,9 +5,9 @@ import { NodeGenerator } from '@typed/uuid'
 import { increment } from '../../math/source'
 import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
-import { InitialState } from './HookEnvironment'
+import { runWithHooks } from './runWithHooks'
+import { InitialState } from './types'
 import { useState } from './useState'
-import { withHooks } from './withHooks'
 
 export const test = describe(`useState`, [
   given(`an initial state`, [
@@ -15,7 +15,7 @@ export const test = describe(`useState`, [
       const manager = createHooksManager(new NodeGenerator())
       const hookEnvironment = createHookEnvironment(manager)
       const expectedValues = [1, 2, 3]
-      const sut = withHooks(function* () {
+      const sut = function* () {
         const [getX, updateX] = yield* useState(InitialState.of(1))
         const expected = expectedValues.shift()
         const actual = yield* getX()
@@ -30,11 +30,11 @@ export const test = describe(`useState`, [
         } catch (error) {
           done(error)
         }
-      })
+      }
 
-      runEffects(sut(), { hookEnvironment })
-      runEffects(sut(), { hookEnvironment })
-      runEffects(sut(), { hookEnvironment })
+      runEffects(runWithHooks(sut(), hookEnvironment))
+      runEffects(runWithHooks(sut(), hookEnvironment))
+      runEffects(runWithHooks(sut(), hookEnvironment))
     }),
   ]),
 ])

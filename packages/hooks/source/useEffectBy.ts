@@ -1,65 +1,46 @@
-import { HookEffects, HooksManagerEnv, HookEnvironment } from './types'
-import { Disposable, disposeAll } from '@typed/disposable'
-import { TimerEnv, get, runEffects, combine } from '@typed/effects'
-import { useMemo } from './useMemo'
+import { combine, TimerEnv } from '@typed/effects'
 import { getEnvironmentByKey } from './getEnvironmentByKey'
-import { useEffect } from './useEffect'
-import { equals } from '@typed/logic'
+import { runWithHooks } from './runWithHooks'
+import { ChannelEffects, HookEffects, HookEnv, HookEnvironment } from './types'
+import { useMemo } from './useMemo'
 
-export function* useEffectBy<E, A extends object>(
-  fn: (a: A, index: number) => HookEffects<E, unknown>,
+export function* useEffectBy<A, B extends object, E, C>(
   values: ReadonlyArray<A>,
-): HookEffects<TimerEnv & HooksManagerEnv & E, Disposable> {
-  const env = yield* get()
-  const previousValues = yield* useMemo(() => new Map<HookEnvironment, A>(), [])
-  const previousDisposables = yield* useMemo(() => new Map<HookEnvironment, Disposable>(), [])
-  const effectDisposable = yield* useEffect(
-    (...values) =>
-      runEffects(manageValues(fn, env, previousValues, previousDisposables, values), env),
-    values,
-  )
+  identify: (a: A) => B,
+  fn: (a: A, index: number) => HookEffects<E, C>,
+): ChannelEffects<HookEnv & TimerEnv & E, ReadonlyArray<C>> {
+  const previousValues = yield* useMemo(() => new WeakMap<HookEnvironment, C>(), [])
 
-  return yield* useMemo((...disposables) => disposeAll(disposables), [
-    effectDisposable,
-    ...previousDisposables.values(),
-  ])
+  return yield* manageValues(values, identify, fn, previousValues)
 }
 
-function* manageValues<E, A extends object>(
-  fn: (a: A, index: number) => HookEffects<E, any>,
-  env: E,
-  previousValues: Map<HookEnvironment, A>,
-  previousDisposables: Map<HookEnvironment, Disposable>,
+function* manageValues<A, B extends object, E, C>(
   values: ReadonlyArray<A>,
+  identify: (a: A) => B,
+  fn: (a: A, index: number) => HookEffects<E, C>,
+  previousValues: WeakMap<HookEnvironment, C>,
 ) {
-  yield* combine(
-    ...values.map((value, index) =>
-      manageValue(fn, env, previousValues, previousDisposables, value, index),
-    ),
+  return yield* combine(
+    ...values.map((value, index) => manageValue(value, index, identify, fn, previousValues)),
   )
 }
 
-function* manageValue<E, A extends object>(
-  fn: (a: A, index: number) => HookEffects<E, any>,
-  env: E,
-  previousValues: Map<HookEnvironment, A>,
-  previousDisposables: Map<HookEnvironment, Disposable>,
+function* manageValue<A, B extends object, E, C>(
   value: A,
   index: number,
+  identify: (a: A) => B,
+  fn: (a: A, index: number) => HookEffects<E, C>,
+  previousValues: WeakMap<HookEnvironment, C>,
 ) {
-  const hookEnvironment = yield* getEnvironmentByKey(value)
+  const hookEnvironment = yield* getEnvironmentByKey(identify(value))
+  const firstRun = !previousValues.has(hookEnvironment)
+  const shouldRerunFn = firstRun || hookEnvironment.updated
 
-  if (previousValues.has(hookEnvironment) && equals(previousValues.get(hookEnvironment)!, value)) {
-    return
+  if (shouldRerunFn) {
+    const c = yield* runWithHooks(fn(value, index), hookEnvironment)
+
+    previousValues.set(hookEnvironment, c)
   }
 
-  const previousDisposable = previousDisposables.get(hookEnvironment)
-
-  if (previousDisposable) {
-    previousDisposable.dispose()
-  }
-
-  const disposable = runEffects(fn(value, index), { ...env, hookEnvironment })
-
-  previousDisposables.set(hookEnvironment, disposable)
+  return previousValues.get(hookEnvironment)!
 }

@@ -1,4 +1,4 @@
-import { all, equals, isArray, isObject, isString, or, and } from '@typed/logic'
+import { all, and, equals, isArray, isObject, isString, or } from '@typed/logic'
 import { hasOwnProperty } from '@typed/objects'
 import { JsonRpcNotification } from '../../model'
 
@@ -24,7 +24,7 @@ export function isNotification(x: unknown): x is JsonRpcNotification {
   const hasPropertyAndIsValid = (key: keyof JsonRpcNotification<any, any>, defaultValue: boolean) =>
     hasOwnProperty(key, x) ? VALIDATE_NOTIFICATION_KEYS[key](x[key]) : defaultValue
 
-  if (!all(key => hasPropertyAndIsValid(key, false), REQUIRED_KEYS)) {
+  if (!all((key) => hasPropertyAndIsValid(key, false), REQUIRED_KEYS)) {
     return false
   }
 

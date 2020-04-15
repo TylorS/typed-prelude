@@ -1,5 +1,5 @@
 import { Effect } from '@typed/effects'
-import { HookEffects, HookEnvironment, HooksManagerEnv } from './types'
+import { ChannelEffects, HookEnv, HookEnvironment } from './types'
 
-export const getEnvironmentByKey = (key: object): HookEffects<HooksManagerEnv, HookEnvironment> =>
-  Effect.withEnv(env => env.getEnvironmentByKey(key))
+export const getEnvironmentByKey = (key: object): ChannelEffects<HookEnv, HookEnvironment> =>
+  Effect.withEnv((env) => env.getEnvironmentByKey(key))

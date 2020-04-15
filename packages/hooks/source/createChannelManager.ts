@@ -1,15 +1,14 @@
 import { PureEffect } from '@typed/effects'
+import { Arity1 } from '@typed/lambda'
 import { equals } from '@typed/logic'
 import { Channel } from './Channel'
-import { HookEffects, InitialState } from './types'
+import { ChannelEffects, UseChannelState, UseChannelStateOptions } from './types'
 
 export type ChannelManager<A extends object> = {
-  readonly updateChannel: <E, B>(
-    channel: Channel<E, B>,
+  readonly useChannelState: <E, B, C = B>(
+    options: UseChannelStateOptions<E, B, C>,
     node: A,
-    initialState?: InitialState<E, B>,
-  ) => HookEffects<E, (value: B) => PureEffect<B>>
-  readonly consumeChannel: <E, B>(channel: Channel<E, B>, node: A) => HookEffects<E, B>
+  ) => ChannelEffects<E, UseChannelState<E, B, C>>
 }
 
 // Keeps track of channel values and helps ensure those that need to be updated
@@ -18,7 +17,7 @@ export function createChannelManager<A extends object>(
   setUpdated: (node: A, updated: boolean) => PureEffect<void>,
   getAllDescendants: (
     providers: WeakSet<A>,
-    consumers: WeakSet<A>,
+    consumers: WeakMap<A, any>,
     node: A,
   ) => Generator<A, void, any>,
   getParent: (node: A) => A | undefined,
@@ -26,7 +25,10 @@ export function createChannelManager<A extends object>(
   // WeakMap & WeakSet are used to requires GC to automatically clean things up for us
   // This is a tradeoff made for convenience
   const channelValues = new WeakMap<Channel<any, any>, WeakMap<A, any>>()
-  const channelConsumers = new WeakMap<Channel<any, any>, WeakSet<A>>()
+  const channelConsumers = new WeakMap<
+    Channel<any, any>,
+    WeakMap<A, Arity1<any, any> | undefined>
+  >()
   const channelProviders = new WeakMap<Channel<any, any>, WeakSet<A>>()
 
   function getChannelValues<E, B>(channel: Channel<E, B>): WeakMap<A, B> {
@@ -37,9 +39,11 @@ export function createChannelManager<A extends object>(
     return channelValues.get(channel)!
   }
 
-  function getChannelConsumers<E, B>(channel: Channel<E, B>): WeakSet<A> {
+  function getChannelConsumers<E, B>(
+    channel: Channel<E, B>,
+  ): WeakMap<A, Arity1<any, any> | undefined> {
     if (!channelConsumers.has(channel)) {
-      channelConsumers.set(channel, new WeakSet())
+      channelConsumers.set(channel, new WeakMap())
     }
 
     return channelConsumers.get(channel)!
@@ -53,60 +57,98 @@ export function createChannelManager<A extends object>(
     return channelProviders.get(channel)!
   }
 
-  function* updateChannel<E, B>(
-    channel: Channel<E, B>,
+  // Traverse up the tree to the first provider or the top of the tree.
+  // If this is the top of the tree, use the provided node.
+  function findProvider(node: A, providers: WeakSet<A>): A {
+    let lastParent: A | undefined
+    let parent = getParent(node)
+
+    while (parent && !providers.has(parent)) {
+      lastParent = parent
+      parent = getParent(parent)
+    }
+
+    return lastParent ?? node
+  }
+
+  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): ChannelEffects<E, B> {
+    const values: WeakMap<A, B> = getChannelValues(channel)
+    let provider = node
+
+    while (!values.has(provider)) {
+      const parent = getParent(provider)
+
+      if (!parent) {
+        const b = yield* channel.defaultValue()
+
+        values.set(node, b)
+
+        getChannelProviders(channel).add(node)
+
+        return b
+      }
+
+      provider = parent
+    }
+
+    return values.get(provider)!
+  }
+
+  function* useChannelState<E, B, C = B>(
+    options: UseChannelStateOptions<E, B, C>,
     node: A,
-    initialState?: InitialState<E, B>,
-  ) {
+  ): ChannelEffects<E, UseChannelState<E, B, C>> {
+    const { channel, selector, initialState } = options
     const values = getChannelValues(channel)
     const consumers = getChannelConsumers(channel)
     const providers = getChannelProviders(channel)
+    const isProvider = selector ? false : !!initialState
 
-    if (!values.has(node) && initialState) {
+    if (isProvider && !values.has(node) && initialState) {
       values.set(node, yield* initialState())
     }
 
-    providers.add(node)
+    if (isProvider) {
+      providers.add(node)
+    }
 
-    return function*(value: B): PureEffect<B> {
-      const currentValue = values.get(node)
+    consumers.set(node, selector)
 
-      if (!equals(currentValue, value)) {
-        values.set(node, value)
+    function* getValue(): ChannelEffects<E, C> {
+      const currentValue = yield* consumeChannel(channel, node)
 
-        yield* setUpdated(node, true)
+      return selector ? selector(currentValue) : (currentValue as any)
+    }
 
-        for (const child of getAllDescendants(providers, consumers, node)) {
-          yield* setUpdated(child, true)
+    function* updateValue(updateValue: Arity1<B, B>): ChannelEffects<E, C> {
+      const currentValue = yield* consumeChannel(channel, node)
+      const updatedValue = updateValue(currentValue)
+
+      if (!equals(currentValue, updatedValue)) {
+        const provider = findProvider(node, providers)
+
+        values.set(provider, updatedValue)
+
+        yield* setUpdated(provider, true)
+
+        for (const child of getAllDescendants(providers, consumers, provider)) {
+          const selector = consumers.get(child)!
+
+          const childUpdated = selector
+            ? !equals(selector(currentValue), selector(updatedValue))
+            : true
+
+          if (childUpdated) {
+            yield* setUpdated(child, childUpdated)
+          }
         }
       }
 
-      return value
-    }
-  }
-
-  function* consumeChannel<E, B>(channel: Channel<E, B>, node: A): HookEffects<E, B> {
-    const values: WeakMap<A, B> = getChannelValues(channel)
-    const consumers = getChannelConsumers(channel)
-
-    consumers.add(node)
-
-    while (!values.has(node)) {
-      const parent = getParent(node)
-
-      if (!parent) {
-        const value = yield* channel.defaultValue()
-
-        values.set(node, value)
-
-        return value
-      }
-
-      node = parent
+      return yield* getValue()
     }
 
-    return values.get(node)!
+    return [getValue, updateValue] as const
   }
 
-  return { updateChannel, consumeChannel } as const
+  return { useChannelState } as const
 }

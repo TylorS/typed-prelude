@@ -1,5 +1,4 @@
-import { PureEffect } from '@typed/effects'
-import { Pure } from '@typed/env'
+import { combine, PureEffect } from '@typed/effects'
 
 // Keeps track of parent-to-child and child-to-parent relationships for usage with Channels.
 export function createTreeManager<A extends object>(): TreeManager<A> {
@@ -34,7 +33,7 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
   }
 
   function* setParent(child: A, parent: A) {
-    yield Pure.fromIO(() => removeFromParent(child))
+    removeFromParent(child)
 
     childToParent.set(child, parent)
 
@@ -49,17 +48,13 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
     return
   }
 
-  function* setChild(parent: A, child: A) {
-    return yield* setParent(child, parent)
-  }
-
-  function* removeNode(node: A) {
-    yield Pure.fromIO(() => removeFromParent(node))
+  function* removeNode(node: A): PureEffect<void> {
+    removeFromParent(node)
 
     const children = getChildren(node)
 
     if (children) {
-      children.forEach(removeNode)
+      yield* combine(...Array.from(children).map(removeNode))
     }
 
     parentToChildren.delete(node)
@@ -67,7 +62,7 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
 
   function* getAllDescendants(
     providers: WeakSet<A>,
-    consumers: WeakSet<A>,
+    consumers: WeakMap<A, any>,
     node: A,
   ): Generator<A, void, any> {
     const children = getChildren(node)
@@ -90,25 +85,35 @@ export function createTreeManager<A extends object>(): TreeManager<A> {
     }
   }
 
+  function* getAllAncestors(node: A) {
+    let parent = childToParent.get(node)
+
+    while (parent) {
+      yield parent
+
+      parent = childToParent.get(parent)
+    }
+  }
+
   return {
     setParent,
-    setChild,
     removeNode,
     getParent,
     getChildren,
     getAllDescendants,
+    getAllAncestors,
   } as const
 }
 
 type TreeManager<A extends object> = {
   readonly setParent: (child: A, parent: A) => PureEffect<void>
-  readonly setChild: (parent: A, child: A) => PureEffect<void>
   readonly removeNode: (node: A) => PureEffect<void>
   readonly getParent: (node: A) => A | undefined
   readonly getChildren: (node: A) => Set<A> | undefined
   readonly getAllDescendants: (
     providers: WeakSet<A>,
-    consumers: WeakSet<A>,
+    consumers: WeakMap<A, any>,
     node: A,
   ) => Generator<A, void, any>
+  readonly getAllAncestors: (node: A) => Generator<A, void, any>
 }

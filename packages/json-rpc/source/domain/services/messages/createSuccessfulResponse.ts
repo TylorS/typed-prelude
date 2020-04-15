@@ -1,7 +1,7 @@
 import { Id, JsonRpcSuccessfulResponse, StructuredJson } from '../../model'
 
 export function createSuccessfulResponse<R extends StructuredJson>(
-  requestId: Id | null,
+  requestId: Id,
   result: R,
 ): JsonRpcSuccessfulResponse<R> {
   return {

@@ -1,5 +1,5 @@
 import { combine, Computation, fail, TypeOf } from '@typed/effects'
-import { HookEnv } from '@typed/hooks'
+import { HookEnv, HooksManagerEnv } from '@typed/hooks'
 import { fromJust, isNothing } from '@typed/maybe'
 import { Tuple } from '@typed/tuple'
 import { CryptoFailure, EncryptedKeyPair, EncryptionEnv } from '../../common'
@@ -15,7 +15,7 @@ export interface ChangePasswordOptions extends DeriveAesKeyOptions {
 export interface ChangePassword
   extends Computation<
     [ChangePasswordOptions],
-    EncryptionEnv & HookEnv,
+    EncryptionEnv & HookEnv & HooksManagerEnv,
     Tuple<CryptoKey, EncryptedKeyPair>
   > {}
 

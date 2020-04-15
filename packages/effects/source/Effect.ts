@@ -20,7 +20,7 @@ export type Yield<A> = A extends Effect<infer R, any> ? R : never
 export type Return<A> = A extends Effect<any, infer R> ? R : never
 
 export type Capabilities<A> = A extends Effects<infer R, any>
-  ? OrToAnd<R>
+  ? R
   : A extends Effect<infer C, any>
   ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
   : never

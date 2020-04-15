@@ -1,10 +1,10 @@
 import { Effect, runEffects } from '@typed/effects'
-import { Pure } from '@typed/env'
 import { describe, given, it } from '@typed/test'
 import { NodeGenerator } from '@typed/uuid'
 import { createChannel } from './createChannel'
 import { createHookEnvironment } from './createHookEnvironment'
-import { createHooksManager } from './createHooksManager'
+import { createHooksManagerEnv } from './createHooksManagerEnv'
+import { HookEnvironment, HookEnvironmentEventType } from './types'
 
 export const test = describe(`createHooksManager`, [
   given(`a hierarchy of HookEnvironments`, [
@@ -13,24 +13,36 @@ export const test = describe(`createHooksManager`, [
       notOk,
       ok,
     }, done) => {
-      const manager = createHooksManager(new NodeGenerator())
-      const a = createHookEnvironment(manager)
-      const b = createHookEnvironment(manager)
-      const c = createHookEnvironment(manager)
+      const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
+      const a = createHookEnvironment(hooksManagerEnv.hooksManager)
+      const b = createHookEnvironment(hooksManagerEnv.hooksManager)
+      const c = createHookEnvironment(hooksManagerEnv.hooksManager)
       const initial = 1
       const expected = 3
-      const channel = createChannel(() => Effect.fromEnv(Pure.of(initial)))
+      const channel = createChannel(() => Effect.of(initial))
+
+      function* consumeFrom(node: HookEnvironment) {
+        const [getValue] = yield* hooksManagerEnv.hooksManager.useChannelState({ channel }, node)
+
+        return yield* getValue()
+      }
 
       function* test() {
         try {
           // Add hierarchy
-          yield* manager.setParent(b, a)
-          yield* manager.setChild(b, c)
+          hooksManagerEnv.hooksManager.hookEvents.publish([
+            HookEnvironmentEventType.Created,
+            { created: b, parent: a },
+          ])
+          hooksManagerEnv.hooksManager.hookEvents.publish([
+            HookEnvironmentEventType.Created,
+            { created: c, parent: b },
+          ])
 
           // Check that things are initial
-          equal(initial, yield* manager.consumeChannel(channel, a))
-          equal(initial, yield* manager.consumeChannel(channel, b))
-          equal(initial, yield* manager.consumeChannel(channel, c))
+          equal(initial, yield* consumeFrom(a))
+          equal(initial, yield* consumeFrom(b))
+          equal(initial, yield* consumeFrom(c))
 
           // Shouldn't be marked updated yet
           notOk(a.updated)
@@ -38,28 +50,23 @@ export const test = describe(`createHooksManager`, [
           notOk(c.updated)
 
           // Get provideChannel Effect from manager
-          const provideChannel = yield* manager.updateChannel(channel, a)
-
-          // Ensure manager.updateChannel didn't make any unexpected changes
-          equal(initial, yield* manager.consumeChannel(channel, a))
-          equal(initial, yield* manager.consumeChannel(channel, b))
-          equal(initial, yield* manager.consumeChannel(channel, c))
-          notOk(a.updated)
-          notOk(b.updated)
-          notOk(c.updated)
+          const [, provideChannel] = yield* hooksManagerEnv.hooksManager.useChannelState(
+            { channel, initialState: channel.defaultValue },
+            a,
+          )
 
           // Provide new value
-          equal(expected, yield* provideChannel(expected))
-
-          // Check that value was updated
-          equal(expected, yield* manager.consumeChannel(channel, a))
-          equal(expected, yield* manager.consumeChannel(channel, b))
-          equal(expected, yield* manager.consumeChannel(channel, c))
+          equal(expected, yield* provideChannel(() => expected))
 
           // Ensure HookEnvironments are marked updated
           ok(a.updated)
           ok(b.updated)
           ok(c.updated)
+
+          // Check that value was updated
+          equal(expected, yield* consumeFrom(a))
+          equal(expected, yield* consumeFrom(b))
+          equal(expected, yield* consumeFrom(c))
 
           done()
         } catch (error) {
@@ -67,7 +74,9 @@ export const test = describe(`createHooksManager`, [
         }
       }
 
-      runEffects(test(), {} as never)
+      runEffects(test(), {
+        ...hooksManagerEnv,
+      })
     }),
   ]),
 ])

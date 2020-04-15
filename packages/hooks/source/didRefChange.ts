@@ -4,7 +4,7 @@ import { Ref } from './types'
 
 export function didRefChange<A>(
   ref: Ref<A>,
-  setRef: (value: A | undefined) => void,
+  setRef: (value: A | null | void | undefined) => void,
   value: A,
   firstRun: boolean,
 ) {

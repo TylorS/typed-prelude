@@ -1,13 +1,13 @@
-import { createChannel } from '@typed/hooks'
-import { Connection, ConnectionEvent, MessageDirection } from '../domain'
-import { createSubscription } from '@typed/subscription'
-import { ServerState, ServerChannel } from './ServerChannel'
 import { Disposable } from '@typed/disposable'
+import { createChannel } from '@typed/hooks'
+import { createSubscription, Subscription } from '@typed/subscription'
+import { Connection, ConnectionEvent, MessageDirection } from '../domain'
+import { ServerChannel, ServerState } from './ServerChannel'
 
 export const createTestServerChannel = (options: Partial<ServerState>): ServerChannel<unknown> =>
-  createChannel(function*() {
+  createChannel(function* () {
     const connections: ReadonlyArray<Connection> = []
-    const connectionEvents = createSubscription<ConnectionEvent>()
+    const connectionEvents = createConnectionEventSubscription()
 
     const state: ServerState = {
       connections,
@@ -19,6 +19,9 @@ export const createTestServerChannel = (options: Partial<ServerState>): ServerCh
 
     return state
   })
+
+export const createConnectionEventSubscription = (): Subscription<ConnectionEvent> =>
+  createSubscription<ConnectionEvent>()
 
 export const createTestConnection = (options: Partial<Connection> = {}): Connection => {
   return {

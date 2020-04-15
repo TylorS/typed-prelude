@@ -1,35 +1,34 @@
+import { Disposable, disposeAll } from '@typed/disposable'
+import { combine, Effect, get, runEffects, runWith, TimerEnv } from '@typed/effects'
 import {
-  ConnectionEvent,
-  JsonRpcNotification,
-  JsonRpcRequest,
-  JsonRpcResponse,
-  Message,
-  ConnectionEnv,
-  isNotification,
-  isRequest,
-  isBatchRequest,
-  createFailedResponse,
-  JsonRpcErrorCode,
-  MessageDirection,
-  BatchResponse,
-} from '../domain'
-import {
+  ChannelEffects,
   HookEffects,
-  provideChannel,
   HooksManagerEnv,
+  provideChannel,
   useEffect,
-  HookEnv,
   useEffectBy,
   useMemo,
 } from '@typed/hooks'
 import { append, filter } from '@typed/list'
 import { complement, equals } from '@typed/logic'
-import { runEffects, get, runWith, combine, TimerEnv, Effect } from '@typed/effects'
-import { Disposable, disposeAll } from '@typed/disposable'
-import { NotificationHandler, RequestHandler, Server } from '../domain/model/Server'
 import { withMutations } from '@typed/map'
-import { ServerState, ServerChannel } from './ServerChannel'
-import { OrToAnd } from '@typed/lambda'
+import {
+  BatchResponse,
+  ConnectionEnv,
+  ConnectionEvent,
+  createFailedResponse,
+  isBatchRequest,
+  isNotification,
+  isRequest,
+  JsonRpcErrorCode,
+  JsonRpcNotification,
+  JsonRpcRequest,
+  JsonRpcResponse,
+  Message,
+  MessageDirection,
+} from '../domain'
+import { NotificationHandler, RequestHandler, Server } from '../domain/model/Server'
+import { ServerChannel, ServerState } from './ServerChannel'
 
 export function* createServer<E>(
   serverChannel: ServerChannel<E>,
@@ -39,32 +38,32 @@ export function* createServer<E>(
 
   // Register notification handlers
   const registerNotification = yield* useMemo(
-    _ =>
+    (_) =>
       function* registerNotification<E2, Notification extends JsonRpcNotification>(
         method: Notification['method'],
         handler: NotificationHandler<E2, Notification>,
-      ): HookEffects<E & E2, Disposable> {
+      ): ChannelEffects<E & E2, Disposable> {
         // Store this environment just in case it's run like runWith(registerNotification(...), ...)
         const env = yield* get()
 
-        yield* updateServerState(state => ({
+        yield* updateServerState((state) => ({
           ...state,
           notificationHandlers: withMutations(
-            handlers => handlers.set(method, [handler, env]),
+            (handlers) => handlers.set(method, [handler, env]),
             state.notificationHandlers,
           ),
         }))
 
         const dispose = () =>
           runEffects(
-            updateServerState(state => ({
+            updateServerState((state) => ({
               ...state,
               notificationHandlers: withMutations(
-                handlers => handlers.delete(method),
+                (handlers) => handlers.delete(method),
                 state.notificationHandlers,
               ),
             })),
-            env as OrToAnd<HookEnv & E>,
+            env,
           )
 
         return { dispose }
@@ -74,32 +73,32 @@ export function* createServer<E>(
 
   // Register request handlers
   const registerRequest = yield* useMemo(
-    _ =>
+    (_) =>
       function* registerRequest<E2, Req extends JsonRpcRequest, Res extends JsonRpcResponse>(
         method: Req['method'],
         handler: RequestHandler<E2, Req, Res>,
-      ): HookEffects<E & E2, Disposable> {
+      ): ChannelEffects<E & E2, Disposable> {
         // Store this environment just in case it's run like runWith(registerRequest(...), ...)
         const env = yield* get()
 
-        yield* updateServerState(state => ({
+        yield* updateServerState((state) => ({
           ...state,
           requestHandlers: withMutations(
-            handlers => handlers.set(method, [handler, env]),
+            (handlers) => handlers.set(method, [handler, env]),
             state.requestHandlers,
           ),
         }))
 
         const dispose = () =>
           runEffects(
-            updateServerState(state => ({
+            updateServerState((state) => ({
               ...state,
               requestHandlers: withMutations(
-                handlers => handlers.delete(method),
+                (handlers) => handlers.get(method)?.[0] === handler && handlers.delete(method),
                 state.requestHandlers,
               ),
             })),
-            env as OrToAnd<HookEnv & E>,
+            env,
           )
         return { dispose }
       },
@@ -176,27 +175,25 @@ export function* createServer<E>(
 
   // Listen to new connections
   const connectionEventsDisposable = yield* useEffect(
-    (s, e) => s.subscribe(event => runEffects(updateServerState(applyConnectionEvent(event)), e)),
+    (s, e) => s.subscribe((event) => runEffects(updateServerState(applyConnectionEvent(event)), e)),
     [connectionEvents, env] as const,
   )
 
   // Listen to all incoming messages
-  const incomingMessagesDisposable = yield* useEffectBy(
-    connection =>
-      Effect.of(
-        connection[MessageDirection.Incoming].subscribe(message =>
-          runEffects(handleIncomingMessage(message), {
-            ...env,
-            connection,
-          }),
-        ),
+  const incomingMessagesDisposables = yield* useEffectBy(connections, Array, (connection) =>
+    Effect.of(
+      connection[MessageDirection.Incoming].subscribe((message) =>
+        runEffects(handleIncomingMessage(message), {
+          ...env,
+          connection,
+        }),
       ),
-    connections,
+    ),
   )
-  const disposable = yield* useMemo((...disposables) => disposeAll(disposables), [
+  const disposable = yield* useMemo((e, disposables) => disposeAll([e, ...disposables]), [
     connectionEventsDisposable,
-    incomingMessagesDisposable,
-  ])
+    incomingMessagesDisposables,
+  ] as const)
 
   return {
     ...disposable,

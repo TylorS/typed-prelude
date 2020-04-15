@@ -5,16 +5,14 @@ import { Arity1 } from '@typed/lambda'
 import { equals } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { uuid4 } from '@typed/uuid'
-import { Channel } from './Channel'
 import {
-  InitialState,
-  HooksManager,
   HookEnvironment,
-  ProvideChannel,
-  UseState,
-  UseRef,
+  HookEnvironmentEventType,
+  HooksManager,
+  InitialState,
   Ref,
-  HookEffects,
+  UseRef,
+  UseState,
 } from './types'
 
 const toNull = InitialState.of(null)
@@ -23,19 +21,21 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
   const id = uuid4(manager.randomUuidSeed())
   const { nextId, resetId } = createIdGenerator()
   const hookStates = new Map<number, any>()
-  const channelUpdates = new WeakMap<Channel<any, any>, ProvideChannel<any, any>>()
   const disposable = Disposable.lazy()
   const hookEnvironment: HookEnvironment = {
     id,
     useState,
     useRef,
-    useChannel,
-    provideChannel,
     resetId,
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
     },
-    clearUpdated: () => manager.setUpdated(hookEnvironment, false),
+    *clearUpdated() {
+      manager.hookEvents.publish([
+        HookEnvironmentEventType.Updated,
+        { hookEnvironment, updated: false },
+      ])
+    },
     ...disposable,
   }
 
@@ -49,6 +49,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     }
 
     const getState = () => Effect.fromEnv(Pure.fromIO((): A => hookStates.get(id)!))
+
     function* setState(update: Arity1<A, A>): PureEffect<A> {
       const current = yield* getState()
       const updated = update(current)
@@ -56,7 +57,10 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
       if (!equals(current, updated)) {
         hookStates.set(id, updated)
 
-        yield* manager.setUpdated(hookEnvironment, true)
+        manager.hookEvents.publish([
+          HookEnvironmentEventType.Updated,
+          { hookEnvironment, updated: true },
+        ])
       }
 
       return yield* getState()
@@ -84,33 +88,6 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     }
 
     return [ref, setState] as const
-  }
-
-  function* provideChannel<E, A>(
-    channel: Channel<E, A>,
-    initial?: InitialState<E, A>,
-  ): HookEffects<E, ProvideChannel<E, A>> {
-    // Only create updateChannel once
-    if (channelUpdates.has(channel)) {
-      return channelUpdates.get(channel)!
-    }
-
-    const getValue = () => manager.consumeChannel(channel, hookEnvironment)
-    const provideValue = yield* manager.updateChannel(channel, hookEnvironment, initial)
-
-    function* updateChannel(update: Arity1<A, A>): HookEffects<E, A> {
-      return yield* provideValue(update(yield* getValue()))
-    }
-
-    const useChannel: ProvideChannel<E, A> = [getValue, updateChannel]
-
-    channelUpdates.set(channel, useChannel)
-
-    return useChannel
-  }
-
-  function* useChannel<E, A>(channel: Channel<E, A>): HookEffects<E, A> {
-    return yield* manager.consumeChannel(channel, hookEnvironment)
   }
 }
 

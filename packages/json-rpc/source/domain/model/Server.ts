@@ -1,8 +1,8 @@
 import { Disposable } from '@typed/disposable'
 import { HookEffects } from '@typed/hooks'
-import { JsonRpcNotification, JsonRpcRequest, JsonRpcResponse } from './json-rpc-v2'
 import { Tuple } from '@typed/tuple'
 import { Connection } from './Connection'
+import { JsonRpcNotification, JsonRpcRequest, JsonRpcResponse } from './json-rpc-v2'
 
 export interface Server<E> extends Disposable {
   readonly registerNotification: <E2, A extends JsonRpcNotification>(

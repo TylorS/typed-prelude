@@ -2,6 +2,8 @@ import { createIndexedDb } from '@typed/asyncstorage'
 import { createServerIndexedDbFactory } from '@typed/asyncstorage'
 import { Fail, runEffects, runWith, TimerEnv, TypeOf } from '@typed/effects'
 import { createHookEnvironment, createHooksManager, HookEffects } from '@typed/hooks'
+import { ChannelEffects, HookEnv } from '@typed/hooks'
+import { createHooksManagerEnv } from '@typed/hooks/source/createHooksManagerEnv'
 import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { isJust, isNothing } from '@typed/maybe'
 import { describe, given, it, Test, TYPED_TEST } from '@typed/test'
@@ -27,7 +29,8 @@ const useAuthTests = describe(`useAuth`, [
         const salt = 'test@example.com'
         const password = 'test'
         const iterations = 10 // Use WAAAAAAYYY more in production
-        const hookEnvironment = createHookEnvironment(createHooksManager(new NodeGenerator()))
+        const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
+        const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
         const timer = createVirtualTimer()
         const i = 100
 
@@ -70,6 +73,7 @@ const useAuthTests = describe(`useAuth`, [
         }
 
         runEffects(setup(), {
+          ...hooksManagerEnv,
           timer,
           hookEnvironment,
           crypto: createServerCrypto(),
@@ -87,11 +91,12 @@ const useAuthTests = describe(`useAuth`, [
         const salt = 'test@example.com'
         const password = 'test'
         const iterations = 10 // Use WAAAAAAYYY more in production
-        const hookEnvironment = createHookEnvironment(createHooksManager(new NodeGenerator()))
+        const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
+        const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
         const timer = createVirtualTimer()
         const i = 100
 
-        function* testSigningUp(): HookEffects<EncryptionEnv & TimerEnv, void> {
+        function* testSigningUp(): ChannelEffects<EncryptionEnv & HookEnv & TimerEnv, void> {
           const a = yield* useAuth()
 
           timer.progressTimeBy(i)
@@ -107,7 +112,7 @@ const useAuthTests = describe(`useAuth`, [
           ok(isJust(encryptedKeyPair))
         }
 
-        function* testSigningOut(): HookEffects<EncryptionEnv & TimerEnv, void> {
+        function* testSigningOut(): ChannelEffects<HookEnv & EncryptionEnv & TimerEnv, void> {
           yield* signOut()
 
           const { availableSalts, encryptedKeyPair } = yield* useAuth()
@@ -143,6 +148,7 @@ const useAuthTests = describe(`useAuth`, [
         type T = TypeOf<typeof setup>
 
         runEffects(setup(), {
+          ...hooksManagerEnv,
           timer,
           hookEnvironment,
           crypto: createServerCrypto(),
@@ -159,11 +165,12 @@ const useAuthTests = describe(`useAuth`, [
       const salt = 'test@example.com'
       const password = 'test'
       const iterations = 10 // Use WAAAAAAYYY more in production
-      const hookEnvironment = createHookEnvironment(createHooksManager(new NodeGenerator()))
+      const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
+      const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
       const timer = createVirtualTimer()
       const i = 100
 
-      function* testSigningUp(): HookEffects<EncryptionEnv & TimerEnv, void> {
+      function* testSigningUp(): ChannelEffects<HookEnv & EncryptionEnv & TimerEnv, void> {
         const a = yield* useAuth()
 
         timer.progressTimeBy(i)
@@ -179,7 +186,7 @@ const useAuthTests = describe(`useAuth`, [
         ok(isJust(encryptedKeyPair))
       }
 
-      function* testSigningOut(): HookEffects<EncryptionEnv & TimerEnv, void> {
+      function* testSigningOut(): ChannelEffects<HookEnv & EncryptionEnv & TimerEnv, void> {
         yield* signOut()
 
         const { availableSalts, encryptedKeyPair } = yield* useAuth()
@@ -226,6 +233,7 @@ const useAuthTests = describe(`useAuth`, [
       type T = TypeOf<typeof setup>
 
       runEffects(setup(), {
+        ...hooksManagerEnv,
         timer,
         hookEnvironment,
         crypto: createServerCrypto(),

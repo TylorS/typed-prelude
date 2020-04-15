@@ -15,7 +15,7 @@ export function* useRouter<A, B = null>(
     (scope, historyEnv) => (scope ? scopeHistoryEnv(scope, historyEnv) : historyEnv),
     [scope, historyEnv] as const,
   )
-  const matches = yield* useMemo(routes => routes.map(r => r.match), [routes])
+  const matches = yield* useMemo((routes) => routes.map((r) => r.match), [routes])
 
   return yield* useMatches(location.pathname as Path, matches)
 }

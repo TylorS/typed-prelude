@@ -1,5 +1,5 @@
 import { Computation, fail, TypeOf } from '@typed/effects'
-import { HookEnv } from '@typed/hooks'
+import { HookEnv, HooksManagerEnv } from '@typed/hooks'
 import { debug, error } from '@typed/logger'
 import { fromJust, isNothing } from '@typed/maybe'
 import { Tuple } from '@typed/tuple'
@@ -13,7 +13,7 @@ export type SignInOptions = DeriveAesKeyOptions & {}
 export interface SignIn
   extends Computation<
     [SignInOptions],
-    EncryptionEnv & HookEnv,
+    EncryptionEnv & HookEnv & HooksManagerEnv,
     Tuple<CryptoKey, EncryptedKeyPair>
   > {}
 

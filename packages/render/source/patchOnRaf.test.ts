@@ -2,7 +2,7 @@ import { runEffects } from '@typed/effects'
 import { Resume } from '@typed/env'
 import {
   createHookEnvironment,
-  createHooksManager,
+  createHooksManagerEnv,
   InitialState,
   useEffectOnce,
   useState,
@@ -11,14 +11,14 @@ import { describe, given, it } from '@typed/test'
 import { createVirtualTimer, interval } from '@typed/timer'
 import { NodeGenerator } from '@typed/uuid'
 import { createTestRafEnv } from './createTestRafEnv'
-import { renderOnRaf } from './renderOnRaf'
+import { patchOnRaf } from './patchOnRaf'
 
-export const test = describe(`renderOnRaf`, [
+export const test = describe(`patchOnRaf`, [
   given(`a function to HookEffects<A, B>`, [
     it(`returns an effect that renders type B on RAF updates`, ({ equal }, done) => {
       const timer = createVirtualTimer()
-      const manager = createHooksManager(new NodeGenerator())
-      const hookEnvironment = createHookEnvironment(manager)
+      const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
+      const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
       const i = 1000
       function* app() {
         const [getState, updateState] = yield* useState(InitialState.of<number>(1))
@@ -41,9 +41,11 @@ export const test = describe(`renderOnRaf`, [
       const expectedValues = [1, 2, 3]
 
       const e = {
+        timer,
+        ...hooksManagerEnv,
         hookEnvironment,
         ...createTestRafEnv(timer),
-        render: (value: number) => {
+        patch: (_: number, value: number) => {
           const expected = expectedValues.shift()
 
           try {
@@ -60,7 +62,8 @@ export const test = describe(`renderOnRaf`, [
         },
       } as const
 
-      runEffects(renderOnRaf(app), e)
+      runEffects(patchOnRaf(app, 0), e)
+      timer.progressTimeBy(i)
 
       setTimeout(() => {
         timer.progressTimeBy(i)

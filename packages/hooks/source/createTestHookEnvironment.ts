@@ -1,8 +1,8 @@
-import { UuidEnv } from '@typed/uuid'
-import { createHooksManagerEnv } from './createHooksManagerEnv'
-import { createHookEnvironment } from './createHookEnvironment'
 import { createVirtualTimer, VirtualTimer } from '@typed/timer'
-import { HooksManagerEnv, HookEnv } from './types'
+import { UuidEnv } from '@typed/uuid'
+import { createHookEnvironment } from './createHookEnvironment'
+import { createHooksManagerEnv } from './createHooksManagerEnv'
+import { HookEnv, HooksManagerEnv } from './types'
 
 export function createTestHookEnvironment(
   uuidEnv: UuidEnv,

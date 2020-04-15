@@ -1,21 +1,20 @@
-import { Effects, get } from '@typed/effects'
+import { Effects } from '@typed/effects'
 import {
   HookEffects,
   HookEnv,
-  runWithHooks,
+  HooksManagerEnv,
   useMatches,
   useMemo,
   useMemoEffect,
 } from '@typed/hooks'
 import { Match } from '@typed/logic'
-import { fromJust, isNothing, Just, Maybe } from '@typed/maybe'
-import { HookManagerEnv } from './HookManagerEnv'
+import { fromJust, isNothing, Just, Maybe, Nothing } from '@typed/maybe'
+import { useKeyManager } from './useKeyManager'
 
 export function* useMatchManager<A, E, B>(
   matchAgainst: A,
   matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
-): Effects<E & HookEnv & HookManagerEnv, Maybe<B>> {
-  const { getEnvironmentByKey } = yield* get<E & HookEnv & HookManagerEnv>()
+): Effects<E & HookEnv & HooksManagerEnv, Maybe<B>> {
   const modifiedMatches = yield* useMemo(
     (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
     [matches],
@@ -23,15 +22,14 @@ export function* useMatchManager<A, E, B>(
   const match = yield* useMatches(matchAgainst, modifiedMatches)
 
   return yield* useMemoEffect(
-    function* (maybeMatch): Effects<E & HookEnv, Maybe<B>> {
+    function* (maybeMatch): Effects<E & HookEnv & HooksManagerEnv, Maybe<B>> {
       if (isNothing(maybeMatch)) {
-        return maybeMatch
+        return Nothing
       }
 
       const [m, computation] = fromJust(maybeMatch)
-      const hookEnvironment = yield* getEnvironmentByKey(m)
 
-      return Just.of(yield* runWithHooks(computation(), hookEnvironment))
+      return Just.of(yield* useKeyManager(m, computation()))
     },
     [match],
   )

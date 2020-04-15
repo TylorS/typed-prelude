@@ -2,10 +2,11 @@ import {
   Channel,
   createChannel,
   HookEnv,
+  HooksManagerEnv,
   InitialState,
   provideChannel,
-  ProvideChannel,
-  useChannel,
+  UseChannelState,
+  useChannelValue,
 } from '@typed/hooks'
 import { debug } from '@typed/logger'
 import { Maybe, Nothing } from '@typed/maybe'
@@ -38,11 +39,11 @@ export const AuthChannel: Channel<EncryptionEnv, AuthInfo> = createChannel(funct
   }
 })
 
-export const useAuthChannel = () => useChannel(AuthChannel)
+export const useAuthChannel = () => useChannelValue(AuthChannel)
 
 export const provideAuthChannel = (
   initial?: InitialState<EncryptionEnv, AuthInfo>,
-): EncryptionEffects<HookEnv, ProvideChannel<EncryptionEnv, AuthInfo>> =>
+): EncryptionEffects<HooksManagerEnv & HookEnv, UseChannelState<EncryptionEnv, AuthInfo>> =>
   provideChannel(AuthChannel, initial)
 
 export function* sendAuthEvent(event: AuthEvent) {

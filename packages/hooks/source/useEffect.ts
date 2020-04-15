@@ -1,18 +1,18 @@
 import { Disposable, dispose, disposeAll } from '@typed/disposable'
+import { TimerEnv } from '@typed/effects'
 import { Fn, IO } from '@typed/lambda'
 import { unwrap, withDefault } from '@typed/maybe'
 import { getHookEnv } from './getHookEnv'
-import { HookEffects } from './types'
+import { ChannelEffects, HookEnv } from './types'
 import { useDepChange } from './useDepChange'
 import { useTimer } from './useTimer'
-import { TimerEnv } from '@typed/effects'
 
 const empty: [] = []
 
 export function* useEffect<A extends readonly any[]>(
   fn: Fn<A, Disposable>,
   deps: A,
-): HookEffects<TimerEnv, Disposable> {
+): ChannelEffects<HookEnv & TimerEnv, Disposable> {
   const { useRef, addDisposable } = yield* getHookEnv()
   const [disposable, setDisposable] = yield* useRef<any, Disposable>()
   const depsChanged = yield* useDepChange(deps)
@@ -29,6 +29,6 @@ export function* useEffect<A extends readonly any[]>(
   return withDefault(Disposable.None, disposable.current)
 }
 
-export function* useEffectOnce(fn: IO<Disposable>): HookEffects<TimerEnv, Disposable> {
+export function* useEffectOnce(fn: IO<Disposable>): ChannelEffects<HookEnv & TimerEnv, Disposable> {
   return yield* useEffect(fn, empty)
 }

@@ -1,12 +1,14 @@
-import { HookEffects, HooksManagerEnv, HookEnvironment } from './types'
-import { getHookEnv } from './getHookEnv'
-import { createHookEnvironment } from './createHookEnvironment'
 import { UuidEnv } from '@typed/uuid'
+import { createHookEnvironment } from './createHookEnvironment'
 import { createHooksManager } from './createHooksManager'
+import { getHookEnv } from './getHookEnv'
+import { HookEffects, HookEnvironment, HookEnvironmentEventType, HooksManagerEnv } from './types'
 
 export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
   const hooksManager = createHooksManager(uuidEnv)
   const environments = new WeakMap<object, HookEnvironment>()
+
+  const { hookEvents } = hooksManager
 
   function* getEnvironmentByKey(key: object): HookEffects<unknown, HookEnvironment> {
     const parent = yield* getHookEnv()
@@ -15,13 +17,13 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
       return environments.get(key)!
     }
 
-    const newEnvironment = createHookEnvironment(hooksManager)
+    const created = createHookEnvironment(hooksManager)
 
-    environments.set(key, newEnvironment)
+    environments.set(key, created)
 
-    yield* hooksManager.setParent(newEnvironment, parent)
+    hookEvents.publish([HookEnvironmentEventType.Created, { created, parent }])
 
-    return newEnvironment
+    return created
   }
 
   function* removeEnvironmentByKey(key: object) {
@@ -30,7 +32,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
     if (environment) {
       environments.delete(key)
 
-      yield* hooksManager.removeNode(environment)
+      hookEvents.publish([HookEnvironmentEventType.Removed, environment])
     }
   }
 

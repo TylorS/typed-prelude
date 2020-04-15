@@ -1,5 +1,5 @@
 import { Computation, TypeOf } from '@typed/effects'
-import { HookEnv } from '@typed/hooks'
+import { HookEnv, HooksManagerEnv } from '@typed/hooks'
 import { debug } from '@typed/logger'
 import { fromJust, isJust } from '@typed/maybe'
 import { Tuple } from '@typed/tuple'
@@ -14,7 +14,7 @@ export type SignUpOptions = DeriveAesKeyOptions & {}
 export interface SignUp
   extends Computation<
     [SignUpOptions],
-    EncryptionEnv & HookEnv,
+    EncryptionEnv & HookEnv & HooksManagerEnv,
     Tuple<CryptoKey, EncryptedKeyPair>
   > {}
 

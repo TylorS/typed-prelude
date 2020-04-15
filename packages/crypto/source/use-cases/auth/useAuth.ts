@@ -1,5 +1,12 @@
 import { Computation, Effects, get, runEffects, TimerEnv, TypeOf } from '@typed/effects'
-import { HookEnv, InitialState, useDepChange, useEffect, useMemoEffect } from '@typed/hooks'
+import {
+  HookEnv,
+  HooksManagerEnv,
+  InitialState,
+  useDepChange,
+  useEffect,
+  useMemoEffect,
+} from '@typed/hooks'
 import { ArgsOf, Arity1 } from '@typed/lambda'
 import { debug } from '@typed/logger'
 import { Just, Maybe, Nothing } from '@typed/maybe'
@@ -13,7 +20,7 @@ const empty: [] = []
 export interface UseAuth
   extends Computation<
     [InitialState<EncryptionEnv, AuthInfo>],
-    EncryptionEnv & HookEnv & TimerEnv,
+    EncryptionEnv & HookEnv & HooksManagerEnv & TimerEnv,
     {
       readonly availableSalts: ReadonlyArray<string>
       readonly encryptedKeyPair: Maybe<EncryptedKeyPair>
