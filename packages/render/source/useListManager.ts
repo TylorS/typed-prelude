@@ -16,6 +16,6 @@ export function* useListManager<A, B extends PropertyKey, E, C>(
     identify,
   ])
   return yield* useEffectBy(list, getIdentifier, (value, index, key) =>
-    useKeyManager(key, ref => computation(ref, value, index)),
+    useKeyManager(key, (ref) => computation(ref, value, index)),
   )
 }

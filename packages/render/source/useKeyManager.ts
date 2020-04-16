@@ -45,9 +45,9 @@ export function* useKeyManager<E, B, C>(
   const renderedRef = yield* useRef<unknown, C>()
   const [rendered, setRendered] = renderedRef
   const applyUpdate = yield* useMemo(
-    _ =>
+    (_) =>
       // Allows for an effect to re-render itself
-      function*(): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
+      function* (): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
         const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
 
         setRenderable(updated)
