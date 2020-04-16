@@ -1,8 +1,8 @@
 import { Match, oneOf } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { HookEffects } from './types'
-import { useMemo } from './useMemo'
 import { useCallback } from './useCallback'
+import { useMemo } from './useMemo'
 
 export function* useMatches<A, B>(
   value: A,

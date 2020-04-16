@@ -1,14 +1,14 @@
-import { describe, given, it } from '@typed/test'
-import { createVirtualTimer } from '@typed/timer'
+import { Disposable } from '@typed/disposable'
+import { runEffects } from '@typed/effects'
 import {
-  createHooksManagerEnv,
   createHookEnvironment,
+  createHooksManagerEnv,
   HookEnvironmentEventType,
 } from '@typed/hooks'
+import { describe, given, it } from '@typed/test'
+import { createVirtualTimer } from '@typed/timer'
 import { NodeGenerator } from '@typed/uuid'
 import { useListManager } from './useListManager'
-import { runEffects } from '@typed/effects'
-import { Disposable } from '@typed/disposable'
 
 export const test = describe(`useListManager`, [
   given(`a List of Values, a fn used to identify each value, and an hook effect`, [
@@ -22,7 +22,7 @@ export const test = describe(`useListManager`, [
 
       let created = 0
 
-      hooksManagerEnv.hooksManager.hookEvents.subscribe(event => {
+      hooksManagerEnv.hooksManager.hookEvents.subscribe((event) => {
         if (event[0] === HookEnvironmentEventType.Created) {
           created++
         }

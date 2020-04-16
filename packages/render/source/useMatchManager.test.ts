@@ -1,13 +1,13 @@
+import { Effect, runEffects } from '@typed/effects'
+import { Resume } from '@typed/env'
+import { createHookEnvironment, createHooksManagerEnv, useRef } from '@typed/hooks'
+import { equals, Match } from '@typed/logic'
+import { Just, withDefault } from '@typed/maybe'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
-import { createHooksManagerEnv, createHookEnvironment, useRef } from '@typed/hooks'
 import { NodeGenerator } from '@typed/uuid'
-import { runEffects, Effect } from '@typed/effects'
-import { Match, equals } from '@typed/logic'
-import { useMatchManager } from './useMatchManager'
-import { Resume } from '@typed/env'
 import { PatchEnv } from './Patch'
-import { withDefault, Just } from '@typed/maybe'
+import { useMatchManager } from './useMatchManager'
 
 export const test = describe(`useMatchManager`, [
   given(`a list of Matches to computations`, [
@@ -33,8 +33,8 @@ export const test = describe(`useMatchManager`, [
       }
 
       const matches = [
-        Match.map(_ => increment, routeA),
-        Match.map(_ => increment, routeB),
+        Match.map((_) => increment, routeA),
+        Match.map((_) => increment, routeB),
       ] as const
 
       function* test() {

@@ -1,18 +1,18 @@
 import { TimerEnv } from '@typed/effects'
 import {
+  ChannelEffects,
   HookEffects,
   HookEnv,
+  useEffectBy,
   useMatches,
   useMemo,
-  ChannelEffects,
-  useEffectBy,
   UseRef,
 } from '@typed/hooks'
+import { id } from '@typed/lambda'
 import { Match } from '@typed/logic'
 import { fromJust, isNothing, Maybe, Nothing } from '@typed/maybe'
-import { useKeyManager } from './useKeyManager'
 import { PatchEnv } from './Patch'
-import { id } from '@typed/lambda'
+import { useKeyManager } from './useKeyManager'
 
 export function useMatchManager<A, E, B>(
   matchAgainst: A,
@@ -31,12 +31,13 @@ export function* useMatchManager<A, E, B, C>(
   matches: ReadonlyArray<Match<A, (ref: UseRef<C>) => HookEffects<E, B>>>,
   initial?: C,
 ): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
-  const modifiedMatches = yield* useMemo(ms => ms.map(m => Match.map(c => [m, c] as const, m)), [
-    matches,
-  ])
+  const modifiedMatches = yield* useMemo(
+    (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
+    [matches],
+  )
   const match = yield* useMatches(matchAgainst, modifiedMatches)
 
-  const [currentValue] = yield* useEffectBy([match], id, function*(maybe) {
+  const [currentValue] = yield* useEffectBy([match], id, function* (maybe) {
     if (isNothing(maybe)) {
       return
     }

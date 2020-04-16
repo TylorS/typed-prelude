@@ -1,14 +1,14 @@
+import { Disposable, onDisposed } from '@typed/disposable'
+import { get } from '@typed/effects'
 import {
   HookEnvironment,
-  HooksManagerEnv,
   HookEnvironmentEventType,
-  useMemo,
+  HooksManagerEnv,
   InitialState,
-  useRef,
   useEffect,
+  useMemo,
+  useRef,
 } from '@typed/hooks'
-import { get } from '@typed/effects'
-import { Disposable, onDisposed } from '@typed/disposable'
 import { withDefault } from '@typed/maybe/source'
 
 /**
@@ -22,7 +22,7 @@ export function* useHookEnvUpdated(env: HookEnvironment, onUpdated: () => Dispos
   const isUpdating = () => withDefault(false, currentlyUpdating.current)
 
   yield* useEffect(
-    _ => {
+    (_) => {
       const shouldRunEffect = withDefault(false, shouldBeUpdated.current)
 
       if (!shouldRunEffect) {
@@ -35,8 +35,8 @@ export function* useHookEnvUpdated(env: HookEnvironment, onUpdated: () => Dispos
   )
 
   return yield* useMemo(
-    _ =>
-      hooksManager.hookEvents.subscribe(event => {
+    (_) =>
+      hooksManager.hookEvents.subscribe((event) => {
         switch (event[0]) {
           case HookEnvironmentEventType.Updated: {
             const { hookEnvironment, updated } = event[1]

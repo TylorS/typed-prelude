@@ -1,18 +1,18 @@
+import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
   getEnvironmentByKey,
   HookEffects,
   HookEnv,
   runWithHooks,
+  useMemo,
   useRef,
   UseRef,
-  useMemo,
 } from '@typed/hooks'
-import { PatchEnv, patch } from './Patch'
-import { useHookEnvUpdated } from './useHookEnvEvents'
-import { TimerEnv, runEffects, get } from '@typed/effects'
-import { isNothing, fromJust, Just, Maybe, isJust } from '@typed/maybe'
 import { isUndefined } from '@typed/logic'
+import { fromJust, isJust, isNothing, Just, Maybe } from '@typed/maybe'
+import { patch, PatchEnv } from './Patch'
+import { useHookEnvUpdated } from './useHookEnvEvents'
 
 /**
  * If not initial value is used the "previous" value can only
@@ -44,9 +44,9 @@ export function* useKeyManager<E, B, C>(
   const renderedRef = yield* useRef<unknown, C>()
   const [rendered, setRendered] = renderedRef
   const applyUpdate = yield* useMemo(
-    _ =>
+    (_) =>
       // Allows for an effect to re-render itself
-      function*(): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
+      function* (): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
         const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
 
         setRenderable(updated)

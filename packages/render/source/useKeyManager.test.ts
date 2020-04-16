@@ -2,24 +2,24 @@ import { createServerDomEnv } from '@typed/dom'
 
 const { document } = createServerDomEnv({ setGlobals: true })
 
-import { describe, given, it } from '@typed/test'
+import { runEffects } from '@typed/effects'
+import { Resume } from '@typed/env'
 import {
-  createHooksManagerEnv,
   createHookEnvironment,
-  useState,
+  createHooksManagerEnv,
   InitialState,
   useEffectOnce,
   UseRef,
+  useState,
 } from '@typed/hooks'
-import { NodeGenerator } from '@typed/uuid'
+import { Just } from '@typed/maybe'
+import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
-import { runEffects } from '@typed/effects'
-import { useKeyManager } from './useKeyManager'
-import { PatchEnv } from './Patch'
-import { Resume } from '@typed/env'
+import { NodeGenerator } from '@typed/uuid'
 import { html, render, Renderable } from 'lighterhtml'
 import * as mostlyDom from 'mostly-dom'
-import { Just } from '@typed/maybe'
+import { PatchEnv } from './Patch'
+import { useKeyManager } from './useKeyManager'
 
 export const test = describe(`useKeyManager`, [
   given(`a key and an HookEffect-returning function that can be patched`, [
@@ -49,7 +49,7 @@ export const test = describe(`useKeyManager`, [
         const [getState, updateState] = yield* useState(InitialState.of(initial))
         const value = yield* getState()
 
-        yield* useEffectOnce(() => runEffects(updateState(x => x + 1)))
+        yield* useEffectOnce(() => runEffects(updateState((x) => x + 1)))
 
         return value + 1
       }
@@ -86,11 +86,11 @@ export const test = describe(`useKeyManager`, [
         const [getState, updateState] = yield* useState(InitialState.of(0))
         const value = yield* getState()
 
-        yield* useEffectOnce(() => runEffects(updateState(x => x + 1)))
+        yield* useEffectOnce(() => runEffects(updateState((x) => x + 1)))
 
         return html`
           <main
-            ref=${el => {
+            ref=${(el) => {
               equal(tagName, el.tagName)
 
               setRef(el)
@@ -139,7 +139,7 @@ export const test = describe(`useKeyManager`, [
       function* sut([, setRef]: UseRef<mostlyDom.ElementVNode>) {
         const [getState, updateState] = yield* useState(InitialState.of(0))
 
-        yield* useEffectOnce(() => runEffects(updateState(x => x + 1)))
+        yield* useEffectOnce(() => runEffects(updateState((x) => x + 1)))
 
         return mostlyDom.h(
           tagName,

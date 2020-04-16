@@ -26,11 +26,11 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
     getAllAncestors,
     getParent,
   } = createTreeManager<HookEnvironment>()
-  const { setUpdated, hasBeenUpdated } = createUpdateManager<HookEnvironment>(a =>
+  const { setUpdated, hasBeenUpdated } = createUpdateManager<HookEnvironment>((a) =>
     getAllDescendants(emptyProviders, emptyConsumers, a),
   )
   const { useChannelState } = createChannelManager(
-    function*(hookEnvironment, updated) {
+    function* (hookEnvironment, updated) {
       hookEvents.publish([HookEnvironmentEventType.Updated, { hookEnvironment, updated }])
     },
     getAllDescendants,
@@ -71,7 +71,7 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
 
   return {
     // Listen to incoming events
-    ...hookEvents.subscribe(event => runEffects(onEvent(event))),
+    ...hookEvents.subscribe((event) => runEffects(onEvent(event))),
 
     // To pass down to createHookEnvironment
     ...uuidEnv,

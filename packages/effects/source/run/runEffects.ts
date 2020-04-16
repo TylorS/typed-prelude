@@ -15,7 +15,7 @@ export function runEffects<A extends Effects<any, any>>(
   onReturn?: (value: Return<A>) => Disposable,
 ): Disposable {
   return runPure(
-    a => (onReturn ? onReturn(a) : Disposable.None),
+    (a) => (onReturn ? onReturn(a) : Disposable.None),
     provide(runEffect(effect), resources),
   )
 }
