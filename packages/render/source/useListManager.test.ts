@@ -36,7 +36,7 @@ export const test = describe(`useListManager`, [
       })
 
       function* sut() {
-        yield* useListManager(list, String, function* component(value) {
+        yield* useListManager(list, String, function* component(_, value) {
           return value
         })
       }

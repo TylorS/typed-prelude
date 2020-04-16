@@ -56,7 +56,7 @@ export const test = describe(`useKeyManager`, [
 
       function* test() {
         // Only runs once
-        equal(Just.of(initial + 1), yield* useKeyManager(key, sut, initial))
+        equal(initial + 1, yield* useKeyManager(key, sut, initial))
       }
 
       runEffects(test(), {
