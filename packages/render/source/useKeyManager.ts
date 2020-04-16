@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
@@ -12,7 +13,7 @@ import {
 import { isUndefined } from '@typed/logic'
 import { fromJust, isJust, isNothing, Just, Maybe } from '@typed/maybe'
 import { patch, PatchEnv } from './Patch'
-import { useHookEnvUpdated } from './useHookEnvEvents'
+import { useHookEnvUpdated } from './useHookEnvUpdated'
 
 /**
  * If not initial value is used the "previous" value can only
@@ -69,7 +70,19 @@ export function* useKeyManager<E, B, C>(
     }
   }
 
-  yield* useHookEnvUpdated(hookEnvironment, () => runEffects(applyUpdate(), env))
+  yield* useHookEnvUpdated(hookEnvironment, () => {
+    const disposable = Disposable.lazy()
+
+    disposable.addDisposable(
+      runEffects(applyUpdate(), env, () => {
+        disposable.dispose()
+
+        return Disposable.None
+      }),
+    )
+
+    return disposable
+  })
 
   return renderable.current
 }

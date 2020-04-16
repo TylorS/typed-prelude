@@ -55,7 +55,13 @@
       "path": "../routing/tsconfig.json"
     },
     {
+      "path": "../subscription/tsconfig.json"
+    },
+    {
       "path": "../timer/tsconfig.json"
+    },
+    {
+      "path": "../tuple/tsconfig.json"
     },
     {
       "path": "../uuid/tsconfig.json"

@@ -40,6 +40,9 @@
       "path": "../lambda/tsconfig.json"
     },
     {
+      "path": "../list/tsconfig.json"
+    },
+    {
       "path": "../logic/tsconfig.json"
     },
     {
@@ -47,6 +50,9 @@
     },
     {
       "path": "../routing/tsconfig.json"
+    },
+    {
+      "path": "../subscription/tsconfig.json"
     },
     {
       "path": "../timer/tsconfig.json"

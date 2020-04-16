@@ -5,6 +5,7 @@ import {
   HookEnvironmentEventType,
   HooksManagerEnv,
   InitialState,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -18,8 +19,9 @@ export function* useHookEnvUpdated(env: HookEnvironment, onUpdated: () => Dispos
   const [currentlyUpdating, setCurrentlyUpdated] = yield* useRef(InitialState.of(false))
   const [shouldBeUpdated, setShouldBeUpdated] = yield* useRef(InitialState.of(false))
   const { hooksManager } = yield* get<HooksManagerEnv>()
-
-  const isUpdating = () => withDefault(false, currentlyUpdating.current)
+  const isUpdating = yield* useCallback(() => withDefault(false, currentlyUpdating.current), [
+    currentlyUpdating.current,
+  ])
 
   yield* useEffect(
     (_) => {
@@ -43,15 +45,26 @@ export function* useHookEnvUpdated(env: HookEnvironment, onUpdated: () => Dispos
             const isUpdatedEnvironment = env.id === hookEnvironment.id && updated
             const itWouldBeFasterToLetAParentRender = hooksManager.hasUpdatedParents(env)
 
-            if (isUpdatedEnvironment && !itWouldBeFasterToLetAParentRender && !isUpdating()) {
+            if (
+              isUpdatedEnvironment &&
+              !itWouldBeFasterToLetAParentRender &&
+              !isUpdating(hookEnvironment)
+            ) {
               // Currently built to only allow for 1 update to be occurring at a time
               // Since a render _should_ z
-              return onDisposed(() => setCurrentlyUpdated(false), onUpdated())
+
+              const disposable = onUpdated()
+
+              hookEnvironment.addDisposable(disposable)
+
+              return onDisposed(() => setCurrentlyUpdated(false), disposable)
             }
 
             if (isUpdatedEnvironment && !itWouldBeFasterToLetAParentRender) {
               setShouldBeUpdated(true)
             }
+
+            return Disposable.None
           }
         }
 

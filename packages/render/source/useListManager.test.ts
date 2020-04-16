@@ -1,5 +1,6 @@
 import { Disposable } from '@typed/disposable'
 import { runEffects } from '@typed/effects'
+import { Resume } from '@typed/env'
 import {
   createHookEnvironment,
   createHooksManagerEnv,
@@ -8,6 +9,7 @@ import {
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
 import { NodeGenerator } from '@typed/uuid'
+import { PatchEnv } from './Patch'
 import { useListManager } from './useListManager'
 
 export const test = describe(`useListManager`, [
@@ -16,6 +18,9 @@ export const test = describe(`useListManager`, [
       const timer = createVirtualTimer()
       const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
       const rootHookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
+      const patch: PatchEnv<number, number> = {
+        patch: (previous, current) => Resume.of(previous + current),
+      }
       const list = Array(100)
         .fill(null)
         .map((_, i) => i)
@@ -31,13 +36,8 @@ export const test = describe(`useListManager`, [
       })
 
       function* sut() {
-        yield* useListManager(list, String, function* component(value, index, key) {
-          equal(key[String(value)], value)
-          equal(value, index)
-
-          if (index === list.length) {
-            equal(list.length - 1, created)
-          }
+        yield* useListManager(list, String, function* component(value) {
+          return value
         })
       }
 
@@ -45,9 +45,12 @@ export const test = describe(`useListManager`, [
         ...hooksManagerEnv,
         timer,
         hookEnvironment: rootHookEnvironment,
+        ...patch,
       })
 
       timer.progressTimeBy(1)
+
+      equal(list.length, created)
     }),
   ]),
 ])

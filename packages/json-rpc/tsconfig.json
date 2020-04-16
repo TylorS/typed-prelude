@@ -25,6 +25,9 @@
       "path": "../disposable/tsconfig.json"
     },
     {
+      "path": "../either/tsconfig.json"
+    },
+    {
       "path": "../effects/tsconfig.json"
     },
     {
@@ -46,10 +49,22 @@
       "path": "../logic/tsconfig.json"
     },
     {
+      "path": "../logger/tsconfig.json"
+    },
+    {
+      "path": "../map/tsconfig.json"
+    },
+    {
       "path": "../objects/tsconfig.json"
     },
     {
       "path": "../subscription/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
+    },
+    {
+      "path": "../tuple/tsconfig.json"
     },
     {
       "path": "../uuid/tsconfig.json"
