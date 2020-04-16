@@ -31,12 +31,11 @@ export function* useMatchManager<A, E, B, C>(
   matches: ReadonlyArray<Match<A, (ref: UseRef<C>) => HookEffects<E, B>>>,
   initial?: C,
 ): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
-  const modifiedMatches = yield* useMemo(
-    (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
-    [matches],
-  )
+  const modifiedMatches = yield* useMemo(ms => ms.map(m => Match.map(c => [m, c] as const, m)), [
+    matches,
+  ])
   const match = yield* useMatches(matchAgainst, modifiedMatches)
-  const [currentValue] = yield* useEffectBy([match], id, function* (maybe) {
+  const [currentValue] = yield* useEffectBy([match], id, function*(maybe) {
     if (isNothing(maybe)) {
       return Nothing
     }

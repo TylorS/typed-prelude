@@ -1,4 +1,4 @@
-import { combine, TimerEnv } from '@typed/effects'
+import { combine } from '@typed/effects'
 import { getEnvironmentByKey } from './getEnvironmentByKey'
 import { runWithHooks } from './runWithHooks'
 import { ChannelEffects, HookEffects, HookEnv, HookEnvironment } from './types'
@@ -8,7 +8,7 @@ export function* useEffectBy<A, B extends object, E, C>(
   values: ReadonlyArray<A>,
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
-): ChannelEffects<HookEnv & TimerEnv & E, ReadonlyArray<C>> {
+): ChannelEffects<HookEnv & E, ReadonlyArray<C>> {
   const currentValues = yield* useMemo(() => new WeakMap<HookEnvironment, C>(), [])
 
   return yield* manageValues(values, identify, fn, currentValues)
