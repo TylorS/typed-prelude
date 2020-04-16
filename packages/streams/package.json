@@ -1,6 +1,6 @@
 {
   "name": "@typed/streams",
-  "version": "6.2.1",
+  "version": "6.3.0",
   "description": "Typed Extensions to @most/core",
   "main": "./cjs/index.js",
   "repository": {
@@ -37,11 +37,11 @@
     "@most/core": "1.5.0",
     "@most/disposable": "1.2.2",
     "@most/types": "1.0.2",
-    "@typed/effects": "^6.2.1",
-    "@typed/either": "^8.0.2",
-    "@typed/env": "^8.0.1",
-    "@typed/lambda": "^3.1.0",
-    "@typed/maybe": "^10.0.2",
+    "@typed/effects": "^6.3.0",
+    "@typed/either": "^8.1.0",
+    "@typed/env": "^8.1.0",
+    "@typed/lambda": "^3.2.0",
+    "@typed/maybe": "^10.1.0",
     "most-subject": "6.0.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@typed/new-type",
-  "version": "3.0.2",
+  "version": "3.1.0",
   "description": "Types for validating constraints",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^3.1.0"
+    "@typed/lambda": "^3.2.0"
   },
   "publishConfig": {
     "access": "public"
