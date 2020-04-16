@@ -7,21 +7,21 @@ import { useMemo } from './useMemo'
 export function* useEffectBy<A, B extends object, E, C>(
   values: ReadonlyArray<A>,
   identify: (a: A) => B,
-  fn: (a: A, index: number) => HookEffects<E, C>,
+  fn: (a: A, index: number, key: B) => HookEffects<E, C>,
 ): ChannelEffects<HookEnv & TimerEnv & E, ReadonlyArray<C>> {
-  const previousValues = yield* useMemo(() => new WeakMap<HookEnvironment, C>(), [])
+  const currentValues = yield* useMemo(() => new WeakMap<HookEnvironment, C>(), [])
 
-  return yield* manageValues(values, identify, fn, previousValues)
+  return yield* manageValues(values, identify, fn, currentValues)
 }
 
 function* manageValues<A, B extends object, E, C>(
   values: ReadonlyArray<A>,
   identify: (a: A) => B,
-  fn: (a: A, index: number) => HookEffects<E, C>,
-  previousValues: WeakMap<HookEnvironment, C>,
+  fn: (a: A, index: number, key: B) => HookEffects<E, C>,
+  currentValues: WeakMap<HookEnvironment, C>,
 ) {
   return yield* combine(
-    ...values.map((value, index) => manageValue(value, index, identify, fn, previousValues)),
+    ...values.map((value, index) => manageValue(value, index, identify, fn, currentValues)),
   )
 }
 
@@ -29,18 +29,17 @@ function* manageValue<A, B extends object, E, C>(
   value: A,
   index: number,
   identify: (a: A) => B,
-  fn: (a: A, index: number) => HookEffects<E, C>,
-  previousValues: WeakMap<HookEnvironment, C>,
+  fn: (a: A, index: number, key: B) => HookEffects<E, C>,
+  currentValues: WeakMap<HookEnvironment, C>,
 ) {
-  const hookEnvironment = yield* getEnvironmentByKey(identify(value))
-  const firstRun = !previousValues.has(hookEnvironment)
+  const key = identify(value)
+  const hookEnvironment = yield* getEnvironmentByKey(key)
+  const firstRun = !currentValues.has(hookEnvironment)
   const shouldRerunFn = firstRun || hookEnvironment.updated
 
   if (shouldRerunFn) {
-    const c = yield* runWithHooks(fn(value, index), hookEnvironment)
-
-    previousValues.set(hookEnvironment, c)
+    currentValues.set(hookEnvironment, yield* runWithHooks(fn(value, index, key), hookEnvironment))
   }
 
-  return previousValues.get(hookEnvironment)!
+  return currentValues.get(hookEnvironment)!
 }

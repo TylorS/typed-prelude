@@ -10,9 +10,9 @@ import { Subscription } from '../../subscription/source'
 import { Channel } from './Channel'
 
 export const enum HookEnvironmentEventType {
-  Created,
-  Updated,
-  Removed,
+  Created = 'created',
+  Updated = 'updated',
+  Removed = 'removed',
 }
 
 export type HookEnvironmentEvent =
@@ -64,6 +64,7 @@ export interface HooksManager extends UuidEnv, Disposable {
    * Check to see if a hook environment has been updated
    */
   readonly hasBeenUpdated: (environment: HookEnvironment) => boolean
+  readonly hasUpdatedParents: (environment: HookEnvironment) => boolean
 }
 
 export type UseChannelStateOptions<E, A, B = A> = {

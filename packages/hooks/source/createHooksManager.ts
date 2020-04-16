@@ -11,17 +11,26 @@ import {
   HooksManager,
 } from './types'
 
+const emptyProviders = new WeakSet<any>()
+const emptyConsumers = new WeakMap<any, any>()
+
 // A HooksManager keeps track of the hierarchy of a number of HookEnvironments.
 // This is how @typed/hooks allows for providing and consuming values via its Channel API.
 // At present the implementation of a HooksManager can only maintain
 export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
   const hookEvents = createSubscription<HookEnvironmentEvent>()
-  const { setUpdated, hasBeenUpdated } = createUpdateManager<HookEnvironment>()
-  const { setParent, removeNode, getAllDescendants, getParent } = createTreeManager<
-    HookEnvironment
-  >()
+  const {
+    setParent,
+    removeNode,
+    getAllDescendants,
+    getAllAncestors,
+    getParent,
+  } = createTreeManager<HookEnvironment>()
+  const { setUpdated, hasBeenUpdated } = createUpdateManager<HookEnvironment>(a =>
+    getAllDescendants(emptyProviders, emptyConsumers, a),
+  )
   const { useChannelState } = createChannelManager(
-    function* (hookEnvironment, updated) {
+    function*(hookEnvironment, updated) {
       hookEvents.publish([HookEnvironmentEventType.Updated, { hookEnvironment, updated }])
     },
     getAllDescendants,
@@ -50,9 +59,20 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
     }
   }
 
+  function hasUpdatedParents(env: HookEnvironment) {
+    for (const parent of getAllAncestors(env)) {
+      if (parent.updated) {
+        return true
+      }
+    }
+
+    return false
+  }
+
   return {
     // Listen to incoming events
-    ...hookEvents.subscribe((event) => runEffects(onEvent(event))),
+    ...hookEvents.subscribe(event => runEffects(onEvent(event))),
+
     // To pass down to createHookEnvironment
     ...uuidEnv,
 
@@ -64,5 +84,8 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
 
     // Check if a node has been marked as updated
     hasBeenUpdated,
+
+    // Check if a node has parent nodes marked as updated
+    hasUpdatedParents,
   }
 }

@@ -33,6 +33,10 @@ export namespace Disposable {
 
     return {
       addDisposable(disposable: Disposable) {
+        if (disposable === Disposable.None) {
+          return disposable
+        }
+
         if (isDisposed) {
           disposable.dispose()
 

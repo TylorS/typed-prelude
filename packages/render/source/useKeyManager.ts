@@ -5,21 +5,71 @@ import {
   HookEnv,
   runWithHooks,
   useRef,
+  UseRef,
+  useMemo,
 } from '@typed/hooks'
-import { fromJust, Just, isNothing } from '@typed/maybe'
-import { TimerEnv } from '@typed/effects'
+import { PatchEnv, patch } from './Patch'
+import { useHookEnvUpdated } from './useHookEnvEvents'
+import { TimerEnv, runEffects, get } from '@typed/effects'
+import { isNothing, fromJust, Just, Maybe, isJust } from '@typed/maybe'
+import { isUndefined } from '@typed/logic'
 
-// TODO: How can we use this to manage re-rendering?
-export function* useKeyManager<E, B>(
+/**
+ * If not initial value is used the "previous" value can only
+ * reliably
+ */
+export function useKeyManager<E, B>(
   key: object,
-  effect: HookEffects<E, B>,
-): ChannelEffects<HookEnv & E, B> {
-  const hookEnvironment = yield* getEnvironmentByKey(key)
-  const [ref, setRef] = yield* useRef<unknown, B>()
+  render: (ref: UseRef<B>) => HookEffects<E, B>,
+): ChannelEffects<HookEnv & TimerEnv & PatchEnv<B, B> & E, Maybe<B>>
 
-  if (isNothing(ref.current) || hookEnvironment.updated) {
-    setRef(yield* runWithHooks(effect, hookEnvironment))
+export function useKeyManager<E, B, C>(
+  key: object,
+  render: (ref: UseRef<C>) => HookEffects<E, B>,
+  initial: C,
+): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, Maybe<B>>
+
+/**
+ * Used to manage a help manage re-rendering a patchable instance
+ */
+export function* useKeyManager<E, B, C>(
+  key: object,
+  render: (ref: UseRef<C>) => HookEffects<E, B>,
+  initial?: C,
+): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, Maybe<B>> {
+  const env = yield* get()
+  const hookEnvironment = yield* getEnvironmentByKey(key)
+  const [renderable, setRenderable] = yield* useRef<unknown, B>()
+  const isFirstRun = isNothing(renderable.current)
+  const renderedRef = yield* useRef<unknown, C>()
+  const [rendered, setRendered] = renderedRef
+  const applyUpdate = yield* useMemo(
+    _ =>
+      // Allows for an effect to re-render itself
+      function*(): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
+        const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
+
+        setRenderable(updated)
+        setRendered(yield* patch(fromJust(rendered.current as Just<C>), updated))
+      },
+    [rendered, hookEnvironment],
+  )
+
+  if (isFirstRun && !isUndefined(initial)) {
+    setRendered(initial)
   }
 
-  return fromJust<B>(ref.current as Just<B>)
+  if (isFirstRun) {
+    const renderable = yield* runWithHooks(render(renderedRef), hookEnvironment)
+
+    setRenderable(renderable)
+
+    if (isJust(rendered.current)) {
+      setRendered(yield* patch(fromJust(rendered.current), renderable))
+    }
+  }
+
+  yield* useHookEnvUpdated(hookEnvironment, () => runEffects(applyUpdate(), env))
+
+  return renderable.current
 }
