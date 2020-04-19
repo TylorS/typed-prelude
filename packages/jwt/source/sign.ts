@@ -21,9 +21,8 @@ export function* sign(
   keyPair: CryptoKeyPair,
 ): Effects<CryptoEnv & CryptoFailure, Jwt> {
   const token = `${header}.${encodeJson(claims)}`
-  const tokenBuffer = stringToArrayBuffer(token)
   const signature = base64UrlEncode(
-    arrayBufferToString(yield* signWithEcdsaKeyPair(tokenBuffer, keyPair)),
+    arrayBufferToString(yield* signWithEcdsaKeyPair(stringToArrayBuffer(token), keyPair)),
   )
   const jwt = `${token}.${signature}`
 

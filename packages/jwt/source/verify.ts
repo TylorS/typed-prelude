@@ -13,7 +13,7 @@ export type VerificationOptions = {
 
 export function* verify(
   jwt: Jwt,
-  keyPair: CryptoKeyPair, // CryptoKey only works in browser or with options.crypto provided
+  keyPair: CryptoKeyPair,
   options: VerificationOptions = {},
 ): CryptoEffects<unknown, boolean> {
   const token = getToken(jwt)
