@@ -16,11 +16,9 @@ export function* verify(
   keyPair: CryptoKeyPair,
   options: VerificationOptions = {},
 ): CryptoEffects<unknown, boolean> {
-  const token = getToken(jwt)
-  const signature = getSignature(jwt)
   const verified = yield* verifyWithEcdsaKeyPair(
-    stringToArrayBuffer(token),
-    stringToArrayBuffer(signature),
+    stringToArrayBuffer(getToken(jwt)),
+    stringToArrayBuffer(getSignature(jwt)),
     keyPair,
   )
 
