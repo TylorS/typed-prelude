@@ -5,7 +5,7 @@ import { PACKAGES, rootDirectory } from './common'
 
 const workspaceFile = join(rootDirectory, 'typed.code-workspace')
 const folders: { name: string; path: string }[] = [
-  ...PACKAGES.map(pkg => {
+  ...PACKAGES.map((pkg) => {
     return {
       name: getPkgName(pkg),
       path: `./packages/${pkg}`,
@@ -21,12 +21,7 @@ function getPkgName(pkg: string) {
 }
 
 function capitalize(str: string): string {
-  return capitalizeFirst(
-    str
-      .split(' ')
-      .map(capitalizeFirst)
-      .join(' '),
-  )
+  return capitalizeFirst(str.split(' ').map(capitalizeFirst).join(' '))
 }
 
 function capitalizeFirst(str: string): string {

@@ -1,10 +1,10 @@
+import { createServerCrypto, CryptoFailure, generateEcdsaKeyPair } from '@typed/crypto'
+import { Fail, runEffects } from '@typed/effects'
+import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
+import { createVirtualClock } from '@typed/timer'
 import { getNotBefore } from './getNotBefore'
 import { sign } from './sign'
-import { createServerCrypto, CryptoFailure, generateEcdsaKeyPair } from '@typed/crypto'
-import { runEffects, Fail } from '@typed/effects'
-import { createConsoleLogger, LogLevel } from '@typed/logger'
-import { createVirtualClock } from '@typed/timer'
 
 export const test = describe(`getNotBefore`, [
   given(`a JWT with nbf claims`, [

@@ -3,9 +3,9 @@ import {
   arrayBufferToString,
   CryptoEnv,
   CryptoFailure,
-  stringToArrayBuffer,
-  signWithEcdsaKeyPair,
   ECDSA_PARAMS,
+  signWithEcdsaKeyPair,
+  stringToArrayBuffer,
 } from '@typed/crypto'
 import { Effects } from '@typed/effects'
 import { base64UrlEncode } from './base64UrlEncode'

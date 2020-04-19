@@ -1,11 +1,11 @@
+import { generateEcdsaKeyPair } from '@typed/crypto'
+import { createServerCrypto, CryptoFailure } from '@typed/crypto'
+import { Fail, runEffects } from '@typed/effects'
+import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
+import { createVirtualClock } from '@typed/timer'
 import { sign } from './sign'
 import { verify } from './verify'
-import { generateEcdsaKeyPair } from '@typed/crypto'
-import { runEffects, Fail } from '@typed/effects'
-import { createServerCrypto, CryptoFailure } from '@typed/crypto'
-import { createConsoleLogger, LogLevel } from '@typed/logger'
-import { createVirtualClock } from '@typed/timer'
 
 export const test = describe(`verify`, [
   given(`a JWT and a Secret Key`, [

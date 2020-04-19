@@ -1,9 +1,9 @@
+import { CryptoEffects, stringToArrayBuffer, verifyWithEcdsaKeyPair } from '@typed/crypto'
 import { getClaims } from './getClaims'
 import { getSignature } from './getSignature'
 import { getToken } from './getToken'
 import { isActive } from './isActive'
 import { Jwt } from './Jwt'
-import { CryptoEffects, verifyWithEcdsaKeyPair, stringToArrayBuffer } from '@typed/crypto'
 
 export type VerificationOptions = {
   readonly issuer?: string

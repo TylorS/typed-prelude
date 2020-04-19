@@ -1,9 +1,9 @@
 import {
   CryptoEffects,
-  ExportedKeyPair,
-  stringToArrayBuffer,
   ECDSA_KEY_PARAMS,
+  ExportedKeyPair,
   SIGN_AND_VERIFY,
+  stringToArrayBuffer,
 } from '../common'
 import { exportKeyPair } from '../effects/exportKeyPair'
 import { generateKey } from '../effects/subtle'
