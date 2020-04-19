@@ -35,6 +35,9 @@
     },
     {
       "path": "../new-type/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }
