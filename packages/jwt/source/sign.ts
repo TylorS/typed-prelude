@@ -1,27 +1,31 @@
 import { JsonObject } from '@typed/common'
+import {
+  arrayBufferToString,
+  CryptoEnv,
+  CryptoFailure,
+  stringToArrayBuffer,
+  signWithEcdsaKeyPair,
+  ECDSA_PARAMS,
+} from '@typed/crypto'
+import { Effects } from '@typed/effects'
 import { base64UrlEncode } from './base64UrlEncode'
-import { hmacSha256 } from './hmacSha256'
 import { Jwt } from './Jwt'
 
 const header = encodeJson({
-  alg: 'HS256',
+  alg: ECDSA_PARAMS.name,
   typ: 'JWT',
 })
 
-export async function sign(
+export function* sign(
   claims: JsonObject,
-  secret: string | CryptoKey,
-  crypto: Crypto,
-): Promise<Jwt>
-export async function sign(claims: JsonObject, secret: string, crypto?: Crypto): Promise<Jwt>
-
-export async function sign(
-  claims: JsonObject,
-  secret: string | CryptoKey,
-  crypto?: Crypto,
-): Promise<Jwt> {
+  keyPair: CryptoKeyPair,
+): Effects<CryptoEnv & CryptoFailure, Jwt> {
   const token = `${header}.${encodeJson(claims)}`
-  const jwt = `${token}.${await hmacSha256(token, secret, crypto)}`
+  const tokenBuffer = stringToArrayBuffer(token)
+  const signature = base64UrlEncode(
+    arrayBufferToString(yield* signWithEcdsaKeyPair(tokenBuffer, keyPair)),
+  )
+  const jwt = `${token}.${signature}`
 
   return jwt as Jwt
 }

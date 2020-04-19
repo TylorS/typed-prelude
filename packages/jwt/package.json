@@ -23,7 +23,11 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/common": "^3.2.0",
+    "@typed/crypto": "^1.1.0",
+    "@typed/effects": "^6.3.0",
     "@typed/lambda": "^3.2.0",
-    "@typed/new-type": "^3.1.0"
+    "@typed/logger": "^8.3.0",
+    "@typed/new-type": "^3.1.0",
+    "@typed/timer": "^3.2.0"
   }
 }

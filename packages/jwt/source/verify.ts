@@ -1,39 +1,30 @@
-import { base64UrlDecode } from './base64UrlDecode'
 import { getClaims } from './getClaims'
-import { getHeader } from './getHeader'
 import { getSignature } from './getSignature'
 import { getToken } from './getToken'
-import { hmacSha256 } from './hmacSha256'
 import { isActive } from './isActive'
 import { Jwt } from './Jwt'
+import { CryptoEffects, verifyWithEcdsaKeyPair, stringToArrayBuffer } from '@typed/crypto'
 
 export type VerificationOptions = {
   readonly issuer?: string
   readonly audience?: string
   readonly subject?: string
-  readonly crypto?: Crypto
 }
 
-const supportedAlgorithms = ['HS256']
-const validTypes = ['JWT']
-
-export async function verify(
+export function* verify(
   jwt: Jwt,
-  secret: string | CryptoKey, // CryptoKey only works in browser or with options.crypto provided
+  keyPair: CryptoKeyPair, // CryptoKey only works in browser or with options.crypto provided
   options: VerificationOptions = {},
-): Promise<boolean> {
-  const header = getHeader(jwt)
+): CryptoEffects<unknown, boolean> {
+  const token = getToken(jwt)
+  const signature = getSignature(jwt)
+  const verified = yield* verifyWithEcdsaKeyPair(
+    stringToArrayBuffer(token),
+    stringToArrayBuffer(signature),
+    keyPair,
+  )
 
-  if (
-    !validTypes.includes(header.typ as string) ||
-    !supportedAlgorithms.includes(header.alg?.toString() ?? '')
-  ) {
-    return false
-  }
-
-  const signature = base64UrlDecode(await hmacSha256(getToken(jwt), secret, options.crypto))
-
-  if (getSignature(jwt) !== signature) {
+  if (!verified) {
     return false
   }
 

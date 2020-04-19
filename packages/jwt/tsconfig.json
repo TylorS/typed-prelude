@@ -22,7 +22,16 @@
       "path": "../common/tsconfig.json"
     },
     {
+      "path": "../crypto/tsconfig.json"
+    },
+    {
+      "path": "../effects/tsconfig.json"
+    },
+    {
       "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../logger/tsconfig.json"
     },
     {
       "path": "../new-type/tsconfig.json"
