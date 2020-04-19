@@ -15,7 +15,7 @@ export const test = describe(`getExpiration`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           equal(new Date(exp), getExpiration(jwt))
 
@@ -38,7 +38,7 @@ export const test = describe(`getExpiration`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign({}, keyPair)
+          const jwt = yield* sign({}, keyPair.privateKey)
 
           ok(getExpiration(jwt) < new Date())
 

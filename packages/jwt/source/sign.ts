@@ -18,11 +18,11 @@ const header = encodeJson({
 
 export function* sign(
   claims: JsonObject,
-  keyPair: CryptoKeyPair,
+  privateKey: CryptoKey,
 ): Effects<CryptoEnv & CryptoFailure, Jwt> {
   const token = `${header}.${encodeJson(claims)}`
   const signature = base64UrlEncode(
-    arrayBufferToString(yield* signWithEcdsaKeyPair(stringToArrayBuffer(token), keyPair)),
+    arrayBufferToString(yield* signWithEcdsaKeyPair(stringToArrayBuffer(token), privateKey)),
   )
   const jwt = `${token}.${signature}`
 

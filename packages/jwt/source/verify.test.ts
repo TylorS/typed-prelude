@@ -9,6 +9,7 @@ import { verify } from './verify'
 
 export const test = describe(`verify`, [
   given(`a JWT and a Secret Key`, [
+    // TODO: figure out why this is finicky
     it(`returns true when valid JWT`, ({ ok }, done) => {
       const now = Date.now()
       const exp = now + 1000 // ms
@@ -19,9 +20,9 @@ export const test = describe(`verify`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
-          ok(yield* verify(jwt, keyPair, { issuer }))
+          ok(yield* verify(jwt, keyPair.publicKey, { issuer }))
           done()
         } catch (error) {
           done(error)

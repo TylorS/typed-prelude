@@ -14,7 +14,7 @@ export const test = describe(`getClaims`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           equal(claims, getClaims(jwt))
 

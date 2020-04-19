@@ -16,9 +16,9 @@ export const test = describe(`verifyWithEcdsaKeyPair`, [
         try {
           const keyPair = yield* generateEcdsaKeyPair()
           const data = stringToArrayBuffer(secret)
-          const signature = yield* signWithEcdsaKeyPair(data, keyPair)
+          const signature = yield* signWithEcdsaKeyPair(data, keyPair.privateKey)
 
-          ok(yield* verifyWithEcdsaKeyPair(data, signature, keyPair))
+          ok(yield* verifyWithEcdsaKeyPair(data, signature, keyPair.publicKey))
 
           done()
         } catch (error) {

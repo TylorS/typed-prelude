@@ -17,7 +17,7 @@ export const test = describe(`isActive`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           ok(isActive(jwt))
 
@@ -43,7 +43,7 @@ export const test = describe(`isActive`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           notOk(isActive(jwt))
 
@@ -69,7 +69,7 @@ export const test = describe(`isActive`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           notOk(isActive(jwt))
 

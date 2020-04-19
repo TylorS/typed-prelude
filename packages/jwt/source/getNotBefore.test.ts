@@ -15,7 +15,7 @@ export const test = describe(`getNotBefore`, [
       function* sut() {
         try {
           const keyPair = yield* generateEcdsaKeyPair()
-          const jwt = yield* sign(claims, keyPair)
+          const jwt = yield* sign(claims, keyPair.privateKey)
 
           equal(new Date(nbf), getNotBefore(jwt))
 

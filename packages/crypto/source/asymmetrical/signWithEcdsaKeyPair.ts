@@ -3,7 +3,7 @@ import { sign } from '../effects'
 
 export function* signWithEcdsaKeyPair(
   data: ArrayBuffer,
-  keyPair: CryptoKeyPair,
+  privateKey: CryptoKey,
 ): CryptoEffects<unknown, ArrayBuffer> {
-  return yield* sign(ECDSA_PARAMS, keyPair.privateKey, data)
+  return yield* sign(ECDSA_PARAMS, privateKey, data)
 }

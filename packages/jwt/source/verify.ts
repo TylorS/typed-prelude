@@ -13,7 +13,7 @@ export type VerificationOptions = {
 
 export function* verify(
   jwt: Jwt,
-  keyPair: CryptoKeyPair,
+  publicKey: CryptoKey,
   options: VerificationOptions = {},
 ): CryptoEffects<unknown, boolean> {
   const token = getToken(jwt)
@@ -21,7 +21,7 @@ export function* verify(
   const verified = yield* verifyWithEcdsaKeyPair(
     stringToArrayBuffer(token),
     stringToArrayBuffer(signature),
-    keyPair,
+    publicKey,
   )
 
   if (!verified) {
