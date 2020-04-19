@@ -1,7 +1,8 @@
 import { Jwt } from './Jwt'
+import { splitToken } from './splitToken'
 
 export function getToken(jwt: Jwt) {
-  const [a = '', b = ''] = jwt.split('.').map((s) => s.trim())
+  const [a, b] = splitToken(jwt)
 
   return [a, b].join('.')
 }

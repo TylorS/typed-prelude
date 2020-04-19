@@ -7,7 +7,7 @@ import { generateEcdsaKeyPair } from './generateEcdsaKeyPair'
 import { signWithEcdsaKeyPair } from './signWithEcdsaKeyPair'
 import { verifyWithEcdsaKeyPair } from './verifyWithEcdsaKeyPair'
 
-export const test = describe(`verifyWithPssKeyPair`, [
+export const test = describe(`verifyWithEcdsaKeyPair`, [
   given(`Data, Signature, and KeyPair`, [
     it(`verifies the signature`, ({ ok }, done) => {
       const secret = 'supersecret'
