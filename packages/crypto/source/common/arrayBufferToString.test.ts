@@ -1,6 +1,6 @@
 import { describe, given, it } from '@typed/test'
-import { stringToArrayBuffer } from './stringToArrayBuffer'
 import { arrayBufferToString } from './arrayBufferToString'
+import { stringToArrayBuffer } from './stringToArrayBuffer'
 
 export const test = describe(`arrayBufferToString`, [
   given(`an ArrayBuffer`, [
