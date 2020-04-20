@@ -1,5 +1,5 @@
 import { generateEcdsaKeyPair } from '@typed/crypto'
-import { createServerCrypto, CryptoFailure } from '@typed/crypto'
+import { CryptoFailure } from '@typed/crypto'
 import { Fail, runEffects } from '@typed/effects'
 import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
@@ -9,9 +9,8 @@ import { verify } from './verify'
 
 export const test = describe(`verify`, [
   given(`a JWT and a Secret Key`, [
-    // TODO: figure out why this is finicky - is it the server crypto implementation?
-    // Passes and fails randomly.
-    it.skip(`returns true when valid JWT`, ({ ok }, done) => {
+    // Test fails in Node. Seems to have to do with @peculiarventures/webcrypto
+    it(`returns true when valid JWT`, ({ ok }, done) => {
       const now = Date.now()
       const exp = now + 1000 // ms
       const nbf = now - 1000 // ms
@@ -31,7 +30,7 @@ export const test = describe(`verify`, [
       }
 
       runEffects(sut(), {
-        crypto: createServerCrypto(),
+        crypto,
         logger: createConsoleLogger({ logLevel: LogLevel.DEBUG, clock: createVirtualClock() }),
         [CryptoFailure]: Fail,
       })
