@@ -17,12 +17,10 @@ export function* verify(
   options: VerificationOptions = {},
 ): CryptoEffects<unknown, boolean> {
   const token = getToken(jwt)
+  const tokenBuffer = stringToArrayBuffer(token)
   const signature = getSignature(jwt)
-  const verified = yield* verifyWithEcdsaKeyPair(
-    stringToArrayBuffer(token),
-    stringToArrayBuffer(signature),
-    publicKey,
-  )
+  const signatureBuffer = stringToArrayBuffer(signature)
+  const verified = yield* verifyWithEcdsaKeyPair(tokenBuffer, signatureBuffer, publicKey)
 
   if (!verified) {
     return false

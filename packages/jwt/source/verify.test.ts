@@ -9,7 +9,8 @@ import { verify } from './verify'
 
 export const test = describe(`verify`, [
   given(`a JWT and a Secret Key`, [
-    // TODO: figure out why this is finicky
+    // TODO: figure out why this is finicky - is it the server crypto implementation?
+    // Passes and fails randomly.
     it.skip(`returns true when valid JWT`, ({ ok }, done) => {
       const now = Date.now()
       const exp = now + 1000 // ms

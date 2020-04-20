@@ -21,12 +21,13 @@ export function* sign(
   privateKey: CryptoKey,
 ): Effects<CryptoEnv & CryptoFailure, Jwt> {
   const token = `${header}.${encodeJson(claims)}`
-  const signature = base64UrlEncode(
-    arrayBufferToString(yield* signWithEcdsaKeyPair(stringToArrayBuffer(token), privateKey)),
-  )
-  const jwt = `${token}.${signature}`
+  const tokenBuffer = stringToArrayBuffer(token)
+  const signatureBuffer = yield* signWithEcdsaKeyPair(tokenBuffer, privateKey)
+  const signatureDecoded = arrayBufferToString(signatureBuffer)
+  const signature = base64UrlEncode(signatureDecoded)
+  const jwt = `${token}.${signature}` as Jwt
 
-  return jwt as Jwt
+  return jwt
 }
 
 function encodeJson(x: JsonObject) {

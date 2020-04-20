@@ -2,8 +2,8 @@ import { pipe } from '@typed/lambda'
 import { base64Decode } from './base64'
 
 export const base64UrlDecode: (encoded: string) => string = pipe(
-  padString,
   replaceTokens,
+  padString,
   base64Decode,
 )
 
