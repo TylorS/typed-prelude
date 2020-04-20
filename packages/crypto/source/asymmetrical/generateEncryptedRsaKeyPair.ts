@@ -1,4 +1,4 @@
-import { CryptoEffects, EncryptedKeyPair } from '../common'
+import { CryptoEffects, EncryptedKeyPair, HASH, RSA_PARAMS } from '../common'
 import { exportedKeysToEncryptedKeyPair } from '../effects/exportedKeysToEncryptedKeyPair'
 import { generateRsaExportedKeys } from './generateRsaExportedKeys'
 
@@ -18,5 +18,12 @@ export function* generateEncryptedRsaKeyPair(
 ): CryptoEffects<unknown, EncryptedKeyPair> {
   const exportedKeys = yield* generateRsaExportedKeys()
 
-  return yield* exportedKeysToEncryptedKeyPair(aesKey, exportedKeys)
+  return yield* exportedKeysToEncryptedKeyPair(
+    aesKey,
+    {
+      name: RSA_PARAMS.name,
+      hash: HASH,
+    },
+    exportedKeys,
+  )
 }

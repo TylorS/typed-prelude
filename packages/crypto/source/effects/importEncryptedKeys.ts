@@ -5,6 +5,12 @@ import { decryptWithAesKey } from '../symmetrical/decryptWithAesKey'
 
 export function* importEncryptedKeys(
   decryptionKey: CryptoKey,
+  params:
+    | RsaHashedImportParams
+    | EcKeyImportParams
+    | HmacImportParams
+    | DhImportKeyParams
+    | AesKeyAlgorithm,
   encryptedKeys: AesEncryptedKeys,
 ): CryptoEffects<unknown, CryptoKeyPair> {
   const [publicKey, privateKey] = yield* combine(
@@ -12,7 +18,7 @@ export function* importEncryptedKeys(
     decryptWithAesKey(decryptionKey, ...encryptedKeys.privateKey),
   )
 
-  return yield* importExportedKeyPair({
+  return yield* importExportedKeyPair(params, {
     publicKey,
     privateKey,
   })

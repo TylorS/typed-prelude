@@ -1,19 +1,15 @@
-import {
-  arrayBufferToString,
-  CryptoEffects,
-  ExportedKeyPair,
-  HASH,
-  JsonWebKeyPair,
-} from '../common'
+import { arrayBufferToString, CryptoEffects, ExportedKeyPair, JsonWebKeyPair } from '../common'
 import { importKey } from '../effects/subtle'
 
 export function* importExportedKeyPair(
+  params:
+    | RsaHashedImportParams
+    | EcKeyImportParams
+    | HmacImportParams
+    | DhImportKeyParams
+    | AesKeyAlgorithm,
   keyPair: ExportedKeyPair,
 ): CryptoEffects<unknown, CryptoKeyPair> {
-  const params = {
-    name: 'RSA-OAEP',
-    hash: HASH,
-  }
   const jsonWebKeyPair: JsonWebKeyPair = {
     publicKey: JSON.parse(arrayBufferToString(keyPair.publicKey)),
     privateKey: JSON.parse(arrayBufferToString(keyPair.privateKey)),

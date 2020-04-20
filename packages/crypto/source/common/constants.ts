@@ -14,7 +14,7 @@ export const RSA_PARAMS: RsaHashedKeyGenParams = {
 }
 export const SIGN_AND_VERIFY = ['sign', 'verify']
 
-export const ECDSA_KEY_PARAMS = {
+export const ECDSA_KEY_PARAMS: EcKeyGenParams = {
   name: 'ECDSA',
   namedCurve: 'P-256',
 }
