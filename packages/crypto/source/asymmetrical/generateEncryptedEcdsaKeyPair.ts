@@ -1,4 +1,4 @@
-import { CryptoEffects, EncryptedKeyPair, ECDSA_KEY_PARAMS } from '../common'
+import { CryptoEffects, ECDSA_KEY_PARAMS, EncryptedKeyPair } from '../common'
 import { exportedKeysToEncryptedKeyPair } from '../effects/exportedKeysToEncryptedKeyPair'
 import { generateEcdsaExportedKeys } from './generateEcdsaExportedKeys'
 
