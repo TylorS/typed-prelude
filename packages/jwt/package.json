@@ -1,6 +1,6 @@
 {
   "name": "@typed/jwt",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "JWT tools for TypeScript",
   "main": "./cjs/index.js",
   "keywords": [
@@ -23,7 +23,7 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/common": "^3.2.0",
-    "@typed/crypto": "^1.3.1",
+    "@typed/crypto": "^1.4.0",
     "@typed/effects": "^6.3.0",
     "@typed/lambda": "^3.2.0",
     "@typed/logger": "^8.3.0",
