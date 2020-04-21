@@ -3,9 +3,10 @@ import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
 import { createVirtualClock } from '../../../timer/source'
 import { CryptoFailure, stringToArrayBuffer } from '../common'
-import { generateEcdsaKeyPair } from './generateEcdsaKeyPair'
+import { generateEncryptedEcdsaKeyPair } from './generateEncryptedEcdsaKeyPair'
 import { signWithEcdsaKeyPair } from './signWithEcdsaKeyPair'
 import { verifyWithEcdsaKeyPair } from './verifyWithEcdsaKeyPair'
+import { deriveAesKey } from '../symmetrical'
 
 export const test = describe(`verifyWithEcdsaKeyPair`, [
   given(`Data, Signature, and KeyPair`, [
@@ -14,7 +15,8 @@ export const test = describe(`verifyWithEcdsaKeyPair`, [
 
       function* test() {
         try {
-          const keyPair = yield* generateEcdsaKeyPair()
+          const aesKey = yield* deriveAesKey({ salt: 'test', password: 'secret' })
+          const keyPair = yield* generateEncryptedEcdsaKeyPair(aesKey)
           const data = stringToArrayBuffer(secret)
           const signature = yield* signWithEcdsaKeyPair(data, keyPair.privateKey)
 

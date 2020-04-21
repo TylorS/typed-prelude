@@ -1,5 +1,6 @@
 import { arrayBufferToString, CryptoEffects, ExportedKeyPair, JsonWebKeyPair } from '../common'
 import { importKey } from '../effects/subtle'
+import { combine } from '@typed/effects'
 
 export function* importExportedKeyPair(
   params:
@@ -14,8 +15,22 @@ export function* importExportedKeyPair(
     publicKey: JSON.parse(arrayBufferToString(keyPair.publicKey)),
     privateKey: JSON.parse(arrayBufferToString(keyPair.privateKey)),
   }
-  const publicKey = yield* importKey('jwk', jsonWebKeyPair.publicKey, params, false, ['encrypt'])
-  const privateKey = yield* importKey('jwk', jsonWebKeyPair.privateKey, params, false, ['decrypt'])
+  const [publicKey, privateKey] = yield* combine(
+    importKey(
+      'jwk',
+      jsonWebKeyPair.publicKey,
+      params,
+      false,
+      jsonWebKeyPair.publicKey.key_ops || [],
+    ),
+    importKey(
+      'jwk',
+      jsonWebKeyPair.privateKey,
+      params,
+      false,
+      jsonWebKeyPair.privateKey.key_ops || [],
+    ),
+  )
 
   return {
     publicKey,

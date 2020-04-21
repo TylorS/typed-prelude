@@ -1,5 +1,5 @@
 import { combine } from '@typed/effects'
-import { importExportedKeyPair } from '../asymmetrical/importExportedRsaKeyPair'
+import { importExportedKeyPair } from '../asymmetrical/importExportedKeyPair'
 import { AesEncryptedKeys, CryptoEffects } from '../common'
 import { decryptWithAesKey } from '../symmetrical/decryptWithAesKey'
 
