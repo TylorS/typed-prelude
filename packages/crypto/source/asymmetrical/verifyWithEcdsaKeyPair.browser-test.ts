@@ -3,10 +3,10 @@ import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { describe, given, it } from '@typed/test'
 import { createVirtualClock } from '../../../timer/source'
 import { CryptoFailure, stringToArrayBuffer } from '../common'
+import { deriveAesKey } from '../symmetrical'
 import { generateEncryptedEcdsaKeyPair } from './generateEncryptedEcdsaKeyPair'
 import { signWithEcdsaKeyPair } from './signWithEcdsaKeyPair'
 import { verifyWithEcdsaKeyPair } from './verifyWithEcdsaKeyPair'
-import { deriveAesKey } from '../symmetrical'
 
 export const test = describe(`verifyWithEcdsaKeyPair`, [
   given(`Data, Signature, and KeyPair`, [

@@ -1,6 +1,6 @@
+import { combine } from '@typed/effects'
 import { arrayBufferToString, CryptoEffects, ExportedKeyPair, JsonWebKeyPair } from '../common'
 import { importKey } from '../effects/subtle'
-import { combine } from '@typed/effects'
 
 export function* importExportedKeyPair(
   params:
