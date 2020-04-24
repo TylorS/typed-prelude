@@ -1,5 +1,5 @@
-import { digest } from '../effects'
 import { CryptoEffects } from '../common'
+import { digest } from '../effects'
 
 // Does not include 1 because it is not cryptographically safe
 export type ShaHashSize = 256 | 348 | 512

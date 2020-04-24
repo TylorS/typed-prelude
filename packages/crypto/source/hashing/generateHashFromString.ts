@@ -1,4 +1,4 @@
-import { stringToArrayBuffer, CryptoEffects } from '../common'
+import { CryptoEffects, stringToArrayBuffer } from '../common'
 import { generateShaHash } from './generateShaHash'
 
 export const generateHashFromString = (str: string): CryptoEffects<unknown, ArrayBuffer> =>
