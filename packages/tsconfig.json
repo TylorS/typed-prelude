@@ -37,6 +37,9 @@
       "path": "./hooks/tsconfig.json"
     },
     {
+      "path": "./html/tsconfig.json"
+    },
+    {
       "path": "./http/tsconfig.json"
     },
     {

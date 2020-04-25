@@ -49,6 +49,10 @@
       "path": "./packages/hooks"
     },
     {
+      "name": "Html",
+      "path": "./packages/html"
+    },
+    {
       "name": "Http",
       "path": "./packages/http"
     },
