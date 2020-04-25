@@ -1,5 +1,4 @@
 import { Json } from '@typed/common'
-import { Effects } from '@typed/effects'
 import { Ref } from '@typed/hooks'
 import { ComparableValues } from '@typed/lambda'
 
@@ -58,15 +57,6 @@ export interface VNodeProps<E, A extends TagName> {
 
   // For keeping references in @typed/hooks
   readonly ref?: Ref<NodeFrom<A>>
-
-  // Life cycle
-  readonly create?: CreateElement<E>
-  readonly insert?: InsertElement<E>
-  readonly prepatch?: UpdateElement<E>
-  readonly update?: UpdateElement<E>
-  readonly postpatch?: UpdateElement<E>
-  readonly remove?: RemoveElement<E>
-  readonly destroy?: DestroyElement<E>
 }
 
 export type TagName = HtmlTagName | SvgTagName
@@ -141,24 +131,6 @@ export interface SvgElementVNode<
 > extends SvgVNode<E, A, ToElements<B>> {
   readonly element: NodeFrom<A>
 }
-
-// Lifecycle
-
-export type CreateElement<E> = (elementVNode: ElementVNode<E>) => Effects<E, void>
-
-export type InsertElement<E> = (elementVNode: ElementVNode<E>) => Effects<E, void>
-
-export type UpdateElement<E> = (
-  formerVNode: ElementVNode<E>,
-  elementVNode: ElementVNode<E>,
-) => Effects<E, void>
-
-export type RemoveElement<E> = (
-  elementVNode: ElementVNode<E>,
-  remove: () => void,
-) => Effects<E, void>
-
-export type DestroyElement<E> = (elementVNode: ElementVNode<E>) => Effects<E, void>
 
 // INTERNAL TYPES
 
