@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@typed/uuid": "^9.3.0",
-    "lighterhtml": "3.1.1",
+    "lighterhtml": "3.1.2",
     "mostly-html": "3.0.0"
   }
 }
