@@ -1,6 +1,5 @@
 import { Disposable } from '@typed/disposable'
-import { runEffects } from '@typed/effects'
-import { Resume } from '@typed/env'
+import { Effect, runEffects } from '@typed/effects'
 import {
   createHookEnvironment,
   createHooksManagerEnv,
@@ -19,7 +18,7 @@ export const test = describe(`useListManager`, [
       const hooksManagerEnv = createHooksManagerEnv(new NodeGenerator())
       const rootHookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
       const patch: PatchEnv<number, number> = {
-        patch: (previous, current) => Resume.of(previous + current),
+        patch: (previous, current) => Effect.of(previous + current),
       }
       const list = Array(100)
         .fill(null)

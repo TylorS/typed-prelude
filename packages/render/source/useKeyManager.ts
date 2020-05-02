@@ -1,4 +1,4 @@
-import { Disposable } from '@typed/disposable'
+import { Disposable, onDisposed } from '@typed/disposable'
 import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
@@ -11,7 +11,7 @@ import {
   UseRef,
 } from '@typed/hooks'
 import { isUndefined } from '@typed/logic'
-import { fromJust, isJust, isNothing, Just } from '@typed/maybe'
+import { fromJust, isJust, isNothing, Just, Maybe, race } from '@typed/maybe'
 import { patch, PatchEnv } from './Patch'
 import { useHookEnvUpdated } from './useHookEnvUpdated'
 
@@ -51,7 +51,12 @@ export function* useKeyManager<E, B, C>(
         const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
 
         setRenderable(updated)
-        setRendered(yield* patch(fromJust(rendered.current as Just<C>), updated))
+        setRendered(
+          yield* patch(
+            fromJust(race(rendered.current, renderable.current as Maybe<C>) as Just<C>),
+            updated,
+          ),
+        )
       },
     [rendered, hookEnvironment],
   )
@@ -72,16 +77,18 @@ export function* useKeyManager<E, B, C>(
 
   yield* useHookEnvUpdated(hookEnvironment, () => {
     const disposable = Disposable.lazy()
+    const { dispose } = hookEnvironment.addDisposable(disposable)
 
     disposable.addDisposable(
       runEffects(applyUpdate(), env, () => {
         disposable.dispose()
+        dispose()
 
         return Disposable.None
       }),
     )
 
-    return disposable
+    return onDisposed(dispose, disposable)
   })
 
   return fromJust(renderable.current as Just<B>)

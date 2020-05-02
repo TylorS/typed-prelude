@@ -19,7 +19,7 @@ function* manageValues<A, B extends object, E, C>(
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
   currentValues: WeakMap<HookEnvironment, C>,
-) {
+): ChannelEffects<HookEnv & E, ReadonlyArray<C>> {
   return yield* combine(
     ...values.map((value, index) => manageValue(value, index, identify, fn, currentValues)),
   )
@@ -31,7 +31,7 @@ function* manageValue<A, B extends object, E, C>(
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
   currentValues: WeakMap<HookEnvironment, C>,
-) {
+): ChannelEffects<E & HookEnv, C> {
   const key = identify(value)
   const hookEnvironment = yield* getEnvironmentByKey(key)
   const firstRun = !currentValues.has(hookEnvironment)

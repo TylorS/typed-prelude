@@ -1,5 +1,6 @@
-import { CapabilitiesOf, Env, Pure, withEnv as runWithEnv } from '@typed/env'
-import { Fn, OrToAnd } from '@typed/lambda'
+import { Flatten, UnNest } from '@typed/common'
+import { Env, Pure, withEnv as runWithEnv } from '@typed/env'
+import { Fn } from '@typed/lambda'
 
 export interface Effects<A = any, B = any> extends Effect<Env<A, any>, B> {}
 
@@ -19,11 +20,7 @@ export type PureEffect<A> = Effect<Pure<any>, A>
 export type Yield<A> = A extends Effect<infer R, any> ? R : never
 export type Return<A> = A extends Effect<any, infer R> ? R : never
 
-export type Capabilities<A> = A extends Effects<infer R, any>
-  ? R
-  : A extends Effect<infer C, any>
-  ? OrToAnd<CapabilitiesOf<Exclude<C, Pure<any>>>>
-  : never
+export type Capabilities<A> = A extends Effects<infer R, any> ? R : never
 
 export namespace Effect {
   export function of<A>(value: A): PureEffect<A> {
@@ -45,10 +42,16 @@ export namespace Effect {
 
 export type IteratorResultOf<A> = IteratorResult<Yield<A>, Return<A>>
 
-export type CombinedCapabilities<A extends ReadonlyArray<Effect<any, any>>> = OrToAnd<
-  Capabilities<A[number]>
+export type CombinedCapabilities<A extends ReadonlyArray<Effect<any, any>>> = UnNest<
+  Flatten<ToConsList<A>, {}>
 >
 
 export type CombinedValues<A extends ReadonlyArray<Effect<any, any>>> = {
   readonly [K in keyof A]: Return<A[K]>
 }
+
+type ToConsList<A extends readonly any[]> = [] extends A
+  ? unknown
+  : ((...a: A) => any) extends (t: infer T, ...ts: infer TS) => any
+  ? [Capabilities<T>, ToConsList<TS>]
+  : never

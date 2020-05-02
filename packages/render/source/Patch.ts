@@ -1,10 +1,11 @@
-import { Effects } from '@typed/effects'
-import { Resume } from '@typed/env'
+import { Effect, Effects } from '@typed/effects'
 
 export interface PatchEnv<A, B> {
-  readonly patch: (previous: A, value: B) => Resume<A>
+  readonly patch: (previous: A, value: B) => Effects<any, A>
 }
 
-export function* patch<A, B>(previous: A, renderable: B): Effects<PatchEnv<A, B>, A> {
-  return yield (c) => c.patch(previous, renderable)
+export function patch<A, B>(previous: A, renderable: B): Effects<PatchEnv<A, B>, A> {
+  return Effect.withEnv(function* ({ patch }) {
+    return yield* patch(previous, renderable)
+  })
 }

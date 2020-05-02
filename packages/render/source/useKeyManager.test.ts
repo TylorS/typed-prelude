@@ -2,8 +2,7 @@ import { createServerDomEnv } from '@typed/dom'
 
 const { document } = createServerDomEnv({ setGlobals: true })
 
-import { runEffects } from '@typed/effects'
-import { Resume } from '@typed/env'
+import { Effect, runEffects } from '@typed/effects'
 import {
   createHookEnvironment,
   createHooksManagerEnv,
@@ -12,7 +11,6 @@ import {
   UseRef,
   useState,
 } from '@typed/hooks'
-import { Just } from '@typed/maybe'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
 import { NodeGenerator } from '@typed/uuid'
@@ -41,7 +39,7 @@ export const test = describe(`useKeyManager`, [
             done(error)
           }
 
-          return Resume.of(previous + current)
+          return Effect.of(previous + current)
         },
       }
 
@@ -79,7 +77,7 @@ export const test = describe(`useKeyManager`, [
       const rootHookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
       const tagName = 'main'
       const patch: PatchEnv<Element, Renderable> = {
-        patch: (previous, current) => Resume.of(render(previous, current)),
+        patch: (previous, current) => Effect.of(render(previous, current)),
       }
 
       function* sut([, setRef]: UseRef<Element>) {
@@ -132,7 +130,7 @@ export const test = describe(`useKeyManager`, [
         patch: (previous, current) => {
           patched++
 
-          return Resume.of(patchVNode(previous, current))
+          return Effect.of(patchVNode(previous, current))
         },
       }
 

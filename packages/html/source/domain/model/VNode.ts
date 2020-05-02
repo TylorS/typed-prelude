@@ -1,15 +1,62 @@
-import { Json } from '@typed/common'
+import { Flatten, Json, UnNest } from '@typed/common'
+import { Effects } from '@typed/effects'
 import { Ref } from '@typed/hooks'
 import { ComparableValues } from '@typed/lambda'
+import { ValuesOf } from '@typed/objects'
+import { RecordDiff } from './StrMap'
 
 /**
  * A Virtual Node, used to represent a DOM element
  */
-export type VNode<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B extends VNodeChildren = VNodeChildren
-> = TextVNode | CommentVNode | HtmlVNode<E, A, B> | SvgVNode<E, A, B>
+export type VNode<E extends {} = any, A extends TagName = any, B extends VNodeChildren = any> =
+  | TextVNode
+  | CommentVNode
+  | HtmlVNode<E, A, B>
+  | SvgVNode<E, A, B>
+
+export type UpdateProperties<E> = <A extends ElementTypes>(
+  vNode: A,
+  diff: RecordDiff<keyof PropsFrom<TagNameOf<A>>, ValuesOf<PropsFrom<TagNameOf<A>>>>,
+) => Effects<E, A>
+
+/**
+ * Get the individual environment of a given VNode
+ */
+export type VNodeEnv<A> = A extends HtmlVNode<infer E, any, any>
+  ? E
+  : A extends SvgVNode<infer E, any, any>
+  ? E
+  : unknown
+
+/**
+ * Get the combined environment of a VNode and it's children
+ */
+export type EnvOf<A> = VNodeEnv<A> & CombinedEnvsOf<ChildrenOf<A>>
+
+/** Get the tag name of a VNode */
+export type TagNameOf<A> = A extends HtmlVNode<any, infer R, any>
+  ? R
+  : A extends SvgVNode<any, infer R, any>
+  ? R
+  : never
+/**
+ * Get the Children of a VNode
+ */
+export type ChildrenOf<A> = A extends VNode<any, any, infer R> ? (R extends any[] ? R : [R]) : []
+
+/**
+ * Get the combined environments of a list of VNodes
+ */
+export type CombinedEnvsOf<A extends readonly any[]> = UnNest<Flatten<ToConsList<A>, {}>>
+
+/**
+ * Get the Node of a given VNode
+ */
+export type NodeOf<A extends VNode> = A extends TextVNode
+  ? Text
+  : A extends CommentVNode
+  ? Comment
+  : NodeFrom<TagNameOf<A>>
 
 export const enum VNodeType {
   Text,
@@ -18,40 +65,46 @@ export const enum VNodeType {
   Svg,
 }
 
-export interface VNodeChildren extends ArrayLike<VNode> {}
+export interface VNodeChildren extends ReadonlyArray<VNode> {}
 
 export interface TextVNode {
   readonly type: VNodeType.Text
   readonly text: string
-  readonly node: Text | undefined
+  readonly key: ComparableValues | undefined
+  node: Node | undefined
 }
 
 export interface CommentVNode {
   readonly type: VNodeType.Comment
   readonly comment: string
-  readonly node: Comment | undefined
+  readonly key: ComparableValues | undefined
+
+  node: Node | undefined
 }
 
-export interface HtmlVNode<E, A extends TagName = HtmlTagName, B = VNodeChildren> {
+export interface HtmlVNode<E extends {} = any, A extends TagName = HtmlTagName, B = VNodeChildren> {
   readonly type: VNodeType.Html
   readonly tagName: A
   readonly props: (VNodeProps<E, A> & PropsFrom<A>) | null
   readonly children: B
-  readonly element: NodeFrom<A> | undefined
+
+  node: NodeFrom<A> | undefined
+  listener: EventListener | undefined
 }
 
-export interface SvgVNode<E, A extends TagName = SvgTagName, B = VNodeChildren> {
+export interface SvgVNode<E extends {} = any, A extends TagName = SvgTagName, B = VNodeChildren> {
   readonly type: VNodeType.Svg
   readonly tagName: A
   readonly props: (VNodeProps<E, A> & PropsFrom<A>) | null
   readonly children: B
-  readonly element: NodeFrom<A> | undefined
+  node: NodeFrom<A> | undefined
+  listener: EventListener | undefined
 }
 
 /**
  * Meant to be extended by external modules
  */
-export interface VNodeProps<E, A extends TagName> {
+export interface VNodeProps<E extends {}, A extends TagName> {
   // For faster rendering of children
   readonly key?: ComparableValues
 
@@ -86,10 +139,14 @@ export type PropertiesOf<A extends Node> = { readonly [K in ValidProperties<A>]?
 
 // WITH ELEMENTS
 export type ElementVNode<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B extends VNodeChildren = VNodeChildren
-> = ToElement<VNode<E, A, B>>
+  E extends {} = any,
+  A extends TagName = any,
+  B extends VNodeChildren = any
+> = TextElementVNode | CommentElementVNode | HtmlElementVNode<E, A, B> | SvgElementVNode<E, A, B>
+
+export interface ElementVNodeChildren extends ReadonlyArray<ElementVNode> {}
+
+export type ElementTypes = HtmlElementVNode<any> | SvgElementVNode<any>
 
 // Add relevant node to object
 export type ToElement<A extends VNode> = A extends TextVNode
@@ -109,27 +166,27 @@ export type ElementKeys<A> = {
 }[keyof A]
 
 export interface TextElementVNode extends TextVNode {
-  readonly node: Text
+  readonly node: NodeOf<TextVNode>
 }
 
 export interface CommentElementVNode extends CommentVNode {
-  readonly node: Comment
+  readonly node: NodeOf<CommentVNode>
 }
 
 export interface HtmlElementVNode<
   E extends {} = {},
   A extends TagName = TagName,
-  B = ToElements<VNodeChildren>
-> extends HtmlVNode<E, A, ToElements<B>> {
-  readonly element: NodeFrom<A>
+  B = ElementVNodeChildren
+> extends HtmlVNode<E, A, B> {
+  readonly node: NodeFrom<A>
 }
 
 export interface SvgElementVNode<
   E extends {} = {},
   A extends TagName = TagName,
-  B = ToElements<VNodeChildren>
-> extends SvgVNode<E, A, ToElements<B>> {
-  readonly element: NodeFrom<A>
+  B = ElementVNodeChildren
+> extends SvgVNode<E, A, B> {
+  readonly node: NodeFrom<A>
 }
 
 // INTERNAL TYPES
@@ -140,10 +197,16 @@ type ValidProperties<A> = {
 
 type ExcludedKeys = 'outerHTML' | 'textContent'
 
-type WritableKeysOf<A> = {
+export type WritableKeysOf<A> = {
   [K in keyof A]: IfEquals<{ [Key in K]: A[K] }, { -readonly [Key in K]: A[K] }, K, never>
 }[keyof A]
 
 type IfEquals<A, B, C, D> = (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2
   ? C
   : D
+
+type ToConsList<A extends readonly any[]> = [] extends A
+  ? unknown
+  : ((...a: A) => any) extends (t: infer T, ...ts: infer TS) => any
+  ? [VNodeEnv<T>, ToConsList<TS>]
+  : never
