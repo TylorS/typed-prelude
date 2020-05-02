@@ -1,8 +1,7 @@
 import { createDomEnv } from '@typed/dom'
-import { runEffects } from '@typed/effects'
-import { Resume } from '@typed/env'
-import { createHookEnvironment, createHooksManager, HookEffects } from '@typed/hooks'
-import { renderOnRaf } from '@typed/render'
+import { Effect, runEffects } from '@typed/effects'
+import { createHookEnvironment, createHooksManagerEnv, HookEffects } from '@typed/hooks'
+import { patchOnRaf } from '@typed/render'
 import { createTimer } from '@typed/timer'
 import { BrowserGenerator } from '@typed/uuid'
 import { render as renderLighterHtml, Renderable } from 'lighterhtml'
@@ -19,8 +18,8 @@ if (!rootElement) {
 }
 
 const timer = createTimer()
-const hooksManager = createHooksManager(new BrowserGenerator())
-const hookEnvironment = createHookEnvironment(hooksManager)
+const hooksManagerEnv = createHooksManagerEnv(new BrowserGenerator())
+const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
 
 function* main<E>(repo: GridRepository<E>): HookEffects<E & RequiredResources, Renderable> {
   const [gameState, dispatch] = yield* use2048(repo)
@@ -31,9 +30,11 @@ function* main<E>(repo: GridRepository<E>): HookEffects<E & RequiredResources, R
 const gridRepo = createGridRepository(GRID_STORAGE_KEY)
 
 runEffects(
-  renderOnRaf(() => main(gridRepo)),
+  patchOnRaf(() => main(gridRepo), rootElement),
   {
-    render: (renderable: Renderable) => Resume.of(renderLighterHtml(rootElement, renderable)),
+    patch: (rootElement: Element, renderable: Renderable) =>
+      Effect.of(renderLighterHtml(rootElement, renderable)),
+    ...hooksManagerEnv,
     hookEnvironment,
     storage: localStorage,
     floor: Math.floor,

@@ -77,9 +77,9 @@ function renderGrid({ coordinates, grid }: GameState) {
   const tilesByRow = mapToList(
     (_, positions) => html`
       <div class="flex items-center">
-        ${positions.map(position =>
+        ${positions.map((position) =>
           renderTile(
-            grid.tiles.find(tile => equals(tile.position, position)) || emptyTile(position),
+            grid.tiles.find((tile) => equals(tile.position, position)) || emptyTile(position),
           ),
         )}
       </div>
