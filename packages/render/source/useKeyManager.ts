@@ -44,9 +44,6 @@ export function* useKeyManager<E, B, C>(
 
   if (isFirstRun) {
     setRendered(initial)
-  }
-
-  if (isFirstRun) {
     setRenderable(yield* runWithHooks(render(renderedRef), hookEnvironment))
   }
 

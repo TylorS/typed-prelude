@@ -1,5 +1,5 @@
-import { ElementTypes, VNode } from '../../model'
-import { getKey } from '../getKey'
+import { ElementTypes, VNode } from '../../model/VNode'
+import { getKey } from './getKey'
 import { isHtml } from './html'
 import { isSvg } from './svg'
 

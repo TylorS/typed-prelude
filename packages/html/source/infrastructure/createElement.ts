@@ -5,6 +5,7 @@ import { pipeline } from '@typed/lambda'
 import { Just } from '@typed/maybe'
 import { dissoc } from '@typed/objects'
 import {
+  AddElements,
   CommentVNode,
   CreateElement,
   diffAttributes,
@@ -17,8 +18,9 @@ import {
   RecordDiff,
   VNode,
 } from '../domain'
-import { addElements } from './addElements'
 import { SVG_NAMESPACE } from './constants'
+import { getNodeOrThrow } from './getNodeOrThrow'
+import { PatchFailure } from './PatchFailure'
 import { updateAriaAttributes } from './updateAriaAttributes'
 import { updateAttributes } from './updateAttributes'
 import { updateDataList } from './updateDataList'
@@ -26,6 +28,18 @@ import { updateEventHandlers } from './updateEventHandlers'
 import { updateProperties } from './updateProperties'
 
 const EMPTY: any = {}
+
+export const addElements: AddElements<DomEnv & PatchFailure> = function* (
+  parentNode,
+  vNodes,
+  referenceNode,
+) {
+  yield* combine(...vNodes.map(createElement))
+
+  for (const vNode of vNodes) {
+    parentNode.insertBefore(yield* getNodeOrThrow(vNode), referenceNode ?? null)
+  }
+}
 
 export const createElement: CreateElement<DomEnv> = function* <A extends VNode>(vNode: A) {
   const { document } = yield* get()

@@ -1,8 +1,7 @@
 import { createDomEnv } from '@typed/dom'
 import { runEffects } from '@typed/effects'
 import { createHookEnvironment, createHooksManagerEnv } from '@typed/hooks'
-import { createPatchEnv, elementToVNode } from '@typed/html'
-import { patchOnRaf } from '@typed/render'
+import { createPatchEnv, patchOnRaf } from '@typed/html'
 import { createTimer } from '@typed/timer'
 import { BrowserGenerator } from '@typed/uuid'
 import { use2048 } from './application'
@@ -28,24 +27,21 @@ function* render<E>(repo: GridRepository<E>) {
   return vNode
 }
 
-function* main<E>(repo: GridRepository<E>, rootElement: HTMLElement) {
-  const rootVNode = yield* elementToVNode(rootElement)
-
-  yield* patchOnRaf(() => render(repo), rootVNode)
-}
-
 const gridRepo = createGridRepository(GRID_STORAGE_KEY)
 
-runEffects(main(gridRepo, rootElement as HTMLElement), {
-  ...createPatchEnv(),
-  ...hooksManagerEnv,
-  hookEnvironment,
-  storage: localStorage,
-  floor: Math.floor,
-  random: Math.random,
-  cancelAnimationFrame,
-  requestAnimationFrame,
-  timer,
-  ...createDomEnv(),
-  ...new BrowserGenerator(),
-})
+runEffects(
+  patchOnRaf(() => render(gridRepo), rootElement as HTMLElement),
+  {
+    ...createPatchEnv(),
+    ...hooksManagerEnv,
+    hookEnvironment,
+    storage: localStorage,
+    floor: Math.floor,
+    random: Math.random,
+    cancelAnimationFrame,
+    requestAnimationFrame,
+    timer,
+    ...createDomEnv(),
+    ...new BrowserGenerator(),
+  },
+)

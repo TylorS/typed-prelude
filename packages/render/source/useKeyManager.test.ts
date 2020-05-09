@@ -32,7 +32,7 @@ export const test = describe(`useKeyManager`, [
         patch: (previous, current) => {
           try {
             equal(initial, previous)
-            equal(initial + 1, current)
+            equal(initial + 2, current)
 
             done()
           } catch (error) {
@@ -88,7 +88,7 @@ export const test = describe(`useKeyManager`, [
 
         return html`
           <main
-            ref=${(el) => {
+            ref=${(el: Element) => {
               equal(tagName, el.tagName)
 
               setRef(el)
@@ -168,7 +168,7 @@ export const test = describe(`useKeyManager`, [
       // Give the useEffect*s time to run
       timer.progressTimeBy(1)
 
-      equal(2, patched)
+      equal(1, patched)
     }),
   ]),
 ])
