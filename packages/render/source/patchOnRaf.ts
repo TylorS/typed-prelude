@@ -2,10 +2,10 @@ import { getHookEnv, HookEffects, runWithHooks } from '@typed/hooks'
 import { patch, PatchEnv } from './Patch'
 import { raf, RafEnv } from './raf'
 
-export function* patchOnRaf<A, B, C, E = any>(
+export function* patchOnRaf<E, A, B, C>(
   fn: () => HookEffects<A, B>,
   initial: C,
-): HookEffects<A & RafEnv & PatchEnv<C, B, E>, never> {
+): HookEffects<E & A & RafEnv & PatchEnv<C, B, E>, never> {
   const env = yield* getHookEnv()
 
   let updating = false

@@ -1,3 +1,4 @@
+import { isEmpty } from '@typed/objects'
 import { UpdateProperties } from '../domain'
 import { getNodeOrThrow } from './getNodeOrThrow'
 import { PatchFailure } from './PatchFailure'
@@ -9,6 +10,10 @@ export const updateProperties: UpdateProperties<PatchFailure> = function* update
   vNode,
   { removed, updated },
 ) {
+  if (isEmpty(removed) && isEmpty(updated)) {
+    return vNode
+  }
+
   const node = yield* getNodeOrThrow(vNode)
 
   for (const [key] of removed) {

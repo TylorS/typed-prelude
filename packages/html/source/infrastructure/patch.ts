@@ -1,5 +1,5 @@
 import { DomEnv } from '@typed/dom'
-import { Effects } from '@typed/effects'
+import { Effects, Fail } from '@typed/effects'
 import { PatchEnv } from '@typed/render'
 import { VNode, vNodesAreEqual } from '../domain'
 import { createElement } from './createElement'
@@ -8,7 +8,7 @@ import { patchElement } from './patchElement'
 import { PatchFailure } from './PatchFailure'
 import { removeElements } from './removeElements'
 
-export function createPatchEnv(): PatchEnv<VNode, VNode> {
+export function createPatchEnv(fail: Fail<Error> = Fail): PatchEnv<VNode, VNode> & PatchFailure {
   return {
     *patch(elementVNode, vNode): Effects<DomEnv & PatchFailure, VNode> {
       if (vNodesAreEqual(elementVNode, vNode)) {
@@ -27,5 +27,6 @@ export function createPatchEnv(): PatchEnv<VNode, VNode> {
 
       return vNode
     },
+    [PatchFailure]: fail,
   }
 }

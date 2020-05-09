@@ -1,7 +1,7 @@
 import { combine } from '@typed/effects'
 import { pipeline } from '@typed/lambda'
 import { dissoc } from '@typed/objects'
-import { diffRecordMap, ElementTypes, RecordDiff } from '../domain'
+import { diffAttributes, diffRecordMap, ElementTypes, RecordDiff } from '../domain'
 import { addElements } from './addElements'
 import { getNodeOrThrow } from './getNodeOrThrow'
 import { removeElements } from './removeElements'
@@ -28,8 +28,7 @@ export function* updateElement<A extends ElementTypes, B extends ElementTypes>(
     ),
     updateAttributes(
       vNode,
-      // TODO :: handle boolean attributes
-      diffRecordMap(previousProps?.attrs ?? EMPTY, currentProps?.attrs ?? EMPTY),
+      diffAttributes(previousProps?.attrs ?? EMPTY, currentProps?.attrs ?? EMPTY),
     ),
     updateDataList(vNode, diffRecordMap(previousProps?.data ?? EMPTY, currentProps?.data ?? EMPTY)),
     updateEventHandlers(

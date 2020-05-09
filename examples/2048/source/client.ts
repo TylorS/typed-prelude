@@ -1,9 +1,8 @@
 import { createDomEnv } from '@typed/dom'
-import { Capabilities, Fail, runEffects, TypeOf } from '@typed/effects'
+import { runEffects } from '@typed/effects'
 import { createHookEnvironment, createHooksManagerEnv } from '@typed/hooks'
-import { createPatchEnv, elementToVNode, PatchFailure, VNode } from '@typed/html'
+import { createPatchEnv, elementToVNode } from '@typed/html'
 import { patchOnRaf } from '@typed/render'
-import { StorageEnv } from '@typed/storage'
 import { createTimer } from '@typed/timer'
 import { BrowserGenerator } from '@typed/uuid'
 import { use2048 } from './application'
@@ -32,15 +31,12 @@ function* render<E>(repo: GridRepository<E>) {
 function* main<E>(repo: GridRepository<E>, rootElement: HTMLElement) {
   const rootVNode = yield* elementToVNode(rootElement)
 
-  yield* patchOnRaf<E & Capabilities<TypeOf<typeof render>>, VNode, VNode>(
-    () => render(repo),
-    rootVNode,
-  )
+  yield* patchOnRaf(() => render(repo), rootVNode)
 }
 
 const gridRepo = createGridRepository(GRID_STORAGE_KEY)
 
-runEffects(main<PatchFailure & StorageEnv>(gridRepo, rootElement as HTMLElement), {
+runEffects(main(gridRepo, rootElement as HTMLElement), {
   ...createPatchEnv(),
   ...hooksManagerEnv,
   hookEnvironment,
@@ -52,5 +48,4 @@ runEffects(main<PatchFailure & StorageEnv>(gridRepo, rootElement as HTMLElement)
   timer,
   ...createDomEnv(),
   ...new BrowserGenerator(),
-  [PatchFailure]: Fail,
 })

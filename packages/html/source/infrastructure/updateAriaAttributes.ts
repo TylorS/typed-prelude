@@ -1,3 +1,4 @@
+import { isEmpty } from '@typed/objects'
 import { UpdateAriaAttributes } from '../domain'
 import { getNodeOrThrow } from './getNodeOrThrow'
 import { PatchFailure } from './PatchFailure'
@@ -8,6 +9,10 @@ export const updateAriaAttributes: UpdateAriaAttributes<PatchFailure> = function
   vNode,
   { removed, updated },
 ) {
+  if (isEmpty(removed) && isEmpty(updated)) {
+    return vNode
+  }
+
   const node = yield* getNodeOrThrow(vNode)
 
   for (const [key] of removed) {

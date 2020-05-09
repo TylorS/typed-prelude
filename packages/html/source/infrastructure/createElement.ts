@@ -7,6 +7,7 @@ import { dissoc } from '@typed/objects'
 import {
   CommentVNode,
   CreateElement,
+  diffAttributes,
   diffRecordMap,
   ElementTypes,
   isHtml,
@@ -53,11 +54,7 @@ function* createElementAttributesAndProps<A extends ElementTypes>(vNode: A) {
 
   yield* combine(
     updateAriaAttributes(vNode, diffRecordMap(EMPTY, currentProps?.aria ?? EMPTY)),
-    updateAttributes(
-      vNode,
-      // TODO :: handle boolean attributes
-      diffRecordMap(EMPTY, currentProps?.attrs ?? EMPTY),
-    ),
+    updateAttributes(vNode, diffAttributes(EMPTY, currentProps?.attrs ?? EMPTY)),
     updateDataList(vNode, diffRecordMap(EMPTY, currentProps?.data ?? EMPTY)),
     updateEventHandlers(
       vNode,
