@@ -34,6 +34,9 @@
       "path": "../lambda/tsconfig.json"
     },
     {
+      "path": "../list/tsconfig.json"
+    },
+    {
       "path": "../maybe/tsconfig.json"
     },
     {

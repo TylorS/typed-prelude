@@ -1,12 +1,14 @@
 import { UpdateAriaAttributes } from '../domain'
+import { getNodeOrThrow } from './getNodeOrThrow'
+import { PatchFailure } from './PatchFailure'
 
 const getAriaKey = (key: string) => `aria-${key}`
 
-export const updateAriaAttributes: UpdateAriaAttributes<{}> = function* updateAriaAttributes(
+export const updateAriaAttributes: UpdateAriaAttributes<PatchFailure> = function* updateAriaAttributes(
   vNode,
   { removed, updated },
 ) {
-  const { node } = vNode
+  const node = yield* getNodeOrThrow(vNode)
 
   for (const [key] of removed) {
     node.removeAttribute(getAriaKey(key))

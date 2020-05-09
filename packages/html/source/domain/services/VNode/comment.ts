@@ -1,5 +1,5 @@
-import { VOID } from '@typed/common'
 import { ComparableValues } from '@typed/lambda'
+import { Nothing } from '@typed/maybe'
 import { CommentVNode, VNode, VNodeType } from '../../model/VNode'
 
 export function comment(comment: string, key?: ComparableValues): CommentVNode {
@@ -7,7 +7,7 @@ export function comment(comment: string, key?: ComparableValues): CommentVNode {
     type: VNodeType.Comment,
     comment,
     key,
-    node: VOID,
+    node: { current: Nothing },
   }
 }
 

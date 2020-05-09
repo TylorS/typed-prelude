@@ -3,7 +3,7 @@ import { Effects } from '@typed/effects'
 import { Ref } from '@typed/hooks'
 import { ComparableValues } from '@typed/lambda'
 import { ValuesOf } from '@typed/objects'
-import { RecordDiff } from './StrMap'
+import { RecordDiff, StrMap } from './StrMap'
 
 /**
  * A Virtual Node, used to represent a DOM element
@@ -18,6 +18,8 @@ export type UpdateProperties<E> = <A extends ElementTypes>(
   vNode: A,
   diff: RecordDiff<keyof PropsFrom<TagNameOf<A>>, ValuesOf<PropsFrom<TagNameOf<A>>>>,
 ) => Effects<E, A>
+
+export type ElementTypes = HtmlVNode | SvgVNode
 
 /**
  * Get the individual environment of a given VNode
@@ -71,15 +73,14 @@ export interface TextVNode {
   readonly type: VNodeType.Text
   readonly text: string
   readonly key: ComparableValues | undefined
-  node: Node | undefined
+  readonly node: Ref<Text>
 }
 
 export interface CommentVNode {
   readonly type: VNodeType.Comment
   readonly comment: string
   readonly key: ComparableValues | undefined
-
-  node: Node | undefined
+  readonly node: Ref<Comment>
 }
 
 export interface HtmlVNode<E extends {} = any, A extends TagName = HtmlTagName, B = VNodeChildren> {
@@ -87,9 +88,8 @@ export interface HtmlVNode<E extends {} = any, A extends TagName = HtmlTagName, 
   readonly tagName: A
   readonly props: (VNodeProps<E, A> & PropsFrom<A>) | null
   readonly children: B
-
-  node: NodeFrom<A> | undefined
-  listener: EventListener | undefined
+  readonly node: Ref<NodeFrom<A>>
+  readonly listener: Ref<EventListener>
 }
 
 export interface SvgVNode<E extends {} = any, A extends TagName = SvgTagName, B = VNodeChildren> {
@@ -97,8 +97,8 @@ export interface SvgVNode<E extends {} = any, A extends TagName = SvgTagName, B 
   readonly tagName: A
   readonly props: (VNodeProps<E, A> & PropsFrom<A>) | null
   readonly children: B
-  node: NodeFrom<A> | undefined
-  listener: EventListener | undefined
+  readonly node: Ref<NodeFrom<A>>
+  readonly listener: Ref<EventListener>
 }
 
 /**
@@ -108,8 +108,20 @@ export interface VNodeProps<E extends {}, A extends TagName> {
   // For faster rendering of children
   readonly key?: ComparableValues
 
-  // For keeping references in @typed/hooks
+  // Allow supplying your own reference
   readonly ref?: Ref<NodeFrom<A>>
+
+  // Generic attribute API
+  readonly attrs?: StrMap<string | undefined>
+
+  // Create aria attributes easily
+  readonly aria?: StrMap<string>
+
+  // Create data-* attributes easily
+  readonly data?: StrMap<string>
+
+  // Declaratively add/remove event handlers
+  readonly on?: EventsFrom<E, A>
 }
 
 export type TagName = HtmlTagName | SvgTagName
@@ -137,67 +149,71 @@ export type PropsFrom<A extends TagName> = PropertiesOf<NodeFrom<A>>
  */
 export type PropertiesOf<A extends Node> = { readonly [K in ValidProperties<A>]?: A[K] }
 
-// WITH ELEMENTS
-export type ElementVNode<
-  E extends {} = any,
-  A extends TagName = any,
-  B extends VNodeChildren = any
-> = TextElementVNode | CommentElementVNode | HtmlElementVNode<E, A, B> | SvgElementVNode<E, A, B>
+export type EventMapFrom<A> = A extends HtmlTagName
+  ? A extends 'body'
+    ? HTMLBodyElementEventMap
+    : A extends 'frameset'
+    ? HTMLFrameSetElementEventMap
+    : A extends 'marquee'
+    ? HTMLMarqueeElementEventMap
+    : A extends 'media'
+    ? HTMLMediaElementEventMap
+    : A extends 'video'
+    ? HTMLVideoElementEventMap
+    : HTMLElementEventMap
+  : A extends SvgTagName
+  ? SVGElementEventMap
+  : never
 
-export interface ElementVNodeChildren extends ReadonlyArray<ElementVNode> {}
+export type EventsFrom<E extends {}, A extends TagName> = EventsFromMap<E, A, EventMapFrom<A>>
 
-export type ElementTypes = HtmlElementVNode<any> | SvgElementVNode<any>
-
-// Add relevant node to object
-export type ToElement<A extends VNode> = A extends TextVNode
-  ? TextElementVNode
-  : A extends HtmlVNode<infer E, infer A, infer B>
-  ? HtmlElementVNode<E, A, ToElements<B>>
-  : A extends SvgVNode<infer E, infer A, infer B>
-  ? SvgElementVNode<E, A, ToElements<B>>
-  : CommentElementVNode
-
-export type ToElements<A> = {
-  readonly [K in ElementKeys<A>]: ToElement<A[K]>
+export type EventsFromMap<E extends {}, A extends TagName, Map extends {}> = {
+  readonly [K in keyof Map]?: EventHandler<E, A, Map, K>
 }
 
-export type ElementKeys<A> = {
-  [K in keyof A]: A[K] extends VNode ? K : never
-}[keyof A]
+export type EventHandler<E extends {}, A extends TagName, Map extends {}, K extends keyof Map> =
+  | BubblingEventHandler<E, A, Map, K>
+  | EventHandlerWithOptions<E, A, Map, K>
 
-export interface TextElementVNode extends TextVNode {
-  readonly node: NodeOf<TextVNode>
-}
+/**
+ * Providing just a function defaults to listing to bubbling events
+ */
 
-export interface CommentElementVNode extends CommentVNode {
-  readonly node: NodeOf<CommentVNode>
-}
+export type BubblingEventHandler<
+  E extends {},
+  A extends TagName,
+  Map extends {},
+  K extends keyof Map
+> = (event: { readonly type: K; readonly currentTarget: NodeFrom<A> } & Map[K]) => Effects<E, void>
 
-export interface HtmlElementVNode<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B = ElementVNodeChildren
-> extends HtmlVNode<E, A, B> {
-  readonly node: NodeFrom<A>
-}
-
-export interface SvgElementVNode<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B = ElementVNodeChildren
-> extends SvgVNode<E, A, B> {
-  readonly node: NodeFrom<A>
-}
+/**
+ * Providing AddEventListenerOptions in a pair allows customizing how the event handler is registered.
+ */
+export type EventHandlerWithOptions<
+  E extends {},
+  A extends TagName,
+  Map extends {},
+  K extends keyof Map
+> = readonly [
+  AddEventListenerOptions,
+  (event: { readonly type: K; readonly currentTarget: NodeFrom<A> } & Map[K]) => Effects<E, void>,
+]
 
 // INTERNAL TYPES
 
 type ValidProperties<A> = {
-  [K in keyof A]: A[K] extends Json ? K : never
-}[Exclude<WritableKeysOf<A>, ExcludedKeys>]
+  [K in keyof A]: K extends ExcludedKeys
+    ? never
+    : K extends WritableKeysOf<A>
+    ? A[K] extends Json
+      ? K
+      : never
+    : never
+}[keyof A]
 
 type ExcludedKeys = 'outerHTML' | 'textContent'
 
-export type WritableKeysOf<A> = {
+type WritableKeysOf<A> = {
   [K in keyof A]: IfEquals<{ [Key in K]: A[K] }, { -readonly [Key in K]: A[K] }, K, never>
 }[keyof A]
 
@@ -209,4 +225,4 @@ type ToConsList<A extends readonly any[]> = [] extends A
   ? unknown
   : ((...a: A) => any) extends (t: infer T, ...ts: infer TS) => any
   ? [VNodeEnv<T>, ToConsList<TS>]
-  : never
+  : unknown

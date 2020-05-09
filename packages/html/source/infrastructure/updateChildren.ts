@@ -1,9 +1,17 @@
 import { DomEnv } from '@typed/dom'
-import { ElementVNode, getKey, UpdateChildren, vNodesAreEqual } from '../domain'
+import { getKey, UpdateChildren, VNodeChildren, vNodesAreEqual } from '../domain'
+import { addElements } from './addElements'
 import { createElement } from './createElement'
+import { getNodeOrThrow } from './getNodeOrThrow'
 import { patchElement } from './patchElement'
+import { PatchFailure } from './PatchFailure'
+import { removeElements } from './removeElements'
 
-export const updateChildren: UpdateChildren<DomEnv> = function* (parentElement, current, updated) {
+export const updateChildren: UpdateChildren<DomEnv & PatchFailure> = function* (
+  parentElement,
+  current,
+  updated,
+) {
   // indexes
   let currentStartIndex = 0
   let updatedStartIndex = 0
@@ -34,12 +42,18 @@ export const updateChildren: UpdateChildren<DomEnv> = function* (parentElement, 
       updatedEndVNode = updated[--updatedEndIndex]
     } else if (vNodesAreEqual(currentStartVNode, updatedEndVNode)) {
       yield* patchElement(currentStartVNode, updatedEndVNode)
-      parentElement.insertBefore(currentStartVNode.node, currentEndVNode.node.nextSibling)
+      parentElement.insertBefore(
+        yield* getNodeOrThrow(currentStartVNode),
+        (yield* getNodeOrThrow(currentEndVNode)).nextSibling,
+      )
       currentStartVNode = current[++currentStartIndex]
       updatedEndVNode = updated[--updatedEndIndex]
     } else if (vNodesAreEqual(currentEndVNode, updatedStartVNode)) {
       yield* patchElement(currentEndVNode, updatedStartVNode)
-      parentElement.insertBefore(currentEndVNode.node, currentStartVNode.node)
+      parentElement.insertBefore(
+        yield* getNodeOrThrow(currentEndVNode),
+        yield* getNodeOrThrow(currentStartVNode),
+      )
       currentEndVNode = current[--currentEndIndex]
       updatedStartVNode = updated[++updatedStartIndex]
     } else {
@@ -51,9 +65,12 @@ export const updateChildren: UpdateChildren<DomEnv> = function* (parentElement, 
 
       if (!currentIndexKey) {
         // new element
-        const element = yield* createElement(updatedStartVNode)
+        yield* createElement(updatedStartVNode)
 
-        parentElement.insertBefore(element, currentStartVNode.node)
+        parentElement.insertBefore(
+          yield* getNodeOrThrow(updatedStartVNode),
+          yield* getNodeOrThrow(currentStartVNode),
+        )
 
         updatedStartVNode = updated[++updatedStartIndex]
       } else {
@@ -61,16 +78,36 @@ export const updateChildren: UpdateChildren<DomEnv> = function* (parentElement, 
 
         yield* patchElement(keyedVNode, updatedStartVNode)
 
-        parentElement.insertBefore(keyedVNode.node, currentStartVNode.node)
+        parentElement.insertBefore(
+          yield* getNodeOrThrow(keyedVNode),
+          yield* getNodeOrThrow(currentStartVNode),
+        )
 
         updatedStartVNode = updated[++updatedStartIndex]
       }
     }
   }
+
+  if (currentStartIndex > currentEndIndex) {
+    const referenceNode = updated[updatedEndIndex + 1]
+      ? yield* getNodeOrThrow(updated[updatedEndIndex + 1])
+      : null
+    const vNodes = updated.slice(updatedStartIndex, updatedEndIndex + 1)
+
+    if (vNodes.length > 0) {
+      yield* addElements(parentElement, vNodes, referenceNode)
+    }
+  } else if (updatedStartIndex > updatedEndIndex) {
+    const vNodes = current.slice(currentStartIndex, currentEndIndex + 1)
+
+    if (vNodes.length > 0) {
+      yield* removeElements(parentElement, vNodes)
+    }
+  }
 }
 
 function mapKeyToCurrentIndex(
-  children: readonly ElementVNode[],
+  children: VNodeChildren,
   startIndex: number,
   endIndex: number,
 ): Map<any, any> {
@@ -81,7 +118,9 @@ function mapKeyToCurrentIndex(
   for (; index <= endIndex; ++index) {
     key = getKey(children[index])
 
-    if (key) map.set(key, index)
+    if (key) {
+      map.set(key, index)
+    }
   }
 
   return map

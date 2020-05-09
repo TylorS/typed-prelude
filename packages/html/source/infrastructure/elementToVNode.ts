@@ -1,61 +1,67 @@
 import { combine, Effects } from '@typed/effects'
+import { map } from '@typed/list'
+import { Just } from '@typed/maybe'
 import {
   comment,
-  CommentElementVNode,
   ElementToVNode,
-  ElementVNode,
-  ElementVNodeChildren,
   html,
-  HtmlElementVNode,
   HtmlTagName,
   svg,
-  SvgElementVNode,
   SvgTagName,
   text,
-  TextElementVNode,
+  VNode,
+  VNodeChildren,
 } from '../domain'
 import { SVG_NAMESPACE } from './constants'
 
-export const elementToVNode: ElementToVNode<unknown> = function* <
-  A extends Text | Comment | HTMLElement | SVGElement
->(node: A): Effects<unknown, ElementVNode<{}>> {
-  if (node.nodeType === Node.TEXT_NODE) {
-    return { ...text(node.textContent ?? ''), node: node as Text } as TextElementVNode
+const EMPTY: VNodeChildren = []
+
+export const elementToVNode: ElementToVNode<unknown> = function* (
+  node: Text | Comment | HTMLElement | SVGElement,
+): Effects<unknown, VNode> {
+  if (isTextNode(node)) {
+    const vNode = text(node.textContent ?? '')
+
+    vNode.node.current = Just.of(node)
+
+    return vNode
   }
 
-  if (node.nodeType === Node.COMMENT_NODE) {
-    return { ...comment(node.textContent ?? ''), node: node as Comment } as CommentElementVNode
+  if (isCommentNode(node)) {
+    const vNode = comment(node.textContent ?? '')
+
+    vNode.node.current = Just.of(node)
+
+    return vNode
   }
 
-  if (node.namespaceURI === SVG_NAMESPACE) {
-    const element: SVGElement = node as any
+  const props = { id: node.id, className: node.className }
+  const children: VNodeChildren =
+    node.childNodes.length === 0
+      ? EMPTY
+      : yield* combine(
+          ...map(
+            elementToVNode,
+            node.childNodes as NodeListOf<Text | Comment | HTMLElement | SVGElement>,
+          ),
+        )
+  const vNode = isSvgElement(node)
+    ? svg(node.tagName.toLowerCase() as SvgTagName, props, children)
+    : html(node.tagName.toLowerCase() as HtmlTagName, props, children)
 
-    return {
-      ...svg(
-        element.tagName.toLowerCase() as SvgTagName,
-        { id: element.id, className: element.className } as any,
-        yield* combine(
-          ...Array.from(
-            element.childNodes as NodeListOf<Text | Comment | HTMLElement | SVGElement>,
-          ).map(elementToVNode),
-        ),
-      ),
-      element,
-    } as SvgElementVNode
-  }
+  vNode.node.current = Just.of(node as any)
 
-  const element: HTMLElement = node as any
+  return vNode
+}
 
-  return {
-    ...html<HtmlTagName, {}, ElementVNodeChildren>(
-      element.tagName.toLowerCase() as HtmlTagName,
-      { id: element.id, className: element.className } as any,
-      yield* combine(
-        ...Array.from(
-          element.childNodes as NodeListOf<Text | Comment | HTMLElement | SVGElement>,
-        ).map(elementToVNode),
-      ),
-    ),
-    element,
-  } as HtmlElementVNode
+function isTextNode(node: Text | Comment | HTMLElement | SVGElement): node is Text {
+  return node.nodeType === Node.TEXT_NODE
+}
+
+function isCommentNode(node: Text | Comment | HTMLElement | SVGElement): node is Comment {
+  return node.nodeType === Node.COMMENT_NODE
+}
+
+function isSvgElement(node: Text | Comment | HTMLElement | SVGElement): node is SVGElement {
+  return node.namespaceURI === SVG_NAMESPACE
 }

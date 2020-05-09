@@ -1,11 +1,12 @@
 import { createDomEnv } from '@typed/dom'
-import { Effect, runEffects } from '@typed/effects'
-import { createHookEnvironment, createHooksManagerEnv, HookEffects } from '@typed/hooks'
+import { Capabilities, Fail, runEffects, TypeOf } from '@typed/effects'
+import { createHookEnvironment, createHooksManagerEnv } from '@typed/hooks'
+import { createPatchEnv, elementToVNode, PatchFailure, VNode } from '@typed/html'
 import { patchOnRaf } from '@typed/render'
+import { StorageEnv } from '@typed/storage'
 import { createTimer } from '@typed/timer'
 import { BrowserGenerator } from '@typed/uuid'
-import { render as renderLighterHtml, Renderable } from 'lighterhtml'
-import { RequiredResources, use2048 } from './application'
+import { use2048 } from './application'
 import { GRID_STORAGE_KEY, ROOT_ELEMENT_SELECTOR } from './constants'
 import { GridRepository } from './domain'
 import { createGridRepository } from './infrastructure/StorageGridRepository'
@@ -21,28 +22,35 @@ const timer = createTimer()
 const hooksManagerEnv = createHooksManagerEnv(new BrowserGenerator())
 const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
 
-function* main<E>(repo: GridRepository<E>): HookEffects<E & RequiredResources, Renderable> {
+function* render<E>(repo: GridRepository<E>) {
   const [gameState, dispatch] = yield* use2048(repo)
+  const vNode = yield* render2048(gameState, dispatch)
 
-  return yield* render2048(gameState, dispatch)
+  return vNode
+}
+
+function* main<E>(repo: GridRepository<E>, rootElement: HTMLElement) {
+  const rootVNode = yield* elementToVNode(rootElement)
+
+  yield* patchOnRaf<E & Capabilities<TypeOf<typeof render>>, VNode, VNode>(
+    () => render(repo),
+    rootVNode,
+  )
 }
 
 const gridRepo = createGridRepository(GRID_STORAGE_KEY)
 
-runEffects(
-  patchOnRaf(() => main(gridRepo), rootElement),
-  {
-    patch: (rootElement: Element, renderable: Renderable) =>
-      Effect.of(renderLighterHtml(rootElement, renderable)),
-    ...hooksManagerEnv,
-    hookEnvironment,
-    storage: localStorage,
-    floor: Math.floor,
-    random: Math.random,
-    cancelAnimationFrame,
-    requestAnimationFrame,
-    timer,
-    ...createDomEnv(),
-    ...new BrowserGenerator(),
-  },
-)
+runEffects(main<PatchFailure & StorageEnv>(gridRepo, rootElement as HTMLElement), {
+  ...createPatchEnv(),
+  ...hooksManagerEnv,
+  hookEnvironment,
+  storage: localStorage,
+  floor: Math.floor,
+  random: Math.random,
+  cancelAnimationFrame,
+  requestAnimationFrame,
+  timer,
+  ...createDomEnv(),
+  ...new BrowserGenerator(),
+  [PatchFailure]: Fail,
+})

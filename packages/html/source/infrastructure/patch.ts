@@ -1,30 +1,31 @@
 import { DomEnv } from '@typed/dom'
 import { Effects } from '@typed/effects'
 import { PatchEnv } from '@typed/render'
-import { ElementVNode, VNode, vNodesAreEqual } from '../domain'
+import { VNode, vNodesAreEqual } from '../domain'
 import { createElement } from './createElement'
+import { getNodeOrThrow } from './getNodeOrThrow'
 import { patchElement } from './patchElement'
+import { PatchFailure } from './PatchFailure'
 import { removeElements } from './removeElements'
 
-export function createPatchEnv(): PatchEnv<ElementVNode, VNode> {
+export function createPatchEnv(): PatchEnv<VNode, VNode> {
   return {
-    *patch(elementVNode, vNode): Effects<DomEnv, ElementVNode> {
+    *patch(elementVNode, vNode): Effects<DomEnv & PatchFailure, VNode> {
       if (vNodesAreEqual(elementVNode, vNode)) {
-        return yield* patchElement(elementVNode, vNode)
+        yield* patchElement(elementVNode, vNode)
+      } else {
+        const element = yield* getNodeOrThrow(elementVNode)
+        const parentNode = element.parentNode
+
+        yield* createElement(vNode)
+
+        if (parentNode) {
+          parentNode.insertBefore(element.nextSibling)
+          yield* removeElements(parentNode, [elementVNode])
+        }
       }
 
-      const element = elementVNode.node
-      const parentNode = element.parentNode
-      const node = yield* createElement(vNode)
-
-      vNode.node = node
-
-      if (parentNode) {
-        parentNode.insertBefore(element.nextSibling)
-        yield* removeElements(parentNode, [elementVNode])
-      }
-
-      return vNode as ElementVNode
+      return vNode
     },
   }
 }

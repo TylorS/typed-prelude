@@ -1,19 +1,30 @@
 import { UpdateProperties } from '../domain'
+import { getNodeOrThrow } from './getNodeOrThrow'
+import { PatchFailure } from './PatchFailure'
 
-// TODO :: How can we improve these type casts?
+const ID_KEY = 'id'
+const CLASS_NAME_KEY = 'className'
 
-export const updateProperties: UpdateProperties<{}> = function* updateAriaAttributes(
+export const updateProperties: UpdateProperties<PatchFailure> = function* updateProperties(
   vNode,
   { removed, updated },
 ) {
-  const { node } = vNode
+  const node = yield* getNodeOrThrow(vNode)
 
   for (const [key] of removed) {
     delete node[key as keyof typeof node]
+
+    if (key === ID_KEY) {
+      node.removeAttribute(ID_KEY)
+    }
+
+    if (key === CLASS_NAME_KEY) {
+      node.removeAttribute('class')
+    }
   }
 
   for (const [key, value] of updated) {
-    ;(node as any)[key] = value
+    node[key as keyof typeof node] = value
   }
 
   return vNode

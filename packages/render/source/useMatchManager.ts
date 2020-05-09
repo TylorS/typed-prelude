@@ -14,22 +14,9 @@ import { fromJust, isNothing, Just, Maybe, Nothing } from '@typed/maybe'
 import { PatchEnv } from './Patch'
 import { useKeyManager } from './useKeyManager'
 
-export function useMatchManager<A, E, B>(
-  matchAgainst: A,
-  matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
-): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<B, B>, Maybe<B>>
-
-export function useMatchManager<A, E, B, C>(
-  matchAgainst: A,
-  matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
-  initial: C,
-): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>>
-
-// TODO: Need to do this in a way that keeps the current version saved somewhere for reference
 export function* useMatchManager<A, E, B, C>(
   matchAgainst: A,
   matches: ReadonlyArray<Match<A, (ref: UseRef<C>) => HookEffects<E, B>>>,
-  initial?: C,
 ): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
   const modifiedMatches = yield* useMemo(
     (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
@@ -43,7 +30,7 @@ export function* useMatchManager<A, E, B, C>(
 
     const [m, computation] = fromJust(maybe)
 
-    return Just.of(yield* useKeyManager(m, computation, initial as C))
+    return Just.of(yield* useKeyManager(m, computation))
   })
 
   return currentValue

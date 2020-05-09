@@ -1,10 +1,11 @@
 import { UpdateDataList } from '../domain'
+import { getNodeOrThrow } from './getNodeOrThrow'
 
-export const updateDataList: UpdateDataList<{}> = function* updateAriaAttributes(
+export const updateDataList: UpdateDataList<{}> = function* updateDataList(
   vNode,
   { removed, updated },
 ) {
-  const { node } = vNode
+  const node = yield* getNodeOrThrow(vNode)
 
   for (const [key] of removed) {
     delete node.dataset[key]

@@ -7,7 +7,11 @@ export function* runWithHooks<A, B>(
   hookEnvironment: HookEnvironment,
 ): Effects<A, B> {
   // Cleanup to ensure always starting from id=0
-  yield* combine(hookEnvironment.clearUpdated(), hookEnvironment.resetId())
+  yield* combine(hookEnvironment.resetId())
 
-  return yield* runWith(effect, { hookEnvironment }) as Effects<A, B>
+  const value = yield* runWith(effect, { hookEnvironment }) as Effects<A, B>
+
+  yield* combine(hookEnvironment.clearUpdated())
+
+  return value
 }

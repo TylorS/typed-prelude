@@ -1,5 +1,7 @@
-import { VOID } from '@typed/common'
+import { isNotNull } from '@typed/logic'
+import { Nothing } from '@typed/maybe'
 import {
+  CombinedEnvsOf,
   PropsFrom,
   SvgTagName,
   SvgVNode,
@@ -10,18 +12,22 @@ import {
   VNodeType,
 } from '../../model/VNode'
 
-export function svg<A extends SvgTagName, E extends {}, B extends VNodeChildren>(
+export function svg<
+  E extends {},
+  A extends SvgTagName = SvgTagName,
+  B extends ReadonlyArray<VNode | null> = ReadonlyArray<VNode | null>
+>(
   tagName: A,
   props: (VNodeProps<E, A> & PropsFrom<A>) | null,
   children: B,
-): SvgVNode<E, A, B> {
+): SvgVNode<E & CombinedEnvsOf<B>, A> {
   return {
     type: VNodeType.Svg,
     tagName,
     props,
-    children,
-    node: VOID,
-    listener: VOID,
+    children: children.filter(isNotNull),
+    node: props?.ref ?? { current: Nothing },
+    listener: { current: Nothing },
   }
 }
 

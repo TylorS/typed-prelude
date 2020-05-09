@@ -1,7 +1,14 @@
-import { VNode } from '../../model'
+import { ElementTypes, VNode } from '../../model'
 import { getKey } from '../getKey'
+import { isHtml } from './html'
+import { isSvg } from './svg'
 
 export function vNodesAreEqual<A extends VNode, B extends VNode>(a: A, b: B): boolean {
-  // This is what validates the unfortunate type-casting below
-  return a.type === b.type && getKey(a) === getKey(b)
+  const isEqual = a.type === b.type && getKey(a) === getKey(b)
+
+  if (isHtml(a) || isSvg(a)) {
+    return isEqual && a.tagName === (b as ElementTypes).tagName
+  }
+
+  return isEqual
 }

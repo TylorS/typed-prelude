@@ -10,25 +10,9 @@ import {
   useRef,
   UseRef,
 } from '@typed/hooks'
-import { isUndefined } from '@typed/logic'
-import { fromJust, isJust, isNothing, Just, Maybe, race } from '@typed/maybe'
+import { fromJust, isJust, isNothing, Just } from '@typed/maybe'
 import { patch, PatchEnv } from './Patch'
 import { useHookEnvUpdated } from './useHookEnvUpdated'
-
-/**
- * If not initial value is used the "previous" value can only
- * reliably
- */
-export function useKeyManager<E, B>(
-  key: object,
-  render: (ref: UseRef<B>) => HookEffects<E, B>,
-): ChannelEffects<HookEnv & TimerEnv & PatchEnv<B, B> & E, B>
-
-export function useKeyManager<E, B, C>(
-  key: object,
-  render: (ref: UseRef<C>) => HookEffects<E, B>,
-  initial: C,
-): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, B>
 
 /**
  * Used to manage a help manage re-rendering a patchable instance
@@ -36,7 +20,7 @@ export function useKeyManager<E, B, C>(
 export function* useKeyManager<E, B, C>(
   key: object,
   render: (ref: UseRef<C>) => HookEffects<E, B>,
-  initial?: C,
+  initial?: C | null,
 ): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, B> {
   const env = yield* get()
   const hookEnvironment = yield* getEnvironmentByKey(key)
@@ -48,31 +32,22 @@ export function* useKeyManager<E, B, C>(
     (_) =>
       // Allows for an effect to re-render itself
       function* (): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
-        const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
+        if (isJust(rendered.current)) {
+          const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
 
-        setRenderable(updated)
-        setRendered(
-          yield* patch(
-            fromJust(race(rendered.current, renderable.current as Maybe<C>) as Just<C>),
-            updated,
-          ),
-        )
+          setRenderable(updated)
+          setRendered(yield* patch(fromJust(rendered.current), updated))
+        }
       },
     [rendered, hookEnvironment],
   )
 
-  if (isFirstRun && !isUndefined(initial)) {
+  if (isFirstRun) {
     setRendered(initial)
   }
 
   if (isFirstRun) {
-    const renderable = yield* runWithHooks(render(renderedRef), hookEnvironment)
-
-    setRenderable(renderable)
-
-    if (isJust(rendered.current)) {
-      setRendered(yield* patch(fromJust(rendered.current), renderable))
-    }
+    setRenderable(yield* runWithHooks(render(renderedRef), hookEnvironment))
   }
 
   yield* useHookEnvUpdated(hookEnvironment, () => {

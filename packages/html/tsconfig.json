@@ -16,5 +16,40 @@
     "./source/**/*.browser-test.ts",
     "./source/**/*.test.ts",
     "./umd/**"
+  ],
+  "references": [
+    {
+      "path": "../common/tsconfig.json"
+    },
+    {
+      "path": "../dom/tsconfig.json"
+    },
+    {
+      "path": "../effects/tsconfig.json"
+    },
+    {
+      "path": "../hooks/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../list/tsconfig.json"
+    },
+    {
+      "path": "../logic/tsconfig.json"
+    },
+    {
+      "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../objects/tsconfig.json"
+    },
+    {
+      "path": "../render/tsconfig.json"
+    },
+    {
+      "path": "../set/tsconfig.json"
+    }
   ]
 }
