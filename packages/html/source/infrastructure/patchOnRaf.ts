@@ -1,4 +1,4 @@
-import { getHookEnv, HookEffects, runWithHooks } from '@typed/hooks'
+import { getEnvironmentByKey, HookEffects, HooksManagerEnv, runWithHooks } from '@typed/hooks'
 import { patch, PatchEnv, raf, RafEnv } from '@typed/render'
 import { EnvOf, VNode } from '../domain'
 import { elementToVNode } from './elementToVNode'
@@ -7,9 +7,9 @@ import { PatchFailure } from './PatchFailure'
 export function* patchOnRaf<E, A extends VNode>(
   fn: () => HookEffects<E, A>,
   rootElement: HTMLElement,
-): HookEffects<E & EnvOf<A> & RafEnv & PatchEnv<VNode, A> & PatchFailure, never> {
+): HookEffects<E & EnvOf<A> & RafEnv & PatchEnv<VNode, A> & PatchFailure & HooksManagerEnv, never> {
   const initial = yield* elementToVNode(rootElement)
-  const env = yield* getHookEnv()
+  const env = yield* getEnvironmentByKey(rootElement)
 
   let updating = false
   let previous = yield* patch(initial, yield* runWithHooks(fn(), env))
