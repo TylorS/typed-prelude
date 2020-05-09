@@ -1,6 +1,6 @@
 {
   "name": "@typed/disposable",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Generic interface for representing disposable resources or other cleanup.",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/lambda": "^3.2.0"
+    "@typed/lambda": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"

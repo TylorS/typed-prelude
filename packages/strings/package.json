@@ -1,6 +1,6 @@
 {
   "name": "@typed/strings",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "description": "String-related operations",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^3.2.0",
-    "@typed/lambda": "^3.2.0"
+    "@typed/common": "^3.3.0",
+    "@typed/lambda": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"
