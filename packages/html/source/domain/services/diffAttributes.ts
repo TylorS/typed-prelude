@@ -1,10 +1,21 @@
+import { isEmpty } from '@typed/objects'
 import { StrMap, StrMapDiff } from '../model'
 import { isBooleanAttribute } from './isBooleanAttribute'
+
+const EMPTY: any[] = []
+const empty = {
+  removed: EMPTY,
+  updated: EMPTY,
+}
 
 export function diffAttributes(
   currentMap: StrMap<string | undefined>,
   updatedMap: StrMap<string | undefined>,
 ): StrMapDiff<string | undefined> {
+  if (isEmpty(currentMap) && isEmpty(updatedMap)) {
+    return empty
+  }
+
   const updated: (readonly [string, string | undefined])[] = []
   const removed: (readonly [string, string | undefined])[] = []
 
