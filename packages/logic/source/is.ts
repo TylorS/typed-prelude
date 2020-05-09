@@ -30,6 +30,15 @@ export function isIterable(x: unknown): x is Iterable<unknown> {
   return x && isFunction((x as Iterable<unknown>)[Symbol.iterator])
 }
 
+export function isGenerator(x: unknown): x is Generator<unknown, unknown, unknown> {
+  return (
+    isIterable(x) &&
+    isFunction((x as Generator).next) &&
+    isFunction((x as Generator).return) &&
+    isFunction((x as Generator).throw)
+  )
+}
+
 export function isArrayLike<A = unknown>(x: unknown): x is ArrayLike<A> {
   if (isArray(x)) {
     return true

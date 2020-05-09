@@ -1,5 +1,4 @@
-import { runEffects } from '@typed/effects'
-import { Resume } from '@typed/env'
+import { Effect, runEffects } from '@typed/effects'
 import {
   createHookEnvironment,
   createHooksManagerEnv,
@@ -58,7 +57,7 @@ export const test = describe(`patchOnRaf`, [
             done(error)
           }
 
-          return Resume.of(value)
+          return Effect.of(value)
         },
       } as const
 

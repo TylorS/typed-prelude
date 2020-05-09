@@ -1,7 +1,8 @@
+import { Effects } from '@typed/effects'
+import { html, text, VNode } from '@typed/html'
 import { flatten, groupBy } from '@typed/list'
 import { equals } from '@typed/logic'
 import { mapToList } from '@typed/objects'
-import { html } from 'lighterhtml'
 import { Dispatch, GameState } from '../application'
 import { Position, Tile } from '../domain'
 
@@ -13,100 +14,103 @@ const emptyTile = (position: Position): Omit<Tile, 'id'> => ({
   position,
 })
 
-export function* render2048(state: GameState, dispatch: Dispatch) {
+export function* render2048<E>(state: GameState, dispatch: Dispatch<E>): Effects<E, VNode<E>> {
   const { grid, score, hasRemainingMoves, hasWon } = state
   const { size } = grid
   const winningAmount = getWinningAmount(grid)
 
-  return html`
-    <div class="flex flex-column pa4 items-center">
-      <header class="flex flex-wrap items-center">
-        <button
-          class="pa2 ph4 mh3 pointer bg-light-blue bn white br3 f6"
-          onclick=${() => dispatch(['resize'])}
-        >
-          Size ${size[0]}x${size[1]}
-        </button>
+  return html('div', { className: 'flex flex-column pa4 items-center' }, [
+    html('header', { className: 'flex flex-wrap items-center' }, [
+      html<E>(
+        'button',
+        {
+          className: 'pa2 ph4 mh3 pointer bg-light-blue bn white br3 f6',
+          on: {
+            click: () => dispatch(['resize']),
+          },
+        },
+        [text(`Size `), text(String(size[0])), text('x'), text(String(size[1]))],
+      ),
 
-        <span class="pa2 mh3 f1">${score}</span>
+      html('span', { className: 'pa2 mh3 f1' }, [text(String(score))]),
 
-        <button
-          class="pa2 ph4 mh3 pointer bg-light-blue bn white br3 f6"
-          onclick=${() => dispatch(['new-grid'])}
-        >
-          Restart
-        </button>
-      </header>
+      html<E>(
+        'button',
+        {
+          className: 'pa2 ph4 mh3 pointer bg-light-blue bn white br3 f6',
+          on: {
+            click: () => dispatch(['new-grid']),
+          },
+        },
+        [text('Restart')],
+      ),
+    ]),
 
-      ${renderGrid(state)}
+    renderGrid(state),
 
-      <footer>
-        <p class="tc">
-          How to play: Use your arrow keys to move the tiles.
-        </p>
-        <p class="tc">
-          When two tiles with the same number touch, they merge together.
-        </p>
-        <p class="tc">
-          When you combine enough tiles to create a ${winningAmount} tile, you win!
-        </p>
-      </footer>
+    html('footer', null, [
+      html('p', { className: 'tc' }, [text('How to play: Use your arrow keys to move the tiles.')]),
 
-      ${hasRemainingMoves || hasWon
-        ? ``
-        : html`
-            <div class="absolute modal bg-white ba b--black br3">
-              <p class="tc">No moves are left,</p>
-              <p class="tc">click restart to try again!</p>
-            </div>
-          `}
-      ${hasWon
-        ? html`
-            <div class="absolute modal bg-white ba b--black br3">
-              <p class="tc">You Win!</p>
-              <p class="tc">click restart to play again!</p>
-            </div>
-          `
-        : ``}
-    </div>
-  `
+      html('p', { className: 'tc' }, [
+        text('When two tiles with the same number touch, they merge together.'),
+      ]),
+
+      html('p', { className: 'tc' }, [
+        text(`When you combine enough tiles to create a ${winningAmount} tile, you win!`),
+      ]),
+    ]),
+
+    !hasRemainingMoves && !hasWon
+      ? html('div', { className: 'absolute modal bg-white ba b--black br3' }, [
+          html('p', { className: 'tc' }, [text('No moves are left,')]),
+          html('p', { className: 'tc' }, [text('Click restart to play again!')]),
+        ])
+      : null,
+
+    hasWon
+      ? html('div', { className: 'absolute modal bg-white ba b--black br3' }, [
+          html('p', { className: 'tc' }, [text('You Win!')]),
+          html('p', { className: 'tc' }, [text('Click restart to play again!')]),
+        ])
+      : null,
+  ])
 }
 
 function renderGrid({ coordinates, grid }: GameState) {
   const coordinatesByRow = groupBy(([, y]) => y, coordinates)
   const tilesByRow = mapToList(
-    (_, positions) => html`
-      <div class="flex items-center">
-        ${positions.map(position =>
+    (_, positions) =>
+      html(
+        'div',
+        { className: 'flex items-center' },
+        positions.map((position) =>
           renderTile(
-            grid.tiles.find(tile => equals(tile.position, position)) || emptyTile(position),
+            grid.tiles.find((tile) => equals(tile.position, position)) || emptyTile(position),
           ),
-        )}
-      </div>
-    `,
+        ),
+      ),
     coordinatesByRow,
   )
   const tiles = flatten(tilesByRow)
 
-  return html`
-    <main class="ma4 pa3 br2 grid">
-      ${tiles}
-    </main>
-  `
+  return html('main', { className: 'ma4 pa3 br2 grid' }, tiles)
 }
+
+const getTileClassName = (value: number) =>
+  `flex items-center justify-center ma2 br2 ${getColorClass(value)}  tile${
+    value === 0 ? ' tile__empty' : ''
+  }`
 
 function renderTile(tile: Omit<Tile, 'id'>) {
   const { value } = tile
 
-  return html`
-    <figure
-      class="flex items-center justify-center ma2 br2 ${getColorClass(value)}  tile${value === 0
-        ? ' tile__empty'
-        : ''}"
-    >
-      ${value === 0 ? '' : value}
-    </figure>
-  `
+  return html(
+    'figure',
+    {
+      className: getTileClassName(value),
+    },
+    [text(`${value === 0 ? '' : value}`)],
+  )
 }
 
 function getColorClass(value: number): string {

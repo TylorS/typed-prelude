@@ -1,5 +1,4 @@
 import { Effect, runEffects } from '@typed/effects'
-import { Resume } from '@typed/env'
 import { createHookEnvironment, createHooksManagerEnv, useRef } from '@typed/hooks'
 import { equals, Match } from '@typed/logic'
 import { Just, withDefault } from '@typed/maybe'
@@ -18,7 +17,7 @@ export const test = describe(`useMatchManager`, [
       const routeA = Match.fromPredicate(equals('a'))
       const routeB = Match.fromPredicate(equals('b'))
       const patch: PatchEnv<string, number> = {
-        patch: (previous, current) => Resume.of(previous + current),
+        patch: (previous, current) => Effect.of(previous + current),
       }
 
       function* increment() {

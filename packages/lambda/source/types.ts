@@ -116,4 +116,4 @@ export type TypeGuard<A, B extends A> = (value: A) => value is B
 
 // Internal
 type CastArray<T> = T extends readonly any[] ? T : []
-type RemoveUnknown<A> = [A] extends [unknown] ? never : A
+type RemoveUnknown<A> = [unknown] extends [A] ? never : A

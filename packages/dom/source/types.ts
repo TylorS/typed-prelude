@@ -1,6 +1,6 @@
 import { HistoryEnv } from '@typed/history'
 
-export interface DomEnv<A = null> extends HistoryEnv<A> {
+export interface DomEnv<A = unknown> extends HistoryEnv<A> {
   readonly window: Window
   readonly document: Document
   readonly localStorage: Storage

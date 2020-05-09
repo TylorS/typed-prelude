@@ -10,8 +10,8 @@ import { generateNewStartingValue } from './generateNewStartingValue'
 export function* addNewTile(grid: Grid): Effects<RandomIntEnv & UuidEnv, Grid> {
   const bounds = convertSizeToBounds(grid.size)
   const coordinates = getAllCoordinates(bounds)
-  const positions = grid.tiles.map(tile => tile.position)
-  const openPositions = coordinates.filter(position => !positions.find(equals(position)))
+  const positions = grid.tiles.map((tile) => tile.position)
+  const openPositions = coordinates.filter((position) => !positions.find(equals(position)))
 
   if (openPositions.length === 0) {
     return grid

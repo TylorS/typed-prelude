@@ -1,3 +1,4 @@
+import { Effects } from '@typed/effects'
 import { Tuple } from '@typed/tuple'
 import { Direction, Grid } from '../domain'
 
@@ -10,4 +11,4 @@ export type GameState = {
 }
 
 export type Action = Tuple<'move', Direction> | readonly ['resize'] | readonly ['new-grid']
-export type Dispatch = (action: Action) => void
+export type Dispatch<E> = (action: Action) => Effects<E, void>
