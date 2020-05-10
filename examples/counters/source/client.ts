@@ -36,9 +36,7 @@ function* main(): HookEffects<TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode
       'button',
       {
         on: {
-          *click() {
-            yield* updateCounters(increment)
-          },
+          click: () => updateCounters(increment),
         },
       },
       [text('add counter')],
@@ -47,9 +45,7 @@ function* main(): HookEffects<TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode
       'button',
       {
         on: {
-          *click() {
-            yield* updateCounters(decrement)
-          },
+          click: () => updateCounters(decrement),
         },
       },
       [text('remove counter')],
