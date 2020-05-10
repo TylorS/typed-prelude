@@ -20,7 +20,7 @@ import { useHookEnvUpdated } from './useHookEnvUpdated'
  */
 export function* useKeyManager<E, B, C>(
   key: object,
-  render: (ref: UseRef<C>) => HookEffects<E, B>,
+  render: (...ref: UseRef<C>) => HookEffects<E, B>,
   initial?: C | null,
 ): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, B> {
   const env = yield* get()
@@ -45,7 +45,8 @@ export function* useKeyManager<E, B, C>(
       function* runPatch(): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
         if (isJust(rendered.current) && !checkIsUpdating()) {
           setCurrentlyUpdating(true)
-          const updated = yield* runWithHooks(render(renderedRef), hookEnvironment)
+
+          const updated = yield* runWithHooks(render(...renderedRef), hookEnvironment)
 
           setRenderable(updated)
           setRendered(yield* patch(fromJust(rendered.current), updated))
@@ -63,9 +64,9 @@ export function* useKeyManager<E, B, C>(
     [rendered, hookEnvironment],
   )
 
-  if (isFirstRun) {
+  if (isFirstRun || hookEnvironment.updated) {
     setRendered(initial)
-    setRenderable(yield* runWithHooks(render(renderedRef), hookEnvironment))
+    setRenderable(yield* runWithHooks(render(...renderedRef), hookEnvironment))
   }
 
   yield* useHookEnvUpdated(hookEnvironment, () => {

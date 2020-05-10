@@ -10,13 +10,14 @@ import {
 import { id } from '@typed/lambda'
 import { Match } from '@typed/logic'
 import { fromJust, isNothing, Just, Maybe, Nothing } from '@typed/maybe'
-import { PatchEnv } from './Patch'
+import { PatchEnv } from '@typed/render'
+import { VNode } from './domain'
 import { useKeyManager } from './useKeyManager'
 
-export function* useMatchManager<A, E, B, C>(
+export function* useMatchManager<A, E, B extends VNode>(
   matchAgainst: A,
   matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
-): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
+): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<VNode, B>, Maybe<B>> {
   const modifiedMatches = yield* useMemo(
     (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
     [matches],
@@ -29,8 +30,8 @@ export function* useMatchManager<A, E, B, C>(
 
     const [m, computation] = fromJust(maybe)
 
-    return Just.of(yield* useKeyManager<E, B, C>(m, computation))
+    return Just.of(yield* useKeyManager<E, VNode>(m, computation))
   })
 
-  return currentValue
+  return currentValue as Maybe<B>
 }

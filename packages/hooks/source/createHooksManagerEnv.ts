@@ -7,6 +7,7 @@ import { HookEffects, HookEnvironment, HookEnvironmentEventType, HooksManagerEnv
 export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
   const hooksManager = createHooksManager(uuidEnv)
   const environments = new WeakMap<object, HookEnvironment>()
+  const environmentToKey = new WeakMap<HookEnvironment, object>()
 
   const { hookEvents } = hooksManager
 
@@ -20,6 +21,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
     const created = createHookEnvironment(hooksManager)
 
     environments.set(key, created)
+    environmentToKey.set(created, key)
 
     hookEvents.publish([HookEnvironmentEventType.Created, { created, parent }])
 
@@ -30,6 +32,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
     const environment = environments.get(key)
 
     if (environment) {
+      environmentToKey.delete(environment)
       environments.delete(key)
 
       hookEvents.publish([HookEnvironmentEventType.Removed, environment])

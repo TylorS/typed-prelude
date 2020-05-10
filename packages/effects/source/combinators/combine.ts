@@ -6,6 +6,10 @@ import { runEffect } from '../run'
 export function* combine<E extends ReadonlyArray<Effects<any, any>>>(
   ...effects: E
 ): Effects<CombinedCapabilities<E>, CombinedValues<E>> {
+  if (effects.length === 0) {
+    return [] as any
+  }
+
   return yield combineEnvs(effects.map(runEffect))
 }
 

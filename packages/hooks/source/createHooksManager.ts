@@ -11,9 +11,6 @@ import {
   HooksManager,
 } from './types'
 
-const emptyProviders = new WeakSet<any>()
-const emptyConsumers = new WeakMap<any, any>()
-
 // A HooksManager keeps track of the hierarchy of a number of HookEnvironments.
 // This is how @typed/hooks allows for providing and consuming values via its Channel API.
 // At present the implementation of a HooksManager can only maintain
@@ -27,7 +24,7 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
     getParent,
   } = createTreeManager<HookEnvironment>()
   const { setUpdated, hasBeenUpdated } = createUpdateManager<HookEnvironment>((a) =>
-    getAllDescendants(emptyProviders, emptyConsumers, a),
+    getAllDescendants(new WeakSet<any>(), new WeakMap<any, any>(), a),
   )
   const { useChannelState } = createChannelManager(
     function* (hookEnvironment, updated) {
