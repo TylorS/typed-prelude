@@ -5,6 +5,7 @@ import {
   HooksManagerEnv,
   useCallback,
   useEffectBy,
+  useMemo,
   UseRef,
 } from '@typed/hooks'
 import { Arity1 } from '@typed/lambda'
@@ -30,7 +31,12 @@ export function* useListManager<A, B extends PropertyKey, E, C, D>(
     identify,
   ])
 
-  return yield* useEffectBy(list, getIdentifier, (value, index, key) =>
-    useKeyManager(key, (ref, setRef) => computation(ref, setRef, value, index)),
-  )
+  return yield* useEffectBy(list, getIdentifier, function* (value, index, key) {
+    const computationKey = yield* useMemo((k) => [k], [key])
+    const computed = yield* useKeyManager(computationKey, (ref, setRef) =>
+      computation(ref, setRef, value, index),
+    )
+
+    return computed
+  })
 }

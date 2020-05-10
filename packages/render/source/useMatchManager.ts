@@ -16,7 +16,8 @@ import { useKeyManager } from './useKeyManager'
 
 export function* useMatchManager<A, E, B, C>(
   matchAgainst: A,
-  matches: ReadonlyArray<Match<A, (ref: UseRef<C>[0], setReef: UseRef<C>[1]) => HookEffects<E, B>>>,
+  matches: ReadonlyArray<Match<A, (ref: UseRef<C>[0], setRef: UseRef<C>[1]) => HookEffects<E, B>>>,
+  initial?: C | null,
 ): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
   const modifiedMatches = yield* useMemo(
     (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),
@@ -30,7 +31,7 @@ export function* useMatchManager<A, E, B, C>(
 
     const [m, computation] = fromJust(maybe)
 
-    return Just.of(yield* useKeyManager<E, B, C>(m, computation))
+    return Just.of(yield* useKeyManager<E, B, C>(m, computation, initial))
   })
 
   return currentValue

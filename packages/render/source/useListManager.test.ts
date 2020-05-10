@@ -4,7 +4,6 @@ import {
   createHookEnvironment,
   createHooksManagerEnv,
   HookEnvironmentEventType,
-  Ref,
 } from '@typed/hooks'
 import { describe, given, it } from '@typed/test'
 import { createVirtualTimer } from '@typed/timer'
@@ -30,8 +29,6 @@ export const test = describe(`useListManager`, [
       hooksManagerEnv.hooksManager.hookEvents.subscribe((event) => {
         if (event[0] === HookEnvironmentEventType.Created) {
           created++
-
-          equal(rootHookEnvironment.id, event[1].parent.id)
         }
 
         return Disposable.None
@@ -56,7 +53,7 @@ export const test = describe(`useListManager`, [
 
       timer.progressTimeBy(1)
 
-      equal(list.length, created)
+      equal(list.length * 2, created)
     }),
   ]),
 ])
