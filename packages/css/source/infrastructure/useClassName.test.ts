@@ -22,13 +22,24 @@ export const test = describe(`useClassName`, [
           },
         },
       }
-      const { rules, styleSheet } = createCssEnv({ styleSheet: { textContent: '' } })
+      const { rules, styleSheet } = createCssEnv()
 
       function* sut() {
         try {
           const className = yield* useClassName(props)
 
           equal('t68799671461f t69fee043f1d2 teeb7f9e164f3' as ClassName, className)
+
+          equal(
+            '.t68799671461f:hover{color:blue}.t69fee043f1d2{display:flex}.teeb7f9e164f3{flex-direction:column}' as Css,
+            getCss(rules),
+          )
+
+          equal(styleSheet.textContent, getCss(rules))
+
+          const className2 = yield* useClassName(props)
+
+          equal('t68799671461f t69fee043f1d2 teeb7f9e164f3' as ClassName, className2)
 
           equal(
             '.t68799671461f:hover{color:blue}.t69fee043f1d2{display:flex}.teeb7f9e164f3{flex-direction:column}' as Css,
