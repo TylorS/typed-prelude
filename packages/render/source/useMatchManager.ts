@@ -6,6 +6,7 @@ import {
   useEffectBy,
   useMatches,
   useMemo,
+  UseRef,
 } from '@typed/hooks'
 import { id } from '@typed/lambda'
 import { Match } from '@typed/logic'
@@ -15,7 +16,7 @@ import { useKeyManager } from './useKeyManager'
 
 export function* useMatchManager<A, E, B, C>(
   matchAgainst: A,
-  matches: ReadonlyArray<Match<A, () => HookEffects<E, B>>>,
+  matches: ReadonlyArray<Match<A, (ref: UseRef<C>[0], setReef: UseRef<C>[1]) => HookEffects<E, B>>>,
 ): ChannelEffects<E & TimerEnv & HookEnv & PatchEnv<C, B>, Maybe<B>> {
   const modifiedMatches = yield* useMemo(
     (ms) => ms.map((m) => Match.map((c) => [m, c] as const, m)),

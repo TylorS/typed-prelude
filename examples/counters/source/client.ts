@@ -6,7 +6,6 @@ import {
   HookEffects,
   HooksManagerEnv,
   InitialState,
-  useMemo,
   useState,
 } from '@typed/hooks'
 import { createPatchEnv, html, patchOnRaf, text, useListManager, VNode } from '@typed/html'
@@ -30,8 +29,7 @@ const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
 
 function* main(): HookEffects<TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode>, VNode> {
   const [getCounters, updateCounters] = yield* useState(InitialState.of(0))
-  const counters = yield* useMemo((n) => range(0, n), [yield* getCounters()])
-  const children = yield* useListManager(counters, String, Counter)
+  const children = yield* useListManager(range(0, yield* getCounters()), String, Counter)
 
   return html('div', null, [
     html(
