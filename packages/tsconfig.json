@@ -13,6 +13,9 @@
       "path": "./crypto/tsconfig.json"
     },
     {
+      "path": "./css/tsconfig.json"
+    },
+    {
       "path": "./disposable/tsconfig.json"
     },
     {
