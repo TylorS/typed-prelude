@@ -80,7 +80,7 @@ export const test = describe(`useKeyManager`, [
         patch: (previous, current) => Effect.of(render(previous, current)),
       }
 
-      function* sut([, setRef]: UseRef<Element>) {
+      function* sut(...[, setRef]: UseRef<Element>) {
         const [getState, updateState] = yield* useState(InitialState.of(0))
         const value = yield* getState()
 
@@ -134,7 +134,7 @@ export const test = describe(`useKeyManager`, [
         },
       }
 
-      function* sut([, setRef]: UseRef<mostlyDom.ElementVNode>) {
+      function* sut(...[, setRef]: UseRef<mostlyDom.ElementVNode>) {
         const [getState, updateState] = yield* useState(InitialState.of(0))
 
         yield* useEffectOnce(() => runEffects(updateState((x) => x + 1)))

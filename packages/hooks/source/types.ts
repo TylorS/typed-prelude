@@ -28,7 +28,6 @@ export type HookEnvironmentEvent =
 
 export interface HooksManagerEnv {
   readonly hooksManager: HooksManager
-  readonly environments: WeakMap<object, HookEnvironment>
   readonly getEnvironmentByKey: (key: object) => HookEffects<unknown, HookEnvironment>
   readonly removeEnvironmentByKey: (key: object) => PureEffect<void>
 }
@@ -65,6 +64,7 @@ export interface HooksManager extends UuidEnv, Disposable {
    */
   readonly hasBeenUpdated: (environment: HookEnvironment) => boolean
   readonly hasUpdatedParents: (environment: HookEnvironment) => boolean
+  readonly getAllDescendants: (environment: HookEnvironment) => Iterable<HookEnvironment>
 }
 
 export type UseChannelStateOptions<E, A, B = A> = {

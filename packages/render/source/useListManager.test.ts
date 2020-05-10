@@ -35,9 +35,13 @@ export const test = describe(`useListManager`, [
       })
 
       function* sut() {
-        yield* useListManager(list, String, function* component(_, value) {
-          return value
-        })
+        yield* useListManager(
+          list,
+          (n) => String(n),
+          function* component(_, __, value) {
+            return value
+          },
+        )
       }
 
       runEffects(sut(), {
@@ -49,7 +53,7 @@ export const test = describe(`useListManager`, [
 
       timer.progressTimeBy(1)
 
-      equal(list.length, created)
+      equal(list.length * 2, created)
     }),
   ]),
 ])
