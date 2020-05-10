@@ -1,9 +1,12 @@
 import { CryptoEffects } from '../common'
 import { digest } from '../effects'
 
-// Does not include 1 because it is not cryptographically safe
-export type ShaHashSize = 256 | 348 | 512
+export type ShaHashSize = 1 | 256 | 348 | 512
 
+/**
+ * Generate a SHA Hash of a given size.
+ * Note: SHA-1 is *NOT* cryptographically secure.
+ */
 export function* generateShaHash(
   size: ShaHashSize,
   data: ArrayBuffer,
