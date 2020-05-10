@@ -1,6 +1,6 @@
 {
   "name": "@typed/streams",
-  "version": "6.3.1",
+  "version": "6.3.2",
   "description": "Typed Extensions to @most/core",
   "main": "./cjs/index.js",
   "repository": {
@@ -37,7 +37,7 @@
     "@most/core": "1.5.0",
     "@most/disposable": "1.2.2",
     "@most/types": "1.0.2",
-    "@typed/effects": "^6.3.1",
+    "@typed/effects": "^6.3.2",
     "@typed/either": "^8.1.1",
     "@typed/env": "^8.1.1",
     "@typed/lambda": "^3.2.1",

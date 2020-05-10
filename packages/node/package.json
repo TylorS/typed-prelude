@@ -1,6 +1,6 @@
 {
   "name": "@typed/node",
-  "version": "6.3.1",
+  "version": "6.3.2",
   "description": "Tools to help with building your node applications",
   "main": "./cjs/index.js",
   "repository": {
@@ -36,12 +36,12 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/disposable": "^3.2.1",
-    "@typed/effects": "^6.3.1",
+    "@typed/effects": "^6.3.2",
     "@typed/either": "^8.1.1",
     "@typed/env": "^8.1.1",
     "@typed/future": "^11.2.1",
     "@typed/lambda": "^3.2.1",
-    "@typed/logger": "^8.3.1",
+    "@typed/logger": "^8.3.2",
     "@typed/logic": "^6.1.1",
     "@typed/maybe": "^10.1.1",
     "@typed/strings": "^7.1.1"
