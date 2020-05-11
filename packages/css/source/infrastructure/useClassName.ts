@@ -6,7 +6,7 @@ import {
   stringToArrayBuffer,
 } from '@typed/crypto'
 import { Effects, get } from '@typed/effects'
-import { HookEnv, useMemo } from '@typed/hooks'
+import { HookEnv, useMemo, useMemoEffect } from '@typed/hooks'
 import { isNotUndefined, isNumber } from '@typed/logic'
 import { ClassName, Css, CssProperties, GenerateClassName, NestedCssProperties } from '../model'
 import { classNames } from './classNames'
@@ -21,7 +21,7 @@ const hyphenate = (s: string) => s.replace(/[A-Z]|^ms/g, '-$&').toLowerCase()
 export const useClassName: GenerateClassName<
   CssEnv & HookEnv & CryptoEnv & CryptoFailure
 > = function* (properties): Effects<CssEnv & HookEnv & CryptoEnv & CryptoFailure, ClassName> {
-  const hashes = yield* generatePropertyHashes(properties)
+  const hashes = yield* useMemoEffect(generatePropertyHashes, [properties])
   const className = yield* useMemo((hs) => classNames(...hs), [hashes])
 
   return className
