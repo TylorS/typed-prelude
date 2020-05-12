@@ -13,12 +13,18 @@ import { classNames } from './classNames'
 import { CssEnv } from './CssEnv'
 import { getCss } from './getCss'
 
-const CLASS_NAME_PREFIX = 't'
+const DEFAULT_CLASS_NAME_PREFIX = 't' // Used to ensure hash turns out as a valid css selector which cannot start with a number
 const DEFAULT_CLASS_NAME_LENGTH = 12
 
+const CLASS_NAME_ESCAPE_REGEX = /[ !#$%&()*+,./;<=>?@[\]^`{|}~"'\\]/g
+const CLASS_NAME_ESCAPE_REPLACEMENT = '\\$&'
+const HYPHENATE_REGEX = /[A-Z]|^ms/g
+const HYPHENATE_REPLACEMENT = '-$&'
+const AND_REGEX = /^&/
+
 const toPx = (sOrN: string | number) => (isNumber(sOrN) ? `${sOrN}px` : sOrN)
-const hyphenate = (s: string) => s.replace(/[A-Z]|^ms/g, '-$&').toLowerCase()
-const notAnd = (s: string) => s.replace(/^&/, '')
+const hyphenate = (s: string) => s.replace(HYPHENATE_REGEX, HYPHENATE_REPLACEMENT).toLowerCase()
+const notAnd = (s: string) => s.replace(AND_REGEX, '')
 
 export const useClassName: GenerateClassName<
   CssEnv & HookEnv & CryptoEnv & CryptoFailure
@@ -37,7 +43,12 @@ function* generatePropertyHashes(
   nestedSelector: string = '',
   media: string = '',
 ): Effects<CssEnv & HookEnv & CryptoEnv & CryptoFailure, ClassName[]> {
-  const { styleSheet, rules, classNameLength = DEFAULT_CLASS_NAME_LENGTH } = yield* get<CssEnv>()
+  const {
+    styleSheet,
+    rules,
+    classNamePrefix = DEFAULT_CLASS_NAME_PREFIX,
+    classNameLength = DEFAULT_CLASS_NAME_LENGTH,
+  } = yield* get<CssEnv>()
   const startSize = rules.size
   const classNames: ClassName[] = []
   const keys = Object.keys(properties).sort() as (keyof NestedCssProperties)[]
@@ -53,6 +64,7 @@ function* generatePropertyHashes(
         media,
         rules,
         classNames,
+        classNamePrefix,
         classNameLength,
       })
     }
@@ -87,9 +99,15 @@ type UpdateRuleOptions = {
   props: string
   // Nested-selector
   nestedSelector: string
+  // Media Query
   media: string
+  // Map of all rules currently in use
   rules: Map<string, readonly [ClassName, Css]>
+  // List of classNames generated
   classNames: ClassName[]
+  // Prefix used to ensure a valid className
+  classNamePrefix: string
+  // Length of className hash - convenient if there's ever a collision
   classNameLength: number
 }
 
@@ -122,8 +140,8 @@ function getPropertiesString(properties: CssProperties, key: keyof CssProperties
 }
 
 function* getRule(options: UpdateRuleOptions) {
-  const { ruleKey, props, media, nestedSelector, classNameLength } = options
-  const className = yield* getClassName(ruleKey, classNameLength)
+  const { ruleKey, props, media, nestedSelector, classNamePrefix, classNameLength } = options
+  const className = yield* getClassName(ruleKey, classNamePrefix, classNameLength)
   const css = `.${className}${nestedSelector}${props}` as Css
 
   if (media) {
@@ -133,11 +151,11 @@ function* getRule(options: UpdateRuleOptions) {
   return [className, css] as const
 }
 
-function* getClassName(hashable: string, classNameLength: number) {
+function* getClassName(hashable: string, classNamePrefix: string, classNameLength: number) {
   const buffer = stringToArrayBuffer(hashable)
   const hash = yield* generateShaHash(1, buffer)
   const className = escape(
-    CLASS_NAME_PREFIX + convertToHex(arrayBufferToString(hash)).slice(0, classNameLength),
+    classNamePrefix + convertToHex(arrayBufferToString(hash)).slice(0, classNameLength),
   ) as ClassName
 
   return className
@@ -151,7 +169,7 @@ function toArray<A>(value: A | readonly A[]): ReadonlyArray<A> {
  * Escape a CSS class name.
  */
 function escape(str: string): ClassName {
-  return str.replace(/[ !#$%&()*+,./;<=>?@[\]^`{|}~"'\\]/g, '\\$&') as ClassName
+  return str.replace(CLASS_NAME_ESCAPE_REGEX, CLASS_NAME_ESCAPE_REPLACEMENT) as ClassName
 }
 
 function convertToHex(str: string) {
