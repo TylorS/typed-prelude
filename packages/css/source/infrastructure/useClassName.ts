@@ -22,7 +22,7 @@ const notAnd = (s: string) => s.replace(/^&/, '')
 
 export const useClassName: GenerateClassName<
   CssEnv & HookEnv & CryptoEnv & CryptoFailure
-> = function* (...properties): Effects<CssEnv & HookEnv & CryptoEnv & CryptoFailure, ClassName> {
+> = function* (...properties) {
   const hashes = yield* useMemoEffect(
     (...props) => sequence(generatePropertyHashes, props),
     properties,
