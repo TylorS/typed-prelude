@@ -77,7 +77,7 @@ function* generatePropertyHashes(
       const isMediaQuery = nestedKey.startsWith('@')
       const nestedClassNames = yield* generatePropertyHashes(
         properties.$nest[nestedKey]!,
-        notAnd(isMediaQuery ? nestedSelector : nestedSelector + ' ' + nestedKey).trim(),
+        notAnd(isMediaQuery ? nestedSelector : nestedSelector + ' ' + notAnd(nestedKey)).trim(),
         isMediaQuery ? nestedKey : media,
       )
 
