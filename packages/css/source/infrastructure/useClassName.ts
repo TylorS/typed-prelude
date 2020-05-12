@@ -52,7 +52,6 @@ export const useClassName: GenerateClassName<CssEnv & HookEnv & CryptoEnv & Cryp
 
 function* generatePropertyClassNames(
   properties: NestedCssProperties,
-  classNames: readonly ClassName[] = [],
   nestedSelector: string = '',
   media: string = '',
 ): Effects<CssEnv & HookEnv & CryptoEnv & CryptoFailure, readonly ClassName[]> {
@@ -81,7 +80,7 @@ function* generatePropertyClassNames(
   }, keys)
 
   if (!properties.$nest) {
-    return [...classNames, ...propertyClassNames]
+    return propertyClassNames
   }
 
   const nestedProperties = properties.$nest
@@ -91,13 +90,12 @@ function* generatePropertyClassNames(
 
     return yield* generatePropertyClassNames(
       nestedProperties[nestedKey]!,
-      [],
       notAnd(isMediaQuery ? nestedSelector : nestedSelector + ' ' + notAnd(nestedKey)).trim(),
       isMediaQuery ? nestedKey : media,
     )
   }, nestedKeys)
 
-  return [...classNames, ...propertyClassNames, ...nestedClassNames.flat()]
+  return [...propertyClassNames, ...nestedClassNames.flat()]
 }
 
 type GetClassNameOptions = {
