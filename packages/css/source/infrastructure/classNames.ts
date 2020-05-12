@@ -4,4 +4,4 @@ import { ClassName, GetClassNames } from '../model'
 const CLASS_NAME_SEPARATOR = ' '
 
 export const classNames: GetClassNames = (...classNames) =>
-  classNames.filter(isString).join(CLASS_NAME_SEPARATOR) as ClassName
+  classNames.filter(isString).sort().join(CLASS_NAME_SEPARATOR) as ClassName

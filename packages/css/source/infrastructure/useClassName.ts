@@ -22,7 +22,7 @@ import { CssEnv } from './CssEnv'
 import { getCss } from './getCss'
 
 const DEFAULT_CLASS_NAME_PREFIX = 't' // Used to ensure hash turns out as a valid css selector which cannot start with a number
-const DEFAULT_CLASS_NAME_LENGTH = 12
+const DEFAULT_CLASS_NAME_LENGTH = 6
 
 const CLASS_NAME_ESCAPE_REGEX = /[ !#$%&()*+,./;<=>?@[\]^`{|}~"'\\]/g
 const CLASS_NAME_ESCAPE_REPLACEMENT = '\\$&'
@@ -34,6 +34,9 @@ const toPx = (sOrN: string | number) => (isNumber(sOrN) ? `${sOrN}px` : sOrN)
 const hyphenate = (s: string) => s.replace(HYPHENATE_REGEX, HYPHENATE_REPLACEMENT).toLowerCase()
 const notAnd = (s: string) => s.replace(AND_REGEX, '')
 
+/**
+ * Deterministically creates classNames for a series of objects that define the styles to be applied.
+ */
 export const useClassName: GenerateClassName<CssEnv & HookEnv & CryptoEnv & CryptoFailure> = (
   ...properties
 ) =>
@@ -47,9 +50,12 @@ export const useClassName: GenerateClassName<CssEnv & HookEnv & CryptoEnv & Cryp
       styleSheet.textContent = getCss(rules)
     }
 
-    return classNames(...generateClassNames.flat().sort())
+    return classNames(...generateClassNames.flat())
   }, properties)
 
+/**
+ * Creates atomic ClassNames for all of the styles defined in NestedCssProperties
+ */
 function* generatePropertyClassNames(
   properties: NestedCssProperties,
   nestedSelector: string = '',
@@ -120,7 +126,7 @@ type GetClassNameOptions = {
  */
 function* getClassName(options: GetClassNameOptions) {
   const { ruleKey, rules } = options
-  const [className] = rules.has(ruleKey) ? rules.get(ruleKey)! : yield* getRule(options)
+  const [className] = rules.has(ruleKey) ? rules.get(ruleKey)! : yield* generateRule(options)
 
   return className
 }
@@ -143,7 +149,7 @@ function getPropertiesString(properties: CssProperties, key: keyof CssProperties
 /**
  * Generate a CSS rule
  */
-function* getRule(options: GetClassNameOptions): CryptoEffects<unknown, Rule> {
+function* generateRule(options: GetClassNameOptions): CryptoEffects<unknown, Rule> {
   const { ruleKey, props, media, nestedSelector, classNamePrefix, classNameLength, rules } = options
   const className = yield* generateClassName(ruleKey, classNamePrefix, classNameLength)
   const css = `.${className}${nestedSelector}${props}` as Css
