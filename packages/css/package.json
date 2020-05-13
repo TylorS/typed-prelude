@@ -1,0 +1,40 @@
+{
+  "name": "@typed/css",
+  "version": "0.0.0",
+  "description": "Strongly-typed, atomic CSS for TypeScript",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "TypeScript",
+    "Typed",
+    "CSS",
+    "atomic",
+    "css-in-js",
+    "effects",
+    "algebraic-effects"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^1.10.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/common": "^3.3.0",
+    "@typed/crypto": "^1.6.0",
+    "@typed/dom": "^7.3.2",
+    "@typed/effects": "^6.3.2",
+    "@typed/hooks": "^10.1.0",
+    "@typed/lambda": "^3.2.1",
+    "@typed/list": "^6.1.1",
+    "@typed/logic": "^6.1.1",
+    "@typed/new-type": "^3.1.1",
+    "csstype": "^2.6.10"
+  }
+}

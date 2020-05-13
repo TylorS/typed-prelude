@@ -19,13 +19,7 @@
   ],
   "references": [
     {
-      "path": "../common/tsconfig.json"
-    },
-    {
-      "path": "../disposable/tsconfig.json"
-    },
-    {
-      "path": "../dom/tsconfig.json"
+      "path": "../crypto/tsconfig.json"
     },
     {
       "path": "../effects/tsconfig.json"
@@ -34,25 +28,10 @@
       "path": "../hooks/tsconfig.json"
     },
     {
-      "path": "../lambda/tsconfig.json"
-    },
-    {
-      "path": "../list/tsconfig.json"
-    },
-    {
       "path": "../logic/tsconfig.json"
     },
     {
-      "path": "../maybe/tsconfig.json"
-    },
-    {
-      "path": "../objects/tsconfig.json"
-    },
-    {
-      "path": "../render/tsconfig.json"
-    },
-    {
-      "path": "../set/tsconfig.json"
+      "path": "../new-type/tsconfig.json"
     }
   ]
 }

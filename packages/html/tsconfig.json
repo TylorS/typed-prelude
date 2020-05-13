@@ -22,6 +22,9 @@
       "path": "../common/tsconfig.json"
     },
     {
+      "path": "../disposable/tsconfig.json"
+    },
+    {
       "path": "../dom/tsconfig.json"
     },
     {
