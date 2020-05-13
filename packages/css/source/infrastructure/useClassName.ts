@@ -8,7 +8,7 @@ import {
 } from '@typed/crypto'
 import { Effects, get, sequence } from '@typed/effects'
 import { HookEnv, useMemoEffect } from '@typed/hooks'
-import { isNotUndefined, isNumber } from '@typed/logic'
+import { isNotUndefined, isNumber, isObject } from '@typed/logic'
 import {
   ClassName,
   Css,
@@ -37,14 +37,16 @@ const notAnd = (s: string) => s.replace(AND_REGEX, '')
 /**
  * Deterministically creates classNames for a series of objects that define the styles to be applied.
  */
-export const useClassName: GenerateClassName<CssEnv & HookEnv & CryptoEnv & CryptoFailure> = (
-  ...properties
-) =>
-  useMemoEffect(function* (...props) {
+export const useClassName: GenerateClassName<
+  CssEnv & HookEnv & CryptoEnv & CryptoFailure
+> = function* (...properties) {
+  return yield* useMemoEffect(function* (...props) {
     const { rules, styleSheet } = yield* get()
 
     const startSize = rules.size
-    const generateClassNames = yield* sequence(generatePropertyClassNames, props)
+    // Merge together properties to avoid creating rules that need to be overridden. Last value wins.
+    const merged = mergeObjects(props.filter(isObject as (x: any) => x is NestedCssProperties))
+    const generateClassNames = yield* generatePropertyClassNames(merged)
 
     if (styleSheet && startSize !== rules.size) {
       styleSheet.textContent = getCss(rules)
@@ -52,6 +54,7 @@ export const useClassName: GenerateClassName<CssEnv & HookEnv & CryptoEnv & Cryp
 
     return classNames(...generateClassNames.flat())
   }, properties)
+}
 
 /**
  * Creates atomic ClassNames for all of the styles defined in NestedCssProperties
@@ -193,4 +196,34 @@ function convertToHex(str: string) {
     hex += '' + str.charCodeAt(i).toString(16)
   }
   return hex
+}
+
+/**
+ * Merge together many NestedCssProperties
+ */
+
+function mergeObjects(properties: ReadonlyArray<NestedCssProperties>) {
+  const result: Record<any, any> = {}
+
+  for (const props of properties) {
+    // tslint:disable-next-line:forin
+    for (const key in props) {
+      /** Falsy values except a explicit 0 is ignored */
+      const val: any = (props as any)[key]
+      if (!val && val !== 0) {
+        continue
+      }
+
+      /** if nested media or pseudo selector */
+      if (key === '$nest' && val) {
+        result[key] = result.$nest ? mergeObjects([result.$nest, val]) : val
+      } else if (key.indexOf('&') !== -1 || key.indexOf('@media') === 0) {
+        result[key] = result[key] ? mergeObjects([result[key], val]) : val
+      } else {
+        result[key] = val
+      }
+    }
+  }
+
+  return result as NestedCssProperties
 }

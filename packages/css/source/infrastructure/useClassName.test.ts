@@ -23,8 +23,8 @@ export const test = describe(`useClassName`, [
         },
       }
       const { rules, styleSheet } = createCssEnv()
-      const expectedClassName = 't68799671461f t69fee043f1d2 teeb7f9e164f3' as ClassName
-      const expectedCss = '.t68799671461f:hover{color:blue}.t69fee043f1d2{display:flex}.teeb7f9e164f3{flex-direction:column}' as Css
+      const expectedClassName = 't687996 t69fee0 teeb7f9' as ClassName
+      const expectedCss = '.t687996:hover{color:blue}.t69fee0{display:flex}.teeb7f9{flex-direction:column}' as Css
 
       function* sut() {
         try {
@@ -76,8 +76,8 @@ export const test = describe(`useClassName`, [
         },
       }
       const { rules, styleSheet } = createCssEnv()
-      const expectedClassName = 't68799671461f t7bd650063e3e' as ClassName
-      const expectedCss = '.t68799671461f:hover{color:blue}@media(min-width: 30em){.t7bd650063e3e:hover > *{display:flex}}' as Css
+      const expectedClassName = 't687996 t7bd650' as ClassName
+      const expectedCss = '.t687996:hover{color:blue}@media(min-width: 30em){.t7bd650:hover > *{display:flex}}' as Css
 
       function* sut() {
         try {

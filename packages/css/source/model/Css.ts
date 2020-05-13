@@ -16,14 +16,14 @@ export type ClassName = NewType<string, 'ClassName'>
  * Given a set of class names should output a set of class names to apply
  */
 export type GenerateClassName<E> = (
-  ...properties: ReadonlyArray<NestedCssProperties>
+  ...properties: ReadonlyArray<NestedCssProperties | null | undefined | false>
 ) => Effects<E, ClassName>
 
 /**
  * Given a list of class names or other common patterns like "foo && ClassName".
  */
 export type GetClassNames = (
-  ...classNames: ReadonlyArray<string | ClassName | null | undefined | boolean>
+  ...classNames: ReadonlyArray<string | ClassName | null | undefined | false>
 ) => ClassName
 
 export type GetCss = (rules: Rules) => Css
