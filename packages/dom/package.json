@@ -27,7 +27,7 @@
   "peerDependencies": {
     "basichtml": "^1.1.1 || ^2.0.0",
     "css-mediaquery": "^0.1.2",
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0 || ^2.0.0"
   },
   "dependencies": {
     "@typed/common": "^3.3.0",

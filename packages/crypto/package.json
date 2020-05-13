@@ -28,7 +28,7 @@
   },
   "peerDependencies": {
     "@peculiar/webcrypto": "1.1.1",
-    "tslib": "^1.10.0"
+    "tslib": "^1.10.0 || ^2.0.0"
   },
   "devDependencies": {
     "@peculiar/webcrypto": "1.1.1"
