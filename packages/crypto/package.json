@@ -1,6 +1,6 @@
 {
   "name": "@typed/crypto",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Cryptography tools for web applications",
   "main": "./cjs/index.js",
   "repository": {
