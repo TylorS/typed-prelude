@@ -51,4 +51,26 @@ export const test: Test = describe(`toString`, [
       equal('false', toString(false))
     }),
   ]),
+
+  given(`a Map`, [
+    it(`is converted to a string`, ({ equal }) => {
+      const map = new Map([
+        [1, 2],
+        [2, 3],
+        [4, 5],
+      ])
+      const expected = `Map { 1 => 2, 2 => 3, 4 => 5 }`
+
+      equal(expected, toString(map))
+    }),
+  ]),
+
+  given(`a Set`, [
+    it(`is converted to a string`, ({ equal }) => {
+      const set = new Set([1, 1, 2, 2, 3, 3])
+      const expected = `Set [ 1, 2, 3 ]`
+
+      equal(expected, toString(set))
+    }),
+  ]),
 ])

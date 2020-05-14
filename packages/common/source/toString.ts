@@ -1,4 +1,5 @@
 import { indexOf } from './indexOf'
+import { isMap, isSet } from './is'
 import { mapArrayLike } from './mapArrayLike'
 import { quote } from './quote'
 
@@ -16,10 +17,13 @@ function _toString(x: any, seen: any[]): string {
     return indexOf(xs, y) > -1 ? '<Circular>' : _toString(y, xs)
   }
 
-  const mapPairs = (obj: any, keys: string[]) => {
-    return mapArrayLike((k: string) => {
-      return quote(k) + ': ' + recur(obj[k])
-    }, keys.slice().sort())
+  const maybeRecur = (y: any) => (typeof y === 'string' ? quote(y) : recur(y))
+
+  const mapPairs = (keys: unknown[], getKey: (u: unknown) => any, separator = ': ') => {
+    return mapArrayLike(
+      (k: unknown) => maybeRecur(k) + separator + maybeRecur(getKey(k)),
+      keys.slice().sort(),
+    )
   }
 
   switch (Object.prototype.toString.call(x)) {
@@ -31,8 +35,8 @@ function _toString(x: any, seen: any[]): string {
         mapArrayLike(recur, x)
           .concat(
             mapPairs(
-              x,
               Object.keys(x).filter((k) => !/^\d+$/.test(k)),
+              (k) => x[k as keyof typeof x],
             ),
           )
           .join(', ') +
@@ -59,10 +63,20 @@ function _toString(x: any, seen: any[]): string {
     default:
       if (typeof x.toString === 'function') {
         const repr = x.toString()
-        if (repr !== '[object Object]') {
+
+        if (!repr.startsWith('[object')) {
           return repr
         }
       }
-      return '{' + mapPairs(x, Object.keys(x)).join(', ') + '}'
+
+      if (isMap(x)) {
+        return 'Map { ' + mapPairs(Array.from(x.keys()), (k) => x.get(k), ' => ').join(', ') + ' }'
+      }
+
+      if (isSet(x)) {
+        return 'Set [ ' + mapPairs(Array.from(x.values()), (_) => '', '').join(', ') + ' ]'
+      }
+
+      return '{' + mapPairs(Object.keys(x), (k) => x[k as keyof typeof x]).join(', ') + '}'
   }
 }

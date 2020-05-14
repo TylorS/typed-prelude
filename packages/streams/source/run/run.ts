@@ -4,10 +4,11 @@ import { Resume } from '@typed/env'
 import { Arity1 } from '@typed/lambda'
 import { create, Subject } from 'most-subject'
 import { disposeAll } from '../../../disposable/esm'
+import { SchedulerEnv } from '../SchedulerEnv'
 import { createProxySinks } from './createProxySinks'
 import { disposeSources } from './disposeSources'
 import { replicateSinks } from './replicateSinks'
-import { Component, IOComponent, Run, SchedulerEnv, Sinks, Sources } from './types'
+import { Component, IOComponent, Run, Sinks, Sources } from './types'
 
 export function* run<A extends Sources, B extends Sinks>(
   main: Component<A, B>,
@@ -27,6 +28,6 @@ export function* run<A extends Sources, B extends Sinks>(
         disposeSources(sources)
       }
 
-      return disposeAll([cb([sources, sinks]), { dispose }])
+      return disposeAll([cb([sources, sinks, { dispose }]), { dispose }])
     })
 }

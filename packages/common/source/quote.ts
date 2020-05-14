@@ -13,6 +13,10 @@ const STEPS: Step[] = [
 const LAST_STEP: Step = [/"/g, '\\"']
 
 export function quote(s: string): string {
+  if (s.length === 0) {
+    return s
+  }
+
   const escaped = STEPS.reduce(applyStep, s)
 
   return '"' + applyStep(escaped, LAST_STEP) + '"'
