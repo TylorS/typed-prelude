@@ -34,7 +34,13 @@
       "path": "../future/tsconfig.json"
     },
     {
+      "path": "../iterable/tsconfig.json"
+    },
+    {
       "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../list/tsconfig.json"
     },
     {
       "path": "../logger/tsconfig.json"
@@ -47,6 +53,9 @@
     },
     {
       "path": "../strings/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }
