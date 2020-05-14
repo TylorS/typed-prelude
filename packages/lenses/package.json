@@ -1,0 +1,24 @@
+{
+  "name": "@typed/lenses",
+  "version": "3.0.0",
+  "description": "Strongly-typed functional lenses",
+  "main": "./cjs/index.js",
+  "keywords": [
+    "Typed",
+    "Lenses",
+    "Functional"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "license": "Parity-6.0.0",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false
+}
