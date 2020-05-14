@@ -13,7 +13,7 @@ export function parseStringArg<A extends string>(
     const indexesUsed = uniq([index, valueIndex])
     const result: ArgParserResult<A, string> = [
       indexesUsed,
-      map(value => ({ [name]: value } as { [K in A]: string }), value),
+      map((value) => ({ [name]: value } as { [K in A]: string }), value),
     ]
 
     return result

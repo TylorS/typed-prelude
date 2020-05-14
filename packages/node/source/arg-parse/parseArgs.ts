@@ -10,7 +10,7 @@ const helpParser = parseBooleanArg('help', { aliases: ['h'] })
 export function* parseArgs<A extends ReadonlyArray<ArgParser<any, any>>>(
   parsers: A,
 ): Effects<ArgsEnv, ArgValues<A>> {
-  const value = { _: [], help: false } as ArgValues<A>
+  const value = { _: [] as readonly string[], help: false } as ArgValues<A>
   const parsedIndexes: number[] = []
 
   for (const { parse } of [helpParser, ...parsers]) {

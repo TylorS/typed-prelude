@@ -1,4 +1,4 @@
-import { Effects } from '@typed/effects'
+import { Effects, PureEffect } from '@typed/effects'
 import { LoggerEnv } from '@typed/logger'
 import { Maybe, Nothing } from '@typed/maybe'
 
@@ -7,7 +7,7 @@ export interface ArgsEnv extends LoggerEnv {
 }
 
 export interface ArgParser<A extends string, B> {
-  readonly help: () => Effects<never, string>
+  readonly help: () => PureEffect<string>
   readonly parse: () => Effects<ArgsEnv, ArgParserResult<A, B>>
 }
 

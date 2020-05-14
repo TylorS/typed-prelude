@@ -14,7 +14,7 @@ export function parseNumberArg<A extends string>(
 
     const result: ArgParserResult<A, number> = [
       indexesUsed,
-      map(value => ({ [name]: value } as { [K in A]: number }), value),
+      map((value) => ({ [name]: value } as { [K in A]: number }), value),
     ]
 
     return result

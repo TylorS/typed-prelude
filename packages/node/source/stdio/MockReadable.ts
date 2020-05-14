@@ -35,12 +35,12 @@ export class MockReadable extends Readable {
     }
   }
 
-  public write(...data: Array<Buffer | string>): MockReadable {
+  public write(...data: (Buffer | string)[]): MockReadable {
     if (!this.readable) {
       throw new Error('This stream has already finished')
     }
 
-    const values = data.map(x => x.toString())
+    const values = data.map((x) => x.toString())
 
     this.readData.push(...values)
     this.writeData.push(...values)

@@ -37,7 +37,7 @@ export function futurify<A extends NodeCallbackFn>(fn: A) {
       const disposable = Disposable.lazy()
 
       disposable.addDisposable(
-        withIsDisposed(isDisposed => {
+        withIsDisposed((isDisposed) => {
           args.push((err: Error | null | undefined, value?: any) => {
             if (isDisposed()) {
               return
