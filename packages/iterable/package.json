@@ -30,7 +30,7 @@
     "@typed/maybe": "^10.1.1"
   },
   "peerDependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "sideEffects": false,
   "unpkg": "./umd/index.js",

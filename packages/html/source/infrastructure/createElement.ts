@@ -55,7 +55,7 @@ export const createElement: CreateElement<DomEnv> = function* <A extends VNode>(
 
   if (isHtml(vNode) || isSvg(vNode)) {
     yield* combine(
-      createElementAttributesAndProps(vNode),
+      createElementAttributesAndProps(vNode as any),
       vNode.children.length > 0 ? addElements(node, vNode.children, null) : Effect.of(null),
     )
   }

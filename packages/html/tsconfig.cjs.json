@@ -53,6 +53,9 @@
     },
     {
       "path": "../set/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     }
   ]
 }

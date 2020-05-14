@@ -19,13 +19,25 @@
   ],
   "references": [
     {
+      "path": "../common/tsconfig.json"
+    },
+    {
       "path": "../crypto/tsconfig.json"
+    },
+    {
+      "path": "../dom/tsconfig.json"
     },
     {
       "path": "../effects/tsconfig.json"
     },
     {
       "path": "../hooks/tsconfig.json"
+    },
+    {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
+      "path": "../list/tsconfig.json"
     },
     {
       "path": "../logic/tsconfig.json"

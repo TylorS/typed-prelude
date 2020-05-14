@@ -59,7 +59,7 @@ export const patchElement: PatchElement<DomEnv & PatchFailure> = function* <
   if (isSvg(vNode) || isHtml(vNode)) {
     vNode.listener.current = (elementVNode as ElementTypes).listener.current
 
-    yield* updateElement(elementVNode as ElementTypes, vNode)
+    yield* updateElement(elementVNode as ElementTypes, vNode as any)
   }
 }
 

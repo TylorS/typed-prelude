@@ -27,7 +27,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "tslib": "^1.10.0"
+    "tslib": "^2.0.0"
   },
   "sideEffects": false,
   "dependencies": {

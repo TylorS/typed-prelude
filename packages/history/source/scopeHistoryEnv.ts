@@ -35,6 +35,7 @@ export function scopeHistoryEnv<A>(
   }
 
   const updatedLocation: Location = {
+    ...location,
     assign: (url) => {
       const { protocol, host, relative } = parseHref(url)
       const href = protocol + `//` + pathJoin([host, scope, relative])
@@ -48,7 +49,6 @@ export function scopeHistoryEnv<A>(
 
       return location.replace(href)
     },
-    ...location,
     get pathname() {
       return location.pathname.replace(pathJoin(['/', scope], true), '')
     },

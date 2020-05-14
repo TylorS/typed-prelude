@@ -5,9 +5,7 @@ import {
   PropsFrom,
   SvgTagName,
   SvgVNode,
-  TagName,
   VNode,
-  VNodeChildren,
   VNodeProps,
   VNodeType,
 } from '../../model/VNode'
@@ -31,10 +29,6 @@ export function svg<
   }
 }
 
-export function isSvg<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B extends VNodeChildren = VNodeChildren
->(vNode: VNode<E, A, B>): vNode is SvgVNode<E, A, B> {
+export function isSvg(vNode: VNode): vNode is SvgVNode {
   return vNode.type === VNodeType.Svg
 }

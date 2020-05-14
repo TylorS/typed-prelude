@@ -29,7 +29,7 @@ export const updateProperties: UpdateProperties<PatchFailure> = function* update
   }
 
   for (const [key, value] of updated) {
-    node[key as keyof typeof node] = value
+    ;(node as Record<typeof key, typeof value>)[key] = value
   }
 
   return vNode

@@ -11,6 +11,6 @@ export function comment(comment: string, key?: ComparableValues): CommentVNode {
   }
 }
 
-export function isComment(vNode: VNode<any, any, any>): vNode is CommentVNode {
+export function isComment(vNode: VNode): vNode is CommentVNode {
   return vNode.type === VNodeType.Comment
 }

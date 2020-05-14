@@ -5,9 +5,7 @@ import {
   HtmlTagName,
   HtmlVNode,
   PropsFrom,
-  TagName,
   VNode,
-  VNodeChildren,
   VNodeProps,
   VNodeType,
 } from '../../model/VNode'
@@ -31,10 +29,6 @@ export function html<
   }
 }
 
-export function isHtml<
-  E extends {} = {},
-  A extends TagName = TagName,
-  B extends VNodeChildren = VNodeChildren
->(vNode: VNode<E, A, B>): vNode is HtmlVNode<E, A, B> {
+export function isHtml(vNode: VNode): vNode is HtmlVNode {
   return vNode.type === VNodeType.Html
 }
