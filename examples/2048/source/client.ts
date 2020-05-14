@@ -16,8 +16,9 @@ if (!rootElement) {
   throw new Error(`Unable to find root element ${ROOT_ELEMENT_SELECTOR}`)
 }
 
+const uuidEnv = new BrowserGenerator()
 const timer = createTimer()
-const hooksManagerEnv = createHooksManagerEnv(new BrowserGenerator())
+const hooksManagerEnv = createHooksManagerEnv(uuidEnv)
 const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
 
 function* render<E>(repo: GridRepository<E>) {
@@ -42,6 +43,6 @@ runEffects(
     requestAnimationFrame,
     timer,
     ...createDomEnv(),
-    ...new BrowserGenerator(),
+    ...uuidEnv,
   },
 )

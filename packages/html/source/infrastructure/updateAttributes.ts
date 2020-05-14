@@ -25,9 +25,9 @@ export const updateAttributes: UpdateAttributes<PatchFailure> = function* update
     const attributeParts = key.split(':')
 
     if (attributeParts.length > 1 && NAMESPACE_URIS.hasOwnProperty(attributeParts[0])) {
-      node.setAttributeNS(NAMESPACE_URIS[attributeParts[0]], key, value)
+      node.setAttributeNS(NAMESPACE_URIS[attributeParts[0]], key, value ?? '')
     } else {
-      node.setAttribute(key, value)
+      node.setAttribute(key, value ?? '')
     }
   }
 

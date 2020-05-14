@@ -28,7 +28,7 @@ for (const pkg of PACKAGES) {
   }
   packageJSONData.peerDependencies = {
     ...(packageJSONData.peerDependencies || {}),
-    tslib: '^1.10.0',
+    tslib: '^2.0.0',
   }
   packageJSONData.sideEffects = false
   fs.writeFileSync(packageJSONPath, JSON.stringify(packageJSONData, null, '  ') + EOL)

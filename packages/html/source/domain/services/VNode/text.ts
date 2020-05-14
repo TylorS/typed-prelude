@@ -10,6 +10,6 @@ export function text(text: string, key?: ComparableValues): TextVNode {
     node: { current: Nothing },
   }
 }
-export function isText(vNode: VNode<any, any, any>): vNode is TextVNode {
+export function isText(vNode: VNode): vNode is TextVNode {
   return vNode.type === VNodeType.Text
 }

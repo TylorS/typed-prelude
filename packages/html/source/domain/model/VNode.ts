@@ -158,8 +158,6 @@ export type EventMapFrom<A> = A extends HtmlTagName
     ? HTMLMarqueeElementEventMap
     : A extends 'media'
     ? HTMLMediaElementEventMap
-    : A extends 'video'
-    ? HTMLVideoElementEventMap
     : HTMLElementEventMap
   : A extends SvgTagName
   ? SVGElementEventMap
