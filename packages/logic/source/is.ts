@@ -1,6 +1,8 @@
-import { Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
+import { isFunction, isMap, isSet, Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
 import { all } from './all'
 import { or } from './or'
+
+export { isFunction, isMap, isSet }
 
 export function isUndefined(x: unknown): x is undefined {
   return x === undefined
@@ -64,27 +66,6 @@ export function isArrayLike<A = unknown>(x: unknown): x is ArrayLike<A> {
   return false
 }
 
-export function isMap<A = unknown, B = unknown>(x: any): x is Map<A, B> {
-  if (!x) {
-    return false
-  }
-
-  const map = x as Map<A, B>
-
-  return (
-    isFunction(map.set) &&
-    isFunction(map.get) &&
-    isFunction(map.has) &&
-    isFunction(map.delete) &&
-    isFunction(map.clear) &&
-    isFunction(map[Symbol.iterator])
-  )
-}
-
-export function isFunction(x: any): x is Function {
-  return typeof x === 'function'
-}
-
 export function isNumber(x: any): x is number {
   return typeof x === 'number' && !Number.isNaN(x)
 }
@@ -99,22 +80,6 @@ export function isObject(x: any): x is Object {
 
 export function isPromiseLike<A = any>(x: any): x is PromiseLike<A> {
   return x && isFunction(x.then)
-}
-
-export function isSet<A = any>(x: any): x is Set<A> {
-  if (!x) {
-    return false
-  }
-
-  const set = x as Set<A>
-
-  return (
-    isFunction(set.add) &&
-    isFunction(set.clear) &&
-    isFunction(set.delete) &&
-    isFunction(set.has) &&
-    isFunction(set[Symbol.iterator])
-  )
 }
 
 export function isBoolean(x: unknown): x is boolean {
