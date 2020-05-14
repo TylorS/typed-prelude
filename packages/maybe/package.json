@@ -1,6 +1,6 @@
 {
   "name": "@typed/maybe",
-  "version": "10.1.1",
+  "version": "10.2.0",
   "description": "Data structure for working with values that may not exist",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

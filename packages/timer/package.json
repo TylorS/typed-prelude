@@ -1,6 +1,6 @@
 {
   "name": "@typed/timer",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Time as a dependency",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -26,7 +26,7 @@
     "@typed/common": "^3.3.0",
     "@typed/disposable": "^3.2.1",
     "@typed/lambda": "^3.2.1",
-    "@typed/list": "^6.1.1"
+    "@typed/list": "^6.2.0"
   },
   "publishConfig": {
     "access": "public"

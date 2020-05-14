@@ -1,6 +1,6 @@
 {
   "name": "@typed/objects",
-  "version": "6.1.1",
+  "version": "6.2.0",
   "description": "Functions for working with objects",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,7 +25,7 @@
   "dependencies": {
     "@typed/common": "^3.3.0",
     "@typed/lambda": "^3.2.1",
-    "@typed/maybe": "^10.1.1"
+    "@typed/maybe": "^10.2.0"
   },
   "publishConfig": {
     "access": "public"
