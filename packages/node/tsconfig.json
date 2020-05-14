@@ -28,6 +28,9 @@
       "path": "../either/tsconfig.json"
     },
     {
+      "path": "../env/tsconfig.json"
+    },
+    {
       "path": "../future/tsconfig.json"
     },
     {
@@ -37,10 +40,10 @@
       "path": "../lambda/tsconfig.json"
     },
     {
-      "path": "../logger/tsconfig.json"
+      "path": "../list/tsconfig.json"
     },
     {
-      "path": "../list/tsconfig.json"
+      "path": "../logger/tsconfig.json"
     },
     {
       "path": "../logic/tsconfig.json"
