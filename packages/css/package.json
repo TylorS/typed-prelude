@@ -1,6 +1,6 @@
 {
   "name": "@typed/css",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Strongly-typed, atomic CSS for TypeScript",
   "main": "./cjs/index.js",
   "keywords": [
@@ -26,15 +26,15 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/common": "^3.3.0",
-    "@typed/crypto": "^1.8.0",
-    "@typed/dom": "^7.4.0",
-    "@typed/effects": "^6.4.0",
-    "@typed/hooks": "^10.2.0",
-    "@typed/lambda": "^3.2.1",
-    "@typed/list": "^6.2.0",
-    "@typed/logic": "^6.2.0",
-    "@typed/new-type": "^3.1.1",
+    "@typed/common": "^3.4.0",
+    "@typed/crypto": "^1.9.0",
+    "@typed/dom": "^7.5.0",
+    "@typed/effects": "^6.5.0",
+    "@typed/hooks": "^10.3.0",
+    "@typed/lambda": "^3.3.0",
+    "@typed/list": "^6.3.0",
+    "@typed/logic": "^6.3.0",
+    "@typed/new-type": "^3.2.0",
     "csstype": "^2.6.10"
   }
 }

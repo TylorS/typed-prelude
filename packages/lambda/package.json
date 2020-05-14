@@ -1,6 +1,6 @@
 {
   "name": "@typed/lambda",
-  "version": "3.2.1",
+  "version": "3.3.0",
   "description": "Helpful functions for working in a functional style",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/common": "^3.3.0"
+    "@typed/common": "^3.4.0"
   },
   "publishConfig": {
     "access": "public"

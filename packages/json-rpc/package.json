@@ -1,6 +1,6 @@
 {
   "name": "@typed/json-rpc",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "description": "JSON-RPC abstractions",
   "main": "./cjs/index.js",
   "keywords": [
@@ -27,22 +27,22 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/common": "^3.3.0",
-    "@typed/disposable": "^3.2.1",
-    "@typed/effects": "^6.4.0",
-    "@typed/either": "^8.1.1",
-    "@typed/env": "^8.2.0",
-    "@typed/future": "^11.3.0",
-    "@typed/hooks": "^10.2.0",
-    "@typed/lambda": "^3.2.1",
-    "@typed/list": "^6.2.0",
-    "@typed/logger": "^8.4.0",
-    "@typed/logic": "^6.2.0",
-    "@typed/map": "^4.2.0",
-    "@typed/objects": "^6.2.0",
-    "@typed/subscription": "^3.4.0",
-    "@typed/timer": "^3.3.0",
-    "@typed/tuple": "^3.1.1",
-    "@typed/uuid": "^9.4.0"
+    "@typed/common": "^3.4.0",
+    "@typed/disposable": "^3.3.0",
+    "@typed/effects": "^6.5.0",
+    "@typed/either": "^8.2.0",
+    "@typed/env": "^8.3.0",
+    "@typed/future": "^11.4.0",
+    "@typed/hooks": "^10.3.0",
+    "@typed/lambda": "^3.3.0",
+    "@typed/list": "^6.3.0",
+    "@typed/logger": "^8.5.0",
+    "@typed/logic": "^6.3.0",
+    "@typed/map": "^4.3.0",
+    "@typed/objects": "^6.3.0",
+    "@typed/subscription": "^3.5.0",
+    "@typed/timer": "^3.4.0",
+    "@typed/tuple": "^3.2.0",
+    "@typed/uuid": "^9.5.0"
   }
 }
