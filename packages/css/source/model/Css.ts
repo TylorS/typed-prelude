@@ -12,6 +12,9 @@ export type Css = NewType<string, 'Css'>
 // Space-separated list of strings
 export type ClassName = NewType<string, 'ClassName'>
 
+// Css Selector
+export type CssSelector = NewType<string, 'CssSelector'>
+
 /**
  * Given a set of class names should output a set of class names to apply
  */
@@ -27,3 +30,8 @@ export type GetClassNames = (
 ) => ClassName
 
 export type GetCss = (rules: Rules) => Css
+
+/**
+ * Converts a className into a CssSelector
+ */
+export type GetCssSelector = (className: ClassName) => CssSelector

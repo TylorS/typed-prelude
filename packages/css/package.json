@@ -28,13 +28,17 @@
   "dependencies": {
     "@typed/common": "^3.4.0",
     "@typed/crypto": "^1.9.0",
+    "@typed/disposable": "^3.3.0",
     "@typed/dom": "^7.5.0",
     "@typed/effects": "^6.5.0",
     "@typed/hooks": "^10.3.0",
     "@typed/lambda": "^3.3.0",
     "@typed/list": "^6.3.0",
+    "@typed/logger": "^8.5.0",
     "@typed/logic": "^6.3.0",
     "@typed/new-type": "^3.2.0",
+    "@typed/timer": "^3.4.0",
+    "@typed/uuid": "^9.5.0",
     "csstype": "^2.6.10"
   }
 }
