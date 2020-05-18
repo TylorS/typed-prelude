@@ -61,9 +61,6 @@
       "path": "./lambda/tsconfig.cjs.json"
     },
     {
-      "path": "./lenses/tsconfig.cjs.json"
-    },
-    {
       "path": "./list/tsconfig.cjs.json"
     },
     {
@@ -116,6 +113,9 @@
     },
     {
       "path": "./subscription/tsconfig.cjs.json"
+    },
+    {
+      "path": "./test/tsconfig.cjs.json"
     },
     {
       "path": "./timer/tsconfig.cjs.json"

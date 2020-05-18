@@ -1,3 +1,4 @@
+import { Is } from '@typed/lambda'
 import { all, and, equals, isArray, isNumber, isObject, isString, or } from '@typed/logic'
 import { hasOwnProperty } from '@typed/objects'
 import { JsonRpcFailedResponse, JsonRpcResponse, JsonRpcSuccessfulResponse } from '../../model'

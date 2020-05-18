@@ -157,6 +157,10 @@
       "path": "./packages/subscription"
     },
     {
+      "name": "Test",
+      "path": "./packages/test"
+    },
+    {
       "name": "Timer",
       "path": "./packages/timer"
     },
@@ -188,5 +192,8 @@
       "name": "Typed Prelude",
       "path": "./"
     }
-  ]
+  ],
+  "settings": {
+    "typescript.tsdk": "Typed Prelude/node_modules/typescript/lib"
+  }
 }

@@ -1,7 +1,7 @@
-import { Json, JsonArray, JsonObject } from '@typed/common'
+import { Json } from '@typed/common'
 
 export type Id = string | number
-export type StructuredJson = JsonObject | JsonArray
+export type StructuredJson = Readonly<Partial<Record<string, any>>> | readonly any[]
 
 export type Message = JsonRpcRequest | JsonRpcResponse | JsonRpcNotification | Batch
 export type BatchRequest = JsonRpcRequest[]
