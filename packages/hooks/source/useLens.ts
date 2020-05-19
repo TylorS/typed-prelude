@@ -20,11 +20,11 @@ export function* useLens<A, B>(
   lens: Lens<A, B>,
 ): HookEffects<unknown, UseState<B>> {
   const getRealThing = yield* useMemo(
-    (get) =>
+    (get, l) =>
       function* () {
-        return lens.get(yield* get())
+        return l.get(yield* get())
       },
-    [getThing],
+    [getThing, lens] as const,
   )
   const updateThing = yield* useMemo(
     (setThing, l) =>
