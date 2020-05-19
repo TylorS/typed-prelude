@@ -1,4 +1,5 @@
 import { Arity1, Arity2, curry, Curry2 } from '@typed/lambda'
+import { set } from '@typed/objects'
 
 export interface Lens<A, B> {
   readonly get: Arity1<A, B>
@@ -15,6 +16,12 @@ export namespace Lens {
     create(
       (a) => a,
       (_, a) => a,
+    )
+
+  export const prop = <A, K extends keyof A>(key: K): Lens<A, A[K]> =>
+    create(
+      (a) => a[key],
+      (b, a) => set(key, b, a),
     )
 }
 

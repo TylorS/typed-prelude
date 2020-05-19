@@ -25,4 +25,4 @@ export type GetPath<O, K extends ReadonlyArray<PropertyKey>> = K extends []
   : {
       complete: Head<K> extends keyof O ? O[Head<K>] : never
       continue: Head<K> extends keyof O ? GetPath<O[Head<K>], Tail<K>> : never
-    }[Tail<K> extends [] ? 'complete' : 'continue']
+    }[[] extends Tail<K> ? 'complete' : 'continue']
