@@ -4,19 +4,19 @@ import { PathLens } from './PathLens'
 import { pipe2 } from './pipe2'
 import { PropLens } from './PropLens'
 
-type Lenses = readonly [Lens<any, any>, Lens<any, any>, ...ReadonlyArray<Lens<any, any>>]
-
 export type PipeLenses<A extends Lenses> = A extends ReadonlyArray<PropLens<any>>
   ? PathLens<GetPropKeys<A>>
   : GetPipedLenses<LensInput<Head<A>>, LensOutput<Head<A>>, Tail<A>>
+
+export function pipe<A extends Lenses>(...lenses: A): PipeLenses<A> {
+  return lenses.reduce(pipe2, Lens.id()) as PipeLenses<A>
+}
 
 type GetPropKeys<A extends Lenses> = {
   [K in keyof A]: A[K] extends PropLens<infer R> ? R : never
 }
 
-export function pipe<A extends Lenses>(...lenses: A): PipeLenses<A> {
-  return lenses.reduce(pipe2, Lens.id()) as PipeLenses<A>
-}
+type Lenses = readonly [Lens<any, any>, Lens<any, any>, ...ReadonlyArray<Lens<any, any>>]
 
 type GetPipedLenses<I, O, Lenses extends ReadonlyArray<Lens<any, any>>> = Lens<
   I,
