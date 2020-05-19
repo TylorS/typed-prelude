@@ -58,7 +58,6 @@ export function* useLenses<A, R extends Record<string, Lens<A, any>>>(
   const hookEnv = yield* getHookEnv()
   const getHookKey = yield* useCallback((k: keyof R) => ({ [k]: [k, lenses[k], hookEnv] }), [
     lenses,
-    hookEnv,
   ])
   // Get All keys
   const keys = yield* useMemo((ls) => Object.keys(ls).sort() as (keyof R)[], [lenses])
