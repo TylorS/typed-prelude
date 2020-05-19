@@ -77,6 +77,10 @@
       "path": "./packages/lambda"
     },
     {
+      "name": "Lenses",
+      "path": "./packages/lenses"
+    },
+    {
       "name": "List",
       "path": "./packages/list"
     },

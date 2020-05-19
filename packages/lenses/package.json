@@ -20,5 +20,10 @@
   "peerDependencies": {
     "tslib": "^2.0.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/lambda": "^3.3.0",
+    "@typed/objects": "^6.3.0",
+    "@typed/maybe": "^10.3.0"
+  }
 }
