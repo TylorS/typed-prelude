@@ -1,6 +1,14 @@
 import { TimerEnv } from '@typed/effects'
 import { Arity1 } from '@typed/lambda'
-import { GetPath, Lens, LensOutput, PathLens, PathToRecord, PropLens } from '@typed/lenses'
+import {
+  GetPath,
+  Lens,
+  LensInput,
+  LensOutput,
+  PathLens,
+  PathToRecord,
+  PropLens,
+} from '@typed/lenses'
 import { getHookEnv } from './getHookEnv'
 import { HookEffects, HooksManagerEnv, UseState } from './types'
 import { useCallback } from './useCallback'
@@ -38,7 +46,9 @@ export type UseLenses<A, R extends Record<string, Lens<A, any>>> = {
     ? PK extends keyof A
       ? UseState<A[PK]>
       : never
-    : UseState<LensOutput<R[K]>>
+    : A extends LensInput<R[K]>
+    ? UseState<LensOutput<R[K]>>
+    : never
 }
 
 export function* useLenses<A, R extends Record<string, Lens<A, any>>>(
