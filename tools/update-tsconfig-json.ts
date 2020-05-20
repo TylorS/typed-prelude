@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import { EOL } from 'os'
 import * as path from 'path'
-import { PACKAGES, sourceDirectory } from './common'
+import { getPackages, sourceDirectory } from './common'
 
 const FILES_TO_EXCLUDE = [
   './source/**/*.test.ts',
@@ -11,15 +11,21 @@ const FILES_TO_EXCLUDE = [
   './umd/**',
 ]
 
-updateRootConfig('tsconfig.json')
-updateRootConfig('tsconfig.cjs.json')
+if (process.mainModule === module) {
+  updateRootConfigs()
 
-PACKAGES.forEach(updatePackage)
+  getPackages().forEach(updateTsConfigForPkg)
+}
 
-function updateRootConfig(configName: string) {
+export function updateRootConfigs() {
+  updateRootConfig('tsconfig.json')
+  updateRootConfig('tsconfig.cjs.json')
+}
+
+export function updateRootConfig(configName: string) {
   const rootTsConfigPath = path.join(sourceDirectory, configName)
   const rootTsConfig = getOrCreateJsonFile(rootTsConfigPath)
-  const packagePaths = PACKAGES.map((pkg) => `./${pkg}/${configName}`)
+  const packagePaths = getPackages().map((pkg) => `./${pkg}/${configName}`)
 
   rootTsConfig.references = packagePaths.map((path) => ({ path }))
   rootTsConfig.files = []
@@ -29,7 +35,7 @@ function updateRootConfig(configName: string) {
   fs.writeFileSync(rootTsConfigPath, JSON.stringify(rootTsConfig, null, '  ') + EOL)
 }
 
-function updatePackage(pkg: string) {
+export function updateTsConfigForPkg(pkg: string) {
   const pkgDirectory = path.join(sourceDirectory, pkg)
   const packageJSONPath = path.join(pkgDirectory, 'package.json')
 
