@@ -58,9 +58,6 @@
       "path": "./lambda/tsconfig.json"
     },
     {
-      "path": "./lenses/tsconfig.json"
-    },
-    {
       "path": "./list/tsconfig.json"
     },
     {
