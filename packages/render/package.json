@@ -1,6 +1,6 @@
 {
   "name": "@typed/render",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "description": "Interfaces for rendering UI applications ",
   "main": "./cjs/index.js",
   "keywords": [
@@ -24,22 +24,22 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/disposable": "^3.3.0",
-    "@typed/dom": "^7.5.0",
-    "@typed/effects": "^6.5.0",
-    "@typed/env": "^8.3.0",
-    "@typed/history": "^10.5.0",
-    "@typed/hooks": "^10.3.0",
-    "@typed/lambda": "^3.3.0",
-    "@typed/list": "^6.3.0",
-    "@typed/logic": "^6.3.0",
-    "@typed/maybe": "^10.3.0",
-    "@typed/routing": "^8.5.0",
-    "@typed/subscription": "^3.5.0",
-    "@typed/timer": "^3.4.0"
+    "@typed/disposable": "^3.3.1",
+    "@typed/dom": "^7.5.1",
+    "@typed/effects": "^6.5.1",
+    "@typed/env": "^8.3.1",
+    "@typed/history": "^10.5.1",
+    "@typed/hooks": "^10.4.0",
+    "@typed/lambda": "^3.3.1",
+    "@typed/list": "^6.3.1",
+    "@typed/logic": "^6.4.0",
+    "@typed/maybe": "^10.3.1",
+    "@typed/routing": "^8.5.1",
+    "@typed/subscription": "^3.5.1",
+    "@typed/timer": "^3.4.1"
   },
   "devDependencies": {
-    "@typed/uuid": "^9.5.0",
+    "@typed/uuid": "^9.5.1",
     "lighterhtml": "3.1.3",
     "mostly-html": "3.0.0"
   }
