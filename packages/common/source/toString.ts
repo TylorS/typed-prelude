@@ -22,7 +22,7 @@ function _toString(x: any, seen: any[]): string {
   const mapPairs = (keys: unknown[], getKey: (u: unknown) => any, separator = ': ') => {
     return mapArrayLike(
       (k: unknown) => maybeRecur(k) + separator + maybeRecur(getKey(k)),
-      keys.slice().sort(),
+      keys.sort(),
     )
   }
 
@@ -62,10 +62,10 @@ function _toString(x: any, seen: any[]): string {
       return 'undefined'
     default:
       if (typeof x.toString === 'function') {
-        const repr = x.toString()
+        const stringRepresentation = x.toString()
 
-        if (!repr.startsWith('[object')) {
-          return repr
+        if (!stringRepresentation.startsWith('[object')) {
+          return stringRepresentation
         }
       }
 

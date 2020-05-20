@@ -32,6 +32,7 @@
     "@typed/future": "^11.4.0",
     "@typed/history": "^10.5.0",
     "@typed/lambda": "^3.3.0",
+    "@typed/lenses": "^3.0.0",
     "@typed/logic": "^6.3.0",
     "@typed/maybe": "^10.3.0",
     "@typed/remote-data": "^4.2.0",

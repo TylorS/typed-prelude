@@ -1,4 +1,5 @@
 import { isFunction, isMap, isSet, Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
+import { Is } from '@typed/lambda'
 import { all } from './all'
 import { or } from './or'
 
@@ -82,8 +83,22 @@ export function isPromiseLike<A = any>(x: any): x is PromiseLike<A> {
   return x && isFunction(x.then)
 }
 
-export function isBoolean(x: unknown): x is boolean {
-  return typeof x === 'boolean'
+export const isBoolean: Is<boolean> = or(isTrue, isFalse)
+
+export function isTrue(x: unknown): x is true {
+  return x === true
+}
+
+export function isFalse(x: unknown): x is false {
+  return x === false
+}
+
+export function isJsonArray(x: unknown): x is JsonArray {
+  return isArray(x) && all(isJson, x)
+}
+
+export function isJsonObject(x: unknown): x is JsonObject {
+  return isObject(x) && all(isString, Object.keys(x)) && all(isJson, Object.values(x))
 }
 
 export const isJsonPrimitive: (x: unknown) => x is JsonPrimitive = or(
@@ -92,11 +107,3 @@ export const isJsonPrimitive: (x: unknown) => x is JsonPrimitive = or(
 )
 
 export const isJson: (x: unknown) => x is Json = or(isJsonPrimitive, or(isJsonArray, isJsonObject))
-
-export function isJsonArray(x: unknown): x is JsonArray {
-  return isArray(x) && all(isJson, x)
-}
-
-export function isJsonObject(x: unknown): x is JsonObject {
-  return isObject(x) && all(isJson, Object.values(x))
-}
