@@ -1,9 +1,15 @@
 import * as fs from 'fs'
 import { EOL } from 'os'
 import * as path from 'path'
-import { PACKAGES, sourceDirectory } from './common'
+import { getPackages, sourceDirectory } from './common'
 
-for (const pkg of PACKAGES) {
+if (process.mainModule === module) {
+  for (const pkg of getPackages()) {
+    updatePackageJson(pkg)
+  }
+}
+
+export function updatePackageJson(pkg: string) {
   const pkgDirectory = path.join(sourceDirectory, pkg)
   const packageJSONPath = path.join(pkgDirectory, 'package.json')
 

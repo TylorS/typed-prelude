@@ -1,10 +1,14 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'fs'
 import { join } from 'path'
-import { PACKAGES, sourceDirectory } from './common'
+import { getPackages, sourceDirectory } from './common'
 
 const VSCODE_SOURCE_FOLDER = join(__dirname, 'vscode-packages')
 
-PACKAGES.forEach((pkg) => {
+if (process.mainModule === module) {
+  getPackages().forEach(updateVsCodeSettings)
+}
+
+export function updateVsCodeSettings(pkg: string) {
   const pkgDirectory = join(sourceDirectory, pkg)
   const vscodeDirectory = join(pkgDirectory, '.vscode')
 
@@ -13,7 +17,7 @@ PACKAGES.forEach((pkg) => {
   }
 
   copyFilesRecursively(VSCODE_SOURCE_FOLDER, vscodeDirectory)
-})
+}
 
 function copyFilesRecursively(sourceFolder: string, destinationFolder: string) {
   for (const pathPart of readdirSync(sourceFolder)) {

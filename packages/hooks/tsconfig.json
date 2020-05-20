@@ -43,6 +43,9 @@
       "path": "../lambda/tsconfig.json"
     },
     {
+      "path": "../lenses/tsconfig.json"
+    },
+    {
       "path": "../logic/tsconfig.json"
     },
     {
