@@ -65,6 +65,10 @@
       "path": "./packages/iterable"
     },
     {
+      "name": "Json",
+      "path": "./packages/json"
+    },
+    {
       "name": "Json Rpc",
       "path": "./packages/json-rpc"
     },
