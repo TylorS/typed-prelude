@@ -49,9 +49,6 @@
       "path": "./iterable/tsconfig.cjs.json"
     },
     {
-      "path": "./json/tsconfig.cjs.json"
-    },
-    {
       "path": "./json-rpc/tsconfig.cjs.json"
     },
     {
