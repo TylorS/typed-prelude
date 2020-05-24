@@ -1,4 +1,4 @@
-import { Arity1, pipe } from '@typed/lambda'
+import { Arity1, Is, IsNot, pipe } from '@typed/lambda'
 import { not } from './not'
 
 /**
@@ -6,4 +6,8 @@ import { not } from './not'
  * @param :: (a -> b)
  * @returns :: (a -> boolean)
  */
-export const complement = <A, B>(fn: Arity1<A, B>) => pipe(fn, not)
+export const complement: {
+  <A>(fn: Is<A>): IsNot<A>
+  <A>(fn: IsNot<A>): Is<A>
+  <A, B>(fn: Arity1<A, B>): Arity1<A, boolean>
+} = <A, B>(fn: Arity1<A, B>) => pipe(fn, not) as any
