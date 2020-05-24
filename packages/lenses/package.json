@@ -1,6 +1,6 @@
 {
   "name": "@typed/lenses",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Strongly-typed functional lenses",
   "main": "./cjs/index.js",
   "keywords": [
@@ -22,8 +22,8 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/lambda": "^3.3.1",
-    "@typed/maybe": "^10.3.1",
-    "@typed/objects": "^6.3.1"
+    "@typed/lambda": "^3.4.0",
+    "@typed/maybe": "^10.4.0",
+    "@typed/objects": "^6.4.0"
   }
 }

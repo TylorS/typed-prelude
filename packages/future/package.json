@@ -1,6 +1,6 @@
 {
   "name": "@typed/future",
-  "version": "11.4.1",
+  "version": "11.5.0",
   "description": "Asynchronous Future Values",
   "main": "./cjs/index.js",
   "repository": {
@@ -32,10 +32,10 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/common": "^3.4.1",
-    "@typed/disposable": "^3.3.1",
-    "@typed/either": "^8.2.1",
-    "@typed/env": "^8.3.1",
-    "@typed/lambda": "^3.3.1"
+    "@typed/common": "^3.5.0",
+    "@typed/disposable": "^3.4.0",
+    "@typed/either": "^8.3.0",
+    "@typed/env": "^8.4.0",
+    "@typed/lambda": "^3.4.0"
   }
 }

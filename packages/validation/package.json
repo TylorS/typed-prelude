@@ -1,6 +1,6 @@
 {
   "name": "@typed/validation",
-  "version": "3.3.1",
+  "version": "3.4.0",
   "description": "Validation data-type for validating preconditions",
   "main": "./cjs/index.js",
   "keywords": [
@@ -22,10 +22,10 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/either": "^8.2.1",
-    "@typed/lambda": "^3.3.1",
-    "@typed/list": "^6.3.1",
-    "@typed/logic": "^6.4.0",
-    "@typed/maybe": "^10.3.1"
+    "@typed/either": "^8.3.0",
+    "@typed/lambda": "^3.4.0",
+    "@typed/list": "^6.4.0",
+    "@typed/logic": "^6.5.0",
+    "@typed/maybe": "^10.4.0"
   }
 }

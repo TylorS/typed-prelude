@@ -1,6 +1,6 @@
 {
   "name": "@typed/css",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "description": "Strongly-typed, atomic CSS for TypeScript",
   "main": "./cjs/index.js",
   "keywords": [
@@ -26,19 +26,19 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@typed/common": "^3.4.1",
-    "@typed/crypto": "^1.9.1",
-    "@typed/disposable": "^3.3.1",
-    "@typed/dom": "^7.5.1",
-    "@typed/effects": "^6.5.1",
-    "@typed/hooks": "^10.4.0",
-    "@typed/lambda": "^3.3.1",
-    "@typed/list": "^6.3.1",
-    "@typed/logger": "^8.5.1",
-    "@typed/logic": "^6.4.0",
-    "@typed/new-type": "^3.2.1",
-    "@typed/timer": "^3.4.1",
-    "@typed/uuid": "^9.5.1",
+    "@typed/common": "^3.5.0",
+    "@typed/crypto": "^1.10.0",
+    "@typed/disposable": "^3.4.0",
+    "@typed/dom": "^7.6.0",
+    "@typed/effects": "^6.6.0",
+    "@typed/hooks": "^10.5.0",
+    "@typed/lambda": "^3.4.0",
+    "@typed/list": "^6.4.0",
+    "@typed/logger": "^8.6.0",
+    "@typed/logic": "^6.5.0",
+    "@typed/new-type": "^3.3.0",
+    "@typed/timer": "^3.5.0",
+    "@typed/uuid": "^9.6.0",
     "csstype": "^2.6.10"
   }
 }

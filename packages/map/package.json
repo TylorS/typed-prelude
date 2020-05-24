@@ -1,6 +1,6 @@
 {
   "name": "@typed/map",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "Combinators for working with ReadonlyMap",
   "main": "./cjs/index.js",
   "repository": {
@@ -20,9 +20,9 @@
   },
   "homepage": "https://github.com/TylorS/typed-prelude#readme",
   "dependencies": {
-    "@typed/iterable": "^3.3.1",
-    "@typed/lambda": "^3.3.1",
-    "@typed/logic": "^6.4.0"
+    "@typed/iterable": "^3.4.0",
+    "@typed/lambda": "^3.4.0",
+    "@typed/logic": "^6.5.0"
   },
   "module": "./esm/index.js",
   "types": "./esm/index.d.ts",

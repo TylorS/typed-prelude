@@ -1,6 +1,6 @@
 {
   "name": "@typed/crypto",
-  "version": "1.9.1",
+  "version": "1.10.0",
   "description": "Cryptography tools for web applications",
   "main": "./cjs/index.js",
   "repository": {
@@ -34,19 +34,19 @@
     "@peculiar/webcrypto": "1.1.1"
   },
   "dependencies": {
-    "@typed/asyncstorage": "^6.5.1",
-    "@typed/disposable": "^3.3.1",
-    "@typed/effects": "^6.5.1",
-    "@typed/either": "^8.2.1",
-    "@typed/env": "^8.3.1",
-    "@typed/future": "^11.4.1",
-    "@typed/hooks": "^10.4.0",
-    "@typed/lambda": "^3.3.1",
-    "@typed/list": "^6.3.1",
-    "@typed/logger": "^8.5.1",
-    "@typed/maybe": "^10.3.1",
-    "@typed/subscription": "^3.5.1",
-    "@typed/tuple": "^3.2.1"
+    "@typed/asyncstorage": "^6.6.0",
+    "@typed/disposable": "^3.4.0",
+    "@typed/effects": "^6.6.0",
+    "@typed/either": "^8.3.0",
+    "@typed/env": "^8.4.0",
+    "@typed/future": "^11.5.0",
+    "@typed/hooks": "^10.5.0",
+    "@typed/lambda": "^3.4.0",
+    "@typed/list": "^6.4.0",
+    "@typed/logger": "^8.6.0",
+    "@typed/maybe": "^10.4.0",
+    "@typed/subscription": "^3.6.0",
+    "@typed/tuple": "^3.3.0"
   },
   "sideEffects": false
 }
