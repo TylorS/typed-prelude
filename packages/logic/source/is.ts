@@ -8,18 +8,6 @@ import { or } from './or'
 
 export { isFunction, isMap, isSet }
 
-type TypeLiteral = 'string' | 'number' | 'boolean' | 'object'
-type TypeLiteralMap = {
-  string: string
-  number: number
-  boolean: boolean
-  object: object
-}
-
-const typeOf = <A extends TypeLiteral>(a: A): Is<TypeLiteralMap[A]> => (
-  u,
-): u is TypeLiteralMap[A] => typeof u === a
-
 export const is = <A>(value: A): Is<A> => equals(value) as any
 export const isNot = <A>(a: A): IsNot<A> => pipe2(is(a), not) as any
 
@@ -86,13 +74,13 @@ export const isArrayLike: Is<ArrayLike<unknown>> = (x): x is ArrayLike<unknown> 
 }
 export const isNotArrayLike = complement(isArrayLike)
 
-export const isNumber: Is<number> = or(complement(Number.isNaN), typeOf('number')) as Is<number>
+export const isNumber: Is<number> = (u): u is number => typeof u === 'number' && !Number.isNaN(u)
 export const isNotNumber: IsNot<number> = complement(isNumber)
 
-export const isString: Is<string> = typeOf('string')
+export const isString: Is<string> = (u): u is string => typeof u === 'string'
 export const isNotString: IsNot<string> = complement(isString)
 
-export const isObject: Is<object> = typeOf('object')
+export const isObject: Is<object> = (u): u is object => typeof u === 'object'
 export const isNotObject: IsNot<object> = complement(isObject)
 
 export const isPromiseLike: Is<PromiseLike<unknown>> = (x: unknown): x is PromiseLike<unknown> =>

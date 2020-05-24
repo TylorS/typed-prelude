@@ -34,13 +34,13 @@ type TaggedJsonValues = {
   [Tag.Set]: ReadonlyArray<Json>
 }
 
-const hasJsonTag = (x: unknown) => Object.prototype.hasOwnProperty.call(x, JSON_TAG)
-const hasValuesTag = (x: unknown) => Object.prototype.hasOwnProperty.call(x, VALUES_TAG)
-
 type TaggedJson<A extends Tag> = {
   readonly [JSON_TAG]: A
   readonly [VALUES_TAG]: TaggedJsonValues[A]
 }
+
+const hasJsonTag = (x: unknown) => Object.prototype.hasOwnProperty.call(x, JSON_TAG)
+const hasValuesTag = (x: unknown) => Object.prototype.hasOwnProperty.call(x, VALUES_TAG)
 
 // Replace
 function replaceJson(_: JsonSerializable, value: JsonSerializable): Json {
