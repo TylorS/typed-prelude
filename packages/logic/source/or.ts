@@ -8,11 +8,11 @@ import { curry, Is, Predicate } from '@typed/lambda'
  * @returns :: boolean
  */
 export const or: {
-  <C, A extends C, B extends C>(predicate1: Is<A>, predicate2: Is<B>, value: C): value is A | B
-  <C, A extends C, B extends C>(predicate1: Is<A>, predicate2: Is<B>): (value: C) => value is A | B
-  <C, A extends C>(predicate1: Is<A>): {
-    <B extends C>(predicate2: Is<B>, value: C): value is A | B
-    <B extends C>(predicate2: Is<B>): (value: C) => value is A | B
+  <A, B>(predicate1: Is<A>, predicate2: Is<B>, value: unknown): value is A | B
+  <A, B>(predicate1: Is<A>, predicate2: Is<B>): (value: unknown) => value is A | B
+  <A>(predicate1: Is<A>): {
+    <B>(predicate2: Is<B>, value: unknown): value is A | B
+    <B>(predicate2: Is<B>): Is<A | B>
   }
 
   <A>(predicate1: Predicate<A>, predicate2: Predicate<A>, value: A): boolean
