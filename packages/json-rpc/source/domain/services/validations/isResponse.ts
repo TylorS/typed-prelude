@@ -17,15 +17,11 @@ const VALIDATE_RESPONSE_VALUES: {
   error: or(isString, isNumber),
 }
 
-export const isSuccessfulResponse: (x: unknown) => x is JsonRpcSuccessfulResponse = and(
-  isResponse,
-  hasOwnProperty('result'),
-)
+export const isSuccessfulResponse = (x: unknown): x is JsonRpcSuccessfulResponse =>
+  isResponse(x) && hasOwnProperty('result', x)
 
-export const isFailedResponse: (x: unknown) => x is JsonRpcFailedResponse = and(
-  isResponse,
-  hasOwnProperty('error'),
-)
+export const isFailedResponse = (x: unknown): x is JsonRpcFailedResponse =>
+  isResponse(x) && hasOwnProperty('error', x)
 
 export function isResponse(x: unknown): x is JsonRpcResponse {
   if (!isObject(x)) {
