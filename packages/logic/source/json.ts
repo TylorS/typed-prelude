@@ -5,8 +5,8 @@ export type JsonSerializable =
   | JsonPrimitive
   | ReadonlyArray<JsonSerializable>
   | JsonSerializableRecord
-  | Map<JsonSerializable, JsonSerializable>
-  | Set<JsonSerializable>
+  | ReadonlyMap<JsonSerializable, JsonSerializable>
+  | ReadonlySet<JsonSerializable>
 
 export interface JsonSerializableRecord extends Record<string, JsonSerializable> {}
 
