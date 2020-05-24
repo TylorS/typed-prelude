@@ -14,7 +14,9 @@ export type Arity5<A = any, B = any, C = any, D = any, E = any, F = any> = (
 ) => F
 
 export type Predicate<A> = Arity1<A, boolean>
-export type Is<A> = (value: any) => value is A
+export type Is<A> = (value: unknown) => value is A
+export type IsNot<A> = <B extends unknown>(value: A | B) => value is B
+export type Refinement<A, B extends A> = (a: A) => a is B
 export type Predicate2<A, B> = Arity2<A, B, boolean>
 export type ComparisonNumbers = -1 | 0 | 1
 export type ComparableValues = keyof any | boolean | Date

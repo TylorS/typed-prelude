@@ -1,5 +1,5 @@
 import { equals as _equals } from '@typed/common'
-import { Arity1, curry } from '@typed/lambda'
+import { Arity1, curry, Is } from '@typed/lambda'
 
 /**
  * Check if two values have value-equality.
@@ -10,8 +10,8 @@ import { Arity1, curry } from '@typed/lambda'
 export const equals: Equals = curry(<A>(a: A, b: A) => _equals(a, b, [], [])) as Equals
 
 export type Equals = {
-  <A, B = A>(a: A, b: B): B extends A ? boolean : false
-  <A>(a: A): <B = A>(b: B) => B extends A ? boolean : false
+  <A>(a: A, b: unknown): b is A
+  <A>(a: A): Is<A>
 }
 
 export const equalsBy: {

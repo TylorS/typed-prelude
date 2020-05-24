@@ -1,39 +1,44 @@
 import { isFunction, isMap, isSet, Json, JsonArray, JsonObject, JsonPrimitive } from '@typed/common'
-import { Is } from '@typed/lambda'
+import { Is, IsNot, pipe2 } from '@typed/lambda'
 import { all } from './all'
+import { complement } from './complement'
+import { equals } from './equals'
+import { not } from './not'
 import { or } from './or'
 
 export { isFunction, isMap, isSet }
 
-export function isUndefined(x: unknown): x is undefined {
-  return x === undefined
-}
+export const is = <A>(value: A): Is<A> => equals(value) as any
+export const isNot = <A>(a: A): IsNot<A> => pipe2(is(a), not) as any
 
-export function isNotUndefined<A>(x: A | undefined): x is A {
-  return x !== undefined
-}
+export const isAndIsNot = <A>(value: A): readonly [Is<A>, IsNot<A>] =>
+  [is(value), isNot(value)] as const
 
-export function isNull(x: unknown): x is null {
-  return x === null
-}
+export const isNotFunction: IsNot<Function> = complement(isFunction)
+export const isNotMap: IsNot<Map<unknown, unknown>> = complement(isMap)
+export const isNotSet: IsNot<Set<unknown>> = complement(isSet)
 
-export function isNotNull<A>(value: A): value is Exclude<A, null> {
-  return value !== null
-}
+export const [isUndefined, isNotUndefined] = isAndIsNot(undefined)
+export const [isNull, isNotNull] = isAndIsNot(null)
 
 export function isArray(x: unknown): x is unknown[] {
   return Array.isArray(x)
 }
+export const isNotArray = pipe2(isArray, not) as IsNot<ReadonlyArray<unknown>>
 
-export function isIterator<A = unknown>(x: unknown): x is Iterator<A> {
-  return x && isFunction((x as Iterator<A>).next)
+export function isIterator(x: unknown): x is Iterator<unknown> {
+  return x && isFunction((x as Iterator<unknown>).next)
 }
+export const isNotIterator: IsNot<Iterator<unknown>> = complement(isIterable)
 
 export function isIterable(x: unknown): x is Iterable<unknown> {
   return x && isFunction((x as Iterable<unknown>)[Symbol.iterator])
 }
+export const isNotIterable: IsNot<Iterable<unknown>> = complement(isIterable)
 
-export function isGenerator(x: unknown): x is Generator<unknown, unknown, unknown> {
+export const isGenerator: Is<Generator<unknown, unknown, unknown>> = (
+  x: unknown,
+): x is Generator<unknown, unknown, unknown> => {
   return (
     isIterable(x) &&
     isFunction((x as Generator).next) &&
@@ -41,8 +46,9 @@ export function isGenerator(x: unknown): x is Generator<unknown, unknown, unknow
     isFunction((x as Generator).throw)
   )
 }
+export const isNotGenerator = complement(isGenerator)
 
-export function isArrayLike<A = unknown>(x: unknown): x is ArrayLike<A> {
+export const isArrayLike: Is<ArrayLike<unknown>> = (x): x is ArrayLike<unknown> => {
   if (isArray(x)) {
     return true
   }
@@ -66,44 +72,41 @@ export function isArrayLike<A = unknown>(x: unknown): x is ArrayLike<A> {
 
   return false
 }
+export const isNotArrayLike = complement(isArrayLike)
 
-export function isNumber(x: any): x is number {
-  return typeof x === 'number' && !Number.isNaN(x)
-}
+export const isNumber: Is<number> = (u): u is number => typeof u === 'number' && !Number.isNaN(u)
+export const isNotNumber: IsNot<number> = complement(isNumber)
 
-export function isString(x: any): x is string {
-  return typeof x === 'string'
-}
+export const isString: Is<string> = (u): u is string => typeof u === 'string'
+export const isNotString: IsNot<string> = complement(isString)
 
-export function isObject(x: any): x is Object {
-  return x && typeof x === 'object'
-}
+export const isObject: Is<object> = (u): u is object => typeof u === 'object'
+export const isNotObject: IsNot<object> = complement(isObject)
 
-export function isPromiseLike<A = any>(x: any): x is PromiseLike<A> {
-  return x && isFunction(x.then)
-}
+export const isPromiseLike: Is<PromiseLike<unknown>> = (x: unknown): x is PromiseLike<unknown> =>
+  x && isObject(x) && isFunction((x as PromiseLike<unknown>).then)
+export const isNotPromiseLie: IsNot<PromiseLike<unknown>> = complement(isPromiseLike)
+
+export const [isTrue, isNotTrue] = isAndIsNot<true>(true)
+export const [isFalse, isNotFalse] = isAndIsNot<false>(false)
 
 export const isBoolean: Is<boolean> = or(isTrue, isFalse)
+export const isNotBoolean: IsNot<boolean> = complement(isBoolean)
 
-export function isTrue(x: unknown): x is true {
-  return x === true
-}
-
-export function isFalse(x: unknown): x is false {
-  return x === false
-}
-
-export function isJsonArray(x: unknown): x is JsonArray {
+export const isJsonArray: Is<JsonArray> = function isJsonArray(x: unknown): x is JsonArray {
   return isArray(x) && all(isJson, x)
 }
+export const isNotJsonArray: IsNot<JsonArray> = complement(isJsonArray)
 
-export function isJsonObject(x: unknown): x is JsonObject {
-  return isObject(x) && all(isString, Object.keys(x)) && all(isJson, Object.values(x))
+export const isJsonObject: Is<JsonObject> = function isJsonObject(x: unknown): x is JsonObject {
+  return (
+    !isArray(x) && isObject(x) && all(isString, Object.keys(x)) && all(isJson, Object.values(x))
+  )
 }
+export const isNotJsonObject: IsNot<JsonObject> = complement(isJsonObject)
 
-export const isJsonPrimitive: (x: unknown) => x is JsonPrimitive = or(
-  isString,
-  or(isNumber, or(isBoolean, isNull)),
-)
+export const isJsonPrimitive: Is<JsonPrimitive> = or(isString, or(isNumber, or(isBoolean, isNull)))
+export const isNotJsonPrimitive: IsNot<JsonPrimitive> = complement(isJsonPrimitive)
 
-export const isJson: (x: unknown) => x is Json = or(isJsonPrimitive, or(isJsonArray, isJsonObject))
+export const isJson: Is<Json> = or(isJsonPrimitive, or(isJsonArray, isJsonObject))
+export const isNotJson: IsNot<Json> = complement(isJson)
