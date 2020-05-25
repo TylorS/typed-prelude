@@ -32,7 +32,7 @@
     "@typed/test": "9.5.0",
     "@types/node": "13.13.9",
     "@types/yargs": "15.0.5",
-    "lerna": "3.21.0",
+    "lerna": "3.22.0",
     "lint-staged": "10.2.6",
     "prettier": "2.0.5",
     "terser": "4.7.0",
