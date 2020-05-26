@@ -12,7 +12,7 @@ export const Null: NullType<unknown> = {
       return Right.of(i)
     }
 
-    return Left.of([{ message: `Expected 'never'` }])
+    return Left.of([{ message: `Expected 'null'` }])
   },
   encode: Effect.of,
 }

@@ -12,53 +12,64 @@ export type Combine<A, B> = A extends NewType<infer AB, infer AT>
   : never
 
 export type Integer = NewType<number, 'Integer'>
-export const isInteger = isNewType<Integer>(Number.isInteger)
+export const isInteger = isNewType<number, Integer>((n): n is Integer => Number.isInteger(n))
 
 export type Zero = NewType<number, 'Zero'>
-export const isZero = isNewType<Zero>((x: number) => x === 0)
+export const isZero = isNewType((x: number): x is Zero => x === 0)
 
 export type NonZero = NewType<number, 'NonZero'>
-export const isNonZero = isNewType<NonZero>((x: number) => x !== 0)
+export const isNonZero = isNewType((x: number): x is NonZero => x !== 0)
 
 export type NonZeroInteger = Combine<NonZero, Integer>
-export const isNonZeroInteger = isNewType<NonZeroInteger>(and(isNonZero, isInteger))
+const _isNonZeroInteger = and(isNonZero, isInteger)
+export const isNonZeroInteger = isNewType((x: number): x is NonZeroInteger => _isNonZeroInteger(x))
 
 export type Positive = NewType<number, 'Positive'>
-export const isPositive = isNewType<Positive>((x: number) => x > 0)
+export const isPositive = isNewType((x: number): x is Positive => x > 0)
 
 export type Negative = NewType<number, 'Negative'>
-export const isNegative = isNewType<Negative>((x: number) => x < 0)
+export const isNegative = isNewType((x: number): x is Negative => x < 0)
 
 export type NonNegative = Zero | Positive
-export const isNonNegative = isNewType<NonNegative>(or(isZero, isPositive))
+const _isNonNegative = or(isZero, isPositive)
+export const isNonNegative = isNewType((x: number): x is NonNegative => _isNonNegative(x))
 
 export type NonPositive = Zero | Negative
-export const isNonPositive = isNewType<NonPositive>(or(isZero, isNegative))
+const _isNonPositive = or(isZero, isNegative)
+export const isNonPositive = isNewType((n: number): n is NonPositive => _isNonPositive(n))
 
 export type PositiveInteger = Combine<Positive, Integer>
-export const isPositiveInteger = isNewType<PositiveInteger>(and(isInteger, isPositive))
+const _isPositiveInteger = and(isInteger, isPositive)
+export const isPositiveInteger = isNewType((n: number): n is PositiveInteger =>
+  _isPositiveInteger(n),
+)
 
 export type NegativeInteger = Combine<Negative, Integer>
-export const isNegativeInteger = isNewType<NegativeInteger>(and(isNegative, isInteger))
+const _isNegativeInteger = and(isNegative, isInteger)
+export const isNegativeInteger = isNewType((n: number): n is NegativeInteger =>
+  _isNegativeInteger(n),
+)
 
 export type NonNegativeInteger = Zero | PositiveInteger
-export const isNonNegativeInteger = isNewType<NonNegativeInteger>(
-  or<number>(isZero, isPositiveInteger as any),
+const _isNonNegativeInteger = or<number>(isZero, isPositiveInteger)
+export const isNonNegativeInteger = isNewType((n: number): n is NonNegativeInteger =>
+  _isNonNegativeInteger(n),
 )
 
 export type NonPositiveInteger = Zero | NegativeInteger
-export const isNonPositiveInteger = isNewType<NonPositiveInteger>(
-  or<number>(isZero, isNegativeInteger as any),
+const _isNonPositiveInteger = or<number>(isZero, isNegativeInteger)
+export const isNonPositiveInteger = isNewType((n: number): n is NonPositiveInteger =>
+  _isNonPositiveInteger(n),
 )
 
 export type EmptyString = NewType<string & { readonly length: Zero }, 'EmptyString'>
-export const isEmptyString = isNewType<EmptyString>((x: string) => x === '')
+export const isEmptyString = isNewType((x: string): x is EmptyString => x === '')
 
 export type NonEmptyString = NewType<
   string & { readonly length: PositiveInteger },
   'NonEmptyString'
 >
-export const isNonEmptyString = isNewType<NonEmptyString>((x: string) => x !== '')
+export const isNonEmptyString = isNewType((x: string): x is NonEmptyString => x !== '')
 
 export type Character = NewType<string & { readonly length: 1 }, 'Character'>
-export const isCharacter = isNewType<Character>((x: string) => x.length === 1)
+export const isCharacter = isNewType((x: string): x is Character => x.length === 1)

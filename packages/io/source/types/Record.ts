@@ -1,5 +1,5 @@
 import { Effect, sequence } from '@typed/effects'
-import { fromRight, isLeft, Left, map, Right } from '@typed/either'
+import { fromRight, isLeft, isRight, Left, map, Right } from '@typed/either'
 import { isRecord } from '@typed/logic'
 import { hasOwnProperty, keysOf } from '@typed/objects'
 import { concat } from '@typed/validation'
@@ -26,7 +26,7 @@ export const Record: UnknownRecordType<unknown> = {
 export type RecordType<E, Name extends string, A extends Props<any>> = Type<
   Name,
   E & EnvsOfProps<A>,
-  { readonly [K in keyof A]: Encoder.Output<A[K]> },
+  { readonly [K in keyof A]: Decoder.Output<A[K]> },
   { readonly [K in keyof A]: Decoder.Input<A[K]> }
 >
 
@@ -43,14 +43,19 @@ export function record<A extends Props<any>, Name extends string>(
 
     const obj = fromRight(either)
     const propsToCheck = keysOf(props)
-    const eithers = yield* sequence(function* (k) {
+    const keyValuePairs = yield* sequence(function* (k) {
       const either = yield* props[k as keyof A].decode(obj[k as any])
 
       return map((v) => [k, v] as const, either)
     }, propsToCheck)
-    const validation = concat(...eithers)
 
-    return map((entries) => Object.fromEntries(entries), validation)
+    if (keyValuePairs.every((kv) => isRight(kv))) {
+      return Object.fromEntries(
+        keyValuePairs.map((kv) => fromRight(kv as Right<readonly [keyof A, any]>)),
+      )
+    }
+
+    return concat(...keyValuePairs)
   }
 
   function* encode(a: { readonly [K in keyof A]?: Encoder.Input<A[K]> }) {

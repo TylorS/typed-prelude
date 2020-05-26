@@ -1,5 +1,6 @@
 import { Flatten, UnNest } from '@typed/common'
 import { combine, Effect } from '@typed/effects'
+import { fromRight, isRight, Right } from '@typed/either'
 import { concat } from '@typed/validation'
 import { Decoder } from '../Decoder'
 import { Encoder } from '../Encoder'
@@ -28,7 +29,13 @@ export function intersection<A extends ReadonlyArray<Mixed>, Name extends string
   const is = (u: unknown) => types.every((t) => t.is(u))
 
   function* decode(i: unknown) {
-    return concat(...(yield* combine(...types.map((t) => t.decode(i)))))
+    const decoded = yield* combine(...types.map((t) => t.decode(i)))
+
+    if (decoded.every((d) => isRight(d))) {
+      return decoded.reduce((acc, d) => ({ ...acc, ...fromRight(d as Right<any>) }), {})
+    }
+
+    return concat(...decoded)
   }
 
   return {

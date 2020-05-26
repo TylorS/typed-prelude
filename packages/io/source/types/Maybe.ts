@@ -1,5 +1,5 @@
 import { Effect } from '@typed/effects'
-import { Either, Right, unpack } from '@typed/either'
+import { Either, map, Right, unpack } from '@typed/either'
 import { pipeline } from '@typed/lambda'
 import { fromJust, isJust, isNothing, Just, Maybe, Nothing } from '@typed/maybe'
 import { DecodeError } from '../Decoder'
@@ -25,7 +25,9 @@ export const maybe = <A extends Mixed>(type: A): MaybeType<Type.Env<A>, Type.Out
         return Right.of(i)
       }
 
-      return Right.of(yield* type.decode(fromJust(i)))
+      const either = yield* type.decode(fromJust(i))
+
+      return map(Just.of, either)
     }
 
     const either = (yield* type.decode(i)) as Either<readonly DecodeError[], Type.Output<A>>

@@ -8,14 +8,14 @@ import { curry, Predicate } from '@typed/lambda'
  */
 // tslint:disable-next-line:variable-name
 export const any: {
-  <A>(predicate: Predicate<A>, list: A[]): boolean
-  <A>(predicate: Predicate<A>): (list: A[]) => boolean
+  <A>(predicate: Predicate<A>, list: readonly A[]): boolean
+  <A>(predicate: Predicate<A>): (list: readonly A[]) => boolean
 } = curry(__any) as {
-  <A>(predicate: Predicate<A>, list: A[]): boolean
-  <A>(predicate: Predicate<A>): (list: A[]) => boolean
+  <A>(predicate: Predicate<A>, list: readonly A[]): boolean
+  <A>(predicate: Predicate<A>): (list: readonly A[]) => boolean
 }
 
-function __any<A>(predicate: Predicate<A>, list: A[]): boolean {
+function __any<A>(predicate: Predicate<A>, list: readonly A[]): boolean {
   for (const value of list) {
     if (predicate(value)) {
       return true

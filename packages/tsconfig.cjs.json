@@ -46,6 +46,9 @@
       "path": "./http/tsconfig.cjs.json"
     },
     {
+      "path": "./io/tsconfig.cjs.json"
+    },
+    {
       "path": "./iterable/tsconfig.cjs.json"
     },
     {

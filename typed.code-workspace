@@ -61,6 +61,10 @@
       "path": "./packages/http"
     },
     {
+      "name": "Io",
+      "path": "./packages/io"
+    },
+    {
       "name": "Iterable",
       "path": "./packages/iterable"
     },
