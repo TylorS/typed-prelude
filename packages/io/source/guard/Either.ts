@@ -10,7 +10,7 @@ const UnknownEither: Guard<Either<unknown, unknown>> = refinement(
 
 export { UnknownEither as Either }
 
-export const either = <L extends Guard<never>, R extends Guard<never>>(
+export const either = <L extends Guard, R extends Guard>(
   left: L,
   right: R,
 ): Guard<Either<TypeOf<L>, TypeOf<R>>> =>

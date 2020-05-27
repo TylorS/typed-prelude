@@ -12,7 +12,7 @@ const UnknownMap: Decoder<ReadonlyMap<unknown, unknown>> = Decoder.fromGuard(
 
 export { UnknownMap as Map }
 
-export const map = <K extends Decoder<never>, V extends Decoder<never>>(
+export const map = <K extends Decoder, V extends Decoder>(
   key: K,
   value: V,
 ): Decoder<ReadonlyMap<TypeOf<K>, TypeOf<V>>> => {

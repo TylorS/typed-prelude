@@ -5,7 +5,7 @@ import { refinement } from './refinement'
 
 export const Map: Guard<ReadonlyMap<unknown, unknown>> = Guard.is(isMap)
 
-export const map = <K extends Guard<never>, V extends Guard<never>>(
+export const map = <K extends Guard, V extends Guard>(
   key: K,
   value: V,
 ): Guard<ReadonlyMap<TypeOf<K>, TypeOf<V>>> => {

@@ -4,7 +4,7 @@ import { Either, Left, mapLeft } from '@typed/either'
 import { curry } from '@typed/lambda'
 import * as G from '../Guard'
 
-export interface Decoder<A = never> {
+export interface Decoder<A = any> {
   readonly expected: string
   readonly decode: (i: unknown) => DecodeEffect<A>
 }

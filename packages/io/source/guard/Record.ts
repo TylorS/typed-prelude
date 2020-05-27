@@ -4,7 +4,7 @@ import { Guard, TypeOf } from './Guard'
 
 export const Record: Guard<Readonly<Record<PropertyKey, unknown>>> = Guard.is(isRecord)
 
-export const record = <R extends Readonly<Record<PropertyKey, Guard<never>>>>(
+export const record = <R extends Readonly<Record<PropertyKey, Guard>>>(
   props: R,
 ): Guard<{ readonly [K in keyof R]: TypeOf<R[K]> }> => {
   return {

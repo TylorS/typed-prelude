@@ -2,7 +2,7 @@ import { hasOwnProperty, keysOf } from '@typed/objects'
 import { Guard, TypeOf } from './Guard'
 import { Record } from './Record'
 
-export function partial<R extends Readonly<Record<PropertyKey, Guard<never>>>>(
+export function partial<R extends Readonly<Record<PropertyKey, Guard>>>(
   props: R,
 ): Guard<{ readonly [K in keyof R]?: TypeOf<R[K]> }> {
   return {

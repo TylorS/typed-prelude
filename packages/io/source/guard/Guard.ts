@@ -1,6 +1,6 @@
 import { curry, Is } from '@typed/lambda'
 
-export interface Guard<A> {
+export interface Guard<A = any> {
   readonly is: Is<A>
 }
 

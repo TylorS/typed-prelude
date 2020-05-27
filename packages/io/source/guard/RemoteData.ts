@@ -17,7 +17,7 @@ const _RemoteData = refinement(
 
 export { _RemoteData as RemoteData }
 
-export function remoteData<L extends Guard<never>, R extends Guard<never>>(
+export function remoteData<L extends Guard, R extends Guard>(
   left: L,
   right: R,
 ): Guard<RemoteData<TypeOf<L>, TypeOf<R>>> {
