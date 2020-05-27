@@ -31,12 +31,14 @@
     "@typed/either": "^8.3.0",
     "@typed/effects": "^6.6.0",
     "@typed/lambda": "^3.4.0",
+    "@typed/list": "^6.4.0",
     "@typed/logic": "^6.5.0",
     "@typed/objects": "^6.4.0",
     "@typed/maybe": "^10.4.0",
     "@typed/new-type": "^3.3.0",
     "@typed/remote-data": "^4.3.0",
     "@typed/strings": "^7.4.0",
+    "@typed/tuple": "^3.3.0",
     "@typed/uuid": "^9.6.0",
     "@typed/validation": "^3.4.0"
   }
