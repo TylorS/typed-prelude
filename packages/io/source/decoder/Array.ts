@@ -1,9 +1,8 @@
 import { combine } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
-import { pipe } from '@typed/lambda'
-import { second } from '../../../list/node_modules/@typed/tuple/esm'
-import { sort } from '../../../timer/node_modules/@typed/list/esm'
-import { ascend } from '../../../timer/node_modules/@typed/list/esm'
+import { sort } from '@typed/list'
+import { ascend } from '@typed/list'
+import { second } from '@typed/tuple'
 import * as G from '../guard'
 import {
   catchDecodeFailure,
@@ -21,21 +20,27 @@ export const Array: Decoder<ReadonlyArray<unknown>> = Decoder.fromGuard(
 )
 
 export const array = <A extends Decoder>(decoder: A): Decoder<ReadonlyArray<TypeOf<A>>> =>
-  refinement(Array, function* (input): DecodeEffect<ReadonlyArray<TypeOf<A>>> {
-    if (input.length === 0) {
-      return input as ReadonlyArray<TypeOf<A>>
-    }
+  refinement(
+    Array,
+    function* (input): DecodeEffect<ReadonlyArray<TypeOf<A>>> {
+      if (input.length === 0) {
+        return input as ReadonlyArray<TypeOf<A>>
+      }
 
-    const decoded = yield* combine(...input.map(pipe(decoder.decode, catchDecodeFailure)))
+      const decoded = yield* combine(
+        ...input.map((i, index) => catchDecodeFailure(decoder.decode(i), () => index)),
+      )
 
-    if (decoded.every(isRight)) {
-      return decoded.map((d) => fromRight(d as Right<TypeOf<A>>))
-    }
+      if (decoded.every(isRight)) {
+        return decoded.map((d) => fromRight(d as Right<TypeOf<A>>))
+      }
 
-    const errors = decoded.filter(isLeft).map((x, i) => [fromLeft(x), i] as const)
+      const errors = decoded.filter(isLeft).map(fromLeft)
 
-    return yield* decodeFailure(formatArrayErrors(errors, decoder.expected))
-  })
+      return yield* decodeFailure(formatArrayErrors(errors, decoder.expected))
+    },
+    `ReadonlyArray<${decoder.expected}>`,
+  )
 
 function formatArrayErrors(
   errors: ReadonlyArray<readonly [DecodeError, number]>,

@@ -1,5 +1,6 @@
 /**
  * Return the keys of a given object.
  */
-export const keysOf = <A extends PropertyKey>(obj: Partial<Record<A, any>>): A[] =>
-  Object.keys(obj) as A[]
+export const keysOf = <A extends Partial<Readonly<Record<PropertyKey, any>>>>(
+  obj: A,
+): ReadonlyArray<keyof A> => Object.keys(obj) as ReadonlyArray<keyof A>

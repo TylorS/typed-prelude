@@ -1,6 +1,6 @@
 import { toString } from '@typed/common'
 import { catchFailure, Effects, fail, FailEnv, PureEffect } from '@typed/effects'
-import { Either, Left } from '@typed/either'
+import { Either, Left, mapLeft } from '@typed/either'
 import { curry } from '@typed/lambda'
 import * as G from '../Guard'
 
@@ -48,14 +48,23 @@ export namespace Decoder {
 
 export const decodeFailure = (e: DecodeError) => fail(DecodeFailure, e)
 
-export function* catchDecodeFailure<A>(
+export function catchDecodeFailure<A>(effect: DecodeEffect<A>): PureEffect<Either<DecodeError, A>>
+export function catchDecodeFailure<A, B = DecodeError>(
   effect: DecodeEffect<A>,
-): PureEffect<Either<DecodeError, A>> {
+  onError: (error: DecodeError) => B,
+): PureEffect<Either<readonly [DecodeError, B], A>>
+
+export function* catchDecodeFailure<A, B = DecodeError>(
+  effect: DecodeEffect<A>,
+  onError?: (error: DecodeError) => B,
+): PureEffect<Either<DecodeError | readonly [DecodeError, B], A>> {
   function* myEffect() {
     const x = yield* effect
 
     return Either.of<DecodeError, A>(x)
   }
 
-  return yield* catchFailure(myEffect(), DecodeFailure, Left.of)
+  const either = yield* catchFailure(myEffect(), DecodeFailure, Left.of)
+
+  return mapLeft((e) => (onError ? ([e, onError(e)] as const) : e), either)
 }
