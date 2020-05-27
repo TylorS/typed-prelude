@@ -1,6 +1,8 @@
 import { NewType } from '@typed/new-type'
 
-export type Uuid = NewType<string, 'Uuid'>
+declare const UUID: unique symbol
+
+export type Uuid = NewType<string, { readonly Uuid: typeof UUID }>
 
 export type UuidSeed = readonly [
   number,

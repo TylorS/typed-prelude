@@ -8,7 +8,7 @@ export type UnknownArrayType<E> = Type<'UnknownArray', E, ReadonlyArray<unknown>
 export const Array: UnknownArrayType<unknown> = {
   name: 'UnknownArray',
   is: isArray,
-  *decode(i) {
+  decode(i) {
     if (isArray(i)) {
       return Right.of(i)
     }

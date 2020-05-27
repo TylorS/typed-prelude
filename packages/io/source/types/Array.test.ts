@@ -1,7 +1,7 @@
 import { Fail, runEffects } from '@typed/effects'
 import { isLeft, Right } from '@typed/either'
 import { describe, given, it } from '@typed/test'
-import { decode, DecodeFailure } from '../Decoder'
+import { decode } from '../Decoder'
 import { Array, array } from './Array'
 import { Boolean } from './Boolean'
 import { String } from './String'
@@ -13,22 +13,16 @@ export const ArrayTest = describe(`Array`, [
         const x = [1, 2, 3]
         const expected = Right.of(x)
 
-        function* test() {
-          const actual = yield* decode(Array, x)
+        const actual = decode(Array, x)
 
-          equal(x, actual)
-        }
-
-        runEffects(test(), {
-          [DecodeFailure]: Fail,
-        })
+        equal(x, actual)
       }),
     ]),
 
     given(`anything else`, [
       it(`returns a Left`, ({ ok }, done) => {
         function* test(value: unknown) {
-          const actual = yield* Array.decode(value)
+          const actual = Array.decode(value)
 
           ok(isLeft(actual))
         }
