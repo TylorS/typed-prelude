@@ -7,6 +7,8 @@ export interface Type<I = any, O = I> extends G.Guard<I>, D.Decoder<I>, E.Encode
   readonly name: string
 }
 
+export type TypeOf<A> = Type.Of<A>
+
 export namespace Type {
   export type Of<A> = G.TypeOf<A>
   export type Encoding<A> = E.OutputOf<A>
