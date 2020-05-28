@@ -2,6 +2,10 @@ import { Either } from '@typed/either'
 import * as G from '../guard'
 import { Type } from './Type'
 
+const _Either = Type.fromGuard(G.Either, `Either<unknown, unknown>`)
+
+export { _Either as Either }
+
 export const either = <A extends Type, B extends Type>(
   a: A,
   b: B,
