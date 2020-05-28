@@ -1,8 +1,8 @@
-import { toString } from '@typed/common'
 import { fromRight, isRight } from '@typed/either'
 import { fromJust, isNothing, Just, Maybe } from '@typed/maybe'
+import { toString } from '@typed/strings'
 import * as G from '../guard'
-import { catchDecodeFailure, decodeFailure, Decoder, TypeOf } from './Decoder'
+import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 import { refinement } from './refinement'
 
 const _Maybe = Decoder.fromGuard(G.Maybe, 'Maybe<unknown>')
@@ -24,9 +24,7 @@ export const maybe = <A extends Decoder>(a: A): Decoder<Maybe<TypeOf<A>>> =>
         return Just.of(fromRight(t))
       }
 
-      return yield* decodeFailure({
-        message: `Expected Maybe<${a.expected}>, but got Just<${toString(u)}>`,
-      })
+      return yield* decodeFailure(DecodeError.create(`Maybe<${a.expected}>`, toString(u)))
     },
     `Maybe<${a.expected}>`,
   )

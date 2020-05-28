@@ -1,7 +1,7 @@
-import { toString } from '@typed/common'
 import { combine } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
 import { Just } from '@typed/maybe'
+import { toString } from '@typed/strings'
 import * as G from '../guard'
 import {
   catchDecodeFailure,

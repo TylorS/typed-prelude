@@ -1,12 +1,11 @@
+import { isObject } from '@typed/logic'
 import { fromJust, isJust, isNothing, Maybe } from '@typed/maybe'
-import { Record } from '../types'
 import { Guard } from './Guard'
 import { refinement } from './refinement'
 
-const _Maybe = refinement(
-  Record,
-  (m): m is Maybe<unknown> => isNothing(m as any) || isJust(m as any),
-)
+const _Maybe = {
+  is: (u: unknown): u is Maybe<unknown> => (isObject(u) && isNothing(u as any)) || isJust(u as any),
+}
 
 export { _Maybe as Maybe }
 

@@ -1,9 +1,9 @@
-import { toString } from '@typed/common'
 import { catchFailure, Effects, fail, FailEnv, PureEffect } from '@typed/effects'
 import { Either, Left, mapLeft } from '@typed/either'
 import { curry } from '@typed/lambda'
 import { isNotUndefined } from '@typed/logic'
 import { Just, Maybe, Nothing } from '@typed/maybe'
+import { toString } from '@typed/strings'
 import * as G from '../Guard'
 
 export interface Decoder<A = any> {
@@ -25,18 +25,18 @@ export interface DecodeFailure extends FailEnv<typeof DecodeFailure, DecodeError
 export interface DecodeError {
   readonly key: Maybe<string>
   readonly expected: string
-  readonly value: string
+  readonly actual: string
   readonly errors: ReadonlyArray<DecodeError>
 }
 
 export namespace DecodeError {
   export const create = (
     expected: string,
-    value: string,
+    actual: string,
     options: { readonly key?: string; readonly errors?: ReadonlyArray<DecodeError> } = {},
   ): DecodeError => ({
     expected,
-    value,
+    actual,
     key: isNotUndefined(options.key) ? Just.of(options.key) : Nothing,
     errors: options.errors ?? [],
   })

@@ -1,5 +1,5 @@
-import { toString } from '@typed/common'
 import { ComparableValues } from '@typed/lambda'
+import { toString } from '@typed/strings'
 import * as G from '../guard'
 import { Decoder } from './Decoder'
 

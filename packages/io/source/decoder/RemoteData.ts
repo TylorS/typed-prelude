@@ -1,8 +1,8 @@
-import { toString } from '@typed/common'
 import { fromRight, isRight } from '@typed/either'
 import { isFailure, isSuccess, RemoteData } from '@typed/remote-data'
+import { toString } from '@typed/strings'
 import * as G from '../guard'
-import { catchDecodeFailure, decodeFailure, Decoder, TypeOf } from './Decoder'
+import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 import { refinement } from './refinement'
 
 const _RemoteData = Decoder.fromGuard(G.RemoteData, `RemoteData<unknown unknown>`)
@@ -25,9 +25,7 @@ export const remoteData = <L extends Decoder, R extends Decoder>(
           return RemoteData.failure(fromRight(either))
         }
 
-        return yield* decodeFailure({
-          message: `Expected ${expected}, but got Failure<${toString(rd.value)}>`,
-        })
+        return yield* decodeFailure(DecodeError.create(expected, `Failure<${toString(rd.value)}>`))
       }
 
       if (isSuccess(rd)) {
@@ -37,9 +35,7 @@ export const remoteData = <L extends Decoder, R extends Decoder>(
           return RemoteData.of(fromRight(either))
         }
 
-        return yield* decodeFailure({
-          message: `Expected ${expected}, but got Success<${toString(rd.value)}>`,
-        })
+        return yield* decodeFailure(DecodeError.create(expected, `Success<${toString(rd.value)}>`))
       }
 
       return rd

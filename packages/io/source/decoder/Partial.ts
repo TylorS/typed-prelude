@@ -1,8 +1,8 @@
 import { combine } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
-import { ascend, sort } from '@typed/list'
+import { Just } from '@typed/maybe'
 import { hasOwnProperty, keysOf, mapToList } from '@typed/objects'
-import { second } from '@typed/tuple'
+import { toString } from '@typed/strings'
 import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 import { Record } from './Record'
 import { refinement } from './refinement'
@@ -30,7 +30,7 @@ export const partial = <A extends Readonly<Record<PropertyKey, Decoder>>>(
 
       const errors = decoded.filter(isLeft).map(fromLeft)
 
-      return yield* decodeFailure(decodePartialError(errors, expected))
+      return yield* decodeFailure(decodePartialError(errors, expected, toString(r)))
     },
     expected,
   )
@@ -48,14 +48,9 @@ function getDefaultPartialExpected<A extends Readonly<Record<PropertyKey, Decode
 function decodePartialError(
   errors: ReadonlyArray<readonly [DecodeError, keyof any]>,
   expected: string,
+  value: string,
 ): DecodeError {
-  return {
-    message: `Expected ${expected}, but received errors \n\n{\n  ${formatRecordErrors(errors)}\n}`,
-  }
-}
-
-function formatRecordErrors(errors: ReadonlyArray<readonly [DecodeError, keyof any]>): string {
-  const sorted = sort(ascend(second), errors)
-
-  return sorted.map(([{ message }, key]) => `"${key.toString()}": ${message}`).join(`,\n  `)
+  return DecodeError.create(expected, value, {
+    errors: errors.map(([e, key]) => ({ ...e, key: Just.of(toString(key)) })),
+  })
 }

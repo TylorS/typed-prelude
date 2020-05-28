@@ -1,8 +1,8 @@
 import { combine } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
-import { ascend, sort } from '@typed/list'
+import { Just } from '@typed/maybe'
 import { keysOf, mapToList } from '@typed/objects'
-import { second } from '@typed/tuple'
+import { toString } from '@typed/strings'
 import { DecodeError, TypeOf } from '../Decoder'
 import * as G from '../guard'
 import { catchDecodeFailure, decodeFailure, Decoder } from './Decoder'
@@ -31,7 +31,7 @@ export const record = <A extends Readonly<Record<PropertyKey, Decoder>>>(
 
       const errors = decoded.filter(isLeft).map(fromLeft)
 
-      return yield* decodeFailure(decodeRecordError(errors, expected))
+      return yield* decodeFailure(decodeRecordError(errors, expected, toString(r)))
     },
     expected,
   )
@@ -48,14 +48,9 @@ function getDefaultRecordExpected<A extends Readonly<Record<PropertyKey, Decoder
 function decodeRecordError(
   errors: ReadonlyArray<readonly [DecodeError, keyof any]>,
   expected: string,
+  value: string,
 ): DecodeError {
-  return {
-    message: `Expected ${expected}, but received errors \n\n{\n  ${formatRecordErrors(errors)}\n}`,
-  }
-}
-
-function formatRecordErrors(errors: ReadonlyArray<readonly [DecodeError, keyof any]>): string {
-  const sorted = sort(ascend(second), errors)
-
-  return sorted.map(([{ message }, key]) => `"${key.toString()}": ${message}`).join(`,\n  `)
+  return DecodeError.create(`ReadonlyArray<${expected}>`, value, {
+    errors: errors.map(([e, key]): DecodeError => ({ ...e, key: Just.of(key.toString()) })),
+  })
 }

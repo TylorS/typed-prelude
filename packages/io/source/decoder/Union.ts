@@ -1,6 +1,6 @@
-import { toString } from '@typed/common'
 import { fromRight, isRight } from '@typed/either'
-import { catchDecodeFailure, decodeFailure, Decoder, TypeOf } from './Decoder'
+import { toString } from '@typed/strings'
+import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 
 export const union = <A extends ReadonlyArray<Decoder>>(
   decoders: A,
@@ -16,6 +16,6 @@ export const union = <A extends ReadonlyArray<Decoder>>(
       }
     }
 
-    return yield* decodeFailure({ message: `Expected ${expected}, but got ${toString(i)}` })
+    return yield* decodeFailure(DecodeError.create(expected, toString(i)))
   },
 })

@@ -1,6 +1,13 @@
-import { toString } from '@typed/common'
 import { fromRight, isRight } from '@typed/either'
-import { catchDecodeFailure, DecodeEffect, decodeFailure, Decoder, TypeOf } from './Decoder'
+import { toString } from '@typed/strings'
+import {
+  catchDecodeFailure,
+  DecodeEffect,
+  DecodeError,
+  decodeFailure,
+  Decoder,
+  TypeOf,
+} from './Decoder'
 
 export const refinement = <A extends Decoder<any>, B extends TypeOf<A>>(
   decoder: A,
@@ -15,6 +22,6 @@ export const refinement = <A extends Decoder<any>, B extends TypeOf<A>>(
       return yield* refined(fromRight(eitherErrorOrA))
     }
 
-    return yield* decodeFailure({ message: `Expected ${expected}, but got ${toString(i)}` })
+    return yield* decodeFailure(DecodeError.create(expected, toString(i)))
   },
 })

@@ -1,7 +1,6 @@
-import { PureEffect } from '@typed/effects'
 import { id } from '@typed/lambda'
 import { toString } from '@typed/strings'
-import { decodeFailure } from '../decoder'
+import { DecodeEffect, DecodeError, decodeFailure } from '../decoder'
 import { Type } from './Type'
 
 export type NeverType = Type<never>
@@ -10,9 +9,7 @@ export const Never: NeverType = {
   expected: 'never',
   is: (_): _ is never => false,
   decode(i) {
-    return decodeFailure({
-      message: `Didn't expect a single thing but got ${toString(i)}`,
-    }) as PureEffect<never>
+    return decodeFailure(DecodeError.create(`not a damn thing`, toString(i))) as DecodeEffect<never>
   },
   encode: id,
 }
