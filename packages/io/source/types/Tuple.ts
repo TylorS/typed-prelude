@@ -1,45 +1,20 @@
-import { combine, Effects } from '@typed/effects'
-import { fromRight, isRight, Left, Right } from '@typed/either'
-import { isArray } from '@typed/logic'
-import { toString } from '@typed/strings'
-import { concat, Validation } from '@typed/validation'
-import { DecodeError } from '../Decoder'
-import { Mixed, Type } from '../Type'
-import { CombinedTypeEnv } from './helpers'
+import * as D from '../decoder'
+import * as E from '../encoder'
+import * as G from '../guard'
+import { MapEncodings, MapTypes } from './helpers'
+import { Type } from './Type'
 
-export type TupleType<E, A extends ReadonlyArray<any>> = Type<'Tuple', E, A>
-
-export function tuple<A extends ReadonlyArray<Mixed>>(
+export const tuple = <A extends ReadonlyArray<Type>>(
   types: A,
-): TupleType<CombinedTypeEnv<A>, { readonly [K in keyof A]: Type.Output<A[K]> }> {
-  type O = { readonly [K in keyof A]: Type.Output<A[K]> }
-
-  const is = (u: unknown): u is O =>
-    isArray(u) && u.length === types.length && u.every((v, i) => types[i].is(v))
-
-  function* decode(u: unknown): Effects<CombinedTypeEnv<A>, Validation<DecodeError, O>> {
-    if (is(u)) {
-      const eithers = yield* combine(...u.map((v, i) => types[i].decode(v)))
-      const successful = eithers.every((e) => isRight(e))
-
-      return successful
-        ? Right.of(eithers.map((e) => fromRight(e as Right<any>)))
-        : concat(...eithers)
-    }
-
-    return Left.of([
-      { message: `Expected [${types.map((t) => t.name).join(', ')}] but received: ${toString(u)}` },
-    ])
-  }
-
-  function* encode(o: O) {
-    return yield* combine(...o.map((v, i) => types[i].encode(v)))
-  }
+): Type<MapTypes<A>, MapEncodings<A>> => {
+  const g = G.tuple(types)
+  const d = D.tuple(types)
+  const e = E.tuple(types)
 
   return {
-    name: 'Tuple',
-    is,
-    decode: decode as TupleType<CombinedTypeEnv<A>, O>['decode'],
-    encode: encode as TupleType<CombinedTypeEnv<A>, O>['encode'],
-  }
+    ...g,
+    ...d,
+    ...e,
+    name: d.expected,
+  } as Type<MapTypes<A>, MapEncodings<A>>
 }

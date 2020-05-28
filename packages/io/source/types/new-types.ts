@@ -1,37 +1,19 @@
-import {
-  isCharacter,
-  isEmptyString,
-  isInteger,
-  isNegative,
-  isNegativeInteger,
-  isNonEmptyString,
-  isNonNegative,
-  isNonNegativeInteger,
-  isNonPositive,
-  isNonPositiveInteger,
-  isNonZero,
-  isNonZeroInteger,
-  isPositive,
-  isPositiveInteger,
-  isZero,
-} from '@typed/new-type'
-import { Number } from './Number'
-import { refinement } from './refinement'
-import { String } from './String'
+import * as G from '../guard'
+import { Type } from './Type'
 
-export const EmptyString = refinement(String, isEmptyString, 'EmptyString')
-export const NonEmptyString = refinement(String, isNonEmptyString, 'EmptyString')
-export const Character = refinement(String, isCharacter, 'Character')
+export const EmptyString = Type.fromGuard(G.EmptyString, 'EmptyString')
+export const NonEmptyString = Type.fromGuard(G.NonEmptyString, 'NonEmptyString')
+export const Character = Type.fromGuard(G.Character, 'Character')
 
-export const Integer = refinement(Number, isInteger, 'Integer')
-export const Negative = refinement(Number, isNegative, 'Negative')
-export const NegativeInteger = refinement(Number, isNegativeInteger, 'NegativeInteger')
-export const NonNegative = refinement(Number, isNonNegative, 'NonNegative')
-export const NonNegativeInteger = refinement(Number, isNonNegativeInteger, 'NonNegativeInteger')
-export const NonPositive = refinement(Number, isNonPositive, 'NonPositive')
-export const NonPositiveInteger = refinement(Number, isNonPositiveInteger, 'NonPositiveInteger')
-export const NonZero = refinement(Number, isNonZero, 'NonZero')
-export const NonZeroInteger = refinement(Number, isNonZeroInteger, 'NonZeroInteger')
-export const Positive = refinement(Number, isPositive, 'Positive')
-export const PositiveInteger = refinement(Number, isPositiveInteger, 'PositiveInteger')
-export const Zero = refinement(Number, isZero, 'Zero')
+export const Integer = Type.fromGuard(G.Integer, 'Integer')
+export const Negative = Type.fromGuard(G.Negative, 'Negative')
+export const NegativeInteger = Type.fromGuard(G.NegativeInteger, 'NegativeInteger')
+export const NonNegative = Type.fromGuard(G.NonNegative, 'NonNegative')
+export const NonNegativeInteger = Type.fromGuard(G.NonNegativeInteger, 'NonNegativeInteger')
+export const NonPositive = Type.fromGuard(G.NonPositive, 'NonPositive')
+export const NonPositiveInteger = Type.fromGuard(G.NonPositiveInteger, 'NonPositiveInteger')
+export const NonZero = Type.fromGuard(G.NonZero, 'NonZero')
+export const NonZeroInteger = Type.fromGuard(G.NonZeroInteger, 'NonZeroInteger')
+export const Positive = Type.fromGuard(G.Positive, 'Positive')
+export const PositiveInteger = Type.fromGuard(G.PositiveInteger, 'PositiveInteger')
+export const Zero = Type.fromGuard(G.Zero, 'Zero')

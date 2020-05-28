@@ -1,45 +1,15 @@
-import { Effect, TypeOf } from '@typed/effects'
-import { Left, Right } from '@typed/either'
-import { isMap } from '@typed/logic'
-import { Any, Type } from '../Type'
-import { array } from './Array'
+import * as G from '../guard'
+import { Mixed, Type } from './Type'
 
-export type UnknownMapType<E> = Type<'UnknownMap', E, ReadonlyMap<unknown, unknown>>
-export const Map: UnknownMapType<unknown> = {
-  name: 'UnknownMap',
-  is: isMap,
-  *decode(i) {
-    if (isMap(i)) {
-      return Right.of(i)
-    }
+export const Map = Type.fromGuard(G.Map, `ReadonlyMap<unknown, unknown>`)
 
-    return Left.of([{ message: `Expected 'ReadonlyMap<unknown, unknown>'` }])
-  },
-  encode: Effect.of,
-}
+export type MapType<K, V> = Type<ReadonlyMap<K, V>>
 
-export type MapType<E, Name extends string, K, V> = Type<Name, E, ReadonlyMap<K, V>>
-
-export function map<K extends Any, V extends Any, Name extends string = 'Map'>(
+export function map<K extends Mixed, V extends Mixed>(
   key: K,
   value: V,
-  name: Name = 'Map' as Name,
-): MapType<unknown, Name, TypeOf<K>, TypeOf<V>> {
-  const keysType = array(key)
-  const valuesType = array(value)
-  const isMap = (u: unknown): u is ReadonlyMap<TypeOf<K>, TypeOf<V>> =>
-    Map.is(u) && keysType.is(Array.from(u.keys())) && valuesType.is(Array.from(u.values()))
-
-  return {
-    name,
-    is: isMap,
-    *decode(i) {
-      if (isMap(i)) {
-        return Right.of(i)
-      }
-
-      return Left.of([{ message: `Expected 'ReadonlyMap<${key.name}, ${value.name}>'` }])
-    },
-    encode: Effect.of,
-  }
+  name: string = `ReadonlyMap<${key.name}, ${value.name}>`,
+  expected: string = `ReadonlyMap<${key.expected}, ${value.expected}>`,
+): MapType<Type.Of<K>, Type.Of<V>> {
+  return Type.fromGuard(G.map(key, value), name, expected)
 }

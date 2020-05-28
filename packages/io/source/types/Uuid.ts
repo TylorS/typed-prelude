@@ -1,7 +1,5 @@
-import { isUuid, Uuid as UUID } from '@typed/uuid'
-import { Type } from '../Type'
-import { refinement } from './refinement'
-import { String } from './String'
+import { Uuid as UUID } from '@typed/uuid'
+import * as G from '../guard'
+import { Type } from './Type'
 
-export type UuidType<E> = Type<'Uuid', E, UUID>
-export const Uuid: UuidType<unknown> = refinement(String, isUuid, 'Uuid')
+export const Uuid: Type<UUID> = Type.fromGuard(G.Uuid, `Uuid`)

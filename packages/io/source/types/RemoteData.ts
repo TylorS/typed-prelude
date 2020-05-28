@@ -1,60 +1,26 @@
-import { Effect } from '@typed/effects'
-import { map, Right } from '@typed/either'
-import {
-  isDoneLoading,
-  isFailure,
-  isLoading,
-  NoData,
-  RemoteData,
-  RemoteDataStatus,
-  Success,
-} from '@typed/remote-data'
-import { Mixed, Type } from '../Type'
-import { either } from './Either'
-import { Record } from './Record'
+import { RemoteData } from '@typed/remote-data'
+import * as D from '../decoder'
+import * as E from '../encoder'
+import * as G from '../guard'
+import { Type } from './Type'
 
-export type RemoteDataType<E, A, B> = Type<'RemoteData', E, RemoteData<A, B>>
+const _RemoteData = Type.fromGuard(G.RemoteData, `RemoteData<unknown, unknown>`)
 
-export const remoteData = <A extends Mixed, B extends Mixed>(
-  left: A,
-  right: B,
-): RemoteDataType<unknown, Type.Output<A>, Type.Output<B>> => {
-  const eitherType = either(left, right)
+export { _RemoteData as RemoteData }
 
-  const is = (u: unknown): u is RemoteData<Type.Output<A>, Type.Output<B>> => {
-    if (!Record.is(u)) {
-      return false
-    }
-
-    const r = u as RemoteData<unknown, unknown>
-
-    return r === NoData || isLoading(r) || isDoneLoading(r)
-  }
-
-  function* decode(u: unknown) {
-    if (is(u)) {
-      if (u.status === RemoteDataStatus.NoData || isLoading(u)) {
-        return Right.of(u)
-      }
-
-      if (isFailure(u)) {
-        const l = yield* left.decode(u.value)
-
-        return map(() => u, l)
-      }
-
-      const r = yield* right.decode((u as Success<Type.Output<B>>).value)
-
-      return map(() => u, r)
-    }
-
-    return map(RemoteData.fromEither, yield* eitherType.decode(u))
-  }
+export const remoteData = <L extends Type, R extends Type>(
+  l: L,
+  r: R,
+  name: string = `RemoteData<${l.name}, ${r.name}>`,
+): Type<RemoteData<Type.Of<L>, Type.Of<R>>> => {
+  const g = G.remoteData(l, r)
+  const d = D.remoteData(l, r)
+  const e = E.Encoder.id()
 
   return {
-    name: 'RemoteData',
-    is,
-    decode: decode as RemoteDataType<unknown, Type.Output<A>, Type.Output<B>>['decode'],
-    encode: Effect.of,
-  }
+    ...g,
+    ...d,
+    ...e,
+    name,
+  } as Type<RemoteData<Type.Of<L>, Type.Of<R>>>
 }

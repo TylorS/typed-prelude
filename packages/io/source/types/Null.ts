@@ -1,18 +1,6 @@
-import { Effect } from '@typed/effects'
-import { Left, Right } from '@typed/either'
-import { isNull } from '@typed/logic'
-import { Type } from '../Type'
+import * as G from '../guard'
+import { Type } from './Type'
+import { union } from './Union'
 
-export type NullType<E> = Type<'Null', E, null>
-export const Null: NullType<unknown> = {
-  name: 'Null',
-  is: isNull,
-  *decode(i) {
-    if (isNull(i)) {
-      return Right.of(i)
-    }
-
-    return Left.of([{ message: `Expected 'null'` }])
-  },
-  encode: Effect.of,
-}
+export const Null: Type<null> = Type.fromGuard(G.Null, `Null`, `null`)
+export const nullable = <A extends Type>(type: A): Type<null | Type.Of<A>> => union([Null, type])
