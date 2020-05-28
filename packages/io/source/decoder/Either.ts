@@ -3,7 +3,10 @@ import * as G from '../guard'
 import { Decoder } from './Decoder'
 import { refinement } from './refinement'
 
-const UnknownEither = Decoder.fromGuard(G.Either, 'Either<unknown, unknown>')
+const UnknownEither: Decoder<Either<unknown, unknown>> = Decoder.fromGuard(
+  G.Either,
+  'Either<unknown, unknown>',
+)
 
 export const either = <A, B>(left: Decoder<A>, right: Decoder<B>): Decoder<Either<A, B>> =>
   refinement(
