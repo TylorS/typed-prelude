@@ -4,7 +4,7 @@ import { curry } from '@typed/lambda'
 import { isNotUndefined } from '@typed/logic'
 import { Just, Maybe, Nothing } from '@typed/maybe'
 import { toString } from '@typed/strings'
-import * as G from '../Guard'
+import * as G from '../guard/Guard'
 
 export interface Decoder<A = any> {
   readonly expected: string

@@ -1,11 +1,14 @@
 import { fromRight, isRight } from '@typed/either'
 import { isFailure, isSuccess, RemoteData } from '@typed/remote-data'
 import { toString } from '@typed/strings'
-import * as G from '../guard'
+import * as G from '../guard/RemoteData'
 import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 import { refinement } from './refinement'
 
-const _RemoteData = Decoder.fromGuard(G.RemoteData, `RemoteData<unknown unknown>`)
+const _RemoteData: Decoder<RemoteData<unknown, unknown>> = Decoder.fromGuard(
+  G.RemoteData,
+  `RemoteData<unknown unknown>`,
+)
 
 export { _RemoteData as RemoteData }
 
