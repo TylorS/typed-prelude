@@ -3,9 +3,8 @@ import { fromLeft, fromRight, isLeft, isRight, Left, Right } from '@typed/either
 import { Just } from '@typed/maybe'
 import { hasOwnProperty, keysOf, mapToList } from '@typed/objects'
 import { toString } from '@typed/strings'
-import { DecodeError, TypeOf } from '../Decoder'
 import * as G from '../guard'
-import { catchDecodeFailure, decodeFailure, Decoder } from './Decoder'
+import { catchDecodeFailure, DecodeError, decodeFailure, Decoder, TypeOf } from './Decoder'
 import { refinement } from './refinement'
 
 export const Record = Decoder.fromGuard(G.Record, 'Record<PropertyKey, unknown>')
