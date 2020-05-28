@@ -1,14 +1,14 @@
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
-import { MapTypes, Props } from './helpers'
+import { Props } from './helpers'
 import { Type } from './Type'
 
 export const partial = <A extends Props>(
   props: A,
   name: string,
   expected: string = name,
-): Type<Partial<MapTypes<A>>> => {
+): Type<Partial<{ readonly [K in keyof A]: Type.Of<A[K]> }>> => {
   const g = G.partial(props)
   const d = D.partial(props, expected)
   const e = E.partial(props)

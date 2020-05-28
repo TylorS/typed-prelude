@@ -1,7 +1,7 @@
 import * as G from '../guard'
 import { Mixed, Type } from './Type'
 
-export const Map = Type.fromGuard(G.Map, `ReadonlyMap<unknown, unknown>`)
+export const Map: MapType<unknown, unknown> = Type.fromGuard(G.Map, `ReadonlyMap<unknown, unknown>`)
 
 export type MapType<K, V> = Type<ReadonlyMap<K, V>>
 

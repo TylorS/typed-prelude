@@ -1,4 +1,4 @@
-import { combine } from '@typed/effects'
+import { combine, map } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
 import { Just } from '@typed/maybe'
 import { hasOwnProperty, keysOf, mapToList } from '@typed/objects'
@@ -19,13 +19,18 @@ export const partial = <A extends Readonly<Record<PropertyKey, Decoder>>>(
       const decoded = yield* combine(
         ...keys
           .filter((k) => hasOwnProperty(k, r))
-          .map((k) => catchDecodeFailure(decoders[k].decode(r), () => k)),
+          .map((k) =>
+            catchDecodeFailure(
+              map((a) => [a, k] as const, decoders[k].decode(r[k])),
+              () => k,
+            ),
+          ),
       )
 
       if (decoded.every(isRight)) {
         return decoded
           .map((d) => fromRight(d as Right<any>))
-          .reduce((acc, x) => ({ ...acc, ...x }), {})
+          .reduce((acc, [v, k]) => ({ ...acc, [k]: v }), {})
       }
 
       const errors = decoded.filter(isLeft).map(fromLeft)

@@ -4,7 +4,10 @@ import * as E from '../encoder'
 import * as G from '../guard'
 import { Type } from './Type'
 
-const _RemoteData = Type.fromGuard(G.RemoteData, `RemoteData<unknown, unknown>`)
+const _RemoteData: Type<RemoteData<unknown, unknown>> = Type.fromGuard(
+  G.RemoteData,
+  `RemoteData<unknown, unknown>`,
+)
 
 export { _RemoteData as RemoteData }
 

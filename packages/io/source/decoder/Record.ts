@@ -1,7 +1,7 @@
-import { combine } from '@typed/effects'
-import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
+import { combine, Effect, map } from '@typed/effects'
+import { fromLeft, fromRight, isLeft, isRight, Left, Right } from '@typed/either'
 import { Just } from '@typed/maybe'
-import { keysOf, mapToList } from '@typed/objects'
+import { hasOwnProperty, keysOf, mapToList } from '@typed/objects'
 import { toString } from '@typed/strings'
 import { DecodeError, TypeOf } from '../Decoder'
 import * as G from '../guard'
@@ -20,13 +20,22 @@ export const record = <A extends Readonly<Record<PropertyKey, Decoder>>>(
     Record,
     function* (r) {
       const decoded = yield* combine(
-        ...keys.map((k) => catchDecodeFailure(decoders[k].decode(r), () => k)),
+        ...keys.map((k) =>
+          hasOwnProperty(k, r)
+            ? catchDecodeFailure(
+                map((a) => [a, k] as const, decoders[k].decode(r[k])),
+                () => k,
+              )
+            : Effect.of(
+                Left.of([DecodeError.create(decoders[k].expected, 'undefined'), k] as const),
+              ),
+        ),
       )
 
       if (decoded.every(isRight)) {
         return decoded
-          .map((d) => fromRight(d as Right<any>))
-          .reduce((acc, x) => ({ ...acc, ...x }), {})
+          .map((either) => fromRight(either as Right<[any, keyof A]>))
+          .reduce((acc, [x, k]) => ({ ...acc, [k]: x }), {})
       }
 
       const errors = decoded.filter(isLeft).map(fromLeft)
@@ -50,7 +59,7 @@ function decodeRecordError(
   expected: string,
   value: string,
 ): DecodeError {
-  return DecodeError.create(`ReadonlyArray<${expected}>`, value, {
+  return DecodeError.create(expected, value, {
     errors: errors.map(([e, key]): DecodeError => ({ ...e, key: Just.of(key.toString()) })),
   })
 }

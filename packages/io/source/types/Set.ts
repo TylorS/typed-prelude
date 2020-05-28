@@ -3,7 +3,10 @@ import * as E from '../encoder'
 import * as G from '../guard'
 import { Type } from './Type'
 
-export const Set = Type.fromGuard(G.Set, `ReadonlySet<unknown, unknown>`)
+export const Set: Type<ReadonlySet<unknown>> = Type.fromGuard(
+  G.Set,
+  `ReadonlySet<unknown, unknown>`,
+)
 
 export const set = <A extends Type>(
   a: A,
