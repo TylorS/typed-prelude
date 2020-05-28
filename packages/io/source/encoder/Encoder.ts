@@ -9,7 +9,9 @@ export type InputOf<E> = E extends Encoder<infer R, any> ? R : never
 export type OutputOf<E> = E extends Encoder<any, infer R> ? R : never
 
 export namespace Encoder {
-  export const id = <A>(): Encoder<A, A> => ({ encode: identity })
+  const _id = { encode: identity }
+
+  export const id = <A extends any>(): Encoder<A, A> => _id
 }
 
 export function partial<P extends Readonly<Record<PropertyKey, Encoder<any, any>>>>(

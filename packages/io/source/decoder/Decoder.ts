@@ -2,6 +2,8 @@ import { toString } from '@typed/common'
 import { catchFailure, Effects, fail, FailEnv, PureEffect } from '@typed/effects'
 import { Either, Left, mapLeft } from '@typed/either'
 import { curry } from '@typed/lambda'
+import { isNotUndefined } from '@typed/logic'
+import { Just, Maybe, Nothing } from '@typed/maybe'
 import * as G from '../Guard'
 
 export interface Decoder<A = any> {
@@ -16,11 +18,29 @@ export type DecodeEffect<A> = Effects<DecodeFailure, A>
 export const DecodeFailure = Symbol.for('DecodeFailure')
 export interface DecodeFailure extends FailEnv<typeof DecodeFailure, DecodeError> {}
 
+/**
+ * An decoding error.
+ * Note: Is and MUST continue to be JSON-safe
+ */
 export interface DecodeError {
-  readonly message: string
+  readonly key: Maybe<string>
+  readonly expected: string
+  readonly value: string
+  readonly errors: ReadonlyArray<DecodeError>
 }
 
-// period.spaced.path.segments.for.object.properties
+export namespace DecodeError {
+  export const create = (
+    expected: string,
+    value: string,
+    options: { readonly key?: string; readonly errors?: ReadonlyArray<DecodeError> } = {},
+  ): DecodeError => ({
+    expected,
+    value,
+    key: isNotUndefined(options.key) ? Just.of(options.key) : Nothing,
+    errors: options.errors ?? [],
+  })
+}
 
 export const decode: {
   <A>(decoder: Decoder<A>, input: unknown): Effects<DecodeFailure, A>
@@ -39,9 +59,7 @@ export namespace Decoder {
         return i
       }
 
-      return yield* fail(DecodeFailure, {
-        message: `Expected ${expected}, but received ${toString(i)}`,
-      })
+      return yield* fail(DecodeFailure, DecodeError.create(expected, toString(i)))
     },
   })
 }
@@ -49,7 +67,7 @@ export namespace Decoder {
 export const decodeFailure = (e: DecodeError) => fail(DecodeFailure, e)
 
 export function catchDecodeFailure<A>(effect: DecodeEffect<A>): PureEffect<Either<DecodeError, A>>
-export function catchDecodeFailure<A, B = DecodeError>(
+export function catchDecodeFailure<A, B>(
   effect: DecodeEffect<A>,
   onError: (error: DecodeError) => B,
 ): PureEffect<Either<readonly [DecodeError, B], A>>

@@ -1,8 +1,7 @@
+import { toString } from '@typed/common'
 import { combine } from '@typed/effects'
 import { fromLeft, fromRight, isLeft, isRight, Right } from '@typed/either'
-import { sort } from '@typed/list'
-import { ascend } from '@typed/list'
-import { second } from '@typed/tuple'
+import { Just } from '@typed/maybe'
 import * as G from '../guard'
 import {
   catchDecodeFailure,
@@ -37,24 +36,17 @@ export const array = <A extends Decoder>(decoder: A): Decoder<ReadonlyArray<Type
 
       const errors = decoded.filter(isLeft).map(fromLeft)
 
-      return yield* decodeFailure(formatArrayErrors(errors, decoder.expected))
+      return yield* decodeFailure(formatArrayErrors(errors, toString(input), decoder.expected))
     },
     `ReadonlyArray<${decoder.expected}>`,
   )
 
 function formatArrayErrors(
   errors: ReadonlyArray<readonly [DecodeError, number]>,
+  value: string,
   expected: string,
 ): DecodeError {
-  return {
-    message: `Expected ReadonlyArray<${expected}>, but received errors at index${
-      errors.length === 1 ? '' : 'es'
-    } ${formatErrors(errors)}`,
-  }
-}
-
-function formatErrors(errors: ReadonlyArray<readonly [DecodeError, number]>): string {
-  const sorted = sort(ascend(second), errors)
-
-  return sorted.map(([error, index]) => `${index} :: ${error.message}`).join(`, `)
+  return DecodeError.create(`ReadonlyArray<${expected}>`, value, {
+    errors: errors.map(([e, key]): DecodeError => ({ ...e, key: Just.of(key.toString()) })),
+  })
 }
