@@ -52,7 +52,9 @@ export const useClassName: GenerateClassName<
       styleSheet.textContent = getCss(rules)
     }
 
-    return classNames(...generateClassNames.flat())
+    return classNames(
+      ...generateClassNames.reduce((acc, x) => [...acc, ...x] as ClassName[], [] as ClassName[]),
+    )
   }, properties)
 }
 
@@ -104,7 +106,10 @@ function* generatePropertyClassNames(
     )
   }, nestedKeys)
 
-  return [...propertyClassNames, ...nestedClassNames.flat()]
+  return [
+    ...propertyClassNames,
+    ...nestedClassNames.reduce((acc, x) => [...acc, ...x] as ClassName[], [] as ClassName[]),
+  ]
 }
 
 type GetClassNameOptions = {

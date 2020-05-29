@@ -42,6 +42,7 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-no-circular-imports": "0.7.0",
     "tslint-plugin-prettier": "2.3.0",
+    "typedoc": "^0.17.7",
     "typescript": "3.9.3",
     "yargs": "15.3.1"
   },

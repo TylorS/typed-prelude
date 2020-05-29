@@ -25,10 +25,10 @@
       "path": "../disposable/tsconfig.json"
     },
     {
-      "path": "../either/tsconfig.json"
+      "path": "../effects/tsconfig.json"
     },
     {
-      "path": "../effects/tsconfig.json"
+      "path": "../either/tsconfig.json"
     },
     {
       "path": "../lambda/tsconfig.json"
@@ -40,13 +40,13 @@
       "path": "../logic/tsconfig.json"
     },
     {
-      "path": "../objects/tsconfig.json"
-    },
-    {
       "path": "../maybe/tsconfig.json"
     },
     {
       "path": "../new-type/tsconfig.json"
+    },
+    {
+      "path": "../objects/tsconfig.json"
     },
     {
       "path": "../remote-data/tsconfig.json"
