@@ -8,16 +8,13 @@ export function* patchOnRaf<E, A, B, C>(
 ): HookEffects<E & A & RafEnv & PatchEnv<C, B, E>, never> {
   const env = yield* getHookEnv()
 
-  let updating = false
   let previous = yield* patch(initial, yield* runWithHooks(fn(), env))
 
   while (true) {
     yield* raf()
 
-    if (!updating && env.updated) {
-      updating = true
+    if (env.updated) {
       previous = yield* patch(previous, yield* runWithHooks(fn(), env))
-      updating = false
     }
   }
 }

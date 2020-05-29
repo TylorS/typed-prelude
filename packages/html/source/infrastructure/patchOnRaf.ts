@@ -11,16 +11,13 @@ export function* patchOnRaf<E, A extends VNode>(
   const initial = yield* elementToVNode(rootElement)
   const env = yield* getEnvironmentByKey(rootElement)
 
-  let updating = false
   let previous = yield* patch(initial, yield* runWithHooks(fn(), env))
 
   while (true) {
     yield* raf()
 
-    if (!updating && env.updated) {
-      updating = true
+    if (env.updated) {
       previous = yield* patch(previous, yield* runWithHooks(fn(), env))
-      updating = false
     }
   }
 }
