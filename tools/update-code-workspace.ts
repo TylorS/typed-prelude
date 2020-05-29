@@ -16,6 +16,9 @@ export function updateCodeWorkspace() {
         path: `./packages/${pkg}`,
       }
     }),
+    { name: 'Documentation', path: './documentation' },
+    { name: 'Examples', path: './examples' },
+    { name: 'Tools', path: './tools' },
     { name: 'Typed Prelude', path: './' },
   ]
 

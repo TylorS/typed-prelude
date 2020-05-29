@@ -8,6 +8,15 @@
           "source": "./documentation/introduction.md"
         }
       ]
+    },
+    {
+      "title": "Community",
+      "pages": [
+        {
+          "title": "Code of Conduct",
+          "source": "./CODE_OF_CONDUCT.md"
+        }
+      ]
     }
   ],
   "output": "pages"
