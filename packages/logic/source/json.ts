@@ -10,6 +10,9 @@ export type JsonSerializable =
 
 export interface JsonSerializableRecord extends Record<string, JsonSerializable> {}
 
+export const jsonReplace = (serializable: JsonSerializable) => replaceJson('', serializable)
+export const jsonRevive = (json: Json) => reviveJson('', json)
+
 export function fromJson(jsonString: string): JsonSerializable {
   return JSON.parse(jsonString, reviveJson)
 }

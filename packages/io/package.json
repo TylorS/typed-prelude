@@ -30,6 +30,7 @@
     "@typed/disposable": "^3.4.0",
     "@typed/effects": "^6.7.0",
     "@typed/either": "^8.3.0",
+    "@typed/http": "^8.7.1",
     "@typed/lambda": "^3.4.0",
     "@typed/list": "^6.4.1",
     "@typed/logic": "^6.5.1",
