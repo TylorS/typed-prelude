@@ -83,6 +83,12 @@ export const isNotString: IsNot<string> = complement(isString)
 export const isObject: Is<object> = (u): u is object => typeof u === 'object'
 export const isNotObject: IsNot<object> = complement(isObject)
 
+export const isRecord: Is<Readonly<Record<PropertyKey, unknown>>> = (
+  u,
+): u is Readonly<Record<PropertyKey, unknown>> =>
+  u && isObject(u) && isNotArrayLike(u) && isNotMap(u) && isNotSet(u)
+export const isNotRecord: IsNot<Readonly<Record<PropertyKey, unknown>>> = complement(isRecord)
+
 export const isPromiseLike: Is<PromiseLike<unknown>> = (x: unknown): x is PromiseLike<unknown> =>
   x && isObject(x) && isFunction((x as PromiseLike<unknown>).then)
 export const isNotPromiseLie: IsNot<PromiseLike<unknown>> = complement(isPromiseLike)

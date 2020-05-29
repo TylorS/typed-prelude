@@ -4,4 +4,4 @@ const regex = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
 
 export type Jwt = NewType<string, 'Jwt'>
 
-export const isJwt = isNewType<Jwt>((s) => regex.test(s))
+export const isJwt = isNewType((s: string): s is Jwt => regex.test(s))

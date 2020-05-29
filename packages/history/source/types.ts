@@ -10,6 +10,6 @@ export type HistoryEnv<A = null> = {
 }
 
 export type Path = NewType<string, 'Path'>
-export const isPath = isNewType<Path>((str: string) => str.startsWith('/'))
+export const isPath = isNewType((str: string): str is Path => str.startsWith('/'))
 
 export const pathJoin = joinPath as (...args: ArgsOf<typeof joinPath>) => Path
