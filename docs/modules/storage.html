@@ -111,7 +111,7 @@
 					<div class="tsd-signature tsd-kind-icon">set<wbr>Item<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/storage.storageenv.html" class="tsd-signature-type">StorageEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/storage.storageenv.html" class="tsd-signature-type">StorageEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = curry((key: string, value: string) &#x3D;&gt;Effect.fromEnv(withEnv&lt;StorageEnv, string&gt;(({ storage }) &#x3D;&gt; (storage.setItem(key, value), value)),),)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/setItem.ts#L12">packages/storage/source/setItem.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/setItem.ts#L12">packages/storage/source/setItem.ts:12</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -196,7 +196,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/clear.ts#L8">packages/storage/source/clear.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/clear.ts#L8">packages/storage/source/clear.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -218,7 +218,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/getItem.ts#L11">packages/storage/source/getItem.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/getItem.ts#L11">packages/storage/source/getItem.ts:11</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -252,7 +252,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/proxyStorage.ts#L1">packages/storage/source/proxyStorage.ts:1</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/proxyStorage.ts#L1">packages/storage/source/proxyStorage.ts:1</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -275,7 +275,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/removeItem.ts#L10">packages/storage/source/removeItem.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/removeItem.ts#L10">packages/storage/source/removeItem.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -309,7 +309,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/scopeStorage.ts#L3">packages/storage/source/scopeStorage.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/scopeStorage.ts#L3">packages/storage/source/scopeStorage.ts:3</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -335,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/c99810ee/packages/storage/source/serverStorage.ts#L8">packages/storage/source/serverStorage.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc0ce0da/packages/storage/source/serverStorage.ts#L8">packages/storage/source/serverStorage.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
