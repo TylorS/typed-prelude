@@ -1,0 +1,11 @@
+{
+  "name": "Typed",
+  "mode": "modules",
+  "out": "docs",
+  "ignoreCompilerErrors": "true",
+  "includeVersion": "true",
+  "exclude": "**/*+(test|browser-test).ts",
+  "external-modulemap": ".*packages/([^/]+)/source/.*",
+  "readme": "readme.md",
+  "stripInternal": "true"
+}
