@@ -10,7 +10,7 @@
     "clean:cjs": "lerna exec rimraf cjs && tsc --build packages/tsconfig.cjs.json --clean",
     "clean:esm": "lerna exec rimraf esm && tsc --build packages/tsconfig.json --clean",
     "clean": " npm run clean:cjs && npm run clean:esm && lerna exec rimraf node_modules",
-    "docs": "typedoc --options typedoc.json --excludeNotExported packages/*/source",
+    "docs": "typedoc --options typedoc.json --excludeNotExported  --excludeExternals  packages/*/source",
     "new:package": "ts-node tools/new-package",
     "update:package": "ts-node tools/update-package-json",
     "update:tsconfig": "ts-node tools/update-tsconfig-json",
