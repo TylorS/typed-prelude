@@ -1,0 +1,1725 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>effects | Typed - v3.4.1</title>
+	<meta name="description" content="Documentation for Typed - v3.4.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Typed - v3.4.1</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="effects.html">effects</a>
+				</li>
+			</ul>
+			<h1>Package effects</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#typedeffects" id="typedeffects" style="color: inherit; text-decoration: none;">
+						<h1>@typed/effects</h1>
+					</a>
+					<p>Generator-based effect management and reverse dependency injection.</p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Namespaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.effect.html" class="tsd-kind-icon">Effect</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/effects.fiberstate.html" class="tsd-kind-icon">Fiber<wbr>State</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Classes</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter"><a href="../classes/effects.failure.html" class="tsd-kind-icon">Failure</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-module"><a href="../classes/effects.killerror.html" class="tsd-kind-icon">Kill<wbr>Error</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/effects.computation.html" class="tsd-kind-icon">Computation</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/effects.effects-1.html" class="tsd-kind-icon">Effects</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/effects.fiber.html" class="tsd-kind-icon">Fiber</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#capabilities" class="tsd-kind-icon">Capabilities</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#combinedcapabilities" class="tsd-kind-icon">Combined<wbr>Capabilities</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#combinedvalues" class="tsd-kind-icon">Combined<wbr>Values</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#errorof" class="tsd-kind-icon">Error<wbr>Of</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#fail" class="tsd-kind-icon">Fail</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#failenv" class="tsd-kind-icon">Fail<wbr>Env</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#failuretypes" class="tsd-kind-icon">Failure<wbr>Types</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#failuresof" class="tsd-kind-icon">Failures<wbr>Of</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="effects.html#fiberfailure" class="tsd-kind-icon">Fiber<wbr>Failure</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#fiberinfo" class="tsd-kind-icon">Fiber<wbr>Info</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="effects.html#fork" class="tsd-kind-icon">Fork</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#forkall" class="tsd-kind-icon">Fork<wbr>All</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#iteratorresultof" class="tsd-kind-icon">Iterator<wbr>Result<wbr>Of</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="effects.html#join" class="tsd-kind-icon">Join</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#joinall" class="tsd-kind-icon">Join<wbr>All</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="effects.html#kill" class="tsd-kind-icon">Kill</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#pureeffect" class="tsd-kind-icon">Pure<wbr>Effect</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#return" class="tsd-kind-icon">Return</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#runwith" class="tsd-kind-icon">Run<wbr>With</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="effects.html#timerenv" class="tsd-kind-icon">Timer<wbr>Env</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#typeof" class="tsd-kind-icon">Type<wbr>Of</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#yield" class="tsd-kind-icon">Yield</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="effects.html#fiberfailure-1" class="tsd-kind-icon">Fiber<wbr>Failure</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#fail-1" class="tsd-kind-icon">Fail</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#catchfailure" class="tsd-kind-icon">catch<wbr>Failure</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#combine" class="tsd-kind-icon">combine</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#createfiber" class="tsd-kind-icon">create<wbr>Fiber</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="effects.html#delay" class="tsd-kind-icon">delay</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#fail-2" class="tsd-kind-icon">fail</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#fork-2" class="tsd-kind-icon">fork</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#forkall-1" class="tsd-kind-icon">fork<wbr>All</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#get" class="tsd-kind-icon">get</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#join-2" class="tsd-kind-icon">join</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#joinall-1" class="tsd-kind-icon">join<wbr>All</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#kill-2" class="tsd-kind-icon">kill</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#killall" class="tsd-kind-icon">kill<wbr>All</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#map" class="tsd-kind-icon">map</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#orfail" class="tsd-kind-icon">or<wbr>Fail</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#race" class="tsd-kind-icon">race</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#runeffect" class="tsd-kind-icon">run<wbr>Effect</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#runeffects" class="tsd-kind-icon">run<wbr>Effects</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#runwith-1" class="tsd-kind-icon">run<wbr>With</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#sequence" class="tsd-kind-icon">sequence</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="effects.html#starteffect" class="tsd-kind-icon">start<wbr>Effect</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="effects.html#fork-3" class="tsd-kind-icon">Fork</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="effects.html#join-3" class="tsd-kind-icon">Join</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="effects.html#kill-3" class="tsd-kind-icon">Kill</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="capabilities" class="tsd-anchor"></a>
+					<h3>Capabilities</h3>
+					<div class="tsd-signature tsd-kind-icon">Capabilities&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L23">packages/effects/source/Effect.ts:23</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="combinedcapabilities" class="tsd-anchor"></a>
+					<h3>Combined<wbr>Capabilities</h3>
+					<div class="tsd-signature tsd-kind-icon">Combined<wbr>Capabilities&lt;A&gt;<span class="tsd-signature-symbol">:</span> <a href="common.html#unnest" class="tsd-signature-type">UnNest</a><span class="tsd-signature-symbol">&lt;</span><a href="common.html#flatten" class="tsd-signature-type">Flatten</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ToConsList</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L45">packages/effects/source/Effect.ts:45</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="combinedvalues" class="tsd-anchor"></a>
+					<h3>Combined<wbr>Values</h3>
+					<div class="tsd-signature tsd-kind-icon">Combined<wbr>Values&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L49">packages/effects/source/Effect.ts:49</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="errorof" class="tsd-anchor"></a>
+					<h3>Error<wbr>Of</h3>
+					<div class="tsd-signature tsd-kind-icon">Error<wbr>Of&lt;E, K&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">FailuresOf</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Fail</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L16">packages/effects/source/failures/Failure.ts:16</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li>
+							<h4>K<span class="tsd-signature-symbol">: </span><a href="effects.html#failuretypes" class="tsd-signature-type">FailureTypes</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="fail" class="tsd-anchor"></a>
+					<h3>Fail</h3>
+					<div class="tsd-signature tsd-kind-icon">Fail&lt;Err&gt;<span class="tsd-signature-symbol">:</span> &lt;A&gt;<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.failure.html" class="tsd-signature-type">Failure</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L7">packages/effects/source/failures/Failure.ts:7</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Err</h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-has-type-parameter">
+									<li class="tsd-signature tsd-kind-icon">&lt;A&gt;<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.failure.html" class="tsd-signature-type">Failure</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-type-parameters-title">Type parameters</h4>
+										<ul class="tsd-type-parameters">
+											<li>
+												<h4>A</h4>
+											</li>
+										</ul>
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>error: <span class="tsd-signature-type">Err</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.failure.html" class="tsd-signature-type">Failure</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="failenv" class="tsd-anchor"></a>
+					<h3>Fail<wbr>Env</h3>
+					<div class="tsd-signature tsd-kind-icon">Fail<wbr>Env&lt;K, Err&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L5">packages/effects/source/failures/Failure.ts:5</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>K<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PropertyKey</span></h4>
+						</li>
+						<li>
+							<h4>Err</h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="failuretypes" class="tsd-anchor"></a>
+					<h3>Failure<wbr>Types</h3>
+					<div class="tsd-signature tsd-kind-icon">Failure<wbr>Types&lt;E&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><a href="effects.html#failuresof" class="tsd-signature-type">FailuresOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L11">packages/effects/source/failures/Failure.ts:11</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="failuresof" class="tsd-anchor"></a>
+					<h3>Failures<wbr>Of</h3>
+					<div class="tsd-signature tsd-kind-icon">Failures<wbr>Of&lt;E&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Pick</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">FailureKeys</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L12">packages/effects/source/failures/Failure.ts:12</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="fiberfailure" class="tsd-anchor"></a>
+					<h3>Fiber<wbr>Failure</h3>
+					<div class="tsd-signature tsd-kind-icon">Fiber<wbr>Failure<span class="tsd-signature-symbol">:</span> <a href="effects.html#failenv" class="tsd-signature-type">FailEnv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">typeof </span><a href="effects.html#fiberfailure-1" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">, </span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/Fiber.ts#L9">packages/effects/source/fibers/Fiber.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="fiberinfo" class="tsd-anchor"></a>
+					<h3>Fiber<wbr>Info</h3>
+					<div class="tsd-signature tsd-kind-icon">Fiber<wbr>Info&lt;B&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>promise<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>state<span class="tsd-signature-symbol">: </span><a href="../enums/effects.fiberstate.html#running" class="tsd-signature-type">Running</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">; </span>state<span class="tsd-signature-symbol">: </span><a href="../enums/effects.fiberstate.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>state<span class="tsd-signature-symbol">: </span><a href="../enums/effects.fiberstate.html#returned" class="tsd-signature-type">Returned</a><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/Fiber.ts#L17">packages/effects/source/fibers/Fiber.ts:17</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>B</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="fork" class="tsd-anchor"></a>
+					<h3>Fork</h3>
+					<div class="tsd-signature tsd-kind-icon">Fork<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>fork<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/fork.ts#L8">packages/effects/source/fibers/fork.ts:8</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> fork<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-has-type-parameter">
+											<li class="tsd-signature tsd-kind-icon">&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-type-parameters-title">Type parameters</h4>
+												<ul class="tsd-type-parameters">
+													<li>
+														<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a></h4>
+													</li>
+												</ul>
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>effect: <span class="tsd-signature-type">A</span></h5>
+													</li>
+													<li>
+														<h5>c: <a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="forkall" class="tsd-anchor"></a>
+					<h3>Fork<wbr>All</h3>
+					<div class="tsd-signature tsd-kind-icon">Fork<wbr>All&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/forkAll.ts#L12">packages/effects/source/fibers/forkAll.ts:12</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="iteratorresultof" class="tsd-anchor"></a>
+					<h3>Iterator<wbr>Result<wbr>Of</h3>
+					<div class="tsd-signature tsd-kind-icon">Iterator<wbr>Result<wbr>Of&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IteratorResult</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#yield" class="tsd-signature-type">Yield</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L43">packages/effects/source/Effect.ts:43</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="join" class="tsd-anchor"></a>
+					<h3>Join</h3>
+					<div class="tsd-signature tsd-kind-icon">Join<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>join<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/join.ts#L8">packages/effects/source/fibers/join.ts:8</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> join<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-has-type-parameter">
+											<li class="tsd-signature tsd-kind-icon">&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-type-parameters-title">Type parameters</h4>
+												<ul class="tsd-type-parameters">
+													<li>
+														<h4>A</h4>
+													</li>
+												</ul>
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>fiber: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="joinall" class="tsd-anchor"></a>
+					<h3>Join<wbr>All</h3>
+					<div class="tsd-signature tsd-kind-icon">Join<wbr>All&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/joinAll.ts#L14">packages/effects/source/fibers/joinAll.ts:14</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="kill" class="tsd-anchor"></a>
+					<h3>Kill</h3>
+					<div class="tsd-signature tsd-kind-icon">Kill<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>kill<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/kill.ts#L5">packages/effects/source/fibers/kill.ts:5</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> kill<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								<ul class="tsd-parameters">
+									<li class="tsd-parameter-signature">
+										<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-has-type-parameter">
+											<li class="tsd-signature tsd-kind-icon">&lt;A&gt;<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+										</ul>
+										<ul class="tsd-descriptions">
+											<li class="tsd-description">
+												<h4 class="tsd-type-parameters-title">Type parameters</h4>
+												<ul class="tsd-type-parameters">
+													<li>
+														<h4>A</h4>
+													</li>
+												</ul>
+												<h4 class="tsd-parameters-title">Parameters</h4>
+												<ul class="tsd-parameters">
+													<li>
+														<h5>f: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+													</li>
+												</ul>
+												<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="pureeffect" class="tsd-anchor"></a>
+					<h3>Pure<wbr>Effect</h3>
+					<div class="tsd-signature tsd-kind-icon">Pure<wbr>Effect&lt;A&gt;<span class="tsd-signature-symbol">:</span> <a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Pure</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L18">packages/effects/source/Effect.ts:18</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="return" class="tsd-anchor"></a>
+					<h3>Return</h3>
+					<div class="tsd-signature tsd-kind-icon">Return&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L21">packages/effects/source/Effect.ts:21</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="runwith" class="tsd-anchor"></a>
+					<h3>Run<wbr>With</h3>
+					<div class="tsd-signature tsd-kind-icon">Run<wbr>With&lt;A, C&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">C</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Capabilities</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">PureEffect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Return</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Capabilities</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Return</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/runWith.ts#L5">packages/effects/source/run/runWith.ts:5</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li>
+							<h4>C</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="timerenv" class="tsd-anchor"></a>
+					<h3>Timer<wbr>Env</h3>
+					<div class="tsd-signature tsd-kind-icon">Timer<wbr>Env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>timer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Timer</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/factories/delay.ts#L5">packages/effects/source/factories/delay.ts:5</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> timer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Timer</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="typeof" class="tsd-anchor"></a>
+					<h3>Type<wbr>Of</h3>
+					<div class="tsd-signature tsd-kind-icon">Type<wbr>Of&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Capabilities</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Return</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Capabilities</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Return</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ReturnType</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">unknown</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L9">packages/effects/source/Effect.ts:9</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="yield" class="tsd-anchor"></a>
+					<h3>Yield</h3>
+					<div class="tsd-signature tsd-kind-icon">Yield&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Effect</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/Effect.ts#L20">packages/effects/source/Effect.ts:20</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="fiberfailure-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Fiber<wbr>Failure</h3>
+					<div class="tsd-signature tsd-kind-icon">Fiber<wbr>Failure<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unique symbol</span><span class="tsd-signature-symbol"> = Symbol.for(&#x27;FiberFailure&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/Fiber.ts#L8">packages/effects/source/fibers/Fiber.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="fail-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Fail</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">Fail&lt;A&gt;<span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"value"</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>resume<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>cb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"lazy"</span><span class="tsd-signature-symbol"> }</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/Failure.ts#L9">packages/effects/source/failures/Failure.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>error: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"value"</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>resume<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>cb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"lazy"</span><span class="tsd-signature-symbol"> }</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="catchfailure" class="tsd-anchor"></a>
+					<h3>catch<wbr>Failure</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">catch<wbr>Failure&lt;A, K&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, errorType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">K</span>, onError<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><a href="effects.html#errorof" class="tsd-signature-type">ErrorOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/fail.ts#L14">packages/effects/source/failures/fail.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+								<li>
+									<h4>K<span class="tsd-signature-symbol">: </span><a href="effects.html#failuretypes" class="tsd-signature-type">FailureTypes</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>errorType: <span class="tsd-signature-type">K</span></h5>
+								</li>
+								<li>
+									<h5>onError: <span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><a href="effects.html#errorof" class="tsd-signature-type">ErrorOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-signature">
+											<ul class="tsd-signatures tsd-kind-type-literal">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>error<span class="tsd-signature-symbol">: </span><a href="effects.html#errorof" class="tsd-signature-type">ErrorOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>error: <a href="effects.html#errorof" class="tsd-signature-type">ErrorOf</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">&gt;</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="combine" class="tsd-anchor"></a>
+					<h3>combine</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">combine&lt;E&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>effects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#combinedvalues" class="tsd-signature-type">CombinedValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/combinators/combine.ts#L6">packages/effects/source/combinators/combine.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>E<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>effects: <span class="tsd-signature-type">E</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#combinedvalues" class="tsd-signature-type">CombinedValues</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createfiber" class="tsd-anchor"></a>
+					<h3>create<wbr>Fiber</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Fiber&lt;A&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/createFiber.ts#L7">packages/effects/source/fibers/createFiber.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="delay" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> delay</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">delay<span class="tsd-signature-symbol">(</span>ms<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/factories/delay.ts#L7">packages/effects/source/factories/delay.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>ms: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="fail-2" class="tsd-anchor"></a>
+					<h3>fail</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">fail&lt;A, Err&gt;<span class="tsd-signature-symbol">(</span>errorType<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#failenv" class="tsd-signature-type">FailEnv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/fail.ts#L7">packages/effects/source/failures/fail.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">any</span></h4>
+								</li>
+								<li>
+									<h4>Err</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>errorType: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>error: <span class="tsd-signature-type">Err</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#failenv" class="tsd-signature-type">FailEnv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Err</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="fork-2" class="tsd-anchor"></a>
+					<h3>fork</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">fork&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fork" class="tsd-signature-type">Fork</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/fork.ts#L35">packages/effects/source/fibers/fork.ts:35</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fork" class="tsd-signature-type">Fork</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="forkall-1" class="tsd-anchor"></a>
+					<h3>fork<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">fork<wbr>All&lt;A&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>effects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fork" class="tsd-signature-type">Fork</a><span class="tsd-signature-symbol">, </span><a href="effects.html#forkall" class="tsd-signature-type">ForkAll</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/forkAll.ts#L6">packages/effects/source/fibers/forkAll.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>effects: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fork" class="tsd-signature-type">Fork</a><span class="tsd-signature-symbol">, </span><a href="effects.html#forkall" class="tsd-signature-type">ForkAll</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="get" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> get</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get&lt;A&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/factories/get.ts#L5">packages/effects/source/factories/get.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="join-2" class="tsd-anchor"></a>
+					<h3>join</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">join&lt;A&gt;<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#join" class="tsd-signature-type">Join</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/join.ts#L37">packages/effects/source/fibers/join.ts:37</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#join" class="tsd-signature-type">Join</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="joinall-1" class="tsd-anchor"></a>
+					<h3>join<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">join<wbr>All&lt;A&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>fibers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#join" class="tsd-signature-type">Join</a><span class="tsd-signature-symbol">, </span><a href="effects.html#joinall" class="tsd-signature-type">JoinAll</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/joinAll.ts#L6">packages/effects/source/fibers/joinAll.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>fibers: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#join" class="tsd-signature-type">Join</a><span class="tsd-signature-symbol">, </span><a href="effects.html#joinall" class="tsd-signature-type">JoinAll</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="kill-2" class="tsd-anchor"></a>
+					<h3>kill</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">kill&lt;A&gt;<span class="tsd-signature-symbol">(</span>f<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#kill" class="tsd-signature-type">Kill</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/kill.ts#L25">packages/effects/source/fibers/kill.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>f: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#kill" class="tsd-signature-type">Kill</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="killall" class="tsd-anchor"></a>
+					<h3>kill<wbr>All</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">kill<wbr>All&lt;A&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>fibers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#kill" class="tsd-signature-type">Kill</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/killAll.ts#L6">packages/effects/source/fibers/killAll.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>fibers: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#kill" class="tsd-signature-type">Kill</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="map" class="tsd-anchor"></a>
+					<h3>map</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">map&lt;E, A, B&gt;<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="lambda.html#arity1" class="tsd-signature-type">Arity1</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span>, effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/combinators/map.ts#L4">packages/effects/source/combinators/map.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>E</h4>
+								</li>
+								<li>
+									<h4>A</h4>
+								</li>
+								<li>
+									<h4>B</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <a href="lambda.html#arity1" class="tsd-signature-type">Arity1</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>effect: <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="orfail" class="tsd-anchor"></a>
+					<h3>or<wbr>Fail</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">or<wbr>Fail&lt;F, A, B, C&gt;<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">F</span>, effect<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#failenv" class="tsd-signature-type">FailEnv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">F</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/failures/orFail.ts#L7">packages/effects/source/failures/orFail.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>F<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PropertyKey</span></h4>
+								</li>
+								<li>
+									<h4>A</h4>
+								</li>
+								<li>
+									<h4>B</h4>
+								</li>
+								<li>
+									<h4>C</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">F</span></h5>
+								</li>
+								<li>
+									<h5>effect: <a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#failenv" class="tsd-signature-type">FailEnv</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">F</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="race" class="tsd-anchor"></a>
+					<h3>race</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">race&lt;E&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>effects<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/combinators/race.ts#L6">packages/effects/source/combinators/race.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>E<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>effects: <span class="tsd-signature-type">E</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#combinedcapabilities" class="tsd-signature-type">CombinedCapabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="runeffect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> run<wbr>Effect</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">run<wbr>Effect&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/runEffect.ts#L5">packages/effects/source/run/runEffect.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="runeffects" class="tsd-anchor"></a>
+					<h3>run<wbr>Effects</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">run<wbr>Effects&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Disposable</span></li>
+						<li class="tsd-signature tsd-kind-icon">run<wbr>Effects&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, resources<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span>, onReturn<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Disposable</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/runEffects.ts#L6">packages/effects/source/run/runEffects.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="effects.html#pureeffect" class="tsd-signature-type">PureEffect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Disposable</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/runEffects.ts#L8">packages/effects/source/run/runEffects.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>resources: <a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> onReturn: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Disposable</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="runwith-1" class="tsd-anchor"></a>
+					<h3>run<wbr>With</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">run<wbr>With&lt;A, C&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, capabilities<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.html#runwith" class="tsd-signature-type">RunWith</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/runWith.ts#L9">packages/effects/source/run/runWith.ts:9</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+								<li>
+									<h4>C</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>capabilities: <span class="tsd-signature-type">C</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="effects.html#runwith" class="tsd-signature-type">RunWith</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">C</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="sequence" class="tsd-anchor"></a>
+					<h3>sequence</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">sequence&lt;E, A, B&gt;<span class="tsd-signature-symbol">(</span>fn<span class="tsd-signature-symbol">: </span><a href="lambda.html#arity1" class="tsd-signature-type">Arity1</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span>, as<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/factories/sequence.ts#L4">packages/effects/source/factories/sequence.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>E</h4>
+								</li>
+								<li>
+									<h4>A</h4>
+								</li>
+								<li>
+									<h4>B</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>fn: <a href="lambda.html#arity1" class="tsd-signature-type">Arity1</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+								<li>
+									<h5>as: <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="starteffect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> start<wbr>Effect</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">start<wbr>Effect&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/run/startEffect.ts#L4">packages/effects/source/run/startEffect.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="effects.effect.html" class="tsd-signature-type">Effect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>effect: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="fork-3" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Fork</h3>
+					<div class="tsd-signature tsd-kind-icon">Fork<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/fork.ts#L15">packages/effects/source/fibers/fork.ts:15</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+						<a name="fork-3.fork-4" class="tsd-anchor"></a>
+						<h3>fork</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+							<li class="tsd-signature tsd-kind-icon">fork&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"value"</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>resume<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>cb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"lazy"</span><span class="tsd-signature-symbol"> }</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/fork.ts#L16">packages/effects/source/fibers/fork.ts:16</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-type-parameters-title">Type parameters</h4>
+								<ul class="tsd-type-parameters">
+									<li>
+										<h4>A<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.effects-1.html" class="tsd-signature-type">Effects</a></h4>
+									</li>
+								</ul>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>effect: <span class="tsd-signature-type">A</span></h5>
+									</li>
+									<li>
+										<h5>c: <a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure" class="tsd-signature-type">FiberFailure</a></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"value"</span><span class="tsd-signature-symbol">; </span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>resume<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>cb<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"lazy"</span><span class="tsd-signature-symbol"> }</span></h4>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="join-3" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Join</h3>
+					<div class="tsd-signature tsd-kind-icon">Join<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/join.ts#L10">packages/effects/source/fibers/join.ts:10</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+						<a name="join-3.join-4" class="tsd-anchor"></a>
+						<h3>join</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+							<li class="tsd-signature tsd-kind-icon">join&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/join.ts#L11">packages/effects/source/fibers/join.ts:11</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-type-parameters-title">Type parameters</h4>
+								<ul class="tsd-type-parameters">
+									<li>
+										<h4>A</h4>
+									</li>
+								</ul>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>fiber: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="kill-3" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Kill</h3>
+					<div class="tsd-signature tsd-kind-icon">Kill<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/kill.ts#L9">packages/effects/source/fibers/kill.ts:9</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+						<a name="kill-3.kill-4" class="tsd-anchor"></a>
+						<h3>kill</h3>
+						<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-object-literal tsd-has-type-parameter">
+							<li class="tsd-signature tsd-kind-icon">kill&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+						</ul>
+						<ul class="tsd-descriptions">
+							<li class="tsd-description">
+								<aside class="tsd-sources">
+									<ul>
+										<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/effects/source/fibers/kill.ts#L10">packages/effects/source/fibers/kill.ts:10</a></li>
+									</ul>
+								</aside>
+								<h4 class="tsd-type-parameters-title">Type parameters</h4>
+								<ul class="tsd-type-parameters">
+									<li>
+										<h4>A</h4>
+									</li>
+								</ul>
+								<h4 class="tsd-parameters-title">Parameters</h4>
+								<ul class="tsd-parameters">
+									<li>
+										<h5>fiber: <a href="../interfaces/effects.fiber.html" class="tsd-signature-type">Fiber</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									</li>
+								</ul>
+								<h4 class="tsd-returns-title">Returns <a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							</li>
+						</ul>
+					</section>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Typed</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../pages/Typed/introduction.html">Introduction</a>
+					</li>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="effects.html">effects</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.effect.html">Effect</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-module">
+						<a href="effects.html" class="tsd-kind-icon">effects</a>
+						<ul>
+							<li class=" tsd-kind-namespace tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.effect.html" class="tsd-kind-icon">Effect</a>
+							</li>
+							<li class=" tsd-kind-enum tsd-parent-kind-module">
+								<a href="../enums/effects.fiberstate.html" class="tsd-kind-icon">Fiber<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../classes/effects.failure.html" class="tsd-kind-icon">Failure</a>
+							</li>
+							<li class=" tsd-kind-class tsd-parent-kind-module">
+								<a href="../classes/effects.killerror.html" class="tsd-kind-icon">Kill<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/effects.computation.html" class="tsd-kind-icon">Computation</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/effects.effects-1.html" class="tsd-kind-icon">Effects</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/effects.fiber.html" class="tsd-kind-icon">Fiber</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#capabilities" class="tsd-kind-icon">Capabilities</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#combinedcapabilities" class="tsd-kind-icon">Combined<wbr>Capabilities</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#combinedvalues" class="tsd-kind-icon">Combined<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#errorof" class="tsd-kind-icon">Error<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#fail" class="tsd-kind-icon">Fail</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#failenv" class="tsd-kind-icon">Fail<wbr>Env</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#failuretypes" class="tsd-kind-icon">Failure<wbr>Types</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#failuresof" class="tsd-kind-icon">Failures<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="effects.html#fiberfailure" class="tsd-kind-icon">Fiber<wbr>Failure</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#fiberinfo" class="tsd-kind-icon">Fiber<wbr>Info</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="effects.html#fork" class="tsd-kind-icon">Fork</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#forkall" class="tsd-kind-icon">Fork<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#iteratorresultof" class="tsd-kind-icon">Iterator<wbr>Result<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="effects.html#join" class="tsd-kind-icon">Join</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#joinall" class="tsd-kind-icon">Join<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="effects.html#kill" class="tsd-kind-icon">Kill</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#pureeffect" class="tsd-kind-icon">Pure<wbr>Effect</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#return" class="tsd-kind-icon">Return</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#runwith" class="tsd-kind-icon">Run<wbr>With</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="effects.html#timerenv" class="tsd-kind-icon">Timer<wbr>Env</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#typeof" class="tsd-kind-icon">Type<wbr>Of</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#yield" class="tsd-kind-icon">Yield</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="effects.html#fiberfailure-1" class="tsd-kind-icon">Fiber<wbr>Failure</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#fail-1" class="tsd-kind-icon">Fail</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#catchfailure" class="tsd-kind-icon">catch<wbr>Failure</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#combine" class="tsd-kind-icon">combine</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#createfiber" class="tsd-kind-icon">create<wbr>Fiber</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="effects.html#delay" class="tsd-kind-icon">delay</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#fail-2" class="tsd-kind-icon">fail</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#fork-2" class="tsd-kind-icon">fork</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#forkall-1" class="tsd-kind-icon">fork<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#get" class="tsd-kind-icon">get</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#join-2" class="tsd-kind-icon">join</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#joinall-1" class="tsd-kind-icon">join<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#kill-2" class="tsd-kind-icon">kill</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#killall" class="tsd-kind-icon">kill<wbr>All</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#map" class="tsd-kind-icon">map</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#orfail" class="tsd-kind-icon">or<wbr>Fail</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#race" class="tsd-kind-icon">race</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#runeffect" class="tsd-kind-icon">run<wbr>Effect</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#runeffects" class="tsd-kind-icon">run<wbr>Effects</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#runwith-1" class="tsd-kind-icon">run<wbr>With</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#sequence" class="tsd-kind-icon">sequence</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="effects.html#starteffect" class="tsd-kind-icon">start<wbr>Effect</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="effects.html#fork-3" class="tsd-kind-icon">Fork</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="effects.html#join-3" class="tsd-kind-icon">Join</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="effects.html#kill-3" class="tsd-kind-icon">Kill</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>

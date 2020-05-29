@@ -1,0 +1,1417 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>json-rpc | Typed - v3.4.1</title>
+	<meta name="description" content="Documentation for Typed - v3.4.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Typed - v3.4.1</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="json_rpc.html">json-rpc</a>
+				</li>
+			</ul>
+			<h1>Package json-rpc</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#typedjson-rpc" id="typedjson-rpc" style="color: inherit; text-decoration: none;">
+						<h1>@typed/json-rpc</h1>
+					</a>
+					<p>A relative work-in-progress compared to the rest of the libraries in Typed, but is an attempt to
+					abstract the building of JSON-RPC servers and client connects using @typed/effects, @typed/hooks, and the ecosystem.</p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Enumerations</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/json_rpc.jsonrpcerrorcode.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error<wbr>Code</a></li>
+								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/json_rpc.messagedirection.html" class="tsd-kind-icon">Message<wbr>Direction</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/json_rpc.connection.html" class="tsd-kind-icon">Connection</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/json_rpc.sendmessage.html" class="tsd-kind-icon">Send<wbr>Message</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/json_rpc.server.html" class="tsd-kind-icon">Server</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/json_rpc.waitforresponse.html" class="tsd-kind-icon">Wait<wbr>For<wbr>Response</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#batch" class="tsd-kind-icon">Batch</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#batchrequest" class="tsd-kind-icon">Batch<wbr>Request</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#batchresponse" class="tsd-kind-icon">Batch<wbr>Response</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#connectionenv" class="tsd-kind-icon">Connection<wbr>Env</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#connectionevent" class="tsd-kind-icon">Connection<wbr>Event</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#handlermap" class="tsd-kind-icon">Handler<wbr>Map</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#id" class="tsd-kind-icon">Id</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#isnever" class="tsd-kind-icon">Is<wbr>Never</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcerror" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcfailedresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Failed<wbr>Response</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcnotification" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Notification</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcrequest" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Request</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#jsonrpcsuccessfulresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Successful<wbr>Response</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#message" class="tsd-kind-icon">Message</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#notificationhandler" class="tsd-kind-icon">Notification<wbr>Handler</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#requesthandler" class="tsd-kind-icon">Request<wbr>Handler</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#sendrequest" class="tsd-kind-icon">Send<wbr>Request</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#serverchannel" class="tsd-kind-icon">Server<wbr>Channel</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#serverstate" class="tsd-kind-icon">Server<wbr>State</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="json_rpc.html#structuredjson" class="tsd-kind-icon">Structured<wbr>Json</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="json_rpc.html#ismessage" class="tsd-kind-icon">is<wbr>Message</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#createconnectioneventsubscription" class="tsd-kind-icon">create<wbr>Connection<wbr>Event<wbr>Subscription</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#createfailedresponse" class="tsd-kind-icon">create<wbr>Failed<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#createnotification" class="tsd-kind-icon">create<wbr>Notification</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#createrequest" class="tsd-kind-icon">create<wbr>Request</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#createserver" class="tsd-kind-icon">create<wbr>Server</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#createsuccessfulresponse" class="tsd-kind-icon">create<wbr>Successful<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#createtestconnection" class="tsd-kind-icon">create<wbr>Test<wbr>Connection</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#createtestserverchannel" class="tsd-kind-icon">create<wbr>Test<wbr>Server<wbr>Channel</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#getoppositedirection" class="tsd-kind-icon">get<wbr>Opposite<wbr>Direction</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#getsubscription" class="tsd-kind-icon">get<wbr>Subscription</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isbatchrequest" class="tsd-kind-icon">is<wbr>Batch<wbr>Request</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isbatchresponse" class="tsd-kind-icon">is<wbr>Batch<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isfailedresponse" class="tsd-kind-icon">is<wbr>Failed<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isnotification" class="tsd-kind-icon">is<wbr>Notification</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isrequest" class="tsd-kind-icon">is<wbr>Request</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#isresponse" class="tsd-kind-icon">is<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#issuccessfulresponse" class="tsd-kind-icon">is<wbr>Successful<wbr>Response</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#sendmessage-1" class="tsd-kind-icon">send<wbr>Message</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="json_rpc.html#sendrequest-1" class="tsd-kind-icon">send<wbr>Request</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="json_rpc.html#waitforresponse-1" class="tsd-kind-icon">wait<wbr>For<wbr>Response</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="batch" class="tsd-anchor"></a>
+					<h3>Batch</h3>
+					<div class="tsd-signature tsd-kind-icon">Batch<span class="tsd-signature-symbol">:</span> <a href="json_rpc.html#batchrequest" class="tsd-signature-type">BatchRequest</a><span class="tsd-signature-symbol"> | </span><a href="json_rpc.html#batchresponse" class="tsd-signature-type">BatchResponse</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L9">packages/json-rpc/source/domain/model/json-rpc-v2.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="batchrequest" class="tsd-anchor"></a>
+					<h3>Batch<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">Batch<wbr>Request<span class="tsd-signature-symbol">:</span> <a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L7">packages/json-rpc/source/domain/model/json-rpc-v2.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="batchresponse" class="tsd-anchor"></a>
+					<h3>Batch<wbr>Response</h3>
+					<div class="tsd-signature tsd-kind-icon">Batch<wbr>Response<span class="tsd-signature-symbol">:</span> <a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L8">packages/json-rpc/source/domain/model/json-rpc-v2.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="connectionenv" class="tsd-anchor"></a>
+					<h3>Connection<wbr>Env</h3>
+					<div class="tsd-signature tsd-kind-icon">Connection<wbr>Env<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/Connection.ts#L11">packages/json-rpc/source/domain/model/Connection.ts:11</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="connectionevent" class="tsd-anchor"></a>
+					<h3>Connection<wbr>Event</h3>
+					<div class="tsd-signature tsd-kind-icon">Connection<wbr>Event<span class="tsd-signature-symbol">:</span> <a href="tuple.html#tuple-1" class="tsd-signature-type">Tuple</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"add"</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="tuple.html#tuple-1" class="tsd-signature-type">Tuple</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">"remove"</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/Server.ts#L27">packages/json-rpc/source/domain/model/Server.ts:27</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="handlermap" class="tsd-anchor"></a>
+					<h3>Handler<wbr>Map</h3>
+					<div class="tsd-signature tsd-kind-icon">Handler<wbr>Map&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ReadonlyMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="tuple.html#tuple-1" class="tsd-signature-type">Tuple</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/ServerChannel.ts#L16">packages/json-rpc/source/infrastructure/ServerChannel.ts:16</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="id" class="tsd-anchor"></a>
+					<h3>Id</h3>
+					<div class="tsd-signature tsd-kind-icon">Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L3">packages/json-rpc/source/domain/model/json-rpc-v2.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="isnever" class="tsd-anchor"></a>
+					<h3>Is<wbr>Never</h3>
+					<div class="tsd-signature tsd-kind-icon">Is<wbr>Never&lt;A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L72">packages/json-rpc/source/domain/model/json-rpc-v2.ts:72</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcerror" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Error</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Error&lt;Code, ErrorData&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IsNever</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">{ </span>code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">; </span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{ </span>code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">; </span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">; </span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L59">packages/json-rpc/source/domain/model/json-rpc-v2.ts:59</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li>
+							<h4>ErrorData<span class="tsd-signature-symbol">: </span><a href="common.html#json" class="tsd-signature-type">Json</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcfailedresponse" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Failed<wbr>Response</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Failed<wbr>Response&lt;Code, ErrorData&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L53">packages/json-rpc/source/domain/model/json-rpc-v2.ts:53</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li>
+							<h4>ErrorData<span class="tsd-signature-symbol">: </span><a href="common.html#json" class="tsd-signature-type">Json</a></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcnotification" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Notification</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Notification&lt;Method, Params&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IsNever</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">{ </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{ </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L11">packages/json-rpc/source/domain/model/json-rpc-v2.ts:11</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li>
+							<h4>Params<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcrequest" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Request&lt;Method, Params&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">IsNever</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">true</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L25">packages/json-rpc/source/domain/model/json-rpc-v2.ts:25</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li>
+							<h4>Params<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcresponse" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Response</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Response&lt;Result, Code, ErrorData&gt;<span class="tsd-signature-symbol">:</span> <a href="json_rpc.html#jsonrpcsuccessfulresponse" class="tsd-signature-type">JsonRpcSuccessfulResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="json_rpc.html#jsonrpcfailedresponse" class="tsd-signature-type">JsonRpcFailedResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L41">packages/json-rpc/source/domain/model/json-rpc-v2.ts:41</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Result<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+						</li>
+						<li>
+							<h4>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li>
+							<h4>ErrorData<span class="tsd-signature-symbol">: </span><a href="common.html#json" class="tsd-signature-type">Json</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="jsonrpcsuccessfulresponse" class="tsd-anchor"></a>
+					<h3>Json<wbr>Rpc<wbr>Successful<wbr>Response</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Rpc<wbr>Successful<wbr>Response&lt;Result&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L47">packages/json-rpc/source/domain/model/json-rpc-v2.ts:47</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Result<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="message" class="tsd-anchor"></a>
+					<h3>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">Message<span class="tsd-signature-symbol">:</span> <a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol"> | </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a><span class="tsd-signature-symbol"> | </span><a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a><span class="tsd-signature-symbol"> | </span><a href="json_rpc.html#batch" class="tsd-signature-type">Batch</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L6">packages/json-rpc/source/domain/model/json-rpc-v2.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="notificationhandler" class="tsd-anchor"></a>
+					<h3>Notification<wbr>Handler</h3>
+					<div class="tsd-signature tsd-kind-icon">Notification<wbr>Handler&lt;E, A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>notification<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/Server.ts#L19">packages/json-rpc/source/domain/model/Server.ts:19</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>notification<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>notification: <span class="tsd-signature-type">A</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="requesthandler" class="tsd-anchor"></a>
+					<h3>Request<wbr>Handler</h3>
+					<div class="tsd-signature tsd-kind-icon">Request<wbr>Handler&lt;E, A, B&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>notification<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/Server.ts#L23">packages/json-rpc/source/domain/model/Server.ts:23</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+						<li>
+							<h4>A<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a></h4>
+						</li>
+						<li>
+							<h4>B<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>notification<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>notification: <span class="tsd-signature-type">A</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="sendrequest" class="tsd-anchor"></a>
+					<h3>Send<wbr>Request</h3>
+					<div class="tsd-signature tsd-kind-icon">Send<wbr>Request&lt;E&gt;<span class="tsd-signature-symbol">:</span> &lt;A, B&gt;<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/Connection.ts#L27">packages/json-rpc/source/domain/model/Connection.ts:27</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-has-type-parameter">
+									<li class="tsd-signature tsd-kind-icon">&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-type-parameters-title">Type parameters</h4>
+										<ul class="tsd-type-parameters">
+											<li>
+												<h4>A<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a></h4>
+											</li>
+											<li>
+												<h4>B<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a></h4>
+											</li>
+										</ul>
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>request: <span class="tsd-signature-type">A</span></h5>
+											</li>
+											<li>
+												<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="serverchannel" class="tsd-anchor"></a>
+					<h3>Server<wbr>Channel</h3>
+					<div class="tsd-signature tsd-kind-icon">Server<wbr>Channel&lt;E&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Channel</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><a href="json_rpc.html#serverstate" class="tsd-signature-type">ServerState</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/ServerChannel.ts#L7">packages/json-rpc/source/infrastructure/ServerChannel.ts:7</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="serverstate" class="tsd-anchor"></a>
+					<h3>Server<wbr>State</h3>
+					<div class="tsd-signature tsd-kind-icon">Server<wbr>State<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>connectionEvents<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionevent" class="tsd-signature-type">ConnectionEvent</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>connections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>notificationHandlers<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#handlermap" class="tsd-signature-type">HandlerMap</a><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#notificationhandler" class="tsd-signature-type">NotificationHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>requestHandlers<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#handlermap" class="tsd-signature-type">HandlerMap</a><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#requesthandler" class="tsd-signature-type">RequestHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/ServerChannel.ts#L9">packages/json-rpc/source/infrastructure/ServerChannel.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> connection<wbr>Events<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionevent" class="tsd-signature-type">ConnectionEvent</a><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> connections<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadonlyArray</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> notification<wbr>Handlers<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#handlermap" class="tsd-signature-type">HandlerMap</a><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#notificationhandler" class="tsd-signature-type">NotificationHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> request<wbr>Handlers<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#handlermap" class="tsd-signature-type">HandlerMap</a><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#requesthandler" class="tsd-signature-type">RequestHandler</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="structuredjson" class="tsd-anchor"></a>
+					<h3>Structured<wbr>Json</h3>
+					<div class="tsd-signature tsd-kind-icon">Structured<wbr>Json<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JsonObject</span><span class="tsd-signature-symbol"> | </span><a href="common.html#jsonarray" class="tsd-signature-type">JsonArray</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/model/json-rpc-v2.ts#L4">packages/json-rpc/source/domain/model/json-rpc-v2.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="ismessage" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Message</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Message<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Message</span><span class="tsd-signature-symbol"> = or(isNotification,or(isRequest, or(isResponse, or(isBatchRequest, isBatchResponse))),)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isMessage.ts#L9">packages/json-rpc/source/domain/services/validations/isMessage.ts:9</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Message</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Message</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createconnectioneventsubscription" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Connection<wbr>Event<wbr>Subscription</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Connection<wbr>Event<wbr>Subscription<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionevent" class="tsd-signature-type">ConnectionEvent</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/createTestServerChannel.ts#L23">packages/json-rpc/source/infrastructure/createTestServerChannel.ts:23</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionevent" class="tsd-signature-type">ConnectionEvent</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createfailedresponse" class="tsd-anchor"></a>
+					<h3>create<wbr>Failed<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Failed<wbr>Response&lt;Code, ErrorData&gt;<span class="tsd-signature-symbol">(</span>requestId<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a>, error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcfailedresponse" class="tsd-signature-type">JsonRpcFailedResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createFailedResponse.ts#L4">packages/json-rpc/source/domain/services/messages/createFailedResponse.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>Code<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></h4>
+								</li>
+								<li>
+									<h4>ErrorData<span class="tsd-signature-symbol">: </span><a href="common.html#json" class="tsd-signature-type">Json</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestId: <a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+								</li>
+								<li>
+									<h5>error: <a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcfailedresponse" class="tsd-signature-type">JsonRpcFailedResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createnotification" class="tsd-anchor"></a>
+					<h3>create<wbr>Notification</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Notification&lt;A&gt;<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Notification&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createNotification.ts#L4">packages/json-rpc/source/domain/services/messages/createNotification.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>method: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createNotification.ts#L5">packages/json-rpc/source/domain/services/messages/createNotification.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+								</li>
+								<li>
+									<h4>B<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>method: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>params: <span class="tsd-signature-type">B</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcnotification" class="tsd-signature-type">JsonRpcNotification</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createrequest" class="tsd-anchor"></a>
+					<h3>create<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Request&lt;A&gt;<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a>, method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Request&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a>, method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createRequest.ts#L4">packages/json-rpc/source/domain/services/messages/createRequest.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+								</li>
+								<li>
+									<h5>method: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createRequest.ts#L5">packages/json-rpc/source/domain/services/messages/createRequest.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h4>
+								</li>
+								<li>
+									<h4>B<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+								</li>
+								<li>
+									<h5>method: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>params: <span class="tsd-signature-type">B</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createserver" class="tsd-anchor"></a>
+					<h3>create<wbr>Server</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Server&lt;E&gt;<span class="tsd-signature-symbol">(</span>serverChannel<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#serverchannel" class="tsd-signature-type">ServerChannel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HooksManagerEnv</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/json_rpc.server.html" class="tsd-signature-type">Server</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HooksManagerEnv</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/createServer.ts#L33">packages/json-rpc/source/infrastructure/createServer.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>E</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>serverChannel: <a href="json_rpc.html#serverchannel" class="tsd-signature-type">ServerChannel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">HookEffects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HooksManagerEnv</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/json_rpc.server.html" class="tsd-signature-type">Server</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HooksManagerEnv</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#timerenv" class="tsd-signature-type">TimerEnv</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createsuccessfulresponse" class="tsd-anchor"></a>
+					<h3>create<wbr>Successful<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Successful<wbr>Response&lt;R&gt;<span class="tsd-signature-symbol">(</span>requestId<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a>, result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcsuccessfulresponse" class="tsd-signature-type">JsonRpcSuccessfulResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/messages/createSuccessfulResponse.ts#L3">packages/json-rpc/source/domain/services/messages/createSuccessfulResponse.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>R<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#structuredjson" class="tsd-signature-type">StructuredJson</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestId: <a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+								</li>
+								<li>
+									<h5>result: <span class="tsd-signature-type">R</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#jsonrpcsuccessfulresponse" class="tsd-signature-type">JsonRpcSuccessfulResponse</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createtestconnection" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Test<wbr>Connection</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Test<wbr>Connection<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/createTestServerChannel.ts#L26">packages/json-rpc/source/infrastructure/createTestServerChannel.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = {}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createtestserverchannel" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> create<wbr>Test<wbr>Server<wbr>Channel</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Test<wbr>Server<wbr>Channel<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#serverstate" class="tsd-signature-type">ServerState</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="json_rpc.html#serverchannel" class="tsd-signature-type">ServerChannel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/createTestServerChannel.ts#L7">packages/json-rpc/source/infrastructure/createTestServerChannel.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#serverstate" class="tsd-signature-type">ServerState</a><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="json_rpc.html#serverchannel" class="tsd-signature-type">ServerChannel</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getoppositedirection" class="tsd-anchor"></a>
+					<h3>get<wbr>Opposite<wbr>Direction</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Opposite<wbr>Direction<span class="tsd-signature-symbol">(</span>direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/oppositeDirection.ts#L3">packages/json-rpc/source/domain/services/oppositeDirection.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getsubscription" class="tsd-anchor"></a>
+					<h3>get<wbr>Subscription</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Subscription<span class="tsd-signature-symbol">(</span>direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionenv" class="tsd-signature-type">ConnectionEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#message" class="tsd-signature-type">Message</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/getSubscription.ts#L5">packages/json-rpc/source/infrastructure/getSubscription.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionenv" class="tsd-signature-type">ConnectionEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Subscription</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#message" class="tsd-signature-type">Message</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isbatchrequest" class="tsd-anchor"></a>
+					<h3>is<wbr>Batch<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Batch<wbr>Request<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">BatchRequest</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isBatchRequest.ts#L5">packages/json-rpc/source/domain/services/validations/isBatchRequest.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">BatchRequest</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isbatchresponse" class="tsd-anchor"></a>
+					<h3>is<wbr>Batch<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Batch<wbr>Response<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">BatchResponse</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isBatchResponse.ts#L5">packages/json-rpc/source/domain/services/validations/isBatchResponse.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">BatchResponse</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isfailedresponse" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Failed<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Failed<wbr>Response<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcFailedResponse</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isResponse.ts#L23">packages/json-rpc/source/domain/services/validations/isResponse.ts:23</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcFailedResponse</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isnotification" class="tsd-anchor"></a>
+					<h3>is<wbr>Notification</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Notification<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcNotification</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isNotification.ts#L19">packages/json-rpc/source/domain/services/validations/isNotification.ts:19</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcNotification</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isrequest" class="tsd-anchor"></a>
+					<h3>is<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Request<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcRequest</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isRequest.ts#L7">packages/json-rpc/source/domain/services/validations/isRequest.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcRequest</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isresponse" class="tsd-anchor"></a>
+					<h3>is<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Response<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcResponse</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isResponse.ts#L26">packages/json-rpc/source/domain/services/validations/isResponse.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcResponse</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="issuccessfulresponse" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Successful<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Successful<wbr>Response<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcSuccessfulResponse</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/domain/services/validations/isResponse.ts#L20">packages/json-rpc/source/domain/services/validations/isResponse.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">JsonRpcSuccessfulResponse</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="sendmessage-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> send<wbr>Message</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Message<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span>, direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Generator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/sendMessage.ts#L4">packages/json-rpc/source/infrastructure/sendMessage.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>method<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Method</span><span class="tsd-signature-symbol">; </span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol">; </span>result<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Result</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>error<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcerror" class="tsd-signature-type">JsonRpcError</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Code</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ErrorData</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a><span class="tsd-signature-symbol">; </span>jsonrpc<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"2.0"</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+								<li>
+									<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Generator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Disposable</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="sendrequest-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> send<wbr>Request</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Request&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>request<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Generator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>fork<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure-1" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Fiber</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>join<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Fiber</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/sendRequest.ts#L13">packages/json-rpc/source/infrastructure/sendRequest.ts:13</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcrequest" class="tsd-signature-type">JsonRpcRequest</a></h4>
+								</li>
+								<li>
+									<h4>B<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>request: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Generator</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>connection<span class="tsd-signature-symbol">: </span><a href="../interfaces/json_rpc.connection.html" class="tsd-signature-type">Connection</a><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>fork<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>effect<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, c<span class="tsd-signature-symbol">: </span><a href="effects.html#capabilities" class="tsd-signature-type">Capabilities</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> &amp; </span><a href="effects.html#fiberfailure-1" class="tsd-signature-type">FiberFailure</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Fiber</span><span class="tsd-signature-symbol">&lt;</span><a href="effects.html#return" class="tsd-signature-type">Return</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>join<span class="tsd-signature-symbol">: </span>&lt;A&gt;<span class="tsd-signature-symbol">(</span>fiber<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Fiber</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="env.resume.html" class="tsd-signature-type">Resume</a><span class="tsd-signature-symbol">&lt;</span><a href="either.either-1.html" class="tsd-signature-type">Either</a><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="waitforresponse-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> wait<wbr>For<wbr>Response</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">wait<wbr>For<wbr>Response<span class="tsd-signature-symbol">(</span>requestId<span class="tsd-signature-symbol">: </span><a href="json_rpc.html#id" class="tsd-signature-type">Id</a>, direction<span class="tsd-signature-symbol">: </span><a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionenv" class="tsd-signature-type">ConnectionEnv</a><span class="tsd-signature-symbol">, </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/json-rpc/source/infrastructure/waitForResponse.ts#L14">packages/json-rpc/source/infrastructure/waitForResponse.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>requestId: <a href="json_rpc.html#id" class="tsd-signature-type">Id</a></h5>
+								</li>
+								<li>
+									<h5>direction: <a href="../enums/json_rpc.messagedirection.html" class="tsd-signature-type">MessageDirection</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="json_rpc.html#connectionenv" class="tsd-signature-type">ConnectionEnv</a><span class="tsd-signature-symbol">, </span><a href="json_rpc.html#jsonrpcresponse" class="tsd-signature-type">JsonRpcResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Typed</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../pages/Typed/introduction.html">Introduction</a>
+					</li>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="json_rpc.html">json-<wbr>rpc</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-module">
+						<a href="json_rpc.html" class="tsd-kind-icon">json-<wbr>rpc</a>
+						<ul>
+							<li class=" tsd-kind-enum tsd-parent-kind-module">
+								<a href="../enums/json_rpc.jsonrpcerrorcode.html" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error<wbr>Code</a>
+							</li>
+							<li class=" tsd-kind-enum tsd-parent-kind-module">
+								<a href="../enums/json_rpc.messagedirection.html" class="tsd-kind-icon">Message<wbr>Direction</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/json_rpc.connection.html" class="tsd-kind-icon">Connection</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/json_rpc.sendmessage.html" class="tsd-kind-icon">Send<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/json_rpc.server.html" class="tsd-kind-icon">Server</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="../interfaces/json_rpc.waitforresponse.html" class="tsd-kind-icon">Wait<wbr>For<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#batch" class="tsd-kind-icon">Batch</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#batchrequest" class="tsd-kind-icon">Batch<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#batchresponse" class="tsd-kind-icon">Batch<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#connectionenv" class="tsd-kind-icon">Connection<wbr>Env</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#connectionevent" class="tsd-kind-icon">Connection<wbr>Event</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#handlermap" class="tsd-kind-icon">Handler<wbr>Map</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#id" class="tsd-kind-icon">Id</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#isnever" class="tsd-kind-icon">Is<wbr>Never</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcerror" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Error</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcfailedresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Failed<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcnotification" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Notification</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcrequest" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#jsonrpcsuccessfulresponse" class="tsd-kind-icon">Json<wbr>Rpc<wbr>Successful<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#message" class="tsd-kind-icon">Message</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#notificationhandler" class="tsd-kind-icon">Notification<wbr>Handler</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#requesthandler" class="tsd-kind-icon">Request<wbr>Handler</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#sendrequest" class="tsd-kind-icon">Send<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#serverchannel" class="tsd-kind-icon">Server<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#serverstate" class="tsd-kind-icon">Server<wbr>State</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="json_rpc.html#structuredjson" class="tsd-kind-icon">Structured<wbr>Json</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="json_rpc.html#ismessage" class="tsd-kind-icon">is<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#createconnectioneventsubscription" class="tsd-kind-icon">create<wbr>Connection<wbr>Event<wbr>Subscription</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#createfailedresponse" class="tsd-kind-icon">create<wbr>Failed<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#createnotification" class="tsd-kind-icon">create<wbr>Notification</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#createrequest" class="tsd-kind-icon">create<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#createserver" class="tsd-kind-icon">create<wbr>Server</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#createsuccessfulresponse" class="tsd-kind-icon">create<wbr>Successful<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#createtestconnection" class="tsd-kind-icon">create<wbr>Test<wbr>Connection</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#createtestserverchannel" class="tsd-kind-icon">create<wbr>Test<wbr>Server<wbr>Channel</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#getoppositedirection" class="tsd-kind-icon">get<wbr>Opposite<wbr>Direction</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#getsubscription" class="tsd-kind-icon">get<wbr>Subscription</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isbatchrequest" class="tsd-kind-icon">is<wbr>Batch<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isbatchresponse" class="tsd-kind-icon">is<wbr>Batch<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isfailedresponse" class="tsd-kind-icon">is<wbr>Failed<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isnotification" class="tsd-kind-icon">is<wbr>Notification</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isrequest" class="tsd-kind-icon">is<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#isresponse" class="tsd-kind-icon">is<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#issuccessfulresponse" class="tsd-kind-icon">is<wbr>Successful<wbr>Response</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#sendmessage-1" class="tsd-kind-icon">send<wbr>Message</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="json_rpc.html#sendrequest-1" class="tsd-kind-icon">send<wbr>Request</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="json_rpc.html#waitforresponse-1" class="tsd-kind-icon">wait<wbr>For<wbr>Response</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>

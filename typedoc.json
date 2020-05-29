@@ -2,10 +2,12 @@
   "name": "Typed",
   "mode": "modules",
   "out": "docs",
+  "theme": "pages-plugin",
+  "pages": "./documentation/pages.json",
+  "readme": "./documentation/readme.md",
   "ignoreCompilerErrors": "true",
   "includeVersion": "true",
   "exclude": "**/*+(test|browser-test).ts",
   "external-modulemap": ".*packages/([^/]+)/source/.*",
-  "readme": "readme.md",
   "stripInternal": "true"
 }

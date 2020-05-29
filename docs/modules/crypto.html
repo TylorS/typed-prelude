@@ -1,0 +1,1788 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>crypto | Typed - v3.4.1</title>
+	<meta name="description" content="Documentation for Typed - v3.4.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Typed - v3.4.1</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="crypto.html">crypto</a>
+				</li>
+			</ul>
+			<h1>Package crypto</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#typedcrypto" id="typedcrypto" style="color: inherit; text-decoration: none;">
+						<h1>@typed/crypto</h1>
+					</a>
+					<p>A handful of cryptographic use-cases built upon <a href="./effects/"><code>@typed/effects</code></a>.</p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-kind-icon">Aes<wbr>Encrypted<wbr>Keys</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.aeskeystorage.html" class="tsd-kind-icon">Aes<wbr>Key<wbr>Storage</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.cryptoenv.html" class="tsd-kind-icon">Crypto<wbr>Env</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.cryptofailure.html" class="tsd-kind-icon">Crypto<wbr>Failure</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.deriveaeskeyoptions.html" class="tsd-kind-icon">Derive<wbr>Aes<wbr>Key<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-kind-icon">Encrypted<wbr>Key<wbr>Pair</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="crypto.html#aesencrypteddata" class="tsd-kind-icon">Aes<wbr>Encrypted<wbr>Data</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="crypto.html#cryptoeffects" class="tsd-kind-icon">Crypto<wbr>Effects</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="crypto.html#encryptioneffects" class="tsd-kind-icon">Encryption<wbr>Effects</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="crypto.html#encryptionenv" class="tsd-kind-icon">Encryption<wbr>Env</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="crypto.html#exportedkeypair" class="tsd-kind-icon">Exported<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="crypto.html#jsonwebkeypair" class="tsd-kind-icon">Json<wbr>Web<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="crypto.html#shahashsize" class="tsd-kind-icon">Sha<wbr>Hash<wbr>Size</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#aes_algorithm" class="tsd-kind-icon">AES_<wbr>ALGORITHM</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#aes_iv_size" class="tsd-kind-icon">AES_<wbr>IV_<wbr>SIZE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#cryptofailure-1" class="tsd-kind-icon">Crypto<wbr>Failure</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#default_iterations" class="tsd-kind-icon">DEFAULT_<wbr>ITERATIONS</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#encrypt_and_decrypt" class="tsd-kind-icon">ENCRYPT_<wbr>AND_<wbr>DECRYPT</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#extractable" class="tsd-kind-icon">EXTRACTABLE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#hash" class="tsd-kind-icon">HASH</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#modulus_length" class="tsd-kind-icon">MODULUS_<wbr>LENGTH</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#public_exponent" class="tsd-kind-icon">PUBLIC_<wbr>EXPONENT</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#sign_and_verify" class="tsd-kind-icon">SIGN_<wbr>AND_<wbr>VERIFY</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#decrypt" class="tsd-kind-icon">decrypt</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#derivebits" class="tsd-kind-icon">derive<wbr>Bits</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#derivekey" class="tsd-kind-icon">derive<wbr>Key</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#digest" class="tsd-kind-icon">digest</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#encrypt" class="tsd-kind-icon">encrypt</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#exportkey" class="tsd-kind-icon">export<wbr>Key</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#generatekey" class="tsd-kind-icon">generate<wbr>Key</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#importkey" class="tsd-kind-icon">import<wbr>Key</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#sign" class="tsd-kind-icon">sign</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#unwrapkey" class="tsd-kind-icon">unwrap<wbr>Key</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#verify" class="tsd-kind-icon">verify</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="crypto.html#wrapkey" class="tsd-kind-icon">wrap<wbr>Key</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#arraybuffertostring" class="tsd-kind-icon">array<wbr>Buffer<wbr>ToString</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#createservercrypto" class="tsd-kind-icon">create<wbr>Server<wbr>Crypto</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#decryptencryptedkeys" class="tsd-kind-icon">decrypt<wbr>Encrypted<wbr>Keys</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#decryptwithaeskey" class="tsd-kind-icon">decrypt<wbr>With<wbr>Aes<wbr>Key</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#decryptwithrsakeypair" class="tsd-kind-icon">decrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#deriveaeskey" class="tsd-kind-icon">derive<wbr>Aes<wbr>Key</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#derivesalt" class="tsd-kind-icon">derive<wbr>Salt</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#encryptexportedkeypair" class="tsd-kind-icon">encrypt<wbr>Exported<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#encryptwithaeskey" class="tsd-kind-icon">encrypt<wbr>With<wbr>Aes<wbr>Key</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#encryptwithrsakeypair" class="tsd-kind-icon">encrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#exportkeypair" class="tsd-kind-icon">export<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#exportedkeystoencryptedkeypair" class="tsd-kind-icon">exported<wbr>Keys<wbr>ToEncrypted<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="crypto.html#frompromise" class="tsd-kind-icon">from<wbr>Promise</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generateecdsaexportedkeys" class="tsd-kind-icon">generate<wbr>Ecdsa<wbr>Exported<wbr>Keys</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generateecdsakeypair" class="tsd-kind-icon">generate<wbr>Ecdsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generateencryptedecdsakeypair" class="tsd-kind-icon">generate<wbr>Encrypted<wbr>Ecdsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generateencryptedrsakeypair" class="tsd-kind-icon">generate<wbr>Encrypted<wbr>Rsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generatehashfromstring" class="tsd-kind-icon">generate<wbr>Hash<wbr>From<wbr>String</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generatersaexportedkeys" class="tsd-kind-icon">generate<wbr>Rsa<wbr>Exported<wbr>Keys</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generatersakeypair" class="tsd-kind-icon">generate<wbr>Rsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#generateshahash" class="tsd-kind-icon">generate<wbr>Sha<wbr>Hash</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="crypto.html#getrandomvalues" class="tsd-kind-icon">get<wbr>Random<wbr>Values</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#getsubtlecrypto" class="tsd-kind-icon">get<wbr>Subtle<wbr>Crypto</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#importencryptedkeys" class="tsd-kind-icon">import<wbr>Encrypted<wbr>Keys</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#importexportedkeypair" class="tsd-kind-icon">import<wbr>Exported<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#signwithecdsakeypair" class="tsd-kind-icon">sign<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#stringtoarraybuffer" class="tsd-kind-icon">string<wbr>ToArray<wbr>Buffer</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="crypto.html#verifywithecdsakeypair" class="tsd-kind-icon">verify<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Object literals</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="crypto.html#ecdsa_key_params" class="tsd-kind-icon">ECDSA_<wbr>KEY_<wbr>PARAMS</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="crypto.html#ecdsa_params" class="tsd-kind-icon">ECDSA_<wbr>PARAMS</a></li>
+								<li class="tsd-kind-object-literal tsd-parent-kind-module"><a href="crypto.html#rsa_params" class="tsd-kind-icon">RSA_<wbr>PARAMS</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="aesencrypteddata" class="tsd-anchor"></a>
+					<h3>Aes<wbr>Encrypted<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">Aes<wbr>Encrypted<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/types.ts#L11">packages/crypto/source/common/types.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="cryptoeffects" class="tsd-anchor"></a>
+					<h3>Crypto<wbr>Effects</h3>
+					<div class="tsd-signature tsd-kind-icon">Crypto<wbr>Effects&lt;E, A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/crypto.cryptofailure.html" class="tsd-signature-type">CryptoFailure</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/Effects.ts#L6">packages/crypto/source/common/Effects.ts:6</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="encryptioneffects" class="tsd-anchor"></a>
+					<h3>Encryption<wbr>Effects</h3>
+					<div class="tsd-signature tsd-kind-icon">Encryption<wbr>Effects&lt;E, A&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="crypto.html#encryptionenv" class="tsd-signature-type">EncryptionEnv</a><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/Effects.ts#L7">packages/crypto/source/common/Effects.ts:7</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>E</h4>
+						</li>
+						<li>
+							<h4>A</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="encryptionenv" class="tsd-anchor"></a>
+					<h3>Encryption<wbr>Env</h3>
+					<div class="tsd-signature tsd-kind-icon">Encryption<wbr>Env<span class="tsd-signature-symbol">:</span> <a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/crypto.cryptofailure.html" class="tsd-signature-type">CryptoFailure</a><span class="tsd-signature-symbol"> &amp; </span><a href="../interfaces/crypto.aeskeystorage.html" class="tsd-signature-type">AesKeyStorage</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/EncryptionEnv.ts#L6">packages/crypto/source/common/EncryptionEnv.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="exportedkeypair" class="tsd-anchor"></a>
+					<h3>Exported<wbr>Key<wbr>Pair</h3>
+					<div class="tsd-signature tsd-kind-icon">Exported<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">; </span>publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/types.ts#L13">packages/crypto/source/common/types.ts:13</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> private<wbr>Key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> public<wbr>Key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="jsonwebkeypair" class="tsd-anchor"></a>
+					<h3>Json<wbr>Web<wbr>Key<wbr>Pair</h3>
+					<div class="tsd-signature tsd-kind-icon">Json<wbr>Web<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">; </span>publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/types.ts#L18">packages/crypto/source/common/types.ts:18</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> private<wbr>Key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagReadonly">Readonly</span> public<wbr>Key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="shahashsize" class="tsd-anchor"></a>
+					<h3>Sha<wbr>Hash<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">Sha<wbr>Hash<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">1</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">256</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">348</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">512</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/hashing/generateShaHash.ts#L4">packages/crypto/source/hashing/generateShaHash.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="aes_algorithm" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> AES_<wbr>ALGORITHM</h3>
+					<div class="tsd-signature tsd-kind-icon">AES_<wbr>ALGORITHM<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"AES-GCM"</span><span class="tsd-signature-symbol"> = &quot;AES-GCM&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L7">packages/crypto/source/common/constants.ts:7</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="aes_iv_size" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> AES_<wbr>IV_<wbr>SIZE</h3>
+					<div class="tsd-signature tsd-kind-icon">AES_<wbr>IV_<wbr>SIZE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">12</span><span class="tsd-signature-symbol"> = 12</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L8">packages/crypto/source/common/constants.ts:8</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="cryptofailure-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> Crypto<wbr>Failure</h3>
+					<div class="tsd-signature tsd-kind-icon">Crypto<wbr>Failure<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">unique symbol</span><span class="tsd-signature-symbol"> = Symbol.for(&#x27;CryptoFailure&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/CryptoFailure.ts#L3">packages/crypto/source/common/CryptoFailure.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="default_iterations" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> DEFAULT_<wbr>ITERATIONS</h3>
+					<div class="tsd-signature tsd-kind-icon">DEFAULT_<wbr>ITERATIONS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2000</span><span class="tsd-signature-symbol"> = 2000</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L2">packages/crypto/source/common/constants.ts:2</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="encrypt_and_decrypt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ENCRYPT_<wbr>AND_<wbr>DECRYPT</h3>
+					<div class="tsd-signature tsd-kind-icon">ENCRYPT_<wbr>AND_<wbr>DECRYPT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyUsage</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;encrypt&#x27;, &#x27;decrypt&#x27;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L4">packages/crypto/source/common/constants.ts:4</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="extractable" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> EXTRACTABLE</h3>
+					<div class="tsd-signature tsd-kind-icon">EXTRACTABLE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> = false</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L3">packages/crypto/source/common/constants.ts:3</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="hash" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> HASH</h3>
+					<div class="tsd-signature tsd-kind-icon">HASH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"SHA-256"</span><span class="tsd-signature-symbol"> = &quot;SHA-256&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L1">packages/crypto/source/common/constants.ts:1</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="modulus_length" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> MODULUS_<wbr>LENGTH</h3>
+					<div class="tsd-signature tsd-kind-icon">MODULUS_<wbr>LENGTH<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2048</span><span class="tsd-signature-symbol"> = 2048</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L6">packages/crypto/source/common/constants.ts:6</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="public_exponent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> PUBLIC_<wbr>EXPONENT</h3>
+					<div class="tsd-signature tsd-kind-icon">PUBLIC_<wbr>EXPONENT<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> = new Uint8Array([0x01, 0x00, 0x01])</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L5">packages/crypto/source/common/constants.ts:5</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="sign_and_verify" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> SIGN_<wbr>AND_<wbr>VERIFY</h3>
+					<div class="tsd-signature tsd-kind-icon">SIGN_<wbr>AND_<wbr>VERIFY<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">KeyUsage</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = [&#x27;sign&#x27;, &#x27;verify&#x27;]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L15">packages/crypto/source/common/constants.ts:15</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="decrypt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> decrypt</h3>
+					<div class="tsd-signature tsd-kind-icon">decrypt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;decrypt&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L9">packages/crypto/source/effects/subtle.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="derivebits" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> derive<wbr>Bits</h3>
+					<div class="tsd-signature tsd-kind-icon">derive<wbr>Bits<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;deriveBits&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L10">packages/crypto/source/effects/subtle.ts:10</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="derivekey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> derive<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">derive<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;deriveKey&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L11">packages/crypto/source/effects/subtle.ts:11</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="digest" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> digest</h3>
+					<div class="tsd-signature tsd-kind-icon">digest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;digest&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L12">packages/crypto/source/effects/subtle.ts:12</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="encrypt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> encrypt</h3>
+					<div class="tsd-signature tsd-kind-icon">encrypt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;encrypt&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L13">packages/crypto/source/effects/subtle.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="exportkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> export<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">export<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"jwk"</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;exportKey&#x27;) as {(format: &#x27;jwk&#x27;, key: CryptoKey): CryptoEffects&lt;unknown, JsonWebKey&gt;(format: &#x27;raw&#x27; | &#x27;pkcs8&#x27; | &#x27;spki&#x27;, key: CryptoKey): CryptoEffects&lt;unknown, ArrayBuffer&gt;(format: string, key: CryptoKey): CryptoEffects&lt;unknown, ArrayBuffer | JsonWebKey&gt;}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L14">packages/crypto/source/effects/subtle.ts:14</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"jwk"</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">"jwk"</span></h5>
+											</li>
+											<li>
+												<h5>key: <span class="tsd-signature-type">CryptoKey</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span></h5>
+											</li>
+											<li>
+												<h5>key: <span class="tsd-signature-type">CryptoKey</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>key: <span class="tsd-signature-type">CryptoKey</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="generatekey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> generate<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">generate<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RsaHashedKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhKeyGenParams</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AesKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Pbkdf2Params</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;generateKey&#x27;) as {(algorithm: string, extractable: boolean, keyUsages: string[]): CryptoEffects&lt;unknown,CryptoKey | CryptoKeyPair&gt;(algorithm: RsaHashedKeyGenParams | EcKeyGenParams | DhKeyGenParams,extractable: boolean,keyUsages: string[],): CryptoEffects&lt;unknown, CryptoKeyPair&gt;(algorithm: AesKeyGenParams | HmacKeyGenParams | Pbkdf2Params,extractable: boolean,keyUsages: string[],): CryptoEffects&lt;unknown, CryptoKey&gt;}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L19">packages/crypto/source/effects/subtle.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RsaHashedKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhKeyGenParams</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AesKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Pbkdf2Params</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">RsaHashedKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhKeyGenParams</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">AesKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacKeyGenParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Pbkdf2Params</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="importkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> import<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">import<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"jwk"</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;importKey&#x27;) as {(format: &#x27;raw&#x27; | &#x27;pkcs8&#x27; | &#x27;spki&#x27;,keyData:| Int8Array| Int16Array| Int32Array| Uint8Array| Uint16Array| Uint32Array| Uint8ClampedArray| Float32Array| Float64Array| DataView| ArrayBuffer,algorithm:| string| RsaHashedImportParams| EcKeyImportParams| HmacImportParams| DhImportKeyParams| AesKeyAlgorithm,extractable: boolean,keyUsages: string[],): CryptoEffects&lt;unknown, CryptoKey&gt;(format: &#x27;jwk&#x27;,keyData: JsonWebKey,algorithm:| string| RsaHashedImportParams| EcKeyImportParams| HmacImportParams| DhImportKeyParams| AesKeyAlgorithm,extractable: boolean,keyUsages: string[],): CryptoEffects&lt;unknown, CryptoKey&gt;(format: string,keyData:| JsonWebKey| Int8Array| Int16Array| Int32Array| Uint8Array| Uint16Array| Uint32Array| Uint8ClampedArray| Float32Array| Float64Array| DataView| ArrayBuffer,algorithm:| string| RsaHashedImportParams| EcKeyImportParams| HmacImportParams| DhImportKeyParams| AesKeyAlgorithm,extractable: boolean,keyUsages: string[],): CryptoEffects&lt;unknown, CryptoKey&gt;}</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L35">packages/crypto/source/effects/subtle.ts:35</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">"jwk"</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>format<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, keyData<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span>, algorithm<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, extractable<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, keyUsages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">"raw"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"pkcs8"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"spki"</span></h5>
+											</li>
+											<li>
+												<h5>keyData: <span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span></h5>
+											</li>
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">"jwk"</span></h5>
+											</li>
+											<li>
+												<h5>keyData: <span class="tsd-signature-type">JsonWebKey</span></h5>
+											</li>
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>format: <span class="tsd-signature-type">string</span></h5>
+											</li>
+											<li>
+												<h5>keyData: <span class="tsd-signature-type">JsonWebKey</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayBuffer</span></h5>
+											</li>
+											<li>
+												<h5>algorithm: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+											</li>
+											<li>
+												<h5>extractable: <span class="tsd-signature-type">boolean</span></h5>
+											</li>
+											<li>
+												<h5>keyUsages: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="sign" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> sign</h3>
+					<div class="tsd-signature tsd-kind-icon">sign<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;sign&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L99">packages/crypto/source/effects/subtle.ts:99</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="unwrapkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> unwrap<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">unwrap<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;unwrapKey&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L100">packages/crypto/source/effects/subtle.ts:100</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="verify" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> verify</h3>
+					<div class="tsd-signature tsd-kind-icon">verify<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;verify&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L101">packages/crypto/source/effects/subtle.ts:101</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="wrapkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> wrap<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">wrap<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">(Anonymous function)</span><span class="tsd-signature-symbol"> = createCryptoEffect(&#x27;wrapKey&#x27;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L102">packages/crypto/source/effects/subtle.ts:102</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="arraybuffertostring" class="tsd-anchor"></a>
+					<h3>array<wbr>Buffer<wbr>ToString</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">array<wbr>Buffer<wbr>ToString<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/arrayBufferToString.ts#L1">packages/crypto/source/common/arrayBufferToString.ts:1</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="createservercrypto" class="tsd-anchor"></a>
+					<h3>create<wbr>Server<wbr>Crypto</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Server<wbr>Crypto<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Crypto</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/createServerCrypto.ts#L1">packages/crypto/source/common/createServerCrypto.ts:1</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Crypto</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="decryptencryptedkeys" class="tsd-anchor"></a>
+					<h3>decrypt<wbr>Encrypted<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">decrypt<wbr>Encrypted<wbr>Keys<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, keyPair<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/decryptEncryptedKeys.ts#L4">packages/crypto/source/effects/decryptEncryptedKeys.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>keyPair: <a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="decryptwithaeskey" class="tsd-anchor"></a>
+					<h3>decrypt<wbr>With<wbr>Aes<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">decrypt<wbr>With<wbr>Aes<wbr>Key<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span>, iv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/symmetrical/decryptWithAesKey.ts#L4">packages/crypto/source/symmetrical/decryptWithAesKey.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+								<li>
+									<h5>iv: <span class="tsd-signature-type">Uint8Array</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="decryptwithrsakeypair" class="tsd-anchor"></a>
+					<h3>decrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">decrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>keyPair<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a>, encrypted<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/decryptWithRsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/decryptWithRsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPair: <a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a></h5>
+								</li>
+								<li>
+									<h5>encrypted: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="deriveaeskey" class="tsd-anchor"></a>
+					<h3>derive<wbr>Aes<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">derive<wbr>Aes<wbr>Key<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.deriveaeskeyoptions.html" class="tsd-signature-type">DeriveAesKeyOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/symmetrical/deriveAesKey.ts#L22">packages/crypto/source/symmetrical/deriveAesKey.ts:22</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Derives a Symmetrical CryptoKey from your password and a salt (e.g. email)</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <a href="../interfaces/crypto.deriveaeskeyoptions.html" class="tsd-signature-type">DeriveAesKeyOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="derivesalt" class="tsd-anchor"></a>
+					<h3>derive<wbr>Salt</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">derive<wbr>Salt<span class="tsd-signature-symbol">(</span>sizeOrValue<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/deriveSalt.ts#L3">packages/crypto/source/common/deriveSalt.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>sizeOrValue: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Uint8Array</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="encryptexportedkeypair" class="tsd-anchor"></a>
+					<h3>encrypt<wbr>Exported<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">encrypt<wbr>Exported<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, keyPair<span class="tsd-signature-symbol">: </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/encryptExportedKeyPair.ts#L5">packages/crypto/source/effects/encryptExportedKeyPair.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>keyPair: <a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="encryptwithaeskey" class="tsd-anchor"></a>
+					<h3>encrypt<wbr>With<wbr>Aes<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">encrypt<wbr>With<wbr>Aes<wbr>Key<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#aesencrypteddata" class="tsd-signature-type">AesEncryptedData</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/symmetrical/encryptWithAesKey.ts#L5">packages/crypto/source/symmetrical/encryptWithAesKey.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#aesencrypteddata" class="tsd-signature-type">AesEncryptedData</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="encryptwithrsakeypair" class="tsd-anchor"></a>
+					<h3>encrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">encrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>keyPair<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/encryptWithRsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/encryptWithRsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPair: <a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="exportkeypair" class="tsd-anchor"></a>
+					<h3>export<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">export<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>keyPair<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#jsonwebkeypair" class="tsd-signature-type">JsonWebKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/exportKeyPair.ts#L5">packages/crypto/source/effects/exportKeyPair.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>keyPair: <a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#jsonwebkeypair" class="tsd-signature-type">JsonWebKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="exportedkeystoencryptedkeypair" class="tsd-anchor"></a>
+					<h3>exported<wbr>Keys<wbr>ToEncrypted<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">exported<wbr>Keys<wbr>ToEncrypted<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, exportedKeys<span class="tsd-signature-symbol">: </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/exportedKeysToEncryptedKeyPair.ts#L6">packages/crypto/source/effects/exportedKeysToEncryptedKeyPair.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>params: <span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+								</li>
+								<li>
+									<h5>exportedKeys: <a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="frompromise" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> from<wbr>Promise</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Promise&lt;A&gt;<span class="tsd-signature-symbol">(</span>promise<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Left</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Right</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/subtle.ts#L121">packages/crypto/source/effects/subtle.ts:121</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>promise: <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Env</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">Left</span><span class="tsd-signature-symbol">&lt;</span><a href="../classes/effects.killerror.html#error" class="tsd-signature-type">Error</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Right</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generateecdsaexportedkeys" class="tsd-anchor"></a>
+					<h3>generate<wbr>Ecdsa<wbr>Exported<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Ecdsa<wbr>Exported<wbr>Keys<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateEcdsaExportedKeys.ts#L15">packages/crypto/source/asymmetrical/generateEcdsaExportedKeys.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generates an exported key pair. WARNING :: be very careful about what you do with this KeyPair. We highly
+									recommend encrypting them with another CryptoKey that never leaves memory and can be derived by user-supplied info.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generateecdsakeypair" class="tsd-anchor"></a>
+					<h3>generate<wbr>Ecdsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Ecdsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateEcdsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/generateEcdsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generateencryptedecdsakeypair" class="tsd-anchor"></a>
+					<h3>generate<wbr>Encrypted<wbr>Ecdsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Encrypted<wbr>Ecdsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateEncryptedEcdsaKeyPair.ts#L8">packages/crypto/source/asymmetrical/generateEncryptedEcdsaKeyPair.ts:8</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate encrypted RSA-PSS key pair for signing and verifying</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generateencryptedrsakeypair" class="tsd-anchor"></a>
+					<h3>generate<wbr>Encrypted<wbr>Rsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Encrypted<wbr>Rsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>aesKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateEncryptedRsaKeyPair.ts#L16">packages/crypto/source/asymmetrical/generateEncryptedRsaKeyPair.ts:16</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Using an AES CryptoKey, a non-extractable CryptoKeyPair is generated. Encrypted copies of the CryptoKeyPair
+									are also generated to allow persistence and sending over the internet.</p>
+								</div>
+								<p>Ideally your supplied CryptoKey is non-extractable, never persisted, and generated with user-supplied
+									information in a way that the key can be derived again and again. The generated CryptoKeyPair should then
+									be used to encrypt/decrypt all application data. The encrypted views of the CryptoKeyPair can safely be
+									persisted or sent over the internet. Furthermore, if the user chooses to change their password
+								one must only re-encrypt the generated CryptoKeyPair with the new AES CryptoKey.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>aesKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A symmetrical key that is allowed to encrypt/decrypt</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-signature-type">EncryptedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generatehashfromstring" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> generate<wbr>Hash<wbr>From<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Hash<wbr>From<wbr>String<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/hashing/generateHashFromString.ts#L4">packages/crypto/source/hashing/generateHashFromString.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>str: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generatersaexportedkeys" class="tsd-anchor"></a>
+					<h3>generate<wbr>Rsa<wbr>Exported<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Rsa<wbr>Exported<wbr>Keys<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateRsaExportedKeys.ts#L15">packages/crypto/source/asymmetrical/generateRsaExportedKeys.ts:15</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generates an exported key pair. WARNING :: be very careful about what you do with this KeyPair. We highly
+									recommend encrypting them with another CryptoKey that never leaves memory and can be derived by user-supplied info.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generatersakeypair" class="tsd-anchor"></a>
+					<h3>generate<wbr>Rsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Rsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/generateRsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/generateRsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="generateshahash" class="tsd-anchor"></a>
+					<h3>generate<wbr>Sha<wbr>Hash</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Sha<wbr>Hash<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><a href="crypto.html#shahashsize" class="tsd-signature-type">ShaHashSize</a>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/hashing/generateShaHash.ts#L10">packages/crypto/source/hashing/generateShaHash.ts:10</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generate a SHA Hash of a given size.
+									Note: SHA-1 is <em>NOT</em> cryptographically secure.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <a href="crypto.html#shahashsize" class="tsd-signature-type">ShaHashSize</a></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="getrandomvalues" class="tsd-anchor"></a>
+					<h3>get<wbr>Random<wbr>Values</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Random<wbr>Values&lt;A&gt;<span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/getRandomValues.ts#L4">packages/crypto/source/effects/getRandomValues.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Int8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Int32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint16Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8ClampedArray</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float32Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Float64Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DataView</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>input: <span class="tsd-signature-type">A</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getsubtlecrypto" class="tsd-anchor"></a>
+					<h3>get<wbr>Subtle<wbr>Crypto</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Subtle<wbr>Crypto<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SubtleCrypto</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/getSubtleCrypto.ts#L4">packages/crypto/source/effects/getSubtleCrypto.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/crypto.cryptoenv.html" class="tsd-signature-type">CryptoEnv</a><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">SubtleCrypto</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="importencryptedkeys" class="tsd-anchor"></a>
+					<h3>import<wbr>Encrypted<wbr>Keys</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">import<wbr>Encrypted<wbr>Keys<span class="tsd-signature-symbol">(</span>decryptionKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, encryptedKeys<span class="tsd-signature-symbol">: </span><a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/effects/importEncryptedKeys.ts#L6">packages/crypto/source/effects/importEncryptedKeys.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>decryptionKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5>params: <span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+								</li>
+								<li>
+									<h5>encryptedKeys: <a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-signature-type">AesEncryptedKeys</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="importexportedkeypair" class="tsd-anchor"></a>
+					<h3>import<wbr>Exported<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">import<wbr>Exported<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span>, keyPair<span class="tsd-signature-symbol">: </span><a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/importExportedKeyPair.ts#L5">packages/crypto/source/asymmetrical/importExportedKeyPair.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>params: <span class="tsd-signature-type">RsaHashedImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">EcKeyImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HmacImportParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">DhImportKeyParams</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">AesKeyAlgorithm</span></h5>
+								</li>
+								<li>
+									<h5>keyPair: <a href="crypto.html#exportedkeypair" class="tsd-signature-type">ExportedKeyPair</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/crypto.encryptedkeypair.html#cryptokeypair" class="tsd-signature-type">CryptoKeyPair</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="signwithecdsakeypair" class="tsd-anchor"></a>
+					<h3>sign<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">sign<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span>, privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/signWithEcdsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/signWithEcdsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+								<li>
+									<h5>privateKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="stringtoarraybuffer" class="tsd-anchor"></a>
+					<h3>string<wbr>ToArray<wbr>Buffer</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">string<wbr>ToArray<wbr>Buffer<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/stringToArrayBuffer.ts#L1">packages/crypto/source/common/stringToArrayBuffer.ts:1</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>str: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ArrayBuffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="verifywithecdsakeypair" class="tsd-anchor"></a>
+					<h3>verify<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">verify<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair<span class="tsd-signature-symbol">(</span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span>, signature<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span>, publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/asymmetrical/verifyWithEcdsaKeyPair.ts#L4">packages/crypto/source/asymmetrical/verifyWithEcdsaKeyPair.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>data: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+								<li>
+									<h5>signature: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+								<li>
+									<h5>publicKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Object literals</h2>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="ecdsa_key_params" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ECDSA_<wbr>KEY_<wbr>PARAMS</h3>
+					<div class="tsd-signature tsd-kind-icon">ECDSA_<wbr>KEY_<wbr>PARAMS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L17">packages/crypto/source/common/constants.ts:17</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="ecdsa_key_params.name" class="tsd-anchor"></a>
+						<h3>name</h3>
+						<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;ECDSA&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L18">packages/crypto/source/common/constants.ts:18</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="ecdsa_key_params.namedcurve" class="tsd-anchor"></a>
+						<h3>named<wbr>Curve</h3>
+						<div class="tsd-signature tsd-kind-icon">named<wbr>Curve<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;P-256&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L19">packages/crypto/source/common/constants.ts:19</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="ecdsa_params" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ECDSA_<wbr>PARAMS</h3>
+					<div class="tsd-signature tsd-kind-icon">ECDSA_<wbr>PARAMS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L22">packages/crypto/source/common/constants.ts:22</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="ecdsa_params.hash-1" class="tsd-anchor"></a>
+						<h3>hash</h3>
+						<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = HASH</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L22">packages/crypto/source/common/constants.ts:22</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="ecdsa_params.name-1" class="tsd-anchor"></a>
+						<h3>name</h3>
+						<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;ECDSA&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L22">packages/crypto/source/common/constants.ts:22</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-module">
+					<a name="rsa_params" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> RSA_<wbr>PARAMS</h3>
+					<div class="tsd-signature tsd-kind-icon">RSA_<wbr>PARAMS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L9">packages/crypto/source/common/constants.ts:9</a></li>
+						</ul>
+					</aside>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="rsa_params.hash-2" class="tsd-anchor"></a>
+						<h3>hash</h3>
+						<div class="tsd-signature tsd-kind-icon">hash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = HASH</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L13">packages/crypto/source/common/constants.ts:13</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="rsa_params.moduluslength" class="tsd-anchor"></a>
+						<h3>modulus<wbr>Length</h3>
+						<div class="tsd-signature tsd-kind-icon">modulus<wbr>Length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = MODULUS_LENGTH</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L11">packages/crypto/source/common/constants.ts:11</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="rsa_params.name-2" class="tsd-anchor"></a>
+						<h3>name</h3>
+						<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;RSA-OAEP&quot;</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L10">packages/crypto/source/common/constants.ts:10</a></li>
+							</ul>
+						</aside>
+					</section>
+					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal">
+						<a name="rsa_params.publicexponent" class="tsd-anchor"></a>
+						<h3>public<wbr>Exponent</h3>
+						<div class="tsd-signature tsd-kind-icon">public<wbr>Exponent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> = PUBLIC_EXPONENT</span></div>
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/crypto/source/common/constants.ts#L12">packages/crypto/source/common/constants.ts:12</a></li>
+							</ul>
+						</aside>
+					</section>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Typed</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../pages/Typed/introduction.html">Introduction</a>
+					</li>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="crypto.html">crypto</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-module">
+						<a href="crypto.html" class="tsd-kind-icon">crypto</a>
+						<ul>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.aesencryptedkeys.html" class="tsd-kind-icon">Aes<wbr>Encrypted<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.aeskeystorage.html" class="tsd-kind-icon">Aes<wbr>Key<wbr>Storage</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.cryptoenv.html" class="tsd-kind-icon">Crypto<wbr>Env</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.cryptofailure.html" class="tsd-kind-icon">Crypto<wbr>Failure</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.deriveaeskeyoptions.html" class="tsd-kind-icon">Derive<wbr>Aes<wbr>Key<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-interface tsd-parent-kind-module">
+								<a href="../interfaces/crypto.encryptedkeypair.html" class="tsd-kind-icon">Encrypted<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="crypto.html#aesencrypteddata" class="tsd-kind-icon">Aes<wbr>Encrypted<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="crypto.html#cryptoeffects" class="tsd-kind-icon">Crypto<wbr>Effects</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="crypto.html#encryptioneffects" class="tsd-kind-icon">Encryption<wbr>Effects</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="crypto.html#encryptionenv" class="tsd-kind-icon">Encryption<wbr>Env</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="crypto.html#exportedkeypair" class="tsd-kind-icon">Exported<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="crypto.html#jsonwebkeypair" class="tsd-kind-icon">Json<wbr>Web<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="crypto.html#shahashsize" class="tsd-kind-icon">Sha<wbr>Hash<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#aes_algorithm" class="tsd-kind-icon">AES_<wbr>ALGORITHM</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#aes_iv_size" class="tsd-kind-icon">AES_<wbr>IV_<wbr>SIZE</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#cryptofailure-1" class="tsd-kind-icon">Crypto<wbr>Failure</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#default_iterations" class="tsd-kind-icon">DEFAULT_<wbr>ITERATIONS</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#encrypt_and_decrypt" class="tsd-kind-icon">ENCRYPT_<wbr>AND_<wbr>DECRYPT</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#extractable" class="tsd-kind-icon">EXTRACTABLE</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#hash" class="tsd-kind-icon">HASH</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#modulus_length" class="tsd-kind-icon">MODULUS_<wbr>LENGTH</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#public_exponent" class="tsd-kind-icon">PUBLIC_<wbr>EXPONENT</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#sign_and_verify" class="tsd-kind-icon">SIGN_<wbr>AND_<wbr>VERIFY</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#decrypt" class="tsd-kind-icon">decrypt</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#derivebits" class="tsd-kind-icon">derive<wbr>Bits</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#derivekey" class="tsd-kind-icon">derive<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#digest" class="tsd-kind-icon">digest</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#encrypt" class="tsd-kind-icon">encrypt</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#exportkey" class="tsd-kind-icon">export<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#generatekey" class="tsd-kind-icon">generate<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#importkey" class="tsd-kind-icon">import<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#sign" class="tsd-kind-icon">sign</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#unwrapkey" class="tsd-kind-icon">unwrap<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#verify" class="tsd-kind-icon">verify</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="crypto.html#wrapkey" class="tsd-kind-icon">wrap<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#arraybuffertostring" class="tsd-kind-icon">array<wbr>Buffer<wbr>ToString</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#createservercrypto" class="tsd-kind-icon">create<wbr>Server<wbr>Crypto</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#decryptencryptedkeys" class="tsd-kind-icon">decrypt<wbr>Encrypted<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#decryptwithaeskey" class="tsd-kind-icon">decrypt<wbr>With<wbr>Aes<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#decryptwithrsakeypair" class="tsd-kind-icon">decrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#deriveaeskey" class="tsd-kind-icon">derive<wbr>Aes<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#derivesalt" class="tsd-kind-icon">derive<wbr>Salt</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#encryptexportedkeypair" class="tsd-kind-icon">encrypt<wbr>Exported<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#encryptwithaeskey" class="tsd-kind-icon">encrypt<wbr>With<wbr>Aes<wbr>Key</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#encryptwithrsakeypair" class="tsd-kind-icon">encrypt<wbr>With<wbr>Rsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#exportkeypair" class="tsd-kind-icon">export<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#exportedkeystoencryptedkeypair" class="tsd-kind-icon">exported<wbr>Keys<wbr>ToEncrypted<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="crypto.html#frompromise" class="tsd-kind-icon">from<wbr>Promise</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generateecdsaexportedkeys" class="tsd-kind-icon">generate<wbr>Ecdsa<wbr>Exported<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generateecdsakeypair" class="tsd-kind-icon">generate<wbr>Ecdsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generateencryptedecdsakeypair" class="tsd-kind-icon">generate<wbr>Encrypted<wbr>Ecdsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generateencryptedrsakeypair" class="tsd-kind-icon">generate<wbr>Encrypted<wbr>Rsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generatehashfromstring" class="tsd-kind-icon">generate<wbr>Hash<wbr>From<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generatersaexportedkeys" class="tsd-kind-icon">generate<wbr>Rsa<wbr>Exported<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generatersakeypair" class="tsd-kind-icon">generate<wbr>Rsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#generateshahash" class="tsd-kind-icon">generate<wbr>Sha<wbr>Hash</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="crypto.html#getrandomvalues" class="tsd-kind-icon">get<wbr>Random<wbr>Values</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#getsubtlecrypto" class="tsd-kind-icon">get<wbr>Subtle<wbr>Crypto</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#importencryptedkeys" class="tsd-kind-icon">import<wbr>Encrypted<wbr>Keys</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#importexportedkeypair" class="tsd-kind-icon">import<wbr>Exported<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#signwithecdsakeypair" class="tsd-kind-icon">sign<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#stringtoarraybuffer" class="tsd-kind-icon">string<wbr>ToArray<wbr>Buffer</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="crypto.html#verifywithecdsakeypair" class="tsd-kind-icon">verify<wbr>With<wbr>Ecdsa<wbr>Key<wbr>Pair</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="crypto.html#ecdsa_key_params" class="tsd-kind-icon">ECDSA_<wbr>KEY_<wbr>PARAMS</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="crypto.html#ecdsa_params" class="tsd-kind-icon">ECDSA_<wbr>PARAMS</a>
+							</li>
+							<li class=" tsd-kind-object-literal tsd-parent-kind-module">
+								<a href="crypto.html#rsa_params" class="tsd-kind-icon">RSA_<wbr>PARAMS</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>

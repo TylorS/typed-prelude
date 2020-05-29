@@ -5,7 +5,7 @@ export const chain: {
   <A, B>(fn: Arity1<A, AsyncIterable<B>>): (asyncIterable: AsyncIterable<A>) => AsyncIterable<B>
 } = curry(__chain)
 
-export async function* __chain<A, B>(
+async function* __chain<A, B>(
   fn: Arity1<A, AsyncIterable<B>>,
   asyncIterable: AsyncIterable<A>,
 ): AsyncIterable<B> {

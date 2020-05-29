@@ -10,7 +10,7 @@
     "clean:cjs": "lerna exec rimraf cjs && tsc --build packages/tsconfig.cjs.json --clean",
     "clean:esm": "lerna exec rimraf esm && tsc --build packages/tsconfig.json --clean",
     "clean": " npm run clean:cjs && npm run clean:esm && lerna exec rimraf node_modules",
-    "docs": "typedoc --options typedoc.json packages/*/source",
+    "docs": "typedoc --options typedoc.json --excludeNotExported packages/*/source",
     "new:package": "ts-node tools/new-package",
     "update:package": "ts-node tools/update-package-json",
     "update:tsconfig": "ts-node tools/update-tsconfig-json",
@@ -47,7 +47,7 @@
     "tslint-plugin-prettier": "2.3.0",
     "typedoc": "^0.17.7",
     "typedoc-plugin-barrel-export": "^1.0.0",
-    "typedoc-plugin-markdown": "^2.2.17",
+    "typedoc-plugin-pages": "^1.0.1",
     "typescript": "3.9.3",
     "yargs": "15.3.1"
   },

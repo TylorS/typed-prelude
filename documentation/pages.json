@@ -1,0 +1,14 @@
+{
+  "groups": [
+    {
+      "title": "Typed",
+      "pages": [
+        {
+          "title": "Introduction",
+          "source": "./documentation/introduction.md"
+        }
+      ]
+    }
+  ],
+  "output": "pages"
+}

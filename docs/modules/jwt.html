@@ -1,0 +1,805 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>jwt | Typed - v3.4.1</title>
+	<meta name="description" content="Documentation for Typed - v3.4.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">Typed - v3.4.1</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="jwt.html">jwt</a>
+				</li>
+			</ul>
+			<h1>Package jwt</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<a href="#typedjwt" id="typedjwt" style="color: inherit; text-decoration: none;">
+						<h1>@typed/jwt</h1>
+					</a>
+					<p>An JWT implementation that uses public-key cryptography for signing/verifying, using @typed/effects.</p>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="jwt.html#jwt-1" class="tsd-kind-icon">Jwt</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="jwt.html#verificationoptions" class="tsd-kind-icon">Verification<wbr>Options</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="jwt.html#base64urldecode" class="tsd-kind-icon">base64<wbr>Url<wbr>Decode</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="jwt.html#base64urlencode" class="tsd-kind-icon">base64<wbr>Url<wbr>Encode</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="jwt.html#isjwt" class="tsd-kind-icon">is<wbr>Jwt</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#base64decode" class="tsd-kind-icon">base64<wbr>Decode</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#base64encode" class="tsd-kind-icon">base64<wbr>Encode</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="jwt.html#createclaims" class="tsd-kind-icon">create<wbr>Claims</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#decode" class="tsd-kind-icon">decode</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#encode" class="tsd-kind-icon">encode</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#encodetokens" class="tsd-kind-icon">encode<wbr>Tokens</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="jwt.html#getclaims" class="tsd-kind-icon">get<wbr>Claims</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#getexpiration" class="tsd-kind-icon">get<wbr>Expiration</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#getheader" class="tsd-kind-icon">get<wbr>Header</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#getnotbefore" class="tsd-kind-icon">get<wbr>Not<wbr>Before</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#getsignature" class="tsd-kind-icon">get<wbr>Signature</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#gettoken" class="tsd-kind-icon">get<wbr>Token</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#isactive" class="tsd-kind-icon">is<wbr>Active</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#isexpired" class="tsd-kind-icon">is<wbr>Expired</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#sign" class="tsd-kind-icon">sign</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#splittoken" class="tsd-kind-icon">split<wbr>Token</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="jwt.html#verify" class="tsd-kind-icon">verify</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="jwt-1" class="tsd-anchor"></a>
+					<h3>Jwt</h3>
+					<div class="tsd-signature tsd-kind-icon">Jwt<span class="tsd-signature-symbol">:</span> <a href="new_type.html#newtype" class="tsd-signature-type">NewType</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">"Jwt"</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/Jwt.ts#L5">packages/jwt/source/Jwt.ts:5</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
+					<a name="verificationoptions" class="tsd-anchor"></a>
+					<h3>Verification<wbr>Options</h3>
+					<div class="tsd-signature tsd-kind-icon">Verification<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>audience<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>issuer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>subject<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/verify.ts#L8">packages/jwt/source/verify.ts:8</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> audience<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> issuer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li class="tsd-parameter">
+								<h5><span class="tsd-flag ts-flagOptional">Optional</span> <span class="tsd-flag ts-flagReadonly">Readonly</span> subject<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="base64urldecode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> base64<wbr>Url<wbr>Decode</h3>
+					<div class="tsd-signature tsd-kind-icon">base64<wbr>Url<wbr>Decode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>encoded<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = pipe(replaceTokens,padString,base64Decode,)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/base64UrlDecode.ts#L4">packages/jwt/source/base64UrlDecode.ts:4</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>encoded<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>encoded: <span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="base64urlencode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> base64<wbr>Url<wbr>Encode</h3>
+					<div class="tsd-signature tsd-kind-icon">base64<wbr>Url<wbr>Encode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = pipe(base64Encode, encodeTokens)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/base64UrlEncode.ts#L4">packages/jwt/source/base64UrlEncode.ts:4</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>str: <span class="tsd-signature-type">string</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="isjwt" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> is<wbr>Jwt</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Jwt<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol"> = isNewType((s: string): s is Jwt &#x3D;&gt; regex.test(s))</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/Jwt.ts#L7">packages/jwt/source/Jwt.ts:7</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">B</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>value: <span class="tsd-signature-type">A</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">value</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">B</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="base64decode" class="tsd-anchor"></a>
+					<h3>base64<wbr>Decode</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">base64<wbr>Decode<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/base64.ts#L16">packages/jwt/source/base64.ts:16</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="base64encode" class="tsd-anchor"></a>
+					<h3>base64<wbr>Encode</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">base64<wbr>Encode<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/base64.ts#L8">packages/jwt/source/base64.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="createclaims" class="tsd-anchor"></a>
+					<h3>create<wbr>Claims</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Claims&lt;A&gt;<span class="tsd-signature-symbol">(</span>claims<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span>, expirationMs<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>exp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>nbf<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/createClaims.ts#L3">packages/jwt/source/createClaims.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonObject</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>claims: <span class="tsd-signature-type">A</span></h5>
+								</li>
+								<li>
+									<h5>expirationMs: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Readonly</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-symbol">{ </span>exp<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">; </span>nbf<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="decode" class="tsd-anchor"></a>
+					<h3>decode</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">decode<span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/browser-base64.ts#L33">packages/jwt/source/browser-base64.ts:33</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>input: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="encode" class="tsd-anchor"></a>
+					<h3>encode</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">encode<span class="tsd-signature-symbol">(</span>input<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/browser-base64.ts#L3">packages/jwt/source/browser-base64.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>input: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="encodetokens" class="tsd-anchor"></a>
+					<h3>encode<wbr>Tokens</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">encode<wbr>Tokens<span class="tsd-signature-symbol">(</span>message<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/base64UrlEncode.ts#L8">packages/jwt/source/base64UrlEncode.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>message: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="getclaims" class="tsd-anchor"></a>
+					<h3>get<wbr>Claims</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Claims&lt;A&gt;<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getClaims.ts#L6">packages/jwt/source/getClaims.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>A<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonObject</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">A</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getexpiration" class="tsd-anchor"></a>
+					<h3>get<wbr>Expiration</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Expiration<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getExpiration.ts#L6">packages/jwt/source/getExpiration.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getheader" class="tsd-anchor"></a>
+					<h3>get<wbr>Header</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Header<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonObject</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getHeader.ts#L6">packages/jwt/source/getHeader.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">JsonObject</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getnotbefore" class="tsd-anchor"></a>
+					<h3>get<wbr>Not<wbr>Before</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Not<wbr>Before<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Date</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getNotBefore.ts#L6">packages/jwt/source/getNotBefore.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Date</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="getsignature" class="tsd-anchor"></a>
+					<h3>get<wbr>Signature</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Signature<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getSignature.ts#L5">packages/jwt/source/getSignature.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="gettoken" class="tsd-anchor"></a>
+					<h3>get<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Token<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/getToken.ts#L4">packages/jwt/source/getToken.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isactive" class="tsd-anchor"></a>
+					<h3>is<wbr>Active</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Active<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/isActive.ts#L5">packages/jwt/source/isActive.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="isexpired" class="tsd-anchor"></a>
+					<h3>is<wbr>Expired</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Expired<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/isExpired.ts#L4">packages/jwt/source/isExpired.ts:4</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="sign" class="tsd-anchor"></a>
+					<h3>sign</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">sign<span class="tsd-signature-symbol">(</span>claims<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JsonObject</span>, privateKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CryptoEnv</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">CryptoFailure</span><span class="tsd-signature-symbol">, </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/sign.ts#L19">packages/jwt/source/sign.ts:19</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>claims: <span class="tsd-signature-type">JsonObject</span></h5>
+								</li>
+								<li>
+									<h5>privateKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">CryptoEnv</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">CryptoFailure</span><span class="tsd-signature-symbol">, </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="splittoken" class="tsd-anchor"></a>
+					<h3>split<wbr>Token</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">split<wbr>Token<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/splitToken.ts#L3">packages/jwt/source/splitToken.ts:3</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="verify" class="tsd-anchor"></a>
+					<h3>verify</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">verify<span class="tsd-signature-symbol">(</span>jwt<span class="tsd-signature-symbol">: </span><a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a>, publicKey<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CryptoKey</span>, options<span class="tsd-signature-symbol">?: </span><a href="jwt.html#verificationoptions" class="tsd-signature-type">VerificationOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/bc00f128/packages/jwt/source/verify.ts#L14">packages/jwt/source/verify.ts:14</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>jwt: <a href="jwt.html#jwt-1" class="tsd-signature-type">Jwt</a></h5>
+								</li>
+								<li>
+									<h5>publicKey: <span class="tsd-signature-type">CryptoKey</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> options: <a href="jwt.html#verificationoptions" class="tsd-signature-type">VerificationOptions</a><span class="tsd-signature-symbol"> = {}</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="crypto.html#cryptoeffects" class="tsd-signature-type">CryptoEffects</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Typed</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../pages/Typed/introduction.html">Introduction</a>
+					</li>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="jwt.html">jwt</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-module">
+						<a href="jwt.html" class="tsd-kind-icon">jwt</a>
+						<ul>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="jwt.html#jwt-1" class="tsd-kind-icon">Jwt</a>
+							</li>
+							<li class=" tsd-kind-type-alias tsd-parent-kind-module">
+								<a href="jwt.html#verificationoptions" class="tsd-kind-icon">Verification<wbr>Options</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="jwt.html#base64urldecode" class="tsd-kind-icon">base64<wbr>Url<wbr>Decode</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="jwt.html#base64urlencode" class="tsd-kind-icon">base64<wbr>Url<wbr>Encode</a>
+							</li>
+							<li class=" tsd-kind-variable tsd-parent-kind-module">
+								<a href="jwt.html#isjwt" class="tsd-kind-icon">is<wbr>Jwt</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#base64decode" class="tsd-kind-icon">base64<wbr>Decode</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#base64encode" class="tsd-kind-icon">base64<wbr>Encode</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="jwt.html#createclaims" class="tsd-kind-icon">create<wbr>Claims</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#decode" class="tsd-kind-icon">decode</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#encode" class="tsd-kind-icon">encode</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#encodetokens" class="tsd-kind-icon">encode<wbr>Tokens</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+								<a href="jwt.html#getclaims" class="tsd-kind-icon">get<wbr>Claims</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#getexpiration" class="tsd-kind-icon">get<wbr>Expiration</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#getheader" class="tsd-kind-icon">get<wbr>Header</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#getnotbefore" class="tsd-kind-icon">get<wbr>Not<wbr>Before</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#getsignature" class="tsd-kind-icon">get<wbr>Signature</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#gettoken" class="tsd-kind-icon">get<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#isactive" class="tsd-kind-icon">is<wbr>Active</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#isexpired" class="tsd-kind-icon">is<wbr>Expired</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#sign" class="tsd-kind-icon">sign</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#splittoken" class="tsd-kind-icon">split<wbr>Token</a>
+							</li>
+							<li class=" tsd-kind-function tsd-parent-kind-module">
+								<a href="jwt.html#verify" class="tsd-kind-icon">verify</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.json"><' + '/script>');</script>
+</body>
+</html>
