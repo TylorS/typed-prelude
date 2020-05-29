@@ -31,7 +31,7 @@
     "release:alpha": "npm run release -- --canary --preid alpha --dist-tag alpha"
   },
   "devDependencies": {
-    "@strictsoftware/typedoc-plugin-monorepo": "^0.3.1",
+    "@strictsoftware/typedoc-plugin-monorepo": "0.3.1",
     "@typed/test": "9.5.0",
     "@types/node": "13.13.9",
     "@types/yargs": "15.0.5",
@@ -45,9 +45,9 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-no-circular-imports": "0.7.0",
     "tslint-plugin-prettier": "2.3.0",
-    "typedoc": "^0.17.7",
-    "typedoc-plugin-barrel-export": "^1.0.0",
-    "typedoc-plugin-pages": "^1.0.1",
+    "typedoc": "0.17.7",
+    "typedoc-plugin-barrel-export": "1.0.0",
+    "typedoc-plugin-pages": "1.0.1",
     "typescript": "3.9.3",
     "yargs": "15.3.1"
   },
