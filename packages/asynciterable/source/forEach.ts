@@ -5,7 +5,7 @@ export const forEach: {
   <A>(fn: (value: A) => void): (asyncIterable: AsyncIterable<A>) => Promise<void>
 } = curry(__forEach)
 
-export async function __forEach<A>(
+async function __forEach<A>(
   fn: (value: A) => void,
   asyncIterable: AsyncIterable<A>,
 ): Promise<void> {
