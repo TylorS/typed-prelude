@@ -46,15 +46,13 @@ export const useClassName: GenerateClassName<
     const startSize = rules.size
     // Merge together properties to avoid creating rules that need to be overridden. Last value wins.
     const merged = mergeObjects(props.filter(isObject as (x: any) => x is NestedCssProperties))
-    const generateClassNames = yield* generatePropertyClassNames(merged)
+    const generatedClassNames = yield* generatePropertyClassNames(merged)
 
     if (styleSheet && startSize !== rules.size) {
       styleSheet.textContent = getCss(rules)
     }
 
-    return classNames(
-      ...generateClassNames.reduce((acc, x) => [...acc, ...x] as ClassName[], [] as ClassName[]),
-    )
+    return classNames(...generatedClassNames)
   }, properties)
 }
 
