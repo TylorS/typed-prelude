@@ -1,6 +1,6 @@
 {
   "name": "@typed/objects",
-  "version": "6.4.0",
+  "version": "6.4.1",
   "description": "Functions for working with objects",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

@@ -1,6 +1,6 @@
 {
   "name": "@typed/html",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Universal rendering for TypeScript",
   "main": "./cjs/index.js",
   "keywords": [
@@ -30,17 +30,17 @@
   "dependencies": {
     "@typed/common": "^3.5.0",
     "@typed/disposable": "^3.4.0",
-    "@typed/dom": "^7.6.0",
-    "@typed/effects": "^6.6.0",
-    "@typed/hooks": "^10.5.0",
+    "@typed/dom": "^7.6.1",
+    "@typed/effects": "^6.7.0",
+    "@typed/hooks": "^10.5.1",
     "@typed/lambda": "^3.4.0",
-    "@typed/list": "^6.4.0",
-    "@typed/logic": "^6.5.0",
+    "@typed/list": "^6.4.1",
+    "@typed/logic": "^6.5.1",
     "@typed/maybe": "^10.4.0",
-    "@typed/objects": "^6.4.0",
-    "@typed/render": "^3.4.0",
+    "@typed/objects": "^6.4.1",
+    "@typed/render": "^3.4.1",
     "@typed/set": "^3.3.0",
-    "@typed/timer": "^3.5.0",
+    "@typed/timer": "^3.5.1",
     "csstype": "2.6.10"
   }
 }
