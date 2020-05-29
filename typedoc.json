@@ -6,7 +6,7 @@
   "pages": "./documentation/pages.json",
   "readme": "./documentation/readme.md",
   "ignoreCompilerErrors": "true",
-  "includeVersion": "true",
+  "includeVersion": "false",
   "exclude": "**/*+(test|browser-test).ts",
   "external-modulemap": ".*packages/([^/]+)/source/.*",
   "stripInternal": "true"
