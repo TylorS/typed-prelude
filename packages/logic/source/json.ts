@@ -1,6 +1,7 @@
 import { Json, JsonPrimitive } from '@typed/common'
 import { isObject } from './is'
 
+// TODO: support Date
 export type JsonSerializable =
   | JsonPrimitive
   | ReadonlyArray<JsonSerializable>
