@@ -10,14 +10,14 @@ import { updateRootConfigs, updateTsConfigForPkg } from './update-tsconfig-json'
 import { updateVsCodeSettings } from './update-vscode-settings'
 
 const options = yargs.boolean('force').alias('f', 'force').help().argv
-const { _: names, force = options.f } = options
+const { _: names, force = false } = options
 
 const mkdir = promisify(fs.mkdir)
 
 if (process.mainModule === module) {
   ;(async () => {
     for (const name of names) {
-      await newPackage(name)
+      await newPackage(name, force)
     }
 
     updateRootConfigs()
@@ -29,7 +29,7 @@ if (process.mainModule === module) {
   })
 }
 
-async function newPackage(name: string) {
+export async function newPackage(name: string, force: boolean) {
   const packageName = `@typed/${name}`
   const packageDirectory = join(sourceDirectory, name)
   const packageSourceDirectory = join(packageDirectory, 'source')
