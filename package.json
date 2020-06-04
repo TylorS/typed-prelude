@@ -48,7 +48,7 @@
     "typedoc": "0.17.7",
     "typedoc-plugin-barrel-export": "1.0.0",
     "typedoc-plugin-pages": "1.0.1",
-    "typescript": "3.9.3",
+    "typescript": "3.9.5",
     "yargs": "15.3.1"
   },
   "peerDependencies": {
