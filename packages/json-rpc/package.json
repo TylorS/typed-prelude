@@ -18,7 +18,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/ws": "7.2.4",
+    "@types/ws": "7.2.5",
     "ws": "7.3.0"
   },
   "peerDependencies": {
