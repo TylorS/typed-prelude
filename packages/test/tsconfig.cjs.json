@@ -22,16 +22,40 @@
       "path": "../common/tsconfig.json"
     },
     {
+      "path": "../crypto/tsconfig.json"
+    },
+    {
       "path": "../disposable/tsconfig.json"
+    },
+    {
+      "path": "../dom/tsconfig.json"
     },
     {
       "path": "../effects/tsconfig.json"
     },
     {
+      "path": "../either/tsconfig.json"
+    },
+    {
+      "path": "../env/tsconfig.json"
+    },
+    {
+      "path": "../hooks/tsconfig.json"
+    },
+    {
+      "path": "../http/tsconfig.json"
+    },
+    {
       "path": "../json-rpc/tsconfig.json"
     },
     {
+      "path": "../lambda/tsconfig.json"
+    },
+    {
       "path": "../list/tsconfig.json"
+    },
+    {
+      "path": "../logger/tsconfig.json"
     },
     {
       "path": "../logic/tsconfig.json"
@@ -44,6 +68,15 @@
     },
     {
       "path": "../node/tsconfig.json"
+    },
+    {
+      "path": "../render/tsconfig.json"
+    },
+    {
+      "path": "../streams/tsconfig.json"
+    },
+    {
+      "path": "../timer/tsconfig.json"
     },
     {
       "path": "../uuid/tsconfig.json"

@@ -1,8 +1,11 @@
 import { Flatten, UnNest } from '@typed/common'
 import { Capabilities, Effects, TypeOf } from '@typed/effects'
+import * as t from '@typed/io'
 import { Maybe } from '@typed/maybe'
 import { Base, NewType } from '@typed/new-type'
 import { Uuid } from '@typed/uuid'
+import { Key } from './common'
+import { TestResult, TestResults } from './TestResult'
 
 /**
  * A list of Tests and Test Suites
@@ -13,6 +16,12 @@ export type Tests = ReadonlyArray<Test>
  * Either a Test or TestSuite
  */
 export type Test = TestCase | TestSuite
+
+export type TestId = Key<Test>
+export const TestId = Key<TestId>('TestId')
+
+export type TestType = Test['type']
+export const TestType: t.Type<TestType> = t.union([t.literal('test'), t.literal('suite')])
 
 /**
  * An individual Test unit. E is the environment in which it is required to run the test. C is
@@ -33,6 +42,8 @@ export type TestEnvOf<A> = A extends TestSuite
   ? GetCombinedTestEnv<A['tests']>
   : A extends TestCase
   ? GetTestEnv<A>
+  : A extends ReadonlyArray<Test>
+  ? GetCombinedTestEnv<A>
   : unknown
 
 /**
@@ -85,14 +96,14 @@ export type TimeoutOf<A> = A extends Test
 export type ModifierOf<A> = A extends Test
   ? ConfigOf<A>['modifier'] extends TestModifier
     ? ConfigOf<A>['modifier']
-    : TestModifier.Default
-  : TestModifier.Default
+    : 'Default'
+  : 'Default'
 
 export type ModifiersOf<A extends Tests> = {
   [K in keyof A]: A[K] extends TestCase
     ? ModifierOf<A[K]>
     : A[K] extends TestSuite
-    ? ModifierOf<A[K]> extends TestModifier.Skip | TestModifier.Todo
+    ? ModifierOf<A[K]> extends 'Skip' | 'Todo'
       ? ModifierOf<A[K]>
       : ModifierOf<A[K]> | ModifiersOf<TestsOf<A[K]>>
     : never
@@ -111,6 +122,13 @@ export interface TestConfig<
   readonly modifier: Modifier
   readonly timeout: Maybe<Timeout>
 }
+
+export const TestConfig: t.Type<TestConfig> = t.record({
+  id: t.Uuid,
+  name: t.refinement(t.String, (_): _ is TestName<string> => true),
+  modifier: t.lazy(() => TestModifier),
+  timeout: t.maybe(t.Number),
+})
 
 /**
  * Update any part of the test config in a TestConfig for a given TestLike.
@@ -163,59 +181,32 @@ export type UpdateModifier<Modifier extends TestModifier, T extends Test> = Upda
 /**
  * A TestName
  */
-export type TestName<A extends string> = NewType<A, { readonly TestName: typeof TestName }>
-declare const TestName: unique symbol
+export type TestName<A extends string> = NewType<A, 'TestName'>
 
 /**
  * Modifiers for how tests should be run
  */
-export const enum TestModifier {
-  Default,
-  Skip,
-  Only,
-  Todo,
-}
+export const DefaultTestModifier = t.literal('Default')
+export const SkipTestModifier = t.literal('Skip')
+export const OnlyTestModifier = t.literal('Only')
+export const TodoTestModifier = t.literal('Todo')
+
+export type TestModifier = t.TypeOf<typeof TestModifier>
+export const TestModifier = t.union([
+  DefaultTestModifier,
+  SkipTestModifier,
+  OnlyTestModifier,
+  TodoTestModifier,
+])
 
 /* Test Results */
 
-export interface TestResults extends ReadonlyArray<TestResult> {}
-
-export type TestResult =
-  | PassedTestResult
-  | SkippedTestResult
-  | TodoTestResult
-  | FailedTestResult
-  | SuiteResult
-
-export interface PassedTestResult {
-  readonly type: 'pass'
-}
-
-export interface SkippedTestResult {
-  readonly type: 'skip'
-}
-
-export interface TodoTestResult {
-  readonly type: 'todo'
-}
-
-export interface FailedTestResult {
-  readonly type: 'fail'
-  readonly message: string
-  readonly stack?: string
-  readonly line?: number
-}
-
-export interface SuiteResult {
-  readonly type: 'suite'
-  readonly results: readonly TestResult[]
-}
 /* End: Test Results */
 
 /* Effects */
 
 export type RunTests<E> = <A extends Tests>(tests: A) => Effects<E & TestEnvOf<A>, TestResults>
-export type RunTest<E> = <A extends Test>(tests: A) => Effects<E & TestEnvOf<A>, TestResult>
+export type RunTest<E> = <A extends Test>(test: A) => Effects<E & TestEnvOf<A>, TestResult>
 
 /* End: Effects */
 

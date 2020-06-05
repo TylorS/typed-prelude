@@ -1,7 +1,7 @@
 import { Json } from '@typed/common'
 
 export type Id = string | number
-export type StructuredJson = Readonly<Partial<Record<string, any>>> | readonly any[]
+export type StructuredJson = Readonly<Partial<Record<string, any>>> | ReadonlyArray<any>
 
 export type Message = JsonRpcRequest | JsonRpcResponse | JsonRpcNotification | Batch
 export type BatchRequest = JsonRpcRequest[]

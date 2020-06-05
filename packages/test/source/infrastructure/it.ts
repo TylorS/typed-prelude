@@ -15,6 +15,7 @@ import {
   race,
   runEffects,
   runWith,
+  TimerEnv,
 } from '@typed/effects'
 import { Left, Right } from '@typed/either'
 import { Resume } from '@typed/env'
@@ -25,12 +26,14 @@ import { isIterable, isPromiseLike } from '@typed/logic'
 import { Nothing } from '@typed/maybe'
 import { VirtualTimer } from '@typed/timer'
 import { uuid4, UuidEnv } from '@typed/uuid'
+import { TestOptions } from '../application'
 import { TestCase, TestConfig, TestModifier, TestName, TestResult } from '../domain/model'
 import { updateModifier } from '../domain/services'
-import { TestEnv } from './TestEnv'
 import { uuidEnv } from './uuidEnv'
 
 export type TestFn = (done: DoneCallback) => void | PromiseLike<any> | Effects<ProvidedEnv, any>
+
+export type TestEnv = LoggerEnv & TimerEnv & Fork & Join & FiberFailure & TestOptions
 
 export type ProvidedEnv = VirtualTimerEnv &
   HooksManagerEnv &

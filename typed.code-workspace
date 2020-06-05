@@ -192,8 +192,5 @@
       "name": "Typed Prelude",
       "path": "./"
     }
-  ],
-  "settings": {
-    "typescript.tsdk": "Typed Prelude/node_modules/typescript/lib"
-  }
+  ]
 }

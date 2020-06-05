@@ -1,3 +1,4 @@
+import { mapToList } from '@typed/objects'
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
@@ -6,7 +7,7 @@ import { Type } from './Type'
 
 export const partial = <A extends Props>(
   props: A,
-  name: string,
+  name: string = getDefaultPartialExpected(props),
   expected: string = name,
 ): Type<Partial<{ readonly [K in keyof A]: Type.Of<A[K]> }>> => {
   const g = G.partial(props)
@@ -19,4 +20,12 @@ export const partial = <A extends Props>(
     ...e,
     name,
   }
+}
+
+function getDefaultPartialExpected<A extends Readonly<Record<PropertyKey, Type>>>(
+  decoders: A,
+): string {
+  return `{${mapToList((key, value) => `"${key.toString()}"?: ${value.expected}`, decoders).join(
+    `,`,
+  )}}`
 }

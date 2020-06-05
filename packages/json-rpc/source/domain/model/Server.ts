@@ -1,7 +1,7 @@
 import { Disposable } from '@typed/disposable'
 import { HookEffects } from '@typed/hooks'
 import { Tuple } from '@typed/tuple'
-import { Connection } from './Connection'
+import { Connection, ConnectionEnv } from './Connection'
 import { JsonRpcNotification, JsonRpcRequest, JsonRpcResponse } from './json-rpc-v2'
 
 export interface Server<E> extends Disposable {
@@ -18,10 +18,10 @@ export interface Server<E> extends Disposable {
 
 export type NotificationHandler<E, A extends JsonRpcNotification> = (
   notification: A,
-) => HookEffects<E, void>
+) => HookEffects<ConnectionEnv & E, void>
 
 export type RequestHandler<E, A extends JsonRpcRequest, B extends JsonRpcResponse> = (
-  notification: A,
-) => HookEffects<E, B>
+  request: A,
+) => HookEffects<ConnectionEnv & E, B>
 
 export type ConnectionEvent = Tuple<'add', Connection> | Tuple<'remove', Connection>

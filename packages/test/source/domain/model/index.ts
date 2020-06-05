@@ -1,3 +1,5 @@
 export * from './common'
-export * from './TestMetadata'
+export * from './protocol'
 export * from './Test'
+export * from './TestMetadata'
+export * from './TestResult'

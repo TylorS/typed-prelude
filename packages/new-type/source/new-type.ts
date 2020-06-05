@@ -1,7 +1,7 @@
 /**
  * Helper type for creating ad-hoc new types
  */
-export type NewType<A, Type> = A & { readonly __TYPE__: Type }
+export type NewType<A, Type> = A & { readonly __TYPE__: [Type] }
 
 /**
  * Get the underlying type of a NewType

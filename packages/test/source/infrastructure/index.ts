@@ -1,6 +1,4 @@
 export * from './describe'
 export * from './given'
 export * from './it'
-export * from './protocol'
 export * from './runTests'
-export * from './TestEnv'
