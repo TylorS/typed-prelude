@@ -31,4 +31,4 @@ export const Environment = t.refinement(
 
 export type Key<A> = NewType<Uuid, A>
 export const Key = <A extends Key<any>>(keyName: string): t.Type<A> =>
-  t.refinement(t.Uuid, (u): u is A => true, keyName)
+  t.refinement(t.Uuid, (_): _ is A => true, keyName)

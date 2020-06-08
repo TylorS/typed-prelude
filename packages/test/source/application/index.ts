@@ -1,2 +1,5 @@
+export * from './assertions'
+export * from './dsl'
 export * from './events'
+export * from './TestEnv'
 export * from './TestOptions'

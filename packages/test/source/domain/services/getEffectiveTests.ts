@@ -10,7 +10,6 @@ import {
   TestSuite,
   UpdateModifier,
 } from '../model'
-import { isTestCase } from './is'
 import { updateModifier } from './updateTestConfig'
 
 const hasModifier = (test: Test, modifier: TestModifier) => test.config.modifier === modifier
@@ -27,17 +26,12 @@ export type EffectiveTests<A extends Tests> = GetEffectiveTests<A, HasOnly<A>, f
  * e.g. A test marked as 'only' should mark other's not marked as 'only' as 'skipped'
  */
 export function getEffectiveTests<A extends Tests>(tests: A): EffectiveTests<A> {
-  return updateTestModifiers<A>(
-    tests,
-    tests.some(hasSpecifiedModifier(TestModifier.Only)),
-    false,
-    true,
-  )
+  return updateTestModifiers<A>(tests, tests.some(hasSpecifiedModifier('Only')), false, true)
 }
 
 function hasSpecifiedModifier(modifier: TestModifier) {
   return (test: Test): boolean => {
-    if (isTestCase(test)) {
+    if (TestCase.is(test)) {
       return hasModifier(test, modifier)
     }
 
@@ -57,22 +51,19 @@ function updateTestModifiers<A extends Tests>(
 }
 
 function updateTestModifier(shouldSkip: boolean, shouldTodo: boolean, canOverride: boolean) {
-  const containsOnly = hasSpecifiedModifier(TestModifier.Only)
+  const containsOnly = hasSpecifiedModifier('Only')
 
   return (test: Test): Test => {
     const shouldOverrideSkip = canOverride ? containsOnly(test) : false
 
-    return isTestCase(test)
+    return TestCase.is(test)
       ? updatedTestCase(test, shouldSkip && !shouldOverrideSkip, shouldTodo)
       : updateTestSuite(test, shouldSkip && !shouldOverrideSkip, shouldTodo, canOverride)
   }
 }
 
 function updatedTestCase(test: TestCase, shouldSkip: boolean, shouldTodo: boolean) {
-  return updateModifier(
-    shouldSkip ? TestModifier.Skip : shouldTodo ? TestModifier.Todo : test.config.modifier,
-    test,
-  )
+  return updateModifier(shouldSkip ? 'Skip' : shouldTodo ? 'Todo' : test.config.modifier, test)
 }
 
 function updateTestSuite(
@@ -81,26 +72,23 @@ function updateTestSuite(
   shouldTodo: boolean,
   canOverride: boolean,
 ) {
-  const hasSkip = shouldSkip || hasModifier(test, TestModifier.Skip)
-  const hasTodo = shouldTodo || hasModifier(test, TestModifier.Todo)
+  const hasSkip = shouldSkip || hasModifier(test, 'Skip')
+  const hasTodo = shouldTodo || hasModifier(test, 'Todo')
   const canStillOverride = canOverride && !(hasSkip || hasTodo)
 
   const tests = updateTestModifiers(test.tests, hasSkip, hasTodo, canStillOverride)
 
-  return updateModifier(
-    shouldSkip ? TestModifier.Skip : shouldTodo ? TestModifier.Todo : test.config.modifier,
-    {
-      ...test,
-      tests,
-    },
-  )
+  return updateModifier(shouldSkip ? 'Skip' : shouldTodo ? 'Todo' : test.config.modifier, {
+    ...test,
+    tests,
+  })
 }
 
 /* Internal Types */
 
 type HasOnly<
   A extends ReadonlyArray<TestCase<any, any> | TestSuite<any, any>>
-> = TestModifier.Only extends ModifiersOf<A> ? true : false
+> = 'Only' extends ModifiersOf<A> ? true : false
 
 type GetEffectiveTests<
   A extends Tests,
@@ -142,11 +130,7 @@ type GetEffectiveTestCase<
   ShouldSkip extends true | false,
   ShouldTodo extends true | false = false
 > = UpdateModifier<
-  ShouldSkip extends true
-    ? TestModifier.Skip
-    : ShouldTodo extends true
-    ? TestModifier.Todo
-    : ModifierOf<A>,
+  ShouldSkip extends true ? 'Skip' : ShouldTodo extends true ? 'Todo' : ModifierOf<A>,
   A
 >
 
@@ -169,15 +153,11 @@ type _GetEffectiveTestSuite<
   CanOverride extends true | false = false
 > = _GetEffectiveTestSuiteChildren<
   UpdateModifier<
-    ShouldSkip extends true
-      ? TestModifier.Skip
-      : ShouldTodo extends true
-      ? TestModifier.Todo
-      : ModifierOf<A>,
+    ShouldSkip extends true ? 'Skip' : ShouldTodo extends true ? 'Todo' : ModifierOf<A>,
     A
   >,
-  ShouldSkip extends true ? true : TestModifier.Skip extends ModifierOf<A> ? true : false,
-  ShouldTodo extends true ? true : TestModifier.Todo extends ModifierOf<A> ? true : false,
+  ShouldSkip extends true ? true : 'Skip' extends ModifierOf<A> ? true : false,
+  ShouldTodo extends true ? true : 'Todo' extends ModifierOf<A> ? true : false,
   CanOverride
 >
 

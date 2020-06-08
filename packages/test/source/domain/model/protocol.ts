@@ -8,6 +8,7 @@ import {
 } from '@typed/json-rpc'
 import { Log } from '@typed/logger'
 import { NewType } from '@typed/new-type'
+import { AssertionError } from '../../application/assertions'
 import { DocumentUri, Environment, Key } from './common'
 import { TestConfig, TestId, TestType } from './Test'
 import { MetadataId, TestMetadata } from './TestMetadata'
@@ -21,6 +22,8 @@ export type TestMessage =
   | DocumentStarted
   | DocumentFinished
   | TestStarted
+  | AssertionPassed
+  | AssertionFailed
   | TestFinished
   | Logged
 
@@ -35,6 +38,7 @@ export enum TestMethod {
   DocumentStarted = 'document.started',
   DocumentFinished = 'document.finished',
   TestStarted = 'test.started',
+  TestAssertion = 'test.assertion',
   TestFinished = 'test.finished',
   Logged = 'test.logged',
 }
@@ -47,7 +51,7 @@ export enum TestErrorCode {
 // A client is responsible for asking for the server to analyze a set of document uris, including file changes.
 // The server is capable of optimizing the response by the use of caching.
 export const AnalyzeRequest = jsonRpcRequest(t.literal(TestMethod.Analyze), t.array(DocumentUri))
-export interface AnalyzeRequest extends t.TypeOf<typeof AnalyzeRequest> {}
+export type AnalyzeRequest = t.TypeOf<typeof AnalyzeRequest>
 
 export const AnalyzeResponse = t.union([
   jsonRpcSuccessResponse(t.array(TestMetadata)),
@@ -75,6 +79,13 @@ export interface StartTestsRequest extends t.TypeOf<typeof StartTestsRequest> {}
 
 export const StartTestsResponse = t.union([
   jsonRpcSuccessResponse(t.array(t.lazy(() => TestRun))),
+  jsonRpcFailedResponse(
+    t.record({
+      code: t.literal(TestErrorCode.UnknownMetadataId),
+      message: t.String,
+      data: t.array(MetadataId),
+    }),
+  ),
   UnknownJsonRpcFailedResponse,
 ])
 
@@ -117,6 +128,31 @@ export const TestStarted = jsonRpcNotification(
   }),
 )
 export type TestStarted = t.TypeOf<typeof TestStarted>
+
+export const AssertionValue = t.record({
+  value: t.String,
+  line: t.Number,
+})
+export type AssertionValue = t.TypeOf<typeof AssertionValue>
+
+export const AssertionPassed = jsonRpcNotification(
+  t.literal(TestMethod.TestAssertion),
+  t.record({
+    testId: TestId,
+    value: AssertionValue,
+  }),
+)
+export type AssertionPassed = t.TypeOf<typeof AssertionPassed>
+
+export const AssertionFailed = jsonRpcNotification(
+  t.literal(TestMethod.TestAssertion),
+  t.record({
+    testId: TestId,
+    error: AssertionError,
+  }),
+)
+
+export type AssertionFailed = t.TypeOf<typeof AssertionFailed>
 
 export const TestFinished = jsonRpcNotification(
   t.literal(TestMethod.TestFinished),

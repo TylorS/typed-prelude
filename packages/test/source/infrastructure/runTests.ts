@@ -1,15 +1,16 @@
 import { combine, Effects } from '@typed/effects'
 import {
   FailedTestResult,
-  RunTest,
   RunTests,
+  SkipTestModifier,
+  Test,
   TestCase,
   TestEnvOf,
-  TestModifier,
   TestResult,
   TestSuite,
+  TodoTestModifier,
 } from '../domain'
-import { EffectiveTests, getEffectiveTests, isTestCase, isTestSuite } from '../domain/services'
+import { EffectiveTests, getEffectiveTests } from '../domain/services'
 
 export const runTests: RunTests<unknown> = function* (tests) {
   const effectiveTests: EffectiveTests<typeof tests> = getEffectiveTests(tests)
@@ -17,13 +18,13 @@ export const runTests: RunTests<unknown> = function* (tests) {
   return yield* combine(...effectiveTests.map((t) => runTest(t)))
 }
 
-export const runTest: RunTest<unknown> = function* (test) {
-  if (isTestCase(test)) {
-    return yield* runTestCase(test as any)
+function* runTest(test: Test) {
+  if (TestCase.is(test)) {
+    return yield* runTestCase(test)
   }
 
-  if (isTestSuite(test)) {
-    return yield* runTestSuite(test as any)
+  if (TestSuite.is(test)) {
+    return yield* runTestSuite(test)
   }
 
   return { type: 'fail', message: 'Unknown Test Type' } as FailedTestResult
@@ -32,13 +33,13 @@ export const runTest: RunTest<unknown> = function* (test) {
 function* runTestCase<A extends TestCase>(test: A): Effects<TestEnvOf<A>, TestResult> {
   const { modifier } = test.config
 
-  if (modifier === TestModifier.Skip) {
+  if (SkipTestModifier.is(modifier)) {
     return {
       type: 'skip',
     } as const
   }
 
-  if (modifier === TestModifier.Todo) {
+  if (TodoTestModifier.is(modifier)) {
     return {
       type: 'todo',
     } as const

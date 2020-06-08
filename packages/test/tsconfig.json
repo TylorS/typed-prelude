@@ -46,6 +46,9 @@
       "path": "../http/tsconfig.json"
     },
     {
+      "path": "../io/tsconfig.json"
+    },
+    {
       "path": "../json-rpc/tsconfig.json"
     },
     {
@@ -76,7 +79,13 @@
       "path": "../streams/tsconfig.json"
     },
     {
+      "path": "../subscription/tsconfig.json"
+    },
+    {
       "path": "../timer/tsconfig.json"
+    },
+    {
+      "path": "../tuple/tsconfig.json"
     },
     {
       "path": "../uuid/tsconfig.json"

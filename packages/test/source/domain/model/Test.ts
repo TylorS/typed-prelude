@@ -1,6 +1,7 @@
 import { Flatten, UnNest } from '@typed/common'
 import { Capabilities, Effects, TypeOf } from '@typed/effects'
 import * as t from '@typed/io'
+import { isGenerator } from '@typed/logic'
 import { Maybe } from '@typed/maybe'
 import { Base, NewType } from '@typed/new-type'
 import { Uuid } from '@typed/uuid'
@@ -16,6 +17,7 @@ export type Tests = ReadonlyArray<Test>
  * Either a Test or TestSuite
  */
 export type Test = TestCase | TestSuite
+export const Test: t.Type<Test> = t.union([t.lazy(() => TestCase), t.lazy(() => TestSuite)])
 
 export type TestId = Key<Test>
 export const TestId = Key<TestId>('TestId')
@@ -34,6 +36,15 @@ export interface TestCase<E extends {} = any, C extends TestConfig = TestConfig>
   readonly config: C
   readonly runTest: () => Effects<E, TestResult>
 }
+
+export const TestCase: t.Type<TestCase> = t.record(
+  {
+    type: t.literal('test'),
+    config: t.lazy(() => TestConfig),
+    runTest: t.refinement(t.Function, (f): f is TestCase['runTest'] => isGenerator(f())),
+  },
+  `TestCase`,
+)
 
 /**
  * Get the combined environment of a Test, TestSuite, or list of the two.
@@ -64,6 +75,12 @@ export interface TestSuite<C extends TestConfig = TestConfig, T extends Tests = 
   readonly config: C
   readonly tests: T
 }
+
+export const TestSuite: t.Type<TestSuite> = t.record({
+  type: t.literal('suite'),
+  config: t.lazy(() => TestConfig),
+  tests: t.array(Test),
+})
 
 /**
  * The tests in a TestSuite
@@ -204,10 +221,7 @@ export const TestModifier = t.union([
 /* End: Test Results */
 
 /* Effects */
-
 export type RunTests<E> = <A extends Tests>(tests: A) => Effects<E & TestEnvOf<A>, TestResults>
-export type RunTest<E> = <A extends Test>(test: A) => Effects<E & TestEnvOf<A>, TestResult>
-
 /* End: Effects */
 
 /* Internal */
