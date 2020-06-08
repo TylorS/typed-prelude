@@ -3,23 +3,24 @@ import * as E from '../encoder'
 import * as G from '../guard'
 import { Type } from './Type'
 
-export const tuple = <A extends ReadonlyArray<Type>>(
-  types: A,
-): Type<
-  { readonly [K in keyof A]: Type.Of<A[K]> },
-  { readonly [K in keyof A]: Type.Encoding<A[K]> }
-> => {
-  const g = G.tuple(types)
-  const d = D.tuple(types)
-  const e = E.tuple(types)
+export interface TupleType<A extends ReadonlyArray<Type>>
+  extends Type<
+    { readonly [K in keyof A]: Type.Of<A[K]> },
+    { readonly [K in keyof A]: Type.Encoding<A[K]> }
+  > {
+  readonly members: A
+}
+
+export const tuple = <A extends ReadonlyArray<Type>>(members: A): TupleType<A> => {
+  const g = G.tuple(members)
+  const d = D.tuple(members)
+  const e = E.tuple(members)
 
   return {
     ...g,
     ...d,
     ...e,
     name: d.expected,
-  } as Type<
-    { readonly [K in keyof A]: Type.Of<A[K]> },
-    { readonly [K in keyof A]: Type.Encoding<A[K]> }
-  >
+    members,
+  } as TupleType<A>
 }

@@ -25,5 +25,5 @@ export namespace Type {
   })
 }
 
-export interface Mixed extends Type<any, any> {}
-export const Mixed: Mixed = Type.fromGuard({ is: (u): u is any => true }, `Mixed`, `any`)
+export interface Any extends Type<any, any> {}
+export const Any: Any = Type.fromGuard({ is: (u): u is any => true }, `Any`, `any`)

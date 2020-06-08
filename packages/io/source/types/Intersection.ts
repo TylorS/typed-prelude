@@ -2,17 +2,19 @@ import { Flatten, UnNest } from '@typed/common'
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
 
-export type IntersectionType<A extends ReadonlyArray<Mixed>> = Type<
-  UnNest<Flatten<DecoderInputConsList<A>, unknown>>,
-  UnNest<Flatten<EncoderOutputConsList<A>, unknown>>
->
+export interface IntersectionType<A extends ReadonlyArray<Any>>
+  extends Type<
+    UnNest<Flatten<DecoderInputConsList<A>, unknown>>,
+    UnNest<Flatten<EncoderOutputConsList<A>, unknown>>
+  > {
+  readonly members: A
+}
 
-const getIntersectionName = (types: readonly Mixed[]): string =>
-  types.map((t) => t.name).join(' & ')
+const getIntersectionName = (types: readonly Any[]): string => types.map((t) => t.name).join(' & ')
 
-export function intersection<A extends ReadonlyArray<Mixed>>(
+export function intersection<A extends ReadonlyArray<Any>>(
   types: A,
   name: string = getIntersectionName(types),
 ): IntersectionType<A> {
@@ -25,6 +27,7 @@ export function intersection<A extends ReadonlyArray<Mixed>>(
     ...decoder,
     ...encoder,
     name,
+    members: types,
   } as IntersectionType<A>
 }
 

@@ -1,15 +1,25 @@
 import * as G from '../guard'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
 
-export const Map: MapType<unknown, unknown> = Type.fromGuard(G.Map, `ReadonlyMap<unknown, unknown>`)
+export interface MapType<K extends Type, V extends Type>
+  extends Type<ReadonlyMap<Type.Of<K>, Type.Of<V>>> {
+  readonly key: K
+  readonly value: V
+}
 
-export type MapType<K, V> = Type<ReadonlyMap<K, V>>
-
-export function map<K extends Mixed, V extends Mixed>(
+export function map<K extends Any, V extends Any>(
   key: K,
   value: V,
   name: string = `ReadonlyMap<${key.name}, ${value.name}>`,
   expected: string = `ReadonlyMap<${key.expected}, ${value.expected}>`,
-): MapType<Type.Of<K>, Type.Of<V>> {
-  return Type.fromGuard(G.map(key, value), name, expected)
+): MapType<K, V> {
+  const type = Type.fromGuard(G.map(key, value), name, expected)
+
+  return {
+    ...type,
+    key,
+    value,
+  }
 }
+
+export const Map: MapType<Any, Any> = map(Any, Any)

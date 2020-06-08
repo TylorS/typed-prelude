@@ -1,8 +1,8 @@
 import { Refinement } from '@typed/lambda'
 import * as D from '../decoder'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
 
-export function refinement<A extends Mixed, B extends Type.Of<A>>(
+export function refinement<A extends Any, B extends Type.Of<A>>(
   type: A,
   refinementF: Refinement<Type.Of<A>, B>,
   name: string = type.name,

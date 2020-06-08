@@ -1,14 +1,19 @@
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
+
+export interface UnionType<A extends ReadonlyArray<Type>>
+  extends Type<{ readonly [K in keyof A]: Type.Of<A[K]> }[number]> {
+  readonly members: A
+}
 
 export const union = <A extends ReadonlyArray<Type>>(
-  types: A,
-  name: string = getUnionName(types),
-): Type<{ readonly [K in keyof A]: Type.Of<A[K]> }[number]> => {
-  const g = G.union(types)
-  const d = D.union(types)
+  members: A,
+  name: string = getUnionName(members),
+): UnionType<A> => {
+  const g = G.union(members)
+  const d = D.union(members)
   const e = E.Encoder.id()
 
   return {
@@ -16,7 +21,7 @@ export const union = <A extends ReadonlyArray<Type>>(
     ...d,
     ...e,
     name,
-  } as Type<{ readonly [K in keyof A]: Type.Of<A[K]> }[number]>
+  } as UnionType<A>
 }
 
-const getUnionName = (types: readonly Mixed[]): string => types.map((t) => t.name).join(' | ')
+const getUnionName = (types: readonly Any[]): string => types.map((t) => t.name).join(' | ')

@@ -1,6 +1,6 @@
 import { Either } from '@typed/either'
 import * as G from '../guard'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
 
 export interface EitherType<A extends Type, B extends Type>
   extends Type<Either<Type.Of<A>, Type.Of<B>>> {
@@ -18,6 +18,6 @@ export const either = <A extends Type, B extends Type>(left: A, right: B): Eithe
   return { ...type, left, right }
 }
 
-const _Either = either(Mixed, Mixed)
+const _Either = either(Any, Any)
 
 export { _Either as Either }
