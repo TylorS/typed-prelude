@@ -1,3 +1,4 @@
+import { Is } from '@typed/lambda'
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
@@ -26,6 +27,12 @@ export namespace Type {
 }
 
 export type Mixed = Type<any, any>
+
+export const Any = Type.fromGuard(
+  { is: ((...args: [] | [unknown]) => args.length === 1) as Is<any> },
+  `Any`,
+  `any`,
+)
 
 export interface RecursiveType<T extends Type> extends Type<Type.Of<T>, Type.Encoding<T>> {}
 

@@ -69,7 +69,13 @@ function getOrCreateJsonFile(filePath: string) {
     fs.writeFileSync(filePath, JSON.stringify({}))
   }
 
-  return JSON.parse(fs.readFileSync(filePath).toString())
+  try {
+    return JSON.parse(fs.readFileSync(filePath).toString())
+  } catch (error) {
+    console.error(`Error from:`, filePath)
+
+    throw error
+  }
 }
 
 function applyEsmDefaults(tsconfig: any) {
