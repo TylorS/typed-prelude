@@ -1,10 +1,21 @@
+import { Maybe } from '@typed/maybe'
 import * as G from '../guard'
-import { Mixed, Type } from './Type'
+import { Any, Type } from './Type'
 
-export const Maybe = Type.fromGuard(G.Maybe, `Maybe<unknown>`)
+export interface MaybeType<A extends Type> extends Type<Maybe<Type.Of<A>>> {
+  readonly justType: A
+}
 
-export const maybe = <A extends Mixed>(
-  type: A,
-  name: string = `Maybe<${type.name}>`,
-  expected: string = `Maybe<${type.expected}>`,
-) => Type.fromGuard(G.maybe(type), name, expected)
+export const maybe = <A extends Any>(
+  justType: A,
+  name: string = `Maybe<${justType.name}>`,
+  expected: string = `Maybe<${justType.expected}>`,
+): MaybeType<A> => {
+  const type = Type.fromGuard(G.maybe(justType), name, expected)
+
+  return { ...type, justType }
+}
+
+const _Maybe = maybe(Any)
+
+export { _Maybe as Maybe }

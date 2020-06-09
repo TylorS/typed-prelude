@@ -1,19 +1,18 @@
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
-import { Type } from './Type'
+import { Any, Type } from './Type'
 
-export const Set: Type<ReadonlySet<unknown>> = Type.fromGuard(
-  G.Set,
-  `ReadonlySet<unknown, unknown>`,
-)
+export interface SetType<A extends Type> extends Type<ReadonlySet<Type.Of<A>>> {
+  readonly member: A
+}
 
 export const set = <A extends Type>(
-  a: A,
-  name: string = `ReadonlySet<${a.name}>`,
-): Type<ReadonlySet<Type.Of<A>>> => {
-  const g = G.set(a)
-  const d = D.set(a)
+  member: A,
+  name: string = `ReadonlySet<${member.name}>`,
+): SetType<A> => {
+  const g = G.set(member)
+  const d = D.set(member)
   const e = E.Encoder.id<ReadonlySet<Type.Of<A>>>()
 
   return {
@@ -21,5 +20,8 @@ export const set = <A extends Type>(
     ...d,
     ...e,
     name,
-  } as Type<ReadonlySet<Type.Of<A>>>
+    member,
+  } as SetType<A>
 }
+
+export const Set: SetType<Any> = set(Any)

@@ -2,22 +2,21 @@ import { RemoteData } from '@typed/remote-data'
 import * as D from '../decoder'
 import * as E from '../encoder'
 import * as G from '../guard'
-import { Type } from './Type'
+import { Any, Type } from './Type'
 
-const _RemoteData: Type<RemoteData<unknown, unknown>> = Type.fromGuard(
-  G.RemoteData,
-  `RemoteData<unknown, unknown>`,
-)
-
-export { _RemoteData as RemoteData }
+export interface RemoteDataType<L extends Type, R extends Type>
+  extends Type<RemoteData<Type.Of<L>, Type.Of<R>>> {
+  readonly left: L
+  readonly right: R
+}
 
 export const remoteData = <L extends Type, R extends Type>(
-  l: L,
-  r: R,
-  name: string = `RemoteData<${l.name}, ${r.name}>`,
-): Type<RemoteData<Type.Of<L>, Type.Of<R>>> => {
-  const g = G.remoteData(l, r)
-  const d = D.remoteData(l, r)
+  left: L,
+  right: R,
+  name: string = `RemoteData<${left.name}, ${right.name}>`,
+): RemoteDataType<L, R> => {
+  const g = G.remoteData(left, right)
+  const d = D.remoteData(left, right)
   const e = E.Encoder.id()
 
   return {
@@ -25,5 +24,11 @@ export const remoteData = <L extends Type, R extends Type>(
     ...d,
     ...e,
     name,
-  } as Type<RemoteData<Type.Of<L>, Type.Of<R>>>
+    left,
+    right,
+  } as RemoteDataType<L, R>
 }
+
+const _RemoteData: RemoteDataType<Any, Any> = remoteData(Any, Any)
+
+export { _RemoteData as RemoteData }

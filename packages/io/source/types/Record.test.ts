@@ -1,5 +1,5 @@
 import { runEffects } from '@typed/effects'
-import { isLeft, isRight, Left, Right } from '@typed/either'
+import { Left, Right } from '@typed/either'
 import { Just, Nothing } from '@typed/maybe'
 import { describe, given, it } from '@typed/test'
 import { catchDecodeFailure } from '../decoder'
@@ -16,6 +16,7 @@ export const test = describe(`record`, [
             d: t.Boolean,
           }),
         },
+        'Test',
         'Test',
       )
       type Type = t.TypeOf<typeof type>
