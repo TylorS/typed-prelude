@@ -1,4 +1,4 @@
-import { ascend } from '../../../list/source'
+import { ascend } from '@typed/list'
 import { Css, GetCss } from '../model'
 
 const isMediaQuery = (css: Css) => css.startsWith('@')
