@@ -47,5 +47,7 @@ export function it(
       crypto: createServerCrypto(),
       logger: createConsoleLogger({ logLevel: LogLevel.DEBUG, clock: timer }),
     })
+
+    timer.progressTimeBy(0)
   })
 }
