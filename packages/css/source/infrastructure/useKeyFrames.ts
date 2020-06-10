@@ -5,7 +5,7 @@ import { ascend } from '@typed/list'
 import { isNotUndefined } from '@typed/logic'
 import { AnimationName, Css, CssProperties, GenerateAnimationName, KeyFrame } from '../model'
 import { CssEnv } from './CssEnv'
-import { generateCssHash, toArray, toPx } from './helpers'
+import { generateCssHash, shouldNotAddPixels, toArray, toPx } from './helpers'
 
 export const useKeyFrames: GenerateAnimationName<
   CssEnv & HookEnv & CryptoEnv & CryptoFailure
@@ -55,7 +55,7 @@ function keyFramesToCssProperties(keyFrames: KeyFrame): string {
 function getPropertiesString(properties: CssProperties, key: keyof CssProperties): string {
   const values = toArray(properties[key]).filter(isNotUndefined).reverse()
   const css = values.reduce(
-    (acc, value) => acc.concat(`${key}:${key !== 'opacity' ? toPx(value) : value}`),
+    (acc, value) => acc.concat(`${key}:${shouldNotAddPixels(key) ? value : toPx(value)}`),
     [] as readonly string[],
   )
 

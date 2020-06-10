@@ -9,6 +9,39 @@ import { isNumber } from '@typed/logic'
 import { ClassName, NestedCssProperties } from '../model'
 import { CssEnv } from './CssEnv'
 
+export const CSS_PROPERTIES_WITHOUT_UNIT = Object.fromEntries(
+  [
+    'animationIterationCount',
+    'boxFlex',
+    'boxFlexGroup',
+    'boxOrdinalGroup',
+    'columnCount',
+    'fillOpacity',
+    'flex',
+    'flexGrow',
+    'flexPositive',
+    'flexShrink',
+    'flexNegative',
+    'flexOrder',
+    'fontWeight',
+    'lineClamp',
+    'lineHeight',
+    'opacity',
+    'order',
+    'orphans',
+    'stopOpacity',
+    'strokeDashoffset',
+    'strokeOpacity',
+    'strokeWidth',
+    'tabSize',
+    'widows',
+    'zIndex',
+    'zoom',
+  ].map((key) => [key, true] as const),
+)
+
+export const shouldNotAddPixels = (key: string) => CSS_PROPERTIES_WITHOUT_UNIT[key] === true
+
 export const CLASS_NAME_ESCAPE_REGEX = /[ !#$%&()*+,./;<=>?@[\]^`{|}~"'\\]/g
 export const CLASS_NAME_ESCAPE_REPLACEMENT = '\\$&'
 
@@ -20,6 +53,7 @@ export const HYPHENATE_REPLACEMENT = '-$&'
 export const AND_REGEX = /^&/
 
 export const toPx = (sOrN: string | number) => (isNumber(sOrN) ? `${sOrN}px` : sOrN)
+
 export const hyphenate = (s: string) =>
   s.replace(HYPHENATE_REGEX, HYPHENATE_REPLACEMENT).toLowerCase()
 export const notAnd = (s: string) => s.replace(AND_REGEX, '')

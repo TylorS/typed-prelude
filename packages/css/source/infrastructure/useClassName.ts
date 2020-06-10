@@ -14,7 +14,15 @@ import {
 import { classNames } from './classNames'
 import { CssEnv } from './CssEnv'
 import { getCss } from './getCss'
-import { generateCssHash, hyphenate, mergeObjects, notAnd, toArray, toPx } from './helpers'
+import {
+  generateCssHash,
+  hyphenate,
+  mergeObjects,
+  notAnd,
+  shouldNotAddPixels,
+  toArray,
+  toPx,
+} from './helpers'
 
 /**
  * Deterministically creates classNames for a series of objects that define the styles to be applied.
@@ -116,7 +124,7 @@ function getPropertiesString(properties: CssProperties, key: keyof CssProperties
   const hyphenatedKey = hyphenate(key)
   const values = toArray(properties[key]).filter(isNotUndefined).reverse()
   const css = values.reduce(
-    (acc, value) => acc.concat(`${hyphenatedKey}:${key !== 'opacity' ? toPx(value) : value}`),
+    (acc, value) => acc.concat(`${hyphenatedKey}:${shouldNotAddPixels(key) ? value : toPx(value)}`),
     [] as readonly string[],
   )
 
