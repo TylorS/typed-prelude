@@ -1,6 +1,6 @@
 {
   "name": "@typed/history",
-  "version": "10.6.2",
+  "version": "10.6.3",
   "description": "Testable interfaces for the history API",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -27,11 +27,11 @@
   "dependencies": {
     "@typed/common": "^3.5.0",
     "@typed/disposable": "^3.4.0",
-    "@typed/effects": "^6.7.1",
-    "@typed/env": "^8.4.2",
+    "@typed/effects": "^6.7.2",
+    "@typed/env": "^8.4.3",
     "@typed/lambda": "^3.4.0",
     "@typed/new-type": "^4.0.0",
-    "@typed/subscription": "^3.6.2",
+    "@typed/subscription": "^3.6.3",
     "@typed/tuple": "^3.3.0"
   },
   "publishConfig": {

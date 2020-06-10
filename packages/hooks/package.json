@@ -1,6 +1,6 @@
 {
   "name": "@typed/hooks",
-  "version": "10.5.2",
+  "version": "10.5.3",
   "description": "Hooks powered by generator functions & effects",
   "main": "./cjs/index.js",
   "keywords": [
@@ -26,20 +26,20 @@
   "dependencies": {
     "@typed/common": "^3.5.0",
     "@typed/disposable": "^3.4.0",
-    "@typed/effects": "^6.7.1",
+    "@typed/effects": "^6.7.2",
     "@typed/either": "^8.3.0",
-    "@typed/env": "^8.4.2",
-    "@typed/future": "^11.5.2",
-    "@typed/history": "^10.6.2",
+    "@typed/env": "^8.4.3",
+    "@typed/future": "^11.5.3",
+    "@typed/history": "^10.6.3",
     "@typed/lambda": "^3.4.0",
     "@typed/lenses": "^4.1.1",
-    "@typed/logic": "^6.5.2",
+    "@typed/logic": "^6.5.3",
     "@typed/maybe": "^10.4.0",
     "@typed/remote-data": "^4.3.0",
-    "@typed/routing": "^8.6.2",
-    "@typed/subscription": "^3.6.2",
-    "@typed/timer": "^3.5.2",
+    "@typed/routing": "^8.6.3",
+    "@typed/subscription": "^3.6.3",
+    "@typed/timer": "^3.5.3",
     "@typed/tuple": "^3.3.0",
-    "@typed/uuid": "^9.6.2"
+    "@typed/uuid": "^9.6.3"
   }
 }

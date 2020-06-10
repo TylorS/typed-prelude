@@ -1,6 +1,6 @@
 {
   "name": "@typed/storage",
-  "version": "8.6.2",
+  "version": "8.6.3",
   "description": "Testable storage-dependent operations",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
-    "@typed/effects": "^6.7.1",
-    "@typed/env": "^8.4.2",
+    "@typed/effects": "^6.7.2",
+    "@typed/env": "^8.4.3",
     "@typed/lambda": "^3.4.0",
     "@typed/maybe": "^10.4.0"
   },
