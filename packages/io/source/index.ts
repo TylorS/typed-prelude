@@ -11,5 +11,6 @@ export { Encoder } from './encoder'
 
 export * from './types'
 export * from './checkHttpRequest'
+export * from './composeEncoder'
 
 // TODO: Dates

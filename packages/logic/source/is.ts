@@ -116,3 +116,6 @@ export const isNotJsonPrimitive: IsNot<JsonPrimitive> = complement(isJsonPrimiti
 
 export const isJson: Is<Json> = or(isJsonPrimitive, or(isJsonArray, isJsonObject))
 export const isNotJson: IsNot<Json> = complement(isJson)
+
+export const isDate: Is<Date> = (u): u is Date => u instanceof Date
+export const isNotDate: IsNot<Date> = complement(isDate)

@@ -1,5 +1,6 @@
 export * from './Array'
 export * from './Boolean'
+export * from './Date'
 export * from './Decoder'
 export * from './Either'
 export * from './Function'
