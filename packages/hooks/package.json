@@ -31,6 +31,8 @@
     "@typed/env": "^8.4.3",
     "@typed/future": "^11.5.3",
     "@typed/history": "^10.6.3",
+    "@typed/http": "^8.7.3",
+    "@typed/io": "^1.1.1",
     "@typed/lambda": "^3.4.0",
     "@typed/lenses": "^4.1.1",
     "@typed/logic": "^6.5.3",

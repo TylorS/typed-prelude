@@ -1,6 +1,8 @@
 export const enum RemoteDataStatus {
-  NoData,
-  Loading,
-  Failure,
-  Success,
+  NoData = 'no-data',
+  Loading = 'loading',
+  Failure = 'failure',
+  Success = 'success',
+  RefreshingFailure = 'refreshing-failure',
+  RefreshingSuccess = 'refreshing-success',
 }

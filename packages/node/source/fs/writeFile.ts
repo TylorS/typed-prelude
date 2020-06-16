@@ -12,6 +12,10 @@ export function* writeFile(
     const disposable = Disposable.lazy()
 
     fs.writeFile(filePath, contents, (err) => {
+      if (disposable.disposed) {
+        return
+      }
+
       if (err) {
         return disposable.addDisposable(reject(err))
       }

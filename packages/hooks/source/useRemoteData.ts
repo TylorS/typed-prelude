@@ -1,6 +1,14 @@
 import { PureEffect } from '@typed/effects'
 import { Arity1, IO } from '@typed/lambda'
-import { Failure, Loading, NoData, RemoteData, Success } from '@typed/remote-data'
+import {
+  Failure,
+  Loading,
+  NoData,
+  RefreshingFailure,
+  RefreshingSuccess,
+  RemoteData,
+  Success,
+} from '@typed/remote-data'
 import { HookEffects, InitialState } from './types'
 import { useMemo } from './useMemo'
 import { useState } from './useState'
@@ -12,8 +20,8 @@ export type RemoteDataActions<A, B> = {
   ) => PureEffect<RemoteData<A, B>>
   readonly loading: () => PureEffect<RemoteData<A, B>>
   readonly clear: () => PureEffect<RemoteData<A, B>>
-  readonly success: (value: B) => PureEffect<RemoteData<A, B>>
-  readonly failure: (value: A) => PureEffect<RemoteData<A, B>>
+  readonly success: (value: B, refreshing: boolean) => PureEffect<RemoteData<A, B>>
+  readonly failure: (value: A, refreshing: boolean) => PureEffect<RemoteData<A, B>>
 }
 
 export function* useRemoteData<E, A, B>(
@@ -31,8 +39,10 @@ export function* useRemoteData<E, A, B>(
         update,
         loading: () => set(Loading),
         clear: () => set(NoData),
-        success: (value: B) => set(Success.of(value)),
-        failure: (value: A) => set(Failure.of(value)),
+        success: (value: B, refreshing: boolean) =>
+          set(refreshing ? RefreshingSuccess.of(value) : Success.of(value)),
+        failure: (value: A, refreshing: boolean) =>
+          set(refreshing ? RefreshingFailure.of(value) : Failure.of(value)),
       } as const),
     [],
   )

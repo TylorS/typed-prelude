@@ -1,5 +1,14 @@
 import { equals } from '@typed/logic'
-import { isFailure, isLoading, isSuccess, NoData, RemoteData } from '@typed/remote-data'
+import {
+  isFailure,
+  isLoading,
+  isRefreshing,
+  isRefreshingFailure,
+  isRefreshingSuccess,
+  isSuccess,
+  NoData,
+  RemoteData,
+} from '@typed/remote-data'
 import { Guard, TypeOf } from './Guard'
 import { Record } from './Record'
 import { refinement } from './refinement'
@@ -12,7 +21,8 @@ const _RemoteData = refinement(
     isNoData(r) ||
     isLoading(r as RemoteData<unknown, unknown>) ||
     isFailure(r as RemoteData<unknown, unknown>) ||
-    isSuccess(r as RemoteData<unknown, unknown>),
+    isSuccess(r as RemoteData<unknown, unknown>) ||
+    isRefreshing(r as RemoteData<unknown, unknown>),
 )
 
 export { _RemoteData as RemoteData }
@@ -22,11 +32,11 @@ export function remoteData<L extends Guard, R extends Guard>(
   right: R,
 ): Guard<RemoteData<TypeOf<L>, TypeOf<R>>> {
   return refinement(_RemoteData, (u): u is RemoteData<TypeOf<L>, TypeOf<R>> => {
-    if (isFailure(u)) {
+    if (isFailure(u) || isRefreshingFailure(u)) {
       return left.is(u.value)
     }
 
-    if (isSuccess(u)) {
+    if (isSuccess(u) || isRefreshingSuccess(u)) {
       return right.is(u.value)
     }
 
