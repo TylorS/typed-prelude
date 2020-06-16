@@ -1,5 +1,6 @@
 import { equals } from '@typed/logic'
 import {
+  isDoneLoading,
   isFailure,
   isLoading,
   isRefreshing,
@@ -20,8 +21,7 @@ const _RemoteData = refinement(
   (r): r is RemoteData<unknown, unknown> =>
     isNoData(r) ||
     isLoading(r as RemoteData<unknown, unknown>) ||
-    isFailure(r as RemoteData<unknown, unknown>) ||
-    isSuccess(r as RemoteData<unknown, unknown>) ||
+    isDoneLoading(r as RemoteData<unknown, unknown>) ||
     isRefreshing(r as RemoteData<unknown, unknown>),
 )
 
