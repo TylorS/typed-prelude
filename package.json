@@ -38,7 +38,7 @@
     "lerna": "3.22.1",
     "lint-staged": "10.2.10",
     "prettier": "2.0.5",
-    "terser": "4.7.0",
+    "terser": "4.8.0",
     "ts-node": "8.10.2",
     "tslib": "2.0.0",
     "tslint": "6.1.2",
