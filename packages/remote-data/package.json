@@ -1,6 +1,6 @@
 {
   "name": "@typed/remote-data",
-  "version": "4.3.0",
+  "version": "5.0.0",
   "description": "Generic type for working with values that come from remote sources",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

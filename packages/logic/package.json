@@ -1,6 +1,6 @@
 {
   "name": "@typed/logic",
-  "version": "6.5.3",
+  "version": "6.5.4",
   "description": "Logical operations all programs need",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

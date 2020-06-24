@@ -1,6 +1,6 @@
 {
   "name": "@typed/timer",
-  "version": "3.5.3",
+  "version": "3.5.4",
   "description": "Time as a dependency",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -24,9 +24,9 @@
   "homepage": "https://github.com/tylors/typed-prelude#readme",
   "dependencies": {
     "@typed/common": "^3.5.0",
-    "@typed/disposable": "^3.4.0",
+    "@typed/disposable": "^3.4.1",
     "@typed/lambda": "^3.4.0",
-    "@typed/list": "^6.4.3"
+    "@typed/list": "^6.4.4"
   },
   "publishConfig": {
     "access": "public"

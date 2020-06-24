@@ -1,6 +1,6 @@
 {
   "name": "@typed/json-rpc",
-  "version": "3.4.3",
+  "version": "3.4.4",
   "description": "JSON-RPC abstractions",
   "main": "./cjs/index.js",
   "keywords": [
@@ -28,21 +28,21 @@
   "sideEffects": false,
   "dependencies": {
     "@typed/common": "^3.5.0",
-    "@typed/disposable": "^3.4.0",
-    "@typed/effects": "^6.7.2",
+    "@typed/disposable": "^3.4.1",
+    "@typed/effects": "^6.7.3",
     "@typed/either": "^8.3.0",
-    "@typed/env": "^8.4.3",
-    "@typed/future": "^11.5.3",
-    "@typed/hooks": "^10.5.3",
+    "@typed/env": "^8.4.4",
+    "@typed/future": "^11.5.4",
+    "@typed/hooks": "^11.0.0",
     "@typed/lambda": "^3.4.0",
-    "@typed/list": "^6.4.3",
-    "@typed/logger": "^8.6.3",
-    "@typed/logic": "^6.5.3",
-    "@typed/map": "^4.4.3",
+    "@typed/list": "^6.4.4",
+    "@typed/logger": "^8.6.4",
+    "@typed/logic": "^6.5.4",
+    "@typed/map": "^4.4.4",
     "@typed/objects": "^6.4.1",
-    "@typed/subscription": "^3.6.3",
-    "@typed/timer": "^3.5.3",
+    "@typed/subscription": "^3.6.4",
+    "@typed/timer": "^3.5.4",
     "@typed/tuple": "^3.3.0",
-    "@typed/uuid": "^9.6.3"
+    "@typed/uuid": "^9.6.4"
   }
 }
