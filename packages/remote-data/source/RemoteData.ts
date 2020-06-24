@@ -1,13 +1,21 @@
 import { Either, unpack } from '@typed/either'
 import { RemoteDataStatus } from './enums'
 import { Failure } from './Failure'
+import { RefreshingFailure } from './RefreshingFailure'
+import { RefreshingSuccess } from './RefreshingSuccess'
 import { Success } from './Success'
 
-export type RemoteData<A = unknown, B = unknown> = NoData | Loading | Loaded<A, B>
+export type RemoteData<A = unknown, B = unknown> =
+  | NoData
+  | Loading
+  | Loaded<A, B>
+  | Refreshing<A, B>
 
 export type Loadable<A = unknown, B = unknown> = Exclude<RemoteData<A, B>, NoData>
 
 export type Loaded<A = unknown, B = unknown> = Failure<A> | Success<B>
+
+export type Refreshing<A = unknown, B = unknown> = RefreshingFailure<A> | RefreshingSuccess<B>
 
 export type NoData = { readonly status: RemoteDataStatus.NoData }
 export const NoData: NoData = { status: RemoteDataStatus.NoData }

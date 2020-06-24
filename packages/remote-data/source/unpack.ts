@@ -2,6 +2,8 @@ import { curry } from '@typed/lambda'
 import { hasNoData } from './hasNoData'
 import { isFailure } from './isFailure'
 import { isLoading } from './isLoading'
+import { isRefreshingFailure } from './isRefreshingFailure'
+import { isRefreshingSuccess } from './isRefreshingSuccess'
 import { RemoteData } from './RemoteData'
 
 export const unpack: {
@@ -67,8 +69,8 @@ export const unpack: {
 function __unpackRemoteData<A, B, C>(
   noData: () => C,
   loading: () => C,
-  failure: (value: A) => C,
-  success: (value: B) => C,
+  failure: (value: A, refreshing: boolean) => C,
+  success: (value: B, refreshing: boolean) => C,
   remoteData: RemoteData<A, B>,
 ): C {
   if (hasNoData(remoteData)) {
@@ -80,8 +82,12 @@ function __unpackRemoteData<A, B, C>(
   }
 
   if (isFailure(remoteData)) {
-    return failure(remoteData.value)
+    return failure(remoteData.value, false)
   }
 
-  return success(remoteData.value)
+  if (isRefreshingFailure(remoteData)) {
+    return failure(remoteData.value, true)
+  }
+
+  return success(remoteData.value, isRefreshingSuccess(remoteData))
 }

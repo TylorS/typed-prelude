@@ -9,7 +9,6 @@ export type HttpOptions = {
   readonly method?: HttpMethod
   readonly headers?: HttpHeaders
   readonly body?: string
-  readonly type?: 'always-fetch' | 'prefer-last' | 'prefer-current'
 }
 
 // @ts-ignore - Allow phantom type

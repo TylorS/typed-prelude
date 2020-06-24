@@ -8,6 +8,7 @@ export interface Disposable {
 }
 
 export interface LazyDisposable extends Disposable {
+  readonly disposed: boolean
   readonly addDisposable: Arity1<Disposable, Disposable>
 }
 
@@ -26,12 +27,15 @@ export namespace Disposable {
   /**
    * Create a disposable that is lazily created
    */
-  export const lazy = () => {
+  export const lazy = (): LazyDisposable => {
     let isDisposed: boolean = false
     const disposables = new Set<Disposable>()
     const removeDisposable = (disposable: Disposable) => disposables.delete(disposable)
 
     return {
+      get disposed() {
+        return isDisposed
+      },
       addDisposable(disposable: Disposable) {
         if (disposable === Disposable.None) {
           return disposable
