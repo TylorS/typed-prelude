@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>HookEnvironment | Typed - v3.4.3</title>
-	<meta name="description" content="Documentation for Typed - v3.4.3">
+	<title>HookEnvironment | Typed - v3.4.4</title>
+	<meta name="description" content="Documentation for Typed - v3.4.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
 	<link rel="stylesheet" href="../assets/css/pages.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">Typed - v3.4.3</a>
+					<a href="../index.html" class="title">Typed - v3.4.4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -89,6 +89,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="hooks.hookenvironment.html#adddisposable" class="tsd-kind-icon">add<wbr>Disposable</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hooks.hookenvironment.html#clearupdated" class="tsd-kind-icon">clear<wbr>Updated</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="hooks.hookenvironment.html#dispose" class="tsd-kind-icon">dispose</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="hooks.hookenvironment.html#disposed" class="tsd-kind-icon">disposed</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hooks.hookenvironment.html#id" class="tsd-kind-icon">id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hooks.hookenvironment.html#resetid" class="tsd-kind-icon">reset<wbr>Id</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="hooks.hookenvironment.html#updated" class="tsd-kind-icon">updated</a></li>
@@ -108,7 +109,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="effects.fiber.html">Fiber</a>.<a href="effects.fiber.html#adddisposable">addDisposable</a></p>
 						<ul>
-							<li>Defined in packages/disposable/esm/Disposable.d.ts:9</li>
+							<li>Defined in packages/disposable/esm/Disposable.d.ts:10</li>
 						</ul>
 					</aside>
 				</section>
@@ -118,7 +119,7 @@
 					<div class="tsd-signature tsd-kind-icon">clear<wbr>Updated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/effects.html#pureeffect" class="tsd-signature-type">PureEffect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L97">packages/hooks/source/types.ts:97</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L97">packages/hooks/source/types.ts:97</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -163,13 +164,24 @@
 						</ul>
 					</div>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="disposed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> disposed</h3>
+					<div class="tsd-signature tsd-kind-icon">disposed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="effects.fiber.html">Fiber</a>.<a href="effects.fiber.html#disposed">disposed</a></p>
+						<ul>
+							<li>Defined in packages/disposable/esm/Disposable.d.ts:9</li>
+						</ul>
+					</aside>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="id" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> id</h3>
 					<div class="tsd-signature tsd-kind-icon">id<span class="tsd-signature-symbol">:</span> <a href="../modules/io.html#uuid" class="tsd-signature-type">Uuid</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L83">packages/hooks/source/types.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L83">packages/hooks/source/types.ts:83</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -179,7 +191,7 @@
 					<div class="tsd-signature tsd-kind-icon">reset<wbr>Id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../modules/effects.html#pureeffect" class="tsd-signature-type">PureEffect</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L86">packages/hooks/source/types.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L86">packages/hooks/source/types.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -204,7 +216,7 @@
 					<div class="tsd-signature tsd-kind-icon">updated<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L96">packages/hooks/source/types.ts:96</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L96">packages/hooks/source/types.ts:96</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -214,7 +226,7 @@
 					<div class="tsd-signature tsd-kind-icon">use<wbr>Ref<span class="tsd-signature-symbol">:</span> &lt;E, A&gt;<span class="tsd-signature-symbol">(</span>initialState<span class="tsd-signature-symbol">?: </span><a href="../modules/hooks.initialstate.html" class="tsd-signature-type">InitialState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><a href="../modules/hooks.html#useref" class="tsd-signature-type">UseRef</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L89">packages/hooks/source/types.ts:89</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L89">packages/hooks/source/types.ts:89</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -254,7 +266,7 @@
 					<div class="tsd-signature tsd-kind-icon">use<wbr>State<span class="tsd-signature-symbol">:</span> &lt;E, A&gt;<span class="tsd-signature-symbol">(</span>initialState<span class="tsd-signature-symbol">: </span><a href="../modules/hooks.initialstate.html" class="tsd-signature-type">InitialState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">Effects</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">E</span><span class="tsd-signature-symbol">, </span><a href="../modules/hooks.html#usestate" class="tsd-signature-type">UseState</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/836710b9/packages/hooks/source/types.ts#L94">packages/hooks/source/types.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/TylorS/typed-prelude/blob/619a2318/packages/hooks/source/types.ts#L94">packages/hooks/source/types.ts:94</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -336,6 +348,9 @@
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 										<a href="hooks.hookenvironment.html#dispose" class="tsd-kind-icon">dispose</a>
+									</li>
+									<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+										<a href="hooks.hookenvironment.html#disposed" class="tsd-kind-icon">disposed</a>
 									</li>
 									<li class=" tsd-kind-property tsd-parent-kind-interface">
 										<a href="hooks.hookenvironment.html#id" class="tsd-kind-icon">id</a>
