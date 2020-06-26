@@ -157,6 +157,10 @@
       "path": "./packages/subscription"
     },
     {
+      "name": "Test",
+      "path": "./packages/test"
+    },
+    {
       "name": "Timer",
       "path": "./packages/timer"
     },

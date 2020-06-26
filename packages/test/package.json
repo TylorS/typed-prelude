@@ -1,0 +1,33 @@
+{
+  "name": "@typed/test",
+  "version": "0.0.0",
+  "description": "Distraction-free, real-time testing that just works.",
+  "keywords": [
+    "TypeScript",
+    "Node",
+    "Chrome",
+    "Firefox",
+    "Edge",
+    "Browser",
+    "Testing",
+    "Test",
+    "Framework",
+    "Static Analysis",
+    "JSON-RPC",
+    "VSCode"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "main": "./cjs/index.js",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "license": "Parity-6.0.0",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false
+}
