@@ -1,6 +1,6 @@
 {
   "name": "@typed/test",
-  "version": "0.0.0",
+  "version": "9.5.0",
   "description": "Distraction-free, real-time testing that just works.",
   "keywords": [
     "TypeScript",
@@ -29,5 +29,23 @@
   "peerDependencies": {
     "tslib": "^2.0.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/common": "^3.5.0",
+    "@typed/disposable": "^3.4.1",
+    "@typed/crypto": "^1.10.4",
+    "@typed/effects": "^6.7.3",
+    "@typed/json-rpc": "^3.4.4",
+    "@typed/io": "^1.1.2",
+    "@typed/lambda": "^3.4.0",
+    "@typed/logic": "^6.5.4",
+    "@typed/logger": "^8.6.4",
+    "@typed/maybe": "^10.4.0",
+    "@typed/new-type": "^4.0.0",
+    "@typed/streams": "^6.6.4",
+    "@typed/strings": "^7.4.0",
+    "@typed/timer": "^3.5.4",
+    "@typed/uuid": "^9.6.4",
+    "error-stack-parser": "^2.0.6"
+  }
 }
