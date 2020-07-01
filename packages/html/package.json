@@ -41,6 +41,6 @@
     "@typed/render": "^3.4.4",
     "@typed/set": "^3.3.0",
     "@typed/timer": "^3.5.4",
-    "csstype": "2.6.10"
+    "csstype": "2.6.11"
   }
 }
