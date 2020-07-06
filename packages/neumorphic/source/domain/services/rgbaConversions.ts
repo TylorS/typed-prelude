@@ -1,7 +1,8 @@
 import { NewType } from '@typed/new-type'
-import { ColorType, HexCode, HexValue, Hsla, Rgba } from '../model'
+import { ColorType, HexCode, Hsla, Rgba } from '../model'
 import { HslHue } from '../model/HslHue'
 import { Percentage } from '../model/Percentage'
+import { padWithZeroIfNeeded } from './helpers'
 
 const HEX_RADIX = 16
 const EIGHT_BIT_MAX = 255
@@ -21,9 +22,6 @@ export function rgbaToHexCode({ red, green, blue, alpha }: Rgba): HexCode {
     alpha: padWithZeroIfNeeded(Math.round(alpha * EIGHT_BIT_MAX).toString(HEX_RADIX)),
   }
 }
-
-const padWithZeroIfNeeded = (redOrGreenOrBlue: string): HexValue =>
-  (redOrGreenOrBlue.length === 1 ? `0${redOrGreenOrBlue}` : redOrGreenOrBlue) as HexValue
 
 export function rgbaToHsla({ red, green, blue, alpha }: Rgba): Hsla {
   const r = red / EIGHT_BIT_MAX

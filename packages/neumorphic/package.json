@@ -30,6 +30,7 @@
     "@typed/disposable": "^3.4.1",
     "@typed/effects": "^6.7.3",
     "@typed/hooks": "^11.0.0",
+    "@typed/lambda": "^3.4.0",
     "@typed/html": "^1.5.4",
     "@typed/new-type": "^4.0.0"
   }
