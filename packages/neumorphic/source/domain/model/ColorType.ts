@@ -1,5 +1,5 @@
 export enum ColorType {
-  Rgba,
-  HexCode,
-  Hsl,
+  Rgba = 'rgba',
+  HexCode = 'hexCode',
+  Hsla = 'hsla',
 }

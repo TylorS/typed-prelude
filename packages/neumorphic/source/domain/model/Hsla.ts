@@ -9,7 +9,7 @@ export interface Hsla<
   L extends Percentage = Percentage,
   A extends ZeroToOne = ZeroToOne
 > {
-  readonly type: ColorType.Hsl
+  readonly type: ColorType.Hsla
   readonly hue: H
   readonly saturation: S
   readonly lightness: L
