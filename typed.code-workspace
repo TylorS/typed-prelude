@@ -109,6 +109,10 @@
       "path": "./packages/maybe"
     },
     {
+      "name": "Neumorphic",
+      "path": "./packages/neumorphic"
+    },
+    {
       "name": "New Type",
       "path": "./packages/new-type"
     },

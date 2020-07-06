@@ -24,12 +24,12 @@ import {
   toPx,
 } from './helpers'
 
+export type ClassNameEnv = CssEnv & HookEnv & CryptoEnv & CryptoFailure
+
 /**
  * Deterministically creates classNames for a series of objects that define the styles to be applied.
  */
-export const useClassName: GenerateClassName<
-  CssEnv & HookEnv & CryptoEnv & CryptoFailure
-> = function* (...properties) {
+export const useClassName: GenerateClassName<ClassNameEnv> = function* (...properties) {
   return yield* useMemoEffect(function* (...props) {
     const { rules, styleSheet } = yield* get()
 

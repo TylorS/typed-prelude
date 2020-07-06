@@ -1,0 +1,36 @@
+{
+  "name": "@typed/neumorphic",
+  "version": "0.0.0",
+  "description": "Testable, neumorphic design system",
+  "keywords": [
+    "Neumorphic",
+    "design",
+    "system",
+    "typescript",
+    "typed",
+    "atomic css"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "main": "./cjs/index.js",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "license": "Parity-6.0.0",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/crypto": "^1.10.4",
+    "@typed/css": "^1.4.1",
+    "@typed/disposable": "^3.4.1",
+    "@typed/effects": "^6.7.3",
+    "@typed/hooks": "^11.0.0",
+    "@typed/html": "^1.5.4",
+    "@typed/new-type": "^4.0.0"
+  }
+}

@@ -11,23 +11,23 @@ export type Combine<A, B> = A extends NewType<infer AB, infer AT>
     : never
   : never
 
-export type Integer = NewType<number, 'Integer'>
+export type Integer = NewType<number, { readonly Integer: unique symbol }>
 export const isInteger = isNewType<number, Integer>((n): n is Integer => Number.isInteger(n))
 
-export type Zero = NewType<number, 'Zero'>
+export type Zero = NewType<number, { readonly Zero: unique symbol }>
 export const isZero = isNewType((x: number): x is Zero => x === 0)
 
-export type NonZero = NewType<number, 'NonZero'>
+export type NonZero = NewType<number, { readonly NonZero: unique symbol }>
 export const isNonZero = isNewType((x: number): x is NonZero => x !== 0)
 
 export type NonZeroInteger = Combine<NonZero, Integer>
 const _isNonZeroInteger = and(isNonZero, isInteger)
 export const isNonZeroInteger = isNewType((x: number): x is NonZeroInteger => _isNonZeroInteger(x))
 
-export type Positive = NewType<number, 'Positive'>
+export type Positive = NewType<number, { readonly Positive: unique symbol }>
 export const isPositive = isNewType((x: number): x is Positive => x > 0)
 
-export type Negative = NewType<number, 'Negative'>
+export type Negative = NewType<number, { readonly Negative: unique symbol }>
 export const isNegative = isNewType((x: number): x is Negative => x < 0)
 
 export type NonNegative = Zero | Positive
@@ -62,7 +62,10 @@ export const isNonPositiveInteger = isNewType((n: number): n is NonPositiveInteg
   _isNonPositiveInteger(n),
 )
 
-export type EmptyString = NewType<string & { readonly length: Zero }, 'EmptyString'>
+export type EmptyString = NewType<
+  string & { readonly length: Zero },
+  { readonly EmptyString: unique symbol }
+>
 export const isEmptyString = isNewType((x: string): x is EmptyString => x === '')
 
 export type NonEmptyString = NewType<
@@ -71,5 +74,8 @@ export type NonEmptyString = NewType<
 >
 export const isNonEmptyString = isNewType((x: string): x is NonEmptyString => x !== '')
 
-export type Character = NewType<string & { readonly length: 1 }, 'Character'>
+export type Character = NewType<
+  string & { readonly length: 1 },
+  { readonly Character: unique symbol }
+>
 export const isCharacter = isNewType((x: string): x is Character => x.length === 1)

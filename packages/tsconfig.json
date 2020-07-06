@@ -82,6 +82,9 @@
       "path": "./maybe/tsconfig.json"
     },
     {
+      "path": "./neumorphic/tsconfig.json"
+    },
+    {
       "path": "./new-type/tsconfig.json"
     },
     {
