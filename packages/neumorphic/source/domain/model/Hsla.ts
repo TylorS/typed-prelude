@@ -28,7 +28,7 @@ export namespace Hsla {
     lightness: L,
     alpha: A = 1 as A,
   ): Hsla<H, S, L, A> => ({
-    type: ColorType.Hsl,
+    type: ColorType.Hsla,
     hue,
     saturation,
     lightness,

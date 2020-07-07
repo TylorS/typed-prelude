@@ -1,7 +1,6 @@
 import { Effects, get } from '@typed/effects'
 import { NonNegativeInteger } from '@typed/new-type'
-import { Theme, ThemeColors } from '../domain/model'
-import { Color } from '../domain/model/Color'
+import { Color, Theme, ThemeColors } from '../domain/model'
 import { ThemeEnv } from './ThemeEnv'
 
 export function* getTheme(): Effects<ThemeEnv, Theme> {

@@ -3,7 +3,7 @@ import { CssEnv, useClassName } from '@typed/css'
 import { combine, Effects } from '@typed/effects'
 import { HookEnv } from '@typed/hooks'
 import { html, VNode, VNodeChildren } from '@typed/html'
-import { rgbaToString, toPx } from '../domain/services'
+import { colorToString, toPx } from '../domain/services'
 import { EMPTY_CHILDREN } from './constants'
 import { getBorderRadius, getPrimaryColor, getSecondaryColor } from './getTheme'
 import { ThemeEnv } from './ThemeEnv'
@@ -19,13 +19,13 @@ export function* Button(
     getBorderRadius(),
   )
   const className = yield* useClassName(
-    display === ButtonDisplay.Primary && { backgroundColor: rgbaToString(primaryColor) },
-    display === ButtonDisplay.Secondary && { backgroundColor: rgbaToString(secondaryColor) },
+    display === ButtonDisplay.Primary && { backgroundColor: colorToString(primaryColor) },
+    display === ButtonDisplay.Secondary && { backgroundColor: colorToString(secondaryColor) },
     display === ButtonDisplay.Outline && {
-      border: `1px solid ${rgbaToString(secondaryColor)}`,
+      border: `1px solid ${colorToString(secondaryColor)}`,
       borderRadius: toPx(borderRadius),
     },
-    display === ButtonDisplay.Chromeless && { color: rgbaToString(secondaryColor) },
+    display === ButtonDisplay.Chromeless && { color: colorToString(secondaryColor) },
   )
 
   return html('button', { className }, children)
