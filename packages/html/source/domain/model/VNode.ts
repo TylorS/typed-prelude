@@ -2,7 +2,7 @@ import { Flatten, Json, UnNest } from '@typed/common'
 import { Effects } from '@typed/effects'
 import { Ref } from '@typed/hooks'
 import { ComparableValues } from '@typed/lambda'
-import { ValuesOf } from '@typed/objects'
+import { Overwrite, ValuesOf } from '@typed/objects'
 import { RecordDiff, StrMap } from './StrMap'
 
 /**
@@ -182,7 +182,9 @@ export type BubblingEventHandler<
   A extends TagName,
   Map extends {},
   K extends keyof Map
-> = (event: { readonly type: K; readonly currentTarget: NodeFrom<A> } & Map[K]) => Effects<E, any>
+> = (
+  event: Overwrite<Map[K], { readonly type: K; readonly currentTarget: NodeFrom<A> }>,
+) => Effects<E, any>
 
 /**
  * Providing AddEventListenerOptions in a pair allows customizing how the event handler is registered.
@@ -194,7 +196,9 @@ export type EventHandlerWithOptions<
   K extends keyof Map
 > = readonly [
   AddEventListenerOptions,
-  (event: { readonly type: K; readonly currentTarget: NodeFrom<A> } & Map[K]) => Effects<E, any>,
+  (
+    event: Overwrite<Map[K], { readonly type: K; readonly currentTarget: NodeFrom<A> }>,
+  ) => Effects<E, any>,
 ]
 
 // INTERNAL TYPES

@@ -23,11 +23,19 @@ export const updateEventHandlers: UpdateEventHandlers<PatchFailure> = function* 
   const listener = yield* getListener(vNode)
 
   for (const [eventType, eventHandler] of removed) {
-    node.removeEventListener(eventType as string, listener, getOptions(eventHandler))
+    node.removeEventListener(
+      eventType as string,
+      listener,
+      getOptions(eventHandler as EventHandler<any, any, any, any>),
+    )
   }
 
   for (const [eventType, eventHandler] of updated) {
-    node.addEventListener(eventType as string, listener, getOptions(eventHandler))
+    node.addEventListener(
+      eventType as string,
+      listener,
+      getOptions(eventHandler as EventHandler<any, any, any, any>),
+    )
   }
 
   return vNode

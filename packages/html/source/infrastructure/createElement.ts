@@ -60,7 +60,7 @@ export const createElement: CreateElement<DomEnv> = function* <A extends VNode>(
     )
   }
 
-  return vNode
+  return node
 } as CreateElement<DomEnv>
 
 function* createElementAttributesAndProps<A extends ElementTypes>(vNode: A) {

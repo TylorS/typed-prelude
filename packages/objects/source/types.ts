@@ -46,7 +46,7 @@ export type MergeObjects<A, B> = {
       : never
   }
 
-export type Overwrite<A, B> = B & MergeObjects<DropKeys<A, keyof B>, B>
+export type Overwrite<A, B> = B & Omit<A, keyof B>
 
 export type OptionalKeys<A, K extends keyof A> = DropKeys<A, K> & Partial<Pick<A, K>>
 

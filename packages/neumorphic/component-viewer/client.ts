@@ -48,15 +48,15 @@ runEffects(patchOnRaf(main, fromJust(rootElement)), {
       primary: Rgba.create(255, 166, 120),
       secondary: Rgba.create(120, 20, 120),
       greyScale: [
-        Rgba.create(0, 0, 0), // White
-        Rgba.create(32, 32, 32), // Lightest Grey
-        Rgba.create(64, 64, 64), // Lighter Grey
-        Rgba.create(96, 96, 96), // Light Grey
-        Rgba.create(128, 128, 128), // Grey
-        Rgba.create(159, 159, 159), // Dark Grey
-        Rgba.create(191, 191, 191), // Darker Grey
-        Rgba.create(223, 223, 223), // Darkest Grey
-        Rgba.create(255, 255, 255), // Black
+        Rgba.create(0, 0, 0),
+        Rgba.create(32, 32, 32),
+        Rgba.create(64, 64, 64),
+        Rgba.create(96, 96, 96),
+        Rgba.create(128, 128, 128),
+        Rgba.create(159, 159, 159),
+        Rgba.create(191, 191, 191),
+        Rgba.create(223, 223, 223),
+        Rgba.create(255, 255, 255),
       ],
     },
     borderRadius: 4 as NonNegativeInteger,

@@ -15,7 +15,9 @@ export function* Button<E>(params: ButtonParams<E>): Button<E> {
     getSecondaryColor(),
     getBorderRadius(),
   )
+  // TODO: Create an icon for :active to replace cursor
   const buttonClassName = yield* useClassName(
+    { cursor: 'pointer' },
     display === ButtonDisplay.Primary && { backgroundColor: colorToString(primaryColor) },
     display === ButtonDisplay.Secondary && { backgroundColor: colorToString(secondaryColor) },
     display === ButtonDisplay.Outline && {

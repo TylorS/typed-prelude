@@ -1,5 +1,5 @@
 import { Effects } from '@typed/effects'
-import { CombinedEnvsOf, EnvOf, VNode } from './VNode'
+import { CombinedEnvsOf, EnvOf, NodeOf, VNode } from './VNode'
 
 /**
  * Converts a DOM node to a VNode for monomorphic patch function
@@ -11,7 +11,7 @@ export type ElementToVNode<E> = (
 /**
  * Given a vNode it creates an element for it
  */
-export type CreateElement<E> = <A extends VNode>(vNode: A) => Effects<E & EnvOf<A>, void>
+export type CreateElement<E> = <A extends VNode>(vNode: A) => Effects<E & EnvOf<A>, NodeOf<A>>
 
 /**
  * Insert child elements to a parent from a given reference

@@ -16,11 +16,11 @@ export function createPatchEnv(fail: Fail<Error> = Fail): PatchEnv<VNode, VNode>
       } else {
         const element = yield* getNodeOrThrow(elementVNode)
         const parentNode = element.parentNode
-
-        yield* createElement(vNode)
+        const node = yield* createElement(vNode)
 
         if (parentNode) {
-          parentNode.insertBefore(element.nextSibling)
+          parentNode.insertBefore(node, element.nextSibling)
+
           yield* removeElements(parentNode, [elementVNode])
         }
       }
