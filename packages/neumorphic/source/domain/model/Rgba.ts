@@ -1,11 +1,11 @@
-import { ColorNumber } from './ColorNumber'
 import { ColorType } from './ColorType'
+import { NonNegativeEightBitInteger } from './NonNegativeEightBitInteger'
 import { ZeroToOne } from './ZeroToOne'
 
 export interface Rgba<
-  R extends ColorNumber = ColorNumber,
-  G extends ColorNumber = ColorNumber,
-  B extends ColorNumber = ColorNumber,
+  R extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
+  G extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
+  B extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
   A extends ZeroToOne = ZeroToOne
 > {
   readonly type: ColorType.Rgba
@@ -17,9 +17,9 @@ export interface Rgba<
 
 export namespace Rgba {
   export const create = <
-    R extends ColorNumber = ColorNumber,
-    G extends ColorNumber = ColorNumber,
-    B extends ColorNumber = ColorNumber,
+    R extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
+    G extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
+    B extends NonNegativeEightBitInteger = NonNegativeEightBitInteger,
     A extends ZeroToOne = 1
   >(
     red: R,

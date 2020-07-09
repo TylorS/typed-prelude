@@ -39,7 +39,7 @@ export function rgbaToHsla({ red, green, blue, alpha }: Rgba): Hsla {
   const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
 
   return {
-    type: ColorType.Hsl,
+    type: ColorType.Hsla,
     hue,
     saturation: toPercentage(s),
     lightness: toPercentage(l),

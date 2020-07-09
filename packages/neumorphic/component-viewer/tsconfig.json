@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "../../",
+    "baseUrl": "./",
+    "composite": true,
+    "incremental": true,
+    "module": "esnext",
+    "paths": {
+      "@typed/*": [
+        "../../*"
+      ]
+    }
+  },
+  "include": [
+    "../source",
+    "**/*.ts"
+  ]
+}

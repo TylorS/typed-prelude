@@ -1,5 +1,5 @@
 import { pipeline } from '@typed/lambda'
-import { ColorNumber, HexCode, Hsla, Rgba } from '../model'
+import { HexCode, Hsla, NonNegativeEightBitInteger, Rgba } from '../model'
 import { rgbaToHexCode } from './rgbaConversions'
 
 export function hslaToString({ hue, saturation, lightness, alpha }: Hsla): string {
@@ -45,9 +45,9 @@ export function hslaToRgba({ hue, saturation, lightness, alpha }: Hsla): Rgba {
     b = x
   }
 
-  const red = Math.round((r + m) * 255) as ColorNumber
-  const green = Math.round((g + m) * 255) as ColorNumber
-  const blue = Math.round((b + m) * 255) as ColorNumber
+  const red = Math.round((r + m) * 255) as NonNegativeEightBitInteger
+  const green = Math.round((g + m) * 255) as NonNegativeEightBitInteger
+  const blue = Math.round((b + m) * 255) as NonNegativeEightBitInteger
 
   return Rgba.create(red, green, blue, alpha)
 }

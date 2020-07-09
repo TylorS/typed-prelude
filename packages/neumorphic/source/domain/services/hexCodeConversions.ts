@@ -1,5 +1,5 @@
 import { pipeline } from '@typed/lambda'
-import { ColorNumber, HexCode, HexValue, Hsla, Rgba, ZeroToOne } from '../model'
+import { HexCode, HexValue, Hsla, NonNegativeEightBitInteger, Rgba, ZeroToOne } from '../model'
 import { rgbaToHsla } from './rgbaConversions'
 
 export function hexCodeToString({ red, green, blue, alpha }: HexCode): string {
@@ -19,8 +19,8 @@ function hexValueToDecimal(value: HexValue): ZeroToOne {
   return (Math.round((hexValueToColorNumber(value) / 255) * 100) / 100) as ZeroToOne
 }
 
-function hexValueToColorNumber(value: HexValue): ColorNumber {
-  return Math.round(parseInt(value, 16)) as ColorNumber
+function hexValueToColorNumber(value: HexValue): NonNegativeEightBitInteger {
+  return Math.round(parseInt(value, 16)) as NonNegativeEightBitInteger
 }
 
 export function hexCodeToHsla(hexCode: HexCode): Hsla {

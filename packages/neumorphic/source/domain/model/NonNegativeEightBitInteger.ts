@@ -1,4 +1,4 @@
-export type ColorNumber =
+export type NonNegativeEightBitInteger =
   | 0
   | 1
   | 2
