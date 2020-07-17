@@ -6,8 +6,6 @@ export function* Counter(): HookEffects<unknown, VNode> {
   const [getCount, updateCount] = yield* useState(InitialState.of(0))
   const count = yield* getCount()
 
-  console.log(count)
-
   return html('div', null, [
     html(
       'button',
