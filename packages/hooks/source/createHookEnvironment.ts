@@ -27,6 +27,7 @@ export function createHookEnvironment(manager: HooksManager): HookEnvironment {
     useState,
     useRef,
     resetId,
+    hookStates,
     get updated() {
       return manager.hasBeenUpdated(hookEnvironment)
     },

@@ -9,7 +9,7 @@
   },
   "include": [
     "source",
-    "source/.ts"
+    "source/.ts",
   ],
   "exclude": [
     "./cjs/**",

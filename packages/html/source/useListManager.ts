@@ -1,6 +1,6 @@
 import { TimerEnv } from '@typed/effects'
-import { HookEffects, HooksManagerEnv, useCallback, useEffectBy, useMemo } from '@typed/hooks'
-import { Arity1 } from '@typed/lambda'
+import { HookEffects, HooksManagerEnv, useEffectBy, useMemo } from '@typed/hooks'
+import { Arity1, memoize } from '@typed/lambda'
 import { PatchEnv } from '@typed/render'
 import { VNode } from './domain'
 import { useKeyManager } from './useKeyManager'
@@ -12,9 +12,10 @@ export function* useListManager<A, B extends PropertyKey, E>(
   identify: Arity1<A, B>,
   computation: (value: A, index: number) => HookEffects<E, VNode>,
 ): HookEffects<E & TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode>, ReadonlyArray<VNode>> {
-  const getIdentifier = yield* useCallback((a: A) => ({ [identify(a)]: a } as KeyOf<A, B>), [
-    identify,
-  ])
+  const getIdentifier = yield* useMemo(
+    () => memoize((a: A) => ({ [identify(a)]: a } as KeyOf<A, B>)),
+    [],
+  )
 
   return yield* useEffectBy(list, getIdentifier, function* (
     value,
