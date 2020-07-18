@@ -23,6 +23,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
 
     environments.set(key, created)
     environmentToKey.set(created, key)
+    parent.addDisposable(created)
 
     hookEvents.publish([HookEnvironmentEventType.Created, { created, parent }])
 
@@ -45,6 +46,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
       }
 
       if (!nested) {
+        environment.dispose()
         hookEvents.publish([HookEnvironmentEventType.Removed, environment])
       }
     }
