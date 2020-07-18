@@ -1,10 +1,12 @@
-import { get, TimerEnv } from '@typed/effects'
+import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
   getEnvironmentByKey,
   HookEffects,
   HookEnv,
+  removeEnvironmentByKey,
   runWithHooks,
+  useEffectOnce,
   useRef,
 } from '@typed/hooks'
 import { isNothing } from '@typed/maybe'
@@ -32,6 +34,8 @@ export function* useKeyManager<E, A, B>(
     getRenderable,
   } = yield* useRenderChannel<A, B>()
   const isFirstRun = isNothing(ref.current)
+
+  yield* useEffectOnce(() => ({ dispose: () => runEffects(removeEnvironmentByKey(key), env) }))
 
   if (isFirstRun) {
     setRef(initial)

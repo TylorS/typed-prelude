@@ -1,23 +1,18 @@
 import { TimerEnv } from '@typed/effects'
 import { HookEffects, HooksManagerEnv, useEffectBy, useMemo } from '@typed/hooks'
-import { Arity1, memoize } from '@typed/lambda'
+import { Arity1 } from '@typed/lambda'
 import { PatchEnv } from '@typed/render'
 import { VNode } from './domain'
 import { useKeyManager } from './useKeyManager'
 
 export type KeyOf<A, Key extends PropertyKey> = { readonly [K in Key]: A }
 
-export function* useListManager<A, B extends PropertyKey, E>(
+export function* useListManager<A, B, E>(
   list: ReadonlyArray<A>,
   identify: Arity1<A, B>,
   computation: (value: A, index: number) => HookEffects<E, VNode>,
 ): HookEffects<E & TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode>, ReadonlyArray<VNode>> {
-  const getIdentifier = yield* useMemo(
-    () => memoize((a: A) => ({ [identify(a)]: a } as KeyOf<A, B>)),
-    [],
-  )
-
-  return yield* useEffectBy(list, getIdentifier, function* (
+  return yield* useEffectBy(list, identify, function* (
     value,
     index,
     key,

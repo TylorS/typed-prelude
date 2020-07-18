@@ -1,10 +1,12 @@
-import { get, TimerEnv } from '@typed/effects'
+import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
   getEnvironmentByKey,
   HookEffects,
   HookEnv,
+  removeEnvironmentByKey,
   runWithHooks,
+  useEffectOnce,
   useRef,
 } from '@typed/hooks'
 import { isNothing } from '@typed/maybe'
@@ -16,13 +18,15 @@ import { useHtmlChannel } from './HtmlChannel'
  * Used to manage a help manage re-rendering a patchable instance
  */
 export function* useKeyManager<E, A extends VNode>(
-  key: object,
+  key: any,
   render: () => HookEffects<E, A>,
 ): ChannelEffects<HookEnv & TimerEnv & PatchEnv<VNode, VNode> & E & EnvOf<A>, A> {
   const env = yield* get()
   const hookEnvironment = yield* getEnvironmentByKey(key)
   const { setRenderable, getRenderable, setRenderer } = yield* useHtmlChannel()
   const isFirstRun = yield* useFirstRun()
+
+  yield* useEffectOnce(() => ({ dispose: () => runEffects(removeEnvironmentByKey(key), env) }))
 
   if (isFirstRun) {
     setRenderer(hookEnvironment.id, [render, env])
