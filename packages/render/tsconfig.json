@@ -8,7 +8,7 @@
     "outDir": "./esm"
   },
   "include": [
-    "source",
+    "source"
   ],
   "exclude": [
     "./cjs/**",
