@@ -1,26 +1,24 @@
-import { Disposable } from '@typed/disposable/source'
-import { combine, get, runEffects, TimerEnv } from '@typed/effects'
+import { combine, get, TimerEnv } from '@typed/effects'
 import { getEnvironmentByKey } from './getEnvironmentByKey'
 import { runWithHooks } from './runWithHooks'
 import { ChannelEffects, HookEffects, HookEnv, HookEnvironment } from './types'
-import { useEffect } from './useEffect'
 import { useMemo } from './useMemo'
 
-export function* useEffectBy<A, B extends object, E, C>(
+export function* useEffectBy<A, B, E, C>(
   values: ReadonlyArray<A>,
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
 ): ChannelEffects<HookEnv & TimerEnv & E, ReadonlyArray<C>> {
-  const currentValues = yield* useMemo(() => new Map<HookEnvironment, [object, C]>(), [])
+  const currentValues = yield* useMemo(() => new Map<HookEnvironment, [B, C]>(), [])
 
   return yield* manageValues(values, identify, fn, currentValues)
 }
 
-function* manageValues<A, B extends object, E, C>(
+function* manageValues<A, B, E, C>(
   values: ReadonlyArray<A>,
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
-  currentValues: Map<HookEnvironment, [object, C]>,
+  currentValues: Map<HookEnvironment, [B, C]>,
 ): ChannelEffects<HookEnv & TimerEnv & E, ReadonlyArray<C>> {
   const { removeEnvironmentByKey } = yield* get()
   const updated = yield* combine(
@@ -30,30 +28,23 @@ function* manageValues<A, B extends object, E, C>(
   const updatedValues = yield* useMemo((u) => u.map(([x]) => x), [updated])
 
   // Remove any old environments
-  yield* useEffect(
-    (envs, _) => {
-      currentValues.forEach(([key], env) => {
-        if (!envs.has(env)) {
-          currentValues.delete(env)
+  for (const [env, [key]] of currentValues) {
+    if (!updatedHookEnvironments.has(env)) {
+      currentValues.delete(env)
 
-          runEffects(removeEnvironmentByKey(key))
-        }
-      })
-
-      return Disposable.None
-    },
-    [updatedHookEnvironments, updated] as const,
-  )
+      yield* removeEnvironmentByKey(key)
+    }
+  }
 
   return updatedValues
 }
 
-function* manageValue<A, B extends object, E, C>(
+function* manageValue<A, B, E, C>(
   value: A,
   index: number,
   identify: (a: A) => B,
   fn: (a: A, index: number, key: B) => HookEffects<E, C>,
-  currentValues: Map<HookEnvironment, [object, C]>,
+  currentValues: Map<HookEnvironment, [B, C]>,
 ): ChannelEffects<E & HookEnv, readonly [C, HookEnvironment, B]> {
   const key = identify(value)
   const hookEnvironment = yield* getEnvironmentByKey(key)
@@ -68,5 +59,5 @@ function* manageValue<A, B extends object, E, C>(
 
   const [k, currentValue] = currentValues.get(hookEnvironment)!
 
-  return [currentValue, hookEnvironment, k as B] as const
+  return yield* useMemo((...args) => args, [currentValue, hookEnvironment, k] as const)
 }

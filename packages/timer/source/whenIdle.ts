@@ -33,7 +33,7 @@ export function whenIdle(
   fn: Arity2<RequestIdleCallbackDeadline, number>,
   timer: Timer,
 ): Disposable {
-  return whenIdleWithTimeout(fn, Infinity, timer)
+  return whenIdleWithTimeout(fn, Number.MAX_SAFE_INTEGER, timer)
 }
 
 /**

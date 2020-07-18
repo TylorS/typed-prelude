@@ -1,12 +1,12 @@
-import { Disposable, LazyDisposable } from '@typed/disposable'
+import { LazyDisposable } from '@typed/disposable'
 import { Effect, Effects, PureEffect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
 import { Maybe } from '@typed/maybe'
+import { Subscription } from '@typed/subscription'
 import { Tuple } from '@typed/tuple'
 import { UuidEnv } from '@typed/uuid'
 import { Uuid } from '@typed/uuid'
-import { Subscription } from '../../subscription/source'
 import { Channel } from './Channel'
 
 export const enum HookEnvironmentEventType {
@@ -15,21 +15,27 @@ export const enum HookEnvironmentEventType {
   Removed = 'removed',
 }
 
+export type HookEnvironmentCreatedEvent = Tuple<
+  HookEnvironmentEventType.Created,
+  { readonly created: HookEnvironment; readonly parent: HookEnvironment }
+>
+
+export type HookEnvironmentUpdatedEvent = Tuple<
+  HookEnvironmentEventType.Updated,
+  { readonly hookEnvironment: HookEnvironment; readonly updated: boolean }
+>
+
+export type HookEnvironmentRemovedEvent = Tuple<HookEnvironmentEventType.Removed, HookEnvironment>
+
 export type HookEnvironmentEvent =
-  | Tuple<
-      HookEnvironmentEventType.Created,
-      { readonly created: HookEnvironment; readonly parent: HookEnvironment }
-    >
-  | Tuple<
-      HookEnvironmentEventType.Updated,
-      { readonly hookEnvironment: HookEnvironment; readonly updated: boolean }
-    >
-  | Tuple<HookEnvironmentEventType.Removed, HookEnvironment>
+  | HookEnvironmentCreatedEvent
+  | HookEnvironmentUpdatedEvent
+  | HookEnvironmentRemovedEvent
 
 export interface HooksManagerEnv {
   readonly hooksManager: HooksManager
-  readonly getEnvironmentByKey: (key: object) => HookEffects<unknown, HookEnvironment>
-  readonly removeEnvironmentByKey: (key: object) => PureEffect<void>
+  readonly getEnvironmentByKey: (key: any) => HookEffects<unknown, HookEnvironment>
+  readonly removeEnvironmentByKey: (key: any) => PureEffect<void>
 }
 
 export interface HookEnv {
@@ -45,7 +51,7 @@ export interface ChannelEffects<A, B> extends Effects<HooksManagerEnv & A, B> {}
  * through a subscription to HookEvents, a HooksManager is able to manage Channels
  * to provide state that is shared.
  */
-export interface HooksManager extends UuidEnv, Disposable {
+export interface HooksManager extends UuidEnv, LazyDisposable {
   /**
    * Listen to hook events
    */
@@ -95,6 +101,7 @@ export interface HookEnvironment extends LazyDisposable {
 
   readonly updated: boolean // true when useState has been updated
   readonly clearUpdated: () => PureEffect<void>
+  readonly hookStates: ReadonlyMap<number, any>
 }
 
 export type InitialState<E, A> = () => Effects<E, A>
@@ -107,5 +114,6 @@ export namespace InitialState {
 
 export type UseState<A> = readonly [IO<PureEffect<A>>, (updateFn: Arity1<A, A>) => PureEffect<A>]
 
-export type UseRef<A> = readonly [Ref<A>, Arity1<A | undefined | void | null, void>]
+export type UseRef<A> = readonly [Ref<A>, SetRef<A>]
 export type Ref<A> = { current: Maybe<A> }
+export type SetRef<A> = Arity1<A | undefined | void | null, void>

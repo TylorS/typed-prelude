@@ -40,6 +40,12 @@
       "path": "../history/tsconfig.json"
     },
     {
+      "path": "../http/tsconfig.json"
+    },
+    {
+      "path": "../io/tsconfig.json"
+    },
+    {
       "path": "../lambda/tsconfig.json"
     },
     {

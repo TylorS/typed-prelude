@@ -29,7 +29,8 @@ const hookEnvironment = createHookEnvironment(hooksManagerEnv.hooksManager)
 
 function* main(): HookEffects<TimerEnv & HooksManagerEnv & PatchEnv<VNode, VNode>, VNode> {
   const [getCounters, updateCounters] = yield* useState(InitialState.of(0))
-  const children = yield* useListManager(range(0, yield* getCounters()), String, Counter)
+  const numberOfCounters = yield* getCounters()
+  const children = yield* useListManager(range(0, numberOfCounters), String, Counter)
 
   return html('div', null, [
     html(

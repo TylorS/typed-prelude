@@ -7,12 +7,12 @@ import { HookEffects, HookEnvironment, HookEnvironmentEventType, HooksManagerEnv
 
 export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
   const hooksManager = createHooksManager(uuidEnv)
-  const environments = new WeakMap<object, HookEnvironment>()
-  const environmentToKey = new WeakMap<HookEnvironment, object>()
+  const environments = new Map<any, HookEnvironment>()
+  const environmentToKey = new WeakMap<HookEnvironment, any>()
 
   const { hookEvents } = hooksManager
 
-  function* getEnvironmentByKey(key: object): HookEffects<unknown, HookEnvironment> {
+  function* getEnvironmentByKey(key: any): HookEffects<unknown, HookEnvironment> {
     const parent = yield* getHookEnv()
 
     if (environments.has(key)) {
@@ -23,13 +23,14 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
 
     environments.set(key, created)
     environmentToKey.set(created, key)
+    parent.addDisposable(created)
 
     hookEvents.publish([HookEnvironmentEventType.Created, { created, parent }])
 
     return created
   }
 
-  function* removeEnvironmentByKey(key: object, nested: boolean = false): Effects<unknown, void> {
+  function* removeEnvironmentByKey(key: any, nested: boolean = false): Effects<unknown, void> {
     const environment = environments.get(key)
 
     if (environment) {
@@ -45,6 +46,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
       }
 
       if (!nested) {
+        environment.dispose()
         hookEvents.publish([HookEnvironmentEventType.Removed, environment])
       }
     }

@@ -20,6 +20,7 @@ export function createTestRafEnv(timer: Timer, delayMs: number = 1): RafEnv {
 
   function cancelAnimationFrame(handle: number) {
     timers.get(handle)?.dispose()
+    timers.delete(handle)
   }
 
   return { requestAnimationFrame, cancelAnimationFrame }

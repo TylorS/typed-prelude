@@ -13,9 +13,28 @@ export function* useEffect<A extends readonly any[]>(
   fn: Fn<A, Disposable>,
   deps: A,
 ): ChannelEffects<HookEnv & TimerEnv, Disposable> {
+  return yield* __useEffect(fn, deps, true)
+}
+
+export function* useUpdateEffect<A extends readonly any[]>(
+  fn: Fn<A, Disposable>,
+  deps: A,
+): ChannelEffects<HookEnv & TimerEnv, Disposable> {
+  return yield* __useEffect(fn, deps, false)
+}
+
+export function* useEffectOnce(fn: IO<Disposable>): ChannelEffects<HookEnv & TimerEnv, Disposable> {
+  return yield* useEffect(fn, empty)
+}
+
+function* __useEffect<A extends readonly any[]>(
+  fn: Fn<A, Disposable>,
+  deps: A,
+  firstRun: boolean,
+): ChannelEffects<HookEnv & TimerEnv, Disposable> {
   const { useRef, addDisposable } = yield* getHookEnv()
   const [disposable, setDisposable] = yield* useRef<any, Disposable>()
-  const depsChanged = yield* useDepChange(deps)
+  const depsChanged = yield* useDepChange(deps, firstRun)
   const timer = yield* useTimer()
 
   if (depsChanged) {
@@ -27,8 +46,4 @@ export function* useEffect<A extends readonly any[]>(
   }
 
   return withDefault(Disposable.None, disposable.current)
-}
-
-export function* useEffectOnce(fn: IO<Disposable>): ChannelEffects<HookEnv & TimerEnv, Disposable> {
-  return yield* useEffect(fn, empty)
 }

@@ -1,89 +1,51 @@
-import { Disposable, onDisposed } from '@typed/disposable'
 import { get, runEffects, TimerEnv } from '@typed/effects'
 import {
   ChannelEffects,
   getEnvironmentByKey,
   HookEffects,
   HookEnv,
-  InitialState,
+  removeEnvironmentByKey,
   runWithHooks,
-  useMemo,
+  useEffectOnce,
   useRef,
-  UseRef,
 } from '@typed/hooks'
-import { fromJust, isJust, isNothing, Just, withDefault } from '@typed/maybe'
-import { patch, PatchEnv } from './Patch'
-import { useHookEnvUpdated } from './useHookEnvUpdated'
+import { isNothing } from '@typed/maybe'
+import { PatchEnv } from './Patch'
+import { useRenderChannel } from './RenderChannel'
+import { RenderRef } from './RenderRef'
 
 /**
  * Used to manage a help manage re-rendering a patchable instance
  */
-export function* useKeyManager<E, B, C>(
-  key: object,
-  render: (...ref: UseRef<C>) => HookEffects<E, B>,
-  initial?: C | null,
-): ChannelEffects<HookEnv & TimerEnv & PatchEnv<C, B> & E, B> {
+export function* useKeyManager<E, A, B>(
+  key: any,
+  render: (ref: RenderRef<A>) => HookEffects<E, B>,
+  initial?: A | null,
+): ChannelEffects<HookEnv & TimerEnv & PatchEnv<A, B> & E, B> {
   const env = yield* get()
+  const [ref, setRef] = yield* useRef<unknown, A>()
   const hookEnvironment = yield* getEnvironmentByKey(key)
-  const [currentlyUpdating, setCurrentlyUpdating] = yield* useRef(InitialState.of(false))
-  const [shouldBeUpdated, setShouldBeUpdated] = yield* useRef(InitialState.of(false))
-  const checkIsUpdating = yield* useMemo(
-    () => () => withDefault(false, currentlyUpdating.current),
-    [],
-  )
-  const checkShouldBeUpdated = yield* useMemo(
-    () => () => withDefault(false, shouldBeUpdated.current),
-    [],
-  )
-  const [renderable, setRenderable] = yield* useRef<unknown, B>()
-  const isFirstRun = isNothing(renderable.current)
-  const renderedRef = yield* useRef<unknown, C>()
-  const [rendered, setRendered] = renderedRef
-  const applyUpdate = yield* useMemo(
-    (_) =>
-      // Allows for an effect to re-render itself
-      function* runPatch(): ChannelEffects<HookEnv & TimerEnv & E & PatchEnv<C, B>, void> {
-        if (isJust(rendered.current) && !checkIsUpdating()) {
-          setCurrentlyUpdating(true)
+  const { id } = hookEnvironment
+  const {
+    setRenderable,
+    setRendered,
+    getRendered,
+    setRenderer,
+    getRenderable,
+  } = yield* useRenderChannel<A, B>()
+  const isFirstRun = isNothing(ref.current)
 
-          const updated = yield* runWithHooks(render(...renderedRef), hookEnvironment)
+  yield* useEffectOnce(() => ({ dispose: () => runEffects(removeEnvironmentByKey(key), env) }))
 
-          setRenderable(updated)
-          setRendered(yield* patch(fromJust(rendered.current), updated))
-          setCurrentlyUpdating(false)
-
-          if (checkShouldBeUpdated()) {
-            setShouldBeUpdated(false)
-
-            return yield* runPatch()
-          }
-        } else {
-          setShouldBeUpdated(true)
-        }
-      },
-    [rendered, hookEnvironment],
-  )
-
-  if (isFirstRun || hookEnvironment.updated) {
-    setRendered(initial)
-    setRenderable(yield* runWithHooks(render(...renderedRef), hookEnvironment))
+  if (isFirstRun) {
+    setRef(initial)
+    setRendered(id, { ref, setRef })
+    setRenderer(id, [render, env])
   }
 
-  yield* useHookEnvUpdated(hookEnvironment, () => {
-    const disposable = Disposable.lazy()
-    const { dispose } = hookEnvironment.addDisposable(disposable)
+  if (isFirstRun || hookEnvironment.updated) {
+    setRenderable(id, yield* runWithHooks(render(getRendered(id)), hookEnvironment))
+  }
 
-    disposable.addDisposable(
-      runEffects(applyUpdate(), env, () => {
-        disposable.dispose()
-        dispose()
-
-        return Disposable.None
-      }),
-    )
-
-    return onDisposed(dispose, disposable)
-  })
-
-  return fromJust(renderable.current as Just<B>)
+  return getRenderable(id)
 }
