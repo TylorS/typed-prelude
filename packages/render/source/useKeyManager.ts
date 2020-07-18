@@ -15,16 +15,22 @@ import { RenderRef } from './RenderRef'
 /**
  * Used to manage a help manage re-rendering a patchable instance
  */
-export function* useKeyManager<E, B, A>(
-  key: object,
-  render: (ref: RenderRef<B>) => HookEffects<E, A>,
-  initial?: B | null,
-): ChannelEffects<HookEnv & TimerEnv & PatchEnv<B, A> & E, A> {
+export function* useKeyManager<E, A, B>(
+  key: any,
+  render: (ref: RenderRef<A>) => HookEffects<E, B>,
+  initial?: A | null,
+): ChannelEffects<HookEnv & TimerEnv & PatchEnv<A, B> & E, B> {
   const env = yield* get()
-  const [ref, setRef] = yield* useRef<unknown, B>()
+  const [ref, setRef] = yield* useRef<unknown, A>()
   const hookEnvironment = yield* getEnvironmentByKey(key)
   const { id } = hookEnvironment
-  const { setRenderable, setRendered, setRenderer, getRenderable } = yield* useRenderChannel<B, A>()
+  const {
+    setRenderable,
+    setRendered,
+    getRendered,
+    setRenderer,
+    getRenderable,
+  } = yield* useRenderChannel<A, B>()
   const isFirstRun = isNothing(ref.current)
 
   if (isFirstRun) {
@@ -34,7 +40,7 @@ export function* useKeyManager<E, B, A>(
   }
 
   if (isFirstRun || hookEnvironment.updated) {
-    setRenderable(id, yield* runWithHooks(render({ ref, setRef }), hookEnvironment))
+    setRenderable(id, yield* runWithHooks(render(getRendered(id)), hookEnvironment))
   }
 
   return getRenderable(id)

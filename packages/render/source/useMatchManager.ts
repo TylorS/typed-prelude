@@ -14,6 +14,9 @@ import { PatchEnv } from './Patch'
 import { RenderRef } from './RenderRef'
 import { useKeyManager } from './useKeyManager'
 
+/**
+ * Provide each match it's own component context
+ */
 export function* useMatchManager<A, E, B, C>(
   matchAgainst: A,
   matches: ReadonlyArray<Match<A, (ref: RenderRef<C>) => HookEffects<E, B>>>,

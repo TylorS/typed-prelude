@@ -1,3 +1,4 @@
+import { Disposable } from '@typed/disposable'
 import { runEffects } from '@typed/effects/source'
 import { createSubscription } from '@typed/subscription'
 import { UuidEnv } from '@typed/uuid'
@@ -18,6 +19,7 @@ const emptyMap = new WeakMap()
 // This is how @typed/hooks allows for providing and consuming values via its Channel API.
 // At present the implementation of a HooksManager can only maintain
 export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
+  const disposable = Disposable.lazy()
   const hookEvents = createSubscription<HookEnvironmentEvent>()
   const {
     setParent,
@@ -69,9 +71,11 @@ export function createHooksManager(uuidEnv: UuidEnv): HooksManager {
     return false
   }
 
+  disposable.addDisposable(hookEvents.subscribe((event) => runEffects(onEvent(event))))
+
   return {
     // Listen to incoming events
-    ...hookEvents.subscribe((event) => runEffects(onEvent(event))),
+    ...disposable,
 
     // To pass down to createHookEnvironment
     ...uuidEnv,

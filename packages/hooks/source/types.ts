@@ -1,4 +1,4 @@
-import { Disposable, LazyDisposable } from '@typed/disposable'
+import { LazyDisposable } from '@typed/disposable'
 import { Effect, Effects, PureEffect } from '@typed/effects'
 import { Pure } from '@typed/env'
 import { Arity1, IO } from '@typed/lambda'
@@ -34,8 +34,8 @@ export type HookEnvironmentEvent =
 
 export interface HooksManagerEnv {
   readonly hooksManager: HooksManager
-  readonly getEnvironmentByKey: (key: object) => HookEffects<unknown, HookEnvironment>
-  readonly removeEnvironmentByKey: (key: object) => PureEffect<void>
+  readonly getEnvironmentByKey: (key: any) => HookEffects<unknown, HookEnvironment>
+  readonly removeEnvironmentByKey: (key: any) => PureEffect<void>
 }
 
 export interface HookEnv {
@@ -51,7 +51,7 @@ export interface ChannelEffects<A, B> extends Effects<HooksManagerEnv & A, B> {}
  * through a subscription to HookEvents, a HooksManager is able to manage Channels
  * to provide state that is shared.
  */
-export interface HooksManager extends UuidEnv, Disposable {
+export interface HooksManager extends UuidEnv, LazyDisposable {
   /**
    * Listen to hook events
    */

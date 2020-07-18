@@ -7,12 +7,12 @@ import { HookEffects, HookEnvironment, HookEnvironmentEventType, HooksManagerEnv
 
 export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
   const hooksManager = createHooksManager(uuidEnv)
-  const environments = new WeakMap<object, HookEnvironment>()
-  const environmentToKey = new WeakMap<HookEnvironment, object>()
+  const environments = new Map<any, HookEnvironment>()
+  const environmentToKey = new WeakMap<HookEnvironment, any>()
 
   const { hookEvents } = hooksManager
 
-  function* getEnvironmentByKey(key: object): HookEffects<unknown, HookEnvironment> {
+  function* getEnvironmentByKey(key: any): HookEffects<unknown, HookEnvironment> {
     const parent = yield* getHookEnv()
 
     if (environments.has(key)) {
@@ -29,7 +29,7 @@ export function createHooksManagerEnv(uuidEnv: UuidEnv): HooksManagerEnv {
     return created
   }
 
-  function* removeEnvironmentByKey(key: object, nested: boolean = false): Effects<unknown, void> {
+  function* removeEnvironmentByKey(key: any, nested: boolean = false): Effects<unknown, void> {
     const environment = environments.get(key)
 
     if (environment) {
