@@ -31,6 +31,9 @@
       "path": "../effects/tsconfig.json"
     },
     {
+      "path": "../env/tsconfig.json"
+    },
+    {
       "path": "../hooks/tsconfig.json"
     },
     {
@@ -43,7 +46,13 @@
       "path": "../logic/tsconfig.json"
     },
     {
+      "path": "../math/tsconfig.json"
+    },
+    {
       "path": "../maybe/tsconfig.json"
+    },
+    {
+      "path": "../new-type/tsconfig.json"
     },
     {
       "path": "../objects/tsconfig.json"
@@ -53,6 +62,9 @@
     },
     {
       "path": "../set/tsconfig.json"
+    },
+    {
+      "path": "../subscription/tsconfig.json"
     },
     {
       "path": "../timer/tsconfig.json"
