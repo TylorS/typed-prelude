@@ -17,6 +17,7 @@ import { NodeGenerator } from '@typed/uuid'
 import { html, render, Renderable } from 'lighterhtml'
 import * as mostlyDom from 'mostly-dom'
 import { PatchEnv } from './Patch'
+import { RenderRef } from './RenderRef'
 import { useKeyManager } from './useKeyManager'
 
 export const test = describe(`useKeyManager`, [
@@ -55,6 +56,8 @@ export const test = describe(`useKeyManager`, [
       function* test() {
         // Only runs once
         equal(initial + 1, yield* useKeyManager(key, sut, initial))
+
+        timer.progressTimeBy(1)
       }
 
       runEffects(test(), {
@@ -80,7 +83,7 @@ export const test = describe(`useKeyManager`, [
         patch: (previous, current) => Effect.of(render(previous, current)),
       }
 
-      function* sut(...[, setRef]: UseRef<Element>) {
+      function* sut({ setRef }: RenderRef<Element>) {
         const [getState, updateState] = yield* useState(InitialState.of(0))
         const value = yield* getState()
 
@@ -102,6 +105,8 @@ export const test = describe(`useKeyManager`, [
 
       function* test() {
         yield* useKeyManager(key, sut, document.createElement(tagName))
+
+        timer.progressTimeBy(1)
       }
 
       runEffects(test(), {
@@ -134,7 +139,7 @@ export const test = describe(`useKeyManager`, [
         },
       }
 
-      function* sut(...[, setRef]: UseRef<mostlyDom.ElementVNode>) {
+      function* sut({ setRef }: RenderRef<mostlyDom.ElementVNode>) {
         const [getState, updateState] = yield* useState(InitialState.of(0))
 
         yield* useEffectOnce(() => runEffects(updateState((x) => x + 1)))
@@ -156,6 +161,8 @@ export const test = describe(`useKeyManager`, [
         const rootElement = document.createElement(tagName)
 
         yield* useKeyManager(key, sut, mostlyDom.elementToVNode(rootElement))
+
+        timer.progressTimeBy(1)
       }
 
       runEffects(test(), {

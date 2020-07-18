@@ -114,5 +114,6 @@ export namespace InitialState {
 
 export type UseState<A> = readonly [IO<PureEffect<A>>, (updateFn: Arity1<A, A>) => PureEffect<A>]
 
-export type UseRef<A> = readonly [Ref<A>, Arity1<A | undefined | void | null, void>]
+export type UseRef<A> = readonly [Ref<A>, SetRef<A>]
 export type Ref<A> = { current: Maybe<A> }
+export type SetRef<A> = Arity1<A | undefined | void | null, void>
