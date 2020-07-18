@@ -1,6 +1,6 @@
 {
   "name": "@typed/io",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "Runtime IO type system",
   "keywords": [
     "TypeScript",
@@ -28,9 +28,9 @@
   "dependencies": {
     "@typed/common": "^3.5.0",
     "@typed/disposable": "^3.4.1",
-    "@typed/effects": "^6.7.3",
+    "@typed/effects": "^6.8.0",
     "@typed/either": "^8.3.0",
-    "@typed/http": "^8.7.4",
+    "@typed/http": "^8.8.0",
     "@typed/lambda": "^3.4.0",
     "@typed/list": "^6.4.4",
     "@typed/logic": "^6.5.4",
@@ -40,7 +40,7 @@
     "@typed/remote-data": "^5.0.0",
     "@typed/strings": "^7.4.0",
     "@typed/tuple": "^3.3.0",
-    "@typed/uuid": "^9.6.4",
+    "@typed/uuid": "^9.7.0",
     "@typed/validation": "^3.4.4"
   }
 }

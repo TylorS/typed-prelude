@@ -1,6 +1,6 @@
 {
   "name": "@typed/subscription",
-  "version": "3.6.4",
+  "version": "3.7.0",
   "description": "Generic one-to-many subscriptions",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
@@ -25,7 +25,7 @@
     "@typed/disposable": "^3.4.1",
     "@typed/lambda": "^3.4.0",
     "@typed/logic": "^6.5.4",
-    "@typed/timer": "^3.5.4"
+    "@typed/timer": "^3.6.0"
   },
   "publishConfig": {
     "access": "public"
