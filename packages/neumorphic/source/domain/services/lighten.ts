@@ -4,10 +4,6 @@ import { hexCodeToHsla } from './hexCodeConversions'
 import { hslaToHexCode, hslaToRgba } from './hslaConversions'
 import { rgbaToHsla } from './rgbaConversions'
 
-export function lighten(color: Hsla, amount: Percentage): Hsla
-export function lighten(color: Rgba, amount: Percentage): Rgba
-export function lighten(color: HexCode, amount: Percentage): HexCode
-
 export function lighten(color: Color, amount: Percentage): Color {
   switch (color.type) {
     case ColorType.HexCode:

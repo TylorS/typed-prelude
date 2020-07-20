@@ -7,6 +7,7 @@ export interface Theme {
   readonly borderRadius: NonNegativeInteger
   readonly margin: NonNegativeInteger
   readonly padding: NonNegativeInteger
+  readonly transitionDuration: NonNegativeInteger
 }
 
 export const enum ThemeMode {
@@ -17,6 +18,7 @@ export const enum ThemeMode {
 export interface ThemeColors {
   readonly primary: Color
   readonly secondary: Color
+  readonly tertiary: Color
   readonly greyScale: ColorScale
 }
 

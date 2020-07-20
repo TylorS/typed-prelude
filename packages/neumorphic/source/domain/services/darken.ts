@@ -4,10 +4,6 @@ import { hexCodeToHsla } from './hexCodeConversions'
 import { hslaToHexCode, hslaToRgba } from './hslaConversions'
 import { rgbaToHsla } from './rgbaConversions'
 
-export function darken(color: Hsla, amount: Percentage): Hsla
-export function darken(color: Rgba, amount: Percentage): Rgba
-export function darken(color: HexCode, amount: Percentage): HexCode
-
 export function darken(color: Color, amount: Percentage): Color {
   switch (color.type) {
     case ColorType.HexCode:

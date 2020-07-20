@@ -1,16 +1,24 @@
-import { BrowserGenerator } from '@typed/uuid'
-import { Button, ButtonDisplay, ButtonParams, Rgba, ThemeMode } from '../source'
-import { createConsoleLogger, LogLevel } from '@typed/logger'
-import { createCssEnv } from '@typed/css'
+import { CryptoFailure } from '@typed/crypto'
+import { createCssEnv, useClassName } from '@typed/css'
 import { createDomEnv, querySelector } from '@typed/dom'
+import { Fail, runEffects } from '@typed/effects'
 import { createHookEnvironment, createHooksManagerEnv } from '@typed/hooks'
 import { createPatchEnv, html, patchOnRaf, text, useListManager } from '@typed/html'
-import { createTimer } from '@typed/timer'
-import { CryptoFailure } from '@typed/crypto'
-import { CSS_STYLESHEET_SELECTOR, ROOT_ELEMENT_SELECTOR } from './constants'
-import { Fail, runEffects } from '@typed/effects'
+import { createConsoleLogger, LogLevel } from '@typed/logger'
 import { fromJust, isNothing } from '@typed/maybe'
 import { NonNegativeInteger } from '@typed/new-type'
+import { createTimer } from '@typed/timer'
+import { BrowserGenerator } from '@typed/uuid'
+import {
+  Button,
+  ButtonDisplay,
+  ButtonParams,
+  colorToString,
+  getTheme,
+  Rgba,
+  ThemeMode,
+} from '../source'
+import { CSS_STYLESHEET_SELECTOR, ROOT_ELEMENT_SELECTOR } from './constants'
 
 const domEnv = createDomEnv()
 const rootElement = querySelector(ROOT_ELEMENT_SELECTOR, domEnv.document.documentElement)
@@ -45,8 +53,9 @@ runEffects(patchOnRaf(main, fromJust(rootElement)), {
   theme: {
     mode: ThemeMode.Light,
     colors: {
-      primary: Rgba.create(255, 166, 120),
+      primary: Rgba.create(220, 220, 220),
       secondary: Rgba.create(120, 20, 120),
+      tertiary: Rgba.create(220, 220, 220),
       greyScale: [
         Rgba.create(0, 0, 0),
         Rgba.create(32, 32, 32),
@@ -62,30 +71,52 @@ runEffects(patchOnRaf(main, fromJust(rootElement)), {
     borderRadius: 4 as NonNegativeInteger,
     margin: 4 as NonNegativeInteger,
     padding: 4 as NonNegativeInteger,
+    transitionDuration: 300 as NonNegativeInteger,
   },
   timer,
 })
 
 function* main() {
+  const { padding, colors } = yield* getTheme()
+  const { primary } = colors
   const buttonParams: ReadonlyArray<ButtonParams> = [
     {
       display: ButtonDisplay.Primary,
       children: [text('Primary')],
+      styles: { margin: '1rem' },
     },
     {
       display: ButtonDisplay.Secondary,
       children: [text('Secondary')],
+      styles: { margin: '1rem' },
+    },
+    {
+      display: ButtonDisplay.Tertiary,
+      children: [text('Tertiary')],
+      styles: { margin: '1rem' },
     },
     {
       display: ButtonDisplay.Outline,
       children: [text('Outline')],
+      styles: { margin: '1rem' },
     },
     {
       display: ButtonDisplay.Chromeless,
       children: [text('Chromeless')],
+      styles: { margin: '1rem' },
     },
   ]
   const buttons = yield* useListManager(buttonParams, (params) => params.display, Button)
+  const hostClass = yield* useClassName({
+    padding: padding * 2,
+    backgroundColor: colorToString(primary),
+    height: '100%',
+    width: '100%',
+  })
 
-  return html('section', {}, [...buttons])
+  return html('section', { className: hostClass }, [
+    html('h1', null, [text('@typed/neumorhpic')]),
+
+    html('section', { id: 'buttons' }, [html('h2', null, [text('Button')]), ...buttons]),
+  ])
 }

@@ -27,6 +27,12 @@ export function* getSecondaryColor(): Effects<ThemeEnv, Color> {
   return secondary
 }
 
+export function* getTertiaryColor(): Effects<ThemeEnv, Color> {
+  const { tertiary } = yield* getThemeColors()
+
+  return tertiary
+}
+
 export function* getMargin(): Effects<ThemeEnv, NonNegativeInteger> {
   const { margin } = yield* getTheme()
 
