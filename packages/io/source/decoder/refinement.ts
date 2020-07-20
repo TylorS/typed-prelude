@@ -6,14 +6,15 @@ import {
   DecodeError,
   decodeFailure,
   Decoder,
+  InputOf,
   TypeOf,
 } from './Decoder'
 
-export const refinement = <A extends Decoder<any>, B extends TypeOf<A>>(
+export const refinement = <A extends Decoder<any, any>, B extends TypeOf<A>>(
   decoder: A,
   refined: (value: TypeOf<A>) => DecodeEffect<B>,
   expected: string,
-): Decoder<B> => ({
+): Decoder<InputOf<A>, B> => ({
   expected,
   *decode(i) {
     const eitherErrorOrA = yield* catchDecodeFailure(decoder.decode(i))

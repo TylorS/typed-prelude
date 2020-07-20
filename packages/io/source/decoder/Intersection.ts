@@ -4,9 +4,9 @@ import { Decoder, TypeOf } from './Decoder'
 import { Record } from './Record'
 import { refinement } from './refinement'
 
-export const intersection = <A extends ReadonlyArray<Decoder<any>>>(
+export const intersection = <A extends ReadonlyArray<Decoder<any, any>>>(
   decoders: A,
-): Decoder<IntersectionType<A>> =>
+): Decoder<unknown, IntersectionType<A>> =>
   refinement(
     Record,
     function* (r) {

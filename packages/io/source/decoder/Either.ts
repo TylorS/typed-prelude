@@ -3,12 +3,15 @@ import * as G from '../guard'
 import { Decoder } from './Decoder'
 import { refinement } from './refinement'
 
-const UnknownEither: Decoder<Either<unknown, unknown>> = Decoder.fromGuard(
+const UnknownEither: Decoder<unknown, Either<unknown, unknown>> = Decoder.fromGuard(
   G.Either,
   'Either<unknown, unknown>',
 )
 
-export const either = <A, B>(left: Decoder<A>, right: Decoder<B>): Decoder<Either<A, B>> =>
+export const either = <A, B>(
+  left: Decoder<any, A>,
+  right: Decoder<any, B>,
+): Decoder<unknown, Either<A, B>> =>
   refinement(
     UnknownEither,
     function* (either) {

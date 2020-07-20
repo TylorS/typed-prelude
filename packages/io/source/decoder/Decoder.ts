@@ -6,12 +6,13 @@ import { Just, Maybe, Nothing } from '@typed/maybe'
 import { toString } from '@typed/strings'
 import * as G from '../guard/Guard'
 
-export interface Decoder<A = any> {
+export interface Decoder<I, O> {
   readonly expected: string
-  readonly decode: (i: unknown) => DecodeEffect<A>
+  readonly decode: (i: I) => DecodeEffect<O>
 }
 
-export type TypeOf<A> = A extends Decoder<infer R> ? R : never
+export type InputOf<A> = A extends Decoder<infer R, any> ? R : never
+export type TypeOf<A> = A extends Decoder<any, infer R> ? R : never
 
 export type DecodeEffect<A> = Effects<DecodeFailure, A>
 
@@ -43,16 +44,16 @@ export namespace DecodeError {
 }
 
 export const decode: {
-  <A>(decoder: Decoder<A>, input: unknown): Effects<DecodeFailure, A>
-  <A>(decoder: Decoder<A>): (input: unknown) => Effects<DecodeFailure, A>
+  <A, B>(decoder: Decoder<A, B>, input: A): Effects<DecodeFailure, B>
+  <A, B>(decoder: Decoder<A, B>): (input: A) => Effects<DecodeFailure, B>
 } = curry(__decode)
 
-function* __decode<A>(decoder: Decoder<A>, input: unknown) {
+function* __decode<A, B>(decoder: Decoder<A, B>, input: A) {
   return yield* decoder.decode(input)
 }
 
 export namespace Decoder {
-  export const fromGuard = <A>(guard: G.Guard<A>, expected: string): Decoder<A> => ({
+  export const fromGuard = <A>(guard: G.Guard<A>, expected: string): Decoder<unknown, A> => ({
     expected,
     *decode(i) {
       if (guard.is(i)) {

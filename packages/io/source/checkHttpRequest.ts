@@ -10,22 +10,23 @@ export const validateHttpRequest: ValidateHttpRequest = curry(checkHttpRequest)
 type ValidateHttpRequest = {
   <A, B = A>(type: Type<A, B>, request: HttpRequest<A>): Effects<
     HttpEnv & DecodeFailure,
-    Either<Error, B>
+    Either<Error, A>
   >
+
   <A, B = A>(type: Type<A, B>): (
     request: HttpRequest<A>,
-  ) => Effects<HttpEnv & DecodeFailure, Either<Error, B>>
+  ) => Effects<HttpEnv & DecodeFailure, Either<Error, A>>
 }
 
 function* checkHttpRequest<A, B = A>(
   type: Type<A, B>,
   request: HttpRequest<A>,
-): Effects<HttpEnv & DecodeFailure, Either<Error, B>> {
+): Effects<HttpEnv & DecodeFailure, Either<Error, A>> {
   const response = toJson(yield* request)
 
   if (isLeft(response)) {
     return response
   }
 
-  return Right.of(type.encode(yield* type.decode(fromRight(response))))
+  return Right.of(yield* type.decode(fromRight(response)))
 }

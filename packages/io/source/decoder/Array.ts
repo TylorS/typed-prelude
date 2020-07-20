@@ -9,16 +9,19 @@ import {
   DecodeError,
   decodeFailure,
   Decoder,
+  InputOf,
   TypeOf,
 } from './Decoder'
 import { refinement } from './refinement'
 
-export const Array: Decoder<ReadonlyArray<unknown>> = Decoder.fromGuard(
+export const Array: Decoder<unknown, ReadonlyArray<unknown>> = Decoder.fromGuard(
   G.Array,
   'ReadonlyArray<unknown>',
 )
 
-export const array = <A extends Decoder>(decoder: A): Decoder<ReadonlyArray<TypeOf<A>>> =>
+export const array = <A extends Decoder<any, any>>(
+  decoder: A,
+): Decoder<ReadonlyArray<InputOf<A>>, ReadonlyArray<TypeOf<A>>> =>
   refinement(
     Array,
     function* (input): DecodeEffect<ReadonlyArray<TypeOf<A>>> {
