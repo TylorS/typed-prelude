@@ -8,7 +8,7 @@ declare module '../Hkt' {
   }
 
   export interface HktValues<T> {
-    readonly Maybe: T extends Maybe<infer R> ? [R] : never
+    readonly Maybe: [T] extends [Maybe<infer R>] ? [R] : never
   }
 }
 

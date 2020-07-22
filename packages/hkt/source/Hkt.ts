@@ -25,7 +25,7 @@ export type Type<
  * TypeToName<Either<any, any>> === 'Either'
  */
 export type TypeToName<A> = {
-  [T in Types]: A extends Type<T, ReadonlyArray<any>> ? T : never
+  [T in Types]: Type<T, ReadonlyArray<any>> extends A ? T : never
 }[Types]
 
 /**
