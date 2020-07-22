@@ -1,0 +1,37 @@
+{
+  "name": "@typed/hkt",
+  "version": "0.0.0",
+  "description": "Simulate Higher-Kinded-Types for TypeScript",
+  "keywords": [
+    "Typed",
+    "TypeScript",
+    "HKT",
+    "Higher-Kinded-Types",
+    "FP",
+    "Category Theory"
+  ],
+  "author": "Tylor Steinberger <tlsteinberger167@gmail.com>",
+  "main": "./cjs/index.js",
+  "unpkg": "./umd/index.js",
+  "module": "./esm/index.js",
+  "license": "Parity-6.0.0",
+  "types": "./esm/index.d.ts",
+  "main:ts": "./source/index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "tslib": "^2.0.0"
+  },
+  "sideEffects": false,
+  "dependencies": {
+    "@typed/either": "^8.3.0",
+    "@typed/env": "^8.5.0",
+    "@typed/effects": "^6.8.0",
+    "@typed/future": "^11.6.0",
+    "@typed/lambda": "^3.4.0",
+    "@typed/list": "^6.4.4",
+    "@typed/maybe": "^10.4.0",
+    "ts-toolbelt": "^6.13.11"
+  }
+}

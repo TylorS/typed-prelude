@@ -37,6 +37,9 @@
       "path": "./history/tsconfig.json"
     },
     {
+      "path": "./hkt/tsconfig.json"
+    },
+    {
       "path": "./hooks/tsconfig.json"
     },
     {

@@ -37,6 +37,9 @@
       "path": "./history/tsconfig.cjs.json"
     },
     {
+      "path": "./hkt/tsconfig.cjs.json"
+    },
+    {
       "path": "./hooks/tsconfig.cjs.json"
     },
     {

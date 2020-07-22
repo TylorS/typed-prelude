@@ -49,6 +49,10 @@
       "path": "./packages/history"
     },
     {
+      "name": "Hkt",
+      "path": "./packages/hkt"
+    },
+    {
       "name": "Hooks",
       "path": "./packages/hooks"
     },
