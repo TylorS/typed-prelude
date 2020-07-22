@@ -31,7 +31,12 @@
     "@typed/future": "^11.6.0",
     "@typed/lambda": "^3.4.0",
     "@typed/list": "^6.4.4",
+    "@typed/map": "^4.4.4",
     "@typed/maybe": "^10.4.0",
+    "@typed/objects": "^6.4.1",
+    "@typed/remote-data": "^5.0.0",
+    "@typed/routing": "^8.7.0",
+    "@typed/set": "^3.3.0",
     "ts-toolbelt": "^6.13.11"
   }
 }
