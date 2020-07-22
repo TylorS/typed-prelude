@@ -8,7 +8,7 @@ declare module '../Hkt' {
   }
 
   export interface HktValues<T> {
-    readonly List: () => T extends ReadonlyArray<infer R> ? [R] : never
+    readonly List: T extends ReadonlyArray<infer R> ? [R] : never
   }
 }
 

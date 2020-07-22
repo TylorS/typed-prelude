@@ -8,7 +8,7 @@ declare module '../Hkt' {
   }
 
   export interface HktValues<T> {
-    readonly Either: () => [T] extends [Either<infer A, infer B>] ? [A, B] : never
+    readonly Either: [T] extends [Either<infer A, infer B>] ? [A, B] : never
   }
 }
 

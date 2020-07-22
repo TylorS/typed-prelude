@@ -33,9 +33,7 @@ export type TypeToName<A> = {
  * @example
  * ValuesOf<Either<A, B>> === [A, B]
  */
-export type ValuesOf<A extends Type<Types, ReadonlyArray<any>>> = ReturnType<
-  HktValues<A>[TypeToName<A>]
->
+export type ValuesOf<A extends Type<Types, ReadonlyArray<any>>> = HktValues<A>[TypeToName<A>]
 
 /* TO BE EXTENDED IN IMPLEMENTATIONS */
 
@@ -50,4 +48,4 @@ export interface Hkts<Values extends ReadonlyArray<any>> {}
  * to retrieve the information.
  */
 // tslint:disable-next-line:no-empty-interface
-export interface HktValues<T> extends Record<PropertyKey, () => ReadonlyArray<any>> {}
+export interface HktValues<T> extends Record<PropertyKey, PossibleValues> {}
