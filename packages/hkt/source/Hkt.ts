@@ -1,6 +1,8 @@
 // Union of all type names
 export type Types = keyof Hkts<ReadonlyArray<any>> & keyof HktValues<any>
 
+export type PossibleValues = [any?, any?, any?, any?, any?]
+
 // Helper for creating types
 export type Type<
   T extends Types = Types,

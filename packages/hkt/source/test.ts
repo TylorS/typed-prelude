@@ -14,3 +14,4 @@ const eraseFuture = erase(future)
 
 export const _x = eraseEither(Either.of<Error, number>(1))
 export const _y = eraseFuture(Future.of<Error, string>('hello'))
+export const _z = either.map((x: number) => x + 1, Either.of<Error, number>(1))
