@@ -1,8 +1,8 @@
 import { Either, map } from '@typed/either'
-import { Functor } from '../type-classes/Functor'
+import { Functor } from '../type-classes'
 import { TypeParams } from './TypeParams'
 
-declare module '../type-classes/Hkt' {
+declare module '../Hkt' {
   export interface Hkts<Values> {
     readonly Either: Either<TypeParams.Second<Values>, TypeParams.First<Values>>
   }

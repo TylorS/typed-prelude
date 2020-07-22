@@ -2,7 +2,10 @@
 export type Types = keyof Hkts<ReadonlyArray<any>> & keyof HktValues<any>
 
 // Helper for creating types
-export type Type<T extends Types, Values extends ReadonlyArray<any>> = Hkts<Values>[T]
+export type Type<
+  T extends Types = Types,
+  Values extends ReadonlyArray<any> = ReadonlyArray<any>
+> = Hkts<Values>[T]
 
 // Lookup the name of Hkt by Type
 export type TypeToName<A> = {

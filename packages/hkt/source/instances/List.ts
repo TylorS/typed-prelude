@@ -1,8 +1,8 @@
 import { map } from '@typed/list'
-import { Functor } from '../type-classes/Functor'
+import { Functor } from '../type-classes'
 import { TypeParams } from './TypeParams'
 
-declare module '../type-classes/Hkt' {
+declare module '../Hkt' {
   export interface Hkts<Values> {
     readonly List: ReadonlyArray<TypeParams.First<Values>>
   }
