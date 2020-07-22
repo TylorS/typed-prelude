@@ -1,6 +1,6 @@
 import { isJust, map, Maybe } from '@typed/maybe'
 import { Alt, Functor } from '../type-classes'
-import { TypeParams } from './TypeParams'
+import { TypeParams } from '../TypeParams'
 
 declare module '../Hkt' {
   export interface Hkts<Values> {

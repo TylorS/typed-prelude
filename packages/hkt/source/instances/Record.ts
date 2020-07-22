@@ -1,7 +1,7 @@
 import { Arity1 } from '@typed/lambda'
 import * as O from '@typed/objects'
 import { Functor } from '../type-classes'
-import { TypeParams } from './TypeParams'
+import { TypeParams } from '../TypeParams'
 
 declare module '../Hkt' {
   export interface Hkts<Values> {

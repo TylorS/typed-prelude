@@ -1,3 +1,5 @@
+import { U } from 'ts-toolbelt'
+
 /**
  * Union of all type names as defined in Hkts & HktValues
  */
@@ -24,16 +26,15 @@ export type Type<
  * @example
  * TypeToName<Either<any, any>> === 'Either'
  */
-export type TypeToName<A> = {
-  [T in Types]: Type<T, ReadonlyArray<any>> extends A ? T : never
-}[Types]
+export type TypeToName<A> = CastToTypeName<
+  U.Last<
+    {
+      [T in Types]: Type<T, ReadonlyArray<any>> extends A ? T : never
+    }[Types]
+  >
+>
 
-/**
- * Retrieve the values of an Hkt as a Tuple.
- * @example
- * ValuesOf<Either<A, B>> === [A, B]
- */
-export type ValuesOf<A extends Type<Types, ReadonlyArray<any>>> = HktValues<A>[TypeToName<A>]
+type CastToTypeName<A> = A extends Types ? A : never
 
 /* TO BE EXTENDED IN IMPLEMENTATIONS */
 

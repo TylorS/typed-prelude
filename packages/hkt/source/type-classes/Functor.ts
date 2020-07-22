@@ -1,10 +1,10 @@
 import { Arity1 } from '@typed/lambda'
-import { L } from 'ts-toolbelt'
-import { PossibleValues, Type, Types, ValuesOf } from '../Hkt'
+import { PossibleValues, Type, Types } from '../Hkt'
+import { TypeParams } from '../TypeParams'
 
 export interface Functor<T extends Types> {
   readonly map: <A, B, F extends Type<T, [...PossibleValues, A]>>(
     f: Arity1<A, B>,
     functor: F,
-  ) => Type<T, readonly [...L.Pop<ValuesOf<F>>, B]>
+  ) => Type<T, readonly [...TypeParams.DropLast<F, 1>, B]>
 }
