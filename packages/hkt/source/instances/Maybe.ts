@@ -1,5 +1,5 @@
-import { map, Maybe } from '@typed/maybe'
-import { Functor } from '../type-classes'
+import { alt, map, Maybe } from '@typed/maybe'
+import { Functor, Alt } from '../type-classes'
 import { TypeParams } from './TypeParams'
 
 declare module '../Hkt' {
@@ -12,6 +12,7 @@ declare module '../Hkt' {
   }
 }
 
-export const maybe: Functor<'Maybe'> = {
+export const maybe: Functor<'Maybe'> & Alt<'Maybe'> = {
   map,
+  alt
 }

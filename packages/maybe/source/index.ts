@@ -1,3 +1,4 @@
+export * from './alt'
 export * from './ap'
 export * from './chain'
 export * from './combine'
