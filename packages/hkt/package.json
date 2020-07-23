@@ -38,5 +38,8 @@
     "@typed/routing": "^8.7.0",
     "@typed/set": "^3.3.0",
     "ts-toolbelt": "^6.13.11"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.0-dev.20200722"
   }
 }

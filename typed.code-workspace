@@ -194,6 +194,6 @@
     }
   ],
   "settings": {
-    "typescript.tsdk": "Typed Prelude/node_modules/typescript/lib"
+    "typescript.tsdk": "Hkt/node_modules/typescript/lib"
   }
 }
