@@ -1,17 +1,20 @@
 import { map, Route } from '@typed/routing'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Route: Route<TypeParams.Second<Values>, TypeParams.First<Values>>
+export const RouteUri = '@typed/routing' as const
+export type RouteUri = typeof RouteUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [RouteUri]: Route<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly Route: T extends Route<infer A, infer B> ? [A, B] : never
+  export interface HktTypeParams<T> {
+    readonly [RouteUri]: T extends Route<infer A, infer B> ? [A, B] : never
   }
 }
 
-export const route: Functor<'Route'> = {
+export const route: Functor<RouteUri> = {
+  URI: RouteUri,
   map,
 }

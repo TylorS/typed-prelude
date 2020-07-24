@@ -1,17 +1,20 @@
 import { map, RemoteData } from '@typed/remote-data'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly RemoteData: RemoteData<TypeParams.Second<Values>, TypeParams.First<Values>>
+export const RemoteDataUri = '@typed/remote-data' as const
+export type RemoteDataUri = typeof RemoteDataUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [RemoteDataUri]: RemoteData<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly RemoteData: [T] extends [RemoteData<infer A, infer B>] ? [A, B] : never
+  export interface HktTypeParams<T> {
+    readonly [RemoteDataUri]: [T] extends [RemoteData<infer A, infer B>] ? [A, B] : never
   }
 }
 
-export const remoteData: Functor<'RemoteData'> = {
+export const remoteData: Functor<RemoteDataUri> = {
+  URI: RemoteDataUri,
   map,
 }

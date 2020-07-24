@@ -1,17 +1,21 @@
 import * as M from '@typed/map'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Map: ReadonlyMap<TypeParams.Second<Values>, TypeParams.First<Values>>
+export const MapUri = '@typed/map' as const
+export type MapUri = typeof MapUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [MapUri]: ReadonlyMap<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly Map: T extends ReadonlyMap<infer A, infer B> ? [A, B] : never
+  export interface HktTypeParams<T> {
+    readonly [MapUri]: T extends ReadonlyMap<infer A, infer B> ? [A, B] : never
   }
 }
 
-export const map: Functor<'Map'> = {
-  map: M.map as Functor<'Map'>['map'],
+export const map: Functor<MapUri> = {
+  URI: MapUri,
+
+  map: M.map,
 }

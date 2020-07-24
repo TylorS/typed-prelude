@@ -1,21 +1,25 @@
-import { Arity1 } from '@typed/lambda'
-import * as O from '@typed/objects'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { mapObj } from '@typed/objects'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Record: Record<TypeParams.Second<Values>, TypeParams.First<Values>>
+export const RecordUri = '@typed/objects' as const
+export type RecordUri = typeof RecordUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [RecordUri]: Readonly<Record<TypeParams.Second<Params>, TypeParams.First<Params>>>
   }
 
-  export interface HktValues<T> {
-    readonly Record: T extends Record<infer A, infer B> ? [A, B] : never
+  export interface HktTypeParams<T> {
+    readonly [RecordUri]: [T] extends [Readonly<Record<infer A, infer B>>] ? [A, B] : never
   }
 }
 
-const map = <K extends PropertyKey, A, B>(f: Arity1<A, B>, record: Record<K, A>): Record<K, B> =>
-  O.mapObj((_, value) => f(value), record)
+const map = <A, B, C extends PropertyKey>(
+  f: (a: A) => B,
+  functor: Readonly<Record<C, A>>,
+): Readonly<Record<C, B>> => mapObj((_, a) => f(a), functor)
 
-export const record: Functor<'Record'> = {
-  map: map as Functor<'Record'>['map'],
+export const record: Functor<RecordUri> = {
+  URI: RecordUri,
+  map: map as Functor<RecordUri>['map'],
 }

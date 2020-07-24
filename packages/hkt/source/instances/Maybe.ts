@@ -1,18 +1,21 @@
-import { isJust, map, Maybe } from '@typed/maybe'
-import { Alt, Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { map, Maybe, race } from '@typed/maybe'
+import { Alt, Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Maybe: Maybe<TypeParams.First<Values>>
+export const MaybeUri = '@typed/maybe' as const
+export type MaybeUri = typeof MaybeUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [MaybeUri]: Maybe<TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly Maybe: [T] extends [Maybe<infer R>] ? [R] : never
+  export interface HktTypeParams<T> {
+    readonly [MaybeUri]: [T] extends [Maybe<infer R>] ? [R] : never
   }
 }
 
-export const maybe: Functor<'Maybe'> & Alt<'Maybe'> = {
+export const maybe: Functor<MaybeUri> & Alt<MaybeUri> = {
+  URI: MaybeUri,
   map,
-  alt: (f, maybe) => (isJust(maybe) ? maybe : f()),
+  alt: race,
 }

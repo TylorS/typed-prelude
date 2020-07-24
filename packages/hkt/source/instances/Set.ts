@@ -1,17 +1,24 @@
 import { map } from '@typed/set'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Set: ReadonlySet<TypeParams.First<Values>>
+export const SetUri = '@typed/set' as const
+export type SetUri = typeof SetUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params> {
+    readonly [SetUri]: ReadonlySet<TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly Set: T extends ReadonlySet<infer R> ? [R] : never
+  export interface HktTypeParams<T> {
+    readonly [SetUri]: [T] extends [ReadonlySet<infer R>]
+      ? [R]
+      : [T] extends [Set<infer R>]
+      ? [R]
+      : never
   }
 }
 
-export const set: Functor<'Set'> = {
+export const set: Functor<SetUri> = {
+  URI: SetUri,
   map,
 }

@@ -1,17 +1,20 @@
 import { Effects, map } from '@typed/effects'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Effect: Effects<TypeParams.Second<Values>, TypeParams.First<Values>>
+export const EffectUri = '@typed/effects' as const
+export type EffectUri = typeof EffectUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params> {
+    readonly [EffectUri]: Effects<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly Effect: [T] extends [Effects<infer A, infer B>] ? [A, B] : never
+  export interface HktTypeParams<T> {
+    readonly [EffectUri]: [T] extends [Effects<infer A, infer B>] ? [A, B] : never
   }
 }
 
-export const effect: Functor<'Effect'> = {
-  map: map as Functor<'Effect'>['map'],
+export const effect: Functor<EffectUri> = {
+  URI: EffectUri,
+  map,
 }

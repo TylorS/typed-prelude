@@ -1,17 +1,20 @@
 import { map } from '@typed/list'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { Functor } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly List: ReadonlyArray<TypeParams.First<Values>>
+export const ListUri = '@typed/list' as const
+export type ListUri = typeof ListUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params> {
+    readonly [ListUri]: ReadonlyArray<TypeParams.First<Params>>
   }
 
-  export interface HktValues<T> {
-    readonly List: T extends ReadonlyArray<infer R> ? [R] : never
+  export interface HktTypeParams<T> {
+    readonly [ListUri]: T extends ReadonlyArray<infer R> ? [R] : never
   }
 }
 
-export const list: Functor<'List'> = {
+export const list: Functor<ListUri> = {
+  URI: ListUri,
   map,
 }

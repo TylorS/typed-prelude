@@ -1,18 +1,20 @@
-import { Future, map, PureFuture } from '@typed/future'
-import { Functor } from '../type-classes'
-import { TypeParams } from '../TypeParams'
+import { ap, chain, Future, map, PureFuture } from '@typed/future'
+import { Monad } from 'hkt-ts'
 
-declare module '../Hkt' {
-  export interface Hkts<Values> {
-    readonly Future: Future<
-      TypeParams.Third<Values>,
-      TypeParams.Second<Values>,
-      TypeParams.First<Values>
+export const FutureUri = '@typed/future' as const
+export type FutureUri = typeof FutureUri
+
+declare module 'hkt-ts' {
+  export interface Hkts<Params extends ReadonlyArray<any>> {
+    readonly [FutureUri]: Future<
+      TypeParams.Third<Params>,
+      TypeParams.Second<Params>,
+      TypeParams.First<Params>
     >
   }
 
-  export interface HktValues<T> {
-    readonly Future: [T] extends [PureFuture<infer A, infer B>]
+  export interface HktTypeParams<T> {
+    readonly [FutureUri]: [T] extends [PureFuture<infer A, infer B>]
       ? [unknown, A, B]
       : [T] extends [Future<infer E, infer A, infer B>]
       ? [E, A, B]
@@ -20,6 +22,10 @@ declare module '../Hkt' {
   }
 }
 
-export const future: Functor<'Future'> = {
+export const future: Monad<FutureUri> = {
+  URI: FutureUri,
+  of: Future.of,
+  ap,
   map,
+  chain,
 }
