@@ -1,5 +1,5 @@
 import { Env, map } from '@typed/env'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const EnvUri = '@typed/env' as const
 export type EnvUri = typeof EnvUri

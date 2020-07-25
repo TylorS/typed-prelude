@@ -10,6 +10,7 @@ import {
   Monad,
   Next,
   tailRecursion,
+  TypeParams,
 } from 'hkt-ts'
 
 export const EitherUri = '@typed/either' as const

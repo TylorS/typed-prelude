@@ -1,5 +1,5 @@
 import { map } from '@typed/list'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const ListUri = '@typed/list' as const
 export type ListUri = typeof ListUri

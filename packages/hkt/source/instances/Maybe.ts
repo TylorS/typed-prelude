@@ -1,5 +1,5 @@
 import { map, Maybe, race } from '@typed/maybe'
-import { Alt, Functor } from 'hkt-ts'
+import { Alt, Functor, TypeParams } from 'hkt-ts'
 
 export const MaybeUri = '@typed/maybe' as const
 export type MaybeUri = typeof MaybeUri

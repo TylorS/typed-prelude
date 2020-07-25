@@ -1,5 +1,5 @@
 import { ap, chain, Future, map, PureFuture } from '@typed/future'
-import { Monad } from 'hkt-ts'
+import { Monad, TypeParams } from 'hkt-ts'
 
 export const FutureUri = '@typed/future' as const
 export type FutureUri = typeof FutureUri

@@ -1,5 +1,5 @@
 import { map, RemoteData } from '@typed/remote-data'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const RemoteDataUri = '@typed/remote-data' as const
 export type RemoteDataUri = typeof RemoteDataUri

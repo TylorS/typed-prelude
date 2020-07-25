@@ -1,5 +1,5 @@
 import { map, Route } from '@typed/routing'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const RouteUri = '@typed/routing' as const
 export type RouteUri = typeof RouteUri

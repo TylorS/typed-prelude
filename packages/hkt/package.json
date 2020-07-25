@@ -37,6 +37,6 @@
     "@typed/remote-data": "^5.0.0",
     "@typed/routing": "^8.7.0",
     "@typed/set": "^3.3.0",
-    "hkt-ts": "^1.2.0"
+    "hkt-ts": "^1.3.0"
   }
 }

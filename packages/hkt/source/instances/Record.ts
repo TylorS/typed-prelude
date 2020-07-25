@@ -1,5 +1,5 @@
 import { mapObj } from '@typed/objects'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const RecordUri = '@typed/objects' as const
 export type RecordUri = typeof RecordUri

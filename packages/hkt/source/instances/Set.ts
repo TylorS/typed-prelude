@@ -1,5 +1,5 @@
 import { map } from '@typed/set'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const SetUri = '@typed/set' as const
 export type SetUri = typeof SetUri

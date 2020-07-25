@@ -1,5 +1,5 @@
 import * as M from '@typed/map'
-import { Functor } from 'hkt-ts'
+import { Functor, TypeParams } from 'hkt-ts'
 
 export const MapUri = '@typed/map' as const
 export type MapUri = typeof MapUri
