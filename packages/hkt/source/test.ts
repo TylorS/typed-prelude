@@ -6,7 +6,9 @@ import { effect, either, future } from './instances'
 
 declare function erase<F extends Functor>(
   F: F,
-): <T extends Type<UriOf<F>>>(fa: T) => Type<UriOf<F>, [...TypeParams.DropLast<T, 1>, void]>
+): <T extends Type<UriOf<F>>>(
+  fa: T,
+) => Type<UriOf<F>, [...TypeParams.DropLast<T, 1, UriOf<F>>, void]>
 
 const eraseEither = erase(either)
 const eraseFuture = erase(future)

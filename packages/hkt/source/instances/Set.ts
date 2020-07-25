@@ -1,5 +1,5 @@
-import { map } from '@typed/set'
-import { Functor, TypeParams } from 'hkt-ts'
+import { ap, chain, concat, map } from '@typed/set'
+import { Monad, Monoid, TypeParams } from 'hkt-ts'
 
 export const SetUri = '@typed/set' as const
 export type SetUri = typeof SetUri
@@ -18,7 +18,12 @@ declare module 'hkt-ts' {
   }
 }
 
-export const set: Functor<SetUri> = {
+export const set: Monad<SetUri> & Monoid<SetUri> = {
   URI: SetUri,
+  of: <A>(value: A) => new Set([value]),
+  empty: <A>() => new Set<A>(),
   map,
+  chain,
+  ap,
+  concat,
 }

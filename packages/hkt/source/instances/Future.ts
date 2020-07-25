@@ -5,7 +5,7 @@ export const FutureUri = '@typed/future' as const
 export type FutureUri = typeof FutureUri
 
 declare module 'hkt-ts' {
-  export interface Hkts<Params extends ReadonlyArray<any>> {
+  export interface Hkts<Params> {
     readonly [FutureUri]: Future<
       TypeParams.Third<Params>,
       TypeParams.Second<Params>,

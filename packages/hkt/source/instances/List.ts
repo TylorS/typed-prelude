@@ -1,5 +1,5 @@
-import { map } from '@typed/list'
-import { Functor, TypeParams } from 'hkt-ts'
+import { ap, chain, map } from '@typed/list'
+import { Monad, TypeParams } from 'hkt-ts'
 
 export const ListUri = '@typed/list' as const
 export type ListUri = typeof ListUri
@@ -14,7 +14,10 @@ declare module 'hkt-ts' {
   }
 }
 
-export const list: Functor<ListUri> = {
+export const list: Monad<ListUri> = {
   URI: ListUri,
+  of: Array.of,
   map,
+  chain,
+  ap,
 }

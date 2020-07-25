@@ -1,5 +1,5 @@
-import { map, RemoteData } from '@typed/remote-data'
-import { Functor, TypeParams } from 'hkt-ts'
+import { ap, chain, map, RemoteData } from '@typed/remote-data'
+import { Monad, TypeParams } from 'hkt-ts'
 
 export const RemoteDataUri = '@typed/remote-data' as const
 export type RemoteDataUri = typeof RemoteDataUri
@@ -14,7 +14,10 @@ declare module 'hkt-ts' {
   }
 }
 
-export const remoteData: Functor<RemoteDataUri> = {
+export const remoteData: Monad<RemoteDataUri> = {
   URI: RemoteDataUri,
+  of: RemoteData.of,
   map,
+  chain,
+  ap,
 }

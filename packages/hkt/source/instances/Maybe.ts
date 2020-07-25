@@ -1,5 +1,5 @@
-import { map, Maybe, race } from '@typed/maybe'
-import { Alt, Functor, TypeParams } from 'hkt-ts'
+import { ap, chain, Just, map, Maybe, race } from '@typed/maybe'
+import { Alt, Monad, TypeParams } from 'hkt-ts'
 
 export const MaybeUri = '@typed/maybe' as const
 export type MaybeUri = typeof MaybeUri
@@ -14,8 +14,11 @@ declare module 'hkt-ts' {
   }
 }
 
-export const maybe: Functor<MaybeUri> & Alt<MaybeUri> = {
+export const maybe: Monad<MaybeUri> & Alt<MaybeUri> = {
   URI: MaybeUri,
   map,
   alt: race,
+  chain,
+  ap,
+  of: Just.of,
 }

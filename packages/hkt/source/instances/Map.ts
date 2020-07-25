@@ -16,6 +16,5 @@ declare module 'hkt-ts' {
 
 export const map: Functor<MapUri> = {
   URI: MapUri,
-
   map: M.map,
 }
