@@ -20,7 +20,7 @@
     "postinstall": "npm run update",
     "build:cjs": "tsc --build packages/tsconfig.cjs.json",
     "build:esm": "tsc --build packages/tsconfig.json",
-    "build": "npm run build:cjs && npm run build:esm",
+    "build": "npm run build:esm && npm run build:cjs",
     "rebuild": "npm run clean && npm run update && npm run build",
     "watch": "npm run build:cjs -- --incremental --watch & npm run build:esm -- --incremental --watch",
     "lint": "tslint -p tsconfig.json --fix",
