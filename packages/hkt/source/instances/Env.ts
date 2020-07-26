@@ -6,23 +6,24 @@ export type EnvUri = typeof EnvUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params> {
-    readonly [EnvUri]: Env<TypeParams.Second<Params>, TypeParams.First<Params>>
+    [EnvUri]: Env<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [EnvUri]: [T] extends [Env<infer A, infer B>] ? [A, B] : never
+    [EnvUri]: [T] extends [Env<infer A, infer B>] ? [A, B] : never
   }
 
   export interface HktSignatureOverride {
-    readonly [EnvUri]: {
-      readonly of: typeof Pure.of
-      readonly ap: typeof ap
-      readonly chain: typeof chain
+    [EnvUri]: {
+      of: typeof Pure.of
+      ap: typeof ap
+      chain: typeof chain
+      apSeq: typeof apSeq
     }
   }
 }
 
-export const env: Monad<EnvUri> = {
+export const env: Monad<EnvUri, { of: 'of'; ap: 'ap'; chain: 'chain' }> = {
   URI: EnvUri,
   of: Pure.of,
   map,
@@ -30,7 +31,7 @@ export const env: Monad<EnvUri> = {
   chain,
 }
 
-export const envSeq: Monad<EnvUri> = {
+export const envSeq: Monad<EnvUri, { of: 'of'; ap: 'apSeq'; chain: 'chain' }> = {
   ...env,
   ap: apSeq,
 }

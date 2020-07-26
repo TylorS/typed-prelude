@@ -34,7 +34,13 @@ const map = <A, B, C extends PropertyKey>(
   functor: Readonly<Record<C, A>>,
 ): Readonly<Record<C, B>> => mapObj((_, a) => f(a), functor)
 
-export const record: Functor<RecordUri> & Monoid<RecordUri> = {
+type RecordOverrides = {
+  map: 'map'
+  empty: 'empty'
+  concat: 'concat'
+}
+
+export const record: Functor<RecordUri, RecordOverrides> & Monoid<RecordUri, RecordOverrides> = {
   URI: RecordUri,
   empty,
   concat,

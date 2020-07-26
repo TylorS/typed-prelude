@@ -20,7 +20,7 @@ declare module 'hkt-ts' {
   }
 }
 
-export const route: Functor<RouteUri> & Semigroup<RouteUri> = {
+export const route: Functor<RouteUri> & Semigroup<RouteUri, { concat: 'concat' }> = {
   URI: RouteUri,
   map,
   concat: combineRoutes,

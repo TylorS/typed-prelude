@@ -20,9 +20,18 @@ declare module 'hkt-ts' {
       ? [E, A, B]
       : never
   }
+
+  export interface HktSignatureOverride {
+    [FutureUri]: {
+      of: typeof Future.of
+      ap: typeof ap
+      map: typeof map
+      chain: typeof chain
+    }
+  }
 }
 
-export const future: Monad<FutureUri> = {
+export const future: Monad<FutureUri, { of: 'of'; ap: 'ap'; map: 'map'; chain: 'chain' }> = {
   URI: FutureUri,
   of: Future.of,
   ap,
