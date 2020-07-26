@@ -6,11 +6,11 @@ export type MaybeUri = typeof MaybeUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params extends ReadonlyArray<any>> {
-    readonly [MaybeUri]: Maybe<TypeParams.First<Params>>
+    [MaybeUri]: Maybe<TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [MaybeUri]: [T] extends [Maybe<infer R>] ? [R] : never
+    [MaybeUri]: [T] extends [Maybe<infer R>] ? [R] : never
   }
 }
 

@@ -6,16 +6,16 @@ export type RouteUri = typeof RouteUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params extends ReadonlyArray<any>> {
-    readonly [RouteUri]: Route<TypeParams.Second<Params>, TypeParams.First<Params>>
+    [RouteUri]: Route<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [RouteUri]: T extends Route<infer A, infer B> ? [A, B] : never
+    [RouteUri]: T extends Route<infer A, infer B> ? [A, B] : never
   }
 
   export interface HktSignatureOverride {
-    readonly [RouteUri]: {
-      readonly concat: typeof combineRoutes
+    [RouteUri]: {
+      concat: typeof combineRoutes
     }
   }
 }

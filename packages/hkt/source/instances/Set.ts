@@ -6,15 +6,11 @@ export type SetUri = typeof SetUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params> {
-    readonly [SetUri]: ReadonlySet<TypeParams.First<Params>>
+    [SetUri]: ReadonlySet<TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [SetUri]: [T] extends [ReadonlySet<infer R>]
-      ? [R]
-      : [T] extends [Set<infer R>]
-      ? [R]
-      : never
+    [SetUri]: [T] extends [ReadonlySet<infer R>] ? [R] : [T] extends [Set<infer R>] ? [R] : never
   }
 }
 

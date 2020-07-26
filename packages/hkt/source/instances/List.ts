@@ -21,11 +21,11 @@ export type ListUri = typeof ListUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params> {
-    readonly [ListUri]: ReadonlyArray<TypeParams.First<Params>>
+    [ListUri]: ReadonlyArray<TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [ListUri]: T extends ReadonlyArray<infer R> ? [R] : never
+    [ListUri]: T extends ReadonlyArray<infer R> ? [R] : never
   }
 }
 

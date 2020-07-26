@@ -6,7 +6,7 @@ export type FutureUri = typeof FutureUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params> {
-    readonly [FutureUri]: Future<
+    [FutureUri]: Future<
       TypeParams.Third<Params>,
       TypeParams.Second<Params>,
       TypeParams.First<Params>
@@ -14,7 +14,7 @@ declare module 'hkt-ts' {
   }
 
   export interface HktTypeParams<T> {
-    readonly [FutureUri]: [T] extends [PureFuture<infer A, infer B>]
+    [FutureUri]: [T] extends [PureFuture<infer A, infer B>]
       ? [unknown, A, B]
       : [T] extends [Future<infer E, infer A, infer B>]
       ? [E, A, B]

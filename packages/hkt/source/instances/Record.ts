@@ -6,15 +6,15 @@ export type RecordUri = typeof RecordUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params extends ReadonlyArray<any>> {
-    readonly [RecordUri]: Readonly<Record<TypeParams.Second<Params>, TypeParams.First<Params>>>
+    [RecordUri]: Readonly<Record<TypeParams.Second<Params>, TypeParams.First<Params>>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [RecordUri]: [T] extends [Readonly<Record<infer A, infer B>>] ? [A, B] : never
+    [RecordUri]: [T] extends [Readonly<Record<infer A, infer B>>] ? [A, B] : never
   }
 
   export interface HktSignatureOverride {
-    readonly [RecordUri]: {
+    [RecordUri]: {
       map: typeof map
       empty: typeof empty
       concat: typeof concat

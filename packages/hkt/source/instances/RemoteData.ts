@@ -6,11 +6,11 @@ export type RemoteDataUri = typeof RemoteDataUri
 
 declare module 'hkt-ts' {
   export interface Hkts<Params extends ReadonlyArray<any>> {
-    readonly [RemoteDataUri]: RemoteData<TypeParams.Second<Params>, TypeParams.First<Params>>
+    [RemoteDataUri]: RemoteData<TypeParams.Second<Params>, TypeParams.First<Params>>
   }
 
   export interface HktTypeParams<T> {
-    readonly [RemoteDataUri]: [T] extends [RemoteData<infer A, infer B>] ? [A, B] : never
+    [RemoteDataUri]: [T] extends [RemoteData<infer A, infer B>] ? [A, B] : never
   }
 }
 
