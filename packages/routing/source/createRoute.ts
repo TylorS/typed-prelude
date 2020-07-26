@@ -23,10 +23,7 @@ export function createRoute<A extends Record<string, string> = {}>(
 
       return !match ? Nothing : Maybe.of({ ...match.params })
     },
-    createPath: (parameters: A, trailingSlash: boolean = false): Maybe<Path> => {
-      const path = getPath(parameters)
-
-      return !path ? Nothing : Maybe.of(pathJoin([path.valueOf()], trailingSlash))
-    },
+    createPath: (parameters: A, trailingSlash: boolean = false): Path =>
+      pathJoin(['/', getPath(parameters).valueOf()], trailingSlash),
   }
 }
