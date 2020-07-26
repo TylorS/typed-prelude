@@ -51,17 +51,17 @@ export const list: Monad<ListUri> &
   reduce,
   zero: () => [],
   equals,
-  traverse: <A extends Applicative>(AP: A) => <A, B>(
-    f: (a: A) => Type<UriOf<A>, [...TypeParams.DropLast<Type<UriOf<A>>, 1>, B]>,
+  traverse: <AP extends Applicative>(applicative: AP) => <A, B>(
+    f: (a: A) => Type<UriOf<AP>, [B]>,
     list: ReadonlyArray<A>,
-  ): Type<UriOf<A>, [...TypeParams.DropLast<Type<UriOf<A>>, 1>, ReadonlyArray<B>]> =>
+  ): Type<UriOf<AP>, [ReadonlyArray<B>]> =>
     reduce(
-      (acc: Type<UriOf<A>, [ReadonlyArray<B>]>, a: A) =>
-        AP.ap(
-          AP.map((as: ReadonlyArray<B>) => (a: B) => [...as, a], acc),
+      (acc: Type<UriOf<AP>, [ReadonlyArray<B>]>, a: A) =>
+        applicative.ap(
+          applicative.map((as: ReadonlyArray<B>) => (a: B) => [...as, a], acc),
           f(a),
         ),
-      AP.of([] as ReadonlyArray<B>),
+      applicative.of([] as ReadonlyArray<B>),
       list,
     ),
 }
