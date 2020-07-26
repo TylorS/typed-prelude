@@ -2,7 +2,7 @@ import { Effect } from '@typed/effects'
 import { Either } from '@typed/either'
 import { Future } from '@typed/future'
 import { Functor, Type, TypeParams, UriOf } from 'hkt-ts'
-import { effect, either, future } from './instances'
+import { effect, either, future, list } from './instances'
 
 declare function erase<F extends Functor>(
   F: F,
@@ -13,6 +13,9 @@ declare function erase<F extends Functor>(
 const eraseEither = erase(either)
 const eraseFuture = erase(future)
 const eraseEffect = erase(effect)
+
+export const traverseEither = list.traverse(either)
+export const traverseEffect = list.traverse(effect)
 
 export const _w = eraseEffect(Effect.of(1))
 export const _x: Either<Error, void> = eraseEither(Either.of<Error, number>(1))
