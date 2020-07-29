@@ -39,6 +39,6 @@
     "@typed/new-type": "^4.0.0",
     "@typed/timer": "^3.6.0",
     "@typed/uuid": "^9.7.0",
-    "csstype": "^2.6.10"
+    "csstype": "^3.0.0"
   }
 }
