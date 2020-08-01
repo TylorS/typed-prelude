@@ -1,3 +1,4 @@
+import { DomEnv } from '@typed/dom'
 import { getEnvironmentByKey, HookEffects, HooksManagerEnv, runWithHooks } from '@typed/hooks'
 import { patch, PatchEnv, raf, RafEnv } from '@typed/render'
 import { EnvOf, VNode } from '../domain'
@@ -7,7 +8,16 @@ import { PatchFailure } from './PatchFailure'
 export function* patchOnRaf<E, A extends VNode>(
   fn: () => HookEffects<E, A>,
   rootElement: HTMLElement,
-): HookEffects<E & EnvOf<A> & RafEnv & PatchEnv<VNode, A> & PatchFailure & HooksManagerEnv, never> {
+): HookEffects<
+  E &
+    EnvOf<A> &
+    RafEnv &
+    PatchEnv<VNode, A, DomEnv & PatchFailure> &
+    DomEnv &
+    PatchFailure &
+    HooksManagerEnv,
+  never
+> {
   const initial = yield* elementToVNode(rootElement)
   const env = yield* getEnvironmentByKey(rootElement)
 
