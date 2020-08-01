@@ -8,7 +8,9 @@ import { patchElement } from './patchElement'
 import { PatchFailure } from './PatchFailure'
 import { removeElements } from './removeElements'
 
-export function createPatchEnv(fail: Fail<Error> = Fail): PatchEnv<VNode, VNode> & PatchFailure {
+export function createPatchEnv(
+  fail: Fail<Error> = Fail,
+): PatchEnv<VNode, VNode, DomEnv & PatchFailure> & PatchFailure {
   return {
     *patch(elementVNode, vNode): Effects<DomEnv & PatchFailure, VNode> {
       if (vNodesAreEqual(elementVNode, vNode)) {
@@ -20,7 +22,7 @@ export function createPatchEnv(fail: Fail<Error> = Fail): PatchEnv<VNode, VNode>
         yield* createElement(vNode)
 
         if (parentNode) {
-          parentNode.insertBefore(element.nextSibling)
+          parentNode.insertBefore(yield* getNodeOrThrow(vNode), element.nextSibling)
           yield* removeElements(parentNode, [elementVNode])
         }
       }
