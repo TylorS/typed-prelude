@@ -27,7 +27,7 @@
     "access": "public"
   },
   "devDependencies": {
-    "@types/node": "13.13.23"
+    "@types/node": "13.13.24"
   },
   "peerDependencies": {
     "@types/node": "^13.11.1",
