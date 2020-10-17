@@ -36,7 +36,7 @@
     "@types/node": "13.13.26",
     "@types/yargs": "15.0.9",
     "lerna": "3.22.1",
-    "lint-staged": "10.4.1",
+    "lint-staged": "10.4.2",
     "prettier": "2.1.2",
     "terser": "4.8.0",
     "ts-node": "8.10.2",
