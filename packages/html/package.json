@@ -45,6 +45,6 @@
     "@typed/set": "^3.3.0",
     "@typed/subscription": "^3.7.0",
     "@typed/timer": "^3.6.0",
-    "csstype": "2.6.13"
+    "csstype": "3.0.5"
   }
 }
