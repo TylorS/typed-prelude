@@ -31,7 +31,7 @@
     "release:alpha": "npm run release -- --canary --preid alpha --dist-tag alpha"
   },
   "devDependencies": {
-    "@strictsoftware/typedoc-plugin-monorepo": "0.3.1",
+    "@strictsoftware/typedoc-plugin-monorepo": "0.4.2",
     "@typed/test": "9.5.0",
     "@types/node": "13.13.28",
     "@types/yargs": "15.0.9",
