@@ -45,7 +45,7 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-no-circular-imports": "0.7.0",
     "tslint-plugin-prettier": "2.3.0",
-    "typedoc": "0.19.2",
+    "typedoc": "0.21.10",
     "typedoc-plugin-barrel-export": "1.0.0",
     "typedoc-plugin-pages": "1.0.1",
     "typescript": "3.9.7",
