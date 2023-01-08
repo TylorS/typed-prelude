@@ -24,7 +24,7 @@
   "devDependencies": {
     "@typed/test": "^9.5.0",
     "css-loader": "^3.4.2",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "style-loader": "^1.1.3",
     "ts-loader": "^6.2.1",
     "tsconfig-paths-webpack-plugin": "^3.2.0",
